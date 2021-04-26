@@ -12,10 +12,21 @@
     }
   },
   "projects": {
-    "orbita-ui": { "tags": [] },
-    "orbita-ui-e2e": { "tags": [], "implicitDependencies": ["orbita-ui"] },
-    "sd-request-listing-domain-logic": { "tags": [] },
-    "sd-request-listing-ui": { "tags": [] },
-    "sd-request-listing-feature-listing": { "tags": [] }
+    "orbita-ui": {
+      "tags": ["type:app", "scope:sd-request-listing"]
+    },
+    "orbita-ui-e2e": {
+      "tags": ["type:e2e"],
+      "implicitDependencies": ["orbita-ui"]
+    },
+    "sd-request-listing-domain-logic": {
+      "tags": ["scope:sd-request-listing", "type:domain-logic"]
+    },
+    "sd-request-listing-ui": {
+      "tags": ["scope:sd-request-listing", "type:ui"]
+    },
+    "sd-request-listing-feature-listing": {
+      "tags": ["scope:sd-request-listing", "type:feature"]
+    }
   }
 }
