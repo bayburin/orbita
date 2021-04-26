@@ -14,7 +14,17 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@orbita/sd-request-listing/domain-logic": [
+        "libs/sd-request-listing/domain-logic/src/index.ts"
+      ],
+      "@orbita/sd-request-listing/ui": [
+        "libs/sd-request-listing/ui/src/index.ts"
+      ],
+      "@orbita/sd-request-listing/feature-listing": [
+        "libs/sd-request-listing/feature-listing/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

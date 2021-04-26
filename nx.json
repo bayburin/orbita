@@ -13,6 +13,9 @@
   },
   "projects": {
     "orbita-ui": { "tags": [] },
-    "orbita-ui-e2e": { "tags": [], "implicitDependencies": ["orbita-ui"] }
+    "orbita-ui-e2e": { "tags": [], "implicitDependencies": ["orbita-ui"] },
+    "sd-request-listing-domain-logic": { "tags": [] },
+    "sd-request-listing-ui": { "tags": [] },
+    "sd-request-listing-feature-listing": { "tags": [] }
   }
 }

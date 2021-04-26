@@ -120,6 +120,87 @@
           }
         }
       }
+    },
+    "sd-request-listing-domain-logic": {
+      "projectType": "library",
+      "root": "libs/sd-request-listing/domain-logic",
+      "sourceRoot": "libs/sd-request-listing/domain-logic/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/sd-request-listing/domain-logic/src/**/*.ts",
+              "libs/sd-request-listing/domain-logic/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/sd-request-listing/domain-logic"
+          ],
+          "options": {
+            "jestConfig": "libs/sd-request-listing/domain-logic/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "sd-request-listing-ui": {
+      "projectType": "library",
+      "root": "libs/sd-request-listing/ui",
+      "sourceRoot": "libs/sd-request-listing/ui/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/sd-request-listing/ui/src/**/*.ts",
+              "libs/sd-request-listing/ui/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/sd-request-listing/ui"
+          ],
+          "options": {
+            "jestConfig": "libs/sd-request-listing/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "sd-request-listing-feature-listing": {
+      "projectType": "library",
+      "root": "libs/sd-request-listing/feature-listing",
+      "sourceRoot": "libs/sd-request-listing/feature-listing/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/sd-request-listing/feature-listing/src/**/*.ts",
+              "libs/sd-request-listing/feature-listing/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/sd-request-listing/feature-listing"
+          ],
+          "options": {
+            "jestConfig": "libs/sd-request-listing/feature-listing/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
