@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { SdRequestFacade, SdRequest } from '@orbita/ticket-system/domain-logic';
 
 @Component({
-  selector: 'ticket-system-listing-sd-requests-table',
+  selector: 'lib-sd-requests-table',
   templateUrl: './sd-requests-table.component.html',
   styleUrls: ['./sd-requests-table.component.scss']
 })

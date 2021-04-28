@@ -6,19 +6,17 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
 
-import { TicketSystemFeatureListingModule } from '@orbita/ticket-system/feature-listing';
+import { TicketSystemShellModule } from '@orbita/ticket-system/shell';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    RouterModule.forRoot([], { initialNavigation: 'enabled' }),
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 25 }),
-    TicketSystemFeatureListingModule
+    TicketSystemShellModule
   ],
   providers: [],
   bootstrap: [AppComponent],
