@@ -13,16 +13,16 @@
             "allow": [],
             "depConstraints": [
               {
-                "sourceTag": "scope:sd-request-lisging",
-                "onlyDependOnLibsWithTags": ["scope:sd-request-lisging"]
+                "sourceTag": "type:app",
+                "onlyDependOnLibsWithTags": ["type:shell"]
               },
               {
-                "sourceTag": "type:app",
-                "onlyDependOnLibsWithTags": ["type:feature"]
+                "sourceTag": "type:shell",
+                "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
               },
               {
                 "sourceTag": "type:feature",
-                "onlyDependOnLibsWithTags": ["type:api", "type:util", "type:domain-logic", "type:ui"]
+                "onlyDependOnLibsWithTags": ["type:util", "type:domain-logic", "type:ui"]
               },
               {
                 "sourceTag": "type:domain-logic",
@@ -31,6 +31,14 @@
               {
                 "sourceTag": "type:util",
                 "onlyDependOnLibsWithTags": ["type:util"]
+              },
+              {
+                "sourceTag": "scope:ticket-system",
+                "onlyDependOnLibsWithTags": ["scope:ticket-system", "scope:shared"]
+              },
+              {
+                "sourceTag": "scope:shared",
+                "onlyDependOnLibsWithTags": ["scope:shared"]
               }
             ]
           }

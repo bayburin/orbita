@@ -12,9 +12,7 @@
     }
   },
   "projects": {
-    "orbita-ui": {
-      "tags": ["type:app", "scope:ticket-system"]
-    },
+    "orbita-ui": { "tags": ["type:app", "scope:ticket"] },
     "orbita-ui-e2e": {
       "tags": ["type:e2e"],
       "implicitDependencies": ["orbita-ui"]
@@ -22,10 +20,12 @@
     "ticket-system-domain-logic": {
       "tags": ["scope:ticket-system", "type:domain-logic"]
     },
-    "ticket-system-ui": {
-      "tags": ["scope:ticket-system", "type:ui"]
-    },
+    "ticket-system-ui": { "tags": ["scope:ticket-system", "type:ui"] },
     "ticket-system-feature-listing": {
+      "tags": ["scope:ticket-system", "type:feature"]
+    },
+    "ticket-system-shell": { "tags": ["scope:ticket-system", "type:shell"] },
+    "ticket-system-feature-sd-request-wizzard": {
       "tags": ["scope:ticket-system", "type:feature"]
     }
   }

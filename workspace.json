@@ -201,6 +201,60 @@
           }
         }
       }
+    },
+    "ticket-system-shell": {
+      "projectType": "library",
+      "root": "libs/ticket-system/shell",
+      "sourceRoot": "libs/ticket-system/shell/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ticket-system/shell/src/**/*.ts",
+              "libs/ticket-system/shell/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/ticket-system/shell"
+          ],
+          "options": {
+            "jestConfig": "libs/ticket-system/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "ticket-system-feature-sd-request-wizzard": {
+      "projectType": "library",
+      "root": "libs/ticket-system/feature-sd-request-wizzard",
+      "sourceRoot": "libs/ticket-system/feature-sd-request-wizzard/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ticket-system/feature-sd-request-wizzard/src/**/*.ts",
+              "libs/ticket-system/feature-sd-request-wizzard/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/ticket-system/feature-sd-request-wizzard"
+          ],
+          "options": {
+            "jestConfig": "libs/ticket-system/feature-sd-request-wizzard/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

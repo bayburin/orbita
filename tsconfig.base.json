@@ -18,11 +18,13 @@
       "@orbita/ticket-system/domain-logic": [
         "libs/ticket-system/domain-logic/src/index.ts"
       ],
-      "@orbita/ticket-system/ui": [
-        "libs/ticket-system/ui/src/index.ts"
-      ],
+      "@orbita/ticket-system/ui": ["libs/ticket-system/ui/src/index.ts"],
       "@orbita/ticket-system/feature-listing": [
         "libs/ticket-system/feature-listing/src/index.ts"
+      ],
+      "@orbita/ticket-system/shell": ["libs/ticket-system/shell/src/index.ts"],
+      "@orbita/ticket-system/feature-sd-request-wizzard": [
+        "libs/ticket-system/feature-sd-request-wizzard/src/index.ts"
       ]
     }
   },
