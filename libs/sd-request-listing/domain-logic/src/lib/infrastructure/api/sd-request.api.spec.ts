@@ -9,7 +9,8 @@ describe('SdRequestApi', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule],
+      providers: [SdRequestApi]
     });
 
     service = TestBed.inject(SdRequestApi);
@@ -22,17 +23,17 @@ describe('SdRequestApi', () => {
 
   describe('#getSdRequests', () => {
     const api = 'https://orbita-center-dev.iss-reshetnev.ru/api/v1/sd_requests';
-    const sd_requests = [{ id: 1 }, { id: 2 }];
+    const sdRequests = [{ id: 1 }, { id: 2 }];
 
     it('should return requests', () => {
       service.getSdRequests().subscribe(result => {
-        expect(result).toEqual(sd_requests);
+        expect(result).toEqual(sdRequests);
       })
 
       httpMock.expectOne({
         method: 'GET',
         url: api
-      }).flush(sd_requests);
+      }).flush(sdRequests);
     });
   });
 });

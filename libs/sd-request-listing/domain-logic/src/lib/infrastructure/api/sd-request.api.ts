@@ -5,9 +5,7 @@ import { Observable } from 'rxjs';
 import { SdRequest } from './../../entities/sd-request.interface';
 import { SdRequestApiAbstract } from './sd-request.api.abstract';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SdRequestApi implements SdRequestApiAbstract {
   readonly api = 'https://orbita-center-dev.iss-reshetnev.ru/api/v1/sd_requests'
 
