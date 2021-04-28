@@ -121,82 +121,82 @@
         }
       }
     },
-    "sd-request-listing-domain-logic": {
+    "ticket-system-domain-logic": {
       "projectType": "library",
-      "root": "libs/sd-request-listing/domain-logic",
-      "sourceRoot": "libs/sd-request-listing/domain-logic/src",
+      "root": "libs/ticket-system/domain-logic",
+      "sourceRoot": "libs/ticket-system/domain-logic/src",
       "prefix": "orbita",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/sd-request-listing/domain-logic/src/**/*.ts",
-              "libs/sd-request-listing/domain-logic/src/**/*.html"
+              "libs/ticket-system/domain-logic/src/**/*.ts",
+              "libs/ticket-system/domain-logic/src/**/*.html"
             ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/sd-request-listing/domain-logic"
+            "coverage/libs/ticket-system/domain-logic"
           ],
           "options": {
-            "jestConfig": "libs/sd-request-listing/domain-logic/jest.config.js",
+            "jestConfig": "libs/ticket-system/domain-logic/jest.config.js",
             "passWithNoTests": true
           }
         }
       }
     },
-    "sd-request-listing-ui": {
+    "ticket-system-ui": {
       "projectType": "library",
-      "root": "libs/sd-request-listing/ui",
-      "sourceRoot": "libs/sd-request-listing/ui/src",
+      "root": "libs/ticket-system/ui",
+      "sourceRoot": "libs/ticket-system/ui/src",
       "prefix": "orbita",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/sd-request-listing/ui/src/**/*.ts",
-              "libs/sd-request-listing/ui/src/**/*.html"
+              "libs/ticket-system/ui/src/**/*.ts",
+              "libs/ticket-system/ui/src/**/*.html"
             ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/sd-request-listing/ui"
+            "coverage/libs/ticket-system/ui"
           ],
           "options": {
-            "jestConfig": "libs/sd-request-listing/ui/jest.config.js",
+            "jestConfig": "libs/ticket-system/ui/jest.config.js",
             "passWithNoTests": true
           }
         }
       }
     },
-    "sd-request-listing-feature-listing": {
+    "ticket-system-feature-listing": {
       "projectType": "library",
-      "root": "libs/sd-request-listing/feature-listing",
-      "sourceRoot": "libs/sd-request-listing/feature-listing/src",
+      "root": "libs/ticket-system/feature-listing",
+      "sourceRoot": "libs/ticket-system/feature-listing/src",
       "prefix": "orbita",
       "targets": {
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/sd-request-listing/feature-listing/src/**/*.ts",
-              "libs/sd-request-listing/feature-listing/src/**/*.html"
+              "libs/ticket-system/feature-listing/src/**/*.ts",
+              "libs/ticket-system/feature-listing/src/**/*.html"
             ]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
           "outputs": [
-            "coverage/libs/sd-request-listing/feature-listing"
+            "coverage/libs/ticket-system/feature-listing"
           ],
           "options": {
-            "jestConfig": "libs/sd-request-listing/feature-listing/jest.config.js",
+            "jestConfig": "libs/ticket-system/feature-listing/jest.config.js",
             "passWithNoTests": true
           }
         }

@@ -21,4 +21,4 @@ import { SdRequestApi } from './infrastructure/api/sd-request.api';
     SdRequestApi
   ],
 })
-export class SdRequestListingDomainLogicModule {}
+export class TicketSystemDomainLogicModule {}

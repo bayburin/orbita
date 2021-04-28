@@ -9,7 +9,7 @@
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
       "parserOptions": {
-        "project": ["libs/sd-request-listing/domain-logic/tsconfig.*?.json"]
+        "project": ["libs/ticket-system/domain-logic/tsconfig.*?.json"]
       },
       "rules": {
         "@angular-eslint/directive-selector": [

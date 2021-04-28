@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'sd-request-listing-feature-listing',
+  displayName: 'ticket-system-ui',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -14,8 +14,7 @@ module.exports = {
       },
     },
   },
-  coverageDirectory:
-    '../../../coverage/libs/sd-request-listing/feature-listing',
+  coverageDirectory: '../../../coverage/libs/ticket-system/ui',
   snapshotSerializers: [
     'jest-preset-angular/build/AngularNoNgAttributesSnapshotSerializer.js',
     'jest-preset-angular/build/AngularSnapshotSerializer.js',

@@ -13,20 +13,20 @@
   },
   "projects": {
     "orbita-ui": {
-      "tags": ["type:app", "scope:sd-request-listing"]
+      "tags": ["type:app", "scope:ticket-system"]
     },
     "orbita-ui-e2e": {
       "tags": ["type:e2e"],
       "implicitDependencies": ["orbita-ui"]
     },
-    "sd-request-listing-domain-logic": {
-      "tags": ["scope:sd-request-listing", "type:domain-logic"]
+    "ticket-system-domain-logic": {
+      "tags": ["scope:ticket-system", "type:domain-logic"]
     },
-    "sd-request-listing-ui": {
-      "tags": ["scope:sd-request-listing", "type:ui"]
+    "ticket-system-ui": {
+      "tags": ["scope:ticket-system", "type:ui"]
     },
-    "sd-request-listing-feature-listing": {
-      "tags": ["scope:sd-request-listing", "type:feature"]
+    "ticket-system-feature-listing": {
+      "tags": ["scope:ticket-system", "type:feature"]
     }
   }
 }
