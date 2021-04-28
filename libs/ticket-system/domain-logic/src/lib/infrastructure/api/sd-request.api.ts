@@ -7,7 +7,8 @@ import { SdRequestApiAbstract } from './sd-request.api.abstract';
 
 @Injectable()
 export class SdRequestApi implements SdRequestApiAbstract {
-  readonly api = 'https://orbita-center-dev.iss-reshetnev.ru/api/v1/sd_requests'
+  // TODO: Подставить environment (запросы на sd_requests)
+  readonly api = 'https://orbita-center-test.iss-reshetnev.ru/api/v1/claims'
 
   constructor(private http: HttpClient) { }
 

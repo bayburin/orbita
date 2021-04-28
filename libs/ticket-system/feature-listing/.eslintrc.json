@@ -18,7 +18,7 @@
         ],
         "@angular-eslint/component-selector": [
           "error",
-          { "type": "element", "prefix": "orbita", "style": "kebab-case" }
+          { "type": "element", "prefix": ["lib", "ticket-system-listing"], "style": "kebab-case" }
         ]
       }
     },
