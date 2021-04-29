@@ -43,6 +43,11 @@ export interface SdRequest {
   readonly ticket_name: string;
 
   /**
+   * Описание
+   */
+  readonly description: string;
+
+  /**
    * Статус
    */
   readonly status: Statuses;

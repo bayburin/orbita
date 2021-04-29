@@ -9,7 +9,7 @@ import { SdRequestFacade, SdRequest } from '@orbita/ticket-system/domain-logic';
   styleUrls: ['./sd-requests-table.component.scss']
 })
 export class SdRequestsTableComponent implements OnInit {
-  sdRequests$: Observable<SdRequest[]>;
+  sdRequests$: Observable<SdRequest[]> = this.sdRequestFacade.all$;
 
   constructor(private sdRequestFacade: SdRequestFacade) { }
 

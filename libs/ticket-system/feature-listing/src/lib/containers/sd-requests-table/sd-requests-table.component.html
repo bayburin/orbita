@@ -1,1 +1,17 @@
 <p>sd-requests-table works!</p>
+<table>
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Услуга</th>
+      <th>Заявка</th>
+      <th>Описание</th>
+    </tr>
+  </thead>
+  <tr *ngFor="let req of sdRequests$ | async">
+    <td>{{ req.id }}</td>
+    <td>{{ req.service_name }}</td>
+    <td>{{ req.ticket_name }}</td>
+    <td>{{ req.description }}</td>
+  </tr>
+</table>

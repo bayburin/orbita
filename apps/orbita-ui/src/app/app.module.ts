@@ -9,11 +9,13 @@ import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AuthCenterModule.forRoot(environment.auth),
     AppRoutingModule,
     StoreModule.forRoot({}),
