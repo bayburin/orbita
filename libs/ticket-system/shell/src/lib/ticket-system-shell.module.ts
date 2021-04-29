@@ -4,6 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'tickets'
+  },
+  {
     path: 'tickets',
     loadChildren: () => import('@orbita/ticket-system/feature-listing').then(
       m => m.TicketSystemFeatureListingModule
@@ -20,7 +25,10 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes, { initialNavigation: 'enabled' })
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
   ]
 })
 export class TicketSystemShellModule {}

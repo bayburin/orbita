@@ -13,7 +13,10 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes)
+  ],
   declarations: [
     NewSdRequestPageComponent
   ],
