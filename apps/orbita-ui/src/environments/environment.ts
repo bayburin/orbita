@@ -4,6 +4,16 @@
 
 export const environment = {
   production: false,
+  auth: {
+    clientId: '83',
+    redirectUrl: 'https://localhost.iss-reshetnev.ru:4200/oauth2/callback',
+    serverUrl: 'https://localhost.iss-reshetnev.ru:9443/api/v1/auth/token',
+    appName: 'Орбита (dev)',
+    jwtOptions: {
+      allowedDomains: ['localhost.iss-reshetnev.ru:9443'],
+      disallowedRoutes: []
+    }
+  }
 };
 
 /*

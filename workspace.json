@@ -21,6 +21,7 @@
               "apps/orbita-ui/src/assets"
             ],
             "styles": [
+              "node_modules/@iss/ng-auth-center/assets/styles.scss",
               "apps/orbita-ui/src/styles.scss"
             ],
             "scripts": []
