@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { TicketsPageComponent } from './tickets-page.component';
 
@@ -8,7 +9,8 @@ describe('TicketsPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TicketsPageComponent ]
+      declarations: [TicketsPageComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });

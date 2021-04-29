@@ -12,7 +12,7 @@
     }
   },
   "projects": {
-    "orbita-ui": { "tags": ["type:app", "scope:ticket"] },
+    "orbita-ui": { "tags": ["type:app"] },
     "orbita-ui-e2e": {
       "tags": ["type:e2e"],
       "implicitDependencies": ["orbita-ui"]
@@ -27,6 +27,7 @@
     "ticket-system-shell": { "tags": ["scope:ticket-system", "type:shell"] },
     "ticket-system-feature-sd-request-wizzard": {
       "tags": ["scope:ticket-system", "type:feature"]
-    }
+    },
+    "shared-environment": { "tags": ["scope:shared", "type:util", "type:env"] }
   }
 }

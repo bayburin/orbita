@@ -256,6 +256,33 @@
           }
         }
       }
+    },
+    "shared-environment": {
+      "projectType": "library",
+      "root": "libs/shared/environment",
+      "sourceRoot": "libs/shared/environment/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/environment/src/**/*.ts",
+              "libs/shared/environment/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/environment"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/environment/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {
@@ -271,7 +298,8 @@
     "@nrwl/angular:library": {
       "style": "scss",
       "linter": "eslint",
-      "unitTestRunner": "jest"
+      "unitTestRunner": "jest",
+      "strict": true
     },
     "@nrwl/angular:component": {
       "style": "scss"

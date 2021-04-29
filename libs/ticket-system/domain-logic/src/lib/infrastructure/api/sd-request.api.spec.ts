@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
 
 import { SdRequestApi } from './sd-request.api';
 
@@ -10,7 +11,10 @@ describe('SdRequestApi', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [SdRequestApi]
+      providers: [
+        SdRequestApi,
+        { provide: ORBITA_UI_ENV_TOKEN, useValue: { serverApiUrl: 'http://test'  } }
+      ]
     });
 
     service = TestBed.inject(SdRequestApi);
@@ -22,7 +26,7 @@ describe('SdRequestApi', () => {
   });
 
   describe('#getSdRequests', () => {
-    const api = 'https://orbita-center-dev.iss-reshetnev.ru/api/v1/sd_requests';
+    const api = 'http://test/claims';
     const sdRequests = [{ id: 1 }, { id: 2 }];
 
     it('should return requests', () => {

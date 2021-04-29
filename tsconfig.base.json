@@ -25,7 +25,8 @@
       "@orbita/ticket-system/shell": ["libs/ticket-system/shell/src/index.ts"],
       "@orbita/ticket-system/feature-sd-request-wizzard": [
         "libs/ticket-system/feature-sd-request-wizzard/src/index.ts"
-      ]
+      ],
+      "@orbita/shared/environment": ["libs/shared/environment/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -6,5 +6,6 @@ module.exports = {
     '<rootDir>/libs/ticket-system/feature-listing',
     '<rootDir>/libs/ticket-system/shell',
     '<rootDir>/libs/ticket-system/feature-sd-request-wizzard',
+    '<rootDir>/libs/shared/environment',
   ],
 };
