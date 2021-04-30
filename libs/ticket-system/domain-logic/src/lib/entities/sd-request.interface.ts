@@ -1,17 +1,9 @@
-import { Statuses } from './statuses.enum';
-import { Priorities } from './priorities.enum';
-import { Runtime } from './runtime.interface';
-import { Parameter } from './parameter.interface';
+import { Ticket } from './ticket.interface';
 
 /**
  * Интерфейс заявки
  */
-export interface SdRequest {
-  /**
-   * ID (номер) заявки.
-   */
-  readonly id: number;
-
+export interface SdRequest extends Ticket {
   /**
    * ID (номер) заявки во внешней системе.
    */
@@ -41,31 +33,6 @@ export interface SdRequest {
    * Имя вида заявки
    */
   readonly ticket_name: string;
-
-  /**
-   * Описание
-   */
-  readonly description: string;
-
-  /**
-   * Статус
-   */
-  readonly status: Statuses;
-
-  /**
-   * Приоритет
-   */
-  readonly priority: Priorities;
-
-  /**
-   * Объект Runtime
-   */
-  readonly runtime: Runtime;
-
-  /**
-   * Массив объектов Parameter
-   */
-  readonly parameters: Parameter[];
 
   /**
    * Оценка качества обслуживания
