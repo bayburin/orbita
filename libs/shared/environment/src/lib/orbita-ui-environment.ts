@@ -1,6 +1,6 @@
 import { InjectionToken } from "@angular/core";
 
-export interface IOrbitaUiEnvironment {
+export interface OrbitaUiEnvironment {
   production: boolean;
   serverApiUrl: string;
   serviceDeskApi: string;
@@ -8,4 +8,4 @@ export interface IOrbitaUiEnvironment {
   auth: any;
 }
 
-export const ORBITA_UI_ENV_TOKEN = new InjectionToken<IOrbitaUiEnvironment>('Orbita UI environment config');
+export const ORBITA_UI_ENV_TOKEN = new InjectionToken<OrbitaUiEnvironment>('Orbita UI environment config');

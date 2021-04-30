@@ -2,9 +2,9 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import { IOrbitaUiEnvironment } from '@orbita/shared/environment';
+import { OrbitaUiEnvironment } from '@orbita/shared/environment';
 
-export const environment: IOrbitaUiEnvironment = {
+export const environment: OrbitaUiEnvironment = {
   production: false,
   serverApiUrl: 'https://localhost.iss-reshetnev.ru:9443/api/v1',
   serviceDeskApi: 'https://inv-dev.iss-reshetnev.ru/api',
