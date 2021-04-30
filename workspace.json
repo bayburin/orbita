@@ -283,6 +283,33 @@
           }
         }
       }
+    },
+    "ticket-system-utils": {
+      "projectType": "library",
+      "root": "libs/ticket-system/utils",
+      "sourceRoot": "libs/ticket-system/utils/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/ticket-system/utils/src/**/*.ts",
+              "libs/ticket-system/utils/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/ticket-system/utils"
+          ],
+          "options": {
+            "jestConfig": "libs/ticket-system/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

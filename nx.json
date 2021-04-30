@@ -28,6 +28,7 @@
     "ticket-system-feature-sd-request-wizzard": {
       "tags": ["scope:ticket-system", "type:feature"]
     },
-    "shared-environment": { "tags": ["scope:shared", "type:util", "type:env"] }
+    "shared-environment": { "tags": ["scope:shared", "type:util", "type:env"] },
+    "ticket-system-utils": { "tags": ["scope:ticket-system", "type:util"] }
   }
 }
