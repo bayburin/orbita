@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { SdRequest } from '../../entities/sd-request.interface';
+import { SdRequest } from '../../../entities/sd-request.interface';
 import * as SdRequestActions from './sd-request.actions';
 import { State, initialState, reducer } from './sd-request.reducer';
 

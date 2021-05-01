@@ -7,8 +7,8 @@ import { hot, cold } from '@nrwl/angular/testing';
 
 import { SdRequestEffects } from './sd-request.effects';
 import * as SdRequestActions from './sd-request.actions';
-import { SdRequestApi } from './../api/sd-request.api';
-import { SdRequestApiStub } from './../api/sd-request.api.stub';
+import { SdRequestApi } from './../../api/sd-request/sd-request.api';
+import { SdRequestApiStub } from './../../api/sd-request/sd-request.api.stub';
 
 describe('SdRequestEffects', () => {
   let actions$: Observable<Action>;
@@ -29,7 +29,7 @@ describe('SdRequestEffects', () => {
     sdRequestApi = TestBed.inject(SdRequestApi);
   });
 
-  describe('loadSdRequests$', () => {
+  describe('loadAll$', () => {
     it('should call loadAllSuccess action if sdRequestApi finished successfully', () => {
       spyOn(sdRequestApi, 'getSdRequests').and.returnValue(cold('--a|', { a: [] }));
       actions$ = hot('-a-|', { a: SdRequestActions.loadAll() });

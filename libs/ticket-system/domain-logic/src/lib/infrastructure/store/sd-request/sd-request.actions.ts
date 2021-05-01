@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { SdRequest } from '../../entities/sd-request.interface';
+import { SdRequest } from '../../../entities/sd-request.interface';
 
 export const loadAll = createAction('[SdRequest/API] Load All');
 

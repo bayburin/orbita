@@ -6,16 +6,12 @@ import { StoreModule, Store } from '@ngrx/store';
 import { NxModule } from '@nrwl/angular';
 
 import { SdRequest } from '../entities/sd-request.interface';
-import { SdRequestEffects } from '../infrastructure/store/sd-request.effects';
+import { SdRequestEffects } from '../infrastructure/store/sd-request/sd-request.effects';
 import { SdRequestFacade } from './sd-request.facade';
-import { SdRequestApi } from './../infrastructure/api/sd-request.api';
-import { SdRequestApiStub } from './../infrastructure/api/sd-request.api.stub';
-import * as SdRequestActions from '../infrastructure/store/sd-request.actions';
-import {
-  SD_REQUEST_FEATURE_KEY,
-  State,
-  reducer,
-} from '../infrastructure/store/sd-request.reducer';
+import { SdRequestApi } from './../infrastructure/api/sd-request/sd-request.api';
+import { SdRequestApiStub } from './../infrastructure/api/sd-request/sd-request.api.stub';
+import * as SdRequestActions from '../infrastructure/store/sd-request/sd-request.actions';
+import { SD_REQUEST_FEATURE_KEY, State, reducer } from '../infrastructure/store/sd-request/sd-request.reducer';
 
 interface TestSchema {
   sdRequest: State;

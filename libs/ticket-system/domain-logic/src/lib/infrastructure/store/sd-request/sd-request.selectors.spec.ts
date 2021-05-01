@@ -1,4 +1,4 @@
-import { SdRequest } from '../../entities/sd-request.interface';
+import { SdRequest } from '../../../entities/sd-request.interface';
 import { sdRequestAdapter, initialState } from './sd-request.reducer';
 import * as SdRequestSelectors from './sd-request.selectors';
 

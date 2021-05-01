@@ -1,7 +1,12 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
+
+import { getTicketSystemState } from './../index';
 import { SD_REQUEST_FEATURE_KEY, State, SdRequestPartialState, sdRequestAdapter } from './sd-request.reducer';
 
-export const getSdRequestState = createFeatureSelector<SdRequestPartialState, State>(SD_REQUEST_FEATURE_KEY);
+export const getSdRequestState = createSelector(
+  getTicketSystemState,
+  (state: SdRequestPartialState) => state[SD_REQUEST_FEATURE_KEY]
+);
 
 const { selectAll, selectEntities } = sdRequestAdapter.getSelectors();
 

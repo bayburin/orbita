@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { SdRequestFacadeAbstract } from './sd-request.facade.abstract';
-import * as SdRequestActions from '../infrastructure/store/sd-request.actions';
-import * as SdRequestFeature from '../infrastructure/store/sd-request.reducer';
-import * as SdRequestSelectors from '../infrastructure/store/sd-request.selectors';
+import * as SdRequestActions from '../infrastructure/store/sd-request/sd-request.actions';
+import * as SdRequestFeature from '../infrastructure/store/sd-request/sd-request.reducer';
+import * as SdRequestSelectors from '../infrastructure/store/sd-request/sd-request.selectors';
 
 @Injectable()
 export class SdRequestFacade implements SdRequestFacadeAbstract {

@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SdRequestActions from './sd-request.actions';
-import { SdRequest } from '../../entities/sd-request.interface';
+import { SdRequest } from '../../../entities/sd-request.interface';
 
 export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
@@ -34,7 +34,7 @@ const sdRequestReducer = createReducer(
   ),
   on(SdRequestActions.loadAllFailure, (state, { error }) => ({
     ...state,
-    error,
+    error
   }))
 );
 

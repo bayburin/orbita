@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { mergeMap, catchError, map } from 'rxjs/operators';
 
 import * as SdRequestActions from './sd-request.actions';
-import { SdRequestApi } from './../api/sd-request.api';
+import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 
 @Injectable()
 export class SdRequestEffects {
