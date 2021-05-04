@@ -26,7 +26,7 @@ describe('SdRequestApi', () => {
   });
 
   describe('#getSdRequests', () => {
-    const api = 'http://test/claims';
+    const api = 'http://test/sd_requests';
     const sdRequests = [{ id: 1 }, { id: 2 }];
 
     it('should return requests', () => {

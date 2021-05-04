@@ -7,7 +7,7 @@ import { SdRequestApiAbstract } from './sd-request.api.abstract';
 
 @Injectable()
 export class SdRequestApi implements SdRequestApiAbstract {
-  readonly api = `${this.env.serverApiUrl}/claims`;
+  readonly api = `${this.env.serverApiUrl}/sd_requests`;
 
   constructor(
     private http: HttpClient,
