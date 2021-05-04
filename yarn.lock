@@ -2435,6 +2435,11 @@ acorn@^8.1.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.1.1.tgz#fb0026885b9ac9f48bac1e185e4af472971149ff"
   integrity sha512-xYiIVjNuqtKXMxlRMDc6mZUhXehod4a3gbZ1qRlM7icK4EbxUFNLhWoPblCvFtB2Y9CIqHP3CF/rdxLItaQv8g==
 
+actioncable@^5.2.0:
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/actioncable/-/actioncable-5.2.5.tgz#f099d8f4253df241fc5648cffca80e031782c0b1"
+  integrity sha512-xG063yBA28TgArnnN580vveA+oOLpf97uk/NjWhoZe7PW+0ti/BuJFEo0+HIf3eRz2HPIUMIcAV2h2xPp/ewqQ==
+
 adjust-sourcemap-loader@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/adjust-sourcemap-loader/-/adjust-sourcemap-loader-3.0.0.tgz#5ae12fb5b7b1c585e80bbb5a63ec163a1a45e61e"
@@ -2492,6 +2497,13 @@ alphanum-sort@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
+
+angular2-actioncable@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/angular2-actioncable/-/angular2-actioncable-6.0.2.tgz#8f19f3684586e103c838663200688629a8512112"
+  integrity sha512-O1Ck9QSIdgOl5z+iCuKwSaBIIoVIBJ+FaYsFQbk82tSrsXTMkE434qVdOCCbfUa1tJdDckqomkqkertYugF90Q==
+  dependencies:
+    actioncable "^5.2.0"
 
 ansi-colors@4.1.1, ansi-colors@^4.1.1:
   version "4.1.1"
