@@ -5,7 +5,9 @@ import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environ
 import { SdRequest } from './../../../entities/sd-request.interface';
 import { SdRequestApiAbstract } from './sd-request.api.abstract';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SdRequestApi implements SdRequestApiAbstract {
   readonly api = `${this.env.serverApiUrl}/sd_requests`;
 

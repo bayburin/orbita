@@ -6,7 +6,9 @@ import * as SdRequestActions from '../infrastructure/store/sd-request/sd-request
 import * as SdRequestFeature from '../infrastructure/store/sd-request/sd-request.reducer';
 import * as SdRequestSelectors from '../infrastructure/store/sd-request/sd-request.selectors';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SdRequestFacade implements SdRequestFacadeAbstract {
   loaded$ = this.store.select(SdRequestSelectors.getLoaded);
   all$ = this.store.select(SdRequestSelectors.getAll);

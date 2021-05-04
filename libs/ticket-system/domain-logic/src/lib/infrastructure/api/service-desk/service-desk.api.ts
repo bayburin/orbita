@@ -5,7 +5,9 @@ import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environ
 import { ServiceDeskApiAbstract } from './service-desk.api.abstract';
 import { FreeSdRequestType } from '../../../entities/free-sd-request-type.interface';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ServiceDeskApi implements ServiceDeskApiAbstract {
   readonly api = `${this.env.serviceDeskApi}/v2`;
 
