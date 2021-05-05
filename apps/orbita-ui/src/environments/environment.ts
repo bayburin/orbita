@@ -7,6 +7,7 @@ import { OrbitaUiEnvironment } from '@orbita/shared/environment';
 export const environment: OrbitaUiEnvironment = {
   production: false,
   serverApiUrl: 'https://localhost.iss-reshetnev.ru:9443/api/v1',
+  actionCableUrl: 'wss://localhost.iss-reshetnev.ru:9443/cable',
   serviceDeskApi: 'https://inv-dev.iss-reshetnev.ru/api',
   svtApi: 'https://svt.iss-reshetnev.ru',
   auth: {

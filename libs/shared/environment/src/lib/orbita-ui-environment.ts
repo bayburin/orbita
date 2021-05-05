@@ -3,6 +3,7 @@ import { InjectionToken } from "@angular/core";
 export interface OrbitaUiEnvironment {
   production: boolean;
   serverApiUrl: string;
+  actionCableUrl: string;
   serviceDeskApi: string;
   svtApi: string;
   auth: any;
