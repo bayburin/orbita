@@ -9,9 +9,9 @@ import { SdRequestEffects } from './sd-request.effects';
 import * as SdRequestActions from './sd-request.actions';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestApiStub } from './../../api/sd-request/sd-request.api.stub';
-import { SdRequestQueue } from '../../../entities/sd-request-queue.interface';
 import { SD_REQUEST_FEATURE_KEY, initialState } from './sd-request.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY } from '../index';
+import { SdRequestQueueBuilder } from './../../builders/sd-request-queue.builder';
 
 describe('SdRequestEffects', () => {
   let actions$: Observable<Action>;
@@ -39,10 +39,10 @@ describe('SdRequestEffects', () => {
 
   describe('loadAll$', () => {
     it('should call loadAllSuccess action if sdRequestApi finished successfully', () => {
-      const sdRequestQueue = { sd_requests: [], meta: {} } as SdRequestQueue;
+      const sdRequestQueue = new SdRequestQueueBuilder().build();
       spyOn(sdRequestApi, 'query').and.returnValue(cold('--a|', { a: sdRequestQueue }));
       actions$ = hot('-a-|', { a: SdRequestActions.loadAll() });
-      const expected = hot('---a|', { a: SdRequestActions.loadAllSuccess({ sdRequestQueue: sdRequestQueue }) });
+      const expected = hot('---a|', { a: SdRequestActions.loadAllSuccess({ sdRequestQueue }) });
 
       expect(effects.loadAll$).toBeObservable(expected);
     });

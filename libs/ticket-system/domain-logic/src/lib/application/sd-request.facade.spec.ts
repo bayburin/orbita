@@ -13,6 +13,7 @@ import { SdRequestApiStub } from './../infrastructure/api/sd-request/sd-request.
 import * as SdRequestActions from '../infrastructure/store/sd-request/sd-request.actions';
 import { SD_REQUEST_FEATURE_KEY, State } from '../infrastructure/store/sd-request/sd-request.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY, reducer } from '../infrastructure/store/index';
+import { SdRequestQueueBuilder } from './../infrastructure/builders/sd-request-queue.builder';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -92,21 +93,13 @@ describe('SdRequestFacade', () => {
         expect(list.length).toBe(0);
         expect(isLoaded).toBe(false);
 
-        store.dispatch(
-          SdRequestActions.loadAllSuccess({
-            sdRequestQueue: {
-              sd_requests: [
-                createSdRequestEntity('AAA'),
-                createSdRequestEntity('BBB'),
-              ],
-              meta: {
-                current_page: 2,
-                total_pages: 3,
-                total_count: 6
-              }
-            }
-          })
-        );
+        const sdRequestQueue = new SdRequestQueueBuilder()
+          .sd_requests([createSdRequestEntity('AAA'), createSdRequestEntity('BBB')])
+          .current_page(2)
+          .total_count(6)
+          .build();
+
+        store.dispatch(SdRequestActions.loadAllSuccess({ sdRequestQueue }));
 
         page = await readFirst(facade.page$);
         totalCount = await readFirst(facade.totalCount$);
@@ -125,4 +118,3 @@ describe('SdRequestFacade', () => {
     });
   });
 });
-

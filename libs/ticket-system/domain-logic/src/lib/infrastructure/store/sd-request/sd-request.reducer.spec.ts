@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 import { SdRequest } from '../../../entities/sd-request.interface';
 import * as SdRequestActions from './sd-request.actions';
 import { State, initialState, reducer } from './sd-request.reducer';
+import { SdRequestQueueBuilder } from './../../builders/sd-request-queue.builder';
 
 describe('SdRequestReducer', () => {
   let action: Action;
@@ -28,14 +29,7 @@ describe('SdRequestReducer', () => {
           createSdRequest('PRODUCT-AAA'),
           createSdRequest('PRODUCT-zzz'),
         ];
-        const sdRequestQueue = {
-          sd_requests: sdRequests,
-          meta: {
-            current_page: 1,
-            total_pages: 2,
-            total_count: 3
-          }
-        }
+        const sdRequestQueue = new SdRequestQueueBuilder().sd_requests(sdRequests).build();
         action = SdRequestActions.loadAllSuccess({ sdRequestQueue });
         const result: State = reducer(initialState, action);
 
