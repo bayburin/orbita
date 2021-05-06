@@ -1,11 +1,11 @@
 <p>sd-requests-table works!</p>
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>№</th>
-      <th>Услуга</th>
-      <th>Заявка</th>
-      <th>Описание</th>
+      <th scope="col">№</th>
+      <th scope="col">Услуга</th>
+      <th scope="col">Заявка</th>
+      <th scope="col">Описание</th>
     </tr>
   </thead>
   <tr *ngFor="let req of sdRequests$ | async">
@@ -15,3 +15,11 @@
     <td>{{ req.description }}</td>
   </tr>
 </table>
+<ngb-pagination
+  [boundaryLinks]="true"
+  [disabled]="loading$ | async"
+  [rotate]="true"
+  [page]="page$ | async"
+  [pageSize]="maxSize$ | async"
+  [collectionSize]="totalCount$ | async"
+  (pageChange)="onPageChagned($event)"></ngb-pagination>

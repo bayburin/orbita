@@ -1,7 +1,7 @@
 import { of, Observable } from 'rxjs';
 
-import { SdRequest } from './../../../entities/sd-request.interface';
+import { SdRequestQueue } from './../../../entities/sd-request-queue.interface';
 
 export class SdRequestApiStub {
-  getSdRequests(): Observable<SdRequest[]> { return of([]); }
+  query(): Observable<SdRequestQueue> { return of({ sd_requests: [], meta: {} } as unknown as SdRequestQueue ); }
 }

@@ -11,10 +11,13 @@ import { SdRequestFacade } from './sd-request.facade';
 import { SdRequestApi } from './../infrastructure/api/sd-request/sd-request.api';
 import { SdRequestApiStub } from './../infrastructure/api/sd-request/sd-request.api.stub';
 import * as SdRequestActions from '../infrastructure/store/sd-request/sd-request.actions';
-import { SD_REQUEST_FEATURE_KEY, State, reducer } from '../infrastructure/store/sd-request/sd-request.reducer';
+import { SD_REQUEST_FEATURE_KEY, State } from '../infrastructure/store/sd-request/sd-request.reducer';
+import { TICKET_SYSTEM_FEATURE_KEY, reducer } from '../infrastructure/store/index';
 
 interface TestSchema {
-  sdRequest: State;
+  [TICKET_SYSTEM_FEATURE_KEY]: {
+    [SD_REQUEST_FEATURE_KEY]: State;
+  }
 }
 
 describe('SdRequestFacade', () => {
@@ -30,7 +33,7 @@ describe('SdRequestFacade', () => {
     beforeEach(() => {
       @NgModule({
         imports: [
-          StoreModule.forFeature(SD_REQUEST_FEATURE_KEY, reducer),
+          StoreModule.forFeature(TICKET_SYSTEM_FEATURE_KEY, reducer),
           EffectsModule.forFeature([SdRequestEffects]),
         ],
         providers: [
@@ -77,26 +80,41 @@ describe('SdRequestFacade', () => {
       }
     });
 
-    it('all$ should return the loaded list; and loaded flag == true', async (done) => {
+    it('all$ should return the loaded list; and loaded flag == true and another attributes', async (done) => {
       try {
+        let page = await readFirst(facade.page$);
+        let totalCount = await readFirst(facade.totalCount$);
         let list = await readFirst(facade.all$);
         let isLoaded = await readFirst(facade.loaded$);
 
+        expect(page).toEqual(1);
+        expect(totalCount).toEqual(0);
         expect(list.length).toBe(0);
         expect(isLoaded).toBe(false);
 
         store.dispatch(
           SdRequestActions.loadAllSuccess({
-            sdRequests: [
-              createSdRequestEntity('AAA'),
-              createSdRequestEntity('BBB'),
-            ],
+            sdRequestQueue: {
+              sd_requests: [
+                createSdRequestEntity('AAA'),
+                createSdRequestEntity('BBB'),
+              ],
+              meta: {
+                current_page: 2,
+                total_pages: 3,
+                total_count: 6
+              }
+            }
           })
         );
 
+        page = await readFirst(facade.page$);
+        totalCount = await readFirst(facade.totalCount$);
         list = await readFirst(facade.all$);
         isLoaded = await readFirst(facade.loaded$);
 
+        expect(page).toEqual(2);
+        expect(totalCount).toEqual(6);
         expect(list.length).toBe(2);
         expect(isLoaded).toBe(true);
 
@@ -107,3 +125,4 @@ describe('SdRequestFacade', () => {
     });
   });
 });
+

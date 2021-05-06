@@ -10,6 +10,36 @@ export const getSdRequestState = createSelector(
 
 const { selectAll, selectEntities } = sdRequestAdapter.getSelectors();
 
+export const getPage = createSelector(
+  getSdRequestState,
+  (state: State) => state.page
+);
+
+export const getTotalPages = createSelector(
+  getSdRequestState,
+  (state: State) => state.totalPages
+);
+
+export const getTotalCount = createSelector(
+  getSdRequestState,
+  (state: State) => state.totalCount
+);
+
+export const getMaxSize = createSelector(
+  getSdRequestState,
+  (state: State) => state.maxSize
+);
+
+export const getSelectedId = createSelector(
+  getSdRequestState,
+  (state: State) => state.selectedId
+);
+
+export const getLoading = createSelector(
+  getSdRequestState,
+  (state: State) => state.loading
+);
+
 export const getLoaded = createSelector(
   getSdRequestState,
   (state: State) => state.loaded
@@ -28,11 +58,6 @@ export const getAll = createSelector(
 export const getEntities = createSelector(
   getSdRequestState,
   (state: State) => selectEntities(state)
-);
-
-export const getSelectedId = createSelector(
-  getSdRequestState,
-  (state: State) => state.selectedId
 );
 
 export const getSelected = createSelector(

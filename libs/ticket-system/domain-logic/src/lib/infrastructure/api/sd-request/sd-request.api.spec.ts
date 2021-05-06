@@ -25,18 +25,18 @@ describe('SdRequestApi', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('#getSdRequests', () => {
+  describe('#query', () => {
     const api = 'http://test/sd_requests';
     const sdRequests = [{ id: 1 }, { id: 2 }];
 
     it('should return requests', () => {
-      service.getSdRequests().subscribe(result => {
+      service.query(1, 2).subscribe(result => {
         expect(result).toEqual(sdRequests);
       })
 
       httpMock.expectOne({
         method: 'GET',
-        url: api
+        url: `${api}?page=1&perPage=2`
       }).flush(sdRequests);
     });
   });

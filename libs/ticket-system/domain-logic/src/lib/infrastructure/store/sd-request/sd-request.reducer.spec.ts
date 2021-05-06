@@ -28,7 +28,15 @@ describe('SdRequestReducer', () => {
           createSdRequest('PRODUCT-AAA'),
           createSdRequest('PRODUCT-zzz'),
         ];
-        action = SdRequestActions.loadAllSuccess({ sdRequests });
+        const sdRequestQueue = {
+          sd_requests: sdRequests,
+          meta: {
+            current_page: 1,
+            total_pages: 2,
+            total_count: 3
+          }
+        }
+        action = SdRequestActions.loadAllSuccess({ sdRequestQueue });
         const result: State = reducer(initialState, action);
 
         expect(result.loaded).toBe(true);

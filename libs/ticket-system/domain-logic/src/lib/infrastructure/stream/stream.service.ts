@@ -3,10 +3,12 @@ import { ActionCableService, Cable } from 'angular2-actioncable';
 import { AuthHelper } from '@iss/ng-auth-center';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
 
+import { StreamServiceAbstract } from './stream.service.abstract';
+
 @Injectable({
   providedIn: 'root'
 })
-export class StreamService {
+export class StreamService implements StreamServiceAbstract {
   cable: Cable;
 
   constructor(

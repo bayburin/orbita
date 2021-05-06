@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { SdRequest } from './../../../entities/sd-request.interface';
+import { SdRequestQueue } from './../../../entities/sd-request-queue.interface';
 
 /**
  * Содержит API заявок для обращения к серверу
@@ -12,7 +12,10 @@ export abstract class SdRequestApiAbstract {
   readonly api: string;
 
   /**
-   * Получает с сервера список заявок.
+   * Получает с сервера список заявок, ограниченный указанной страницей и фильтрами.
+   *
+   * @param page - номер страницы
+   * @param perPage - число записей на странице
    */
-  abstract getSdRequests(): Observable<SdRequest[]>;
+  abstract query(page: number, perPage: number): Observable<SdRequestQueue>;
 }

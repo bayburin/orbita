@@ -20,6 +20,10 @@ describe('SdRequestSelectors', () => {
     'PRODUCT-CCC': arrEntities[2]
   };
   const selectedId = 'PRODUCT-BBB';
+  const page = 1;
+  const totalPages = 2;
+  const totalCount = 3;
+  const maxSize = 4;
   let state: any;
 
   beforeEach(() => {
@@ -27,11 +31,40 @@ describe('SdRequestSelectors', () => {
       arrEntities,
       {
         ...initialState,
-        selectedId: selectedId,
-        error: error,
+        selectedId,
+        page,
+        totalPages,
+        totalCount,
+        maxSize,
+        error,
+        loading: false,
         loaded: true
       }
     )
+  });
+
+  it('getPage() should return "page" attribute', () => {
+    expect(SdRequestSelectors.getPage.projector(state)).toEqual(page);
+  });
+
+  it('getTotalPages() should return "totalPages" attribute', () => {
+    expect(SdRequestSelectors.getTotalPages.projector(state)).toEqual(totalPages);
+  });
+
+  it('getTotalCount() should return "totalCount" attribute', () => {
+    expect(SdRequestSelectors.getTotalCount.projector(state)).toEqual(totalCount);
+  });
+
+  it('getMaxSize() should return "maxSize" attribute', () => {
+    expect(SdRequestSelectors.getMaxSize.projector(state)).toEqual(maxSize);
+  });
+
+  it('getSelectedId() should return "selectedId" attribute', () => {
+    expect(SdRequestSelectors.getSelectedId.projector(state)).toEqual(selectedId);
+  });
+
+  it('getLoading() should return "loading" attribute', () => {
+    expect(SdRequestSelectors.getLoading.projector(state)).toEqual(false);
   });
 
   it('getLoaded() should return "loaded" attribute', () => {
@@ -48,10 +81,6 @@ describe('SdRequestSelectors', () => {
 
   it('getEntities() should return entities', () => {
     expect(SdRequestSelectors.getEntities.projector(state)).toEqual(entities);
-  });
-
-  it('getSelectedId() should return "selectedId" attribute', () => {
-    expect(SdRequestSelectors.getSelectedId.projector(state)).toEqual(selectedId);
   });
 
   it('getSelected() should return selected entity', () => {
