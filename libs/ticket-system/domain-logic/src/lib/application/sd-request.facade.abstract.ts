@@ -1,16 +1,12 @@
 import { Observable } from 'rxjs';
 
 import { SdRequest } from './../entities/sd-request.interface';
+import { SdRequestQueue } from './../entities/sd-request-queue.interface';
 
 /**
  * Фасад для обращений к объектам SdRequest
  */
 export abstract class SdRequestFacadeAbstract {
-  /**
-   * Список заявок
-   */
-  all$: Observable<SdRequest[]>;
-
   /**
    * Выбранная заявка
    */
@@ -42,9 +38,14 @@ export abstract class SdRequestFacadeAbstract {
   loaded$: Observable<boolean>;
 
   /**
-   * Загружает список заявок с указанием номера страницы и фильтров
+   * Загружает список заявок с метаданными (количество заявок, номер страницы, и т.д.)
    */
-  abstract loadAll(): void;
+  loadSdRequests$: Observable<void | SdRequestQueue>;
+
+  /**
+   * Список заявок
+   */
+  all$: Observable<SdRequest[]>;
 
   /**
    * Устанавливает номер страницы

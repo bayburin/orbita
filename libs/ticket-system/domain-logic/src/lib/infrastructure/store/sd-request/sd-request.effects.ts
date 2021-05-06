@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { mergeMap, catchError, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import * as SdRequestActions from './sd-request.actions';
@@ -19,12 +19,12 @@ export class SdRequestEffects {
 
   loadAll$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SdRequestActions.loadAll, SdRequestActions.SetPage),
+      ofType(SdRequestActions.SetPage),
       withLatestFrom(
         this.store.select(SdRequestSelectors.getPage),
         this.store.select(SdRequestSelectors.getMaxSize)
       ),
-      mergeMap(([action, page, maxSize]) => this.sdRequestApi.query(page, maxSize)
+      switchMap(([action, page, maxSize]) => this.sdRequestApi.query(page, maxSize)
         .pipe(
           map(sdRequestQueue => SdRequestActions.loadAllSuccess({ sdRequestQueue })),
           catchError(error => of(SdRequestActions.loadAllFailure({ error })))

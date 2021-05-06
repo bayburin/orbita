@@ -43,7 +43,6 @@ const sdRequestReducer = createReducer(
   on(SdRequestActions.loadAllSuccess, (state, { sdRequestQueue }) =>
     sdRequestAdapter.setAll(sdRequestQueue.sd_requests, {
       ...state,
-      page: sdRequestQueue.meta.current_page,
       totalPages: sdRequestQueue.meta.total_pages,
       totalCount: sdRequestQueue.meta.total_count,
       loading: false,

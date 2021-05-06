@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { SdRequestFacade, SdRequest } from '@orbita/ticket-system/domain-logic';
@@ -8,18 +8,14 @@ import { SdRequestFacade, SdRequest } from '@orbita/ticket-system/domain-logic';
   templateUrl: './sd-requests-table.component.html',
   styleUrls: ['./sd-requests-table.component.scss']
 })
-export class SdRequestsTableComponent implements OnInit {
+export class SdRequestsTableComponent {
   loading$: Observable<boolean> = this.sdRequestFacade.loading$;
   sdRequests$: Observable<SdRequest[]> = this.sdRequestFacade.all$;
   page$: Observable<number> = this.sdRequestFacade.page$;
   totalCount$: Observable<number> = this.sdRequestFacade.totalCount$;
   maxSize$: Observable<number> = this.sdRequestFacade.maxSize$;
 
-  constructor(private sdRequestFacade: SdRequestFacade) { }
-
-  ngOnInit(): void {
-    this.sdRequestFacade.loadAll();
-  }
+  constructor(private sdRequestFacade: SdRequestFacade) {}
 
   /**
    * Событие выбора номера страницы

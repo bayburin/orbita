@@ -41,7 +41,7 @@ describe('SdRequestEffects', () => {
     it('should call loadAllSuccess action if sdRequestApi finished successfully', () => {
       const sdRequestQueue = new SdRequestQueueBuilder().build();
       spyOn(sdRequestApi, 'query').and.returnValue(cold('--a|', { a: sdRequestQueue }));
-      actions$ = hot('-a-|', { a: SdRequestActions.loadAll() });
+      actions$ = hot('-a-|', { a: SdRequestActions.SetPage({ page: 2 }) });
       const expected = hot('---a|', { a: SdRequestActions.loadAllSuccess({ sdRequestQueue }) });
 
       expect(effects.loadAll$).toBeObservable(expected);
@@ -50,7 +50,7 @@ describe('SdRequestEffects', () => {
     it('should call loadAllFailure action if sdRequestApi finished failure', () => {
       const error = 'error message';
       spyOn(sdRequestApi, 'query').and.returnValue(cold('--#', null, error));
-      actions$ = hot('-a-|', { a: SdRequestActions.loadAll() });
+      actions$ = hot('-a-|', { a: SdRequestActions.SetPage({ page: 2 }) });
       const expected = hot('---(a|)', { a: SdRequestActions.loadAllFailure({ error }) });
 
       expect(effects.loadAll$).toBeObservable(expected);

@@ -1,9 +1,13 @@
+
 import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { readFirst } from '@nrwl/angular/testing';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule, Store } from '@ngrx/store';
+import { StoreModule, Action } from '@ngrx/store';
 import { NxModule } from '@nrwl/angular';
+import { of, Observable, throwError } from 'rxjs';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { provideMockActions } from '@ngrx/effects/testing';
 
 import { SdRequest } from '../entities/sd-request.interface';
 import { SdRequestEffects } from '../infrastructure/store/sd-request/sd-request.effects';
@@ -11,9 +15,11 @@ import { SdRequestFacade } from './sd-request.facade';
 import { SdRequestApi } from './../infrastructure/api/sd-request/sd-request.api';
 import { SdRequestApiStub } from './../infrastructure/api/sd-request/sd-request.api.stub';
 import * as SdRequestActions from '../infrastructure/store/sd-request/sd-request.actions';
-import { SD_REQUEST_FEATURE_KEY, State } from '../infrastructure/store/sd-request/sd-request.reducer';
+import * as SdRequestSelectors from '../infrastructure/store/sd-request/sd-request.selectors';
+import { SD_REQUEST_FEATURE_KEY, State, initialState } from '../infrastructure/store/sd-request/sd-request.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY, reducer } from '../infrastructure/store/index';
 import { SdRequestQueueBuilder } from './../infrastructure/builders/sd-request-queue.builder';
+import { SdRequestQueue } from '../entities/sd-request-queue.interface';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -23,12 +29,80 @@ interface TestSchema {
 
 describe('SdRequestFacade', () => {
   let facade: SdRequestFacade;
-  let store: Store<TestSchema>;
+  let store: MockStore<TestSchema>;
+  let sdRequestApi: SdRequestApi;
   const createSdRequestEntity = (id: string, name = '') =>
     ({
       id,
       name: name || `name-${id}`,
     } as unknown as SdRequest);
+
+  describe('Unit', () => {
+    let actions$: Observable<Action>;
+    const state = {
+      [TICKET_SYSTEM_FEATURE_KEY]: {
+        [SD_REQUEST_FEATURE_KEY]: initialState
+      }
+    }
+
+    beforeEach(() => {
+      TestBed.configureTestingModule({
+        providers: [
+          SdRequestFacade,
+          provideMockActions(() => actions$),
+          provideMockStore({ initialState: state }),
+          { provide: SdRequestApi, useClass: SdRequestApiStub }
+        ]
+      });
+
+      store = TestBed.inject(MockStore);
+      facade = TestBed.inject(SdRequestFacade);
+      sdRequestApi = TestBed.inject(SdRequestApi);
+    });
+
+    describe('loadSdRequests$ attribute', () => {
+      let querySpy: jasmine.Spy;
+      let sdRequestQueue: SdRequestQueue;
+
+      beforeEach(() => {
+        sdRequestQueue = new SdRequestQueueBuilder().build();
+        querySpy = spyOn(sdRequestApi, 'query')
+      })
+
+      it('should call loadAll action', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        facade.loadSdRequests$.subscribe(() => {});
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAll());
+      });
+
+      it('should call "query" method with attributes from store', () => {
+        store.overrideSelector(SdRequestSelectors.getPage, 2);
+        store.overrideSelector(SdRequestSelectors.getMaxSize, 10);
+        facade.loadSdRequests$.subscribe();
+
+        expect(querySpy).toHaveBeenCalledWith(2, 10);
+      });
+
+      it('should call loadAllSuccess action if sdRequestApi finished successfully', () => {
+        const sdRequestQueue = new SdRequestQueueBuilder().build();
+        querySpy.and.returnValue(of(sdRequestQueue));
+        const spy = spyOn(store, 'dispatch');
+        facade.loadSdRequests$.subscribe();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAllSuccess({ sdRequestQueue }));
+      });
+
+      it('should call loadAllSuccess action if sdRequestApi finished successfully', () => {
+        const error = { error: 'Error message' }
+        querySpy.and.callFake(() => throwError(error));
+        const spy = spyOn(store, 'dispatch');
+        facade.loadSdRequests$.subscribe();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAllFailure({ error }));
+      });
+    });
+  });
 
   describe('used in NgModule', () => {
     beforeEach(() => {
@@ -55,25 +129,37 @@ describe('SdRequestFacade', () => {
       class RootModule {}
       TestBed.configureTestingModule({ imports: [RootModule] });
 
-      store = TestBed.inject(Store);
       facade = TestBed.inject(SdRequestFacade);
+      sdRequestApi = TestBed.inject(SdRequestApi);
     });
 
-    it('loadAll() should return empty list with loaded == true', async (done) => {
+    it('all$ should return the loaded list; and loaded flag == true and another attributes', async (done) => {
       try {
-        let list = await readFirst(facade.all$);
+        const sdRequestQueue = new SdRequestQueueBuilder()
+          .sd_requests([createSdRequestEntity('AAA'), createSdRequestEntity('BBB')])
+          .current_page(2)
+          .total_count(6)
+          .build();
+        spyOn(sdRequestApi, 'query').and.returnValue(of(sdRequestQueue));
         let isLoaded = await readFirst(facade.loaded$);
 
-        expect(list.length).toBe(0);
         expect(isLoaded).toBe(false);
 
-        facade.loadAll();
-
-        list = await readFirst(facade.all$);
+        let page = await readFirst(facade.page$);
+        let totalCount = await readFirst(facade.totalCount$);
+        const list = await readFirst(facade.all$);
         isLoaded = await readFirst(facade.loaded$);
 
-        expect(list.length).toBe(0);
+        expect(page).toEqual(1);
+        expect(totalCount).toEqual(0);
+        expect(list.length).toBe(2);
         expect(isLoaded).toBe(true);
+
+        page = await readFirst(facade.page$);
+        totalCount = await readFirst(facade.totalCount$);
+
+        expect(page).toEqual(1);
+        expect(totalCount).toEqual(6);
 
         done();
       } catch (err) {
@@ -81,35 +167,25 @@ describe('SdRequestFacade', () => {
       }
     });
 
-    it('all$ should return the loaded list; and loaded flag == true and another attributes', async (done) => {
+    it('setPage() should change page, and all$ data', async (done) => {
       try {
+        spyOn(sdRequestApi, 'query').and.returnValues(
+          of(new SdRequestQueueBuilder().sd_requests([createSdRequestEntity('AAA'), createSdRequestEntity('BBB')]).build()),
+          of(new SdRequestQueueBuilder().sd_requests([createSdRequestEntity('AAA'), createSdRequestEntity('BBB'), createSdRequestEntity('CCC')]).current_page(123).build()),
+        );
         let page = await readFirst(facade.page$);
-        let totalCount = await readFirst(facade.totalCount$);
         let list = await readFirst(facade.all$);
-        let isLoaded = await readFirst(facade.loaded$);
 
         expect(page).toEqual(1);
-        expect(totalCount).toEqual(0);
-        expect(list.length).toBe(0);
-        expect(isLoaded).toBe(false);
+        expect(list.length).toEqual(2);
 
-        const sdRequestQueue = new SdRequestQueueBuilder()
-          .sd_requests([createSdRequestEntity('AAA'), createSdRequestEntity('BBB')])
-          .current_page(2)
-          .total_count(6)
-          .build();
-
-        store.dispatch(SdRequestActions.loadAllSuccess({ sdRequestQueue }));
+        facade.setPage(3);
 
         page = await readFirst(facade.page$);
-        totalCount = await readFirst(facade.totalCount$);
         list = await readFirst(facade.all$);
-        isLoaded = await readFirst(facade.loaded$);
 
-        expect(page).toEqual(2);
-        expect(totalCount).toEqual(6);
-        expect(list.length).toBe(2);
-        expect(isLoaded).toBe(true);
+        expect(page).toEqual(3);
+        expect(list.length).toEqual(3);
 
         done();
       } catch (err) {
