@@ -311,6 +311,33 @@
           }
         }
       }
+    },
+    "shared-domain-logic": {
+      "projectType": "library",
+      "root": "libs/shared/domain-logic",
+      "sourceRoot": "libs/shared/domain-logic/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/domain-logic/src/**/*.ts",
+              "libs/shared/domain-logic/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/shared/domain-logic"
+          ],
+          "options": {
+            "jestConfig": "libs/shared/domain-logic/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

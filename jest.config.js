@@ -8,5 +8,6 @@ module.exports = {
     '<rootDir>/libs/ticket-system/feature-sd-request-wizzard',
     '<rootDir>/libs/shared/environment',
     '<rootDir>/libs/ticket-system/utils',
+    '<rootDir>/libs/shared/domain-logic',
   ],
 };

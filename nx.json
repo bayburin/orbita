@@ -29,6 +29,7 @@
       "tags": ["scope:ticket-system", "type:feature"]
     },
     "shared-environment": { "tags": ["scope:shared", "type:util", "type:env"] },
-    "ticket-system-utils": { "tags": ["scope:ticket-system", "type:util"] }
+    "ticket-system-utils": { "tags": ["scope:ticket-system", "type:util"] },
+    "shared-domain-logic": { "tags": ["scope:shared", "type:domain-logic"] }
   }
 }
