@@ -13,17 +13,17 @@ export interface SdRequestQueue {
     /**
      * Текущая страница
      */
-    current_page: number | null;
+    current_page: number;
 
     /**
      * Общее число страниц
      */
-    total_pages: number | null;
+    total_pages: number;
 
     /**
      * Общее число заявок
      */
-    total_count: number | null;
+    total_count: number;
   }
 }
 

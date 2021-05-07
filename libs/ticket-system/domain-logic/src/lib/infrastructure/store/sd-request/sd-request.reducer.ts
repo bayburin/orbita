@@ -8,8 +8,8 @@ export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
 export interface State extends EntityState<SdRequest> {
   page: number;
-  totalPages: number | null;
-  totalCount: number | null;
+  totalPages: number;
+  totalCount: number;
   maxSize: number;
   selectedId?: string | number;
   loading: boolean;

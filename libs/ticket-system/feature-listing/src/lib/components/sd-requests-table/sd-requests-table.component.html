@@ -1,4 +1,3 @@
-<p>sd-requests-table works!</p>
 <table class="table">
   <thead>
     <tr>
@@ -15,11 +14,3 @@
     <td>{{ req.description }}</td>
   </tr>
 </table>
-<ngb-pagination
-  [boundaryLinks]="true"
-  [disabled]="loading$ | async"
-  [rotate]="true"
-  [page]="page$ | async"
-  [pageSize]="maxSize$ | async"
-  [collectionSize]="totalCount$ | async"
-  (pageChange)="onPageChagned($event)"></ngb-pagination>

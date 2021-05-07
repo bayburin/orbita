@@ -1,0 +1,7 @@
+<lib-sd-requests-table [sdRequests$]="sdRequests$"></lib-sd-requests-table>
+<lib-pagination
+  [loading$]="loading$"
+  [page$]="page$"
+  [totalCount$]="totalCount$"
+  [maxSize$]="maxSize$"
+  (pageChanged)="onPageChagned($event)"></lib-pagination>

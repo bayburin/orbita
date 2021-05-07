@@ -3,11 +3,11 @@ import { Component } from '@angular/core';
 import { SdRequestFacade } from '@orbita/ticket-system/domain-logic';
 
 @Component({
-  selector: 'lib-sd-requests-table',
-  templateUrl: './sd-requests-table.component.html',
-  styleUrls: ['./sd-requests-table.component.scss']
+  selector: 'lib-sd-requests-block',
+  templateUrl: './sd-requests-block.component.html',
+  styleUrls: ['./sd-requests-block.component.scss']
 })
-export class SdRequestsTableComponent {
+export class SdRequestsBlockComponent {
   loading$ = this.sdRequestFacade.loading$;
   sdRequests$ = this.sdRequestFacade.all$;
   page$ = this.sdRequestFacade.page$;

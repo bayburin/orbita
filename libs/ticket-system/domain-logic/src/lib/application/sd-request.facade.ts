@@ -23,7 +23,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     filter(loaded => !loaded),
     tap(() => this.store.dispatch(SdRequestActions.loadAll())),
     withLatestFrom(this.page$, this.maxSize$),
-    switchMap(([loaded, page, maxSize]) =>
+    switchMap(([_loaded, page, maxSize]) =>
       this.sdRequestApi.query(page, maxSize)
         .pipe(
           tap(sdRequestQueue => this.store.dispatch(SdRequestActions.loadAllSuccess({ sdRequestQueue }))),
@@ -36,7 +36,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     this.loadSdRequests$.pipe(startWith(null)),
     this.store.select(SdRequestSelectors.getAll)
   ]).pipe(
-    map(([dispatcher, selector]) => selector),
+    map(([_dispatcher, selector]) => selector),
     distinctUntilChanged()
   );
 

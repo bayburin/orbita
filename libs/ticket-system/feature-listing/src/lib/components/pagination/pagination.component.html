@@ -1,0 +1,9 @@
+<ngb-pagination
+  [boundaryLinks]="true"
+  [disabled]="loading$ | async"
+  [rotate]="true"
+  [page]="page$ | async"
+  [pageSize]="maxSize$ | async"
+  [collectionSize]="totalCount$ | async"
+  (pageChange)="pageChanged.emit($event)">
+</ngb-pagination>

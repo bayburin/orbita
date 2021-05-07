@@ -20,7 +20,7 @@ export abstract class SdRequestFacadeAbstract {
   /**
    * Общее число записей
    */
-  totalCount$: Observable<number | null> = of();
+  totalCount$: Observable<number> = of();
 
   /**
    * Максимальное число записей для одной страницы
