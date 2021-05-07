@@ -5,5 +5,5 @@ export class SdRequestFacadeStub {
   all$ = new BehaviorSubject([]);
   selected$ = new BehaviorSubject(null);
 
-  loadAll() {}
+  loadAll() { console.log('load all data'); }
 }

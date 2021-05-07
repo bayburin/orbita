@@ -5,7 +5,7 @@ export abstract class ModelBuilder<T> {
   /**
    * Создаваемая модель
    */
-  model: T;
+  model: T = {} as T;
 
   /**
    * Создает объект и возвращает его.

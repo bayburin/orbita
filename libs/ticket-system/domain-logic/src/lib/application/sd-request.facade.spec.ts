@@ -72,7 +72,7 @@ describe('SdRequestFacade', () => {
       it('should call loadAll action', () => {
         const spy = spyOn(store, 'dispatch');
 
-        facade.loadSdRequests$.subscribe(() => {});
+        facade.loadSdRequests$.subscribe();
         expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAll());
       });
 
@@ -85,7 +85,6 @@ describe('SdRequestFacade', () => {
       });
 
       it('should call loadAllSuccess action if sdRequestApi finished successfully', () => {
-        const sdRequestQueue = new SdRequestQueueBuilder().build();
         querySpy.and.returnValue(of(sdRequestQueue));
         const spy = spyOn(store, 'dispatch');
         facade.loadSdRequests$.subscribe();

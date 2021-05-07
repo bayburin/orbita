@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
 
-import { SdRequestFacade, SdRequest } from '@orbita/ticket-system/domain-logic';
+import { SdRequestFacade } from '@orbita/ticket-system/domain-logic';
 
 @Component({
   selector: 'lib-sd-requests-table',
@@ -9,11 +8,11 @@ import { SdRequestFacade, SdRequest } from '@orbita/ticket-system/domain-logic';
   styleUrls: ['./sd-requests-table.component.scss']
 })
 export class SdRequestsTableComponent {
-  loading$: Observable<boolean> = this.sdRequestFacade.loading$;
-  sdRequests$: Observable<SdRequest[]> = this.sdRequestFacade.all$;
-  page$: Observable<number> = this.sdRequestFacade.page$;
-  totalCount$: Observable<number> = this.sdRequestFacade.totalCount$;
-  maxSize$: Observable<number> = this.sdRequestFacade.maxSize$;
+  loading$ = this.sdRequestFacade.loading$;
+  sdRequests$ = this.sdRequestFacade.all$;
+  page$ = this.sdRequestFacade.page$;
+  totalCount$ = this.sdRequestFacade.totalCount$;
+  maxSize$ = this.sdRequestFacade.maxSize$;
 
   constructor(private sdRequestFacade: SdRequestFacade) {}
 

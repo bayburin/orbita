@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ticket-system-listing-tickets-page',
   templateUrl: './tickets-page.component.html',
   styleUrls: ['./tickets-page.component.scss']
 })
-export class TicketsPageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-}
+export class TicketsPageComponent {}
