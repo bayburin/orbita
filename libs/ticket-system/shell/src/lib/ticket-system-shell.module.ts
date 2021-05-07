@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+
 import { LayoutComponent } from './containers/layout/layout.component';
+import { SharedDomainLogicModule } from '@orbita/shared/domain-logic';
 
 const routes: Routes = [
   {
@@ -32,7 +34,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedDomainLogicModule
   ],
   exports: [
     RouterModule
