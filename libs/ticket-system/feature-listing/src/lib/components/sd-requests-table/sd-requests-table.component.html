@@ -7,10 +7,17 @@
       <th scope="col">Описание</th>
     </tr>
   </thead>
-  <tr *ngFor="let req of sdRequests$ | async">
-    <td>{{ req.id }}</td>
-    <td>{{ req.service_name }}</td>
-    <td>{{ req.ticket_name }}</td>
-    <td>{{ req.description }}</td>
-  </tr>
+  <ng-container *ngFor="let req of sdRequests$ | async">
+    <tr>
+      <td>{{ req.id }}</td>
+      <td>{{ req.service_name }}</td>
+      <td>{{ req.ticket_name }}</td>
+      <td>{{ req.description }}</td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <lib-sd-request-view></lib-sd-request-view>
+      </td>
+    </tr>
+  </ng-container>
 </table>

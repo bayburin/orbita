@@ -8,6 +8,7 @@ import { SdRequestsBlockComponent } from './containers/sd-requests-block/sd-requ
 import { TicketsPageComponent } from './pages/tickets-page/tickets-page.component';
 import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requests-table.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { SdRequestViewComponent } from './components/sd-request-view/sd-request-view.component';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,7 @@ export const routes: Routes = [
     TicketsPageComponent,
     SdRequestsBlockComponent,
     PaginationComponent,
+    SdRequestViewComponent,
   ],
   exports: [
     TicketsPageComponent,
