@@ -160,9 +160,9 @@
     tslib "^2.0.0"
 
 "@angular/cdk@^11.2.11":
-  version "11.2.11"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-11.2.11.tgz#ce4906173f040dbc6bde74b9806c3730230bbe4b"
-  integrity sha512-INDyO6Vh4WjsWkYAeZN39B4wTs+VqoAcTGdVBA39uij6wdu00ufr7pPRHtjAoNgrOWjEd/SCgDaUMcFEZ2+lcg==
+  version "11.2.12"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-11.2.12.tgz#c1c9c8d4a5763745fe2d324fc253f221b9c2b1b3"
+  integrity sha512-LImCQQ7n5OnTGXBAx1BaHgBBbdXiEtsNcHk5RvVURya9sswRcXRoa48EG3RyuT8mtqWsUdOX9+v4nCINLG4hZA==
   dependencies:
     tslib "^2.0.0"
   optionalDependencies:
@@ -231,10 +231,17 @@
     glob "7.1.2"
     yargs "^16.2.0"
 
+"@angular/material-moment-adapter@^11.2.12":
+  version "11.2.12"
+  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-11.2.12.tgz#8044d1a21c916382714062e665fa19fb3375f1b7"
+  integrity sha512-dV3rYkB1OkLECTJZH+xyLWEnu7MEwIWn93P1xd/xA0a0loW9HvHhGaLOWodtS2MdFau6QCnwGTeoVecH7Z4zpw==
+  dependencies:
+    tslib "^2.0.0"
+
 "@angular/material@^11.2.11":
-  version "11.2.11"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-11.2.11.tgz#29515cc5f0324fd34b97cb539e59679b67a9f7d8"
-  integrity sha512-B9uehF/TCaH6+nCY3+S8GxSHzFbk1OD4djzyBcSNsLnwtY3UYSCT9j/J05cAahpCSUPxCWkj4MfgnhtduLmMgA==
+  version "11.2.12"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-11.2.12.tgz#625778113075bddb92f13ab03a8a513178f2b5a8"
+  integrity sha512-n3HDKoM552jLcmxtpTYzMUzV6V9vUBKyNs7SNdUfjuK00VJlTWMu03g/QWOj2Y9KftOuDUa8+N2XodwAr+jtCw==
   dependencies:
     tslib "^2.0.0"
 
@@ -1633,6 +1640,11 @@
     loader-utils "^2.0.0"
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
+
+"@mdi/angular-material@^5.9.55":
+  version "5.9.55"
+  resolved "https://registry.yarnpkg.com/@mdi/angular-material/-/angular-material-5.9.55.tgz#e4fad2ae73d630f0853dc67e509ca50ea0cbef03"
+  integrity sha512-RAQlvSI90eJHW9o6uSN5KKH8SJ61ZQuXVCjLDpQWtKQX8aTRPTJkruZ1M2U0YT6AtxKY4hPW7qyHH7VTJdTXRA==
 
 "@ng-bootstrap/ng-bootstrap@^9.1.0":
   version "9.1.0"

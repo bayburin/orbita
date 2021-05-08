@@ -18,7 +18,12 @@
             "aot": true,
             "assets": [
               "apps/orbita-ui/src/favicon.ico",
-              "apps/orbita-ui/src/assets"
+              "apps/orbita-ui/src/assets",
+              {
+                "glob": "mdi.svg",
+                "input": "node_modules/@mdi/angular-material/",
+                "output": "assets"
+              }
             ],
             "styles": [
               "node_modules/@iss/ng-auth-center/assets/styles.scss",

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { MaterialModule } from './material.module';
+
 const ngbModules: any[] = [
   NgbPaginationModule
 ];
@@ -9,8 +11,12 @@ const ngbModules: any[] = [
 @NgModule({
   imports: [
     CommonModule,
-    ...ngbModules
+    MaterialModule,
+    ...ngbModules,
   ],
-  exports: [...ngbModules]
+  exports: [
+    MaterialModule,
+    ...ngbModules
+  ]
 })
 export class TicketSystemUiModule {}
