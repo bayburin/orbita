@@ -18,7 +18,7 @@
               },
               {
                 "sourceTag": "type:shell",
-                "onlyDependOnLibsWithTags": ["type:feature", "type:util"]
+                "onlyDependOnLibsWithTags": ["type:feature", "type:util", "type:domain-logic", "type:ui"]
               },
               {
                 "sourceTag": "type:feature",

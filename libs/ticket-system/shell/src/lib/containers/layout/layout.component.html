@@ -1,40 +1,31 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/ticket-system/tickets']" class="nav-link">tickets</a>
-      </li>
-      <li class="nav-item">
-        <a [routerLink]="['/ticket-system/new-sd-request']" class="nav-link">new sd-request</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-
-<router-outlet></router-outlet>
+<mat-sidenav-container class="sidebar-container" fullscreen>
+  <mat-sidenav mode="side" opened class="sidebar mat-elevation-z2">
+    <mat-toolbar>
+      <mat-toolbar-row class="justify-content-center">
+        <img src="assets/images/orbita-ui-logo.svg" alt="Логотип системы Орбита" />
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/dashboard']">
+        <mat-icon mat-list-icon svgIcon="view-dashboard-outline"></mat-icon>
+        Сводка
+      </a>
+      <a mat-list-item [routerLink]="['/ticket-system', 'tickets']">
+        <mat-icon mat-list-icon svgIcon="file-document-multiple-outline"></mat-icon>
+        Заявки
+      </a>
+      <a mat-list-item [routerLink]="['/employees']">
+        <mat-icon mat-list-icon svgIcon="account-multiple-outline"></mat-icon>
+        Работники
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="mat-elevation-z2">
+      <lib-header></lib-header>
+    </div>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

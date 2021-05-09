@@ -2,8 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { LayoutComponent } from './containers/layout/layout.component';
 import { SharedDomainLogicModule } from '@orbita/shared/domain-logic';
+import { TicketSystemUiModule } from '@orbita/ticket-system/ui';
+import { LayoutComponent } from './containers/layout/layout.component';
+import { HeaderComponent } from './components/header/header.component';
 
 const routes: Routes = [
   {
@@ -35,13 +37,15 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    SharedDomainLogicModule
+    SharedDomainLogicModule,
+    TicketSystemUiModule
   ],
   exports: [
     RouterModule
   ],
   declarations: [
-    LayoutComponent
+    LayoutComponent,
+    HeaderComponent
   ]
 })
 export class TicketSystemShellModule {}

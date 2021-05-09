@@ -8,6 +8,9 @@
 @import "themes/default-material-theme";
 @import "themes/blue-gray-dark-material-theme";
 
+// Компоненты
+@import "components/sidenav";
+
 @mixin mat-icon-size($size: 24px) {
   height: $size !important;
   width: $size !important;
