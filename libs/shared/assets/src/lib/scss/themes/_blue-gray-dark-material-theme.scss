@@ -1,0 +1,15 @@
+$blue-gray-dark-primary: mat-palette($mat-blue-grey);
+$blue-gray-dark-accent: mat-palette($mat-green, A200, A100, A400);
+$blue-gray-dark-warn: mat-palette($mat-amber);
+
+$blue-gray-dark-theme: mat-dark-theme((
+  color: (
+    primary: $blue-gray-dark-primary,
+    accent: $blue-gray-dark-accent,
+    warn: $blue-gray-dark-warn
+  )
+));
+
+.blue-gray-dark-theme {
+  @include angular-material-theme($blue-gray-dark-theme);
+}

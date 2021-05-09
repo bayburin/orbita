@@ -9,5 +9,6 @@ module.exports = {
     '<rootDir>/libs/shared/environment',
     '<rootDir>/libs/ticket-system/utils',
     '<rootDir>/libs/shared/domain-logic',
+    '<rootDir>/libs/shared/assets',
   ],
 };

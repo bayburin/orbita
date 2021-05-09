@@ -1,0 +1,13 @@
+$default-app-primary: mat-palette($mat-iss-default-primary);
+$default-app-accent: mat-palette($mat-purple, A200, A100, A400);
+$default-app-warn: mat-palette($mat-amber);
+
+$default-app-theme: mat-light-theme((
+  color: (
+    primary: $default-app-primary,
+    accent: $default-app-accent,
+    warn: $default-app-warn
+  )
+));
+
+@include angular-material-theme($default-app-theme);
