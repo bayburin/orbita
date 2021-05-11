@@ -231,20 +231,6 @@
     glob "7.1.2"
     yargs "^16.2.0"
 
-"@angular/material-moment-adapter@^11.2.12":
-  version "11.2.12"
-  resolved "https://registry.yarnpkg.com/@angular/material-moment-adapter/-/material-moment-adapter-11.2.12.tgz#8044d1a21c916382714062e665fa19fb3375f1b7"
-  integrity sha512-dV3rYkB1OkLECTJZH+xyLWEnu7MEwIWn93P1xd/xA0a0loW9HvHhGaLOWodtS2MdFau6QCnwGTeoVecH7Z4zpw==
-  dependencies:
-    tslib "^2.0.0"
-
-"@angular/material@^11.2.11":
-  version "11.2.12"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-11.2.12.tgz#625778113075bddb92f13ab03a8a513178f2b5a8"
-  integrity sha512-n3HDKoM552jLcmxtpTYzMUzV6V9vUBKyNs7SNdUfjuK00VJlTWMu03g/QWOj2Y9KftOuDUa8+N2XodwAr+jtCw==
-  dependencies:
-    tslib "^2.0.0"
-
 "@angular/platform-browser-dynamic@^11.2.0":
   version "11.2.11"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-11.2.11.tgz#6ef4803150e50a92c518f4e7079ae52c31374bc5"

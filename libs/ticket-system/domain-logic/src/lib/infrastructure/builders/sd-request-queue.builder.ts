@@ -10,7 +10,6 @@ export class SdRequestQueueBuilder extends ModelBuilder<SdRequestQueue> {
       sd_requests: [],
       meta: {
         current_page: null,
-        total_pages: null,
         total_count: null
       }
     };
@@ -24,12 +23,6 @@ export class SdRequestQueueBuilder extends ModelBuilder<SdRequestQueue> {
 
   current_page(currentPage: number): SdRequestQueueBuilder {
     this.model.meta.current_page = currentPage;
-
-    return this;
-  }
-
-  total_pages(totalPages: number): SdRequestQueueBuilder {
-    this.model.meta.total_pages = totalPages;
 
     return this;
   }

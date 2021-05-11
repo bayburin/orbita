@@ -20,11 +20,8 @@ export class SdRequestEffects {
   loadAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.SetPage),
-      withLatestFrom(
-        this.store.select(SdRequestSelectors.getPage),
-        this.store.select(SdRequestSelectors.getMaxSize)
-      ),
-      switchMap(([action, page, maxSize]) => this.sdRequestApi.query(page, maxSize)
+      withLatestFrom(this.store.select(SdRequestSelectors.getMaxSize)),
+      switchMap(([action, maxSize]) => this.sdRequestApi.query(action.page, maxSize)
         .pipe(
           map(sdRequestQueue => SdRequestActions.loadAllSuccess({ sdRequestQueue })),
           catchError(error => of(SdRequestActions.loadAllFailure({ error })))

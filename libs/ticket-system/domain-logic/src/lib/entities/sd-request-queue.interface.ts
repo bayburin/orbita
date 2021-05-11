@@ -16,11 +16,6 @@ export interface SdRequestQueue {
     current_page: number;
 
     /**
-     * Общее число страниц
-     */
-    total_pages: number;
-
-    /**
      * Общее число заявок
      */
     total_count: number;

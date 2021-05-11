@@ -21,7 +21,6 @@ describe('SdRequestSelectors', () => {
   };
   const selectedId = 'PRODUCT-BBB';
   const page = 1;
-  const totalPages = 2;
   const totalCount = 3;
   const maxSize = 4;
   let state: any;
@@ -33,7 +32,6 @@ describe('SdRequestSelectors', () => {
         ...initialState,
         selectedId,
         page,
-        totalPages,
         totalCount,
         maxSize,
         error,
@@ -45,10 +43,6 @@ describe('SdRequestSelectors', () => {
 
   it('getPage() should return "page" attribute', () => {
     expect(SdRequestSelectors.getPage.projector(state)).toEqual(page);
-  });
-
-  it('getTotalPages() should return "totalPages" attribute', () => {
-    expect(SdRequestSelectors.getTotalPages.projector(state)).toEqual(totalPages);
   });
 
   it('getTotalCount() should return "totalCount" attribute', () => {

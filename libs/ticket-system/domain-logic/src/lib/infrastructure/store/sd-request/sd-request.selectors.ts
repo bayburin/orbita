@@ -15,11 +15,6 @@ export const getPage = createSelector(
   (state: State) => state.page
 );
 
-export const getTotalPages = createSelector(
-  getSdRequestState,
-  (state: State) => state.totalPages
-);
-
 export const getTotalCount = createSelector(
   getSdRequestState,
   (state: State) => state.totalCount
