@@ -13,40 +13,50 @@ describe('SdRequestReducer', () => {
       name || `name-${id}`
     } as unknown as SdRequest);
 
-    describe('loadAll', () => {
-      it('should clear "loaded" and "error" attributes', () => {
-        action = SdRequestActions.loadAll();
-        const result: State = reducer(initialState, action);
+  describe('loadAll', () => {
+    it('should clear "loaded" and "error" attributes', () => {
+      action = SdRequestActions.loadAll();
+      const result: State = reducer(initialState, action);
 
-        expect(result.loaded).toBe(false);
-        expect(result.error).toBeNull();
-      });
+      expect(result.loaded).toBe(false);
+      expect(result.error).toBeNull();
     });
+  });
 
-    describe('loadAllSuccess', () => {
-      it('should return set the list of known SdRequest', () => {
-        const sdRequests = [
-          createSdRequest('PRODUCT-AAA'),
-          createSdRequest('PRODUCT-zzz'),
-        ];
-        const sdRequestQueue = new SdRequestQueueBuilder().sd_requests(sdRequests).build();
-        action = SdRequestActions.loadAllSuccess({ sdRequestQueue });
-        const result: State = reducer(initialState, action);
+  describe('loadAllSuccess', () => {
+    it('should return set the list of known SdRequest', () => {
+      const sdRequests = [
+        createSdRequest('PRODUCT-AAA'),
+        createSdRequest('PRODUCT-zzz'),
+      ];
+      const sdRequestQueue = new SdRequestQueueBuilder().sd_requests(sdRequests).build();
+      action = SdRequestActions.loadAllSuccess({ sdRequestQueue });
+      const result: State = reducer(initialState, action);
 
-        expect(result.loaded).toBe(true);
-        expect(result.ids.length).toBe(2);
-      });
+      expect(result.loaded).toBe(true);
+      expect(result.ids.length).toBe(2);
     });
+  });
 
-    describe('loadAllFailure', () => {
-      it('should set "error" attribute', () => {
-        const error = { message: 'error' };
-        action = SdRequestActions.loadAllFailure({ error });
-        const result: State = reducer(initialState, action);
+  describe('loadAllFailure', () => {
+    it('should set "error" attribute', () => {
+      const error = { message: 'error' };
+      action = SdRequestActions.loadAllFailure({ error });
+      const result: State = reducer(initialState, action);
 
-        expect(result.error).toEqual(error);
-      });
+      expect(result.error).toEqual(error);
     });
+  });
+
+  describe('setPage', () => {
+    it('should set "page" attribute', () => {
+      action = SdRequestActions.SetPage({ page: 123 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.page).toEqual(123);
+      expect(result.loaded).toEqual(false);
+    });
+  });
 
   describe('unknown action', () => {
     it('should return the previous state', () => {

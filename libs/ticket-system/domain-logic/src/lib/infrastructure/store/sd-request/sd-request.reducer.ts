@@ -35,7 +35,6 @@ const sdRequestReducer = createReducer(
   on(SdRequestActions.loadAll, (state) => ({
     ...state,
     loading: true,
-    loaded: false,
     error: null
   })),
   on(SdRequestActions.loadAllSuccess, (state, { sdRequestQueue }) =>
@@ -46,14 +45,18 @@ const sdRequestReducer = createReducer(
       loaded: true
     })
   ),
-  on(SdRequestActions.loadAllFailure, (state, { error }) => ({
-    ...state,
-    error,
-    loading: false
-  })),
+  on(SdRequestActions.loadAllFailure, (state, { error }) =>
+    sdRequestAdapter.removeAll({
+      ...state,
+      error,
+      selectedId: null,
+      loading: false
+    })
+  ),
   on(SdRequestActions.SetPage, (state, { page }) => ({
     ...state,
-    page: page
+    page,
+    loaded: false
   }))
 );
 

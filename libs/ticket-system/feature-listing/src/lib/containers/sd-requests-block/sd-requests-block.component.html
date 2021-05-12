@@ -1,3 +1,4 @@
+<div *ngIf="loading$ | async">Загрузка</div>
 <lib-sd-requests-table [sdRequests$]="sdRequests$"></lib-sd-requests-table>
 <lib-pagination
   [loading$]="loading$"

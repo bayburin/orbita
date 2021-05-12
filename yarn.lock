@@ -231,6 +231,13 @@
     glob "7.1.2"
     yargs "^16.2.0"
 
+"@angular/material@^11.2.12":
+  version "11.2.12"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-11.2.12.tgz#625778113075bddb92f13ab03a8a513178f2b5a8"
+  integrity sha512-n3HDKoM552jLcmxtpTYzMUzV6V9vUBKyNs7SNdUfjuK00VJlTWMu03g/QWOj2Y9KftOuDUa8+N2XodwAr+jtCw==
+  dependencies:
+    tslib "^2.0.0"
+
 "@angular/platform-browser-dynamic@^11.2.0":
   version "11.2.11"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-11.2.11.tgz#6ef4803150e50a92c518f4e7079ae52c31374bc5"
@@ -1627,10 +1634,10 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.7.0"
 
-"@mdi/angular-material@^5.9.55":
+"@mdi/font@^5.9.55":
   version "5.9.55"
-  resolved "https://registry.yarnpkg.com/@mdi/angular-material/-/angular-material-5.9.55.tgz#e4fad2ae73d630f0853dc67e509ca50ea0cbef03"
-  integrity sha512-RAQlvSI90eJHW9o6uSN5KKH8SJ61ZQuXVCjLDpQWtKQX8aTRPTJkruZ1M2U0YT6AtxKY4hPW7qyHH7VTJdTXRA==
+  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-5.9.55.tgz#41acd50b88073ded7095fc3029d8712b6e12f38e"
+  integrity sha512-jswRF6q3eq8NWpWiqct6q+6Fg/I7nUhrxYJfiEM8JJpap0wVJLQdbKtyS65GdlK7S7Ytnx3TTi/bmw+tBhkGmg==
 
 "@ng-bootstrap/ng-bootstrap@^9.1.0":
   version "9.1.0"

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
 import * as SdRequestActions from './sd-request.actions';
@@ -17,16 +17,17 @@ export class SdRequestEffects {
     private store: Store<fromSdRequest.SdRequestPartialState>
   ) { }
 
-  loadAll$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(SdRequestActions.SetPage),
-      withLatestFrom(this.store.select(SdRequestSelectors.getMaxSize)),
-      switchMap(([action, maxSize]) => this.sdRequestApi.query(action.page, maxSize)
-        .pipe(
-          map(sdRequestQueue => SdRequestActions.loadAllSuccess({ sdRequestQueue })),
-          catchError(error => of(SdRequestActions.loadAllFailure({ error })))
-        )
-      )
-    )
-  );
+  // loadAll$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(SdRequestActions.SetPage),
+  //     tap(() => this.store.dispatch(SdRequestActions.loadAll())),
+  //     withLatestFrom(this.store.select(SdRequestSelectors.getMaxSize)),
+  //     switchMap(([action, maxSize]) => this.sdRequestApi.query(action.page, maxSize)
+  //       .pipe(
+  //         map(sdRequestQueue => SdRequestActions.loadAllSuccess({ sdRequestQueue })),
+  //         catchError(error => of(SdRequestActions.loadAllFailure({ error })))
+  //       )
+  //     )
+  //   )
+  // );
 }
