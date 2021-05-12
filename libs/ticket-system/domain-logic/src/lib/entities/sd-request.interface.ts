@@ -1,4 +1,5 @@
 import { Ticket } from './ticket.interface';
+import { Parameter } from './parameter.interface';
 
 /**
  * Интерфейс заявки
@@ -38,4 +39,9 @@ export interface SdRequest extends Ticket {
    * Оценка качества обслуживания
    */
   readonly rating: number;
+
+  /**
+   * Массив объектов Parameter
+   */
+  readonly parameters: Parameter[];
 }

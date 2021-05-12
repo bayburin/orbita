@@ -1,7 +1,6 @@
 import { Statuses } from './statuses.enum';
 import { Priorities } from './priorities.enum';
 import { Runtime } from './runtime.interface';
-import { Parameter } from './parameter.interface';
 
 /**
  * Типы тикета
@@ -41,9 +40,4 @@ export interface Ticket {
    * Объект Runtime
    */
   readonly runtime: Runtime;
-
-  /**
-   * Массив объектов Parameter
-   */
-  readonly parameters: Parameter[];
 }
