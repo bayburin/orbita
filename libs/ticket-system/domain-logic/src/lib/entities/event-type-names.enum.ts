@@ -11,7 +11,8 @@ export enum EventTypeNames {
   CLOSE = 'close',
   ADD_FILES = 'add_files',
   DEL_FILES = 'del_files',
-  ADD_TAGS = 'add_tags'
+  ADD_TAGS = 'add_tags',
+  PRIORITY = 'priority'
 }
 
 /**
@@ -35,6 +36,7 @@ export const eventTypeNamesMap: Record<EventTypeNames, IEventTypeNamesData> = {
   [EventTypeNames.ADD_FILES]: { icon: 'checkbox-marked-circle-outline' },
   [EventTypeNames.DEL_FILES]: { icon: 'checkbox-marked-circle-outline' },
   [EventTypeNames.ADD_TAGS]: { icon: 'checkbox-marked-circle-outline' },
+  [EventTypeNames.PRIORITY]: { icon: 'comment-text-outline' }
 };
 
 /**
