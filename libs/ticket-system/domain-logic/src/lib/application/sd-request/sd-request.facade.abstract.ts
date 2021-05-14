@@ -1,7 +1,7 @@
 import { Observable, of } from 'rxjs';
 
-import { SdRequest } from './../entities/sd-request.interface';
-import { SdRequestQueue } from './../entities/sd-request-queue.interface';
+import { SdRequest } from './../../entities/sd-request.interface';
+import { SdRequestQueue } from './../../entities/sd-request-queue.interface';
 
 /**
  * Фасад для обращений к объектам SdRequest

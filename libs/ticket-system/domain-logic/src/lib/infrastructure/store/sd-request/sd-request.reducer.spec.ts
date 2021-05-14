@@ -29,12 +29,14 @@ describe('SdRequestReducer', () => {
         createSdRequest('PRODUCT-AAA'),
         createSdRequest('PRODUCT-zzz'),
       ];
-      const sdRequestQueue = new SdRequestQueueBuilder().sd_requests(sdRequests).build();
+      const sdRequestQueue = new SdRequestQueueBuilder().sd_requests(sdRequests).total_count(12).build();
       action = SdRequestActions.loadAllSuccess({ sdRequestQueue });
       const result: State = reducer(initialState, action);
 
-      expect(result.loaded).toBe(true);
       expect(result.ids.length).toBe(2);
+      expect(result.totalCount).toEqual(12);
+      expect(result.loading).toEqual(false);
+      expect(result.loaded).toBe(true);
     });
   });
 
@@ -45,6 +47,8 @@ describe('SdRequestReducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.error).toEqual(error);
+      expect(result.selectedId).toBeNull();
+      expect(result.loading).toEqual(false);
     });
   });
 

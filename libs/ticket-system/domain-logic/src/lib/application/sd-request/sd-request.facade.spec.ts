@@ -9,17 +9,17 @@ import { of, Observable, throwError } from 'rxjs';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
-import { SdRequest } from '../entities/sd-request.interface';
-import { SdRequestEffects } from '../infrastructure/store/sd-request/sd-request.effects';
+import { SdRequest } from '../../entities/sd-request.interface';
+import { SdRequestEffects } from '../../infrastructure/store/sd-request/sd-request.effects';
 import { SdRequestFacade } from './sd-request.facade';
-import { SdRequestApi } from './../infrastructure/api/sd-request/sd-request.api';
-import { SdRequestApiStub } from './../infrastructure/api/sd-request/sd-request.api.stub';
-import * as SdRequestActions from '../infrastructure/store/sd-request/sd-request.actions';
-import * as SdRequestSelectors from '../infrastructure/store/sd-request/sd-request.selectors';
-import { SD_REQUEST_FEATURE_KEY, State, initialState } from '../infrastructure/store/sd-request/sd-request.reducer';
-import { TICKET_SYSTEM_FEATURE_KEY, reducer } from '../infrastructure/store/index';
-import { SdRequestQueueBuilder } from './../infrastructure/builders/sd-request-queue.builder';
-import { SdRequestQueue } from '../entities/sd-request-queue.interface';
+import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
+import { SdRequestApiStub } from './../../infrastructure/api/sd-request/sd-request.api.stub';
+import * as SdRequestActions from '../../infrastructure/store/sd-request/sd-request.actions';
+import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-request.selectors';
+import { SD_REQUEST_FEATURE_KEY, State, initialState } from '../../infrastructure/store/sd-request/sd-request.reducer';
+import { TICKET_SYSTEM_FEATURE_KEY, reducer } from '../../infrastructure/store/index';
+import { SdRequestQueueBuilder } from './../../infrastructure/builders/sd-request-queue.builder';
+import { SdRequestQueue } from '../../entities/sd-request-queue.interface';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
