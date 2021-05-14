@@ -1,2 +1,47 @@
 <lib-header></lib-header>
-<router-outlet></router-outlet>
+<div class="container-fluid">
+  <div class="row">
+    <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/dashboard']" routerLinkActive="active">
+              <span class="d-flex">
+                <i class="mdi mdi-view-dashboard-outline mdi-24px"></i>
+                <span class="ml-1">Сводка</span>
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/ticket-system', 'tickets']" routerLinkActive="active">
+              <span class="d-flex">
+                <i class="mdi mdi-file-document-multiple-outline mdi-24px"></i>
+                <span class="ml-1">Заявки</span>
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/ticket-system', 'employees']" routerLinkActive="active">
+              <span class="d-flex">
+                <i class="mdi mdi-account-multiple-outline mdi-24px"></i>
+                <span class="ml-1">Работники</span>
+              </span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/ticket-system', 'hosts']" routerLinkActive="active">
+              <span class="d-flex">
+                <i class="mdi mdi-network-outline mdi-24px"></i>
+                <span class="ml-1">Хосты</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

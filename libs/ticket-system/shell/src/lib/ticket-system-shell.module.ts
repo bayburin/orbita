@@ -24,7 +24,7 @@ const routes: Routes = [
         )
       },
       {
-        path: 'new-sd-request',
+        path: 'tickets/new-sd-request',
         loadChildren: () => import('@orbita/ticket-system/feature-sd-request-wizzard').then(
           m => m.TicketSystemFeatureSdRequestWizzardModule
         )
