@@ -18,25 +18,25 @@ export enum EventTypeNames {
 /**
  * Интерфейс маппинга вида событий для отображения в представлении
  */
-export interface IEventTypeNamesData {
+export interface EventTypeNamesData {
   icon: string;
 }
 
 /**
  * Объект маппинга вида событий для отображения в представление
  */
-export const eventTypeNamesMap: Record<EventTypeNames, IEventTypeNamesData> = {
-  [EventTypeNames.OPEN]: { icon: 'comment-check-outline' },
-  [EventTypeNames.WORKFLOW]: { icon: 'comment-text-outline' },
-  [EventTypeNames.ADD_WORKERS]: { icon: 'calendar-clock' },
-  [EventTypeNames.DEL_WORKERS]: { icon: 'checkbox-marked-circle-outline' },
-  [EventTypeNames.ESCALATION]: { icon: 'checkbox-marked-circle-outline' },
-  [EventTypeNames.POSTPONE]: { icon: 'checkbox-marked-circle-outline' },
-  [EventTypeNames.CLOSE]: { icon: 'checkbox-marked-circle-outline' },
-  [EventTypeNames.ADD_FILES]: { icon: 'checkbox-marked-circle-outline' },
-  [EventTypeNames.DEL_FILES]: { icon: 'checkbox-marked-circle-outline' },
-  [EventTypeNames.ADD_TAGS]: { icon: 'checkbox-marked-circle-outline' },
-  [EventTypeNames.PRIORITY]: { icon: 'comment-text-outline' }
+export const eventTypeNamesMap: Record<EventTypeNames, EventTypeNamesData> = {
+  [EventTypeNames.OPEN]: { icon: 'mdi-comment-check-outline' },
+  [EventTypeNames.WORKFLOW]: { icon: 'mdi-comment-text-outline' },
+  [EventTypeNames.ADD_WORKERS]: { icon: 'mdi-calendar-clock' },
+  [EventTypeNames.DEL_WORKERS]: { icon: 'mdi-checkbox-marked-circle-outline' },
+  [EventTypeNames.ESCALATION]: { icon: 'mdi-checkbox-marked-circle-outline' },
+  [EventTypeNames.POSTPONE]: { icon: 'mdi-checkbox-marked-circle-outline' },
+  [EventTypeNames.CLOSE]: { icon: 'mdi-checkbox-marked-circle-outline' },
+  [EventTypeNames.ADD_FILES]: { icon: 'mdi-checkbox-marked-circle-outline' },
+  [EventTypeNames.DEL_FILES]: { icon: 'mdi-checkbox-marked-circle-outline' },
+  [EventTypeNames.ADD_TAGS]: { icon: 'mdi-checkbox-marked-circle-outline' },
+  [EventTypeNames.PRIORITY]: { icon: 'mdi-comment-text-outline' }
 };
 
 /**
@@ -44,6 +44,6 @@ export const eventTypeNamesMap: Record<EventTypeNames, IEventTypeNamesData> = {
  *
  * @param name - имя вида события
  */
-export function getEventTypeName(name: EventTypeNames): IEventTypeNamesData {
+export function getEventTypeName(name: EventTypeNames): EventTypeNamesData {
   return eventTypeNamesMap[name];
 }

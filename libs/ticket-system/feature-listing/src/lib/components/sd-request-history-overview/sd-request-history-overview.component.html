@@ -1,1 +1,22 @@
 <h3>ХОД РАБОТЫ</h3>
+<div class="container-fluid">
+  <div class="row">
+    <div *ngFor="let work of sdRequest.works; trackBy:trackByWork" class="col">
+      <h3 class="text-primary">{{ work.group.description }}</h3>
+      <div *ngFor="let history of work.histories; trackBy:trackByHistory; let index = index">
+        <div class="card">
+          <div class="card-header">
+            <span>Событие {{ index + 1 }}</span>
+            <i class="mdi" [class]="eventTypeName(history.event_type.name).icon"></i>
+          </div>
+          <div class="card-body">
+            <p class="card-text">
+              <b>Байбурин Равиль:</b> {{ history.action }}
+            </p>
+          </div>
+          <div class="card-footer text-muted">{{ history.created_at | datetime }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,6 @@
 import { Ticket } from './ticket.interface';
 import { Parameter } from './parameter.interface';
+import { Work } from './work.interface';
 
 /**
  * Интерфейс заявки
@@ -44,4 +45,9 @@ export interface SdRequest extends Ticket {
    * Массив объектов Parameter
    */
   readonly parameters: Parameter[];
+
+  /**
+   * Массив объектов Work
+   */
+  readonly works: Work[];
 }

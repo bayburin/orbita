@@ -58,9 +58,7 @@
   <!-- Быстрый просмотр рабочего процесса заявки -->
   <ng-container cdkColumnDef="expandedEl">
     <td cdk-cell *cdkCellDef="let element" [attr.colspan]="displayedColumns.length">
-      <div>
-        <lib-sd-request-history-overview></lib-sd-request-history-overview>
-      </div>
+      <lib-sd-request-history-overview [sdRequest]="element"></lib-sd-request-history-overview>
     </td>
   </ng-container>
 
