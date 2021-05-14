@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+
 import { SdRequestQueue } from '../../../entities/sd-request-queue.interface';
 
 export const loadAll = createAction('[SdRequest/API] Load All');

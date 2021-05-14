@@ -12,7 +12,7 @@ export abstract class ServiceDeskApiAbstract {
   readonly api: string;
 
   /**
-   * Получает с сервера список видов заявок в свободной форме.
+   * Получает с сервера список видов заявок в свободной форме
    */
   abstract getFreeSdRequestTypes(): Observable<FreeSdRequestType[]>;
 }
