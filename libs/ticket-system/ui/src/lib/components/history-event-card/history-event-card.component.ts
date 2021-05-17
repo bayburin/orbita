@@ -8,8 +8,17 @@ import { EventTypeNames, EventTypeNamesData, getEventTypeName } from '@orbita/ti
   styleUrls: ['./history-event-card.component.scss']
 })
 export class HistoryEventCardComponent {
+  /**
+   * История события
+   */
   @Input() history: History;
+  /**
+   * Порядковый номер события
+   */
   @Input() num: number;
+  /**
+   * Флаг, показывающий, является ли текущее событие последним для заявки
+   */
   @Input() isLast = false;
 
   /**
