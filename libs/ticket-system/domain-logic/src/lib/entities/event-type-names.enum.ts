@@ -26,17 +26,17 @@ export interface EventTypeNamesData {
  * Объект маппинга вида событий для отображения в представление
  */
 export const eventTypeNamesMap: Record<EventTypeNames, EventTypeNamesData> = {
-  [EventTypeNames.OPEN]: { icon: 'mdi-comment-check-outline' },
-  [EventTypeNames.WORKFLOW]: { icon: 'mdi-comment-text-outline' },
-  [EventTypeNames.ADD_WORKERS]: { icon: 'mdi-calendar-clock' },
-  [EventTypeNames.DEL_WORKERS]: { icon: 'mdi-checkbox-marked-circle-outline' },
-  [EventTypeNames.ESCALATION]: { icon: 'mdi-checkbox-marked-circle-outline' },
-  [EventTypeNames.POSTPONE]: { icon: 'mdi-checkbox-marked-circle-outline' },
-  [EventTypeNames.CLOSE]: { icon: 'mdi-checkbox-marked-circle-outline' },
-  [EventTypeNames.ADD_FILES]: { icon: 'mdi-checkbox-marked-circle-outline' },
-  [EventTypeNames.DEL_FILES]: { icon: 'mdi-checkbox-marked-circle-outline' },
-  [EventTypeNames.ADD_TAGS]: { icon: 'mdi-checkbox-marked-circle-outline' },
-  [EventTypeNames.PRIORITY]: { icon: 'mdi-comment-text-outline' }
+  [EventTypeNames.OPEN]: { icon: 'mdi-comment-check-outline' }, // ?
+  [EventTypeNames.WORKFLOW]: { icon: 'mdi-comment-text-outline' }, // +
+  [EventTypeNames.ADD_WORKERS]: { icon: 'mdi-account-multiple-plus-outline' },
+  [EventTypeNames.DEL_WORKERS]: { icon: 'mdi-account-multiple-minus-outline' },
+  [EventTypeNames.ESCALATION]: { icon: 'mdi-alert-outline' },
+  [EventTypeNames.POSTPONE]: { icon: 'mdi-calendar-clock' },
+  [EventTypeNames.CLOSE]: { icon: 'mdi-close-box-outline' },
+  [EventTypeNames.ADD_FILES]: { icon: 'mdi-file-plus-outline' },
+  [EventTypeNames.DEL_FILES]: { icon: 'mdi-file-remove-outline' },
+  [EventTypeNames.ADD_TAGS]: { icon: 'mdi-code-tags' },
+  [EventTypeNames.PRIORITY]: { icon: 'mdi-priority-high' }
 };
 
 /**
