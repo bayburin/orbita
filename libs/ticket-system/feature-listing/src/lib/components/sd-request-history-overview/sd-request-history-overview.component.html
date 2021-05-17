@@ -3,20 +3,19 @@
   <div class="row">
     <div *ngFor="let work of sdRequest.works; trackBy:trackByWork" class="col">
       <h3 class="text-primary">{{ work.group.description }}</h3>
-      <div *ngFor="let history of work.histories; trackBy:trackByHistory; let index = index">
-        <div class="card">
-          <div class="card-header">
-            <span>Событие {{ index + 1 }}</span>
-            <i class="mdi" [class]="eventTypeName(history.event_type.name).icon"></i>
-          </div>
-          <div class="card-body">
-            <p class="card-text">
-              <b>Байбурин Равиль:</b> {{ history.action }}
-            </p>
-          </div>
-          <div class="card-footer text-muted">{{ history.created_at | datetime }}</div>
-        </div>
+      <div *ngIf="work.histories.length; else noActions">
+        <lib-history-event-card
+          [history]="work.histories[work.histories.length - 1]"
+          [num]="work.histories.length"
+          [isLast]="work.histories[work.histories.length - 1]._isLast">
+        </lib-history-event-card>
       </div>
+      <div *ngFor="let history of work.histories; trackBy:trackByHistory; let index = index" class="mb-4 mt-4">
+        <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
     </div>
   </div>
 </div>
+
+<ng-template #noActions>
+  <h3>Зафиксированных действий нет</h3>
+</ng-template>

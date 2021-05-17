@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPaginationModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CdkTableModule } from '@angular/cdk/table';
 import { DatetimePipe } from './pipes/datetime.pipe';
 
 const ngbModules: any[] = [
-  NgbPaginationModule
+  NgbPaginationModule,
+  NgbTooltipModule
 ];
 
 const materialModules: any[] = [

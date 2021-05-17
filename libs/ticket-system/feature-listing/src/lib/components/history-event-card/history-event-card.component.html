@@ -1,0 +1,15 @@
+<div class="card" [ngClass]="{ 'border-info': isLast }">
+  <div class="card-header d-flex justify-content-between">
+    <span>Событие {{ num }}</span>
+    <i class="mdi mdi-18px" [class]="eventTypeName(history.event_type.name).icon" [ngbTooltip]="history.event_type.description"></i>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <b>Байбурин Равиль:</b> {{ history.action }}
+    </p>
+  </div>
+  <div class="card-footer clearfix">
+    <div class="badge badge-info text-wrap" *ngIf="isLast">Последнее событие</div>
+    <small class="text-muted float-right">{{ history.created_at | datetime }}</small>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { SdRequestHistoryOverviewComponent } from './sd-request-history-overview.component';
 
@@ -8,7 +9,8 @@ describe('SdRequestHistoryOverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SdRequestHistoryOverviewComponent ]
+      declarations: [SdRequestHistoryOverviewComponent],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });

@@ -25,7 +25,7 @@ export const sdRequestAdapter: EntityAdapter<SdRequest> = createEntityAdapter<Sd
 export const initialState: State = sdRequestAdapter.getInitialState({
   page: 1,
   totalCount: 0,
-  maxSize: 25,
+  maxSize: 5,
   loading: false,
   loaded: false,
 });

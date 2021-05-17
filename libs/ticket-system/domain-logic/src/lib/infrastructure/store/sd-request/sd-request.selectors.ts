@@ -2,6 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import { getTicketSystemState } from './../index';
 import { SD_REQUEST_FEATURE_KEY, State, SdRequestPartialState, sdRequestAdapter } from './sd-request.reducer';
+import { getLastHistory } from '../../utils/get-last-history.function';
 
 export const getSdRequestState = createSelector(
   getTicketSystemState,
@@ -47,7 +48,32 @@ export const getError = createSelector(
 
 export const getAll = createSelector(
   getSdRequestState,
-  (state: State) => selectAll(state)
+  (state: State) =>
+    selectAll(state).map(sdRequest => {
+      if (!sdRequest.works) {
+        return sdRequest;
+      }
+
+      const lastHistory = getLastHistory(sdRequest);
+      const works = sdRequest.works.map(work => {
+        const histories = work.histories.map(hist => {
+          return {
+            ...hist,
+            _isLast: hist == lastHistory
+          }
+        });
+
+        return {
+          ...work,
+          histories
+        }
+      });
+
+      return {
+        ...sdRequest,
+        works
+      }
+    })
 );
 
 export const getEntities = createSelector(
@@ -60,3 +86,8 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
+
+export const getLastHistories = createSelector(
+  getEntities,
+  (entities) => Object.keys(entities).map(id => ({ [id]: getLastHistory(entities[id]) }))
+)
