@@ -14,11 +14,11 @@
       "rules": {
         "@angular-eslint/directive-selector": [
           "error",
-          { "type": "attribute", "prefix": "orbita", "style": "camelCase" }
+          { "type": "attribute", "prefix": "lib", "style": "camelCase" }
         ],
         "@angular-eslint/component-selector": [
           "error",
-          { "type": "element", "prefix": "orbita", "style": "kebab-case" }
+          { "type": "element", "prefix": ["lib", "ticket-system-listing"], "style": "kebab-case" }
         ]
       }
     },

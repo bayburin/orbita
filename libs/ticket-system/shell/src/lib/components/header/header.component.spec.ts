@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AuthHelper, AuthHelperStub } from '@iss/ng-auth-center';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { HeaderComponent } from './header.component';
 
@@ -8,7 +10,9 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HeaderComponent ]
+      imports: [RouterTestingModule],
+      declarations: [HeaderComponent],
+      providers: [{ provide: AuthHelper, useClass: AuthHelperStub }]
     })
     .compileComponents();
   });
