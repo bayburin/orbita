@@ -12,7 +12,19 @@ import { SdRequest } from '@orbita/ticket-system/domain-logic';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SdRequestsTableComponent {
-  displayedColumns = ['id', 'createdAt', 'finishedAtPlan', 'priority', 'status', 'serviceName', 'ticketName', 'description', 'actions'];
+  displayedColumns = [
+    'id',
+    'createdAt',
+    'finishedAtPlan',
+    'status',
+    'serviceName',
+    'ticketName',
+    'description',
+    'priority',
+    'finished_at',
+    'workers',
+    'actions'
+  ];
   @Input() sdRequests$: Observable<SdRequest[]> = of([]);
 
   /**

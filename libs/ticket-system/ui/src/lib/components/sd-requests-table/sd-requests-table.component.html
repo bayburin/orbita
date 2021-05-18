@@ -17,16 +17,12 @@
     <td cdk-cell *cdkCellDef="let element">{{ element.runtime.finished_at_plan | datetime }}</td>
   </ng-container>
 
-  <!-- Приоритет -->
-  <ng-container cdkColumnDef="priority">
-    <th cdk-header-cell *cdkHeaderCellDef>Приоритет</th>
-    <td cdk-cell *cdkCellDef="let element">{{ priority(element.priority).title }}</td>
-  </ng-container>
-
   <!-- Статус -->
   <ng-container cdkColumnDef="status">
     <th cdk-header-cell *cdkHeaderCellDef>Статус</th>
-    <td cdk-cell *cdkCellDef="let element">{{ status(element.status).title }}</td>
+    <td cdk-cell *cdkCellDef="let element">
+      <span class="badge" [ngClass]="status(element.status).badge">{{ status(element.status).title }}</span>
+    </td>
   </ng-container>
 
   <!-- Вид услуги -->
@@ -45,6 +41,24 @@
   <ng-container cdkColumnDef="description">
     <th cdk-header-cell *cdkHeaderCellDef>Подробности</th>
     <td cdk-cell *cdkCellDef="let element">{{ element.description }}</td>
+  </ng-container>
+
+  <!-- Приоритет -->
+  <ng-container cdkColumnDef="priority">
+    <th cdk-header-cell *cdkHeaderCellDef>Приоритет</th>
+    <td cdk-cell *cdkCellDef="let element">{{ priority(element.priority).title }}</td>
+  </ng-container>
+
+  <!-- Дата закрытия -->
+  <ng-container cdkColumnDef="finished_at">
+    <th cdk-header-cell *cdkHeaderCellDef>Дата закрытия</th>
+    <td cdk-cell *cdkCellDef="let element">{{ element.runtime.finished_at | datetime }}</td>
+  </ng-container>
+
+  <!-- Исполнители -->
+  <ng-container cdkColumnDef="workers">
+    <th cdk-header-cell *cdkHeaderCellDef>Исполнители</th>
+    <td cdk-cell *cdkCellDef="let element"></td>
   </ng-container>
 
   <!-- Действия -->

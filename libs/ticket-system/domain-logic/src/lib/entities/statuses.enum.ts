@@ -16,16 +16,32 @@ export interface StatusesData {
    * Название статуса
    */
   title: string;
+  /**
+   * Тип badge
+   */
+  badge: string;
 }
 
 /**
  * Объект маппинга статуса для отображения в представление
  */
 export const sdRequestStatusesMap: Record<Statuses, StatusesData> = {
-  [Statuses.OPENED]: { title: 'Открыта' },
-  [Statuses.AT_WORK]: { title: 'В работе' },
-  [Statuses.CANCELED]: { title: 'Отменена' },
-  [Statuses.DONE]: { title: 'Выполнена' },
+  [Statuses.OPENED]: {
+    title: 'Открыта',
+    badge: 'badge-primary'
+  },
+  [Statuses.AT_WORK]: {
+    title: 'В работе',
+    badge: 'badge-info'
+  },
+  [Statuses.CANCELED]: {
+    title: 'Отменена',
+    badge: 'badge-secondary'
+  },
+  [Statuses.DONE]: {
+    title: 'Выполнена',
+    badge: 'badge-success'
+  },
 };
 
 /**
