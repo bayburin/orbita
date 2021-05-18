@@ -7,6 +7,8 @@ import { AuthHelper } from '@iss/ng-auth-center';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  user = this.authHelper.getJwtPayload();
+
   constructor(private authHelper: AuthHelper) {}
 
   logout(): void {

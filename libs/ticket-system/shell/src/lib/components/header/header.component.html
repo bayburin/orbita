@@ -6,10 +6,23 @@
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button">
     <i class="mdi mdi-reorder-horizontal"></i>
   </button>
+  <ul class="navbar-nav px-3">
+    <li class="nav-item" display="dynamic" ngbDropdown>
+      <a class="nav-link" ngbDropdownToggle role="button">
+        <i class="mdi mdi-dots-vertical mdi-24px"></i>
+      </a>
+      <div ngbDropdownMenu class="dropdown-menu">
+        <a ngbDropdownItem [routerLink]="['/ticket-system', 'tickets', 'new-sd-request']">Новая заявка</a>
+      </div>
+    </li>
+  </ul>
   <input class="form-control form-control-dark w-100" type="text" placeholder="Search">
   <ul class="navbar-nav px-3">
-    <li class="nav-item text-nowrap">
-      <a class="nav-link" (click)="logout()">Выход</a>
+    <li class="nav-item" display="dynamic" ngbDropdown>
+      <a class="nav-link" ngbDropdownToggle role="button">{{ user.fio | fioInitials }}</a>
+      <div ngbDropdownMenu class="dropdown-menu">
+        <button ngbDropdownItem (click)="logout()">Выход</button>
+      </div>
     </li>
   </ul>
 </nav>

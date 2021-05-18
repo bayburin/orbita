@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbPaginationModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbPaginationModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CdkTableModule } from '@angular/cdk/table';
 
-import { DatetimePipe } from './pipes/datetime.pipe';
+import { DatetimePipe } from './pipes/datetime/datetime.pipe';
+import { FioInitialsPipe } from './pipes/fio-initials/fio-initials.pipe';
 
 import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requests-table.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
@@ -13,7 +14,8 @@ import { HistoryEventCardComponent } from './components/history-event-card/histo
 
 const ngbModules: any[] = [
   NgbPaginationModule,
-  NgbTooltipModule
+  NgbTooltipModule,
+  NgbDropdownModule
 ];
 
 const materialModules: any[] = [
@@ -21,7 +23,8 @@ const materialModules: any[] = [
 ]
 
 const pipes: any[] = [
-  DatetimePipe
+  DatetimePipe,
+  FioInitialsPipe
 ]
 
 const components: any[] = [
