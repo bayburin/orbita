@@ -5,7 +5,7 @@
       <div *ngFor="let comment of comments; trackBy:trackByComment">
         <div class="card">
           <div class="card-header d-flex align-items-center justify-content-between">
-            <span>{{ comment.sender.fio | fioInitials}}</span>
+            <span>{{ comment.sender?.fio | fioInitials}}</span>
             <small>{{ comment.created_at | datetime }}</small>
           </div>
           <div class="card-body">

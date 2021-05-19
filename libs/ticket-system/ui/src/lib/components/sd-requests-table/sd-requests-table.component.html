@@ -53,7 +53,7 @@
   <ng-container cdkColumnDef="workers">
     <th cdk-header-cell *cdkHeaderCellDef>Исполнители</th>
     <td cdk-cell *cdkCellDef="let element">
-      <div *ngFor="let worker of workers(element); trackBy:trackByUserWork">{{ worker.user.fio | fioMiddleName }}</div>
+      <div *ngFor="let worker of workers(element); trackBy:trackByUserWork">{{ worker.user?.fio | fioMiddleName }}</div>
     </td>
   </ng-container>
 
