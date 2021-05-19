@@ -6,7 +6,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class FioInitialsPipe implements PipeTransform {
   transform(fio: string): unknown {
     const arr = fio.split(' ');
+    const initials = arr.slice(1).map(str => `${str[0]}.`).join(' ')
+    const result = arr[0];
 
-    return `${arr[0]} ${arr[1][0]}. ${arr[2][0]}.`;
+    return initials ? `${result} ${initials}` : result;
   }
 }
