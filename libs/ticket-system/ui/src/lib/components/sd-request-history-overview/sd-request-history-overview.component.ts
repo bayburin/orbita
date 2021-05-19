@@ -1,8 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-import { SdRequest } from '@orbita/ticket-system/domain-logic';
-import { Work } from '@orbita/ticket-system/domain-logic';
-import { History } from '@orbita/ticket-system/domain-logic';
+import { SdRequest, Work, History } from '@orbita/ticket-system/domain-logic';
 
 @Component({
   selector: 'lib-sd-request-history-overview',
@@ -25,5 +22,9 @@ export class SdRequestHistoryOverviewComponent {
 
   trackByHistory(_index: number, history: History): number {
     return history.id;
+  }
+
+  sendMessage(message: string): void {
+    // TODO: Отправить событие родительскому контроллеру
   }
 }

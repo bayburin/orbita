@@ -1,6 +1,7 @@
 import { Statuses } from './statuses.enum';
 import { Priorities } from './priorities.enum';
 import { Runtime } from './runtime.interface';
+import { Message } from './message.interface';
 
 /**
  * Типы тикета
@@ -40,4 +41,9 @@ export interface Ticket {
    * Объект Runtime
    */
   readonly runtime: Runtime;
+
+  /**
+   * Массив объектов Message
+   */
+  readonly comments: Message[];
 }

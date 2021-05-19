@@ -11,6 +11,7 @@ import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requ
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { SdRequestHistoryOverviewComponent } from './components/sd-request-history-overview/sd-request-history-overview.component';
 import { HistoryEventCardComponent } from './components/history-event-card/history-event-card.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 const ngbModules: any[] = [
   NgbPaginationModule,
@@ -32,7 +33,8 @@ const components: any[] = [
   SdRequestsTableComponent,
   PaginationComponent,
   SdRequestHistoryOverviewComponent,
-  HistoryEventCardComponent
+  HistoryEventCardComponent,
+  CommentComponent
 ]
 
 @NgModule({

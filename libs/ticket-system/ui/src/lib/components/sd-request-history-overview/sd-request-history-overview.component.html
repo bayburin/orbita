@@ -1,17 +1,25 @@
 <h3>Ход работы</h3>
 <div class="container-fluid">
   <div class="row">
-    <div *ngFor="let work of sdRequest.works; trackBy:trackByWork" class="col">
-      <h4 class="text-primary">{{ work.group.description }}</h4>
-      <div *ngIf="work.histories.length; else noActions">
-        <lib-history-event-card
-          [history]="work.histories[work.histories.length - 1]"
-          [num]="work.histories.length"
-          [isLast]="work.histories[work.histories.length - 1]._isLast">
-        </lib-history-event-card>
+    <div class="col">
+      <div class="row">
+        <div *ngFor="let work of sdRequest.works; trackBy:trackByWork" class="col">
+          <h4 class="text-primary">{{ work.group.description }}</h4>
+          <div *ngIf="work.histories.length; else noActions">
+            <lib-history-event-card
+              [history]="work.histories[work.histories.length - 1]"
+              [num]="work.histories.length"
+              [isLast]="work.histories[work.histories.length - 1]._isLast">
+            </lib-history-event-card>
+          </div>
+          <div *ngFor="let history of work.histories; trackBy:trackByHistory; let index = index" class="mb-4 mt-4">
+            <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
+          </div>
+        </div>
       </div>
-      <div *ngFor="let history of work.histories; trackBy:trackByHistory; let index = index" class="mb-4 mt-4">
-        <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
+    </div>
+    <div class="col">
+      <lib-comment [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comment>
     </div>
   </div>
 </div>
