@@ -8,7 +8,6 @@ import { FioInitialsPipe } from './pipes/fio-initials/fio-initials.pipe';
 
 import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requests-table.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
-import { SdRequestViewComponent } from './components/sd-request-view/sd-request-view.component';
 import { SdRequestHistoryOverviewComponent } from './components/sd-request-history-overview/sd-request-history-overview.component';
 import { HistoryEventCardComponent } from './components/history-event-card/history-event-card.component';
 
@@ -30,7 +29,6 @@ const pipes: any[] = [
 const components: any[] = [
   SdRequestsTableComponent,
   PaginationComponent,
-  SdRequestViewComponent,
   SdRequestHistoryOverviewComponent,
   HistoryEventCardComponent,
 ]
