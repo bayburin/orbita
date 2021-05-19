@@ -18,7 +18,7 @@ export class UserEffects {
   //     ofType(UserActions.loadAll),
   //     switchMap(() => this.userApi.query()
   //       .pipe(
-  //         map(users => UserActions.loadAllSuccess({ users })),
+  //         map(userQueue => UserActions.loadAllSuccess({ userQueue })),
   //         catchError(error => of(UserActions.loadAllFailure({ error })))
   //       )
   //     )

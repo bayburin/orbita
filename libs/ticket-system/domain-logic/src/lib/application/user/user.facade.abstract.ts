@@ -15,4 +15,9 @@ export abstract class UserFacadeAbstract {
    * Список пользователей
    */
   all$: Observable<User[]> = of();
+
+  /**
+   * Инициализация стора
+   */
+  abstract init(): void;
 }

@@ -3,7 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { History, EventTypeNames } from '@orbita/ticket-system/domain-logic';
 
 import { HistoryEventCardComponent } from './history-event-card.component';
-import { DatetimePipe } from './../../pipes/datetime.pipe';
+import { DatetimePipe } from './../../pipes/datetime/datetime.pipe';
 
 describe('HistoryEventCardComponent', () => {
   let component: HistoryEventCardComponent;

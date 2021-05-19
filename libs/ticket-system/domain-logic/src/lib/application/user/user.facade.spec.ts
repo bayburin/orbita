@@ -72,12 +72,14 @@ describe('UserFacade', () => {
         const spy = spyOn(store, 'dispatch');
 
         facade.loadUsers$.subscribe();
+
         expect(spy).toHaveBeenCalledWith(UserActions.loadAll());
       });
 
       it('should call loadAllSuccess action if userApi finished successfully', () => {
         querySpy.and.returnValue(of(userQueue));
         const spy = spyOn(store, 'dispatch');
+
         facade.loadUsers$.subscribe();
 
         expect(spy).toHaveBeenCalledWith(UserActions.loadAllSuccess({ userQueue }));
@@ -87,9 +89,20 @@ describe('UserFacade', () => {
         const error = { error: 'Error message' }
         querySpy.and.callFake(() => throwError(error));
         const spy = spyOn(store, 'dispatch');
+
         facade.loadUsers$.subscribe();
 
         expect(spy).toHaveBeenCalledWith(UserActions.loadAllFailure({ error }));
+      });
+    });
+
+    describe('init()', () => {
+      it('should subscribe to loadUsers$ attribute', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        facade.init();
+
+        expect(spy).toHaveBeenCalledWith(UserActions.loadAll());
       });
     });
   });

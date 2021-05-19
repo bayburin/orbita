@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, of } from 'rxjs';
-import { tap, switchMap, catchError, map, distinctUntilChanged, share, startWith, filter } from 'rxjs/operators';
+import { tap, switchMap, catchError, map, distinctUntilChanged, share, startWith, filter, take } from 'rxjs/operators';
 
 import { UserFacadeAbstract } from './user.facade.abstract';
 import * as UserActions from '../../infrastructure/store/user/user.actions';
@@ -38,4 +38,8 @@ export class UserFacade implements UserFacadeAbstract {
     private store: Store<UserFeature.UserPartialState>,
     private userApi: UserApi
   ) {}
+
+  init() {
+    this.loadUsers$.pipe(take(1)).subscribe();
+  }
 }
