@@ -19,7 +19,7 @@ import { UserEffects } from './infrastructure/store/user/user.effects';
       SdRequestEffects,
       FreeSdRequestTypeEffects,
       UserEffects
-    ]),
+    ])
   ],
   providers: [],
 })

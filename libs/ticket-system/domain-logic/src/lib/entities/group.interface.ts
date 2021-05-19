@@ -23,3 +23,12 @@ export interface Group {
   readonly description: string;
 }
 
+/**
+ * ОБъект данных Group, который возвращает сервер
+ */
+export interface GroupQueue {
+  /**
+   * Массив объектов Group
+   */
+  groups: Group[];
+}
