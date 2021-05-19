@@ -1,4 +1,4 @@
-<table cdk-table [dataSource]="sdRequests$" class="table" multiTemplateDataRows>
+<table cdk-table [dataSource]="sdRequests$" [trackBy]="trackBySdRequest" class="table" multiTemplateDataRows>
   <!-- Номер заявки -->
   <ng-container cdkColumnDef="id">
     <th cdk-header-cell *cdkHeaderCellDef>No.</th>
@@ -49,16 +49,18 @@
     <td cdk-cell *cdkCellDef="let element">{{ priority(element.priority).title }}</td>
   </ng-container>
 
+  <!-- Исполнители -->
+  <ng-container cdkColumnDef="workers">
+    <th cdk-header-cell *cdkHeaderCellDef>Исполнители</th>
+    <td cdk-cell *cdkCellDef="let element">
+      <div *ngFor="let worker of workers(element); trackBy:trackByUserWork">{{ worker.user.fio | fioMiddleName }}</div>
+    </td>
+  </ng-container>
+
   <!-- Дата закрытия -->
   <ng-container cdkColumnDef="finished_at">
     <th cdk-header-cell *cdkHeaderCellDef>Дата закрытия</th>
     <td cdk-cell *cdkCellDef="let element">{{ element.runtime.finished_at | datetime }}</td>
-  </ng-container>
-
-  <!-- Исполнители -->
-  <ng-container cdkColumnDef="workers">
-    <th cdk-header-cell *cdkHeaderCellDef>Исполнители</th>
-    <td cdk-cell *cdkCellDef="let element"></td>
   </ng-container>
 
   <!-- Действия -->

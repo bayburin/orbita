@@ -1,7 +1,8 @@
 import { Observable, of } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Priorities, PrioritiesData, getSdRequestPriority } from '@orbita/ticket-system/domain-logic';
+import { Priorities, PrioritiesData, getSdRequestPriority, Work, UserWork } from '@orbita/ticket-system/domain-logic';
 import { Statuses, StatusesData, getSdRequestStatus } from '@orbita/ticket-system/domain-logic';
+import { oFlatMap } from '@orbita/ticket-system/utils';
 
 import { SdRequest } from '@orbita/ticket-system/domain-logic';
 
@@ -12,6 +13,9 @@ import { SdRequest } from '@orbita/ticket-system/domain-logic';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SdRequestsTableComponent {
+  /**
+   * Список выводимых столбцов
+   */
   displayedColumns = [
     'id',
     'createdAt',
@@ -21,10 +25,13 @@ export class SdRequestsTableComponent {
     'ticketName',
     'description',
     'priority',
-    'finished_at',
     'workers',
+    'finished_at',
     'actions'
   ];
+  /**
+   * Массив заявок
+   */
   @Input() sdRequests$: Observable<SdRequest[]> = of([]);
 
   /**
@@ -43,5 +50,22 @@ export class SdRequestsTableComponent {
    */
   status(status: Statuses): StatusesData {
     return getSdRequestStatus(status);
+  }
+
+  /**
+   * Возвращает текущий список исполнителей для указанной заявки
+   *
+   * @param sdRequest - заяка
+   */
+  workers(sdRequest: SdRequest): UserWork[] {
+    return oFlatMap((work: Work) => work.workers, sdRequest.works);
+  }
+
+  trackBySdRequest(index: number, sdRequest: SdRequest): number {
+    return sdRequest.id;
+  }
+
+  trackByUserWork(index: number, worker: UserWork): number {
+    return worker.id;
   }
 }

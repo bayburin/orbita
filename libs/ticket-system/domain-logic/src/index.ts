@@ -7,6 +7,7 @@ export * from './lib/entities/sd-request.interface';
 export * from './lib/entities/user.interface';
 export * from './lib/entities/work.interface';
 export * from './lib/entities/history.interface';
+export * from './lib/entities/user-work.interface';
 export * from './lib/entities/event-type-names.enum';
 
 export * from './lib/application/sd-request/sd-request.facade';

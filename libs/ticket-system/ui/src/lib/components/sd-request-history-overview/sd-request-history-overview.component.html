@@ -1,8 +1,8 @@
-<h3>ХОД РАБОТЫ</h3>
+<h3>Ход работы</h3>
 <div class="container-fluid">
   <div class="row">
     <div *ngFor="let work of sdRequest.works; trackBy:trackByWork" class="col">
-      <h3 class="text-primary">{{ work.group.description }}</h3>
+      <h4 class="text-primary">{{ work.group.description }}</h4>
       <div *ngIf="work.histories.length; else noActions">
         <lib-history-event-card
           [history]="work.histories[work.histories.length - 1]"
@@ -17,5 +17,5 @@
 </div>
 
 <ng-template #noActions>
-  <h3>Зафиксированных действий нет</h3>
+  <p>Зафиксированных действий нет</p>
 </ng-template>

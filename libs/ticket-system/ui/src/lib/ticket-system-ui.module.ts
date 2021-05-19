@@ -5,6 +5,7 @@ import { CdkTableModule } from '@angular/cdk/table';
 
 import { DatetimePipe } from './pipes/datetime/datetime.pipe';
 import { FioInitialsPipe } from './pipes/fio-initials/fio-initials.pipe';
+import { FioMiddleNamePipe } from './pipes/fio-middle-name/fio-middle-name.pipe';
 
 import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requests-table.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
@@ -23,14 +24,15 @@ const materialModules: any[] = [
 
 const pipes: any[] = [
   DatetimePipe,
-  FioInitialsPipe
+  FioInitialsPipe,
+  FioMiddleNamePipe
 ]
 
 const components: any[] = [
   SdRequestsTableComponent,
   PaginationComponent,
   SdRequestHistoryOverviewComponent,
-  HistoryEventCardComponent,
+  HistoryEventCardComponent
 ]
 
 @NgModule({
