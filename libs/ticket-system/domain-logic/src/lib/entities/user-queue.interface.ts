@@ -1,4 +1,4 @@
-import { User } from './user.interface';
+import { User } from './models/user.interface';
 
 export interface UserQueue {
   /**

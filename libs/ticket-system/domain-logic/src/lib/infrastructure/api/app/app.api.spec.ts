@@ -2,24 +2,24 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
 
-import { OrbitaApi } from './orbita.api';
+import { AppApi } from './app.api';
 import { Group } from './../../../entities/models/group.interface';
 import { User } from './../../../entities/models/user.interface';
 
-describe('OrbitaApi', () => {
-  let service: OrbitaApi;
+describe('AppApi', () => {
+  let service: AppApi;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        OrbitaApi,
+        AppApi,
         { provide: ORBITA_UI_ENV_TOKEN, useValue: { serverApiUrl: 'http://test'  } }
       ]
     });
 
-    service = TestBed.inject(OrbitaApi);
+    service = TestBed.inject(AppApi);
     httpMock = TestBed.inject(HttpTestingController);
   });
 

@@ -1,4 +1,4 @@
-import { Group } from './group.interface';
+import { Group } from './models/group.interface';
 import { History } from './history.interface';
 import { UserWork } from './user-work.interface';
 

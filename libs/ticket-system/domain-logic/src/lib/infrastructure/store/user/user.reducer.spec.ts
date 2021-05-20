@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { User } from '../../../entities/user.interface';
+import { User } from '../../../entities/models/user.interface';
 import * as UserActions from './user.actions';
 import { State, initialState, reducer } from './user.reducer';
 import { UserQueueBuilder } from './../../builders/user-queue.builder';
@@ -30,7 +30,7 @@ describe('UserReducer', () => {
         createUser('PRODUCT-zzz'),
       ];
       const userQueue = new UserQueueBuilder().users(users).build();
-      action = UserActions.loadAllSuccess({ userQueue });
+      action = UserActions.loadAllSuccess({ users: userQueue.users });
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(true);

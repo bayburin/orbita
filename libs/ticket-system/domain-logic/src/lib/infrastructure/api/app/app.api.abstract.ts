@@ -5,7 +5,7 @@ import { Init } from './../../../entities/server-data/init.interface';
 /**
  * Содержит API для обращения к серверу орбиты в случаях, когда они не связаны с какими-то конкретными сущностями
  */
-export abstract class OrbitaApiAbstract {
+export abstract class AppApiAbstract {
   /**
    * Адрес сервера
    */

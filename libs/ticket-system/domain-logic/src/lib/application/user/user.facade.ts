@@ -20,7 +20,7 @@ export class UserFacade implements UserFacadeAbstract {
     switchMap(() =>
       this.userApi.query()
         .pipe(
-          tap(userQueue => this.store.dispatch(UserActions.loadAllSuccess({ userQueue }))),
+          tap(userQueue => this.store.dispatch(UserActions.loadAllSuccess({ users: userQueue.users }))),
           catchError(error => of(this.store.dispatch(UserActions.loadAllFailure({ error }))))
         )
     ),

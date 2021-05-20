@@ -9,7 +9,7 @@ import { of, Observable, throwError } from 'rxjs';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 
-import { User } from '../../entities/user.interface';
+import { User } from '../../entities/models/user.interface';
 import { UserEffects } from '../../infrastructure/store/user/user.effects';
 import { UserFacade } from './user.facade';
 import { UserApi } from './../../infrastructure/api/user/user.api';
@@ -82,7 +82,7 @@ describe('UserFacade', () => {
 
         facade.loadUsers$.subscribe();
 
-        expect(spy).toHaveBeenCalledWith(UserActions.loadAllSuccess({ userQueue }));
+        expect(spy).toHaveBeenCalledWith(UserActions.loadAllSuccess({ users: userQueue.users }));
       });
 
       it('should call loadAllSuccess action if userApi finished successfully', () => {

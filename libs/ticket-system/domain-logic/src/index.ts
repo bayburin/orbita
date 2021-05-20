@@ -12,6 +12,8 @@ export * from './lib/entities/message.interface';
 export * from './lib/entities/user-work.interface';
 export * from './lib/entities/event-type-names.enum';
 
+export * from './lib/application/app/app.facade';
+export * from './lib/application/app/app.facade.stub';
 export * from './lib/application/sd-request/sd-request.facade';
 export * from './lib/application/sd-request/sd-request.facade.stub';
 export * from './lib/application/user/user.facade';

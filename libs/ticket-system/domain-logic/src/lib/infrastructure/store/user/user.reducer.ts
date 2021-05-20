@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as UserActions from './user.actions';
-import { User } from '../../../entities/user.interface';
+import { User } from '../../../entities/models/user.interface';
 
 export const USER_FEATURE_KEY = 'user';
 
@@ -28,8 +28,8 @@ const userReducer = createReducer(
     loaded: false,
     error: null
   })),
-  on(UserActions.loadAllSuccess, (state, { userQueue }) =>
-    userAdapter.setAll(userQueue.users, { ...state, loaded: true })
+  on(UserActions.loadAllSuccess, (state, { users }) =>
+    userAdapter.setAll(users, { ...state, loaded: true })
   ),
   on(UserActions.loadAllFailure, (state, { error }) => ({ ...state, error }))
 );

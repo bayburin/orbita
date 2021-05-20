@@ -1,4 +1,4 @@
-import { User } from '../../../entities/user.interface';
+import { User } from '../../../entities/models/user.interface';
 import { userAdapter, initialState } from './user.reducer';
 import * as UserSelectors from './user.selectors';
 

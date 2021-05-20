@@ -1,6 +1,6 @@
 import { Observable, of } from 'rxjs';
 
-import { User } from '../../entities/user.interface';
+import { User } from '../../entities/models/user.interface';
 
 /**
  * Фасад для обращений к объектам SdRequest

@@ -1,12 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 
-import { UserQueue } from '../../../entities/user-queue.interface';
+import { User } from '../../../entities/models/user.interface';
 
 export const loadAll = createAction('[User/Api] loadAll');
 
 export const loadAllSuccess = createAction(
   '[User/API] Load All Success',
-  props<{ userQueue: UserQueue }>()
+  props<{ users: User[] }>()
 );
 
 export const loadAllFailure = createAction(

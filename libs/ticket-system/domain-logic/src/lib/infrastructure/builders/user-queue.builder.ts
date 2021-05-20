@@ -1,6 +1,6 @@
 import { ModelBuilder } from './model.builder';
 import { UserQueue } from '../../entities/user-queue.interface';
-import { User } from './../../entities/user.interface';
+import { User } from './../../entities/models/user.interface';
 
 export class UserQueueBuilder extends ModelBuilder<UserQueue> {
   constructor() {
