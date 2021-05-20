@@ -49,3 +49,13 @@ export interface Message {
    */
   readonly sender: User;
 }
+
+/**
+ * ОБъект данных Message, который возвращает сервер
+ */
+ export interface MessageQueue {
+  /**
+   * Массив объектов Group
+   */
+  messages: Message[];
+}
