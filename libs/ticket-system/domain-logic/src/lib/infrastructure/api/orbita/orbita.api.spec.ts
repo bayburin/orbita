@@ -2,22 +2,24 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
 
-import { UserApi } from './user.api';
+import { OrbitaApi } from './orbita.api';
+import { Group } from './../../../entities/models/group.interface';
+import { User } from './../../../entities/models/user.interface';
 
-describe('UserApi', () => {
-  let service: UserApi;
+describe('OrbitaApi', () => {
+  let service: OrbitaApi;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        UserApi,
+        OrbitaApi,
         { provide: ORBITA_UI_ENV_TOKEN, useValue: { serverApiUrl: 'http://test'  } }
       ]
     });
 
-    service = TestBed.inject(UserApi);
+    service = TestBed.inject(OrbitaApi);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
@@ -25,19 +27,22 @@ describe('UserApi', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('query()', () => {
-    const api = 'http://test/users';
-    const users = [{ id: 1 }, { id: 2 }];
+  describe('init()', () => {
+    const api = 'http://test/init';
+    const initData = {
+      groups: [] as Group[],
+      users: [] as User[]
+    };
 
     it('should return requests', () => {
-      service.query().subscribe(result => {
-        expect(result).toEqual(users);
-      })
+      service.init().subscribe(result => {
+        expect(result).toEqual(initData);
+      });
 
       httpMock.expectOne({
         method: 'GET',
         url: api
-      }).flush(users);
+      }).flush(initData);
     });
   });
 });

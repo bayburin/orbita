@@ -25,7 +25,7 @@ describe('ServiceDeskApi', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('#getFreeSdRequestTypes', () => {
+  describe('getFreeSdRequestTypes()', () => {
     const api = 'http://test/v2/services';
     const sdRequests = [{ id: 1 }, { id: 2 }];
 

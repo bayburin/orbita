@@ -25,7 +25,7 @@ describe('SdRequestApi', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('#query', () => {
+  describe('query()', () => {
     const api = 'http://test/sd_requests';
     const sdRequests = [{ id: 1 }, { id: 2 }];
 
