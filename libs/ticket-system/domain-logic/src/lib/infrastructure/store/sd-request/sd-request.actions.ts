@@ -1,12 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 
-import { SdRequestQueue } from '../../../entities/sd-request-queue.interface';
+import { SdRequest } from './../../../entities/models/sd-request.interface';
+import { Meta } from './../../../entities/server-data/meta.interface';
 
 export const loadAll = createAction('[SdRequest/API] Load All');
 
 export const loadAllSuccess = createAction(
   '[SdRequest/API] Load All Success',
-  props<{ sdRequestQueue: SdRequestQueue }>()
+  props<{ sd_requests: SdRequest[], meta: Meta }>()
 );
 
 export const loadAllFailure = createAction(

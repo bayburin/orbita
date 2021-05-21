@@ -1,13 +1,14 @@
 import { Observable, of } from 'rxjs';
 
-import { SdRequest } from './../../entities/sd-request.interface';
+import { SdRequest } from './../../entities/models/sd-request.interface';
 import { SdRequestQueue } from './../../entities/sd-request-queue.interface';
 
 export abstract class SdRequestFacadeAbstract {
   /**
    * Выбранная заявка
    */
-  selected$: Observable<"" | 0 | SdRequest | undefined> = of();
+  // TODO: Исправить
+  // selected$: Observable<"" | 0 | SdRequest | undefined> = of();
 
   /**
    * Номер текущей страницы
