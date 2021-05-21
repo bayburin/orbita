@@ -9,6 +9,9 @@ import * as SdRequestFeature from '../../infrastructure/store/sd-request/sd-requ
 import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-request.selectors';
 import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
 
+/**
+ * Фасад для работы с заявками (обращения к стору SdRequest)
+ */
 @Injectable({
   providedIn: 'root'
 })

@@ -1,7 +1,10 @@
 import { BehaviorSubject } from "rxjs";
 
-export class UserFacadeStub {
+import { UserFacadeAbstract } from "./user.facade.abstract";
+
+export class UserFacadeStub implements UserFacadeAbstract {
   loaded$ = new BehaviorSubject(false);
   all$ = new BehaviorSubject([]);
-  init() {}
+
+  init() { /** */ }
 }

@@ -95,16 +95,6 @@ describe('UserFacade', () => {
         expect(spy).toHaveBeenCalledWith(UserActions.loadAllFailure({ error }));
       });
     });
-
-    describe('init()', () => {
-      it('should subscribe to loadUsers$ attribute', () => {
-        const spy = spyOn(store, 'dispatch');
-
-        facade.init();
-
-        expect(spy).toHaveBeenCalledWith(UserActions.loadAll());
-      });
-    });
   });
 
   describe('used in NgModule', () => {

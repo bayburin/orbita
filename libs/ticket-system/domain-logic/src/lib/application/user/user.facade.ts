@@ -9,6 +9,9 @@ import * as UserFeature from '../../infrastructure/store/user/user.reducer';
 import * as UserSelectors from '../../infrastructure/store/user/user.selectors';
 import { UserApi } from '../../infrastructure/api/user/user.api';
 
+/**
+ * Фасад для работы со списком пользователей (обращения к стору User)
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -38,8 +41,4 @@ export class UserFacade implements UserFacadeAbstract {
     private store: Store<UserFeature.UserPartialState>,
     private userApi: UserApi
   ) {}
-
-  init() {
-    this.loadUsers$.pipe(take(1)).subscribe();
-  }
 }
