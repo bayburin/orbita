@@ -12,4 +12,4 @@ export const sd_request_schema = new schema.Entity('sd_requests', {
   comments: [comment_schema]
 });
 
-export const sd_request_list_schema = { sd_requests: [sd_request_schema] }
+export const sd_requests_schema = { sd_requests: [sd_request_schema] }

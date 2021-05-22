@@ -49,3 +49,17 @@ export interface SdRequest extends Ticket {
    */
   readonly works: number[];
 }
+
+/**
+ * Интерфейс нормализованного объекта заявки
+ */
+export interface NormalizedSdRequest {
+  [key: number]: SdRequest;
+}
+
+/**
+ * Интерфейс нормализованных данных, возвращаемый функцией normalize
+ */
+export interface NormalizedSdRequests {
+  entities: { sd_requests: NormalizedSdRequest }
+}

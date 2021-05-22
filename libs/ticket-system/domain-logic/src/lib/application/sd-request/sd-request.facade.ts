@@ -2,14 +2,13 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, of } from 'rxjs';
 import { tap, switchMap, catchError, map, withLatestFrom, distinctUntilChanged, share, startWith, filter } from 'rxjs/operators';
-import { normalize } from 'normalizr';
 
 import { SdRequestFacadeAbstract } from './sd-request.facade.abstract';
 import * as SdRequestActions from '../../infrastructure/store/sd-request/sd-request.actions';
 import * as SdRequestFeature from '../../infrastructure/store/sd-request/sd-request.reducer';
 import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-request.selectors';
 import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
-import { sd_request_list_schema } from './../../infrastructure/schemas/normalizr.schema';
+import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 
 /**
  * Фасад для работы с заявками (обращения к стору SdRequest)
@@ -33,8 +32,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
       this.sdRequestApi.query(page, maxSize)
         .pipe(
           tap(sdRequestQueue => {
-            // TODO: Выделить в класс SdRequestCacheService
-            const normalizeData = normalize(sdRequestQueue, sd_request_list_schema)
+            const normalizeData = SdRequestCacheService.normalizeSdRequests(sdRequestQueue)
 
             this.store.dispatch(SdRequestActions.loadAllSuccess({
               sd_requests: Object.values(normalizeData.entities.sd_requests),
