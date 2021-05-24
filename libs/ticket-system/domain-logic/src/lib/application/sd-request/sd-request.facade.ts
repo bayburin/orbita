@@ -11,6 +11,7 @@ import * as SdRequestViewModelSelectors from '../../infrastructure/store/view-mo
 import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { MessageFacade } from './../message/message.facade';
+import { WorkFacade } from './../work/work.facade';
 
 /**
  * Фасад для работы с заявками (обращения к стору SdRequest)
@@ -42,6 +43,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
             }));
 
             this.messageFacade.setMessages(Object.values(normalizeData.entities.comments));
+            this.workFacade.setWorks(Object.values(normalizeData.entities.works));
           }),
           catchError(error => of(this.store.dispatch(SdRequestActions.loadAllFailure({ error }))))
         )
@@ -59,7 +61,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   constructor(
     private store: Store<SdRequestFeature.SdRequestPartialState>,
     private sdRequestApi: SdRequestApi,
-    private messageFacade: MessageFacade
+    private messageFacade: MessageFacade,
+    private workFacade: WorkFacade
   ) {}
 
   setPage(page: number) {

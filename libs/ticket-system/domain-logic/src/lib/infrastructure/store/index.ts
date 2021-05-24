@@ -6,6 +6,7 @@ import * as fromFreeSdRequestType from './free-sd-request-type/free-sd-request-t
 import * as fromUser from './user/user.reducer';
 import * as fromGroup from './group/group.reducer';
 import * as fromMessage from './message/message.reducer';
+import * as fromWork from './work/work.reducer';
 
 export const TICKET_SYSTEM_FEATURE_KEY = 'ticketSystem';
 
@@ -15,7 +16,8 @@ export interface TicketSystemState extends
   fromFreeSdRequestType.FreeSdRequestTypePartialState,
   fromUser.UserPartialState,
   fromGroup.GroupPartialState,
-  fromMessage.MessagePartialState { }
+  fromMessage.MessagePartialState,
+  fromWork.WorkPartialState { }
 
 export const reducer: ActionReducerMap<TicketSystemState> = {
   [fromApp.APP_FEATURE_KEY]: fromApp.reducer,
@@ -23,7 +25,8 @@ export const reducer: ActionReducerMap<TicketSystemState> = {
   [fromFreeSdRequestType.FREE_SD_REQUEST_TYPE_FEATURE_KEY]: fromFreeSdRequestType.reducer,
   [fromUser.USER_FEATURE_KEY]: fromUser.reducer,
   [fromGroup.GROUP_FEATURE_KEY]: fromGroup.reducer,
-  [fromMessage.MESSAGE_FEATURE_KEY]: fromMessage.reducer
+  [fromMessage.MESSAGE_FEATURE_KEY]: fromMessage.reducer,
+  [fromWork.WORK_FEATURE_KEY]: fromWork.reducer
 }
 
 export const getTicketSystemState = createFeatureSelector<TicketSystemState>(TICKET_SYSTEM_FEATURE_KEY);
