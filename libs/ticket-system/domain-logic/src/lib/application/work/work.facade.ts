@@ -4,15 +4,15 @@ import { Store } from '@ngrx/store';
 import * as WorkFeature from '../../infrastructure/store/work/work.reducer';
 import * as WorkActions from '../../infrastructure/store/work/work.actions';
 import { Work } from '../../entities/models/work.interface';
-// import { WorkFacadeAbstract } from "./work.facade.abstract";
+import { WorkFacadeAbstract } from './work.facade.abstract';
 
 /**
- * Фасад для работы с сообщениями (обращения к стору Work)
+ * Фасад для работы с "работами" (обращения к стору Work)
  */
 @Injectable({
   providedIn: 'root'
 })
-export class WorkFacade {
+export class WorkFacade implements WorkFacadeAbstract {
   constructor(private store: Store<WorkFeature.WorkPartialState>) {}
 
   setWorks(works: Work[]) {
