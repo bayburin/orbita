@@ -7,8 +7,10 @@ import { SdRequestFacadeAbstract } from './sd-request.facade.abstract';
 import * as SdRequestActions from '../../infrastructure/store/sd-request/sd-request.actions';
 import * as SdRequestFeature from '../../infrastructure/store/sd-request/sd-request.reducer';
 import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-request.selectors';
+import * as SdRequestViewModelSelectors from '../../infrastructure/store/view-model/sd-request-view-model.selectors';
 import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
+import { MessageFacade } from './../message/message.facade';
 
 /**
  * Фасад для работы с заявками (обращения к стору SdRequest)
@@ -37,7 +39,9 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
             this.store.dispatch(SdRequestActions.loadAllSuccess({
               sd_requests: Object.values(normalizeData.entities.sd_requests),
               meta: sdRequestQueue.meta
-            }))
+            }));
+
+            this.messageFacade.setMessages(Object.values(normalizeData.entities.comments));
           }),
           catchError(error => of(this.store.dispatch(SdRequestActions.loadAllFailure({ error }))))
         )
@@ -46,7 +50,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   );
   all$ = combineLatest([
     this.loadSdRequests$.pipe(startWith(null)),
-    this.store.select(SdRequestSelectors.getAll)
+    this.store.select(SdRequestViewModelSelectors.getAllViewModel)
   ]).pipe(
     map(([_dispatcher, selector]) => selector),
     distinctUntilChanged()
@@ -54,7 +58,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   constructor(
     private store: Store<SdRequestFeature.SdRequestPartialState>,
-    private sdRequestApi: SdRequestApi
+    private sdRequestApi: SdRequestApi,
+    private messageFacade: MessageFacade
   ) {}
 
   setPage(page: number) {

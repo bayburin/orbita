@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as MessageActions from './message.actions';
-import { Message } from '../../../entities/message.interface';
+import { Message } from '../../../entities/models/message.interface';
 
 export const MESSAGE_FEATURE_KEY = 'message';
 
@@ -18,20 +18,14 @@ export interface MessagePartialState {
 export const messageAdapter: EntityAdapter<Message> = createEntityAdapter<Message>();
 
 export const initialState: State = messageAdapter.getInitialState({
-  loaded: false,
+  loaded: false
 });
 
 const messageReducer = createReducer(
   initialState,
-  on(MessageActions.init, (state) => ({
-    ...state,
-    loaded: false,
-    error: null,
-  })),
-  on(MessageActions.loadAllSuccess, (state, { messageQueue }) =>
-    messageAdapter.setAll(messageQueue.messages, { ...state, loaded: true })
-  ),
-  on(MessageActions.loadAllFailure, (state, { error }) => ({ ...state, error }))
+  on(MessageActions.setAll, (state, { messages }) =>
+    messageAdapter.setAll(messages, { ...state, loaded: true })
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {

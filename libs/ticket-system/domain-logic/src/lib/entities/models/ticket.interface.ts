@@ -35,7 +35,7 @@ export interface Ticket {
   /**
    * Массив идентификаторов объектов Message
    */
-  readonly comments: string;
+  readonly comments: string[];
 }
 
 /**

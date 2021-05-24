@@ -1,6 +1,6 @@
 import { Observable, of } from 'rxjs';
 
-import { SdRequest } from './../../entities/models/sd-request.interface';
+import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
 import { SdRequestQueue } from './../../entities/sd-request-queue.interface';
 
 export abstract class SdRequestFacadeAbstract {
@@ -43,7 +43,7 @@ export abstract class SdRequestFacadeAbstract {
   /**
    * Список заявок
    */
-  all$: Observable<SdRequest[]> = of();
+  all$: Observable<SdRequestViewModel[]> = of();
 
   /**
    * Устанавливает номер страницы

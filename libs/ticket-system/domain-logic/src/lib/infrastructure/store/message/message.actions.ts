@@ -1,15 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 
-import { MessageQueue } from '../../../entities/message.interface';
+import { Message } from '../../../entities/models/message.interface';
 
-export const init = createAction('[Message/API] Load All');
-
-export const loadAllSuccess = createAction(
-  '[Message/API] Load All Success',
-  props<{ messageQueue: MessageQueue }>()
-);
-
-export const loadAllFailure = createAction(
-  '[Message/API] Load All Failure',
-  props<{ error: any }>()
+export const setAll = createAction(
+  '[Message] Set All',
+  props<{ messages: Message[] }>()
 );

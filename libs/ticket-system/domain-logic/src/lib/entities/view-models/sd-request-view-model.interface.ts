@@ -1,9 +1,9 @@
-import { Ticket } from './ticket.interface';
+import { TicketViewModel } from './ticket-view-model.interface';
 
 /**
  * Интерфейс заявки
  */
-export interface SdRequest extends Ticket {
+export interface SdRequestViewModel extends TicketViewModel {
   /**
    * ID (номер) заявки во внешней системе.
    */
@@ -40,12 +40,12 @@ export interface SdRequest extends Ticket {
   readonly rating: number;
 
   /**
-   * Массив идентификаторов Parameter
+   * Массив объектов Parameter
    */
-  readonly parameters: number[];
+  // readonly parameters: Parameter[];
 
   /**
-   * Массив идентификаторов Work
+   * Массив объектов Work
    */
-  readonly works: number[];
+  // readonly works: Work[];
 }

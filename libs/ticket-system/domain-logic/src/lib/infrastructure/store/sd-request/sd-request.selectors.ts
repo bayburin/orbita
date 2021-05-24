@@ -46,35 +46,9 @@ export const getError = createSelector(
   (state: State) => state.error
 );
 
-// TODO: Исправить
 export const getAll = createSelector(
   getSdRequestState,
   (state: State) => selectAll(state)
-    // selectAll(state).map(sdRequest => {
-    //   if (!sdRequest.works) {
-    //     return sdRequest;
-    //   }
-
-    //   const lastHistory = getLastHistory(sdRequest);
-    //   const works = sdRequest.works.map(work => {
-    //     const histories = work.histories.map(hist => {
-    //       return {
-    //         ...hist,
-    //         _isLast: hist == lastHistory
-    //       }
-    //     });
-
-    //     return {
-    //       ...work,
-    //       histories
-    //     }
-    //   });
-
-    //   return {
-    //     ...sdRequest,
-    //     works
-    //   }
-    // })
 );
 
 export const getEntities = createSelector(
@@ -88,6 +62,7 @@ export const getSelected = createSelector(
   (entities, selectedId) => selectedId && entities[selectedId]
 );
 
+// TODO: Исправить или удалить
 export const getLastHistories = createSelector(
   getEntities,
   (entities) => Object.keys(entities).map(id => ({ [id]: getLastHistory(entities[id]) }))
