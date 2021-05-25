@@ -1,6 +1,7 @@
 import { SdRequest } from './sd-request.interface';
 import { Message } from './message.interface';
 import { Work } from './work.interface';
+import { History } from './history.interface';
 
 /**
  * Интерфейс нормализованного объекта заявки
@@ -19,8 +20,15 @@ export interface NormalizedMessage {
 /**
  * Интерфейс нормализованного объекта работы
  */
- export interface NormalizedWork {
+export interface NormalizedWork {
   [key: number]: Work;
+}
+
+/**
+ * Интерфейс нормализованного объекта истории
+ */
+export interface NormalizedHistory {
+  [key: number]: History;
 }
 
 /**
@@ -30,6 +38,7 @@ export interface NormalizedSdRequests {
   entities: {
     sd_requests: NormalizedSdRequest,
     comments: NormalizedMessage,
-    works: NormalizedWork
+    works: NormalizedWork,
+    histories: NormalizedHistory
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, of } from 'rxjs';
-import { tap, switchMap, catchError, map, distinctUntilChanged, share, startWith, filter, take } from 'rxjs/operators';
+import { tap, switchMap, catchError, map, distinctUntilChanged, share, startWith, filter } from 'rxjs/operators';
 
 import { UserFacadeAbstract } from './user.facade.abstract';
 import * as UserActions from '../../infrastructure/store/user/user.actions';
@@ -10,7 +10,7 @@ import * as UserSelectors from '../../infrastructure/store/user/user.selectors';
 import { UserApi } from '../../infrastructure/api/user/user.api';
 
 /**
- * Фасад для работы со списком пользователей (обращения к стору User)
+ * Фасад для работы со списком пользователей (обращения к хранилищу User)
  */
 @Injectable({
   providedIn: 'root'

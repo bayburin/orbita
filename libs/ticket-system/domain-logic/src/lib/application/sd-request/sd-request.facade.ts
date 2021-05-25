@@ -12,9 +12,10 @@ import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.a
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { MessageFacade } from './../message/message.facade';
 import { WorkFacade } from './../work/work.facade';
+import { HistoryFacade } from './../history/history.facade';
 
 /**
- * Фасад для работы с заявками (обращения к стору SdRequest)
+ * Фасад для работы с заявками (обращения к хранилищу SdRequest)
  */
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
             this.messageFacade.setMessages(Object.values(normalizeData.entities.comments));
             this.workFacade.setWorks(Object.values(normalizeData.entities.works));
+            this.historyFacade.setHistories(Object.values(normalizeData.entities.histories));
           }),
           catchError(error => of(this.store.dispatch(SdRequestActions.loadAllFailure({ error }))))
         )
@@ -62,7 +64,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     private store: Store<SdRequestFeature.SdRequestPartialState>,
     private sdRequestApi: SdRequestApi,
     private messageFacade: MessageFacade,
-    private workFacade: WorkFacade
+    private workFacade: WorkFacade,
+    private historyFacade: HistoryFacade
   ) {}
 
   setPage(page: number) {

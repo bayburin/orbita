@@ -105,7 +105,17 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             {
               id: 1,
               claim_id: 1,
-              group_id: 1
+              group_id: 1,
+              histories: [
+                {
+                  id: 1,
+                  work_id: 1,
+                  user_id: 3,
+                  event_type_id: 2,
+                  action: 'Выполнено действие: дал доступ на коммутаторе',
+                  created_at: '2021-05-26 10:32:24 +0700'
+                }
+              ]
             }
           ]
         }

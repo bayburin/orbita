@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as MessageFeature from '../../infrastructure/store/message/message.reducer';
@@ -7,7 +7,7 @@ import { Message } from '../../entities/models/message.interface';
 import { MessageFacadeAbstract } from './message.facade.abstract';
 
 /**
- * Фасад для работы с сообщениями (обращения к стору Message)
+ * Фасад для работы с сообщениями (обращения к хранилищу Message)
  */
 @Injectable({
   providedIn: 'root'

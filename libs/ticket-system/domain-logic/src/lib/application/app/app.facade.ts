@@ -6,7 +6,7 @@ import * as AppActions from '../../infrastructure/store/app/app.actions';
 import * as AppFeature from '../../infrastructure/store/app/app.reducer';
 
 /**
- * Фасад для общей работы с приложением (обращения к стору App)
+ * Фасад для общей работы с приложением (обращения к хранилищу App)
  */
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import * as WorkFeature from '../../infrastructure/store/work/work.reducer';
@@ -7,7 +7,7 @@ import { Work } from '../../entities/models/work.interface';
 import { WorkFacadeAbstract } from './work.facade.abstract';
 
 /**
- * Фасад для работы с "работами" (обращения к стору Work)
+ * Фасад для работы с "работами" (обращения к хранилищу Work)
  */
 @Injectable({
   providedIn: 'root'
