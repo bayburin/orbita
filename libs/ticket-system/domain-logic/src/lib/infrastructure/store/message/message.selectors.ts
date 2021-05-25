@@ -10,22 +10,22 @@ export const getMessageState = createSelector(
 
 const { selectAll, selectEntities } = messageAdapter.getSelectors();
 
-export const getMessageLoaded = createSelector(
+export const getLoaded = createSelector(
   getMessageState,
   (state: State) => state.loaded
 );
 
-export const getMessageError = createSelector(
+export const getError = createSelector(
   getMessageState,
   (state: State) => state.error
 );
 
-export const getAllMessage = createSelector(
+export const getAll = createSelector(
   getMessageState,
   (state: State) => selectAll(state)
 );
 
-export const getMessageEntities = createSelector(
+export const getEntities = createSelector(
   getMessageState,
   (state: State) => selectEntities(state)
 );

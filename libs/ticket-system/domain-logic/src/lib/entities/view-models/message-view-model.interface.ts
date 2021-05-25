@@ -1,12 +1,10 @@
-/**
- * Типы сообщений
- */
-export type MessageTypes = 'workflow' | 'comment';
+import { User } from './../models/user.interface';
+import { MessageTypes } from './../models/message.interface';
 
 /**
  * Интерфейс сообщений
  */
-export interface Message {
+export interface MessageViewModel {
   /**
    * Идентификатор сообщения
    */
@@ -26,6 +24,11 @@ export interface Message {
    * Идентификатор отправителя
    */
   readonly sender_id: number;
+
+  /**
+   * Отправитель сообщения
+   */
+  readonly sender: User;
 
   /**
    * Тип сообщения: рабочий процесс или комментарий
