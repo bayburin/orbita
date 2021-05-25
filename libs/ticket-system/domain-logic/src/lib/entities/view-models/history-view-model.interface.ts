@@ -33,7 +33,7 @@ export interface HistoryViewModel {
   /**
    * Объект EventType
    */
-  readonly event_type: EventType;
+  readonly eventType: EventType;
 
   /**
    * Текстовое описание произошедшего события

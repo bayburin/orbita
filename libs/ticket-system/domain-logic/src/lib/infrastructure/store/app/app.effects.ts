@@ -7,6 +7,7 @@ import * as AppActions from './app.actions';
 import { AppApi } from './../../api/app/app.api';
 import * as UserActions from '../user/user.actions';
 import * as GroupActions from '../group/group.actions';
+import * as EventTypeActions from '../event-type/event-type.actions';
 
 @Injectable()
 export class AppEffects {
@@ -23,7 +24,8 @@ export class AppEffects {
           switchMap(initData => [
             AppActions.loadAppSuccess(),
             UserActions.loadAllSuccess({ users: initData.users }),
-            GroupActions.loadAllSuccess({ groups: initData.groups })
+            GroupActions.loadAllSuccess({ groups: initData.groups }),
+            EventTypeActions.setAll({ event_types: initData.event_types })
           ]),
           catchError(error => of(AppActions.loadAppFailure(error)))
         )

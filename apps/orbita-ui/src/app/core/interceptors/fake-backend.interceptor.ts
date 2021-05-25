@@ -60,7 +60,22 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         name: '7142',
         description: 'Ремонт ВТ'
       }
-    ]
+    ];
+
+    const eventTypes = [
+      {
+        id: 1,
+        name: 'open',
+        description: 'Событие создания заявки/кейса',
+        is_public: true
+      },
+      {
+        id: 2,
+        name: 'workflow',
+        description: 'Было выполнило действие для решения проблемы',
+        is_public: true
+      }
+    ];
 
     const sdRequests = {
       sd_requests: [
@@ -131,7 +146,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     if (req.url.endsWith('/init')) {
-      return of(new HttpResponse({ body: { users, groups }, status: 200 }))
+      const body = {
+        users,
+        groups,
+        event_types: eventTypes
+      };
+
+      return of(new HttpResponse({ body, status: 200 }))
     }
 
     return next.handle(req).pipe(

@@ -1,4 +1,5 @@
 import { TicketViewModel } from './ticket-view-model.interface';
+import { WorkViewModel } from './work-view-model.interface';
 
 /**
  * Интерфейс заявки
@@ -47,5 +48,5 @@ export interface SdRequestViewModel extends TicketViewModel {
   /**
    * Массив объектов Work
    */
-  // readonly works: Work[];
+  readonly works: WorkViewModel[];
 }
