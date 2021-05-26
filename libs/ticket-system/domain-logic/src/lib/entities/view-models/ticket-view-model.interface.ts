@@ -1,5 +1,5 @@
 import { TicketTypes, Statuses, Priorities, Runtime } from './../models/ticket.interface';
-import { Message } from '../models/message.interface';
+import { MessageViewModel } from './message-view-model.interface';
 
 /**
  * Интерфейс заявки
@@ -38,5 +38,5 @@ export interface TicketViewModel {
   /**
    * Массив объектов Message
    */
-  readonly comments: Message[];
+  readonly comments: MessageViewModel[];
 }

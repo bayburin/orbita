@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
 
-import { SdRequestQueue } from './../../../entities/sd-request-queue.interface';
+import { SdRequestServerData } from './../../../entities/server-data/sd-request-server-data.interface';
 import { SdRequestApiAbstract } from './sd-request.api.abstract';
 
 @Injectable({
@@ -21,6 +21,6 @@ export class SdRequestApi implements SdRequestApiAbstract {
       .append('page', `${page}`)
       .append('perPage', `${perPage}`);
 
-    return this.http.get<SdRequestQueue>(this.api, { params });
+    return this.http.get<SdRequestServerData>(this.api, { params });
   }
 }

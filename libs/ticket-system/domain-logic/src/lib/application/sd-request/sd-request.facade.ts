@@ -21,8 +21,6 @@ import { HistoryFacade } from './../history/history.facade';
   providedIn: 'root'
 })
 export class SdRequestFacade implements SdRequestFacadeAbstract {
-  // TODO: Исправить
-  // selected$ = this.store.select(SdRequestSelectors.getSelected);
   page$ = this.store.select(SdRequestSelectors.getPage);
   totalCount$ = this.store.select(SdRequestSelectors.getTotalCount);
   maxSize$ = this.store.select(SdRequestSelectors.getMaxSize);

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SdRequest, Work, History } from '@orbita/ticket-system/domain-logic';
+import { SdRequestViewModel, WorkViewModel, HistoryViewModel } from '@orbita/ticket-system/domain-logic';
 
 @Component({
   selector: 'lib-sd-request-history-overview',
@@ -10,17 +10,17 @@ export class SdRequestHistoryOverviewComponent {
   /**
    * Заявка
    */
-  @Input() sdRequest: SdRequest;
+  @Input() sdRequest: SdRequestViewModel;
   /**
    * Событие (история), которое произошло самым последним в текущей заявке
    */
   lastHistory: History;
 
-  trackByWork(_index: number, work: Work): number {
+  trackByWork(_index: number, work: WorkViewModel): number {
     return work.id;
   }
 
-  trackByHistory(_index: number, history: History): number {
+  trackByHistory(_index: number, history: HistoryViewModel): number {
     return history.id;
   }
 

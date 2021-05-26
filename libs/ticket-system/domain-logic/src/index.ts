@@ -1,16 +1,20 @@
 export * from './lib/ticket-system-domain-logic.module';
 
+export * from './lib/entities/models/ticket.interface';
 export * from './lib/entities/models/user.interface';
 export * from './lib/entities/models/group.interface';
-export * from './lib/entities/ticket.interface';
-export * from './lib/entities/statuses.enum';
-export * from './lib/entities/priorities.enum';
-export * from './lib/entities/sd-request.interface';
-export * from './lib/entities/work.interface';
-export * from './lib/entities/history.interface';
-export * from './lib/entities/message.interface';
+export * from './lib/entities/models/parameter.interface';
+export * from './lib/entities/models/event-type.interface';
+
+export * from './lib/entities/view-models/sd-request-view-model.interface';
+export * from './lib/entities/view-models/work-view-model.interface';
+export * from './lib/entities/view-models/history-view-model.interface';
+export * from './lib/entities/view-models/message-view-model.interface';
+export * from './lib/entities/view-models/event-type-names-view-model.enum';
+export * from './lib/entities/view-models/priorities-view-model.enum';
+export * from './lib/entities/view-models/statuses-view-model.enum';
+
 export * from './lib/entities/user-work.interface';
-export * from './lib/entities/event-type-names.enum';
 
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';

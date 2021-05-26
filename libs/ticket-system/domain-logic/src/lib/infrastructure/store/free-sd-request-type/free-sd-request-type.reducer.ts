@@ -2,7 +2,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as FreeSdRequestTypeActions from './free-sd-request-type.actions';
-import { FreeSdRequestType } from '../../../entities/free-sd-request-type.interface';
+import { FreeSdRequestType } from '../../../entities/models/sd/free-sd-request-type.interface';
 
 export const FREE_SD_REQUEST_TYPE_FEATURE_KEY = 'freeSdRequestType';
 
@@ -19,7 +19,7 @@ export interface FreeSdRequestTypePartialState {
 export const freeSdRequestTypeAdapter: EntityAdapter<FreeSdRequestType> = createEntityAdapter<FreeSdRequestType>();
 
 export const initialState: State = freeSdRequestTypeAdapter.getInitialState({
-  loaded: false,
+  loaded: false
 });
 
 const freeSdRequestTypeReducer = createReducer(

@@ -18,20 +18,14 @@ export interface UserPartialState {
 export const userAdapter: EntityAdapter<User> = createEntityAdapter<User>();
 
 export const initialState: State = userAdapter.getInitialState({
-  loaded: false,
+  loaded: false
 });
 
 const userReducer = createReducer(
   initialState,
-  on(UserActions.loadAll, (state) => ({
-    ...state,
-    loaded: false,
-    error: null
-  })),
-  on(UserActions.loadAllSuccess, (state, { users }) =>
+  on(UserActions.setAll, (state, { users }) =>
     userAdapter.setAll(users, { ...state, loaded: true })
-  ),
-  on(UserActions.loadAllFailure, (state, { error }) => ({ ...state, error }))
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {

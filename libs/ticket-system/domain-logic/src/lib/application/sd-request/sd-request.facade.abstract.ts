@@ -1,14 +1,12 @@
 import { Observable, of } from 'rxjs';
 
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
-import { SdRequestQueue } from './../../entities/sd-request-queue.interface';
-
+import { SdRequestServerData } from './../../entities/server-data/sd-request-server-data.interface';
 export abstract class SdRequestFacadeAbstract {
   /**
    * Выбранная заявка
    */
-  // TODO: Исправить
-  // selected$: Observable<"" | 0 | SdRequest | undefined> = of();
+  // selected$: Observable<"" | 0 | SdRequestViewModel | undefined> = of();
 
   /**
    * Номер текущей страницы
@@ -38,7 +36,7 @@ export abstract class SdRequestFacadeAbstract {
   /**
    * Загружает список заявок с метаданными (количество заявок, номер страницы, и т.д.)
    */
-  loadSdRequests$: Observable<void | SdRequestQueue> = of();
+  loadSdRequests$: Observable<void | SdRequestServerData> = of();
 
   /**
    * Список заявок

@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { History } from '@orbita/ticket-system/domain-logic';
-import { EventTypeNames, EventTypeNamesData, getEventTypeName } from '@orbita/ticket-system/domain-logic';
+import {
+  HistoryViewModel,
+  EventTypeNames,
+  EventTypeNamesViewModel,
+  getViewModelEventTypeName } from '@orbita/ticket-system/domain-logic';
 
 @Component({
   selector: 'lib-history-event-card',
@@ -11,7 +14,7 @@ export class HistoryEventCardComponent {
   /**
    * История события
    */
-  @Input() history: History;
+  @Input() history: HistoryViewModel;
   /**
    * Порядковый номер события
    */
@@ -26,7 +29,7 @@ export class HistoryEventCardComponent {
    *
    * @param type - вид события
    */
-  eventTypeName(type: EventTypeNames): EventTypeNamesData {
-    return getEventTypeName(type);
+  eventTypeName(type: EventTypeNames): EventTypeNamesViewModel {
+    return getViewModelEventTypeName(type);
   }
 }

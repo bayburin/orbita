@@ -1,7 +1,7 @@
 <div class="card" [ngClass]="{ 'border-info': isLast }">
   <div class="card-header d-flex justify-content-between">
     <span>Событие {{ num }}</span>
-    <i class="mdi mdi-18px" [class]="eventTypeName(history.event_type.name).icon" [ngbTooltip]="history.event_type.description"></i>
+    <i class="mdi mdi-18px" [class]="eventTypeName(history.eventType.name).icon" [ngbTooltip]="history.eventType.description"></i>
   </div>
   <div class="card-body">
     <p class="card-text">

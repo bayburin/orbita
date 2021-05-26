@@ -1,7 +1,7 @@
 import { SdRequestService } from './sd-request-service.interface';
 
 /**
- * Интерфейс объекта типа заявки в свободной форме
+ * Интерфейс типа заявки в свободной форме
  */
 export interface FreeSdRequestType {
   /**
@@ -15,7 +15,7 @@ export interface FreeSdRequestType {
   readonly name: string;
 
   /**
-   * Объект SdRequestService
+   * Объект услуги
    */
   readonly service: SdRequestService;
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
 
 import { ServiceDeskApiAbstract } from './service-desk.api.abstract';
-import { FreeSdRequestType } from '../../../entities/free-sd-request-type.interface';
+import { FreeSdRequestType } from '../../../entities/models/sd/free-sd-request-type.interface';
 
 @Injectable({
   providedIn: 'root'

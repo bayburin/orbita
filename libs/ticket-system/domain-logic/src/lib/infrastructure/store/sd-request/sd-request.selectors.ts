@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import { getTicketSystemState } from './../index';
 import { SD_REQUEST_FEATURE_KEY, State, SdRequestPartialState, sdRequestAdapter } from './sd-request.reducer';
-import { getLastHistory } from '../../utils/get-last-history.function';
+// import { getLastHistory } from '../../utils/get-last-history.function';
 
 export const getSdRequestState = createSelector(
   getTicketSystemState,
@@ -63,7 +63,7 @@ export const getSelected = createSelector(
 );
 
 // TODO: Исправить или удалить
-export const getLastHistories = createSelector(
-  getEntities,
-  (entities) => Object.keys(entities).map(id => ({ [id]: getLastHistory(entities[id]) }))
-)
+// export const getLastHistories = createSelector(
+//   getEntities,
+//   (entities) => Object.keys(entities).map(id => ({ [id]: getLastHistory(entities[id]) }))
+// )

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Message } from '@orbita/ticket-system/domain-logic';
+import { MessageViewModel } from '@orbita/ticket-system/domain-logic';
 
 @Component({
   selector: 'lib-comment',
@@ -10,13 +10,13 @@ export class CommentComponent {
   /**
    * Список комментариев к заявке
    */
-  @Input() comments: Message[];
+  @Input() comments: MessageViewModel[];
   /**
    * Событие отправки комментария
    */
   @Output() sendMessage = new EventEmitter<string>();
 
-  trackByComment(index: number, comment: Message): number {
+  trackByComment(index: number, comment: MessageViewModel): number {
     return comment.id;
   }
 }

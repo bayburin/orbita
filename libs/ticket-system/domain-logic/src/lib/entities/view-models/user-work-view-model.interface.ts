@@ -1,9 +1,9 @@
-import { User } from './models/user.interface';
+import { User } from '../models/user.interface';
 
 /**
  * Интерфейс, связывающий работников с заявками
  */
-export interface UserWork {
+export interface UserWorkViewModel {
   /**
    * Идентификатор связки
    */

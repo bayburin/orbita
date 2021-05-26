@@ -22,7 +22,7 @@ export const initialState: State = groupAdapter.getInitialState({
 
 const groupReducer = createReducer(
   initialState,
-  on(GroupActions.loadAllSuccess, (state, { groups }) =>
+  on(GroupActions.setAll, (state, { groups }) =>
     groupAdapter.setAll(groups, { ...state, loaded: true })
   ),
 );

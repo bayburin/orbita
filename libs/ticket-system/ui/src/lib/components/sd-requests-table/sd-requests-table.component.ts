@@ -1,10 +1,16 @@
 import { Observable, of } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Priorities, PrioritiesData, getSdRequestPriority, Work, UserWork } from '@orbita/ticket-system/domain-logic';
-import { Statuses, StatusesData, getSdRequestStatus } from '@orbita/ticket-system/domain-logic';
+import {
+  Priorities,
+  PrioritiesViewModel,
+  getViewModelPriority,
+  WorkViewModel,
+  Statuses,
+  StatusesViewModel,
+  getViewModelStatus,
+  SdRequestViewModel,
+  UserWork } from '@orbita/ticket-system/domain-logic';
 import { oFlatMap } from '@orbita/ticket-system/utils';
-
-import { SdRequest } from '@orbita/ticket-system/domain-logic';
 
 @Component({
   selector: 'lib-sd-requests-table',
@@ -32,24 +38,24 @@ export class SdRequestsTableComponent {
   /**
    * Массив заявок
    */
-  @Input() sdRequests$: Observable<SdRequest[]> = of([]);
+  @Input() sdRequests$: Observable<SdRequestViewModel[]> = of([]);
 
   /**
-   * Возвращает объект PrioritiesData, в котором содержатся данные о приоритете для представления
+   * Возвращает объект PrioritiesViewModel, в котором содержатся данные о приоритете для представления
    *
    * @param priority - приоритет
    */
-  priority(priority: Priorities): PrioritiesData {
-    return getSdRequestPriority(priority);
+  priority(priority: Priorities): PrioritiesViewModel {
+    return getViewModelPriority(priority);
   }
 
   /**
-   * Возвращает объект StatusesData, в котором содержатся данные о статусе для представления
+   * Возвращает объект StatusesViewModel, в котором содержатся данные о статусе для представления
    *
    * @param status - статус
    */
-  status(status: Statuses): StatusesData {
-    return getSdRequestStatus(status);
+  status(status: Statuses): StatusesViewModel {
+    return getViewModelStatus(status);
   }
 
   /**
@@ -57,11 +63,11 @@ export class SdRequestsTableComponent {
    *
    * @param sdRequest - заяка
    */
-  workers(sdRequest: SdRequest): UserWork[] {
-    return oFlatMap((work: Work) => work.workers, sdRequest.works);
+  workers(sdRequest: SdRequestViewModel): UserWork[] {
+    return oFlatMap((work: WorkViewModel) => work.workers, sdRequest.works);
   }
 
-  trackBySdRequest(index: number, sdRequest: SdRequest): number {
+  trackBySdRequest(index: number, sdRequest: SdRequestViewModel): number {
     return sdRequest.id;
   }
 

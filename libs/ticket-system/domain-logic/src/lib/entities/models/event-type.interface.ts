@@ -21,7 +21,7 @@ export interface EventType {
 /**
  * Виды событий
  */
- export enum EventTypeNames {
+export enum EventTypeNames {
   OPEN = 'open',
   WORKFLOW = 'workflow',
   ADD_WORKERS = 'add_workers',

@@ -13,16 +13,6 @@ describe('UserReducer', () => {
       name: name || `name-${id}`,
     } as unknown as User);
 
-  describe('loadAll', () => {
-    it('should clear "loaded" and "error" attributes', () => {
-      action = UserActions.loadAll();
-      const result: State = reducer(initialState, action);
-
-      expect(result.loaded).toBe(false);
-      expect(result.error).toBeNull();
-    });
-  });
-
   describe('loadAllSuccess', () => {
     it('should set the list of known Users', () => {
       const users = [
@@ -30,21 +20,11 @@ describe('UserReducer', () => {
         createUser('PRODUCT-zzz'),
       ];
       const userQueue = new UserQueueBuilder().users(users).build();
-      action = UserActions.loadAllSuccess({ users: userQueue.users });
+      action = UserActions.setAll({ users: userQueue.users });
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(true);
       expect(result.ids.length).toBe(2);
-    });
-  });
-
-  describe('loadAllFailure', () => {
-    it('should set "error" attribute', () => {
-      const error = { message: 'error' };
-      action = UserActions.loadAllFailure({ error });
-      const result: State = reducer(initialState, action);
-
-      expect(result.error).toEqual(error);
     });
   });
 

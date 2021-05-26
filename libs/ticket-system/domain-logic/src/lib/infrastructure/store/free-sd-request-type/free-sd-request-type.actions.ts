@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { FreeSdRequestType } from '../../../entities/free-sd-request-type.interface';
+import { FreeSdRequestType } from '../../../entities/models/sd/free-sd-request-type.interface';
 
 export const loadAll = createAction('[FreeSdRequestType/API] Load All');
 
