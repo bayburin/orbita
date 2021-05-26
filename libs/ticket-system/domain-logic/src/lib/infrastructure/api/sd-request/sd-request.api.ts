@@ -5,6 +5,9 @@ import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environ
 import { SdRequestServerData } from './../../../entities/server-data/sd-request-server-data.interface';
 import { SdRequestApiAbstract } from './sd-request.api.abstract';
 
+/**
+ * Содержит API заявок для обращения к серверу
+ */
 @Injectable({
   providedIn: 'root'
 })

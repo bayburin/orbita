@@ -5,6 +5,9 @@ import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environ
 import { ServiceDeskApiAbstract } from './service-desk.api.abstract';
 import { FreeSdRequestType } from '../../../entities/models/sd/free-sd-request-type.interface';
 
+/**
+ * Содержит API заявок для обращения к серверу
+ */
 @Injectable({
   providedIn: 'root'
 })

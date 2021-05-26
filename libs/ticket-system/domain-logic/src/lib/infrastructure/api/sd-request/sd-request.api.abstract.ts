@@ -2,9 +2,6 @@ import { Observable } from 'rxjs';
 
 import { SdRequestServerData } from './../../../entities/server-data/sd-request-server-data.interface';
 
-/**
- * Содержит API заявок для обращения к серверу
- */
 export abstract class SdRequestApiAbstract {
   /**
    * Адрес сервера
