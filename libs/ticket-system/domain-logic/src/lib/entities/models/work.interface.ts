@@ -18,12 +18,12 @@ export interface Work {
   readonly group_id: number;
 
   /**
-   * Массив объектов History
+   * Массив произошедших событий
    */
   readonly histories: number[];
 
   /**
-   * Массив обьъектов UserWork
+   * Массив исполнителей
    */
   readonly workers: number[];
 }

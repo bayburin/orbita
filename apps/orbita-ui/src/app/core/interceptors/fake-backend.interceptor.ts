@@ -115,7 +115,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               created_at: '2021-05-24 23:18:49 +0700'
             }
           ],
-          parameters: [],
+          parameters: [
+            {
+              id: 1,
+              name: 'Номер заявки ЛК',
+              value: '15-475'
+            }
+          ],
           works: [
             {
               id: 1,
@@ -129,6 +135,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   event_type_id: 2,
                   action: 'Выполнено действие: дал доступ на коммутаторе',
                   created_at: '2021-05-26 10:32:24 +0700'
+                }
+              ],
+              workers: [
+                {
+                  id: 1,
+                  work_id: 1,
+                  user_id: 2
                 }
               ]
             }

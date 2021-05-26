@@ -13,6 +13,7 @@ import { SdRequestCacheService } from './../../infrastructure/services/sd-reques
 import { MessageFacade } from './../message/message.facade';
 import { WorkFacade } from './../work/work.facade';
 import { HistoryFacade } from './../history/history.facade';
+import { WorkerFacade } from './../worker/worker.facade';
 
 /**
  * Фасад для работы с заявками (обращения к хранилищу SdRequest)
@@ -34,16 +35,17 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
       this.sdRequestApi.query(page, maxSize)
         .pipe(
           tap(sdRequestQueue => {
-            const normalizeData = SdRequestCacheService.normalizeSdRequests(sdRequestQueue)
+            const normalizeData = SdRequestCacheService.normalizeSdRequests(sdRequestQueue).entities;
 
             this.store.dispatch(SdRequestActions.loadAllSuccess({
-              sd_requests: Object.values(normalizeData.entities.sd_requests),
+              sd_requests: Object.values(normalizeData.sd_requests),
               meta: sdRequestQueue.meta
             }));
 
-            this.messageFacade.setMessages(Object.values(normalizeData.entities.comments));
-            this.workFacade.setWorks(Object.values(normalizeData.entities.works));
-            this.historyFacade.setHistories(Object.values(normalizeData.entities.histories));
+            this.messageFacade.setMessages(Object.values(normalizeData.comments));
+            this.workFacade.setWorks(Object.values(normalizeData.works));
+            this.historyFacade.setHistories(Object.values(normalizeData.histories));
+            this.workerFacade.setWorkers(Object.values(normalizeData.workers));
           }),
           catchError(error => of(this.store.dispatch(SdRequestActions.loadAllFailure({ error }))))
         )
@@ -63,7 +65,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     private sdRequestApi: SdRequestApi,
     private messageFacade: MessageFacade,
     private workFacade: WorkFacade,
-    private historyFacade: HistoryFacade
+    private historyFacade: HistoryFacade,
+    private workerFacade: WorkerFacade
   ) {}
 
   setPage(page: number) {

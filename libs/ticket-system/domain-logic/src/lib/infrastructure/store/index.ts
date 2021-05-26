@@ -10,6 +10,7 @@ import * as fromWork from './work/work.reducer';
 import * as fromHistory from './history/history.reducer';
 import * as fromEventType from './event-type/event-type.reducer';
 import * as fromParameter from './parameter/parameter.reducer';
+import * as fromWorker from './worker/worker.reducer';
 
 export const TICKET_SYSTEM_FEATURE_KEY = 'ticketSystem';
 
@@ -23,7 +24,8 @@ export interface TicketSystemState extends
   fromWork.WorkPartialState,
   fromHistory.HistoryPartialState,
   fromEventType.EventTypePartialState,
-  fromParameter.ParameterPartialState { }
+  fromParameter.ParameterPartialState,
+  fromWorker.WorkerPartialState { }
 
 export const reducer: ActionReducerMap<TicketSystemState> = {
   [fromApp.APP_FEATURE_KEY]: fromApp.reducer,
@@ -35,7 +37,8 @@ export const reducer: ActionReducerMap<TicketSystemState> = {
   [fromWork.WORK_FEATURE_KEY]: fromWork.reducer,
   [fromHistory.HISTORY_FEATURE_KEY]: fromHistory.reducer,
   [fromEventType.EVENT_TYPE_FEATURE_KEY]: fromEventType.reducer,
-  [fromParameter.PARAMETER_FEATURE_KEY]: fromParameter.reducer
+  [fromParameter.PARAMETER_FEATURE_KEY]: fromParameter.reducer,
+  [fromWorker.WORKER_FEATURE_KEY]: fromWorker.reducer
 }
 
 export const getTicketSystemState = createFeatureSelector<TicketSystemState>(TICKET_SYSTEM_FEATURE_KEY);

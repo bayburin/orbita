@@ -3,7 +3,7 @@ import { User } from '../models/user.interface';
 /**
  * Интерфейс, связывающий работников с заявками
  */
-export interface UserWorkViewModel {
+export interface WorkerViewModel {
   /**
    * Идентификатор связки
    */
@@ -20,7 +20,7 @@ export interface UserWorkViewModel {
   work_id: number;
 
   /**
-   * Объект User
+   * Исполнитель
    */
   user: User;
 }

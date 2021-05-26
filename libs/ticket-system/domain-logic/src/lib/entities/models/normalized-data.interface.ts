@@ -2,6 +2,7 @@ import { SdRequest } from './sd-request.interface';
 import { Message } from './message.interface';
 import { Work } from './work.interface';
 import { History } from './history.interface';
+import { Worker } from './worker.interface';
 
 /**
  * Интерфейс нормализованного объекта заявки
@@ -32,6 +33,13 @@ export interface NormalizedHistory {
 }
 
 /**
+ * Интерфейс нормализованного объекта работника
+ */
+ export interface NormalizedWorker {
+  [key: number]: Worker;
+}
+
+/**
  * Интерфейс нормализованных данных, возвращаемый функцией normalize
  */
 export interface NormalizedSdRequests {
@@ -39,6 +47,7 @@ export interface NormalizedSdRequests {
     sd_requests: NormalizedSdRequest,
     comments: NormalizedMessage,
     works: NormalizedWork,
-    histories: NormalizedHistory
+    histories: NormalizedHistory,
+    workers: NormalizedWorker
   }
 }

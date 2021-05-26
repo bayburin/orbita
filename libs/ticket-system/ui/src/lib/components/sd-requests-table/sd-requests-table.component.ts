@@ -9,7 +9,7 @@ import {
   StatusesViewModel,
   getViewModelStatus,
   SdRequestViewModel,
-  UserWork } from '@orbita/ticket-system/domain-logic';
+  WorkerViewModel } from '@orbita/ticket-system/domain-logic';
 import { oFlatMap } from '@orbita/ticket-system/utils';
 
 @Component({
@@ -63,7 +63,7 @@ export class SdRequestsTableComponent {
    *
    * @param sdRequest - заяка
    */
-  workers(sdRequest: SdRequestViewModel): UserWork[] {
+  workers(sdRequest: SdRequestViewModel): WorkerViewModel[] {
     return oFlatMap((work: WorkViewModel) => work.workers, sdRequest.works);
   }
 
@@ -71,7 +71,7 @@ export class SdRequestsTableComponent {
     return sdRequest.id;
   }
 
-  trackByUserWork(index: number, worker: UserWork): number {
+  trackByWorker(index: number, worker: WorkerViewModel): number {
     return worker.id;
   }
 }

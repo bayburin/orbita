@@ -13,8 +13,7 @@ export * from './lib/entities/view-models/message-view-model.interface';
 export * from './lib/entities/view-models/event-type-names-view-model.enum';
 export * from './lib/entities/view-models/priorities-view-model.enum';
 export * from './lib/entities/view-models/statuses-view-model.enum';
-
-export * from './lib/entities/user-work.interface';
+export * from './lib/entities/view-models/worker-view-model.interface';
 
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';
