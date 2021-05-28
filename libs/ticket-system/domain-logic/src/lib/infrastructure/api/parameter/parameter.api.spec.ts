@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
 
 import { ParameterApi } from './parameter.api';
-import { Parameter } from './../../../entities/parameter.interface';
+import { Parameter } from './../../../entities/models/parameter.interface';
 
 describe('ParameterApi', () => {
   let service: ParameterApi;

@@ -7,20 +7,20 @@ export interface WorkerViewModel {
   /**
    * Идентификатор связки
    */
-  id: number;
+  readonly id: number;
 
   /**
    * Идентификатор пользователя
    */
-  user_id: number;
+  readonly user_id: number;
 
   /**
    * Идентификатор работы
    */
-  work_id: number;
+  readonly work_id: number;
 
   /**
    * Исполнитель
    */
-  user: User;
+  readonly user: User;
 }

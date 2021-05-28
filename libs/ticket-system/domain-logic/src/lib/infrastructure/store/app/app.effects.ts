@@ -25,7 +25,7 @@ export class AppEffects {
             AppActions.loadAppSuccess(),
             UserActions.setAll({ users: initData.users }),
             GroupActions.setAll({ groups: initData.groups }),
-            EventTypeActions.setAll({ event_types: initData.event_types })
+            EventTypeActions.setAll({ eventTypes: initData.event_types })
           ]),
           catchError(error => of(AppActions.loadAppFailure(error)))
         )

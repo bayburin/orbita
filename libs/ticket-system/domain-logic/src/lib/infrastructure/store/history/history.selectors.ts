@@ -15,11 +15,6 @@ export const getLoaded = createSelector(
   (state: State) => state.loaded
 );
 
-export const getError = createSelector(
-  getHistoryState,
-  (state: State) => state.error
-);
-
 export const getAll = createSelector(
   getHistoryState,
   (state: State) => selectAll(state)

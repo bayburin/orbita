@@ -33,9 +33,9 @@ export interface Ticket {
   readonly runtime: Runtime;
 
   /**
-   * Массив идентификаторов объектов Message
+   * Массив идентификаторов комментариев
    */
-  readonly comments: string[];
+  readonly comments: number[];
 }
 
 /**

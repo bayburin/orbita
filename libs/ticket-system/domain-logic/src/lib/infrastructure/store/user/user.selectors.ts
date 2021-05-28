@@ -15,11 +15,6 @@ export const getLoaded = createSelector(
   (state: State) => state.loaded
 );
 
-export const getError = createSelector(
-  getUserState,
-  (state: State) => state.error
-);
-
 export const getAll = createSelector(
   getUserState,
   (state: State) => selectAll(state)

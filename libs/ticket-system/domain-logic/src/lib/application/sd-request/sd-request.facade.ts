@@ -34,12 +34,12 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     switchMap(([_loaded, page, maxSize]) =>
       this.sdRequestApi.query(page, maxSize)
         .pipe(
-          tap(sdRequestQueue => {
-            const normalizeData = SdRequestCacheService.normalizeSdRequests(sdRequestQueue).entities;
+          tap(data => {
+            const normalizeData = SdRequestCacheService.normalizeSdRequests(data).entities;
 
             this.store.dispatch(SdRequestActions.loadAllSuccess({
-              sd_requests: Object.values(normalizeData.sd_requests),
-              meta: sdRequestQueue.meta
+              sdRequests: Object.values(normalizeData.sd_requests),
+              meta: data.meta
             }));
 
             this.messageFacade.setMessages(Object.values(normalizeData.comments));

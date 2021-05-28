@@ -8,7 +8,7 @@ export const getEntitiesViewModel = createSelector(
   WorkerSelectors.getEntities,
   UserSelectors.getEntities,
   (workerEntities, userEntities): WorkerViewModelDict => {
-    return Object.keys(workerEntities).reduce<WorkerViewModelDict>((acc, key) => {
+    return Object.keys(workerEntities).map(Number).reduce<WorkerViewModelDict>((acc, key) => {
       const entity = workerEntities[key];
 
       acc[key] = {

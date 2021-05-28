@@ -1,64 +1,44 @@
-// import { GroupEntity } from './group.models';
-// import { State, groupAdapter, initialState } from './group.reducer';
-// import * as GroupSelectors from './group.selectors';
+import { groupAdapter, initialState } from './group.reducer';
+import * as GroupSelectors from './group.selectors';
+import { Group } from './../../../entities/models/group.interface';
 
-// describe('Group Selectors', () => {
-//   const ERROR_MSG = 'No Error Available';
-//   const getGroupId = (it) => it['id'];
-//   const createGroupEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as GroupEntity);
+describe('GroupSelectors', () => {
+  const createGroupEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as Group);
+  const arrEntities = [
+    createGroupEntity(1),
+    createGroupEntity(2),
+    createGroupEntity(3)
+  ];
+  const entities = {
+    1: arrEntities[0],
+    2: arrEntities[1],
+    3: arrEntities[2]
+  };
+  let state: any;
 
-//   let state;
+  beforeEach(() => {
+    state = groupAdapter.setAll(
+      arrEntities,
+      {
+        ...initialState,
+        loaded: true
+      }
+    );
+  });
 
-//   beforeEach(() => {
-//     state = {
-//       group: groupAdapter.setAll(
-//         [
-//           createGroupEntity('PRODUCT-AAA'),
-//           createGroupEntity('PRODUCT-BBB'),
-//           createGroupEntity('PRODUCT-CCC'),
-//         ],
-//         {
-//           ...initialState,
-//           selectedId: 'PRODUCT-BBB',
-//           error: ERROR_MSG,
-//           loaded: true,
-//         }
-//       ),
-//     };
-//   });
+  it('getLoaded() should return "loaded" attribute', () => {
+    expect(GroupSelectors.getLoaded.projector(state)).toEqual(true);
+  });
 
-//   describe('Group Selectors', () => {
-//     it('getAllGroup() should return the list of Group', () => {
-//       const results = GroupSelectors.getAllGroup(state);
-//       const selId = getGroupId(results[1]);
+  it('getAll() should return array of entities', () => {
+    expect(GroupSelectors.getAll.projector(state)).toEqual(arrEntities);
+  });
 
-//       expect(results.length).toBe(3);
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
-
-//     it('getSelected() should return the selected Entity', () => {
-//       const result = GroupSelectors.getSelected(state);
-//       const selId = getGroupId(result);
-
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
-
-//     it("getGroupLoaded() should return the current 'loaded' status", () => {
-//       const result = GroupSelectors.getGroupLoaded(state);
-
-//       expect(result).toBe(true);
-//     });
-
-//     it("getGroupError() should return the current 'error' state", () => {
-//       const result = GroupSelectors.getGroupError(state);
-
-//       expect(result).toBe(ERROR_MSG);
-//     });
-//   });
-// });
-
-it('', () => {});
+  it('getEntities() should return entities', () => {
+    expect(GroupSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+});

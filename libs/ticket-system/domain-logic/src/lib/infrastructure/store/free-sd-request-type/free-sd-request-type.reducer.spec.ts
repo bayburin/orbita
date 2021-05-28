@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { FreeSdRequestType } from '../../../entities/free-sd-request-type.interface';
+import { FreeSdRequestType } from '../../../entities/models/sd/free-sd-request-type.interface';
 import * as FreeSdRequestTypeActions from './free-sd-request-type.actions';
 import { State, initialState, reducer } from './free-sd-request-type.reducer';
 

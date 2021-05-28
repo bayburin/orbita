@@ -1,40 +1,37 @@
-// import { MessageEntity } from './message.models';
-// import * as MessageActions from './message.actions';
-// import { State, initialState, reducer } from './message.reducer';
+import { Action } from '@ngrx/store';
 
-// describe('Message Reducer', () => {
-//   const createMessageEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as MessageEntity);
+import { Message } from './../../../entities/models/message.interface';
+import * as MessageActions from './message.actions';
+import { State, initialState, reducer } from './message.reducer';
 
-//   beforeEach(() => {});
+describe('MessageReducer', () => {
+  let action: Action;
+  const createMessageEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as Message);
 
-//   describe('valid Message actions', () => {
-//     it('loadMessageSuccess should return set the list of known Message', () => {
-//       const message = [
-//         createMessageEntity('PRODUCT-AAA'),
-//         createMessageEntity('PRODUCT-zzz'),
-//       ];
-//       const action = MessageActions.loadMessageSuccess({ message });
+  describe('SetAll()', () => {
+    it('should change "loaded" and "entities" attributes', () => {
+      const messages = [
+        createMessageEntity(1),
+        createMessageEntity(2)
+      ];
+      action = MessageActions.setAll({ messages });
+      const result: State = reducer(initialState, action);
 
-//       const result: State = reducer(initialState, action);
+      expect(result.loaded).toBe(true);
+      expect(result.ids.length).toEqual(2)
+    });
+  });
 
-//       expect(result.loaded).toBe(true);
-//       expect(result.ids.length).toBe(2);
-//     });
-//   });
+  describe('unknown action', () => {
+    it('should return the previous state', () => {
+      const action = {} as any;
+      const result = reducer(initialState, action);
 
-//   describe('unknown action', () => {
-//     it('should return the previous state', () => {
-//       const action = {} as any;
-
-//       const result = reducer(initialState, action);
-
-//       expect(result).toBe(initialState);
-//     });
-//   });
-// });
-
-it('', () => {});
+      expect(result).toBe(initialState);
+    });
+  });
+});

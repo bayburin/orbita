@@ -8,7 +8,6 @@ export const USER_FEATURE_KEY = 'user';
 
 export interface State extends EntityState<User> {
   loaded: boolean;
-  error?: string | null;
 }
 
 export interface UserPartialState {

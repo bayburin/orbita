@@ -11,7 +11,7 @@ import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestApiStub } from './../../api/sd-request/sd-request.api.stub';
 import { SD_REQUEST_FEATURE_KEY, initialState, State } from './sd-request.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY } from '../index';
-import { SdRequestQueueBuilder } from './../../builders/sd-request-queue.builder';
+import { SdRequestServerDataBuilder } from './../../builders/sd-request-server-data.builder';
 
 describe('SdRequestEffects', () => {
   let actions$: Observable<Action>;

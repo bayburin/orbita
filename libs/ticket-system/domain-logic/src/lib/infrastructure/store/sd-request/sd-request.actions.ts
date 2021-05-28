@@ -7,7 +7,7 @@ export const loadAll = createAction('[SdRequest/API] Load All');
 
 export const loadAllSuccess = createAction(
   '[SdRequest/API] Load All Success',
-  props<{ sd_requests: SdRequest[], meta: Meta }>()
+  props<{ sdRequests: SdRequest[], meta: Meta }>()
 );
 
 export const loadAllFailure = createAction(

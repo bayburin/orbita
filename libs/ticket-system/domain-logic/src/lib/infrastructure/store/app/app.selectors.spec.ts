@@ -1,7 +1,7 @@
 import { initialState } from './app.reducer';
 import * as AppSelectors from './app.selectors';
 
-describe('App Selectors', () => {
+describe('AppSelectors', () => {
   const error = { message: 'error message' };
   let state: any;
 

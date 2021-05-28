@@ -1,40 +1,37 @@
-// import { UserWorkEntity } from './user-work.models';
-// import * as UserWorkActions from './user-work.actions';
-// import { State, initialState, reducer } from './user-work.reducer';
+import { Action } from '@ngrx/store';
 
-// describe('UserWork Reducer', () => {
-//   const createUserWorkEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as UserWorkEntity);
+import { Worker } from './../../../entities/models/worker.interface';
+import * as WorkerActions from './worker.actions';
+import { State, initialState, reducer } from './worker.reducer';
 
-//   beforeEach(() => {});
+describe('WorkerReducer', () => {
+  let action: Action;
+  const createWorkerEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as Worker);
 
-//   describe('valid UserWork actions', () => {
-//     it('loadUserWorkSuccess should return set the list of known UserWork', () => {
-//       const userWork = [
-//         createUserWorkEntity('PRODUCT-AAA'),
-//         createUserWorkEntity('PRODUCT-zzz'),
-//       ];
-//       const action = UserWorkActions.loadUserWorkSuccess({ userWork });
+  describe('SetAll()', () => {
+    it('should change "loaded" and "entities" attributes', () => {
+      const workers = [
+        createWorkerEntity(1),
+        createWorkerEntity(2)
+      ];
+      action = WorkerActions.setAll({ workers });
+      const result: State = reducer(initialState, action);
 
-//       const result: State = reducer(initialState, action);
+      expect(result.loaded).toBe(true);
+      expect(result.ids.length).toEqual(2)
+    });
+  });
 
-//       expect(result.loaded).toBe(true);
-//       expect(result.ids.length).toBe(2);
-//     });
-//   });
+  describe('unknown action', () => {
+    it('should return the previous state', () => {
+      const action = {} as any;
+      const result = reducer(initialState, action);
 
-//   describe('unknown action', () => {
-//     it('should return the previous state', () => {
-//       const action = {} as any;
-
-//       const result = reducer(initialState, action);
-
-//       expect(result).toBe(initialState);
-//     });
-//   });
-// });
-
-it('', () => {});
+      expect(result).toBe(initialState);
+    });
+  });
+});

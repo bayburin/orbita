@@ -1,40 +1,57 @@
-// import { ParameterEntity } from './parameter.models';
-// import * as ParameterActions from './parameter.actions';
-// import { State, initialState, reducer } from './parameter.reducer';
+import { Action } from '@ngrx/store';
 
-// describe('Parameter Reducer', () => {
-//   const createParameterEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as ParameterEntity);
+import { Parameter } from '../../../entities/models/parameter.interface';
+import * as ParameterActions from './parameter.actions';
+import { State, initialState, reducer } from './parameter.reducer';
 
-//   beforeEach(() => {});
+describe('ParameterReducer', () => {
+  let action: Action;
+  const createParameterEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as Parameter);
 
-//   describe('valid Parameter actions', () => {
-//     it('loadParameterSuccess should return set the list of known Parameter', () => {
-//       const parameter = [
-//         createParameterEntity('PRODUCT-AAA'),
-//         createParameterEntity('PRODUCT-zzz'),
-//       ];
-//       const action = ParameterActions.loadParameterSuccess({ parameter });
+  describe('loadAll()', () => {
+    it('should change "loaded" and "error" attributes', () => {
+      action = ParameterActions.loadAll({ claim_id: 1 });
+      const result: State = reducer(initialState, action);
 
-//       const result: State = reducer(initialState, action);
+      expect(result.loaded).toBe(false);
+      expect(result.error).toBe(null);
+    });
+  });
 
-//       expect(result.loaded).toBe(true);
-//       expect(result.ids.length).toBe(2);
-//     });
-//   });
+  describe('loadAllSuccess()', () => {
+    it('should change "loaded" and "loading" attributes', () => {
+      const parameters = [
+        createParameterEntity(1),
+        createParameterEntity(2)
+      ];
+      action = ParameterActions.loadAllSuccess({ parameters });
+      const result: State = reducer(initialState, action);
 
-//   describe('unknown action', () => {
-//     it('should return the previous state', () => {
-//       const action = {} as any;
+      expect(result.loaded).toBe(true);
+      expect(result.ids.length).toEqual(2);
+    });
+  });
 
-//       const result = reducer(initialState, action);
+  describe('loadAllFailure()', () => {
+    it('should change "loading" and "error" attributes', () => {
+      const error = { message: 'test message' };
+      action = ParameterActions.loadAllFailure({ error });
+      const result: State = reducer(initialState, action);
 
-//       expect(result).toBe(initialState);
-//     });
-//   });
-// });
+      expect(result.error).toEqual(error);
+    });
+  });
 
-it('', () => {});
+  describe('unknown action', () => {
+    it('should return the previous state', () => {
+      action = {} as any;
+      const result = reducer(initialState, action);
+
+      expect(result).toBe(initialState);
+    });
+  });
+});

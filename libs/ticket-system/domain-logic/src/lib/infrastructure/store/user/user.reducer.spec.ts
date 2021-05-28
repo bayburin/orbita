@@ -1,36 +1,34 @@
 import { Action } from '@ngrx/store';
 
-import { User } from '../../../entities/models/user.interface';
+import { User } from './../../../entities/models/user.interface';
 import * as UserActions from './user.actions';
 import { State, initialState, reducer } from './user.reducer';
-import { UserQueueBuilder } from './../../builders/user-queue.builder';
 
 describe('UserReducer', () => {
   let action: Action;
-  const createUser = (id: string, name = '') =>
+  const createUserEntity = (id: number, name = '') =>
     ({
       id,
       name: name || `name-${id}`,
     } as unknown as User);
 
-  describe('loadAllSuccess', () => {
-    it('should set the list of known Users', () => {
+  describe('SetAll()', () => {
+    it('should change "loaded" and "entities" attributes', () => {
       const users = [
-        createUser('PRODUCT-AAA'),
-        createUser('PRODUCT-zzz'),
+        createUserEntity(1),
+        createUserEntity(2)
       ];
-      const userQueue = new UserQueueBuilder().users(users).build();
-      action = UserActions.setAll({ users: userQueue.users });
+      action = UserActions.setAll({ users });
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(true);
-      expect(result.ids.length).toBe(2);
+      expect(result.ids.length).toEqual(2)
     });
   });
 
   describe('unknown action', () => {
     it('should return the previous state', () => {
-      action = {} as any;
+      const action = {} as any;
       const result = reducer(initialState, action);
 
       expect(result).toBe(initialState);

@@ -12,7 +12,7 @@ export const getEntitiesViewModel = createSelector(
   HistoryViewModelSelectors.getEntitiesViewModel,
   WorkerViewModelSelectors.getEntitiesViewModel,
   (workEntities, groupEntities, historyEntities, workerEntities): WorkViewModelDict => {
-    return Object.keys(workEntities).reduce<WorkViewModelDict>((acc, key) => {
+    return Object.keys(workEntities).map(Number).reduce<WorkViewModelDict>((acc, key) => {
       const workViewModel = workEntities[key];
       const histories = workViewModel.histories.map(historyId => historyEntities[historyId]);
       const workers = workViewModel.workers.map(workerId => workerEntities[workerId]);

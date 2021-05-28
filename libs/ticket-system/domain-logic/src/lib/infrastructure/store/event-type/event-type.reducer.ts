@@ -8,7 +8,6 @@ export const EVENT_TYPE_FEATURE_KEY = 'eventType';
 
 export interface State extends EntityState<EventType> {
   loaded: boolean;
-  error?: string | null;
 }
 
 export interface EventTypePartialState {
@@ -23,8 +22,8 @@ export const initialState: State = eventTypeAdapter.getInitialState({
 
 const eventTypeReducer = createReducer(
   initialState,
-  on(EventTypeActions.setAll, (state, { event_types }) =>
-    eventTypeAdapter.setAll(event_types, { ...state, loaded: true })
+  on(EventTypeActions.setAll, (state, { eventTypes }) =>
+    eventTypeAdapter.setAll(eventTypes, { ...state, loaded: true })
   ),
 );
 

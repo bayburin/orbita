@@ -1,64 +1,50 @@
-// import { ParameterEntity } from './parameter.models';
-// import { State, parameterAdapter, initialState } from './parameter.reducer';
-// import * as ParameterSelectors from './parameter.selectors';
+import { parameterAdapter, initialState } from './parameter.reducer';
+import * as ParameterSelectors from './parameter.selectors';
+import { Parameter } from './../../../entities/models/parameter.interface';
 
-// describe('Parameter Selectors', () => {
-//   const ERROR_MSG = 'No Error Available';
-//   const getParameterId = (it) => it['id'];
-//   const createParameterEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as ParameterEntity);
+describe('ParameterSelectors', () => {
+  const error = { message: 'error message' };
+  const createParameterEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as Parameter);
+  const arrEntities = [
+    createParameterEntity(1),
+    createParameterEntity(2),
+    createParameterEntity(3)
+  ];
+  const entities = {
+    1: arrEntities[0],
+    2: arrEntities[1],
+    3: arrEntities[2]
+  };
+  let state: any;
 
-//   let state;
+  beforeEach(() => {
+    state = parameterAdapter.setAll(
+      arrEntities,
+      {
+        ...initialState,
+        loaded: true,
+        error
+      }
+    );
+  });
 
-//   beforeEach(() => {
-//     state = {
-//       parameter: parameterAdapter.setAll(
-//         [
-//           createParameterEntity('PRODUCT-AAA'),
-//           createParameterEntity('PRODUCT-BBB'),
-//           createParameterEntity('PRODUCT-CCC'),
-//         ],
-//         {
-//           ...initialState,
-//           selectedId: 'PRODUCT-BBB',
-//           error: ERROR_MSG,
-//           loaded: true,
-//         }
-//       ),
-//     };
-//   });
+  it('getLoaded() should return "loaded" attribute', () => {
+    expect(ParameterSelectors.getLoaded.projector(state)).toEqual(true);
+  });
 
-//   describe('Parameter Selectors', () => {
-//     it('getAllParameter() should return the list of Parameter', () => {
-//       const results = ParameterSelectors.getAllParameter(state);
-//       const selId = getParameterId(results[1]);
+  it('getError() should return "error" attribute', () => {
+    expect(ParameterSelectors.getError.projector(state)).toEqual(error);
+  });
 
-//       expect(results.length).toBe(3);
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
+  it('getAll() should return array of entities', () => {
+    expect(ParameterSelectors.getAll.projector(state)).toEqual(arrEntities);
+  });
 
-//     it('getSelected() should return the selected Entity', () => {
-//       const result = ParameterSelectors.getSelected(state);
-//       const selId = getParameterId(result);
-
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
-
-//     it("getParameterLoaded() should return the current 'loaded' status", () => {
-//       const result = ParameterSelectors.getParameterLoaded(state);
-
-//       expect(result).toBe(true);
-//     });
-
-//     it("getParameterError() should return the current 'error' state", () => {
-//       const result = ParameterSelectors.getParameterError(state);
-
-//       expect(result).toBe(ERROR_MSG);
-//     });
-//   });
-// });
-
-it('', () => {});
+  it('getEntities() should return entities', () => {
+    expect(ParameterSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+});

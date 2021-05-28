@@ -10,13 +10,14 @@ export const getEntitiesViewModel = createSelector(
   UserSelectors.getEntities,
   EventTypeSelectors.getEntities,
   (historyEntities, userEntities, eventTypeEntities): HistoryViewModelDict => {
-    return Object.keys(historyEntities).reduce<HistoryViewModelDict>((acc, key) => {
+    return Object.keys(historyEntities).map(Number).reduce<HistoryViewModelDict>((acc, key) => {
       const historyViewModel = historyEntities[key];
 
       acc[key] = {
         ...historyViewModel,
         user: userEntities[historyViewModel.user_id],
-        eventType: eventTypeEntities[historyViewModel.event_type_id]
+        eventType: eventTypeEntities[historyViewModel.event_type_id],
+        _isLast: false
       }
 
       return acc;

@@ -1,64 +1,50 @@
-// import { MessageEntity } from './message.models';
-// import { State, messageAdapter, initialState } from './message.reducer';
-// import * as MessageSelectors from './message.selectors';
+import { messageAdapter, initialState } from './message.reducer';
+import * as MessageSelectors from './message.selectors';
+import { Message } from './../../../entities/models/message.interface';
 
-// describe('Message Selectors', () => {
-//   const ERROR_MSG = 'No Error Available';
-//   const getMessageId = (it) => it['id'];
-//   const createMessageEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as MessageEntity);
+describe('MessageSelectors', () => {
+  const error = { message: 'error message' };
+  const createMessageEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as Message);
+  const arrEntities = [
+    createMessageEntity(1),
+    createMessageEntity(2),
+    createMessageEntity(3)
+  ];
+  const entities = {
+    1: arrEntities[0],
+    2: arrEntities[1],
+    3: arrEntities[2]
+  };
+  let state: any;
 
-//   let state;
+  beforeEach(() => {
+    state = messageAdapter.setAll(
+      arrEntities,
+      {
+        ...initialState,
+        loaded: true,
+        error
+      }
+    );
+  });
 
-//   beforeEach(() => {
-//     state = {
-//       message: messageAdapter.setAll(
-//         [
-//           createMessageEntity('PRODUCT-AAA'),
-//           createMessageEntity('PRODUCT-BBB'),
-//           createMessageEntity('PRODUCT-CCC'),
-//         ],
-//         {
-//           ...initialState,
-//           selectedId: 'PRODUCT-BBB',
-//           error: ERROR_MSG,
-//           loaded: true,
-//         }
-//       ),
-//     };
-//   });
+  it('getLoaded() should return "loaded" attribute', () => {
+    expect(MessageSelectors.getLoaded.projector(state)).toEqual(true);
+  });
 
-//   describe('Message Selectors', () => {
-//     it('getAllMessage() should return the list of Message', () => {
-//       const results = MessageSelectors.getAllMessage(state);
-//       const selId = getMessageId(results[1]);
+  it('getError() should return "error" attribute', () => {
+    expect(MessageSelectors.getError.projector(state)).toEqual(error);
+  });
 
-//       expect(results.length).toBe(3);
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
+  it('getAll() should return array of entities', () => {
+    expect(MessageSelectors.getAll.projector(state)).toEqual(arrEntities);
+  });
 
-//     it('getSelected() should return the selected Entity', () => {
-//       const result = MessageSelectors.getSelected(state);
-//       const selId = getMessageId(result);
-
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
-
-//     it("getMessageLoaded() should return the current 'loaded' status", () => {
-//       const result = MessageSelectors.getMessageLoaded(state);
-
-//       expect(result).toBe(true);
-//     });
-
-//     it("getMessageError() should return the current 'error' state", () => {
-//       const result = MessageSelectors.getMessageError(state);
-
-//       expect(result).toBe(ERROR_MSG);
-//     });
-//   });
-// });
-
-it('' ,() => {});
+  it('getEntities() should return entities', () => {
+    expect(MessageSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+});

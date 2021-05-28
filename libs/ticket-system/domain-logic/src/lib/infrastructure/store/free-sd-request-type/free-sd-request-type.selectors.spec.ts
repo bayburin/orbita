@@ -1,4 +1,4 @@
-import { FreeSdRequestType } from '../../../entities/free-sd-request-type.interface';
+import { FreeSdRequestType } from '../../../entities/models/sd/free-sd-request-type.interface';
 import { freeSdRequestTypeAdapter, initialState } from './free-sd-request-type.reducer';
 import * as FreeSdRequestTypeSelectors from './free-sd-request-type.selectors';
 

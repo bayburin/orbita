@@ -1,64 +1,44 @@
-// import { EventTypeEntity } from './event-type.models';
-// import { State, eventTypeAdapter, initialState } from './event-type.reducer';
-// import * as EventTypeSelectors from './event-type.selectors';
+import { eventTypeAdapter, initialState } from './event-type.reducer';
+import * as EventTypeSelectors from './event-type.selectors';
+import { EventType } from './../../../entities/models/event-type.interface';
 
-// describe('EventType Selectors', () => {
-//   const ERROR_MSG = 'No Error Available';
-//   const getEventTypeId = (it) => it['id'];
-//   const createEventTypeEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as EventTypeEntity);
+describe('EventTypeSelectors', () => {
+  const createEventTypeEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as EventType);
+  const arrEntities = [
+    createEventTypeEntity(1),
+    createEventTypeEntity(2),
+    createEventTypeEntity(3)
+  ];
+  const entities = {
+    1: arrEntities[0],
+    2: arrEntities[1],
+    3: arrEntities[2]
+  };
+  let state: any;
 
-//   let state;
+  beforeEach(() => {
+    state = eventTypeAdapter.setAll(
+      arrEntities,
+      {
+        ...initialState,
+        loaded: true
+      }
+    );
+  });
 
-//   beforeEach(() => {
-//     state = {
-//       eventType: eventTypeAdapter.setAll(
-//         [
-//           createEventTypeEntity('PRODUCT-AAA'),
-//           createEventTypeEntity('PRODUCT-BBB'),
-//           createEventTypeEntity('PRODUCT-CCC'),
-//         ],
-//         {
-//           ...initialState,
-//           selectedId: 'PRODUCT-BBB',
-//           error: ERROR_MSG,
-//           loaded: true,
-//         }
-//       ),
-//     };
-//   });
+  it('getLoaded() should return "loaded" attribute', () => {
+    expect(EventTypeSelectors.getLoaded.projector(state)).toEqual(true);
+  });
 
-//   describe('EventType Selectors', () => {
-//     it('getAllEventType() should return the list of EventType', () => {
-//       const results = EventTypeSelectors.getAllEventType(state);
-//       const selId = getEventTypeId(results[1]);
+  it('getAll() should return array of entities', () => {
+    expect(EventTypeSelectors.getAll.projector(state)).toEqual(arrEntities);
+  });
 
-//       expect(results.length).toBe(3);
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
-
-//     it('getSelected() should return the selected Entity', () => {
-//       const result = EventTypeSelectors.getSelected(state);
-//       const selId = getEventTypeId(result);
-
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
-
-//     it("getEventTypeLoaded() should return the current 'loaded' status", () => {
-//       const result = EventTypeSelectors.getEventTypeLoaded(state);
-
-//       expect(result).toBe(true);
-//     });
-
-//     it("getEventTypeError() should return the current 'error' state", () => {
-//       const result = EventTypeSelectors.getEventTypeError(state);
-
-//       expect(result).toBe(ERROR_MSG);
-//     });
-//   });
-// });
-
-it('', () => {});
+  it('getEntities() should return entities', () => {
+    expect(EventTypeSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+});

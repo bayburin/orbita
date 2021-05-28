@@ -37,8 +37,8 @@ const sdRequestReducer = createReducer(
     loading: true,
     error: null
   })),
-  on(SdRequestActions.loadAllSuccess, (state, { sd_requests, meta }) =>
-    sdRequestAdapter.setAll(sd_requests, {
+  on(SdRequestActions.loadAllSuccess, (state, { sdRequests, meta }) =>
+    sdRequestAdapter.setAll(sdRequests, {
       ...state,
       totalCount: meta.total_count,
       loading: false,

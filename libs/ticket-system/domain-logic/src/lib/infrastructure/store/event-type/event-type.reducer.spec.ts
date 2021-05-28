@@ -1,40 +1,37 @@
-// import { EventTypeEntity } from './event-type.models';
-// import * as EventTypeActions from './event-type.actions';
-// import { State, initialState, reducer } from './event-type.reducer';
+import { Action } from '@ngrx/store';
 
-// describe('EventType Reducer', () => {
-//   const createEventTypeEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as EventTypeEntity);
+import { EventType } from './../../../entities/models/event-type.interface';
+import * as EventTypeActions from './event-type.actions';
+import { State, initialState, reducer } from './event-type.reducer';
 
-//   beforeEach(() => {});
+describe('EventTypeReducer', () => {
+  let action: Action;
+  const createEventTypeEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as EventType);
 
-//   describe('valid EventType actions', () => {
-//     it('loadEventTypeSuccess should return set the list of known EventType', () => {
-//       const eventType = [
-//         createEventTypeEntity('PRODUCT-AAA'),
-//         createEventTypeEntity('PRODUCT-zzz'),
-//       ];
-//       const action = EventTypeActions.loadEventTypeSuccess({ eventType });
+  describe('SetAll()', () => {
+    it('should change "loaded" and "entities" attributes', () => {
+      const eventTypes = [
+        createEventTypeEntity(1),
+        createEventTypeEntity(2)
+      ];
+      action = EventTypeActions.setAll({ eventTypes });
+      const result: State = reducer(initialState, action);
 
-//       const result: State = reducer(initialState, action);
+      expect(result.loaded).toBe(true);
+      expect(result.ids.length).toEqual(2)
+    });
+  });
 
-//       expect(result.loaded).toBe(true);
-//       expect(result.ids.length).toBe(2);
-//     });
-//   });
+  describe('unknown action', () => {
+    it('should return the previous state', () => {
+      const action = {} as any;
+      const result = reducer(initialState, action);
 
-//   describe('unknown action', () => {
-//     it('should return the previous state', () => {
-//       const action = {} as any;
-
-//       const result = reducer(initialState, action);
-
-//       expect(result).toBe(initialState);
-//     });
-//   });
-// });
-
-it('', () => {});
+      expect(result).toBe(initialState);
+    });
+  });
+});

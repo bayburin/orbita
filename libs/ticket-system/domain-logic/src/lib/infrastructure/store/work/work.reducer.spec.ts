@@ -1,40 +1,37 @@
-// import { WorkEntity } from './work.models';
-// import * as WorkActions from './work.actions';
-// import { State, initialState, reducer } from './work.reducer';
+import { Action } from '@ngrx/store';
 
-// describe('Work Reducer', () => {
-//   const createWorkEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as WorkEntity);
+import { Work } from './../../../entities/models/work.interface';
+import * as WorkActions from './work.actions';
+import { State, initialState, reducer } from './work.reducer';
 
-//   beforeEach(() => {});
+describe('WorkReducer', () => {
+  let action: Action;
+  const createWorkEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as Work);
 
-//   describe('valid Work actions', () => {
-//     it('loadWorkSuccess should return set the list of known Work', () => {
-//       const work = [
-//         createWorkEntity('PRODUCT-AAA'),
-//         createWorkEntity('PRODUCT-zzz'),
-//       ];
-//       const action = WorkActions.loadWorkSuccess({ work });
+  describe('SetAll()', () => {
+    it('should change "loaded" and "entities" attributes', () => {
+      const works = [
+        createWorkEntity(1),
+        createWorkEntity(2)
+      ];
+      action = WorkActions.setAll({ works });
+      const result: State = reducer(initialState, action);
 
-//       const result: State = reducer(initialState, action);
+      expect(result.loaded).toBe(true);
+      expect(result.ids.length).toEqual(2)
+    });
+  });
 
-//       expect(result.loaded).toBe(true);
-//       expect(result.ids.length).toBe(2);
-//     });
-//   });
+  describe('unknown action', () => {
+    it('should return the previous state', () => {
+      const action = {} as any;
+      const result = reducer(initialState, action);
 
-//   describe('unknown action', () => {
-//     it('should return the previous state', () => {
-//       const action = {} as any;
-
-//       const result = reducer(initialState, action);
-
-//       expect(result).toBe(initialState);
-//     });
-//   });
-// });
-
-it('', () => {});
+      expect(result).toBe(initialState);
+    });
+  });
+});

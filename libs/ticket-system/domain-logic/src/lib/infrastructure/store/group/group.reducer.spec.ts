@@ -1,40 +1,37 @@
-// import { GroupEntity } from './group.models';
-// import * as GroupActions from './group.actions';
-// import { State, initialState, reducer } from './group.reducer';
+import { Action } from '@ngrx/store';
 
-// describe('Group Reducer', () => {
-//   const createGroupEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as GroupEntity);
+import { Group } from './../../../entities/models/group.interface';
+import * as GroupActions from './group.actions';
+import { State, initialState, reducer } from './group.reducer';
 
-//   beforeEach(() => {});
+describe('GroupReducer', () => {
+  let action: Action;
+  const createGroupEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as Group);
 
-//   describe('valid Group actions', () => {
-//     it('loadGroupSuccess should return set the list of known Group', () => {
-//       const group = [
-//         createGroupEntity('PRODUCT-AAA'),
-//         createGroupEntity('PRODUCT-zzz'),
-//       ];
-//       const action = GroupActions.loadGroupSuccess({ group });
+  describe('SetAll()', () => {
+    it('should change "loaded" and "entities" attributes', () => {
+      const groups = [
+        createGroupEntity(1),
+        createGroupEntity(2)
+      ];
+      action = GroupActions.setAll({ groups });
+      const result: State = reducer(initialState, action);
 
-//       const result: State = reducer(initialState, action);
+      expect(result.loaded).toBe(true);
+      expect(result.ids.length).toEqual(2)
+    });
+  });
 
-//       expect(result.loaded).toBe(true);
-//       expect(result.ids.length).toBe(2);
-//     });
-//   });
+  describe('unknown action', () => {
+    it('should return the previous state', () => {
+      const action = {} as any;
+      const result = reducer(initialState, action);
 
-//   describe('unknown action', () => {
-//     it('should return the previous state', () => {
-//       const action = {} as any;
-
-//       const result = reducer(initialState, action);
-
-//       expect(result).toBe(initialState);
-//     });
-//   });
-// });
-
-it('', () => {});
+      expect(result).toBe(initialState);
+    });
+  });
+});

@@ -8,7 +8,6 @@ export const HISTORY_FEATURE_KEY = 'history';
 
 export interface State extends EntityState<History> {
   loaded: boolean;
-  error?: string | null;
 }
 
 export interface HistoryPartialState {

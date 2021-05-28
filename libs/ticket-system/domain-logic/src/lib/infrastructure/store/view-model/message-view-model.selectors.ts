@@ -20,7 +20,7 @@ export const getEntitiesViewModel = createSelector(
   MessageSelectors.getEntities,
   UserSelectors.getEntities,
   (messageEntities, userEntities): MessageViewModelDict => {
-    return Object.keys(messageEntities).reduce<MessageViewModelDict>((acc, key) => {
+    return Object.keys(messageEntities).map(Number).reduce<MessageViewModelDict>((acc, key) => {
       const entity = messageEntities[key];
 
       acc[key] = {

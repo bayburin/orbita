@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 
-import { SdRequest } from '../../../entities/sd-request.interface';
+import { SdRequest } from '../../../entities/models/sd-request.interface';
+import { Meta } from '../../../entities/server-data/meta.interface';
 import * as SdRequestActions from './sd-request.actions';
 import { State, initialState, reducer } from './sd-request.reducer';
-import { SdRequestQueueBuilder } from './../../builders/sd-request-queue.builder';
 
 describe('SdRequestReducer', () => {
   let action: Action;
@@ -14,11 +14,11 @@ describe('SdRequestReducer', () => {
     } as unknown as SdRequest);
 
   describe('loadAll', () => {
-    it('should clear "loaded" and "error" attributes', () => {
+    it('should clear "loading" and "error" attributes', () => {
       action = SdRequestActions.loadAll();
       const result: State = reducer(initialState, action);
 
-      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
       expect(result.error).toBeNull();
     });
   });
@@ -29,8 +29,10 @@ describe('SdRequestReducer', () => {
         createSdRequest('PRODUCT-AAA'),
         createSdRequest('PRODUCT-zzz'),
       ];
-      const sdRequestQueue = new SdRequestQueueBuilder().sd_requests(sdRequests).total_count(12).build();
-      action = SdRequestActions.loadAllSuccess({ sdRequestQueue });
+      const meta = {
+        total_count: 12
+      } as Meta;
+      action = SdRequestActions.loadAllSuccess({ sdRequests, meta });
       const result: State = reducer(initialState, action);
 
       expect(result.ids.length).toBe(2);

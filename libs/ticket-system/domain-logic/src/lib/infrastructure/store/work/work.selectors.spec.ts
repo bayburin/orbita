@@ -1,64 +1,44 @@
-// import { WorkEntity } from './work.models';
-// import { State, workAdapter, initialState } from './work.reducer';
-// import * as WorkSelectors from './work.selectors';
+import { workAdapter, initialState } from './work.reducer';
+import * as WorkSelectors from './work.selectors';
+import { Work } from './../../../entities/models/work.interface';
 
-// describe('Work Selectors', () => {
-//   const ERROR_MSG = 'No Error Available';
-//   const getWorkId = (it) => it['id'];
-//   const createWorkEntity = (id: string, name = '') =>
-//     ({
-//       id,
-//       name: name || `name-${id}`,
-//     } as WorkEntity);
+describe('WorkSelectors', () => {
+  const createWorkEntity = (id: number, name = '') =>
+    ({
+      id,
+      name: name || `name-${id}`,
+    } as unknown as Work);
+  const arrEntities = [
+    createWorkEntity(1),
+    createWorkEntity(2),
+    createWorkEntity(3)
+  ];
+  const entities = {
+    1: arrEntities[0],
+    2: arrEntities[1],
+    3: arrEntities[2]
+  };
+  let state: any;
 
-//   let state;
+  beforeEach(() => {
+    state = workAdapter.setAll(
+      arrEntities,
+      {
+        ...initialState,
+        loaded: true
+      }
+    );
+  });
 
-//   beforeEach(() => {
-//     state = {
-//       work: workAdapter.setAll(
-//         [
-//           createWorkEntity('PRODUCT-AAA'),
-//           createWorkEntity('PRODUCT-BBB'),
-//           createWorkEntity('PRODUCT-CCC'),
-//         ],
-//         {
-//           ...initialState,
-//           selectedId: 'PRODUCT-BBB',
-//           error: ERROR_MSG,
-//           loaded: true,
-//         }
-//       ),
-//     };
-//   });
+  it('getLoaded() should return "loaded" attribute', () => {
+    expect(WorkSelectors.getLoaded.projector(state)).toEqual(true);
+  });
 
-//   describe('Work Selectors', () => {
-//     it('getAllWork() should return the list of Work', () => {
-//       const results = WorkSelectors.getAllWork(state);
-//       const selId = getWorkId(results[1]);
+  it('getAll() should return array of entities', () => {
+    expect(WorkSelectors.getAll.projector(state)).toEqual(arrEntities);
+  });
 
-//       expect(results.length).toBe(3);
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
-
-//     it('getSelected() should return the selected Entity', () => {
-//       const result = WorkSelectors.getSelected(state);
-//       const selId = getWorkId(result);
-
-//       expect(selId).toBe('PRODUCT-BBB');
-//     });
-
-//     it("getWorkLoaded() should return the current 'loaded' status", () => {
-//       const result = WorkSelectors.getWorkLoaded(state);
-
-//       expect(result).toBe(true);
-//     });
-
-//     it("getWorkError() should return the current 'error' state", () => {
-//       const result = WorkSelectors.getWorkError(state);
-
-//       expect(result).toBe(ERROR_MSG);
-//     });
-//   });
-// });
-
-it('', () => {});
+  it('getEntities() should return entities', () => {
+    expect(WorkSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+});

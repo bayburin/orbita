@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import * as AppActions from './app.actions';
 import { State, initialState, reducer } from './app.reducer';
 
-describe('App Reducer', () => {
+describe('AppReducer', () => {
   let action: Action;
 
   describe('init()', () => {

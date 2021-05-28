@@ -8,7 +8,6 @@ export const WORKER_FEATURE_KEY = 'worker';
 
 export interface State extends EntityState<Worker> {
   loaded: boolean;
-  error?: string | null;
 }
 
 export interface WorkerPartialState {
