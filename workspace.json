@@ -32,7 +32,8 @@
             ],
             "styles": [
               "node_modules/@iss/ng-auth-center/assets/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
               "libs/shared/assets/src/lib/styles.scss",
               "apps/orbita-ui/src/styles.scss"
             ],

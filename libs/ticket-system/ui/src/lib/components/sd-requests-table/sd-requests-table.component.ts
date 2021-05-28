@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 import {
   Priorities,
   PrioritiesViewModel,
@@ -11,6 +11,7 @@ import {
   SdRequestViewModel,
   WorkerViewModel } from '@orbita/ticket-system/domain-logic';
 import { oFlatMap } from '@orbita/ticket-system/utils';
+import { LazyLoadEvent } from 'primeng/api';
 
 @Component({
   selector: 'lib-sd-requests-table',
@@ -20,25 +21,29 @@ import { oFlatMap } from '@orbita/ticket-system/utils';
 })
 export class SdRequestsTableComponent {
   /**
-   * Список выводимых столбцов
-   */
-  displayedColumns = [
-    'id',
-    'createdAt',
-    'finishedAtPlan',
-    'status',
-    'serviceName',
-    'ticketName',
-    'description',
-    'priority',
-    'workers',
-    'finished_at',
-    'actions'
-  ];
-  /**
    * Массив заявок
    */
   @Input() sdRequests$: Observable<SdRequestViewModel[]> = of([]);
+  /**
+   * Индикатор загрузки
+   */
+  @Input() loading$: Observable<boolean> = of(null);
+  /**
+   * Номер страницы
+   */
+  @Input() page$: Observable<number> = of(null);
+  /**
+   * Общее число записей
+   */
+  @Input() totalCount$: Observable<number> = of(null);
+  /**
+   * Максимальный размер записей на странице
+   */
+  @Input() maxSize$: Observable<number> = of(null);
+  /**
+   * Событие изменения номера страницы. Возвращает новый номер страницы
+   */
+  @Output() pageChanged = new EventEmitter<number>();
 
   /**
    * Возвращает объект PrioritiesViewModel, в котором содержатся данные о приоритете для представления
@@ -65,6 +70,17 @@ export class SdRequestsTableComponent {
    */
   workers(sdRequest: SdRequestViewModel): WorkerViewModel[] {
     return oFlatMap((work: WorkViewModel) => work.workers, sdRequest.works);
+  }
+
+  /**
+   * Событие изменения номера страницы, сортировки или фильтров
+   *
+   * @param event
+   */
+  loadSdRequests(event: LazyLoadEvent) {
+    const currentPage = event.first / event.rows + 1;
+
+    this.pageChanged.emit(currentPage);
   }
 
   trackBySdRequest(index: number, sdRequest: SdRequestViewModel): number {

@@ -155,7 +155,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     };
 
     if (req.url.endsWith('v1/sd_requests')) {
-      return of(new HttpResponse({ body: sdRequests, status: 200 }))
+      return of(new HttpResponse({ body: sdRequests, status: 200 })).pipe(
+        materialize(),
+        delay(1500),
+        dematerialize()
+      );
     }
 
     if (req.url.endsWith('/init')) {
@@ -165,7 +169,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         event_types: eventTypes
       };
 
-      return of(new HttpResponse({ body, status: 200 }))
+      return of(new HttpResponse({ body, status: 200 })).pipe(
+        materialize(),
+        delay(1500),
+        dematerialize()
+      );
     }
 
     return next.handle(req).pipe(

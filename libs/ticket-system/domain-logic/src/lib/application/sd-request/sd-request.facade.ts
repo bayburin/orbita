@@ -42,10 +42,10 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
               meta: data.meta
             }));
 
-            this.messageFacade.setMessages(Object.values(normalizeData.comments));
-            this.workFacade.setWorks(Object.values(normalizeData.works));
-            this.historyFacade.setHistories(Object.values(normalizeData.histories));
-            this.workerFacade.setWorkers(Object.values(normalizeData.workers));
+            this.messageFacade.setMessages(Object.values(normalizeData.comments || []));
+            this.workFacade.setWorks(Object.values(normalizeData.works || []));
+            this.historyFacade.setHistories(Object.values(normalizeData.histories || []));
+            this.workerFacade.setWorkers(Object.values(normalizeData.workers || []));
           }),
           catchError(error => of(this.store.dispatch(SdRequestActions.loadAllFailure({ error }))))
         )

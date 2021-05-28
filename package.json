@@ -42,7 +42,6 @@
     "@auth0/angular-jwt": "^5.0.2",
     "@iss/ng-auth-center": "^1.1.0",
     "@mdi/font": "^5.9.55",
-    "@ng-bootstrap/ng-bootstrap": "^9.1.0",
     "@ngrx/component-store": "^11.0.0",
     "@ngrx/effects": "^11.0.0",
     "@ngrx/entity": "^11.0.0",
@@ -52,6 +51,8 @@
     "bootstrap": "^4.6.0",
     "moment": "^2.29.1",
     "normalizr": "^3.6.1",
+    "primeicons": "^4.1.0",
+    "primeng": "11.4.2",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "^0.10.2"

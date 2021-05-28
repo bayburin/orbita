@@ -1,84 +1,42 @@
-<table cdk-table [dataSource]="sdRequests$" [trackBy]="trackBySdRequest" class="table" multiTemplateDataRows>
-  <!-- Номер заявки -->
-  <ng-container cdkColumnDef="id">
-    <th cdk-header-cell *cdkHeaderCellDef>No.</th>
-    <td cdk-cell *cdkCellDef="let element">{{ element.id }}</td>
-  </ng-container>
-
-  <!-- Дата подачи -->
-  <ng-container cdkColumnDef="createdAt">
-    <th cdk-header-cell *cdkHeaderCellDef>Дата подачи</th>
-    <td cdk-cell *cdkCellDef="let element">{{ element.runtime.created_at | datetime }}</td>
-  </ng-container>
-
-  <!-- Срок выполнения -->
-  <ng-container cdkColumnDef="finishedAtPlan">
-    <th cdk-header-cell *cdkHeaderCellDef>Дедлайн</th>
-    <td cdk-cell *cdkCellDef="let element">{{ element.runtime.finished_at_plan | datetime }}</td>
-  </ng-container>
-
-  <!-- Статус -->
-  <ng-container cdkColumnDef="status">
-    <th cdk-header-cell *cdkHeaderCellDef>Статус</th>
-    <td cdk-cell *cdkCellDef="let element">
-      <span class="badge" [ngClass]="status(element.status).badge">{{ status(element.status).title }}</span>
-    </td>
-  </ng-container>
-
-  <!-- Вид услуги -->
-  <ng-container cdkColumnDef="serviceName">
-    <th cdk-header-cell *cdkHeaderCellDef>Вид услуги</th>
-    <td cdk-cell *cdkCellDef="let element">{{ element.service_name }}</td>
-  </ng-container>
-
-  <!-- Вид заявки -->
-  <ng-container cdkColumnDef="ticketName">
-    <th cdk-header-cell *cdkHeaderCellDef>Вид заявки</th>
-    <td cdk-cell *cdkCellDef="let element">{{ element.ticket_name }}</td>
-  </ng-container>
-
-  <!-- Описание -->
-  <ng-container cdkColumnDef="description">
-    <th cdk-header-cell *cdkHeaderCellDef>Подробности</th>
-    <td cdk-cell *cdkCellDef="let element">{{ element.description }}</td>
-  </ng-container>
-
-  <!-- Приоритет -->
-  <ng-container cdkColumnDef="priority">
-    <th cdk-header-cell *cdkHeaderCellDef>Приоритет</th>
-    <td cdk-cell *cdkCellDef="let element">{{ priority(element.priority).title }}</td>
-  </ng-container>
-
-  <!-- Исполнители -->
-  <ng-container cdkColumnDef="workers">
-    <th cdk-header-cell *cdkHeaderCellDef>Исполнители</th>
-    <td cdk-cell *cdkCellDef="let element">
-      <div *ngFor="let worker of workers(element); trackBy:trackByWorker">{{ worker.user?.fio | fioMiddleName }}</div>
-    </td>
-  </ng-container>
-
-  <!-- Дата закрытия -->
-  <ng-container cdkColumnDef="finished_at">
-    <th cdk-header-cell *cdkHeaderCellDef>Дата закрытия</th>
-    <td cdk-cell *cdkCellDef="let element">{{ element.runtime.finished_at | datetime }}</td>
-  </ng-container>
-
-  <!-- Действия -->
-  <ng-container cdkColumnDef="actions">
-    <th cdk-header-cell *cdkHeaderCellDef></th>
-    <td cdk-cell *cdkCellDef="let element">
-      <i class="mdi mdi-chevron-double-down mdi-18px"></i>
-    </td>
-  </ng-container>
-
-  <!-- Быстрый просмотр рабочего процесса заявки -->
-  <ng-container cdkColumnDef="expandedEl">
-    <td cdk-cell *cdkCellDef="let element" [attr.colspan]="displayedColumns.length">
-      <!-- <lib-sd-request-history-overview [sdRequest]="element"></lib-sd-request-history-overview> -->
-    </td>
-  </ng-container>
-
-  <tr cdk-header-row *cdkHeaderRowDef="displayedColumns"></tr>
-  <tr cdk-row *cdkRowDef="let row; columns: displayedColumns;"></tr>
-  <tr cdk-row *cdkRowDef="let row; columns: ['expandedEl']"></tr>
-</table>
+<p-table [value]="sdRequests$ | async" [lazy]="true" (onLazyLoad)="loadSdRequests($event)" [paginator]="true"
+  [rows]="maxSize$ | async" [totalRecords]="totalCount$ | async" [loading]="loading$ | async">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>No.</th>
+      <th>Дата подачи</th>
+      <th>Дедлайн</th>
+      <th>Статус</th>
+      <th>Вид услуги</th>
+      <th>Вид заявки</th>
+      <th>Подробности</th>
+      <th>Приоритет</th>
+      <th>Исполнители</th>
+      <th>Дата закрытия</th>
+      <th></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-req>
+    <tr>
+      <td>{{ req.id }}</td>
+      <td>{{ req.runtime.created_at | datetime }}</td>
+      <td>{{ req.runtime.finished_at_plan | datetime }}</td>
+      <td>
+        <p-tag [severity]="status(req.status).badge">{{ status(req.status).title }}</p-tag>
+      </td>
+      <td>{{ req.service_name }}</td>
+      <td>{{ req.ticket_name }}</td>
+      <td>{{ req.description }}</td>
+      <td>{{ priority(req.priority).title }}</td>
+      <td>
+        <div *ngFor="let worker of workers(req); trackBy:trackByWorker">{{ worker.user?.fio | fioMiddleName }}</div>
+      </td>
+      <td>{{ req.runtime.finished_at | datetime }}</td>
+      <td>
+        <i class="mdi mdi-chevron-double-down mdi-18px"></i>
+      </td>
+      <!-- <td>
+        <lib-sd-request-history-overview [sdRequest]="req"></lib-sd-request-history-overview>
+      </td> -->
+    </tr>
+  </ng-template>
+</p-table>

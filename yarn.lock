@@ -1639,13 +1639,6 @@
   resolved "https://registry.yarnpkg.com/@mdi/font/-/font-5.9.55.tgz#41acd50b88073ded7095fc3029d8712b6e12f38e"
   integrity sha512-jswRF6q3eq8NWpWiqct6q+6Fg/I7nUhrxYJfiEM8JJpap0wVJLQdbKtyS65GdlK7S7Ytnx3TTi/bmw+tBhkGmg==
 
-"@ng-bootstrap/ng-bootstrap@^9.1.0":
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-9.1.0.tgz#975942e1e710b2fa00c81c46e4e4c863ff820519"
-  integrity sha512-5cTxOew6EsENIa/PiIlIlF3MSGanLGD2fyGPyQJc0hU5j9uK+alz2eJXWpeAX3IHLDIaOBfRdCGOrpXkeIUhzQ==
-  dependencies:
-    tslib "^2.0.0"
-
 "@ngrx/component-store@^11.0.0":
   version "11.1.1"
   resolved "https://registry.yarnpkg.com/@ngrx/component-store/-/component-store-11.1.1.tgz#9036ada220ff287a872ad74769a0ead70e82924d"
@@ -8827,6 +8820,18 @@ pretty-format@^25.2.1, pretty-format@^25.5.0:
     ansi-regex "^5.0.0"
     ansi-styles "^4.0.0"
     react-is "^16.12.0"
+
+primeicons@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/primeicons/-/primeicons-4.1.0.tgz#19eaef8ef5594b0006358ae64e738d03e167c9bb"
+  integrity sha512-uEv2pSPk1zQCfaB2VgnUfnUxxlGryYi+5rbdxmZBBt5v9S/pscIQYS5YDLxsQZ7D9jn5c76+Tx5wX/2J1nK6sA==
+
+primeng@11.4.2:
+  version "11.4.2"
+  resolved "https://registry.yarnpkg.com/primeng/-/primeng-11.4.2.tgz#13078d0c555e9a5e4eb3c0b9c6e0e4a4e9204bb6"
+  integrity sha512-ftuh3UBIyK/k/DOlUAbdGkPKmT+Z2OwH3qBhgL7YlXc34JpBXNesOo/jPCL9Zi8nwAoHIL0tvn1GlvGyQ/S2Ew==
+  dependencies:
+    tslib "^2.0.0"
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
