@@ -1,5 +1,6 @@
-<p-table [value]="sdRequests$ | async" [lazy]="true" (onLazyLoad)="loadSdRequests($event)" [paginator]="true"
-  [rows]="maxSize$ | async" [totalRecords]="totalCount$ | async" [loading]="loading$ | async">
+<p-table [value]="sdRequests$ | async" [lazy]="true" (onLazyLoad)="loadSdRequests($event)" [rowHover]="true"
+  [paginator]="true" [rows]="maxSize$ | async" [rowsPerPageOptions]="[10,25,50]" [totalRecords]="totalCount$ | async"
+  [showCurrentPageReport]="true" currentPageReportTemplate="Показано {first}-{last} из {totalRecords} заявок" [loading]="loading$ | async">
   <ng-template pTemplate="header">
     <tr>
       <th>No.</th>
@@ -21,7 +22,7 @@
       <td>{{ req.runtime.created_at | datetime }}</td>
       <td>{{ req.runtime.finished_at_plan | datetime }}</td>
       <td>
-        <p-tag [severity]="status(req.status).badge">{{ status(req.status).title }}</p-tag>
+        <span [class]="'sd-request-badge status-' + status(req.status).badge">{{ status(req.status).title }}</span>
       </td>
       <td>{{ req.service_name }}</td>
       <td>{{ req.ticket_name }}</td>

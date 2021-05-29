@@ -20,19 +20,19 @@ import { Statuses } from './../models/ticket.interface';
 export const statusesViewModelMap: Record<Statuses, StatusesViewModel> = {
   [Statuses.OPENED]: {
     title: 'Открыта',
-    badge: 'primary'
+    badge: 'opened'
   },
   [Statuses.AT_WORK]: {
     title: 'В работе',
-    badge: 'info'
+    badge: 'at_work'
   },
   [Statuses.CANCELED]: {
     title: 'Отменена',
-    badge: 'success'
+    badge: 'canceled'
   },
   [Statuses.DONE]: {
     title: 'Выполнена',
-    badge: 'success'
+    badge: 'done'
   },
 };
 
