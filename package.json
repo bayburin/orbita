@@ -51,6 +51,7 @@
     "bootstrap": "^4.6.0",
     "moment": "^2.29.1",
     "normalizr": "^3.6.1",
+    "primeflex": "^2.0.0",
     "primeicons": "^4.1.0",
     "primeng": "11.4.2",
     "rxjs": "~6.6.3",

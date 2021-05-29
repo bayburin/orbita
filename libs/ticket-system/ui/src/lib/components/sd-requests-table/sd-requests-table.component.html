@@ -1,4 +1,4 @@
-<p-table [value]="sdRequests$ | async" [lazy]="true" (onLazyLoad)="loadSdRequests($event)" [rowHover]="true"
+<p-table [value]="sdRequests$ | async" [lazy]="true" (onLazyLoad)="loadSdRequests($event)" [rowHover]="true" dataKey="id"
   [paginator]="true" [rows]="maxSize$ | async" [rowsPerPageOptions]="[10,25,50]" [totalRecords]="totalCount$ | async"
   [showCurrentPageReport]="true" currentPageReportTemplate="Показано {first}-{last} из {totalRecords} заявок" [loading]="loading$ | async">
   <ng-template pTemplate="header">
@@ -16,7 +16,7 @@
       <th></th>
     </tr>
   </ng-template>
-  <ng-template pTemplate="body" let-req>
+  <ng-template pTemplate="body" let-req let-expanded="expanded">
     <tr>
       <td>{{ req.id }}</td>
       <td>{{ req.runtime.created_at | datetime }}</td>
@@ -33,11 +33,17 @@
       </td>
       <td>{{ req.runtime.finished_at | datetime }}</td>
       <td>
-        <i class="mdi mdi-chevron-double-down mdi-18px"></i>
+        <button type="button" pButton pRipple [pRowToggler]="req" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-left'"></button>
       </td>
-      <!-- <td>
-        <lib-sd-request-history-overview [sdRequest]="req"></lib-sd-request-history-overview>
-      </td> -->
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-req>
+    <tr>
+      <td colspan=11>
+        <div class="p-p-2">
+          <lib-sd-request-history-overview [sdRequest]="req"></lib-sd-request-history-overview>
+        </div>
+      </td>
     </tr>
   </ng-template>
 </p-table>
