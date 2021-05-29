@@ -13,7 +13,7 @@
       <th>Приоритет</th>
       <th>Исполнители</th>
       <th>Дата закрытия</th>
-      <th></th>
+      <th style="width: 4rem"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-req let-expanded="expanded">
@@ -46,4 +46,9 @@
       </td>
     </tr>
   </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="11">Заявки отсутствуют</td>
+    </tr>
+</ng-template>
 </p-table>

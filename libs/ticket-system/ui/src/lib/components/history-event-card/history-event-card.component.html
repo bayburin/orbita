@@ -1,15 +1,15 @@
-<div class="card" [ngClass]="{ 'border-info': isLast }">
-  <div class="card-header d-flex justify-content-between">
-    <span>Событие {{ num }}</span>
-    <!-- <i class="mdi mdi-18px" [class]="eventTypeName(history.eventType.name).icon" [ngbTooltip]="history.eventType.description"></i> -->
-  </div>
-  <div class="card-body">
-    <p class="card-text">
-      <b>Байбурин Равиль:</b> {{ history.action }}
-    </p>
-  </div>
-  <div class="card-footer clearfix">
-    <div class="badge badge-info text-wrap" *ngIf="isLast">Последнее событие</div>
-    <small class="text-muted float-right">{{ history.created_at | datetime }}</small>
-  </div>
-</div>
+<p-card styleClass="p-card-shadow">
+  <ng-template pTemplate="header">
+    <div class="p-d-flex p-jc-between p-ai-center p-pl-3 p-pt-3 p-pr-3">
+      <span>Событие {{ num }}</span>
+      <i class="mdi mdi-18px" [class]="eventTypeName(history.eventType.name).icon" [pTooltip]="history.eventType.description"></i>
+    </div>
+  </ng-template>
+  <b>Байбурин Равиль:</b> {{ history.action }}
+  <ng-template pTemplate="footer">
+    <div class="p-d-flex p-flex-row-reverse p-jc-between p-ai-center">
+      <small>{{ history.created_at | datetime }}</small>
+      <p-tag severity="info" value="Последнее событие" *ngIf="isLast"></p-tag>
+    </div>
+  </ng-template>
+</p-card>
