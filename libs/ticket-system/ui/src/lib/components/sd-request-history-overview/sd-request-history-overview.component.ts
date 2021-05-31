@@ -26,5 +26,6 @@ export class SdRequestHistoryOverviewComponent {
 
   sendMessage(message: string): void {
     // TODO: Отправить событие родительскому контроллеру
+    console.log(message);
   }
 }

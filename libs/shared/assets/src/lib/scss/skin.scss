@@ -1,1 +1,14 @@
-@import 'components/sd_request-statuses';
+// Переменные
+@import "variables";
+
+// Цвета
+@import "colors";
+
+// Миксины
+@import "mixines";
+
+// Компоненты
+@import "components/sd_request-statuses";
+@import "components/sd-request-history-overview";
+@import "components/table";
+@import "components/comments-card";

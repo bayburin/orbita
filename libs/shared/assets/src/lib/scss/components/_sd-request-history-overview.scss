@@ -1,0 +1,70 @@
+.history-overview-card {
+  .p-card-body {
+    padding: 0;
+
+    .p-card-content {
+      padding: 0;
+    }
+  }
+}
+
+.history-overview-scroll-panel {
+  @include primary-scroll;
+  width: 100%;
+  height: $ticket-history-content-height;
+}
+
+.history-overview-content {
+  display: flex;
+  flex-direction: row;
+  max-height: $ticket-history-content-height;
+
+  .work-block {
+    min-width: $work-block-width;
+    width: $work-block-width;
+    padding: 0 $spacer;
+  }
+
+  .work-block + .work-block {
+    border-left: 1px solid $default-border-color;
+  }
+
+  .history-block {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .history-card {
+    display: block;
+    // max-height: $ticket-history-card-height;
+    margin-bottom: $spacer;
+    border: 1px solid $default-border-color;
+    border-radius: 3px;
+
+    .history-card-header, .history-card-body {
+      font-size: .9rem;
+      line-height: 1.3;
+    }
+
+    .history-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $default-bg-color;
+      border-bottom: 1px solid $default-border-color;
+      padding: 0.5 * $spacer;
+    }
+
+    .p-card-body {
+      padding: 0.5 * $spacer;
+    }
+
+    .history-card-footer {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .8rem !important;
+    }
+  }
+}

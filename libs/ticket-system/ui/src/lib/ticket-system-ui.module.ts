@@ -10,7 +10,7 @@ import { FioMiddleNamePipe } from './pipes/fio-middle-name/fio-middle-name.pipe'
 import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requests-table.component';
 import { SdRequestHistoryOverviewComponent } from './components/sd-request-history-overview/sd-request-history-overview.component';
 import { HistoryEventCardComponent } from './components/history-event-card/history-event-card.component';
-import { CommentComponent } from './components/comment/comment.component';
+import { CommentsComponent } from './components/comments/comments.component';
 
 const pipes: any[] = [
   DatetimePipe,
@@ -22,7 +22,7 @@ const components: any[] = [
   SdRequestsTableComponent,
   SdRequestHistoryOverviewComponent,
   HistoryEventCardComponent,
-  CommentComponent
+  CommentsComponent
 ];
 
 @NgModule({

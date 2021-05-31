@@ -1,19 +1,19 @@
-<p-table [value]="sdRequests$ | async" [lazy]="true" (onLazyLoad)="loadSdRequests($event)" [rowHover]="true" dataKey="id"
+<p-table [value]="sdRequests$ | async" [lazy]="true" (onLazyLoad)="loadSdRequests($event)" dataKey="id"
   [paginator]="true" [rows]="maxSize$ | async" [rowsPerPageOptions]="[10,25,50]" [totalRecords]="totalCount$ | async"
   [showCurrentPageReport]="true" currentPageReportTemplate="Показано {first}-{last} из {totalRecords} заявок" [loading]="loading$ | async">
   <ng-template pTemplate="header">
     <tr>
-      <th>No.</th>
-      <th>Дата подачи</th>
-      <th>Дедлайн</th>
-      <th>Статус</th>
-      <th>Вид услуги</th>
-      <th>Вид заявки</th>
+      <th width="3%">No.</th>
+      <th width="6%">Дата подачи</th>
+      <th width="6%">Дедлайн</th>
+      <th width="7%">Статус</th>
+      <th width="7%">Вид услуги</th>
+      <th width="7%">Вид заявки</th>
       <th>Подробности</th>
-      <th>Приоритет</th>
-      <th>Исполнители</th>
-      <th>Дата закрытия</th>
-      <th style="width: 4rem"></th>
+      <th width="6%">Приоритет</th>
+      <th width="7%">Исполнители</th>
+      <th width="6%">Дата закрытия</th>
+      <th width="50px"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-req let-expanded="expanded">
@@ -33,7 +33,8 @@
       </td>
       <td>{{ req.runtime.finished_at | datetime }}</td>
       <td>
-        <button type="button" pButton pRipple [pRowToggler]="req" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-left'"></button>
+        <button type="button" pButton pRipple [pRowToggler]="req" class="p-button-text p-button-rounded p-button-plain"
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-left'"></button>
       </td>
     </tr>
   </ng-template>

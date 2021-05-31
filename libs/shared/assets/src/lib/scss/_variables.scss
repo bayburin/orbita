@@ -1,0 +1,13 @@
+// Spacing
+$spacer: 1rem;
+
+// Borders:
+$default-border-color: var(--surface-d);
+
+// Backgrounds:
+$default-bg-color: rgb(248, 249, 250); //
+
+// Быстрый просмотр истории заявки
+$work-block-width: 350px; // Ширина блока "работы"
+$ticket-history-card-height: 200px; // Высота карточки события
+$ticket-history-content-height: 600px; // Максимальная высота контента просмотра истории заявки

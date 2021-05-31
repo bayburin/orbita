@@ -6,6 +6,8 @@ import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
 import { DividerModule } from 'primeng/divider';
 import { TooltipModule } from 'primeng/tooltip';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 
 const modules: any[] = [
   TableModule,
@@ -13,7 +15,9 @@ const modules: any[] = [
   CardModule,
   TagModule,
   DividerModule,
-  TooltipModule
+  TooltipModule,
+  InputTextareaModule,
+  ScrollPanelModule
 ];
 
 @NgModule({

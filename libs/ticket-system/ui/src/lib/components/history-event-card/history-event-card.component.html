@@ -1,15 +1,17 @@
-<p-card styleClass="p-card-shadow">
+<p-card class="history-card">
   <ng-template pTemplate="header">
-    <div class="p-d-flex p-jc-between p-ai-center p-pl-3 p-pt-3 p-pr-3">
+    <div class="history-card-header">
       <span>Событие {{ num }}</span>
       <i class="mdi mdi-18px" [class]="eventTypeName(history.eventType.name).icon" [pTooltip]="history.eventType.description"></i>
     </div>
   </ng-template>
-  <b>Байбурин Равиль:</b> {{ history.action }}
+  <div class="history-card-body">
+    <b>Байбурин Равиль:</b> {{ history.action }}
+  </div>
   <ng-template pTemplate="footer">
-    <div class="p-d-flex p-flex-row-reverse p-jc-between p-ai-center">
-      <small>{{ history.created_at | datetime }}</small>
-      <p-tag severity="info" value="Последнее событие" *ngIf="isLast"></p-tag>
+    <div class="history-card-footer">
+      <span class="text-secondary">{{ history.created_at | datetime }}</span>
+      <span class="text-primary" *ngIf="isLast">Последнее событие</span>
     </div>
   </ng-template>
 </p-card>

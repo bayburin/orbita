@@ -1,0 +1,27 @@
+.comments-card {
+  .p-card-body {
+    padding: 1rem 0 0 0;
+
+    .p-card-content {
+      padding: 0;
+    }
+  }
+
+  .comment {
+    padding: 1rem;
+  }
+
+  .comment-sender {
+    padding: 1rem;
+    background-color: $default-bg-color;
+  }
+
+  .p-scrollpanel-content {
+    padding: 0;
+  }
+}
+
+.comments-card-scroll-panel {
+  @include primary-scroll;
+  height: calc(#{$ticket-history-content-height} - 124px - #{$spacer});
+}

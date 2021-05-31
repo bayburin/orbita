@@ -2,11 +2,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MessageViewModel } from '@orbita/ticket-system/domain-logic';
 
 @Component({
-  selector: 'lib-comment',
-  templateUrl: './comment.component.html',
-  styleUrls: ['./comment.component.scss']
+  selector: 'lib-comments',
+  templateUrl: './comments.component.html',
+  styleUrls: ['./comments.component.scss']
 })
-export class CommentComponent {
+export class CommentsComponent {
   /**
    * Список комментариев к заявке
    */
