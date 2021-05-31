@@ -1,20 +1,28 @@
 <p-card class="comments-card">
   <p-scrollPanel styleClass="comments-card-scroll-panel">
-    <div *ngFor="let comment of comments; trackBy:trackByComment">
-      <div class="comment">
-        <div class="p-d-flex p-ai-center">
-          <span><b>{{ comment.sender.fio }}</b></span>
-          <small class="p-ml-2">{{ comment.created_at | datetime}}</small>
+    <ng-container *ngIf="comments.length; else noComments">
+      <div *ngFor="let comment of comments; trackBy:trackByComment">
+        <div class="comment">
+          <div class="p-d-flex p-ai-center">
+            <span><b>{{ comment.sender.fio }}</b></span>
+            <small class="p-ml-2">{{ comment.created_at | datetime}}</small>
+          </div>
+          <div class="p-mt-2">{{ comment.message }}</div>
         </div>
-        <div class="p-mt-2">{{ comment.message }}</div>
+        <p-divider></p-divider>
       </div>
-      <p-divider></p-divider>
-    </div>
+    </ng-container>
   </p-scrollPanel>
   <div class="comment-sender">
     <div class="p-inputgroup">
-      <textarea #comment rows="5" pInputTextarea></textarea>
+      <textarea #comment placeholder="Комментарий..." rows="5" pInputTextarea></textarea>
       <button type="button" pButton pRipple icon="pi pi-send" class="p-button-lg" (click)="sendMessage.emit(comment.value)"></button>
     </div>
   </div>
 </p-card>
+
+<ng-template #noComments>
+  <div class="p-d-flex p-jc-center">
+    <p>Комментарии отсутствуют</p>
+  </div>
+</ng-template>

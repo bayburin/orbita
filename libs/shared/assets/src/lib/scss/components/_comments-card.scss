@@ -14,6 +14,10 @@
   .comment-sender {
     padding: 1rem;
     background-color: $default-bg-color;
+
+    textarea {
+      height: 5rem;
+    }
   }
 
   .p-scrollpanel-content {
@@ -23,5 +27,5 @@
 
 .comments-card-scroll-panel {
   @include primary-scroll;
-  height: calc(#{$ticket-history-content-height} - 124px - #{$spacer});
+  height: calc(#{$ticket-history-content-height} - 7rem - #{$spacer});
 }

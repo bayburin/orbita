@@ -1,36 +1,43 @@
 <div class="p-grid">
   <div class="p-col-8">
     <h3>Ход работы</h3>
-    <p-card class="history-overview-card">
-      <p-scrollPanel styleClass="history-overview-scroll-panel">
-        <div class="history-overview-content">
-          <div *ngFor="let work of sdRequest.works; trackBy:trackByWork" class="work-block">
-            <h4 [ngClass]="work.group.description ? 'text-primary' : 'text-secondary'">{{ work.group.description || 'название группы отсутствует' }}</h4>
-            <div *ngIf="work.histories.length; else noActions">
-              <lib-history-event-card
-                [history]="work.histories[work.histories.length - 1]"
-                [num]="work.histories.length"
-                [isLast]="work.histories[work.histories.length - 1]._isLast">
-              </lib-history-event-card>
-            </div>
-            <div class="p-mb-5 p-mt-5">
-              <p-divider></p-divider>
-            </div>
-            <div class="history-block">
-              <div *ngFor="let history of work.histories; trackBy:trackByHistory; let index = index">
-                <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
+    <ng-container *ngIf="sdRequest.works.length; else noWorks">
+      <p-card class="history-overview-card">
+        <p-scrollPanel styleClass="history-overview-scroll-panel">
+          <div class="history-overview-content">
+            <div *ngFor="let work of sdRequest.works; trackBy:trackByWork" class="work-block">
+              <h4 [ngClass]="work.group.description ? 'text-primary' : 'text-secondary'">{{ work.group.description || 'название группы отсутствует' }}</h4>
+              <div *ngIf="work.histories.length; else noActions">
+                <lib-history-event-card
+                  [history]="work.histories[work.histories.length - 1]"
+                  [num]="work.histories.length"
+                  [isLast]="work.histories[work.histories.length - 1]._isLast">
+                </lib-history-event-card>
+              </div>
+              <div class="p-mb-5 p-mt-5">
+                <p-divider></p-divider>
+              </div>
+              <div class="history-block">
+                <div *ngFor="let history of work.histories; trackBy:trackByHistory; let index = index">
+                  <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </p-scrollPanel>
-    </p-card>
+        </p-scrollPanel>
+      </p-card>
+    </ng-container>
   </div>
   <div class="p-col-4">
     <h3>Комментарии</h3>
     <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>
   </div>
 </div>
+
+<ng-template #noWorks>
+  <p-divider type="dashed"></p-divider>
+  <h4>Исполнители не назначены</h4>
+</ng-template>
 
 <ng-template #noActions>
   <p>Зафиксированных действий нет</p>
