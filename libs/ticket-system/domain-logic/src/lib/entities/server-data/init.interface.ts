@@ -21,3 +21,13 @@ export interface Init {
    */
   event_types: EventType[];
 }
+
+/**
+ * Описывает ответ сервера по запросу исходных данных для работы приложения
+ */
+export interface InitServerData {
+  /**
+   * Объект данных
+   */
+  init: Init;
+}

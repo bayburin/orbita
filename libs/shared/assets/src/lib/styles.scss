@@ -1,8 +1,13 @@
 @import "~@mdi/font/css/materialdesignicons.css";
 @import "~primeng/resources/themes/saga-blue/theme.css";
+// @import "~primeng/resources/themes/bootstrap4-dark-blue/theme.css";
 @import "scss/layout.css";
 @import "scss/skin.scss";
 
 html {
   font-size: 14px;
+}
+
+body {
+  margin: 0;
 }

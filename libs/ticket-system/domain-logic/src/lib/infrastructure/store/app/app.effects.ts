@@ -23,9 +23,9 @@ export class AppEffects {
         .pipe(
           switchMap(initData => [
             AppActions.loadAppSuccess(),
-            UserActions.setAll({ users: initData.users }),
-            GroupActions.setAll({ groups: initData.groups }),
-            EventTypeActions.setAll({ eventTypes: initData.event_types })
+            UserActions.setAll({ users: initData.init.users }),
+            GroupActions.setAll({ groups: initData.init.groups }),
+            EventTypeActions.setAll({ eventTypes: initData.init.event_types })
           ]),
           catchError(error => of(AppActions.loadAppFailure(error)))
         )

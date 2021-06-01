@@ -16,6 +16,11 @@ export interface EventType {
    * Описание вида события
    */
   readonly description: string;
+
+  /**
+   * Флаг, показывающий, является ли данный вид события публичным
+   */
+  readonly is_public: boolean;
 }
 
 /**

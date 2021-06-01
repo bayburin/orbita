@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
 
 import { AppApiAbstract } from './app.api.abstract';
-import { Init } from './../../../entities/server-data/init.interface';
+import { InitServerData } from './../../../entities/server-data/init.interface';
 
 /**
  * Содержит API для обращения к серверу орбиты в случаях, когда они не связаны с какими-то конкретными сущностями
@@ -20,6 +20,6 @@ export class AppApi implements AppApiAbstract {
   ) { }
 
   init() {
-    return this.http.get<Init>(`${this.api}/init`);
+    return this.http.get<InitServerData>(`${this.api}/init`);
   }
 }
