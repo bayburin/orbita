@@ -30,8 +30,7 @@ export interface OrbitaUiState
 export const reducer: ActionReducerMap<OrbitaUiState> = {
   [fromApp.APP_FEATURE_KEY]: fromApp.reducer,
   [fromSdRequest.SD_REQUEST_FEATURE_KEY]: fromSdRequest.reducer,
-  [fromFreeSdRequestType.FREE_SD_REQUEST_TYPE_FEATURE_KEY]:
-    fromFreeSdRequestType.reducer,
+  [fromFreeSdRequestType.FREE_SD_REQUEST_TYPE_FEATURE_KEY]: fromFreeSdRequestType.reducer,
   [fromUser.USER_FEATURE_KEY]: fromUser.reducer,
   [fromGroup.GROUP_FEATURE_KEY]: fromGroup.reducer,
   [fromMessage.MESSAGE_FEATURE_KEY]: fromMessage.reducer,

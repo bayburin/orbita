@@ -18,7 +18,7 @@ import { FreeSdRequestTypeEffects } from './infrastructure/store/free-sd-request
     EffectsModule.forFeature([
       AppEffects,
       SdRequestEffects,
-      FreeSdRequestTypeEffects,
+      FreeSdRequestTypeEffects
     ]),
   ],
   providers: [],
