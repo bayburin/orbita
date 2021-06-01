@@ -4,20 +4,19 @@ import { AuthCenterGuard } from '@iss/ng-auth-center';
 
 export const routes: Routes = [
   {
-    path: 'ticket-system',
-    loadChildren: () => import('@orbita/ticket-system/shell').then(
-      m => m.TicketSystemShellModule
-    ),
-    canActivate: [AuthCenterGuard]
+    path: 'orbita-ui',
+    loadChildren: () =>
+      import('@orbita/orbita-ui/shell').then((m) => m.OrbitaUiShellModule),
+    canActivate: [AuthCenterGuard],
   },
   {
     path: '**',
-    redirectTo: 'ticket-system'
-  }
-]
+    redirectTo: 'orbita-ui',
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { initialNavigation: 'enabled' })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

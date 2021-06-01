@@ -1,0 +1,75 @@
+import { Action } from '@ngrx/store';
+
+import { SdRequest } from '../../../entities/models/sd-request.interface';
+import { Meta } from '../../../entities/server-data/meta.interface';
+import * as SdRequestActions from './sd-request.actions';
+import { State, initialState, reducer } from './sd-request.reducer';
+
+describe('SdRequestReducer', () => {
+  let action: Action;
+  const createSdRequest = (id: string, name = '') =>
+    (({
+      id,
+      name: name || `name-${id}`,
+    } as unknown) as SdRequest);
+
+  describe('loadAll', () => {
+    it('should clear "loading" and "error" attributes', () => {
+      action = SdRequestActions.loadAll();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('loadAllSuccess', () => {
+    it('should return set the list of known SdRequest', () => {
+      const sdRequests = [
+        createSdRequest('PRODUCT-AAA'),
+        createSdRequest('PRODUCT-zzz'),
+      ];
+      const meta = {
+        total_count: 12,
+      } as Meta;
+      action = SdRequestActions.loadAllSuccess({ sdRequests, meta });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(2);
+      expect(result.totalCount).toEqual(12);
+      expect(result.loading).toEqual(false);
+      expect(result.loaded).toBe(true);
+    });
+  });
+
+  describe('loadAllFailure', () => {
+    it('should set "error" attribute', () => {
+      const error = { message: 'error' };
+      action = SdRequestActions.loadAllFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.error).toEqual(error);
+      expect(result.selectedId).toBeNull();
+      expect(result.loading).toEqual(false);
+    });
+  });
+
+  describe('setPage', () => {
+    it('should set "page" attribute', () => {
+      action = SdRequestActions.SetPage({ page: 123 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.page).toEqual(123);
+      expect(result.loaded).toEqual(false);
+    });
+  });
+
+  describe('unknown action', () => {
+    it('should return the previous state', () => {
+      action = {} as any;
+      const result = reducer(initialState, action);
+
+      expect(result).toBe(initialState);
+    });
+  });
+});

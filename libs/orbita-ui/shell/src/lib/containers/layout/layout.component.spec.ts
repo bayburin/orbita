@@ -1,0 +1,37 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppFacade, AppFacadeStub } from '@orbita/orbita-ui/domain-logic';
+
+import { LayoutComponent } from './layout.component';
+
+describe('LayoutComponent', () => {
+  let component: LayoutComponent;
+  let fixture: ComponentFixture<LayoutComponent>;
+  let userFacade: AppFacade;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      declarations: [LayoutComponent],
+      providers: [{ provide: AppFacade, useClass: AppFacadeStub }],
+      schemas: [NO_ERRORS_SCHEMA],
+    }).compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LayoutComponent);
+    component = fixture.componentInstance;
+    userFacade = TestBed.inject(AppFacade);
+    spyOn(userFacade, 'init');
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('userFacade() should call init', () => {
+    expect(userFacade.init).toHaveBeenCalled();
+  });
+});

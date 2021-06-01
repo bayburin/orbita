@@ -1,0 +1,77 @@
+<p-table
+  [value]="sdRequests$ | async"
+  [lazy]="true"
+  (onLazyLoad)="loadSdRequests($event)"
+  dataKey="id"
+  [paginator]="true"
+  [rows]="maxSize$ | async"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [totalRecords]="totalCount$ | async"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Показано {first}-{last} из {totalRecords} заявок"
+  [loading]="loading$ | async"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th width="3%">No.</th>
+      <th width="6%">Дата подачи</th>
+      <th width="6%">Дедлайн</th>
+      <th width="8%">Статус</th>
+      <th width="9%">Вид услуги</th>
+      <th width="9%">Вид заявки</th>
+      <th>Подробности</th>
+      <th width="7%">Приоритет</th>
+      <th width="8%">Исполнители</th>
+      <th width="6%">Дата закрытия</th>
+      <th width="50px"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-req let-expanded="expanded">
+    <tr>
+      <td>{{ req.id }}</td>
+      <td>{{ req.runtime.created_at | datetime }}</td>
+      <td>{{ req.runtime.finished_at_plan | datetime }}</td>
+      <td>
+        <span [class]="'sd-request-badge status-' + status(req.status).badge">{{
+          status(req.status).title
+        }}</span>
+      </td>
+      <td>{{ req.service_name }}</td>
+      <td>{{ req.ticket_name }}</td>
+      <td>{{ req.description }}</td>
+      <td>{{ priority(req.priority).title }}</td>
+      <td>
+        <div *ngFor="let worker of workers(req); trackBy: trackByWorker">
+          {{ worker.user?.fio | fioMiddleName }}
+        </div>
+      </td>
+      <td>{{ req.runtime.finished_at | datetime }}</td>
+      <td>
+        <button
+          type="button"
+          pButton
+          pRipple
+          [pRowToggler]="req"
+          class="p-button-text p-button-rounded p-button-plain"
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-left'"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-req>
+    <tr>
+      <td colspan="11">
+        <div class="p-p-2">
+          <lib-sd-request-history-overview
+            [sdRequest]="req"
+          ></lib-sd-request-history-overview>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="11">Заявки отсутствуют</td>
+    </tr>
+  </ng-template>
+</p-table>

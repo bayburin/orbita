@@ -33,8 +33,8 @@
                 "onlyDependOnLibsWithTags": ["type:util"]
               },
               {
-                "sourceTag": "scope:ticket-system",
-                "onlyDependOnLibsWithTags": ["scope:ticket-system", "scope:shared"]
+                "sourceTag": "scope:orbita-ui",
+                "onlyDependOnLibsWithTags": ["scope:orbita-ui", "scope:shared"]
               },
               {
                 "sourceTag": "scope:shared",
