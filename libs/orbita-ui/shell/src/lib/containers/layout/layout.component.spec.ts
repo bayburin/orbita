@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppFacade, AppFacadeStub } from '@orbita/orbita-ui/domain-logic';
+import { AuthHelper, AuthHelperStub } from '@iss/ng-auth-center';
+import { ConfirmationService } from 'primeng/api';
 
 import { LayoutComponent } from './layout.component';
 
@@ -14,7 +16,11 @@ describe('LayoutComponent', () => {
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [LayoutComponent],
-      providers: [{ provide: AppFacade, useClass: AppFacadeStub }],
+      providers: [
+        { provide: AppFacade, useClass: AppFacadeStub },
+        { provide: AuthHelper, useClass: AuthHelperStub },
+        ConfirmationService
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });

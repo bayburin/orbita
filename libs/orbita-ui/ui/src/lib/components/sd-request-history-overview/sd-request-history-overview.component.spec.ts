@@ -18,7 +18,7 @@ describe('SdRequestHistoryOverviewComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SdRequestHistoryOverviewComponent);
     component = fixture.componentInstance;
-    component.sdRequest = {} as SdRequestViewModel;
+    component.sdRequest = { works: [] } as SdRequestViewModel;
     fixture.detectChanges();
   });
 

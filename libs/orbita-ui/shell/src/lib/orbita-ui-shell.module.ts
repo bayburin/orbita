@@ -5,7 +5,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedDomainLogicModule } from '@orbita/shared/domain-logic';
 import { OrbitaUiUiModule } from '@orbita/orbita-ui/ui';
 import { LayoutComponent } from './containers/layout/layout.component';
-import { HeaderComponent } from './components/header/header.component';
 
 const routes: Routes = [
   {
@@ -43,6 +42,6 @@ const routes: Routes = [
     OrbitaUiUiModule,
   ],
   exports: [RouterModule],
-  declarations: [LayoutComponent, HeaderComponent],
+  declarations: [LayoutComponent],
 })
 export class OrbitaUiShellModule {}
