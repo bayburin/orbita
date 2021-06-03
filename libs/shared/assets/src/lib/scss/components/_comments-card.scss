@@ -1,4 +1,6 @@
 .comments-card {
+  display: block;
+
   .p-card-body {
     padding: 1rem 0 0 0;
 
@@ -13,7 +15,7 @@
 
   .comment-sender {
     padding: 1rem;
-    background-color: $default-bg-color;
+    background-color: var(--surface-b);
 
     textarea {
       height: 5rem;

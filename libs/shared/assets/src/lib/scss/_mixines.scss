@@ -3,3 +3,8 @@
     background-color: var(--primary-color);
   }
 }
+
+@mixin body-colors {
+  background-color: var(--surface-b);
+  color: var(--text-color);
+}

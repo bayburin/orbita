@@ -32,9 +32,7 @@
       <td>{{ req.runtime.created_at | datetime }}</td>
       <td>{{ req.runtime.finished_at_plan | datetime }}</td>
       <td>
-        <span [class]="'sd-request-badge status-' + status(req.status).badge">{{
-          status(req.status).title
-        }}</span>
+        <span [class]="'sd-request-badge status-' + status(req.status).badge">{{ status(req.status).title }}</span>
       </td>
       <td>{{ req.service_name }}</td>
       <td>{{ req.ticket_name }}</td>
@@ -62,9 +60,7 @@
     <tr>
       <td colspan="11">
         <div class="p-p-2">
-          <lib-sd-request-history-overview
-            [sdRequest]="req"
-          ></lib-sd-request-history-overview>
+          <lib-sd-request-history-overview [sdRequest]="req"></lib-sd-request-history-overview>
         </div>
       </td>
     </tr>

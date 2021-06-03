@@ -1,0 +1,54 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a [routerLink]="['']">
+      <img src="assets/images/orbita-ui-logo.svg" alt="Логотип системы Орбита" />
+    </a>
+  </div>
+  <div class="navbar-form">
+    <div class="p-inputgroup">
+      <span class="p-inputgroup-addon"><i class="mdi mdi-magnify mdi-18px"></i></span>
+      <input type="text" pInputText placeholder="Поиск..." />
+    </div>
+  </div>
+  <ul class="navbar-nav">
+    <!-- <li class="nav-item">
+      <p-button styleClass="p-button-text p-button-plain">
+        <ng-template pTemplate="content">
+          <i class="mdi mdi-bell-ring-outline mdi-18px" pBadge value="8" severity="warning"></i>
+        </ng-template>
+      </p-button>
+    </li> -->
+    <li class="nav-item">
+      <p-button icon="mdi mdi-bell-outline mdi-18px" styleClass="p-button-text p-button-plain"></p-button>
+    </li>
+    <li class="nav-item">
+      <p-button
+        icon="mdi mdi-theme-light-dark mdi-18px"
+        styleClass="p-button-text p-button-plain"
+        (click)="themeMenu.toggle($event)"
+      ></p-button>
+    </li>
+  </ul>
+  <p-divider layout="vertical"></p-divider>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <div class="icon-group">
+        <i class="mdi mdi-account-outline mdi-18px"></i>
+        <span>{{ currentUser.fio | fioInitials }}</span>
+      </div>
+    </li>
+    <li class="nav-item">
+      <p-button
+        icon="mdi mdi-logout mdi-18px"
+        styleClass="p-button-text p-button-plain"
+        (click)="logout.emit()"
+      ></p-button>
+    </li>
+  </ul>
+</nav>
+
+<p-menu #themeMenu [popup]="true" [model]="themeMenuItems" styleClass="navbar-menu" appendTo="body">
+  <ng-template pTemplate="end">
+    <span>Need to right side</span>
+  </ng-template>
+</p-menu>

@@ -1,4 +1,6 @@
 .history-overview-card {
+  display: block;
+
   .p-card-body {
     padding: 0;
 
@@ -26,7 +28,7 @@
   }
 
   .work-block + .work-block {
-    border-left: 1px solid $default-border-color;
+    border-left: 1px solid var(--surface-d);
   }
 
   .history-block {
@@ -38,11 +40,12 @@
     display: block;
     // max-height: $ticket-history-card-height;
     margin-bottom: $spacer;
-    border: 1px solid $default-border-color;
+    border: 1px solid var(--surface-d);
     border-radius: 3px;
 
-    .history-card-header, .history-card-body {
-      font-size: .9rem;
+    .history-card-header,
+    .history-card-body {
+      font-size: 0.9rem;
       line-height: 1.3;
     }
 
@@ -50,8 +53,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: $default-bg-color;
-      border-bottom: 1px solid $default-border-color;
+      background-color: var(--surface-b);
+      border-bottom: 1px solid var(--surface-d);
       padding: 0.5 * $spacer;
     }
 
@@ -64,7 +67,7 @@
       flex-direction: row-reverse;
       justify-content: space-between;
       align-items: center;
-      font-size: .8rem !important;
+      font-size: 0.8rem !important;
     }
   }
 }

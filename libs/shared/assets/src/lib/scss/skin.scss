@@ -8,7 +8,19 @@
 @import "mixines";
 
 // Компоненты
+@import "components/layout";
+@import "components/navbar";
+@import "components/sidebar";
 @import "components/sd_request-statuses";
 @import "components/sd-request-history-overview";
 @import "components/table";
 @import "components/comments-card";
+
+.icon-group {
+  display: flex;
+  align-items: center;
+
+  i {
+    margin-right: 0.25 * $spacer;
+  }
+}

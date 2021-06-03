@@ -2,10 +2,14 @@
 $spacer: 1rem;
 
 // Borders:
-$default-border-color: var(--surface-d);
+// $default-border-color: var(--surface-d);
 
 // Backgrounds:
-$default-bg-color: rgb(248, 249, 250); //
+// $default-bg-color: rgb(248, 249, 250);
+
+// Layout
+$navbar-height: 56px;
+$sidebar-width: 6rem;
 
 // Быстрый просмотр истории заявки
 $work-block-width: 350px; // Ширина блока "работы"

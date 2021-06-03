@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AppFacade } from '@orbita/orbita-ui/domain-logic';
+import { AuthHelper } from '@iss/ng-auth-center';
+import { AppFacade, CurrentUser } from '@orbita/orbita-ui/domain-logic';
+import { MenuItem, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'orbita-ui-shell-layout',
@@ -7,9 +9,41 @@ import { AppFacade } from '@orbita/orbita-ui/domain-logic';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  constructor(private appFacade: AppFacade) {}
+  /**
+   * Меню sidebar
+   */
+  menuItems: MenuItem[];
+  /**
+   * Текущий пользователь
+   */
+  currentUser: CurrentUser = this.authHelper.getJwtPayload();
+
+  constructor(
+    private appFacade: AppFacade,
+    private authHelper: AuthHelper,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
     this.appFacade.init();
+    this.menuItems = [
+      { label: 'Сводка', icon: 'mdi mdi-view-dashboard-outline mdi-24px', routerLink: ['/dashboard'], routerLinkActiveOptions: { exact: true } },
+      { label: 'Заявки', icon: 'mdi mdi-file-document-multiple-outline mdi-24px', routerLink: ['/tickets'], routerLinkActiveOptions: { exact: true } },
+      { label: 'Работники', icon: 'mdi mdi-account-multiple-outline mdi-24px', routerLink: ['/employees'], routerLinkActiveOptions: { exact: true } },
+      { label: 'Хосты', icon: 'mdi mdi-network-outline mdi-24px', routerLink: ['/hosts'], routerLinkActiveOptions: { exact: true } },
+      { label: 'Техника', icon: 'mdi mdi-desktop-classic mdi-24px', routerLink: ['/svt-items'], routerLinkActiveOptions: { exact: true } }
+    ];
+  }
+
+  /**
+   * Выходит из системы
+   */
+  logout(): void {
+    this.confirmationService.confirm({
+      message: 'Вы действительно хотите выйти из системы?',
+      acceptLabel: 'Да',
+      rejectLabel: 'Нет',
+      accept: () => this.authHelper.logout(),
+    });
   }
 }

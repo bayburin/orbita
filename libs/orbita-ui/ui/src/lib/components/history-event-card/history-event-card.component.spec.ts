@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { History, EventTypeNames } from '@orbita/orbita-ui/domain-logic';
+import { HistoryViewModel, EventTypeNames } from '@orbita/orbita-ui/domain-logic';
 
 import { HistoryEventCardComponent } from './history-event-card.component';
 import { DatetimePipe } from './../../pipes/datetime/datetime.pipe';
@@ -16,7 +16,7 @@ describe('HistoryEventCardComponent', () => {
       description: 'test description',
     },
     created_at: 'today',
-  } as History;
+  } as unknown as HistoryViewModel;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

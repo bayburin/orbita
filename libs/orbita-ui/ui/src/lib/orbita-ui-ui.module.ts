@@ -11,6 +11,7 @@ import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requ
 import { SdRequestHistoryOverviewComponent } from './components/sd-request-history-overview/sd-request-history-overview.component';
 import { HistoryEventCardComponent } from './components/history-event-card/history-event-card.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -19,6 +20,7 @@ const components: any[] = [
   SdRequestHistoryOverviewComponent,
   HistoryEventCardComponent,
   CommentsComponent,
+  NavbarComponent
 ];
 
 @NgModule({

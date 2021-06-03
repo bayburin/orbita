@@ -8,6 +8,12 @@ import { DividerModule } from 'primeng/divider';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { MenuModule } from 'primeng/menu';
+import { BadgeModule } from 'primeng/badge';
+import { InputTextModule } from 'primeng/inputtext';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
+import { ConfirmationService } from 'primeng/api';
 
 const modules: any[] = [
   TableModule,
@@ -18,10 +24,15 @@ const modules: any[] = [
   TooltipModule,
   InputTextareaModule,
   ScrollPanelModule,
+  MenuModule,
+  BadgeModule,
+  InputTextModule,
+  ConfirmDialogModule
 ];
 
 @NgModule({
   imports: [...modules],
   exports: [...modules],
+  providers: [ConfirmationService]
 })
 export class PrimengModule {}

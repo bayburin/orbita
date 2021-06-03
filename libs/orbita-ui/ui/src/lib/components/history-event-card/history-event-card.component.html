@@ -1,4 +1,4 @@
-<p-card class="history-card">
+<p-card class="history-card p-shadow-2">
   <ng-template pTemplate="header">
     <div class="history-card-header">
       <span>Событие {{ num }}</span>
@@ -9,9 +9,7 @@
       ></i>
     </div>
   </ng-template>
-  <div class="history-card-body">
-    <b>Байбурин Равиль:</b> {{ history.action }}
-  </div>
+  <div class="history-card-body"><b>Байбурин Равиль:</b> {{ history.action }}</div>
   <ng-template pTemplate="footer">
     <div class="history-card-footer">
       <span class="text-secondary">{{ history.created_at | datetime }}</span>
