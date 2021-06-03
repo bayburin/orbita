@@ -5,6 +5,7 @@ export * from './lib/entities/models/user.interface';
 export * from './lib/entities/models/group.interface';
 export * from './lib/entities/models/parameter.interface';
 export * from './lib/entities/models/event-type.interface';
+export * from './lib/entities/models/auth/current-user.interface';
 
 export * from './lib/entities/view-models/sd-request-view-model.interface';
 export * from './lib/entities/view-models/work-view-model.interface';
