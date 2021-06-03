@@ -75,5 +75,5 @@ describe('SdRequestEffects', () => {
   //   });
   // });
 
-  it('fake-test', () => {});
+  it('fake-test', () => { /** */ });
 });
