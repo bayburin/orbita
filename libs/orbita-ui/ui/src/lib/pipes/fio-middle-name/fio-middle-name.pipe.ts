@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'fioMiddleName',
 })
 export class FioMiddleNamePipe implements PipeTransform {
-  transform(fio: string): unknown {
+  transform(fio: string): string {
     if (!fio) {
       return '';
     }
