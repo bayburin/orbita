@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  orbita-ui:
+    build:
+      context: .
+      dockerfile: .docker/app/orbita-ui.prod.Dockerfile
+      args:
+        NODE_MAJOR: 14
+        YARN_VERSION: 1.22.5
+        APP_ROOT: /app
+        APP_HOSTNAME: orbita-test
+      labels:
+        project-name: "orbita-ui-test"
+        environment: "staging"
+        maintainer: "bayburin@iss-reshetnev.ru"
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    stdin_open: true
+    tty: true
