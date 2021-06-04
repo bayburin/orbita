@@ -21,10 +21,10 @@ services:
       - 443:443
     stdin_open: true
     tty: true
-    mac_address: 56:b7:91:c1:21:ee
+    mac_address: 56:a2:71:39:91:e8
     networks:
       macvlan:
-        ipv4_address: 10.0.9.188
+        ipv4_address: 10.0.8.12
 
 networks:
   macvlan:
