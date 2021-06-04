@@ -20,3 +20,18 @@ services:
       - 443:443
     stdin_open: true
     tty: true
+    mac_address: 56:b7:91:c1:21:ee
+    networks:
+      macvlan:
+        ipv4_address: 10.0.9.188
+
+networks:
+  macvlan:
+    driver: macvlan
+    driver_opts:
+      parent: ens224
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/16
+          gateway: 10.0.0.1
