@@ -9,7 +9,9 @@
       ></i>
     </div>
   </ng-template>
-  <div class="history-card-body"><b>Байбурин Равиль:</b> {{ history.action }}</div>
+  <div class="history-card-body">
+    <b>{{ history.user.fio | fioInitials }}:</b> {{ history.action }}
+  </div>
   <ng-template pTemplate="footer">
     <div class="history-card-footer">
       <span class="text-secondary">{{ history.created_at | datetime }}</span>
