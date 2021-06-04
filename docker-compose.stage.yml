@@ -9,7 +9,7 @@ services:
         NODE_MAJOR: 14
         YARN_VERSION: 1.22.5
         APP_ROOT: /app
-        APP_HOSTNAME: docker-test-713
+        APP_HOSTNAME: orbita-test
       labels:
         project-name: "orbita-ui-test"
         environment: "staging"
