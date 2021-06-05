@@ -1,5 +1,5 @@
 <div class="p-grid">
-  <div class="p-col-8">
+  <div class="p-col-12 p-xl-9">
     <h3>Ход работы</h3>
     <ng-container *ngIf="sdRequest.works.length; else noWorks">
       <p-card class="history-overview-card p-shadow-2">
@@ -30,7 +30,7 @@
       </p-card>
     </ng-container>
   </div>
-  <div class="p-col-4">
+  <div class="p-col-12 p-xl-3">
     <h3>Комментарии</h3>
     <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>
   </div>
