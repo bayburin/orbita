@@ -10,6 +10,8 @@ export interface State extends EntityState<SdRequest> {
   firstRowIndex: number;
   totalCount: number;
   perPage: number;
+  sortField: string;
+  sortOrder: number;
   selectedId?: string | number;
   loading: boolean;
   loaded: boolean;
@@ -25,6 +27,8 @@ export const sdRequestAdapter: EntityAdapter<SdRequest> = createEntityAdapter<Sd
 export const initialState: State = sdRequestAdapter.getInitialState({
   firstRowIndex: 0,
   totalCount: 0,
+  sortField: 'id',
+  sortOrder: -1,
   perPage: 25,
   loading: false,
   loaded: false,
@@ -57,6 +61,8 @@ const sdRequestReducer = createReducer(
     ...state,
     firstRowIndex: data.first,
     perPage: data.rows,
+    sortField: data.sortField,
+    sortOrder: data.sortOrder,
     loaded: false,
   }))
 );

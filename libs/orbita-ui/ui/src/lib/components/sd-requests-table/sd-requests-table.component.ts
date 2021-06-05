@@ -1,11 +1,5 @@
 import { Observable, of } from 'rxjs';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 import {
   Priorities,
   PrioritiesViewModel,

@@ -1,7 +1,6 @@
 <p-table
   [value]="sdRequests$ | async"
   [lazy]="true"
-  (onLazyLoad)="tableChanged.emit($event)"
   dataKey="id"
   [paginator]="true"
   [first]="firstRowIndex$ | async "
@@ -11,10 +10,13 @@
   [showCurrentPageReport]="true"
   currentPageReportTemplate="Показано {first}-{last} из {totalRecords} заявок"
   [loading]="loading$ | async"
+  sortField="id"
+  [sortOrder]="-1"
+  (onLazyLoad)="tableChanged.emit($event)"
 >
   <ng-template pTemplate="header">
     <tr>
-      <th width="3%">No.</th>
+      <th pSortableColumn="id" width="3%">No <p-sortIcon field="id"></p-sortIcon></th>
       <th width="6%">Дата подачи</th>
       <th width="6%">Дедлайн</th>
       <th width="8%">Статус</th>

@@ -70,6 +70,10 @@ describe('SdRequestSelectors', () => {
     expect(SdRequestSelectors.getAll.projector(state)).toEqual(arrEntities);
   });
 
+  it('getAllSorted() should return sorted array of entities', () => {
+    expect(SdRequestSelectors.getAll.projector(arrEntities, 'id', -1)).toEqual(arrEntities.reverse());
+  });
+
   it('getEntities() should return entities', () => {
     expect(SdRequestSelectors.getEntities.projector(state)).toEqual(entities);
   });
