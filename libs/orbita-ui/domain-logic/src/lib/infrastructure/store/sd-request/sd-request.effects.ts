@@ -27,8 +27,8 @@ export class SdRequestEffects {
   //   this.actions$.pipe(
   //     ofType(SdRequestActions.SetPage),
   //     tap(() => this.store.dispatch(SdRequestActions.loadAll())),
-  //     withLatestFrom(this.store.select(SdRequestSelectors.getMaxSize)),
-  //     switchMap(([action, maxSize]) => this.sdRequestApi.query(action.page, maxSize)
+  //     withLatestFrom(this.store.select(SdRequestSelectors.getPerPage)),
+  //     switchMap(([action, perPage]) => this.sdRequestApi.query(action.page, perPage)
   //       .pipe(
   //         map(sdRequestQueue => SdRequestActions.loadAllSuccess({ sdRequestQueue })),
   //         catchError(error => of(SdRequestActions.loadAllFailure({ error })))

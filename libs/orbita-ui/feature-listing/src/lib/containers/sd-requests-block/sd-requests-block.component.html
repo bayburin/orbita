@@ -2,8 +2,8 @@
   <lib-sd-requests-table
     [sdRequests$]="sdRequests$"
     [loading$]="loading$"
-    [page$]="page$"
+    [firstRowIndex$]="firstRowIndex$"
     [totalCount$]="totalCount$"
-    [maxSize$]="maxSize$"
-    (pageChanged)="onPageChagned($event)"></lib-sd-requests-table>
+    [perPage$]="perPage$"
+    (tableChanged)="tableChanged($event)"></lib-sd-requests-table>
 </div>

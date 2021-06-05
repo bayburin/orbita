@@ -1,10 +1,11 @@
 <p-table
   [value]="sdRequests$ | async"
   [lazy]="true"
-  (onLazyLoad)="loadSdRequests($event)"
+  (onLazyLoad)="tableChanged.emit($event)"
   dataKey="id"
   [paginator]="true"
-  [rows]="maxSize$ | async"
+  [first]="firstRowIndex$ | async "
+  [rows]="perPage$ | async"
   [rowsPerPageOptions]="[10, 25, 50]"
   [totalRecords]="totalCount$ | async"
   [showCurrentPageReport]="true"

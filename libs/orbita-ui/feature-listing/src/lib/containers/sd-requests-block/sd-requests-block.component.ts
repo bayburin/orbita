@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { LazyLoadEvent } from 'primeng/api';
 import { SdRequestFacade } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -10,18 +10,18 @@ import { SdRequestFacade } from '@orbita/orbita-ui/domain-logic';
 export class SdRequestsBlockComponent {
   loading$ = this.sdRequestFacade.loading$;
   sdRequests$ = this.sdRequestFacade.all$;
-  page$ = this.sdRequestFacade.page$;
+  firstRowIndex$ = this.sdRequestFacade.firstRowIndex$;
   totalCount$ = this.sdRequestFacade.totalCount$;
-  maxSize$ = this.sdRequestFacade.maxSize$;
+  perPage$ = this.sdRequestFacade.perPage$;
 
   constructor(private sdRequestFacade: SdRequestFacade) {}
 
   /**
-   * Событие выбора номера страницы
+   * Событие изменения метаданных таблицы
    *
-   * @param page - выбранный номер страницы
+   * @param event - метаданные для загрузки данных таблицы
    */
-  onPageChagned(page: number): void {
-    this.sdRequestFacade.setPage(page);
+  tableChanged(event: LazyLoadEvent): void {
+    this.sdRequestFacade.setTableMetadata(event);
   }
 }

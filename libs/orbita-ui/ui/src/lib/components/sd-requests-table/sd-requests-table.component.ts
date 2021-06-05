@@ -36,9 +36,9 @@ export class SdRequestsTableComponent {
    */
   @Input() loading$: Observable<boolean> = of(null);
   /**
-   * Номер страницы
+   * Индекс первой строки на странице
    */
-  @Input() page$: Observable<number> = of(null);
+  @Input() firstRowIndex$: Observable<number> = of(null);
   /**
    * Общее число записей
    */
@@ -46,11 +46,11 @@ export class SdRequestsTableComponent {
   /**
    * Максимальный размер записей на странице
    */
-  @Input() maxSize$: Observable<number> = of(null);
+  @Input() perPage$: Observable<number> = of(null);
   /**
-   * Событие изменения номера страницы. Возвращает новый номер страницы
+   * События изменения метаданных таблицы (пагинация, сортировка, фильтры)
    */
-  @Output() pageChanged = new EventEmitter<number>();
+  @Output() tableChanged = new EventEmitter<LazyLoadEvent>();
 
   /**
    * Возвращает объект PrioritiesViewModel, в котором содержатся данные о приоритете для представления
@@ -77,17 +77,6 @@ export class SdRequestsTableComponent {
    */
   workers(sdRequest: SdRequestViewModel): WorkerViewModel[] {
     return oFlatMap((work: WorkViewModel) => work.workers, sdRequest.works);
-  }
-
-  /**
-   * Событие изменения номера страницы, сортировки или фильтров
-   *
-   * @param event
-   */
-  loadSdRequests(event: LazyLoadEvent) {
-    const currentPage = event.first / event.rows + 1;
-
-    this.pageChanged.emit(currentPage);
   }
 
   trackBySdRequest(index: number, sdRequest: SdRequestViewModel): number {

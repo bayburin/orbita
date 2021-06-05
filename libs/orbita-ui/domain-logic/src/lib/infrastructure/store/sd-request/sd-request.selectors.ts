@@ -16,9 +16,9 @@ export const getSdRequestState = createSelector(
 
 const { selectAll, selectEntities } = sdRequestAdapter.getSelectors();
 
-export const getPage = createSelector(
+export const getFirstRowIndex = createSelector(
   getSdRequestState,
-  (state: State) => state.page
+  (state: State) => state.firstRowIndex
 );
 
 export const getTotalCount = createSelector(
@@ -26,9 +26,9 @@ export const getTotalCount = createSelector(
   (state: State) => state.totalCount
 );
 
-export const getMaxSize = createSelector(
+export const getPerPage = createSelector(
   getSdRequestState,
-  (state: State) => state.maxSize
+  (state: State) => state.perPage
 );
 
 export const getSelectedId = createSelector(
@@ -51,12 +51,14 @@ export const getError = createSelector(
   (state: State) => state.error
 );
 
-export const getAll = createSelector(getSdRequestState, (state: State) =>
-  selectAll(state)
+export const getAll = createSelector(
+  getSdRequestState,
+  (state: State) => selectAll(state)
 );
 
-export const getEntities = createSelector(getSdRequestState, (state: State) =>
-  selectEntities(state)
+export const getEntities = createSelector(
+  getSdRequestState,
+  (state: State) => selectEntities(state)
 );
 
 export const getSelected = createSelector(
@@ -64,6 +66,12 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
+
+export const getPage = createSelector(
+  getFirstRowIndex,
+  getPerPage,
+  (firstRowIndex, perPage) => firstRowIndex / perPage + 1
+)
 
 // TODO: Исправить или удалить
 // export const getLastHistories = createSelector(

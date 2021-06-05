@@ -1,4 +1,5 @@
 import { Observable, of } from 'rxjs';
+import { LazyLoadEvent } from 'primeng/api';
 
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
 import { SdRequestServerData } from './../../entities/server-data/sd-request-server-data.interface';
@@ -9,9 +10,9 @@ export abstract class SdRequestFacadeAbstract {
   // selected$: Observable<"" | 0 | SdRequestViewModel | undefined> = of();
 
   /**
-   * Номер текущей страницы
+   * Индекс первой строки на странице
    */
-  page$: Observable<number> = of();
+  firstRowIndex$: Observable<number> = of();
 
   /**
    * Общее число записей
@@ -21,7 +22,7 @@ export abstract class SdRequestFacadeAbstract {
   /**
    * Максимальное число записей для одной страницы
    */
-  maxSize$: Observable<number> = of();
+  perPage$: Observable<number> = of();
 
   /**
    * Индикатор, идет ли загрузка в данный момент
@@ -44,9 +45,9 @@ export abstract class SdRequestFacadeAbstract {
   all$: Observable<SdRequestViewModel[]> = of();
 
   /**
-   * Устанавливает номер страницы
+   * Устанавливает метаданные таблицы
    *
-   * @param page - номер страницы
+   * @param data - метаданные для загрузки данных таблицы
    */
-  abstract setPage(page: number): void;
+  abstract setTableMetadata(data: LazyLoadEvent): void;
 }

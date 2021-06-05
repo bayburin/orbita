@@ -1,3 +1,4 @@
+import { LazyLoadEvent } from 'primeng/api';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, of } from 'rxjs';
@@ -32,20 +33,19 @@ import { WorkerFacade } from './../worker/worker.facade';
   providedIn: 'root',
 })
 export class SdRequestFacade implements SdRequestFacadeAbstract {
-  page$ = this.store.select(SdRequestSelectors.getPage);
+  firstRowIndex$ = this.store.select(SdRequestSelectors.getFirstRowIndex);
   totalCount$ = this.store.select(SdRequestSelectors.getTotalCount);
-  maxSize$ = this.store.select(SdRequestSelectors.getMaxSize);
+  perPage$ = this.store.select(SdRequestSelectors.getPerPage);
   loading$ = this.store.select(SdRequestSelectors.getLoading);
   loaded$ = this.store.select(SdRequestSelectors.getLoaded);
   loadSdRequests$ = this.loaded$.pipe(
     filter((loaded) => !loaded),
     tap(() => this.store.dispatch(SdRequestActions.loadAll())),
-    withLatestFrom(this.page$, this.maxSize$),
-    switchMap(([_loaded, page, maxSize]) =>
-      this.sdRequestApi.query(page, maxSize).pipe(
+    withLatestFrom(this.store.select(SdRequestSelectors.getPage), this.perPage$),
+    switchMap(([_loaded, page, perPage]) =>
+      this.sdRequestApi.query(page, perPage).pipe(
         tap((data) => {
-          const normalizeData = SdRequestCacheService.normalizeSdRequests(data)
-            .entities;
+          const normalizeData = SdRequestCacheService.normalizeSdRequests(data).entities;
 
           this.store.dispatch(
             SdRequestActions.loadAllSuccess({
@@ -54,20 +54,12 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
             })
           );
 
-          this.messageFacade.setMessages(
-            Object.values(normalizeData.comments || [])
-          );
+          this.messageFacade.setMessages(Object.values(normalizeData.comments || []));
           this.workFacade.setWorks(Object.values(normalizeData.works || []));
-          this.historyFacade.setHistories(
-            Object.values(normalizeData.histories || [])
-          );
-          this.workerFacade.setWorkers(
-            Object.values(normalizeData.workers || [])
-          );
+          this.historyFacade.setHistories(Object.values(normalizeData.histories || []));
+          this.workerFacade.setWorkers(Object.values(normalizeData.workers || []));
         }),
-        catchError((error) =>
-          of(this.store.dispatch(SdRequestActions.loadAllFailure({ error })))
-        )
+        catchError((error) => of(this.store.dispatch(SdRequestActions.loadAllFailure({ error }))))
       )
     ),
     share()
@@ -89,7 +81,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     private workerFacade: WorkerFacade
   ) {}
 
-  setPage(page: number) {
-    this.store.dispatch(SdRequestActions.SetPage({ page }));
+  setTableMetadata(event: LazyLoadEvent) {
+    this.store.dispatch(SdRequestActions.SetTableMetadata({ data: event }));
   }
 }

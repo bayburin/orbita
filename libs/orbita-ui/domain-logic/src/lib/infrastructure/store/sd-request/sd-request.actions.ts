@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { SdRequest } from './../../../entities/models/sd-request.interface';
 import { Meta } from './../../../entities/server-data/meta.interface';
+import { LazyLoadEvent } from 'primeng/api';
 
 export const loadAll = createAction('[SdRequest/API] Load All');
 
@@ -15,7 +16,7 @@ export const loadAllFailure = createAction(
   props<{ error: any }>()
 );
 
-export const SetPage = createAction(
-  '[SdRequest] Set Page',
-  props<{ page: number }>()
-);
+export const SetTableMetadata = createAction(
+  '[SdRequest] Set Table Metadata',
+  props<{ data: LazyLoadEvent }>()
+)

@@ -20,42 +20,38 @@ describe('SdRequestSelectors', () => {
     'PRODUCT-CCC': arrEntities[2],
   };
   const selectedId = 'PRODUCT-BBB';
-  const page = 1;
   const totalCount = 3;
-  const maxSize = 4;
+  const perPage = 4;
+  const firstRowIndex = 0;
   let state: any;
 
   beforeEach(() => {
     state = sdRequestAdapter.setAll(arrEntities, {
       ...initialState,
       selectedId,
-      page,
+      firstRowIndex,
       totalCount,
-      maxSize,
+      perPage,
       error,
       loading: false,
       loaded: true,
     });
   });
 
-  it('getPage() should return "page" attribute', () => {
-    expect(SdRequestSelectors.getPage.projector(state)).toEqual(page);
+  it('getFirstRowIndex() should return "page" attribute', () => {
+    expect(SdRequestSelectors.getFirstRowIndex.projector(state)).toEqual(firstRowIndex);
   });
 
   it('getTotalCount() should return "totalCount" attribute', () => {
-    expect(SdRequestSelectors.getTotalCount.projector(state)).toEqual(
-      totalCount
-    );
+    expect(SdRequestSelectors.getTotalCount.projector(state)).toEqual(totalCount);
   });
 
-  it('getMaxSize() should return "maxSize" attribute', () => {
-    expect(SdRequestSelectors.getMaxSize.projector(state)).toEqual(maxSize);
+  it('getPerPage() should return "perPage" attribute', () => {
+    expect(SdRequestSelectors.getPerPage.projector(state)).toEqual(perPage);
   });
 
   it('getSelectedId() should return "selectedId" attribute', () => {
-    expect(SdRequestSelectors.getSelectedId.projector(state)).toEqual(
-      selectedId
-    );
+    expect(SdRequestSelectors.getSelectedId.projector(state)).toEqual(selectedId);
   });
 
   it('getLoading() should return "loading" attribute', () => {
@@ -79,8 +75,10 @@ describe('SdRequestSelectors', () => {
   });
 
   it('getSelected() should return selected entity', () => {
-    expect(
-      SdRequestSelectors.getSelected.projector(entities, selectedId)
-    ).toEqual(arrEntities[1]);
+    expect(SdRequestSelectors.getSelected.projector(entities, selectedId)).toEqual(arrEntities[1]);
+  });
+
+  it('getPage', () => {
+    expect(SdRequestSelectors.getPage.projector(firstRowIndex, perPage)).toEqual(1);
   });
 });

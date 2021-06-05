@@ -7,9 +7,9 @@ import { SdRequest } from '../../../entities/models/sd-request.interface';
 export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
 export interface State extends EntityState<SdRequest> {
-  page: number;
+  firstRowIndex: number;
   totalCount: number;
-  maxSize: number;
+  perPage: number;
   selectedId?: string | number;
   loading: boolean;
   loaded: boolean;
@@ -23,9 +23,9 @@ export interface SdRequestPartialState {
 export const sdRequestAdapter: EntityAdapter<SdRequest> = createEntityAdapter<SdRequest>();
 
 export const initialState: State = sdRequestAdapter.getInitialState({
-  page: 1,
+  firstRowIndex: 0,
   totalCount: 0,
-  maxSize: 25,
+  perPage: 25,
   loading: false,
   loaded: false,
 });
@@ -53,9 +53,10 @@ const sdRequestReducer = createReducer(
       loading: false,
     })
   ),
-  on(SdRequestActions.SetPage, (state, { page }) => ({
+  on(SdRequestActions.SetTableMetadata, (state, { data }) => ({
     ...state,
-    page,
+    firstRowIndex: data.first,
+    perPage: data.rows,
     loaded: false,
   }))
 );

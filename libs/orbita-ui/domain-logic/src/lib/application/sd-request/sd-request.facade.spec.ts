@@ -15,15 +15,8 @@ import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.a
 import { SdRequestApiStub } from './../../infrastructure/api/sd-request/sd-request.api.stub';
 import * as SdRequestActions from '../../infrastructure/store/sd-request/sd-request.actions';
 import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-request.selectors';
-import {
-  SD_REQUEST_FEATURE_KEY,
-  State,
-  initialState,
-} from '../../infrastructure/store/sd-request/sd-request.reducer';
-import {
-  TICKET_SYSTEM_FEATURE_KEY,
-  reducer,
-} from '../../infrastructure/store/index';
+import { SD_REQUEST_FEATURE_KEY, State, initialState } from '../../infrastructure/store/sd-request/sd-request.reducer';
+import { TICKET_SYSTEM_FEATURE_KEY, reducer } from '../../infrastructure/store/index';
 import { SdRequestServerDataBuilder } from './../../infrastructure/builders/sd-request-server-data.builder';
 import { SdRequestServerData } from '../../entities/server-data/sd-request-server-data.interface';
 import { MessageFacade } from './../message/message.facade';
@@ -103,7 +96,7 @@ describe('SdRequestFacade', () => {
 
       it('should call "query" method with attributes from store', () => {
         store.overrideSelector(SdRequestSelectors.getPage, 2);
-        store.overrideSelector(SdRequestSelectors.getMaxSize, 10);
+        store.overrideSelector(SdRequestSelectors.getPerPage, 10);
         facade.loadSdRequests$.subscribe();
 
         expect(querySpy).toHaveBeenCalledWith(2, 10);
@@ -165,9 +158,7 @@ describe('SdRequestFacade', () => {
         const spy = spyOn(store, 'dispatch');
         facade.loadSdRequests$.subscribe();
 
-        expect(spy).toHaveBeenCalledWith(
-          SdRequestActions.loadAllFailure({ error })
-        );
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAllFailure({ error }));
       });
     });
   });
@@ -179,20 +170,12 @@ describe('SdRequestFacade', () => {
           StoreModule.forFeature(TICKET_SYSTEM_FEATURE_KEY, reducer),
           EffectsModule.forFeature([SdRequestEffects]),
         ],
-        providers: [
-          SdRequestFacade,
-          { provide: SdRequestApi, useClass: SdRequestApiStub },
-        ],
+        providers: [SdRequestFacade, { provide: SdRequestApi, useClass: SdRequestApiStub }],
       })
       class CustomFeatureModule {}
 
       @NgModule({
-        imports: [
-          NxModule.forRoot(),
-          StoreModule.forRoot({}),
-          EffectsModule.forRoot([]),
-          CustomFeatureModule,
-        ],
+        imports: [NxModule.forRoot(), StoreModule.forRoot({}), EffectsModule.forRoot([]), CustomFeatureModule],
         providers: [
           { provide: MessageFacade, useClass: MessageFacadeStub },
           { provide: WorkFacade, useClass: WorkFacadeStub },
@@ -216,28 +199,26 @@ describe('SdRequestFacade', () => {
           .build();
         spyOn(sdRequestApi, 'query').and.returnValue(of(sdRequestServerData));
         spyOn(SdRequestCacheService, 'normalizeSdRequests').and.returnValue(
-          SdRequestCacheServiceStub.normalizeSdRequests(
-            sdRequestServerData.sd_requests
-          )
+          SdRequestCacheServiceStub.normalizeSdRequests(sdRequestServerData.sd_requests)
         );
         let isLoaded = await readFirst(facade.loaded$);
 
         expect(isLoaded).toBe(false);
 
-        let page = await readFirst(facade.page$);
+        // let page = await readFirst(facade.page$);
         let totalCount = await readFirst(facade.totalCount$);
         const list = await readFirst(facade.all$);
         isLoaded = await readFirst(facade.loaded$);
 
-        expect(page).toEqual(1);
+        // expect(page).toEqual(1);
         expect(totalCount).toEqual(0);
         expect(list.length).toBe(2);
         expect(isLoaded).toBe(true);
 
-        page = await readFirst(facade.page$);
+        // page = await readFirst(facade.page$);
         totalCount = await readFirst(facade.totalCount$);
 
-        expect(page).toEqual(1);
+        // expect(page).toEqual(1);
         expect(totalCount).toEqual(6);
 
         done();
@@ -246,39 +227,37 @@ describe('SdRequestFacade', () => {
       }
     });
 
-    it('setPage() should change page, and all$ data', async (done) => {
+    it('setTableMetadata() should change firstRowIndex, perPage and all$ data', async (done) => {
       try {
         const firstList = new SdRequestServerDataBuilder()
           .sd_requests([createSdRequestEntity(1), createSdRequestEntity(2)])
           .build();
         const secondList = new SdRequestServerDataBuilder()
-          .sd_requests([
-            createSdRequestEntity(1),
-            createSdRequestEntity(2),
-            createSdRequestEntity(3),
-          ])
+          .sd_requests([createSdRequestEntity(1), createSdRequestEntity(2), createSdRequestEntity(3)])
           .current_page(123)
           .build();
-        spyOn(sdRequestApi, 'query').and.returnValues(
-          of(firstList),
-          of(secondList)
-        );
+        spyOn(sdRequestApi, 'query').and.returnValues(of(firstList), of(secondList));
         spyOn(SdRequestCacheService, 'normalizeSdRequests').and.returnValues(
           SdRequestCacheServiceStub.normalizeSdRequests(firstList.sd_requests),
           SdRequestCacheServiceStub.normalizeSdRequests(secondList.sd_requests)
         );
-        let page = await readFirst(facade.page$);
+        let firstRowIndex = await readFirst(facade.firstRowIndex$);
         let list = await readFirst(facade.all$);
+        let perPage = await readFirst(facade.perPage$);
 
-        expect(page).toEqual(1);
+        expect(firstRowIndex).toEqual(0);
+        expect(perPage).toEqual(25);
         expect(list.length).toEqual(2);
 
-        facade.setPage(3);
+        facade.setTableMetadata({ first: 4, rows: 2 });
 
-        page = await readFirst(facade.page$);
+        firstRowIndex = await readFirst(facade.firstRowIndex$);
+        perPage = await readFirst(facade.perPage$);
+        perPage = await readFirst(facade.perPage$);
         list = await readFirst(facade.all$);
 
-        expect(page).toEqual(3);
+        expect(firstRowIndex).toEqual(4);
+        expect(perPage).toEqual(2);
         expect(list.length).toEqual(3);
 
         done();

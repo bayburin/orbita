@@ -54,12 +54,18 @@ describe('SdRequestReducer', () => {
     });
   });
 
-  describe('setPage', () => {
+  describe('setTableMetadata', () => {
+    const data = {
+      first: 4,
+      rows: 2
+    }
+
     it('should set "page" attribute', () => {
-      action = SdRequestActions.SetPage({ page: 123 });
+      action = SdRequestActions.SetTableMetadata({ data });
       const result: State = reducer(initialState, action);
 
-      expect(result.page).toEqual(123);
+      expect(result.firstRowIndex).toEqual(data.first);
+      expect(result.perPage).toEqual(data.rows);
       expect(result.loaded).toEqual(false);
     });
   });
