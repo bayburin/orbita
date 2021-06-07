@@ -3,7 +3,7 @@
   [lazy]="true"
   dataKey="id"
   [paginator]="true"
-  [first]="firstRowIndex$ | async "
+  [first]="firstRowIndex$ | async"
   [rows]="perPage$ | async"
   [rowsPerPageOptions]="[10, 25, 50]"
   [totalRecords]="totalCount$ | async"
@@ -30,7 +30,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-req let-expanded="expanded">
-    <tr>
+    <tr [ngClass]="{ 'expanded-row': expanded }">
       <td>{{ req.id }}</td>
       <td>{{ req.runtime.created_at | datetime }}</td>
       <td>{{ req.runtime.finished_at_plan | datetime }}</td>

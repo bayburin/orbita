@@ -49,4 +49,9 @@ export interface SdRequestViewModel extends TicketViewModel {
    * Массив объектов Work
    */
   readonly works: WorkViewModel[];
+
+  /**
+   * Идентификатор события, произошедшего последним в заявке
+   */
+  readonly lastHistoryId?: number;
 }

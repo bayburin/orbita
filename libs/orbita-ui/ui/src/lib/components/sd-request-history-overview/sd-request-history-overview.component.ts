@@ -1,9 +1,5 @@
 import { Component, Input } from '@angular/core';
-import {
-  SdRequestViewModel,
-  WorkViewModel,
-  HistoryViewModel,
-} from '@orbita/orbita-ui/domain-logic';
+import { SdRequestViewModel, WorkViewModel, HistoryViewModel } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-sd-request-history-overview',

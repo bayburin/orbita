@@ -19,7 +19,6 @@ export const getEntitiesViewModel = createSelector(
           ...historyViewModel,
           user: userEntities[historyViewModel.user_id],
           eventType: eventTypeEntities[historyViewModel.event_type_id],
-          _isLast: false,
         };
 
         return acc;

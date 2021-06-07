@@ -44,9 +44,4 @@ export interface HistoryViewModel {
    * Время события
    */
   readonly created_at: string;
-
-  /**
-   * Флаг, определяющий, является ли событие (история) последним в заявке
-   */
-  readonly _isLast: boolean;
 }
