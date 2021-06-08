@@ -18,6 +18,6 @@ export class AppApi implements AppApiAbstract {
   constructor(private http: HttpClient, @Inject(ORBITA_UI_ENV_TOKEN) private env: OrbitaUiEnvironment) {}
 
   init() {
-    return this.http.get<InitServerData>(`${this.api}/init`).pipe(delay(1000));
+    return this.http.get<InitServerData>(`${this.api}/init`).pipe(delay(500));
   }
 }
