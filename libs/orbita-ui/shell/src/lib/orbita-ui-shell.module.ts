@@ -18,29 +18,19 @@ const routes: Routes = [
       },
       {
         path: 'tickets',
-        loadChildren: () =>
-          import('@orbita/orbita-ui/feature-listing').then(
-            (m) => m.OrbitaUiFeatureListingModule
-          ),
+        loadChildren: () => import('@orbita/orbita-ui/feature-listing').then((m) => m.OrbitaUiFeatureListingModule),
       },
       {
         path: 'tickets/new-sd-request',
         loadChildren: () =>
-          import('@orbita/orbita-ui/feature-sd-request-wizzard').then(
-            (m) => m.OrbitaUiFeatureSdRequestWizzardModule
-          ),
+          import('@orbita/orbita-ui/feature-sd-request-wizzard').then((m) => m.OrbitaUiFeatureSdRequestWizzardModule),
       },
     ],
   },
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    SharedDomainLogicModule,
-    OrbitaUiUiModule,
-  ],
+  imports: [CommonModule, RouterModule.forChild(routes), SharedDomainLogicModule, OrbitaUiUiModule],
   exports: [RouterModule],
   declarations: [LayoutComponent],
 })

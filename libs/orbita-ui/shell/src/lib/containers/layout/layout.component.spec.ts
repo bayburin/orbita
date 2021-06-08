@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppFacade, AppFacadeStub } from '@orbita/orbita-ui/domain-logic';
@@ -14,12 +15,12 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [RouterTestingModule, NoopAnimationsModule],
       declarations: [LayoutComponent],
       providers: [
         { provide: AppFacade, useClass: AppFacadeStub },
         { provide: AuthHelper, useClass: AuthHelperStub },
-        ConfirmationService
+        ConfirmationService,
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

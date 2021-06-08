@@ -26,7 +26,7 @@ export class AppEffects {
             EventTypeActions.setAll({ eventTypes: initData.init.event_types }),
             ApplicationActions.setAll({ applications: initData.init.applications }),
           ]),
-          catchError((error) => of(AppActions.loadAppFailure(error)))
+          catchError((error) => of(AppActions.loadAppFailure(error.error)))
         )
       )
     )

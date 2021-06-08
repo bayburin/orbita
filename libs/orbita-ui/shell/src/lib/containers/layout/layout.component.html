@@ -1,20 +1,36 @@
-<lib-navbar [currentUser]="currentUser" (logout)="logout()"></lib-navbar>
-<div class="p-d-flex">
-  <aside class="layout-sidebar">
-    <p-menu [model]="menuItems"></p-menu>
-  </aside>
-  <main>
-    <router-outlet></router-outlet>
-  </main>
+<div *ngIf="loading$ | async; else loaded" class="app-spinner-container">
+  <app-orbit-spinner [animationDuration]="1200" [size]="100" [color]="'#ff1d5e'"></app-orbit-spinner>
 </div>
 
-<p-confirmDialog
-  [style]="{ width: '40vw' }"
-  [baseZIndex]="10000"
-  rejectButtonStyleClass="p-button-text"
-  rejectIcon=""
-  acceptIcon=""
-  [dismissableMask]="true"
->
-  <ng-template pTemplate="header"></ng-template>
-</p-confirmDialog>
+<ng-template #loaded>
+  <div *ngIf="error$ | async as error; else appReady" class="app-error">
+    <h3>Ошибка</h3>
+    <p>Не удалось загрузить данные для работы приложения. Попробуйте обновить страницу.</p>
+    <p>{{ error }}</p>
+  </div>
+</ng-template>
+
+<ng-template #appReady>
+  <lib-navbar [currentUser]="currentUser" (logout)="logout()" @appHeaderAnimation></lib-navbar>
+  <div class="p-d-flex">
+    <div @appContentAnimation>
+      <aside class="layout-sidebar">
+        <p-menu [model]="menuItems"></p-menu>
+      </aside>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+
+  <p-confirmDialog
+    [style]="{ width: '40vw' }"
+    [baseZIndex]="10000"
+    rejectButtonStyleClass="p-button-text"
+    rejectIcon=""
+    acceptIcon=""
+    [dismissableMask]="true"
+  >
+    <ng-template pTemplate="header"></ng-template>
+  </p-confirmDialog>
+</ng-template>

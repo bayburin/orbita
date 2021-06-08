@@ -7,6 +7,8 @@ import { DatetimePipe } from './pipes/datetime/datetime.pipe';
 import { FioInitialsPipe } from './pipes/fio-initials/fio-initials.pipe';
 import { FioMiddleNamePipe } from './pipes/fio-middle-name/fio-middle-name.pipe';
 
+import { OrbitSpinnerModule } from 'angular-epic-spinners';
+
 import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requests-table.component';
 import { SdRequestHistoryOverviewComponent } from './components/sd-request-history-overview/sd-request-history-overview.component';
 import { HistoryEventCardComponent } from './components/history-event-card/history-event-card.component';
@@ -20,12 +22,14 @@ const components: any[] = [
   SdRequestHistoryOverviewComponent,
   HistoryEventCardComponent,
   CommentsComponent,
-  NavbarComponent
+  NavbarComponent,
 ];
 
+const modules: any[] = [OrbitSpinnerModule];
+
 @NgModule({
-  imports: [CommonModule, PrimengModule],
-  exports: [...pipes, ...components, PrimengModule],
+  imports: [CommonModule, PrimengModule, ...modules],
+  exports: [...pipes, ...components, PrimengModule, ...modules],
   declarations: [...pipes, ...components],
 })
 export class OrbitaUiUiModule {}

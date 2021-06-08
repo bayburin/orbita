@@ -1,4 +1,4 @@
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
@@ -7,42 +7,42 @@ export abstract class SdRequestFacadeAbstract {
   /**
    * Выбранная заявка
    */
-  // selected$: Observable<"" | 0 | SdRequestViewModel | undefined> = of();
+  // selected$: Observable<"" | 0 | SdRequestViewModel | undefined>;
 
   /**
    * Индекс первой строки на странице
    */
-  firstRowIndex$: Observable<number> = of();
+  firstRowIndex$: Observable<number>;
 
   /**
    * Общее число записей
    */
-  totalCount$: Observable<number> = of();
+  totalCount$: Observable<number>;
 
   /**
    * Максимальное число записей для одной страницы
    */
-  perPage$: Observable<number> = of();
+  perPage$: Observable<number>;
 
   /**
    * Индикатор, идет ли загрузка в данный момент
    */
-  loading$: Observable<boolean> = of();
+  loading$: Observable<boolean>;
 
   /**
    * Индикатор, загружены ли данные
    */
-  loaded$: Observable<boolean> = of();
+  loaded$: Observable<boolean>;
 
   /**
    * Загружает список заявок с метаданными (количество заявок, номер страницы, и т.д.)
    */
-  loadSdRequests$: Observable<void | SdRequestServerData> = of();
+  loadSdRequests$: Observable<void | SdRequestServerData>;
 
   /**
    * Список заявок
    */
-  all$: Observable<SdRequestViewModel[]> = of();
+  all$: Observable<SdRequestViewModel[]>;
 
   /**
    * Устанавливает метаданные таблицы

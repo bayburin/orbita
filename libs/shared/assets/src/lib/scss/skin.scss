@@ -1,20 +1,20 @@
 // Переменные
-@import "variables";
+@import 'variables';
 
 // Цвета
-@import "colors";
+@import 'colors';
 
 // Миксины
-@import "mixines";
+@import 'mixines';
 
 // Компоненты
-@import "components/layout";
-@import "components/navbar";
-@import "components/sidebar";
-@import "components/sd_request-statuses";
-@import "components/sd-request-history-overview";
-@import "components/table";
-@import "components/comments-card";
+@import 'components/layout';
+@import 'components/navbar';
+@import 'components/sidebar';
+@import 'components/sd_request-statuses';
+@import 'components/sd-request-history-overview';
+@import 'components/table';
+@import 'components/comments-card';
 
 .icon-group {
   display: flex;

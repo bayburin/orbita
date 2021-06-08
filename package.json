@@ -47,6 +47,7 @@
     "@ngrx/entity": "^11.0.0",
     "@ngrx/router-store": "^11.0.0",
     "@ngrx/store": "^11.0.0",
+    "angular-epic-spinners": "^2.0.0",
     "angular2-actioncable": "^6.0.2",
     "moment": "^2.29.1",
     "normalizr": "^3.6.1",
