@@ -1,6 +1,7 @@
 import { User } from './../models/user.interface';
 import { Group } from './../models/group.interface';
 import { EventType } from './../models/event-type.interface';
+import { Application } from './../models/application.interface';
 
 /**
  * Интерфейс, описывающий исходные данные, необходимые для работы приложения
@@ -20,6 +21,11 @@ export interface Init {
    * Массив видов событий
    */
   event_types: EventType[];
+
+  /**
+   * Массив приложений
+   */
+  applications: Application[];
 }
 
 /**

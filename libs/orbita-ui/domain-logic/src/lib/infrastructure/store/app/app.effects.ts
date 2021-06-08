@@ -8,6 +8,7 @@ import { AppApi } from './../../api/app/app.api';
 import * as UserActions from '../user/user.actions';
 import * as GroupActions from '../group/group.actions';
 import * as EventTypeActions from '../event-type/event-type.actions';
+import * as ApplicationActions from '../application/application.actions';
 
 @Injectable()
 export class AppEffects {
@@ -23,6 +24,7 @@ export class AppEffects {
             UserActions.setAll({ users: initData.init.users }),
             GroupActions.setAll({ groups: initData.init.groups }),
             EventTypeActions.setAll({ eventTypes: initData.init.event_types }),
+            ApplicationActions.setAll({ applications: initData.init.applications }),
           ]),
           catchError((error) => of(AppActions.loadAppFailure(error)))
         )

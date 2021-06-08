@@ -5,14 +5,14 @@ import { Ticket } from './ticket.interface';
  */
 export interface SdRequest extends Ticket {
   /**
-   * ID (номер) заявки во внешней системе.
+   * ID заявки во внешней системе.
    */
   readonly integration_id: number;
 
   /**
-   * Имя внешнего приложения, с которого пришла заявка.
+   * ID приложения, с которого пришла заявка.
    */
-  readonly application_name: string;
+  readonly application_id: number;
 
   /**
    * ID Услуги

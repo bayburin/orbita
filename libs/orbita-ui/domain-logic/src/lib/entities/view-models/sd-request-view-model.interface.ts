@@ -1,19 +1,25 @@
 import { TicketViewModel } from './ticket-view-model.interface';
 import { WorkViewModel } from './work-view-model.interface';
+import { Application } from './../models/application.interface';
 
 /**
  * Интерфейс заявки
  */
 export interface SdRequestViewModel extends TicketViewModel {
   /**
-   * ID (номер) заявки во внешней системе.
+   * ID заявки во внешней системе.
    */
   readonly integration_id: number;
 
   /**
-   * Имя внешнего приложения, с которого пришла заявка.
+   * ID приложения, с которого пришла заявка.
    */
-  readonly application_name: string;
+  readonly application_id: number;
+
+  /**
+   * Приложение создавшнее/обрабатывающее заявку
+   */
+  readonly application: Application;
 
   /**
    * ID Услуги

@@ -11,6 +11,7 @@ import * as fromHistory from './history/history.reducer';
 import * as fromEventType from './event-type/event-type.reducer';
 import * as fromParameter from './parameter/parameter.reducer';
 import * as fromWorker from './worker/worker.reducer';
+import * as fromApplication from './application/application.reducer';
 
 export const TICKET_SYSTEM_FEATURE_KEY = 'orbitaUi';
 
@@ -25,7 +26,8 @@ export interface OrbitaUiState
     fromHistory.HistoryPartialState,
     fromEventType.EventTypePartialState,
     fromParameter.ParameterPartialState,
-    fromWorker.WorkerPartialState {}
+    fromWorker.WorkerPartialState,
+    fromApplication.ApplicationPartialState {}
 
 export const reducer: ActionReducerMap<OrbitaUiState> = {
   [fromApp.APP_FEATURE_KEY]: fromApp.reducer,
@@ -39,8 +41,7 @@ export const reducer: ActionReducerMap<OrbitaUiState> = {
   [fromEventType.EVENT_TYPE_FEATURE_KEY]: fromEventType.reducer,
   [fromParameter.PARAMETER_FEATURE_KEY]: fromParameter.reducer,
   [fromWorker.WORKER_FEATURE_KEY]: fromWorker.reducer,
+  [fromApplication.APPLICATION_FEATURE_KEY]: fromApplication.reducer,
 };
 
-export const getOrbitaUiState = createFeatureSelector<OrbitaUiState>(
-  TICKET_SYSTEM_FEATURE_KEY
-);
+export const getOrbitaUiState = createFeatureSelector<OrbitaUiState>(TICKET_SYSTEM_FEATURE_KEY);

@@ -71,7 +71,7 @@ describe('SdRequestSelectors', () => {
   });
 
   it('getAllSorted() should return sorted array of entities', () => {
-    expect(SdRequestSelectors.getAll.projector(arrEntities, 'id', -1)).toEqual(arrEntities.reverse());
+    expect(SdRequestSelectors.getAllSorted.projector(arrEntities, 'id', -1)).toEqual(arrEntities.reverse());
   });
 
   it('getEntities() should return entities', () => {

@@ -4,23 +4,27 @@ import { HistoryViewModel, EventTypeNames } from '@orbita/orbita-ui/domain-logic
 
 import { HistoryEventCardComponent } from './history-event-card.component';
 import { DatetimePipe } from './../../pipes/datetime/datetime.pipe';
+import { FioInitialsPipe } from './../../pipes/fio-initials/fio-initials.pipe';
 
 describe('HistoryEventCardComponent', () => {
   let component: HistoryEventCardComponent;
   let fixture: ComponentFixture<HistoryEventCardComponent>;
-  const history = {
+  const history = ({
     id: 1,
     action: 'test action',
     event_type: {
       name: EventTypeNames['OPEN'],
       description: 'test description',
     },
+    user: {
+      fio: 'fake fio',
+    },
     created_at: 'today',
-  } as unknown as HistoryViewModel;
+  } as unknown) as HistoryViewModel;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HistoryEventCardComponent, DatetimePipe],
+      declarations: [HistoryEventCardComponent, DatetimePipe, FioInitialsPipe],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });

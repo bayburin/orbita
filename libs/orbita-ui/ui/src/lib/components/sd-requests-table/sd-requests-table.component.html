@@ -16,24 +16,28 @@
 >
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="id" width="70px">No <p-sortIcon field="id"></p-sortIcon></th>
+      <th pSortableColumn="id" width="70px">№ <p-sortIcon field="id"></p-sortIcon></th>
+      <th width="7%">Внешн №</th>
+      <th width="7%">Внешн имя</th>
       <th width="7%">Дата подачи</th>
-      <th width="7%">Дедлайн</th>
+      <!-- <th width="7%">Дедлайн</th> -->
       <th width="8%">Статус</th>
       <th width="9%">Вид услуги</th>
       <th width="9%">Вид заявки</th>
       <th>Подробности</th>
       <th width="7%">Приоритет</th>
       <th width="8%">Исполнители</th>
-      <th width="6%">Дата закрытия</th>
+      <!-- <th width="6%">Дата закрытия</th> -->
       <th width="50px"></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-req let-expanded="expanded">
     <tr [ngClass]="{ 'expanded-row': expanded }">
       <td>{{ req.id }}</td>
+      <td>{{ req.integration_id }}</td>
+      <td>{{ req.application?.name }}</td>
       <td>{{ req.runtime.created_at | datetime }}</td>
-      <td>{{ req.runtime.finished_at_plan | datetime }}</td>
+      <!-- <td>{{ req.runtime.finished_at_plan | datetime }}</td> -->
       <td>
         <span [class]="'sd-request-badge status-' + status(req.status).badge">{{ status(req.status).title }}</span>
       </td>
@@ -46,7 +50,7 @@
           {{ worker.user?.fio | fioMiddleName }}
         </div>
       </td>
-      <td>{{ req.runtime.finished_at | datetime }}</td>
+      <!-- <td>{{ req.runtime.finished_at | datetime }}</td> -->
       <td>
         <button
           type="button"
