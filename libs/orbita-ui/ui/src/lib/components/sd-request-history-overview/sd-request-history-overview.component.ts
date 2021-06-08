@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SdRequestViewModel, WorkViewModel, HistoryViewModel } from '@orbita/orbita-ui/domain-logic';
+import { WorkViewModel, HistoryViewModel } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-sd-request-history-overview',
@@ -8,13 +8,13 @@ import { SdRequestViewModel, WorkViewModel, HistoryViewModel } from '@orbita/orb
 })
 export class SdRequestHistoryOverviewComponent {
   /**
-   * Заявка
+   * Работы по заявке
    */
-  @Input() sdRequest: SdRequestViewModel;
+  @Input() works: WorkViewModel[];
   /**
-   * Событие (история), которое произошло самым последним в текущей заявке
+   * Идентификатор события, которое произошло самым последним в текущей заявке
    */
-  lastHistory: History;
+  @Input() lastHistoryId: number;
 
   trackByWork(_index: number, work: WorkViewModel): number {
     return work.id;
@@ -22,10 +22,5 @@ export class SdRequestHistoryOverviewComponent {
 
   trackByHistory(_index: number, history: HistoryViewModel): number {
     return history.id;
-  }
-
-  sendMessage(message: string): void {
-    // TODO: Отправить событие родительскому контроллеру
-    console.log(message);
   }
 }

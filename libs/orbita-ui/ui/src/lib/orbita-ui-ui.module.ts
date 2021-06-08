@@ -14,6 +14,8 @@ import { SdRequestHistoryOverviewComponent } from './components/sd-request-histo
 import { HistoryEventCardComponent } from './components/history-event-card/history-event-card.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { ShowSdRequestComponent } from './components/show-sd-request/show-sd-request.component';
+import { SdRequestDetailsComponent } from './components/sd-request-details/sd-request-details.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -23,6 +25,7 @@ const components: any[] = [
   HistoryEventCardComponent,
   CommentsComponent,
   NavbarComponent,
+  ShowSdRequestComponent,
 ];
 
 const modules: any[] = [OrbitSpinnerModule];
@@ -30,6 +33,6 @@ const modules: any[] = [OrbitSpinnerModule];
 @NgModule({
   imports: [CommonModule, PrimengModule, ...modules],
   exports: [...pipes, ...components, PrimengModule, ...modules],
-  declarations: [...pipes, ...components],
+  declarations: [...pipes, ...components, SdRequestDetailsComponent],
 })
 export class OrbitaUiUiModule {}

@@ -1,3 +1,5 @@
+import { SourceSnapshot } from './source-snapshot.interface';
+
 /**
  * Интерфейс заявки
  */
@@ -6,6 +8,11 @@ export interface Ticket {
    * ID (номер) заявки.
    */
   readonly id: number;
+
+  /**
+   * Данные на момент создания заявки/кейса
+   */
+  readonly source_snapshot: SourceSnapshot;
 
   /**
    * Тип тикета: заявка или кейс

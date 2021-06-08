@@ -1,9 +1,5 @@
-import {
-  TicketTypes,
-  Statuses,
-  Priorities,
-  Runtime,
-} from './../models/ticket.interface';
+import { TicketTypes, Statuses, Priorities, Runtime } from './../models/ticket.interface';
+import { SourceSnapshot } from './../models/source-snapshot.interface';
 import { MessageViewModel } from './message-view-model.interface';
 
 /**
@@ -14,6 +10,11 @@ export interface TicketViewModel {
    * ID (номер) заявки.
    */
   readonly id: number;
+
+  /**
+   * Данные на момент создания заявки/кейса
+   */
+  readonly source_snapshot: SourceSnapshot;
 
   /**
    * Тип тикета: заявка или кейс

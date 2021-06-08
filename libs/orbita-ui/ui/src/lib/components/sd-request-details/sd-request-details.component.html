@@ -1,0 +1,78 @@
+<p-panel class="source-snapshot-panel" header="Данные на момент создания заявки">
+  <h4>Данные по пользователю</h4>
+  <div class="p-grid">
+    <div class="p-col-4">ФИО</div>
+    <div class="p-col-8">
+      <b>{{ data.fio }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">Отдел</div>
+    <div class="p-col-8">
+      <b>{{ data.dept }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">Табельный номер</div>
+    <div class="p-col-8">
+      <b>{{ data.tn }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">Телефон</div>
+    <div class="p-col-8">
+      <b>{{ data.user_attrs?.phone }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">Логин ЛК</div>
+    <div class="p-col-8">
+      <b>{{ data.domain_user }}</b>
+    </div>
+  </div>
+  <p-divider></p-divider>
+
+  <h4>Данные по хосту</h4>
+  <div class="p-grid">
+    <div class="p-col-4">Имя</div>
+    <div class="p-col-8">
+      <b>{{ data.dns }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">IP</div>
+    <div class="p-col-8">
+      <b>{{ data.source_ip }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">MAC</div>
+    <div class="p-col-8">
+      <b>{{ data.mac }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">Инвентарный номер</div>
+    <div class="p-col-8">
+      <b>{{ data.invent_num }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">Штрих-код</div>
+    <div class="p-col-8">
+      <b>{{ data.svt_item_id }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">Расположение</div>
+    <div class="p-col-8">
+      <b>{{ data.host_location }}</b>
+    </div>
+  </div>
+  <div class="p-grid">
+    <div class="p-col-4">Версия ОС</div>
+    <div class="p-col-8">
+      <b>{{ data.os }}</b>
+    </div>
+  </div>
+</p-panel>
