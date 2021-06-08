@@ -12,6 +12,7 @@ import { MenuModule } from 'primeng/menu';
 import { BadgeModule } from 'primeng/badge';
 import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ScrollTopModule } from 'primeng/scrolltop';
 
 import { ConfirmationService } from 'primeng/api';
 
@@ -27,12 +28,13 @@ const modules: any[] = [
   MenuModule,
   BadgeModule,
   InputTextModule,
-  ConfirmDialogModule
+  ConfirmDialogModule,
+  ScrollTopModule,
 ];
 
 @NgModule({
   imports: [...modules],
   exports: [...modules],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService],
 })
 export class PrimengModule {}
