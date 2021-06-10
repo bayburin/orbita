@@ -13,11 +13,11 @@
   [loading]="loading$ | async"
   sortField="id"
   [sortOrder]="-1"
-  (onLazyLoad)="tableChanged.emit($event)"
+  (onLazyLoad)="reloadTable($event)"
 >
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="id" width="70px">№ <p-sortIcon field="id"></p-sortIcon></th>
+      <th pSortableColumn="id" width="5%">№ <p-sortIcon field="id"></p-sortIcon></th>
       <th width="7%">Внешн №</th>
       <th width="7%">Внешн имя</th>
       <th width="7%">Дата подачи</th>
@@ -26,10 +26,91 @@
       <th width="9%">Вид услуги</th>
       <th width="9%">Вид заявки</th>
       <th>Подробности</th>
-      <th width="7%">Приоритет</th>
+      <th width="8%">Приоритет</th>
       <th width="8%">Исполнители</th>
       <!-- <th width="6%">Дата закрытия</th> -->
       <th width="50px"></th>
+    </tr>
+    <tr>
+      <th>
+        <p-columnFilter type="text" field="id" matchMode="equals" [showMenu]="false"></p-columnFilter>
+      </th>
+      <th></th>
+      <th></th>
+      <th>
+        <p-columnFilter type="date" field="created_at" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-filter="filterCallback">
+            <p-calendar
+              dateFormat="dd.mm.yy"
+              appendTo="body"
+              [showButtonBar]="true"
+              (onSelect)="filter($event)"
+              (onClearClick)="filter(null)"
+            ></p-calendar>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-dropdown
+              [ngModel]="value"
+              [options]="statuses"
+              [showClear]="true"
+              placeholder="Все"
+              (onChange)="filter($event.value?.status)"
+            >
+              <ng-template let-item pTemplate="selectedItem">{{ item.title }}</ng-template>
+              <ng-template let-option pTemplate="item">
+                <span [class]="'sd-request-badge status-' + option.badge">{{ option.title }}</span>
+              </ng-template>
+            </p-dropdown>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th></th>
+      <th></th>
+      <th>
+        <p-columnFilter type="text" field="description" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="priority" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-dropdown
+              [ngModel]="value"
+              [options]="priorities"
+              [showClear]="true"
+              placeholder="Все"
+              (onChange)="filter($event.value?.priority)"
+            >
+              <ng-template let-item pTemplate="selectedItem">{{ item.title }}</ng-template>
+              <ng-template let-option pTemplate="item">
+                <span [class]="'sd-request-badge priority-' + option.badge">{{ option.title }}</span>
+              </ng-template>
+            </p-dropdown>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <!-- TODO: Сгруппировать по группам -->
+        <p-columnFilter field="users" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-multiSelect
+              [ngModel]="value"
+              [options]="users$ | async"
+              [virtualScroll]="true"
+              optionValue="id"
+              optionLabel="fio"
+              defaultLabel="Все"
+              scrollHeight="400px"
+              itemSize="30"
+              appendTo="body"
+              (onChange)="filter($event.value)"
+            ></p-multiSelect>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-req let-expanded="expanded">
@@ -45,11 +126,14 @@
       <td>{{ req.service_name }}</td>
       <td>{{ req.ticket_name }}</td>
       <td>{{ req.description }}</td>
-      <td>{{ priority(req.priority).title }}</td>
       <td>
-        <div *ngFor="let worker of workers(req); trackBy: trackByWorker">
-          {{ worker.user?.fio | fioMiddleName }}
-        </div>
+        <span [class]="'sd-request-badge priority-' + priority(req.priority).badge">{{
+          priority(req.priority).title
+        }}</span>
+        <!-- {{ priority(req.priority).title }} -->
+      </td>
+      <td>
+        <div *ngFor="let worker of workers(req); trackBy: trackByWorker">{{ worker.user?.fio | fioMiddleName }}</div>
       </td>
       <!-- <td>{{ req.runtime.finished_at | datetime }}</td> -->
       <td>

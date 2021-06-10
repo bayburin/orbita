@@ -37,6 +37,18 @@ export const statusesViewModelMap: Record<Statuses, StatusesViewModel> = {
 };
 
 /**
+ * Массив статусов
+ */
+export const statusesViewModelArray = Object.keys(statusesViewModelMap).reduce(
+  (arr, status) =>
+    arr.concat({
+      status,
+      ...statusesViewModelMap[status as Statuses],
+    }),
+  []
+);
+
+/**
  * Функция возвращает значение объекта sdRequestStatusesMap исходя из полученного статуса
  *
  * @param status - статус

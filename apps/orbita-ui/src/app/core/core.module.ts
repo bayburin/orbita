@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from "@angular/core";
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -7,6 +7,7 @@ import { AuthCenterModule } from '@iss/ng-auth-center';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ActionCableService } from 'angular2-actioncable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { environment } from '../../environments/environment';
 import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
@@ -16,18 +17,19 @@ import { FakeBackendInterceptor } from './interceptors/fake-backend.interceptor'
 @NgModule({
   imports: [
     HttpClientModule,
+    FormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),
     environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 25 }),
-    AuthCenterModule.forRoot(environment.auth)
+    AuthCenterModule.forRoot(environment.auth),
   ],
   providers: [
     { provide: ORBITA_UI_ENV_TOKEN, useValue: environment },
     { provide: HTTP_INTERCEPTORS, useClass: JsonInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
-    ActionCableService
-  ]
+    ActionCableService,
+  ],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

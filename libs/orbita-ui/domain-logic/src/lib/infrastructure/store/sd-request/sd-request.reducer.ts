@@ -3,6 +3,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SdRequestActions from './sd-request.actions';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
+import { PrimeFilter } from './../../../entities/prime-filter.interface';
 
 export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
@@ -12,6 +13,7 @@ export interface State extends EntityState<SdRequest> {
   perPage: number;
   sortField: string;
   sortOrder: number;
+  filters: PrimeFilter;
   selectedId?: string | number;
   loading: boolean;
   loaded: boolean;
@@ -30,6 +32,7 @@ export const initialState: State = sdRequestAdapter.getInitialState({
   sortField: 'id',
   sortOrder: -1,
   perPage: 25,
+  filters: {},
   loading: false,
   loaded: false,
 });
@@ -63,6 +66,7 @@ const sdRequestReducer = createReducer(
     perPage: data.rows,
     sortField: data.sortField,
     sortOrder: data.sortOrder,
+    filters: data.filters,
     loaded: false,
   }))
 );

@@ -41,15 +41,19 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   loadSdRequests$ = this.loaded$.pipe(
     filter((loaded) => !loaded),
     tap(() => this.store.dispatch(SdRequestActions.loadAll())),
-    withLatestFrom(this.store.select(SdRequestSelectors.getPage), this.perPage$),
-    switchMap(([_loaded, page, perPage]) =>
-      this.sdRequestApi.query(page, perPage).pipe(
+    withLatestFrom(
+      this.store.select(SdRequestSelectors.getPage),
+      this.perPage$,
+      this.store.select(SdRequestSelectors.getFilters)
+    ),
+    switchMap(([_loaded, page, perPage, filters]) =>
+      this.sdRequestApi.query(page, perPage, filters).pipe(
         tap((data) => {
           const normalizeData = SdRequestCacheService.normalizeSdRequests(data).entities;
 
           this.store.dispatch(
             SdRequestActions.loadAllSuccess({
-              sdRequests: Object.values(normalizeData.sd_requests),
+              sdRequests: Object.values(normalizeData.sd_requests || []),
               meta: data.meta,
             })
           );

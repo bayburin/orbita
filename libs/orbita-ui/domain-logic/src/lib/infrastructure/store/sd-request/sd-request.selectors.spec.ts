@@ -23,6 +23,9 @@ describe('SdRequestSelectors', () => {
   const totalCount = 3;
   const perPage = 4;
   const firstRowIndex = 0;
+  const sortField = 'name';
+  const sortOrder = 1;
+  const filters = { foo: 'bar' };
   let state: any;
 
   beforeEach(() => {
@@ -31,6 +34,9 @@ describe('SdRequestSelectors', () => {
       selectedId,
       firstRowIndex,
       totalCount,
+      sortField,
+      sortOrder,
+      filters,
       perPage,
       error,
       loading: false,
@@ -46,8 +52,20 @@ describe('SdRequestSelectors', () => {
     expect(SdRequestSelectors.getTotalCount.projector(state)).toEqual(totalCount);
   });
 
+  it('getSortField() should return "sortField" attribute', () => {
+    expect(SdRequestSelectors.getSortField.projector(state)).toEqual(sortField);
+  });
+
+  it('getSortOrder() should return "sortOrder" attribute', () => {
+    expect(SdRequestSelectors.getSortOrder.projector(state)).toEqual(sortOrder);
+  });
+
   it('getPerPage() should return "perPage" attribute', () => {
     expect(SdRequestSelectors.getPerPage.projector(state)).toEqual(perPage);
+  });
+
+  it('getFilters() should return "filters" attribute', () => {
+    expect(SdRequestSelectors.getFilters.projector(state)).toEqual(filters);
   });
 
   it('getSelectedId() should return "selectedId" attribute', () => {

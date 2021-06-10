@@ -21,6 +21,8 @@ export const getSortOrder = createSelector(getSdRequestState, (state: State) => 
 
 export const getPerPage = createSelector(getSdRequestState, (state: State) => state.perPage);
 
+export const getFilters = createSelector(getSdRequestState, (state: State) => state.filters);
+
 export const getSelectedId = createSelector(getSdRequestState, (state: State) => state.selectedId);
 
 export const getLoading = createSelector(getSdRequestState, (state: State) => state.loading);

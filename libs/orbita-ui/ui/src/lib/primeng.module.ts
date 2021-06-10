@@ -15,6 +15,9 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TabViewModule } from 'primeng/tabview';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { PanelModule } from 'primeng/panel';
+import { CalendarModule } from 'primeng/calendar';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { DropdownModule } from 'primeng/dropdown';
 
 import { ConfirmationService } from 'primeng/api';
 
@@ -34,6 +37,9 @@ const modules: any[] = [
   TabViewModule,
   ScrollTopModule,
   PanelModule,
+  CalendarModule,
+  MultiSelectModule,
+  DropdownModule,
 ];
 
 @NgModule({
