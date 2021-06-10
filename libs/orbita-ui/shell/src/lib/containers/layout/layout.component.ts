@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthHelper } from '@iss/ng-auth-center';
 import { AppFacade, CurrentUser } from '@orbita/orbita-ui/domain-logic';
 import { appHeaderAnimation, appContentAnimation } from '@orbita/orbita-ui/ui';
-import { MenuItem, ConfirmationService } from 'primeng/api';
+import { MenuItem, ConfirmationService, PrimeNGConfig } from 'primeng/api';
+import { primeLocale } from '@orbita/orbita-ui/ui';
 
 @Component({
   selector: 'orbita-ui-shell-layout',
@@ -35,11 +36,13 @@ export class LayoutComponent implements OnInit {
   constructor(
     private appFacade: AppFacade,
     private authHelper: AuthHelper,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private config: PrimeNGConfig
   ) {}
 
   ngOnInit(): void {
     this.appFacade.init();
+    this.config.setTranslation(primeLocale);
     this.menuItems = [
       {
         label: 'Сводка',

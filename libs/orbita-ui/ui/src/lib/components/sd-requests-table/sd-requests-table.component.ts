@@ -1,5 +1,5 @@
 import { Observable, of } from 'rxjs';
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
 import {
   Priorities,
   PrioritiesViewModel,
@@ -15,7 +15,7 @@ import {
   User,
 } from '@orbita/orbita-ui/domain-logic';
 import { oFlatMap } from '@orbita/orbita-ui/utils';
-import { LazyLoadEvent, PrimeNGConfig } from 'primeng/api';
+import { LazyLoadEvent } from 'primeng/api';
 import * as moment from 'moment';
 
 @Component({
@@ -24,7 +24,7 @@ import * as moment from 'moment';
   styleUrls: ['./sd-requests-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SdRequestsTableComponent implements OnInit {
+export class SdRequestsTableComponent {
   /**
    * Список статусов
    */
@@ -62,65 +62,6 @@ export class SdRequestsTableComponent implements OnInit {
    * События изменения метаданных таблицы (пагинация, сортировка, фильтры)
    */
   @Output() tableChanged = new EventEmitter<LazyLoadEvent>();
-
-  constructor(private config: PrimeNGConfig) {}
-
-  ngOnInit() {
-    this.config.setTranslation({
-      startsWith: 'Начинается с',
-      contains: 'Включает',
-      notContains: 'Не включает',
-      endsWith: 'Заканчивается на',
-      equals: 'Равно',
-      notEquals: 'Не равно',
-      noFilter: 'Без фильтров',
-      lt: 'Меньше чем',
-      lte: 'Меньше либо равно',
-      gt: 'Больше чем',
-      gte: 'Больше либо равно',
-      is: 'Является',
-      isNot: 'Не является',
-      before: 'До',
-      after: 'После',
-      clear: 'Очистить',
-      apply: 'Применить',
-      matchAll: 'Совпадает всё',
-      matchAny: 'Совпадает любое',
-      addRule: 'Добавить правило',
-      removeRule: 'Удалить правило',
-      accept: 'Да',
-      reject: 'Нет',
-      choose: 'Выбрать',
-      upload: 'Загрузить',
-      cancel: 'Отмена',
-      dayNames: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'],
-      dayNamesShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-      dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-      monthNames: [
-        'Январь',
-        'Февраль',
-        'Март',
-        'Апрель',
-        'Май',
-        'Июнь',
-        'Июль',
-        'Август',
-        'Сентябрь',
-        'Октябрь',
-        'Ноябрь',
-        'Декабрь',
-      ],
-      monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн', 'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
-      today: 'Сегодня',
-      weekHeader: 'Нд',
-      weak: 'Слабый',
-      medium: 'Средний',
-      strong: 'Сильный',
-      passwordPrompt: 'Введите пароль',
-      emptyMessage: 'Данные не найдены',
-      emptyFilterMessage: 'Данные не найдены',
-    });
-  }
 
   /**
    * Возвращает объект PrioritiesViewModel, в котором содержатся данные о приоритете для представления
