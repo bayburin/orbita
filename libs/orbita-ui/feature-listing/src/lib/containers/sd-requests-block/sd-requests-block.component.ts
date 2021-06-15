@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
-import { SdRequestFacade, UserFacade } from '@orbita/orbita-ui/domain-logic';
+import { SdRequestFacade, UserFacade, ServiceDeskFacade } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-sd-requests-block',
@@ -14,8 +14,14 @@ export class SdRequestsBlockComponent {
   totalCount$ = this.sdRequestFacade.totalCount$;
   perPage$ = this.sdRequestFacade.perPage$;
   users$ = this.userFacade.all$;
+  sdServices$ = this.sdFacade.sdServices$;
+  sdTickets$ = this.sdFacade.sdTickets$;
 
-  constructor(private sdRequestFacade: SdRequestFacade, private userFacade: UserFacade) {}
+  constructor(
+    private sdRequestFacade: SdRequestFacade,
+    private userFacade: UserFacade,
+    private sdFacade: ServiceDeskFacade
+  ) {}
 
   /**
    * Событие изменения метаданных таблицы

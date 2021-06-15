@@ -1,8 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
 
 import { ServiceDeskApi } from './service-desk.api';
@@ -31,13 +28,13 @@ describe('ServiceDeskApi', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('getFreeSdRequestTypes()', () => {
-    const api = 'http://test/v2/services';
-    const sdRequests = [{ id: 1 }, { id: 2 }];
+  describe('getTickets()', () => {
+    const api = 'http://test/v2/tickets';
+    const sdTickets = [{ id: 1 }, { id: 2 }];
 
     it('should return free_sd_request_types', () => {
-      service.getFreeSdRequestTypes().subscribe((result) => {
-        expect(result).toEqual(sdRequests);
+      service.getTickets().subscribe((result) => {
+        expect(result).toEqual(sdTickets);
       });
 
       httpMock
@@ -45,7 +42,7 @@ describe('ServiceDeskApi', () => {
           method: 'GET',
           url: api,
         })
-        .flush(sdRequests);
+        .flush(sdTickets);
     });
   });
 });

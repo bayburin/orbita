@@ -109,7 +109,7 @@ describe('SdRequestFacade', () => {
           querySpy.and.returnValue(of(sdRequestServerData));
         });
 
-        it('should call loadAllSuccess action if sdRequestApi finished successfully', () => {
+        it('should call loadAllSuccess action', () => {
           const storeSpy = spyOn(store, 'dispatch');
           facade.loadSdRequests$.subscribe();
 

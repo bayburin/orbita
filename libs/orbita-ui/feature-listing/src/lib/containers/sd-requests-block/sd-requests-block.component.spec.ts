@@ -1,6 +1,13 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SdRequestFacade, SdRequestFacadeStub, UserFacade, UserFacadeStub } from '@orbita/orbita-ui/domain-logic';
+import {
+  SdRequestFacade,
+  SdRequestFacadeStub,
+  UserFacade,
+  UserFacadeStub,
+  ServiceDeskFacade,
+  ServiceDeskFacadeStub,
+} from '@orbita/orbita-ui/domain-logic';
 
 import { SdRequestsBlockComponent } from './sd-requests-block.component';
 
@@ -14,6 +21,7 @@ describe('SdRequestsBlockComponent', () => {
       providers: [
         { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
         { provide: UserFacade, useClass: UserFacadeStub },
+        { provide: ServiceDeskFacade, useClass: ServiceDeskFacadeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

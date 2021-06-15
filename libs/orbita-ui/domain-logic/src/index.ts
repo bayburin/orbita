@@ -7,6 +7,8 @@ export * from './lib/entities/models/group.interface';
 export * from './lib/entities/models/parameter.interface';
 export * from './lib/entities/models/event-type.interface';
 export * from './lib/entities/models/auth/current-user.interface';
+export * from './lib/entities/models/sd/sd-service.interface';
+export * from './lib/entities/models/sd/sd-ticket.interface';
 
 export * from './lib/entities/view-models/sd-request-view-model.interface';
 export * from './lib/entities/view-models/work-view-model.interface';
@@ -24,3 +26,5 @@ export * from './lib/application/sd-request/sd-request.facade';
 export * from './lib/application/sd-request/sd-request.facade.stub';
 export * from './lib/application/user/user.facade';
 export * from './lib/application/user/user.facade.stub';
+export * from './lib/application/service-desk/service-desk.facade';
+export * from './lib/application/service-desk/service-desk.facade.stub';

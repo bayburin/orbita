@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { FreeSdRequestType } from '../../../entities/models/sd/free-sd-request-type.interface';
+import { SdTicket } from './../../../entities/models/sd/sd-ticket.interface';
 
 export abstract class ServiceDeskApiAbstract {
   /**
@@ -9,7 +9,7 @@ export abstract class ServiceDeskApiAbstract {
   readonly api: string;
 
   /**
-   * Получает с сервера список видов заявок в свободной форме
+   * Получает с сервера техподдержки список возможных заявок.
    */
-  abstract getFreeSdRequestTypes(): Observable<FreeSdRequestType[]>;
+  abstract getTickets(): Observable<SdTicket[]>;
 }

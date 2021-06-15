@@ -42,7 +42,6 @@ export const initialState: State = sdRequestAdapter.getInitialState({
 
 const sdRequestReducer = createReducer(
   initialState,
-  on(SdRequestActions.init, (state) => ({ ...state })),
   on(SdRequestActions.loadAll, (state) => ({
     ...state,
     loaded: false,

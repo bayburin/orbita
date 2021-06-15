@@ -22,6 +22,8 @@ import {
   SdRequestViewModel,
   WorkerViewModel,
   User,
+  SdService,
+  SdTicket,
 } from '@orbita/orbita-ui/domain-logic';
 import { oFlatMap } from '@orbita/orbita-ui/utils';
 import { LazyLoadEvent } from 'primeng/api';
@@ -74,6 +76,14 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
    * Максимальный размер записей на странице
    */
   @Input() perPage$: Observable<number>;
+  /**
+   * Список услуг
+   */
+  @Input() sdServices$: Observable<SdService[]>;
+  /**
+   * Список видов заявок
+   */
+  @Input() sdTickets$: Observable<SdTicket[]>;
   /**
    * События изменения метаданных таблицы (пагинация, сортировка, фильтры)
    */

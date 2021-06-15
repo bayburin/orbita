@@ -1,12 +1,12 @@
 import { of, Observable } from 'rxjs';
 
-import { FreeSdRequestType } from '../../../entities/models/sd/free-sd-request-type.interface';
+import { SdTicket } from './../../../entities/models/sd/sd-ticket.interface';
 import { ServiceDeskApiAbstract } from './service-desk.api.abstract';
 
 export class ServiceDeskApiStub implements ServiceDeskApiAbstract {
   api = '';
 
-  getFreeSdRequestTypes(): Observable<FreeSdRequestType[]> {
+  getTickets(): Observable<SdTicket[]> {
     return of([]);
   }
 }

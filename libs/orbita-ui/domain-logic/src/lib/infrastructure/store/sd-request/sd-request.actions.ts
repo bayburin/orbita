@@ -4,8 +4,6 @@ import { SdRequest } from './../../../entities/models/sd-request.interface';
 import { Meta } from './../../../entities/server-data/meta.interface';
 import { LazyLoadEvent } from 'primeng/api';
 
-export const init = createAction('[SdRequest/Page] Init');
-
 export const loadAll = createAction('[SdRequest/API] Load All');
 
 export const loadAllSuccess = createAction(

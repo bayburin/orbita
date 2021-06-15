@@ -1,7 +1,7 @@
 /**
  * Интерфейс услуги портала техподдержки
  */
-export interface SdRequestService {
+export interface SdService {
   /**
    * ID услуги
    */

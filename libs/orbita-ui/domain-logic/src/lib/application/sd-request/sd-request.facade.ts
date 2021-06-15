@@ -46,7 +46,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
       this.perPage$,
       this.store.select(SdRequestSelectors.getFilters)
     ),
-    switchMap(([_loaded, page, perPage, filters]) =>
+    switchMap(([_need, page, perPage, filters]) =>
       this.sdRequestApi.query(page, perPage, filters).pipe(
         tap((data) => {
           const normalizeData = SdRequestCacheService.normalizeSdRequests(data).entities;

@@ -3,6 +3,8 @@ import { Message } from './message.interface';
 import { Work } from './work.interface';
 import { History } from './history.interface';
 import { Worker } from './worker.interface';
+import { SdTicket } from './sd/sd-ticket.interface';
+import { SdService } from './sd/sd-service.interface';
 
 /**
  * Интерфейс нормализованного объекта заявки
@@ -49,5 +51,29 @@ export interface NormalizedSdRequests {
     works: NormalizedWork;
     histories: NormalizedHistory;
     workers: NormalizedWorker;
+  };
+}
+
+/**
+ * Интерфейс нормализованного вида заявки
+ */
+export interface NormalizedSdTicket {
+  [key: number]: SdTicket;
+}
+
+/**
+ * Интерфейс нормализованного вида заявки
+ */
+export interface NormalizedSdService {
+  [key: number]: SdService;
+}
+
+/**
+ * Интерфейс нормализованных данных, возвращаемый функцией normalize
+ */
+export interface NormalizedSdTickets {
+  entities: {
+    tickets: NormalizedSdTicket;
+    services: NormalizedSdService;
   };
 }

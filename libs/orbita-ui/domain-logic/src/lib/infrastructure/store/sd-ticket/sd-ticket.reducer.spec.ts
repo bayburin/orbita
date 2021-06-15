@@ -1,48 +1,49 @@
 import { Action } from '@ngrx/store';
 
-import { FreeSdRequestType } from '../../../entities/models/sd/free-sd-request-type.interface';
-import * as FreeSdRequestTypeActions from './free-sd-request-type.actions';
-import { State, initialState, reducer } from './free-sd-request-type.reducer';
+import { SdTicket } from '../../../entities/models/sd/sd-ticket.interface';
+import * as SdTicketActions from './sd-ticket.actions';
+import { State, initialState, reducer } from './sd-ticket.reducer';
 
-describe('FreeSdRequestTypeReducer', () => {
+describe('SdTicketReducer', () => {
   let action: Action;
-  const createFreeSdRequestType = (id: string, name = '') =>
+  const createSdTicket = (id: string, name = '') =>
     (({
       id,
       name: name || `name-${id}`,
-    } as unknown) as FreeSdRequestType);
+    } as unknown) as SdTicket);
 
   describe('loadAll', () => {
-    it('should clear "loaded" and "error" attributes', () => {
-      action = FreeSdRequestTypeActions.loadAll();
+    it('should clear "loading" and "error" attributes', () => {
+      action = SdTicketActions.loadAll();
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.needTickets).toBe(false);
       expect(result.error).toBeNull();
     });
   });
 
   describe('loadAllSuccess', () => {
-    it('should return set the list of known SdRequest', () => {
-      const freeSdRequestTypes = [
-        createFreeSdRequestType('PRODUCT-AAA'),
-        createFreeSdRequestType('PRODUCT-zzz'),
-      ];
-      action = FreeSdRequestTypeActions.loadAllSuccess({ freeSdRequestTypes });
+    it('should return set the list of known SdTicket', () => {
+      const tickets = [createSdTicket('PRODUCT-AAA'), createSdTicket('PRODUCT-zzz')];
+      action = SdTicketActions.loadAllSuccess({ tickets });
       const result: State = reducer(initialState, action);
 
-      expect(result.loaded).toBe(true);
       expect(result.ids.length).toBe(2);
+      expect(result.loading).toEqual(false);
+      expect(result.loaded).toBe(true);
     });
   });
 
   describe('loadAllFailure', () => {
     it('should set "error" attribute', () => {
       const error = { message: 'error' };
-      action = FreeSdRequestTypeActions.loadAllFailure({ error });
+      action = SdTicketActions.loadAllFailure({ error });
       const result: State = reducer(initialState, action);
 
       expect(result.error).toEqual(error);
+      expect(result.loading).toEqual(false);
     });
   });
 

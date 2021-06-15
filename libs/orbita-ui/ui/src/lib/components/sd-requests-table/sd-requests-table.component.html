@@ -84,8 +84,42 @@
           </ng-template>
         </p-columnFilter>
       </th>
-      <th></th>
-      <th></th>
+      <th>
+        <p-columnFilter field="service_id" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-multiSelect
+              [ngModel]="table.filters.service_id?.value"
+              [options]="sdServices$ | async"
+              [virtualScroll]="true"
+              optionValue="id"
+              optionLabel="name"
+              defaultLabel="Все"
+              scrollHeight="400px"
+              itemSize="30"
+              appendTo="body"
+              (onChange)="filter($event.value); table.saveState()"
+            ></p-multiSelect>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="ticket_identity" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-multiSelect
+              [ngModel]="table.filters.ticket_identity?.value"
+              [options]="sdTickets$ | async"
+              [virtualScroll]="true"
+              optionValue="id"
+              optionLabel="name"
+              defaultLabel="Все"
+              scrollHeight="400px"
+              itemSize="30"
+              appendTo="body"
+              (onChange)="filter($event.value); table.saveState()"
+            ></p-multiSelect>
+          </ng-template>
+        </p-columnFilter>
+      </th>
       <th>
         <p-columnFilter type="text" field="description" matchMode="contains" [showMenu]="false">
           <ng-template pTemplate="filter" let-filter="filterCallback">
@@ -117,7 +151,6 @@
         </p-columnFilter>
       </th>
       <th>
-        <!-- TODO: Сгруппировать по группам -->
         <p-columnFilter field="users" matchMode="equals" [showMenu]="false">
           <ng-template pTemplate="filter" let-value let-filter="filterCallback">
             <p-multiSelect

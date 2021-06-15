@@ -17,7 +17,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         fio: 'Байбурин Равиль Фаильевич',
         work_tel: '84-29',
         mobile_tel: '',
-        email: 'bayburin@iss-reshetnev.ru'
+        email: 'bayburin@iss-reshetnev.ru',
       },
       {
         id: 3,
@@ -29,7 +29,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         fio: 'Дрянных Алексей Геннадьевич',
         work_tel: '24-80',
         mobile_tel: '',
-        email: 'drag@iss-reshetnev.ru'
+        email: 'drag@iss-reshetnev.ru',
       },
       {
         id: 4,
@@ -41,8 +41,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         fio: 'Сильченко Дмитрий Михайлович',
         work_tel: '28-74',
         mobile_tel: '',
-        email: 'dmitry@iss-reshetnev.ru'
-      }
+        email: 'dmitry@iss-reshetnev.ru',
+      },
     ];
 
     const groups = [
@@ -50,14 +50,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         id: 1,
         department_id: 3,
         name: '7141',
-        description: 'Сектор ИТ'
+        description: 'Сектор ИТ',
       },
       {
         id: 2,
         department_id: 3,
         name: '7142',
-        description: 'Ремонт ВТ'
-      }
+        description: 'Ремонт ВТ',
+      },
     ];
 
     const eventTypes = [
@@ -65,14 +65,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         id: 1,
         name: 'open',
         description: 'Событие создания заявки/кейса',
-        is_public: true
+        is_public: true,
       },
       {
         id: 2,
         name: 'workflow',
         description: 'Было выполнило действие для решения проблемы',
-        is_public: true
-      }
+        is_public: true,
+      },
     ];
 
     const sdRequests = {
@@ -93,7 +93,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             created_at: '2021-05-22 15:00:00 +0700',
             updated_at: '2021-05-24 23:18:49 +0700',
             finished_at_plan: '2021-05-29 15:00:00 +0700',
-            finished_at: null
+            finished_at: null,
           },
           comments: [
             {
@@ -102,7 +102,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               sender_id: 2,
               type: 'comment',
               message: 'Первый комментарий',
-              created_at: '2021-05-24 23:16:49 +0700'
+              created_at: '2021-05-24 23:16:49 +0700',
             },
             {
               id: 2,
@@ -110,15 +110,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               sender_id: 3,
               type: 'comment',
               message: 'Второй комментарий',
-              created_at: '2021-05-24 23:18:49 +0700'
-            }
+              created_at: '2021-05-24 23:18:49 +0700',
+            },
           ],
           parameters: [
             {
               id: 1,
               name: 'Номер заявки ЛК',
-              value: '15-475'
-            }
+              value: '15-475',
+            },
           ],
           works: [
             {
@@ -132,52 +132,58 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                   user_id: 3,
                   event_type_id: 2,
                   action: 'Выполнено действие: дал доступ на коммутаторе',
-                  created_at: '2021-05-26 10:32:24 +0700'
-                }
+                  created_at: '2021-05-26 10:32:24 +0700',
+                },
               ],
               workers: [
                 {
                   id: 1,
                   work_id: 1,
-                  user_id: 2
-                }
-              ]
-            }
-          ]
-        }
+                  user_id: 2,
+                },
+              ],
+            },
+          ],
+        },
       ],
       meta: {
         current_page: 1,
-        total_count: 20
-      }
+        total_count: 20,
+      },
     };
+    const sdTickets = [
+      {
+        id: 1,
+        identity: 1,
+        service_id: 1,
+        name: 'Локальная сеть. Обращение в техподдержку',
+        sla: null,
+        ticketable_type: 'FreeApplication',
+        service: {
+          id: 1,
+          name: 'Локальная сеть',
+        },
+      },
+    ];
 
     if (req.url.endsWith('v1/sd_requests')) {
-      return of(new HttpResponse({ body: sdRequests, status: 200 })).pipe(
-        materialize(),
-        delay(1500),
-        dematerialize()
-      );
+      return of(new HttpResponse({ body: sdRequests, status: 200 })).pipe(materialize(), delay(1500), dematerialize());
     }
 
     if (req.url.endsWith('/init')) {
       const body = {
         users,
         groups,
-        event_types: eventTypes
+        event_types: eventTypes,
       };
 
-      return of(new HttpResponse({ body, status: 200 })).pipe(
-        materialize(),
-        delay(1500),
-        dematerialize()
-      );
+      return of(new HttpResponse({ body, status: 200 })).pipe(materialize(), delay(1500), dematerialize());
     }
 
-    return next.handle(req).pipe(
-      materialize(),
-      delay(1500),
-      dematerialize()
-    );
+    if (req.url.endsWith('tickets')) {
+      return of(new HttpResponse({ body: sdTickets, status: 200 })).pipe(materialize(), delay(1500), dematerialize());
+    }
+
+    return next.handle(req).pipe(materialize(), delay(1500), dematerialize());
   }
 }

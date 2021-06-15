@@ -14,32 +14,26 @@ export abstract class SdRequestFacadeAbstract {
    * Индекс первой строки на странице
    */
   firstRowIndex$: Observable<number>;
-
   /**
    * Общее число записей
    */
   totalCount$: Observable<number>;
-
   /**
    * Максимальное число записей для одной страницы
    */
   perPage$: Observable<number>;
-
   /**
    * Индикатор, идет ли загрузка в данный момент
    */
   loading$: Observable<boolean>;
-
   /**
    * Индикатор, загружены ли данные
    */
   loaded$: Observable<boolean>;
-
   /**
    * Загружает список заявок с метаданными (количество заявок, номер страницы, и т.д.)
    */
   loadSdRequests$: Observable<void | SdRequestServerData>;
-
   /**
    * Список заявок
    */
