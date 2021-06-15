@@ -72,7 +72,7 @@ const sdRequestReducer = createReducer(
     perPage: data.rows,
     sortField: data.sortField,
     sortOrder: data.sortOrder,
-    filters: processSdRequestTableFilters(JSON.parse(JSON.stringify(data.filters))),
+    filters: processSdRequestTableFilters(data.filters ? JSON.parse(JSON.stringify(data.filters)) : {}),
     needTickets: true,
   }))
 );
@@ -85,7 +85,6 @@ export function metaReducer(reducer: ActionReducer<State>): ActionReducer<State>
   return (state: State | undefined, action: Action) => {
     if (action.type === INIT || action.type === UPDATE) {
       const storageValue = localStorage.getItem(SD_REQUEST_FEATURE_KEY);
-      console.log(storageValue);
 
       if (storageValue) {
         try {

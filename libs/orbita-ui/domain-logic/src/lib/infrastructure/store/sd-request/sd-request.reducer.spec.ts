@@ -25,10 +25,7 @@ describe('SdRequestReducer', () => {
 
   describe('loadAllSuccess', () => {
     it('should return set the list of known SdRequest', () => {
-      const sdRequests = [
-        createSdRequest('PRODUCT-AAA'),
-        createSdRequest('PRODUCT-zzz'),
-      ];
+      const sdRequests = [createSdRequest('PRODUCT-AAA'), createSdRequest('PRODUCT-zzz')];
       const meta = {
         total_count: 12,
       } as Meta;
@@ -57,8 +54,9 @@ describe('SdRequestReducer', () => {
   describe('setTableMetadata', () => {
     const data = {
       first: 4,
-      rows: 2
-    }
+      rows: 2,
+      filters: {},
+    };
 
     it('should set "page" attribute', () => {
       action = SdRequestActions.SetTableMetadata({ data });

@@ -40,7 +40,7 @@ describe('SdRequestApi', () => {
       httpMock
         .expectOne({
           method: 'GET',
-          url: `${api}?page=1&perPage=2&filters={}`,
+          url: `${api}?page=1&perPage=2&filters=%7B%7D`,
         })
         .flush(sdRequests);
     });

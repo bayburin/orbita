@@ -15,3 +15,5 @@ export const getLoaded = createSelector(getHistoryState, (state: State) => state
 export const getAll = createSelector(getHistoryState, (state: State) => selectAll(state));
 
 export const getEntities = createSelector(getHistoryState, (state: State) => selectEntities(state));
+
+export const getLastHistory = (id: number) => createSelector(getEntities, (entities) => entities && entities[id]);

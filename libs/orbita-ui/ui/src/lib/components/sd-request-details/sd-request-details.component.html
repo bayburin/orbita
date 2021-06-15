@@ -1,78 +1,105 @@
-<p-panel class="source-snapshot-panel" header="Данные на момент создания заявки">
-  <h4>Данные по пользователю</h4>
-  <div class="p-grid">
-    <div class="p-col-4">ФИО</div>
-    <div class="p-col-8">
-      <b>{{ data.fio }}</b>
-    </div>
-  </div>
-  <div class="p-grid">
-    <div class="p-col-4">Отдел</div>
-    <div class="p-col-8">
-      <b>{{ data.dept }}</b>
-    </div>
-  </div>
-  <div class="p-grid">
-    <div class="p-col-4">Табельный номер</div>
-    <div class="p-col-8">
-      <b>{{ data.tn }}</b>
-    </div>
-  </div>
-  <div class="p-grid">
-    <div class="p-col-4">Телефон</div>
-    <div class="p-col-8">
-      <b>{{ data.user_attrs?.phone }}</b>
-    </div>
-  </div>
-  <div class="p-grid">
-    <div class="p-col-4">Логин ЛК</div>
-    <div class="p-col-8">
-      <b>{{ data.domain_user }}</b>
-    </div>
-  </div>
-  <p-divider></p-divider>
+<div class="p-grid">
+  <div class="p-col-4">
+    <p-panel class="source-snapshot-panel" header="Данные на момент создания заявки">
+      <h4>Данные по пользователю</h4>
+      <div class="p-grid">
+        <div class="p-col-4">ФИО</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.fio }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">Отдел</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.dept }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">Табельный номер</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.tn }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">Телефон</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.user_attrs?.phone }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">Логин ЛК</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.domain_user }}</b>
+        </div>
+      </div>
+      <p-divider></p-divider>
 
-  <h4>Данные по хосту</h4>
-  <div class="p-grid">
-    <div class="p-col-4">Имя</div>
-    <div class="p-col-8">
-      <b>{{ data.dns }}</b>
-    </div>
+      <h4>Данные по хосту</h4>
+      <div class="p-grid">
+        <div class="p-col-4">Имя</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.dns }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">IP</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.source_ip }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">MAC</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.mac }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">Инвентарный номер</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.invent_num }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">Штрих-код</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.svt_item_id }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">Расположение</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.host_location }}</b>
+        </div>
+      </div>
+      <div class="p-grid">
+        <div class="p-col-4">Версия ОС</div>
+        <div class="p-col-8">
+          <b>{{ sdRequest.source_snapshot?.os }}</b>
+        </div>
+      </div>
+    </p-panel>
   </div>
-  <div class="p-grid">
-    <div class="p-col-4">IP</div>
-    <div class="p-col-8">
-      <b>{{ data.source_ip }}</b>
+  <div class="p-col-8">
+    <div class="p-mb-3">
+      <p-panel header="Последнее событие">
+        <div *ngIf="sdRequest.lastHistory; else noHistory">
+          <div class="p-d-flex p-ai-center">
+            <span>
+              <b>{{ sdRequest.lastHistory.user.fio }}</b>
+            </span>
+            <small class="p-ml-2">{{ sdRequest.lastHistory.created_at | datetime }}</small>
+          </div>
+          <div class="p-mt-2">{{ sdRequest.lastHistory.action }}</div>
+        </div>
+      </p-panel>
     </div>
+    <p-panel header="Последний комментарий">
+      <div *ngIf="sdRequest.comments.length; else noComments">
+        <lib-comment [comment]="sdRequest.comments[sdRequest.comments.length - 1]"></lib-comment>
+      </div>
+    </p-panel>
   </div>
-  <div class="p-grid">
-    <div class="p-col-4">MAC</div>
-    <div class="p-col-8">
-      <b>{{ data.mac }}</b>
-    </div>
-  </div>
-  <div class="p-grid">
-    <div class="p-col-4">Инвентарный номер</div>
-    <div class="p-col-8">
-      <b>{{ data.invent_num }}</b>
-    </div>
-  </div>
-  <div class="p-grid">
-    <div class="p-col-4">Штрих-код</div>
-    <div class="p-col-8">
-      <b>{{ data.svt_item_id }}</b>
-    </div>
-  </div>
-  <div class="p-grid">
-    <div class="p-col-4">Расположение</div>
-    <div class="p-col-8">
-      <b>{{ data.host_location }}</b>
-    </div>
-  </div>
-  <div class="p-grid">
-    <div class="p-col-4">Версия ОС</div>
-    <div class="p-col-8">
-      <b>{{ data.os }}</b>
-    </div>
-  </div>
-</p-panel>
+</div>
+
+<ng-template #noComments>Комментарии отсутствуют</ng-template>
+<ng-template #noHistory>События отсутствуют</ng-template>

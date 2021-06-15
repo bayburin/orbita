@@ -3,13 +3,7 @@
     <ng-container *ngIf="comments.length; else noComments">
       <div *ngFor="let comment of comments; trackBy: trackByComment">
         <div class="comment">
-          <div class="p-d-flex p-ai-center">
-            <span>
-              <b>{{ comment.sender.fio }}</b>
-            </span>
-            <small class="p-ml-2">{{ comment.created_at | datetime }}</small>
-          </div>
-          <div class="p-mt-2">{{ comment.message }}</div>
+          <lib-comment [comment]="comment"></lib-comment>
         </div>
         <p-divider></p-divider>
       </div>

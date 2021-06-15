@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { WorkViewModel, HistoryViewModel } from '@orbita/orbita-ui/domain-logic';
+import { WorkViewModel, HistoryViewModel, SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-sd-request-history-overview',
@@ -12,9 +12,9 @@ export class SdRequestHistoryOverviewComponent {
    */
   @Input() works: WorkViewModel[];
   /**
-   * Идентификатор события, которое произошло самым последним в текущей заявке
+   * Событие, которое произошло самым последним в текущей заявке
    */
-  @Input() lastHistoryId: number;
+  @Input() lastHistory: SdRequestViewModel;
 
   trackByWork(_index: number, work: WorkViewModel): number {
     return work.id;

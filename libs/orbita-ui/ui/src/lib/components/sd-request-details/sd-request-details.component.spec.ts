@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { SourceSnapshot } from '@orbita/orbita-ui/domain-logic';
+import { SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
 
 import { SdRequestDetailsComponent } from './sd-request-details.component';
 
@@ -18,7 +18,7 @@ describe('SdRequestDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SdRequestDetailsComponent);
     component = fixture.componentInstance;
-    component.data = {} as SourceSnapshot;
+    component.sdRequest = { comments: [] } as SdRequestViewModel;
     fixture.detectChanges();
   });
 

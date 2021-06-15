@@ -35,39 +35,39 @@
     display: flex;
     flex-direction: column;
   }
+}
 
-  .history-card {
-    display: block;
-    // max-height: $ticket-history-card-height;
-    margin-bottom: $spacer;
-    border: 1px solid var(--surface-d);
-    border-radius: 3px;
+.history-card {
+  display: block;
+  // max-height: $ticket-history-card-height;
+  margin-bottom: $spacer;
+  border: 1px solid var(--surface-d);
+  border-radius: 3px;
 
-    .history-card-header,
-    .history-card-body {
-      font-size: 0.9rem;
-      line-height: 1.3;
-    }
+  .history-card-header,
+  .history-card-body {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
 
-    .history-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: var(--surface-b);
-      border-bottom: 1px solid var(--surface-d);
-      padding: 0.5 * $spacer;
-    }
+  .history-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--surface-b);
+    border-bottom: 1px solid var(--surface-d);
+    padding: 0.5 * $spacer;
+  }
 
-    .p-card-body {
-      padding: 0.5 * $spacer;
-    }
+  .p-card-body {
+    padding: 0.5 * $spacer;
+  }
 
-    .history-card-footer {
-      display: flex;
-      flex-direction: row-reverse;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.8rem !important;
-    }
+  .history-card-footer {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem !important;
   }
 }

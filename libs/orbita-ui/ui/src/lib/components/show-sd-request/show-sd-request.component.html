@@ -1,11 +1,11 @@
 <p-tabView>
   <p-tabPanel header="Детали">
-    <lib-sd-request-details [data]="sdRequest.source_snapshot"></lib-sd-request-details>
+    <lib-sd-request-details [sdRequest]="sdRequest"></lib-sd-request-details>
   </p-tabPanel>
   <p-tabPanel header="Ход работы">
     <lib-sd-request-history-overview
       [works]="sdRequest.works"
-      [lastHistoryId]="sdRequest.lastHistoryId"
+      [lastHistory]="sdRequest.lastHistory"
     ></lib-sd-request-history-overview>
   </p-tabPanel>
   <p-tabPanel header="Комментарии">

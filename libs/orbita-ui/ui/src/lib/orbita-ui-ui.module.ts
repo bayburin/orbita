@@ -17,6 +17,7 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShowSdRequestComponent } from './components/show-sd-request/show-sd-request.component';
 import { SdRequestDetailsComponent } from './components/sd-request-details/sd-request-details.component';
+import { CommentComponent } from './components/comment/comment.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -27,6 +28,7 @@ const components: any[] = [
   CommentsComponent,
   NavbarComponent,
   ShowSdRequestComponent,
+  CommentComponent,
 ];
 
 const modules: any[] = [FormsModule, OrbitSpinnerModule];

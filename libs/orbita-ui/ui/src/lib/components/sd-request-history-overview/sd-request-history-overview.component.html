@@ -19,7 +19,7 @@
             <lib-history-event-card
               [history]="work.histories[work.histories.length - 1]"
               [num]="work.histories.length"
-              [isLast]="work.histories[work.histories.length - 1].id == lastHistoryId"
+              [isLast]="work.histories[work.histories.length - 1] == lastHistory"
             ></lib-history-event-card>
           </div>
           <div class="p-mb-5 p-mt-5">

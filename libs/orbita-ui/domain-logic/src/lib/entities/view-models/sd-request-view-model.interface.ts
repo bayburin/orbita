@@ -1,6 +1,7 @@
 import { TicketViewModel } from './ticket-view-model.interface';
 import { WorkViewModel } from './work-view-model.interface';
 import { Application } from './../models/application.interface';
+import { HistoryViewModel } from './history-view-model.interface';
 
 /**
  * Интерфейс заявки
@@ -57,7 +58,7 @@ export interface SdRequestViewModel extends TicketViewModel {
   readonly works: WorkViewModel[];
 
   /**
-   * Идентификатор события, произошедшего последним в заявке
+   * Событие, произошедшее последним в заявке
    */
-  readonly lastHistoryId?: number;
+  readonly lastHistory: HistoryViewModel;
 }

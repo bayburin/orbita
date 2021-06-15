@@ -44,6 +44,7 @@ export const getAllViewModel = createSelector(
         ...sdRequest,
         application,
         lastHistoryId: lastHistory ? lastHistory.id : null,
+        lastHistory,
         comments,
         works,
       };

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { SourceSnapshot } from '@orbita/orbita-ui/domain-logic';
+import { SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-sd-request-details',
@@ -7,5 +7,5 @@ import { SourceSnapshot } from '@orbita/orbita-ui/domain-logic';
   styleUrls: ['./sd-request-details.component.scss'],
 })
 export class SdRequestDetailsComponent {
-  @Input() data: SourceSnapshot;
+  @Input() sdRequest: SdRequestViewModel;
 }

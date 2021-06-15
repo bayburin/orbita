@@ -1,4 +1,4 @@
-<p-card class="history-card p-shadow-2">
+<p-card class="history-card">
   <ng-template pTemplate="header">
     <div class="history-card-header">
       <span>Событие {{ num }}</span>
@@ -6,6 +6,7 @@
         class="mdi mdi-18px"
         [class]="eventTypeName(history.eventType.name).icon"
         [pTooltip]="history.eventType.description"
+        tooltipPosition="top"
       ></i>
     </div>
   </ng-template>
