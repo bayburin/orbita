@@ -95,11 +95,13 @@ describe('SdRequestFacade', () => {
       });
 
       it('should call "query" method with attributes from store', () => {
+        const filter = { id: { value: '123' } };
         store.overrideSelector(SdRequestSelectors.getPage, 2);
         store.overrideSelector(SdRequestSelectors.getPerPage, 10);
+        store.overrideSelector(SdRequestSelectors.getFilters, filter);
         facade.loadSdRequests$.subscribe();
 
-        expect(querySpy).toHaveBeenCalledWith(2, 10);
+        expect(querySpy).toHaveBeenCalledWith(2, 10, filter);
       });
 
       describe('when sdRequestApi finished successfully', () => {

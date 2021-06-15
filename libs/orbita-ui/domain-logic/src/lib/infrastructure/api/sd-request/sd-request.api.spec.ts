@@ -1,8 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
 
 import { SdRequestApi } from './sd-request.api';
@@ -36,14 +33,14 @@ describe('SdRequestApi', () => {
     const sdRequests = [{ id: 1 }, { id: 2 }];
 
     it('should return requests', () => {
-      service.query(1, 2).subscribe((result) => {
+      service.query(1, 2, {}).subscribe((result) => {
         expect(result).toEqual(sdRequests);
       });
 
       httpMock
         .expectOne({
           method: 'GET',
-          url: `${api}?page=1&perPage=2`,
+          url: `${api}?page=1&perPage=2&filters={}`,
         })
         .flush(sdRequests);
     });

@@ -41,6 +41,7 @@ describe('SdRequestSelectors', () => {
       error,
       loading: false,
       loaded: true,
+      needTickets: true,
     });
   });
 
@@ -78,6 +79,10 @@ describe('SdRequestSelectors', () => {
 
   it('getLoaded() should return "loaded" attribute', () => {
     expect(SdRequestSelectors.getLoaded.projector(state)).toEqual(true);
+  });
+
+  it('getNeedTickets() should return "needTickets" attribute', () => {
+    expect(SdRequestSelectors.getNeedTickets.projector(state)).toEqual(true);
   });
 
   it('getError() should return "error" attribute', () => {

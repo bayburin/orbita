@@ -1,9 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  SdRequestFacade,
-  SdRequestFacadeStub,
-} from '@orbita/orbita-ui/domain-logic';
+import { SdRequestFacade, SdRequestFacadeStub, UserFacade, UserFacadeStub } from '@orbita/orbita-ui/domain-logic';
 
 import { SdRequestsBlockComponent } from './sd-requests-block.component';
 
@@ -14,7 +11,10 @@ describe('SdRequestsBlockComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SdRequestsBlockComponent],
-      providers: [{ provide: SdRequestFacade, useClass: SdRequestFacadeStub }],
+      providers: [
+        { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
+        { provide: UserFacade, useClass: UserFacadeStub },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });

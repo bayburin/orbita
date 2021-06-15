@@ -83,8 +83,6 @@ export class LayoutComponent implements OnInit {
   logout(): void {
     this.confirmationService.confirm({
       message: 'Вы действительно хотите выйти из системы?',
-      acceptLabel: 'Да',
-      rejectLabel: 'Нет',
       accept: () => this.authHelper.logout(),
     });
   }

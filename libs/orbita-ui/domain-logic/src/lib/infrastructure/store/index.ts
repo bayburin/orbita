@@ -1,4 +1,4 @@
-import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, MetaReducer } from '@ngrx/store';
 
 import * as fromApp from './app/app.reducer';
 import * as fromSdRequest from './sd-request/sd-request.reducer';
@@ -45,3 +45,5 @@ export const reducer: ActionReducerMap<OrbitaUiState> = {
 };
 
 export const getOrbitaUiState = createFeatureSelector<OrbitaUiState>(TICKET_SYSTEM_FEATURE_KEY);
+
+export const metaReducers: MetaReducer[] = [fromSdRequest.metaReducer];

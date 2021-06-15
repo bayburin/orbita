@@ -38,8 +38,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   perPage$ = this.store.select(SdRequestSelectors.getPerPage);
   loading$ = this.store.select(SdRequestSelectors.getLoading);
   loaded$ = this.store.select(SdRequestSelectors.getLoaded);
-  loadSdRequests$ = this.loaded$.pipe(
-    filter((loaded) => !loaded),
+  loadSdRequests$ = this.store.select(SdRequestSelectors.getNeedTickets).pipe(
+    filter((needTickets) => needTickets),
     tap(() => this.store.dispatch(SdRequestActions.loadAll())),
     withLatestFrom(
       this.store.select(SdRequestSelectors.getPage),

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { PrimengModule } from './primeng.module';
 
@@ -28,7 +29,7 @@ const components: any[] = [
   ShowSdRequestComponent,
 ];
 
-const modules: any[] = [OrbitSpinnerModule];
+const modules: any[] = [FormsModule, OrbitSpinnerModule];
 
 @NgModule({
   imports: [CommonModule, PrimengModule, ...modules],

@@ -7,7 +7,6 @@ import { AuthCenterModule } from '@iss/ng-auth-center';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ActionCableService } from 'angular2-actioncable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
 
 import { environment } from '../../environments/environment';
 import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
@@ -17,7 +16,6 @@ import { FakeBackendInterceptor } from './interceptors/fake-backend.interceptor'
 @NgModule({
   imports: [
     HttpClientModule,
-    FormsModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot(),

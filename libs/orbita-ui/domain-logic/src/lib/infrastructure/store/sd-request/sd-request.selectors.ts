@@ -1,3 +1,4 @@
+import { FilterMetadata } from 'primeng/api';
 import { createSelector } from '@ngrx/store';
 
 import { getOrbitaUiState } from './../index';
@@ -29,6 +30,8 @@ export const getLoading = createSelector(getSdRequestState, (state: State) => st
 
 export const getLoaded = createSelector(getSdRequestState, (state: State) => state.loaded);
 
+export const getNeedTickets = createSelector(getSdRequestState, (state: State) => state.needTickets);
+
 export const getError = createSelector(getSdRequestState, (state: State) => state.error);
 
 export const getAll = createSelector(getSdRequestState, (state: State) => selectAll(state));
@@ -53,8 +56,16 @@ export const getPage = createSelector(
   (firstRowIndex, perPage) => firstRowIndex / perPage + 1
 );
 
-// TODO: Исправить или удалить
-// export const getLastHistories = createSelector(
-//   getEntities,
-//   (entities) => Object.keys(entities).map(id => ({ [id]: getLastHistory(entities[id]) }))
-// )
+// export const getProcessedFilters = createSelector(getFilters, (filters) => {
+//   let created_at: FilterMetadata;
+//   if (filters.created_at && filters.created_at.value) {
+//     created_at = {
+//       value: new Date(filters.created_at.value),
+//       matchMode: 'equals',
+//     };
+//   }
+//   return {
+//     ...filters,
+//     created_at,
+//   };
+// });

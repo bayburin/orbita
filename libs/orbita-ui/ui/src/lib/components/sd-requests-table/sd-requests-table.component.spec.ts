@@ -1,5 +1,6 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { Priorities } from '@orbita/orbita-ui/domain-logic';
 import { Statuses } from '@orbita/orbita-ui/domain-logic';
 import { OrbitaUiUiModule } from '@orbita/orbita-ui/ui';
@@ -12,7 +13,7 @@ describe('SdRequestsTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrbitaUiUiModule],
+      imports: [OrbitaUiUiModule, FormsModule],
       declarations: [SdRequestsTableComponent],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

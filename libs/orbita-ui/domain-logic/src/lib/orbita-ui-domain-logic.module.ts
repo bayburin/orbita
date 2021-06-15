@@ -11,7 +11,9 @@ import { FreeSdRequestTypeEffects } from './infrastructure/store/free-sd-request
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature(fromOrbitaUi.TICKET_SYSTEM_FEATURE_KEY, fromOrbitaUi.reducer),
+    StoreModule.forFeature(fromOrbitaUi.TICKET_SYSTEM_FEATURE_KEY, fromOrbitaUi.reducer, {
+      metaReducers: fromOrbitaUi.metaReducers,
+    }),
     EffectsModule.forFeature([AppEffects, SdRequestEffects, FreeSdRequestTypeEffects]),
   ],
   providers: [],

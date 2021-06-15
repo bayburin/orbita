@@ -4,6 +4,8 @@ import { SdRequest } from './../../../entities/models/sd-request.interface';
 import { Meta } from './../../../entities/server-data/meta.interface';
 import { LazyLoadEvent } from 'primeng/api';
 
+export const init = createAction('[SdRequest/Page] Init');
+
 export const loadAll = createAction('[SdRequest/API] Load All');
 
 export const loadAllSuccess = createAction(
@@ -11,12 +13,6 @@ export const loadAllSuccess = createAction(
   props<{ sdRequests: SdRequest[]; meta: Meta }>()
 );
 
-export const loadAllFailure = createAction(
-  '[SdRequest/API] Load All Failure',
-  props<{ error: any }>()
-);
+export const loadAllFailure = createAction('[SdRequest/API] Load All Failure', props<{ error: any }>());
 
-export const SetTableMetadata = createAction(
-  '[SdRequest] Set Table Metadata',
-  props<{ data: LazyLoadEvent }>()
-)
+export const SetTableMetadata = createAction('[SdRequest] Set Table Metadata', props<{ data: LazyLoadEvent }>());

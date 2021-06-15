@@ -1,9 +1,10 @@
-import { createReducer, on, Action } from '@ngrx/store';
+import { createReducer, on, Action, ActionReducer, INIT, UPDATE } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SdRequestActions from './sd-request.actions';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
+import { processSdRequestTableFilters } from '../../utils/process-sd-request-table-filters.function';
 
 export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
@@ -17,6 +18,7 @@ export interface State extends EntityState<SdRequest> {
   selectedId?: string | number;
   loading: boolean;
   loaded: boolean;
+  needTickets: boolean;
   error?: string | null;
 }
 
@@ -35,13 +37,17 @@ export const initialState: State = sdRequestAdapter.getInitialState({
   filters: {},
   loading: false,
   loaded: false,
+  needTickets: true,
 });
 
 const sdRequestReducer = createReducer(
   initialState,
+  on(SdRequestActions.init, (state) => ({ ...state })),
   on(SdRequestActions.loadAll, (state) => ({
     ...state,
+    loaded: false,
     loading: true,
+    needTickets: false,
     error: null,
   })),
   on(SdRequestActions.loadAllSuccess, (state, { sdRequests, meta }) =>
@@ -66,11 +72,44 @@ const sdRequestReducer = createReducer(
     perPage: data.rows,
     sortField: data.sortField,
     sortOrder: data.sortOrder,
-    filters: data.filters,
-    loaded: false,
+    filters: processSdRequestTableFilters(JSON.parse(JSON.stringify(data.filters))),
+    needTickets: true,
   }))
 );
 
 export function reducer(state: State | undefined, action: Action) {
   return sdRequestReducer(state, action);
+}
+
+export function metaReducer(reducer: ActionReducer<State>): ActionReducer<State> {
+  return (state: State | undefined, action: Action) => {
+    if (action.type === INIT || action.type === UPDATE) {
+      const storageValue = localStorage.getItem(SD_REQUEST_FEATURE_KEY);
+      console.log(storageValue);
+
+      if (storageValue) {
+        try {
+          const meta = JSON.parse(storageValue);
+
+          return {
+            ...state,
+            [SD_REQUEST_FEATURE_KEY]: {
+              ...initialState,
+              firstRowIndex: meta.first,
+              perPage: meta.rows,
+              sortField: meta.sortField,
+              sortOrder: meta.sortField,
+              filters: processSdRequestTableFilters(meta.filters),
+            },
+          };
+        } catch (e) {
+          console.log('Ошибка. Не удалось считать данные фильтров из localStorage');
+          console.log(e);
+          localStorage.removeItem(SD_REQUEST_FEATURE_KEY);
+        }
+      }
+    }
+
+    return reducer(state, action);
+  };
 }
