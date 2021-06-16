@@ -6,10 +6,10 @@ import { State, initialState, reducer } from './sd-ticket.reducer';
 
 describe('SdTicketReducer', () => {
   let action: Action;
-  const createSdTicket = (id: string, name = '') =>
+  const createSdTicket = (identity: string, name = '') =>
     (({
-      id,
-      name: name || `name-${id}`,
+      identity,
+      name: name || `name-${identity}`,
     } as unknown) as SdTicket);
 
   describe('loadAll', () => {

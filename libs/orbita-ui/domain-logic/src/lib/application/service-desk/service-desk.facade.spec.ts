@@ -41,10 +41,10 @@ describe('ServiceDeskFacade', () => {
   let store: MockStore<TestSchema>;
   // let sdServiceStore: MockStore<TestSchema>;
   let serviceDeskApi: ServiceDeskApi;
-  const createSdTicketEntity = (id: number, name = '') =>
+  const createSdTicketEntity = (identity: number, name = '') =>
     (({
-      id,
-      name: name || `name-${id}`,
+      identity,
+      name: name || `name-${identity}`,
     } as unknown) as SdTicket);
   const createSdServiceEntity = (id: number, name = '') =>
     (({

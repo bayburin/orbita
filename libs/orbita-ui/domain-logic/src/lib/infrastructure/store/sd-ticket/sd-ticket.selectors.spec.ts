@@ -3,10 +3,10 @@ import * as SdTicketSelectors from './sd-ticket.selectors';
 import { SdTicket } from './../../../entities/models/sd/sd-ticket.interface';
 
 describe('SdTicketSelectors', () => {
-  const createSdTicketEntity = (id: number, name = '') =>
+  const createSdTicketEntity = (identity: number, name = '') =>
     (({
-      id,
-      name: name || `name-${id}`,
+      identity,
+      name: name || `name-${identity}`,
     } as unknown) as SdTicket);
   const arrEntities = [createSdTicketEntity(1), createSdTicketEntity(2), createSdTicketEntity(3)];
   const entities = {

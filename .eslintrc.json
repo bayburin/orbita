@@ -14,7 +14,7 @@
             "depConstraints": [
               {
                 "sourceTag": "type:app",
-                "onlyDependOnLibsWithTags": ["type:shell", "type:env"]
+                "onlyDependOnLibsWithTags": ["type:shell", "type:ui", "type:env"]
               },
               {
                 "sourceTag": "type:shell",
