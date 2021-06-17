@@ -1,3 +1,4 @@
+import { LayoutFacade, LayoutFacadeStub } from '@orbita/shared/domain-logic';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -12,6 +13,7 @@ describe('LayoutComponent', () => {
   let component: LayoutComponent;
   let fixture: ComponentFixture<LayoutComponent>;
   let userFacade: AppFacade;
+  let layoutFacade: LayoutFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -20,6 +22,7 @@ describe('LayoutComponent', () => {
       providers: [
         { provide: AppFacade, useClass: AppFacadeStub },
         { provide: AuthHelper, useClass: AuthHelperStub },
+        { provide: LayoutFacade, useClass: LayoutFacadeStub },
         ConfirmationService,
       ],
       schemas: [NO_ERRORS_SCHEMA],
@@ -30,7 +33,9 @@ describe('LayoutComponent', () => {
     fixture = TestBed.createComponent(LayoutComponent);
     component = fixture.componentInstance;
     userFacade = TestBed.inject(AppFacade);
+    layoutFacade = TestBed.inject(LayoutFacade);
     spyOn(userFacade, 'init');
+    spyOn(layoutFacade, 'initTheme');
     fixture.detectChanges();
   });
 
@@ -40,5 +45,18 @@ describe('LayoutComponent', () => {
 
   it('userFacade() should call init', () => {
     expect(userFacade.init).toHaveBeenCalled();
+  });
+
+  it('layoutFacade() should call initTheme', () => {
+    expect(layoutFacade.initTheme).toHaveBeenCalled();
+  });
+
+  describe('loadTheme()', () => {
+    it('should call setTheme method', () => {
+      const spy = spyOn(layoutFacade, 'setTheme');
+      component.loadTheme('fake-theme');
+
+      expect(spy).toHaveBeenCalledWith('fake-theme');
+    });
   });
 });

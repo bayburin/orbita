@@ -5,10 +5,17 @@ describe('LayoutSelectors', () => {
   let state: State;
 
   beforeEach(() => {
-    state = { ...initialState }
+    state = {
+      ...initialState,
+      theme: 'fake-theme',
+    };
   });
 
-  it('getPage() should return "page" attribute', () => {
+  it('getSidebarOpened() should return "sidebarOpened" attribute', () => {
     expect(LayoutSelectors.getSidebarOpened.projector(state)).toBe(true);
+  });
+
+  it('getTheme() should return "theme" attribute', () => {
+    expect(LayoutSelectors.getTheme.projector(state)).toEqual('fake-theme');
   });
 });

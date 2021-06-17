@@ -16,6 +16,7 @@
             "polyfills": "apps/orbita-ui/src/polyfills.ts",
             "tsConfig": "apps/orbita-ui/tsconfig.app.json",
             "aot": true,
+            "extractCss": true,
             "assets": [
               "apps/orbita-ui/src/favicon.ico",
               "apps/orbita-ui/src/assets",
@@ -31,6 +32,36 @@
               }
             ],
             "styles": [
+              {
+                "input": "node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css",
+                "inject": false,
+                "bundleName": "bootstrap4-blue-light-theme"
+              },
+              {
+                "input": "node_modules/primeng/resources/themes/mdc-light-indigo/theme.css",
+                "inject": false,
+                "bundleName": "mdc-indigo-light-theme"
+              },
+              {
+                "input": "node_modules/primeng/resources/themes/saga-blue/theme.css",
+                "inject": false,
+                "bundleName": "saga-blue-theme"
+              },
+              {
+                "input": "node_modules/primeng/resources/themes/bootstrap4-dark-blue/theme.css",
+                "inject": false,
+                "bundleName": "bootstrap4-blue-dark-theme"
+              },
+              {
+                "input": "node_modules/primeng/resources/themes/mdc-dark-indigo/theme.css",
+                "inject": false,
+                "bundleName": "mdc-indigo-dark-theme"
+              },
+              {
+                "input": "node_modules/primeng/resources/themes/vela-blue/theme.css",
+                "inject": false,
+                "bundleName": "vela-blue-theme"
+              },
               "node_modules/@iss/ng-auth-center/assets/styles.scss",
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/primeicons/primeicons.css",

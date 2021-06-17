@@ -7,10 +7,11 @@ import * as LayoutFeature from '../infrastructure/store/layout.reducer';
 import * as LayoutSelectors from '../infrastructure/store/layout.selectors';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LayoutFacade implements LayoutFacadeAbstract {
   sidebarOpened$ = this.store.select(LayoutSelectors.getSidebarOpened);
+  theme$ = this.store.select(LayoutSelectors.getTheme);
 
   constructor(private store: Store<LayoutFeature.LayoutPartialState>) {}
 
@@ -20,5 +21,13 @@ export class LayoutFacade implements LayoutFacadeAbstract {
 
   closeSidebar() {
     this.store.dispatch(LayoutActions.closeSidebar());
+  }
+
+  initTheme() {
+    this.store.dispatch(LayoutActions.loadTheme());
+  }
+
+  setTheme(cssFile: string) {
+    this.store.dispatch(LayoutActions.setTheme({ theme: cssFile }));
   }
 }

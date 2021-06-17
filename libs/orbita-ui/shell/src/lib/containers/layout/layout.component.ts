@@ -4,6 +4,7 @@ import { AppFacade, CurrentUser } from '@orbita/orbita-ui/domain-logic';
 import { appHeaderAnimation, appContentAnimation } from '@orbita/orbita-ui/ui';
 import { MenuItem, ConfirmationService, PrimeNGConfig } from 'primeng/api';
 import { primeLocale } from '@orbita/orbita-ui/ui';
+import { LayoutFacade } from '@orbita/shared/domain-logic';
 
 @Component({
   selector: 'orbita-ui-shell-layout',
@@ -32,15 +33,21 @@ export class LayoutComponent implements OnInit {
    * Ошибки, возникшие при загрузке приложения
    */
   error$ = this.appFacade.error$;
+  /**
+   * Пользовательская тема
+   */
+  $theme = this.layoutFacade.theme$;
 
   constructor(
     private appFacade: AppFacade,
+    private layoutFacade: LayoutFacade,
     private authHelper: AuthHelper,
     private confirmationService: ConfirmationService,
     private config: PrimeNGConfig
   ) {}
 
   ngOnInit(): void {
+    this.layoutFacade.initTheme();
     this.appFacade.init();
     this.config.setTranslation(primeLocale);
     this.menuItems = [
@@ -75,6 +82,15 @@ export class LayoutComponent implements OnInit {
         routerLinkActiveOptions: { exact: true },
       },
     ];
+  }
+
+  /**
+   * Устанавливает тему
+   *
+   * @param cssFile - имя файла с темой
+   */
+  setTheme(cssFile: string) {
+    this.layoutFacade.setTheme(cssFile);
   }
 
   /**

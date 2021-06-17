@@ -24,6 +24,15 @@ describe('Layout Reducer', () => {
     });
   });
 
+  describe('setTheme', () => {
+    it('should set theme="new-theme"', () => {
+      action = LayoutActions.setTheme({ theme: 'new-theme' });
+      const result: State = reducer(initialState, action);
+
+      expect(result.theme).toBe('new-theme');
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;

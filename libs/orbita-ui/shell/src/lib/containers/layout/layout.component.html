@@ -11,7 +11,12 @@
 </ng-template>
 
 <ng-template #appReady>
-  <lib-navbar [currentUser]="currentUser" (logout)="logout()" @appHeaderAnimation></lib-navbar>
+  <lib-navbar
+    [currentUser]="currentUser"
+    (logout)="logout()"
+    (selectThemeCss)="setTheme($event)"
+    @appHeaderAnimation
+  ></lib-navbar>
   <div class="p-d-flex">
     <div @appContentAnimation>
       <aside class="layout-sidebar">
