@@ -1420,9 +1420,9 @@
     strip-json-comments "^3.1.1"
 
 "@iss/ng-auth-center@^1.1.0":
-  version "1.1.1"
-  resolved "https://gitlab.iss-reshetnev.ru/api/v4/projects/774/packages/npm/@iss/ng-auth-center/-/@iss/ng-auth-center-1.1.1.tgz#8eb4d39a801f1ff8ede1dfa6e1a7b73f07a8096a"
-  integrity sha1-jrTTmoAfH/jt4d+m4ae3PweoCWo=
+  version "1.1.2"
+  resolved "https://gitlab.iss-reshetnev.ru/api/v4/projects/774/packages/npm/@iss/ng-auth-center/-/@iss/ng-auth-center-1.1.2.tgz#5b4cb60cd2f36bd2da48ed9252bd6f04cfe7cf43"
+  integrity sha1-W0y2DNLza9LaSO2SUr1vBM/nz0M=
   dependencies:
     tslib "^2.0.0"
 
