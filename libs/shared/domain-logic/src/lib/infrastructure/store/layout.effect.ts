@@ -35,7 +35,7 @@ export class LayoutEffects {
             newCssEl.rel = 'stylesheet';
             newCssEl.href = cssFile;
 
-            headEl.append(newCssEl);
+            headEl.prepend(newCssEl);
           }
         })
       ),
