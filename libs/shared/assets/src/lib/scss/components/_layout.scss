@@ -14,8 +14,18 @@ main {
   height: calc(100vh - #{$navbar-height});
 }
 
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  background-color: transparent;
+}
+
 .layout {
   display: flex;
+
+  & > div:first-child {
+    width: 100%;
+  }
 }
 
 .app-spinner-container {

@@ -55,31 +55,31 @@ export class LayoutComponent implements OnInit {
         label: 'Сводка',
         icon: 'mdi mdi-view-dashboard-outline mdi-24px',
         routerLink: ['/dashboard'],
-        routerLinkActiveOptions: { exact: true },
+        routerLinkActiveOptions: { exact: false },
       },
       {
         label: 'Заявки',
         icon: 'mdi mdi-file-document-multiple-outline mdi-24px',
         routerLink: ['/tickets'],
-        routerLinkActiveOptions: { exact: true },
+        routerLinkActiveOptions: { exact: false },
       },
       {
         label: 'Работники',
         icon: 'mdi mdi-account-multiple-outline mdi-24px',
         routerLink: ['/employees'],
-        routerLinkActiveOptions: { exact: true },
+        routerLinkActiveOptions: { exact: false },
       },
       {
         label: 'Хосты',
         icon: 'mdi mdi-network-outline mdi-24px',
         routerLink: ['/hosts'],
-        routerLinkActiveOptions: { exact: true },
+        routerLinkActiveOptions: { exact: false },
       },
       {
         label: 'Техника',
         icon: 'mdi mdi-desktop-classic mdi-24px',
         routerLink: ['/svt-items'],
-        routerLinkActiveOptions: { exact: true },
+        routerLinkActiveOptions: { exact: false },
       },
     ];
   }
