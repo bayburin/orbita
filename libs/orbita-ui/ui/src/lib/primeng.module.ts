@@ -19,6 +19,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
+import { ToolbarModule } from 'primeng/toolbar';
 
 import { ConfirmationService } from 'primeng/api';
 
@@ -42,6 +43,7 @@ const modules: any[] = [
   MultiSelectModule,
   DropdownModule,
   ToastModule,
+  ToolbarModule,
 ];
 
 @NgModule({

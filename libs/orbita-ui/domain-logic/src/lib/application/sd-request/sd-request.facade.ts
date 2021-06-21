@@ -88,4 +88,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   setTableMetadata(event: LazyLoadEvent) {
     this.store.dispatch(SdRequestActions.SetTableMetadata({ data: event }));
   }
+
+  reloadTableData() {
+    this.store.dispatch(SdRequestActions.ReloadEntities());
+  }
 }

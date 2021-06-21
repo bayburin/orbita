@@ -14,6 +14,7 @@ import { SdRequestsBlockComponent } from './sd-requests-block.component';
 describe('SdRequestsBlockComponent', () => {
   let component: SdRequestsBlockComponent;
   let fixture: ComponentFixture<SdRequestsBlockComponent>;
+  let sdRequestFacade: SdRequestFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -30,10 +31,29 @@ describe('SdRequestsBlockComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SdRequestsBlockComponent);
     component = fixture.componentInstance;
+    sdRequestFacade = TestBed.inject(SdRequestFacade);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('tableChanged', () => {
+    it('should call setTableMetadata method', () => {
+      const spy = spyOn(sdRequestFacade, 'setTableMetadata');
+      component.tableChanged({});
+
+      expect(spy).toHaveBeenCalledWith({});
+    });
+  });
+
+  describe('reloadTable', () => {
+    it('should call reloadTableData method', () => {
+      const spy = spyOn(sdRequestFacade, 'reloadTableData');
+      component.reloadTable();
+
+      expect(spy).toHaveBeenCalled();
+    });
   });
 });

@@ -1,4 +1,27 @@
 <div class="card">
+  <p-toolbar styleClass="toolbar-sm">
+    <div class="p-toolbar-group-left">
+      <a
+        pButton
+        pRipple
+        icon="mdi mdi-plus mdi-18px"
+        class="p-mr-2"
+        pTooltip="Новая заявка"
+        tooltipPosition="bottom"
+        [routerLink]="['/tickets', 'new-sd-request']"
+      ></a>
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="mdi mdi-refresh mdi-18px"
+        class="p-button-text p-button-plain"
+        pTooltip="Обновить таблицу"
+        tooltipPosition="bottom"
+        (click)="reloadTable()"
+      ></button>
+    </div>
+  </p-toolbar>
   <lib-sd-requests-table
     [sdRequests$]="sdRequests$"
     [loading$]="loading$"

@@ -31,4 +31,11 @@ export class SdRequestsBlockComponent {
   tableChanged(event: LazyLoadEvent): void {
     this.sdRequestFacade.setTableMetadata(event);
   }
+
+  /**
+   * Перезагружает таблицу
+   */
+  reloadTable(): void {
+    this.sdRequestFacade.reloadTableData();
+  }
 }

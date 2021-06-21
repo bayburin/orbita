@@ -45,4 +45,9 @@ export abstract class SdRequestFacadeAbstract {
    * @param data - метаданные для загрузки данных таблицы
    */
   abstract setTableMetadata(data: LazyLoadEvent): void;
+
+  /**
+   * Перезагружает данные таблицы заявок
+   */
+  abstract reloadTableData(): void;
 }

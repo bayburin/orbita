@@ -72,6 +72,16 @@ describe('SdRequestReducer', () => {
       expect(result.sortOrder).toEqual(data.sortOrder);
       expect(result.filters).toEqual(data.filters);
       expect(result.loaded).toEqual(false);
+      expect(result.needTickets).toEqual(true);
+    });
+  });
+
+  describe('ReloadEntities', () => {
+    it('should set "needTickets" attribute', () => {
+      action = SdRequestActions.ReloadEntities();
+      const result: State = reducer(initialState, action);
+
+      expect(result.needTickets).toEqual(true);
     });
   });
 

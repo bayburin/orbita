@@ -15,4 +15,8 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   setTableMetadata() {
     /** */
   }
+
+  reloadTableData() {
+    /** */
+  }
 }

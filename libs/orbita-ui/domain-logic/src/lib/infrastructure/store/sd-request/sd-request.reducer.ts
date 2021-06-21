@@ -73,6 +73,10 @@ const sdRequestReducer = createReducer(
     sortOrder: data.sortOrder,
     filters: processSdRequestTableFilters(data.filters ? JSON.parse(JSON.stringify(data.filters)) : {}),
     needTickets: true,
+  })),
+  on(SdRequestActions.ReloadEntities, (state) => ({
+    ...state,
+    needTickets: true,
   }))
 );
 

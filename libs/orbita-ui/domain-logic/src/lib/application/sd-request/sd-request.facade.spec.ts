@@ -91,6 +91,7 @@ describe('SdRequestFacade', () => {
         const spy = spyOn(store, 'dispatch');
 
         facade.loadSdRequests$.subscribe();
+
         expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAll());
       });
 
@@ -99,6 +100,7 @@ describe('SdRequestFacade', () => {
         store.overrideSelector(SdRequestSelectors.getPage, 2);
         store.overrideSelector(SdRequestSelectors.getPerPage, 10);
         store.overrideSelector(SdRequestSelectors.getFilters, filter);
+
         facade.loadSdRequests$.subscribe();
 
         expect(querySpy).toHaveBeenCalledWith(2, 10, filter);
@@ -111,6 +113,7 @@ describe('SdRequestFacade', () => {
 
         it('should call loadAllSuccess action', () => {
           const storeSpy = spyOn(store, 'dispatch');
+
           facade.loadSdRequests$.subscribe();
 
           expect(storeSpy).toHaveBeenCalledWith(
@@ -124,6 +127,7 @@ describe('SdRequestFacade', () => {
         it('should call setMessages() method from MessageFacade', () => {
           const messageFacade = TestBed.inject(MessageFacade);
           spyOn(messageFacade, 'setMessages');
+
           facade.loadSdRequests$.subscribe();
 
           expect(messageFacade.setMessages).toHaveBeenCalled();
@@ -132,6 +136,7 @@ describe('SdRequestFacade', () => {
         it('should call setWorks() method from WorkFacade', () => {
           const workFacade = TestBed.inject(WorkFacade);
           spyOn(workFacade, 'setWorks');
+
           facade.loadSdRequests$.subscribe();
 
           expect(workFacade.setWorks).toHaveBeenCalled();
@@ -140,6 +145,7 @@ describe('SdRequestFacade', () => {
         it('should call setHistories() method from HistoryFacade', () => {
           const historyFacade = TestBed.inject(HistoryFacade);
           spyOn(historyFacade, 'setHistories');
+
           facade.loadSdRequests$.subscribe();
 
           expect(historyFacade.setHistories).toHaveBeenCalled();
@@ -148,6 +154,7 @@ describe('SdRequestFacade', () => {
         it('should call setWorkers() method from WorkerFacade', () => {
           const workerFacade = TestBed.inject(WorkerFacade);
           spyOn(workerFacade, 'setWorkers');
+
           facade.loadSdRequests$.subscribe();
 
           expect(workerFacade.setWorkers).toHaveBeenCalled();
@@ -158,9 +165,30 @@ describe('SdRequestFacade', () => {
         const error = { error: 'Error message' };
         querySpy.and.callFake(() => throwError(error));
         const spy = spyOn(store, 'dispatch');
+
         facade.loadSdRequests$.subscribe();
 
         expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAllFailure({ error }));
+      });
+    });
+
+    describe('setTableMetadata()', () => {
+      it('should call ReloadEntities action', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        facade.setTableMetadata({});
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.SetTableMetadata({ data: {} }));
+      });
+    });
+
+    describe('reloadTableData()', () => {
+      it('should call ReloadEntities action', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        facade.reloadTableData();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.ReloadEntities());
       });
     });
   });

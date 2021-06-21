@@ -14,3 +14,5 @@ export const loadAllSuccess = createAction(
 export const loadAllFailure = createAction('[SdRequest/API] Load All Failure', props<{ error: any }>());
 
 export const SetTableMetadata = createAction('[SdRequest] Set Table Metadata', props<{ data: LazyLoadEvent }>());
+
+export const ReloadEntities = createAction('[SdRequest] Reload Entities');
