@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { OrbitaUiUiModule } from '@orbita/orbita-ui/ui';
+import { OrbitaUiDomainLogicModule } from '@orbita/orbita-ui/domain-logic';
 
 import { NewSdRequestPageComponent } from './pages/new-sd-request-page/new-sd-request-page.component';
 
@@ -13,7 +15,7 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), OrbitaUiUiModule, OrbitaUiDomainLogicModule],
   declarations: [NewSdRequestPageComponent],
   exports: [NewSdRequestPageComponent],
 })

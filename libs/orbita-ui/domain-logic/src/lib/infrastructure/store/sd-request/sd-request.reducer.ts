@@ -1,4 +1,4 @@
-import { createReducer, on, Action, ActionReducer, INIT, UPDATE } from '@ngrx/store';
+import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SdRequestActions from './sd-request.actions';
@@ -82,36 +82,4 @@ const sdRequestReducer = createReducer(
 
 export function reducer(state: State | undefined, action: Action) {
   return sdRequestReducer(state, action);
-}
-
-export function metaReducer(reducer: ActionReducer<State>): ActionReducer<State> {
-  return (state: State | undefined, action: Action) => {
-    if (action.type === INIT || action.type === UPDATE) {
-      const storageValue = localStorage.getItem(SD_REQUEST_FEATURE_KEY);
-
-      if (storageValue) {
-        try {
-          const meta = JSON.parse(storageValue);
-
-          return {
-            ...state,
-            [SD_REQUEST_FEATURE_KEY]: {
-              ...initialState,
-              firstRowIndex: meta.first,
-              perPage: meta.rows,
-              sortField: meta.sortField,
-              sortOrder: meta.sortField,
-              filters: processSdRequestTableFilters(meta.filters),
-            },
-          };
-        } catch (e) {
-          console.log('Ошибка. Не удалось считать данные фильтров из localStorage');
-          console.log(e);
-          localStorage.removeItem(SD_REQUEST_FEATURE_KEY);
-        }
-      }
-    }
-
-    return reducer(state, action);
-  };
 }

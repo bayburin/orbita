@@ -1,4 +1,6 @@
-import { ActionReducerMap, createFeatureSelector, MetaReducer } from '@ngrx/store';
+import { ActionReducerMap, createFeatureSelector, MetaReducer, Action, ActionReducer, INIT, UPDATE } from '@ngrx/store';
+
+import { processSdRequestTableFilters } from '../utils/process-sd-request-table-filters.function';
 
 import * as fromApp from './app/app.reducer';
 import * as fromSdRequest from './sd-request/sd-request.reducer';
@@ -49,4 +51,36 @@ export const reducer: ActionReducerMap<OrbitaUiState> = {
 
 export const getOrbitaUiState = createFeatureSelector<OrbitaUiState>(TICKET_SYSTEM_FEATURE_KEY);
 
-export const metaReducers: MetaReducer[] = [fromSdRequest.metaReducer];
+export function metaReducer(reducer: ActionReducer<OrbitaUiState>): ActionReducer<OrbitaUiState> {
+  return (state: OrbitaUiState | undefined, action: Action) => {
+    if (action.type === INIT || action.type === UPDATE) {
+      const storageValue = localStorage.getItem(fromSdRequest.SD_REQUEST_FEATURE_KEY);
+
+      if (storageValue && !state) {
+        try {
+          const meta = JSON.parse(storageValue);
+
+          return {
+            ...state,
+            [fromSdRequest.SD_REQUEST_FEATURE_KEY]: {
+              ...fromSdRequest.initialState,
+              firstRowIndex: meta.first,
+              perPage: meta.rows,
+              sortField: meta.sortField,
+              sortOrder: meta.sortField,
+              filters: processSdRequestTableFilters(meta.filters),
+            },
+          };
+        } catch (e) {
+          console.log('Ошибка. Не удалось считать данные фильтров из localStorage');
+          console.log(e);
+          localStorage.removeItem(fromSdRequest.SD_REQUEST_FEATURE_KEY);
+        }
+      }
+    }
+
+    return reducer(state, action);
+  };
+}
+
+export const metaReducers: MetaReducer[] = [metaReducer];
