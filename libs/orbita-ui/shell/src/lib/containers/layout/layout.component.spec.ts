@@ -51,10 +51,10 @@ describe('LayoutComponent', () => {
     expect(layoutFacade.initTheme).toHaveBeenCalled();
   });
 
-  describe('loadTheme()', () => {
+  describe('setTheme()', () => {
     it('should call setTheme method', () => {
       const spy = spyOn(layoutFacade, 'setTheme');
-      component.loadTheme('fake-theme');
+      component.setTheme('fake-theme');
 
       expect(spy).toHaveBeenCalledWith('fake-theme');
     });

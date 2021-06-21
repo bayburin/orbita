@@ -4,20 +4,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { OrbitaUiUiModule } from '@orbita/orbita-ui/ui';
 import { OrbitaUiDomainLogicModule } from '@orbita/orbita-ui/domain-logic';
 
-import { SdRequestsBlockComponent } from './containers/sd-requests-block/sd-requests-block.component';
-import { TicketsPageComponent } from './pages/tickets-page/tickets-page.component';
+import { OverviewPageComponent } from './pages/overview-page/overview-page.component';
+import { OverviewBlockComponent } from './containers/overview-block/overview-block.component';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: TicketsPageComponent,
+    component: OverviewPageComponent,
   },
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), OrbitaUiUiModule, OrbitaUiDomainLogicModule],
-  declarations: [TicketsPageComponent, SdRequestsBlockComponent],
-  exports: [TicketsPageComponent],
+  declarations: [OverviewPageComponent, OverviewBlockComponent],
+  exports: [OverviewPageComponent],
 })
-export class OrbitaUiFeatureListingModule {}
+export class OrbitaUiFeatureSdRequestOverviewModule {}

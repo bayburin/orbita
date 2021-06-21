@@ -25,6 +25,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('@orbita/orbita-ui/feature-sd-request-wizzard').then((m) => m.OrbitaUiFeatureSdRequestWizzardModule),
       },
+      {
+        path: 'tickets/sd-requests/:id',
+        loadChildren: () =>
+          import('@orbita/orbita-ui/feature-sd-request-overview').then((m) => m.OrbitaUiFeatureSdRequestOverviewModule),
+      },
     ],
   },
 ];
