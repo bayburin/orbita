@@ -19,7 +19,7 @@ export interface State extends EntityState<SdRequest> {
   loading: boolean;
   loaded: boolean;
   needTickets: boolean;
-  needTicket: boolean;
+  // needTicket: boolean;
   error?: string | null;
 }
 
@@ -40,7 +40,7 @@ export const initialState: State = sdRequestAdapter.getInitialState({
   loading: false,
   loaded: false,
   needTickets: true,
-  needTicket: true,
+  // needTicket: true,
 });
 
 const sdRequestReducer = createReducer(
@@ -85,7 +85,7 @@ const sdRequestReducer = createReducer(
     selected: null,
     loaded: false,
     loading: true,
-    needTicket: false,
+    // needTicket: false,
     error: null,
   })),
   on(SdRequestActions.loadSelectedSuccess, (state, { sdRequest }) => ({

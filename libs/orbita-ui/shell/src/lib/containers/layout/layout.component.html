@@ -3,11 +3,9 @@
 </div>
 
 <ng-template #loaded>
-  <div *ngIf="error$ | async as error; else appReady" class="app-error">
-    <h3>Ошибка</h3>
+  <lib-page-error *ngIf="error$ | async as error; else appReady" [error]="error">
     <p>Не удалось загрузить данные для работы приложения. Попробуйте обновить страницу.</p>
-    <p>{{ error }}</p>
-  </div>
+  </lib-page-error>
 </ng-template>
 
 <ng-template #appReady>

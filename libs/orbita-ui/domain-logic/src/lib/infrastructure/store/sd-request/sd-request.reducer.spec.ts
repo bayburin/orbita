@@ -92,7 +92,7 @@ describe('SdRequestReducer', () => {
       expect(result.selected).toBeNull();
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
-      expect(result.needTicket).toBe(false);
+      // expect(result.needTicket).toBe(false);
       expect(result.error).toBeNull();
     });
   });

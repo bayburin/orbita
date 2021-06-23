@@ -18,6 +18,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ShowSdRequestComponent } from './components/show-sd-request/show-sd-request.component';
 import { SdRequestDetailsComponent } from './components/sd-request-details/sd-request-details.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { TicketOverviewSkeletonComponent } from './components/ticket-overview-skeleton/ticket-overview-skeleton.component';
+import { PageErrorComponent } from './components/page-error/page-error.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -29,6 +31,9 @@ const components: any[] = [
   NavbarComponent,
   ShowSdRequestComponent,
   CommentComponent,
+  SdRequestDetailsComponent,
+  TicketOverviewSkeletonComponent,
+  PageErrorComponent,
 ];
 
 const modules: any[] = [FormsModule, OrbitSpinnerModule];
@@ -36,6 +41,6 @@ const modules: any[] = [FormsModule, OrbitSpinnerModule];
 @NgModule({
   imports: [CommonModule, PrimengModule, ...modules],
   exports: [...pipes, ...components, PrimengModule, ...modules],
-  declarations: [...pipes, ...components, SdRequestDetailsComponent],
+  declarations: [...pipes, ...components],
 })
 export class OrbitaUiUiModule {}

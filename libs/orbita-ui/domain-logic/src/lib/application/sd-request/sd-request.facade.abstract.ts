@@ -37,13 +37,13 @@ export abstract class SdRequestFacadeAbstract {
    */
   all$: Observable<SdRequestViewModel[]>;
   /**
-   * Загружает указанную заявку
-   */
-  loadSelected$: Observable<void | SdRequestServerData>;
-  /**
    * Выбранная заявка
    */
   selected$: Observable<SdRequestViewModel>;
+  /**
+   * Содержит ошибку, возникшую в процессе загрузки или обработки заявки
+   */
+  error$: Observable<any>;
 
   /**
    * Устанавливает метаданные таблицы
@@ -56,4 +56,9 @@ export abstract class SdRequestFacadeAbstract {
    * Перезагружает данные таблицы заявок
    */
   abstract reloadTableData(): void;
+
+  /**
+   * Загружает выбранную заявку
+   */
+  abstract loadSelectedSdRequest(): void;
 }

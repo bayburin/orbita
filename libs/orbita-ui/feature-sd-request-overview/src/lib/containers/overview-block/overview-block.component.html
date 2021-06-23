@@ -1,5 +1,13 @@
-<div class="p-grid">
-  <div class="p-col">1</div>
-  <div class="p-col">2</div>
-  <div class="p-col">3</div>
+<lib-ticket-overview-skeleton *ngIf="loading$ | async"></lib-ticket-overview-skeleton>
+
+<lib-page-error *ngIf="error$ | async as error" [error]="error">
+  <p>Не удалось загрузить заявку. Попробуйте обновить страницу.</p>
+</lib-page-error>
+
+<div *ngIf="sdRequest$ | async as sdRequest">
+  <div class="p-grid">
+    <div class="p-col-3">1</div>
+    <div class="p-col-6">2</div>
+    <div class="p-col-3">3</div>
+  </div>
 </div>

@@ -10,14 +10,19 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   loaded$ = new BehaviorSubject(false);
   loadSdRequests$ = new BehaviorSubject(null);
   all$ = new BehaviorSubject([]);
-  loadSelected$ = new BehaviorSubject(null);
+  // loadSelected$ = new BehaviorSubject(null);
   selected$ = new BehaviorSubject(null);
+  error$ = new BehaviorSubject(null);
 
   setTableMetadata() {
     /** */
   }
 
   reloadTableData() {
+    /** */
+  }
+
+  loadSelectedSdRequest() {
     /** */
   }
 }

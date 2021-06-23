@@ -30,7 +30,7 @@ export const getLoaded = createSelector(getSdRequestState, (state: State) => sta
 
 export const getNeedTickets = createSelector(getSdRequestState, (state: State) => state.needTickets);
 
-export const getNeedTicket = createSelector(getSdRequestState, (state: State) => state.needTicket);
+// export const getNeedTicket = createSelector(getSdRequestState, (state: State) => state.needTicket);
 
 export const getError = createSelector(getSdRequestState, (state: State) => state.error);
 

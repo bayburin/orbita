@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SdRequestFacade } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -6,8 +6,14 @@ import { SdRequestFacade } from '@orbita/orbita-ui/domain-logic';
   templateUrl: './overview-block.component.html',
   styleUrls: ['./overview-block.component.scss'],
 })
-export class OverviewBlockComponent {
+export class OverviewBlockComponent implements OnInit {
   sdRequest$ = this.sdRequestFacade.selected$;
+  loading$ = this.sdRequestFacade.loading$;
+  error$ = this.sdRequestFacade.error$;
 
   constructor(private sdRequestFacade: SdRequestFacade) {}
+
+  ngOnInit(): void {
+    this.sdRequestFacade.loadSelectedSdRequest();
+  }
 }
