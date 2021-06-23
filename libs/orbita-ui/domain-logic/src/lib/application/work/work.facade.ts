@@ -15,7 +15,11 @@ import { WorkFacadeAbstract } from './work.facade.abstract';
 export class WorkFacade implements WorkFacadeAbstract {
   constructor(private store: Store<WorkFeature.WorkPartialState>) {}
 
-  setWorks(works: Work[]) {
+  replaceAllWorks(works: Work[]) {
     this.store.dispatch(WorkActions.setAll({ works }));
+  }
+
+  setWorks(works: Work[]) {
+    this.store.dispatch(WorkActions.setWorks({ works }));
   }
 }

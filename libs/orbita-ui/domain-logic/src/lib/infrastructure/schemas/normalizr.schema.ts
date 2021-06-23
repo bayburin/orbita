@@ -19,7 +19,8 @@ export const sdRequestSchema = new schema.Entity('sd_requests', {
   comments: [commentSchema],
 });
 
-export const sdRequestsSchema = { sd_requests: [sdRequestSchema] };
+// export const sdRequestsSchema = { sd_requests: [sdRequestSchema] };
+export const sdRequestsSchema = new schema.Array(sdRequestSchema);
 
 export const sdServiceSchema = new schema.Entity('services');
 

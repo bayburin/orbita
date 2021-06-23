@@ -60,5 +60,5 @@ export interface SdRequestViewModel extends TicketViewModel {
   /**
    * Событие, произошедшее последним в заявке
    */
-  readonly lastHistory: HistoryViewModel;
+  readonly lastHistory?: HistoryViewModel;
 }

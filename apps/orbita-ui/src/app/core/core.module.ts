@@ -2,6 +2,7 @@ import { OrbitaUiUiModule } from '@orbita/orbita-ui/ui';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AuthCenterModule } from '@iss/ng-auth-center';
@@ -20,8 +21,9 @@ import { FakeBackendInterceptor } from './interceptors/fake-backend.interceptor'
   imports: [
     HttpClientModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({ router: routerReducer }),
     EffectsModule.forRoot(),
+    StoreRouterConnectingModule.forRoot(),
     environment.production ? [] : StoreDevtoolsModule.instrument({ maxAge: 25 }),
     AuthCenterModule.forRoot(environment.auth),
     OrbitaUiUiModule,

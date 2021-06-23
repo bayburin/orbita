@@ -45,4 +45,22 @@ describe('SdRequestApi', () => {
         .flush(sdRequests);
     });
   });
+
+  describe('show()', () => {
+    const api = 'http://test/sd_requests/1';
+    const sdRequest = { id: 1 };
+
+    it('should return request', () => {
+      service.show(1).subscribe((result) => {
+        expect(result).toEqual(sdRequest);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: api,
+        })
+        .flush(sdRequest);
+    });
+  });
 });

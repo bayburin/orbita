@@ -43,10 +43,38 @@ export const getAllViewModel = createSelector(
       return {
         ...sdRequest,
         application,
-        lastHistoryId: lastHistory ? lastHistory.id : null,
         lastHistory,
         comments,
         works,
       };
     })
+);
+
+export const getSelectedViewModel = createSelector(
+  SdRequestSelectors.getSelected,
+  MessageViewModelSelectors.getEntitiesViewModel,
+  WorkViewModelSelectors.getEntitiesViewModel,
+  ApplicationSelectors.getEntities,
+  (sdRequest, messageEntities, workEntities, applicationEntities): SdRequestViewModel => {
+    if (!sdRequest) {
+      return null;
+    }
+
+    const comments = sdRequest.comments.reduce(
+      (arr, commentId) => (messageEntities[commentId] ? arr.concat(messageEntities[commentId]) : arr),
+      [] as MessageViewModel[]
+    );
+    const works = sdRequest.works.reduce(
+      (arr, workId) => (workEntities[workId] ? arr.concat(workEntities[workId]) : arr),
+      [] as WorkViewModel[]
+    );
+    const application = applicationEntities[sdRequest.application_id];
+
+    return {
+      ...sdRequest,
+      application,
+      comments,
+      works,
+    };
+  }
 );

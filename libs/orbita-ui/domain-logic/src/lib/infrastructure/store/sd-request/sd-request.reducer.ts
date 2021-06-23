@@ -15,10 +15,11 @@ export interface State extends EntityState<SdRequest> {
   sortField: string;
   sortOrder: number;
   filters: PrimeFilter;
-  selectedId?: string | number;
+  selected: SdRequest;
   loading: boolean;
   loaded: boolean;
   needTickets: boolean;
+  needTicket: boolean;
   error?: string | null;
 }
 
@@ -35,9 +36,11 @@ export const initialState: State = sdRequestAdapter.getInitialState({
   sortOrder: -1,
   perPage: 25,
   filters: {},
+  selected: null,
   loading: false,
   loaded: false,
   needTickets: true,
+  needTicket: true,
 });
 
 const sdRequestReducer = createReducer(
@@ -61,7 +64,6 @@ const sdRequestReducer = createReducer(
     sdRequestAdapter.removeAll({
       ...state,
       error,
-      selectedId: null,
       loading: false,
     })
   ),
@@ -77,6 +79,25 @@ const sdRequestReducer = createReducer(
   on(SdRequestActions.ReloadEntities, (state) => ({
     ...state,
     needTickets: true,
+  })),
+  on(SdRequestActions.loadSelected, (state) => ({
+    ...state,
+    selected: null,
+    loaded: false,
+    loading: true,
+    needTicket: false,
+    error: null,
+  })),
+  on(SdRequestActions.loadSelectedSuccess, (state, { sdRequest }) => ({
+    ...state,
+    selected: sdRequest,
+    loading: false,
+    loaded: true,
+  })),
+  on(SdRequestActions.loadSelectedFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
   }))
 );
 

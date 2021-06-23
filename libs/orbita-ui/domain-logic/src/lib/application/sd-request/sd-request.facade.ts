@@ -18,7 +18,8 @@ import { SdRequestFacadeAbstract } from './sd-request.facade.abstract';
 import * as SdRequestActions from '../../infrastructure/store/sd-request/sd-request.actions';
 import * as SdRequestFeature from '../../infrastructure/store/sd-request/sd-request.reducer';
 import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-request.selectors';
-import * as SdRequestViewModelSelectors from '../../infrastructure/store/view-model/sd-request-view-model.selectors';
+import * as SdRequestViewModelSelectors from '../../infrastructure/store/selectors/sd-request-view-model.selectors';
+import * as RouterSelector from '../../infrastructure/store/selectors/router.selectors';
 import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { MessageFacade } from './../message/message.facade';
@@ -49,7 +50,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     switchMap(([_need, page, perPage, filters]) =>
       this.sdRequestApi.query(page, perPage, filters).pipe(
         tap((data) => {
-          const normalizeData = SdRequestCacheService.normalizeSdRequests(data).entities;
+          const normalizeData = SdRequestCacheService.normalizeSdRequests(data.sd_requests).entities;
 
           this.store.dispatch(
             SdRequestActions.loadAllSuccess({
@@ -57,11 +58,10 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
               meta: data.meta,
             })
           );
-
-          this.messageFacade.setMessages(Object.values(normalizeData.comments || []));
-          this.workFacade.setWorks(Object.values(normalizeData.works || []));
-          this.historyFacade.setHistories(Object.values(normalizeData.histories || []));
-          this.workerFacade.setWorkers(Object.values(normalizeData.workers || []));
+          this.messageFacade.replaceAllMessages(Object.values(normalizeData.comments || []));
+          this.workFacade.replaceAllWorks(Object.values(normalizeData.works || []));
+          this.historyFacade.replaceAllHistories(Object.values(normalizeData.histories || []));
+          this.workerFacade.replaceAllWorkers(Object.values(normalizeData.workers || []));
         }),
         catchError((error) => of(this.store.dispatch(SdRequestActions.loadAllFailure({ error }))))
       )
@@ -71,6 +71,34 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   all$ = combineLatest([
     this.loadSdRequests$.pipe(startWith(null)),
     this.store.select(SdRequestViewModelSelectors.getAllViewModel),
+  ]).pipe(
+    map(([_dispatcher, selector]) => selector),
+    distinctUntilChanged()
+  );
+  loadSelected$ = this.store.select(SdRequestSelectors.getNeedTicket).pipe(
+    filter((needTicket) => needTicket),
+    tap(() => this.store.dispatch(SdRequestActions.loadSelected())),
+    withLatestFrom(this.store.select(RouterSelector.selectRouteParams)),
+    switchMap(([_needTicket, routeParams]) =>
+      this.sdRequestApi.show(routeParams.id).pipe(
+        tap((data) => {
+          const normalizeData = SdRequestCacheService.normalizeSdRequest(data.sd_request);
+          const sdRequest = normalizeData.entities.sd_requests[normalizeData.result];
+
+          this.store.dispatch(SdRequestActions.loadSelectedSuccess({ sdRequest }));
+          this.messageFacade.setMessages(Object.values(normalizeData.entities.comments || []));
+          this.workFacade.setWorks(Object.values(normalizeData.entities.works || []));
+          this.historyFacade.setHistories(Object.values(normalizeData.entities.histories || []));
+          this.workerFacade.setWorkers(Object.values(normalizeData.entities.workers || []));
+        }),
+        catchError((error) => of(this.store.dispatch(SdRequestActions.loadSelectedFailure({ error }))))
+      )
+    ),
+    share()
+  );
+  selected$ = combineLatest([
+    this.loadSelected$.pipe(startWith(null)),
+    this.store.select(SdRequestViewModelSelectors.getSelectedViewModel),
   ]).pipe(
     map(([_dispatcher, selector]) => selector),
     distinctUntilChanged()

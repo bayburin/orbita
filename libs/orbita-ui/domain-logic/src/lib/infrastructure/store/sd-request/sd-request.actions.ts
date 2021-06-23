@@ -16,3 +16,12 @@ export const loadAllFailure = createAction('[SdRequest/API] Load All Failure', p
 export const SetTableMetadata = createAction('[SdRequest] Set Table Metadata', props<{ data: LazyLoadEvent }>());
 
 export const ReloadEntities = createAction('[SdRequest] Reload Entities');
+
+export const loadSelected = createAction('[SdRequest/API] Load Selected');
+
+export const loadSelectedSuccess = createAction(
+  '[SdRequest/API] Load Selected Success',
+  props<{ sdRequest: SdRequest }>()
+);
+
+export const loadSelectedFailure = createAction('[SdRequest/API] Load Selected Failure', props<{ error: any }>());

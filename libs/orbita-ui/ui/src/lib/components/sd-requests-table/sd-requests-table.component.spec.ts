@@ -3,9 +3,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { Priorities } from '@orbita/orbita-ui/domain-logic';
 import { Statuses } from '@orbita/orbita-ui/domain-logic';
-import { OrbitaUiUiModule } from '@orbita/orbita-ui/ui';
 
 import { SdRequestsTableComponent } from './sd-requests-table.component';
+import { DatetimePipe } from './../../pipes/datetime/datetime.pipe';
+import { FioMiddleNamePipe } from './../../pipes/fio-middle-name/fio-middle-name.pipe';
 
 describe('SdRequestsTableComponent', () => {
   let component: SdRequestsTableComponent;
@@ -13,8 +14,8 @@ describe('SdRequestsTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrbitaUiUiModule, FormsModule],
-      declarations: [SdRequestsTableComponent],
+      imports: [FormsModule],
+      declarations: [SdRequestsTableComponent, DatetimePipe, FioMiddleNamePipe],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });

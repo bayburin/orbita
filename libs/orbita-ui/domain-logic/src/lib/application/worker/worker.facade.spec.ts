@@ -6,10 +6,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 
 import { WorkerFacade } from './worker.facade';
 import * as WorkerActions from '../../infrastructure/store/worker/worker.actions';
-import {
-  WORKER_FEATURE_KEY,
-  initialState,
-} from '../../infrastructure/store/worker/worker.reducer';
+import { WORKER_FEATURE_KEY, initialState } from '../../infrastructure/store/worker/worker.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY } from '../../infrastructure/store/index';
 import { Worker } from '../../entities/models/worker.interface';
 
@@ -25,26 +22,30 @@ describe('WorkerFacade', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        WorkerFacade,
-        provideMockActions(() => actions$),
-        provideMockStore({ initialState: state }),
-      ],
+      providers: [WorkerFacade, provideMockActions(() => actions$), provideMockStore({ initialState: state })],
     });
 
     store = TestBed.inject(MockStore);
     facade = TestBed.inject(WorkerFacade);
   });
 
-  describe('setWorkers()', () => {
+  describe('replaceAllWorkers()', () => {
     it('should call init() action', () => {
+      const workers = [{ id: 1 } as Worker, { id: 2 } as Worker];
+      spyOn(store, 'dispatch');
+      facade.replaceAllWorkers(workers);
+
+      expect(store.dispatch).toHaveBeenCalledWith(WorkerActions.setAll({ workers }));
+    });
+  });
+
+  describe('setWorkers()', () => {
+    it('should call setWorkers() action', () => {
       const workers = [{ id: 1 } as Worker, { id: 2 } as Worker];
       spyOn(store, 'dispatch');
       facade.setWorkers(workers);
 
-      expect(store.dispatch).toHaveBeenCalledWith(
-        WorkerActions.setAll({ workers })
-      );
+      expect(store.dispatch).toHaveBeenCalledWith(WorkerActions.setWorkers({ workers }));
     });
   });
 });

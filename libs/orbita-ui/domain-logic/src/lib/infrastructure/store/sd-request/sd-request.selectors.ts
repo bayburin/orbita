@@ -24,13 +24,13 @@ export const getPerPage = createSelector(getSdRequestState, (state: State) => st
 
 export const getFilters = createSelector(getSdRequestState, (state: State) => state.filters);
 
-export const getSelectedId = createSelector(getSdRequestState, (state: State) => state.selectedId);
-
 export const getLoading = createSelector(getSdRequestState, (state: State) => state.loading);
 
 export const getLoaded = createSelector(getSdRequestState, (state: State) => state.loaded);
 
 export const getNeedTickets = createSelector(getSdRequestState, (state: State) => state.needTickets);
+
+export const getNeedTicket = createSelector(getSdRequestState, (state: State) => state.needTicket);
 
 export const getError = createSelector(getSdRequestState, (state: State) => state.error);
 
@@ -44,11 +44,7 @@ export const getAllSorted = createSelector(getAll, getSortField, getSortOrder, (
 
 export const getEntities = createSelector(getSdRequestState, (state: State) => selectEntities(state));
 
-export const getSelected = createSelector(
-  getEntities,
-  getSelectedId,
-  (entities, selectedId) => selectedId && entities[selectedId]
-);
+export const getSelected = createSelector(getSdRequestState, (state: State) => state.selected);
 
 export const getPage = createSelector(
   getFirstRowIndex,

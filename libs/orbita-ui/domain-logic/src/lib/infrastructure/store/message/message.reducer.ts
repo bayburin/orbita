@@ -23,9 +23,8 @@ export const initialState: State = messageAdapter.getInitialState({
 
 const messageReducer = createReducer(
   initialState,
-  on(MessageActions.setAll, (state, { messages }) =>
-    messageAdapter.setAll(messages, { ...state, loaded: true })
-  )
+  on(MessageActions.setAll, (state, { messages }) => messageAdapter.setAll(messages, { ...state, loaded: true })),
+  on(MessageActions.setMessages, (state, { messages }) => messageAdapter.upsertMany(messages, state))
 );
 
 export function reducer(state: State | undefined, action: Action) {

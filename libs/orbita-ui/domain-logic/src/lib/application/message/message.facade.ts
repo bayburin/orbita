@@ -15,7 +15,11 @@ import { MessageFacadeAbstract } from './message.facade.abstract';
 export class MessageFacade implements MessageFacadeAbstract {
   constructor(private store: Store<MessageFeature.MessagePartialState>) {}
 
-  setMessages(messages: Message[]) {
+  replaceAllMessages(messages: Message[]) {
     this.store.dispatch(MessageActions.setAll({ messages }));
+  }
+
+  setMessages(messages: Message[]) {
+    this.store.dispatch(MessageActions.setMessages({ messages }));
   }
 }

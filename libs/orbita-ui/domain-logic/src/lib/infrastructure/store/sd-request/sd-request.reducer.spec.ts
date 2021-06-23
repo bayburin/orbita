@@ -42,13 +42,12 @@ describe('SdRequestReducer', () => {
   });
 
   describe('loadAllFailure', () => {
-    it('should set "error" attribute', () => {
+    it('should set attributes', () => {
       const error = { message: 'error' };
       action = SdRequestActions.loadAllFailure({ error });
       const result: State = reducer(initialState, action);
 
       expect(result.error).toEqual(error);
-      expect(result.selectedId).toBeNull();
       expect(result.loading).toEqual(false);
     });
   });
@@ -62,7 +61,7 @@ describe('SdRequestReducer', () => {
       filters: {},
     };
 
-    it('should set "page" attribute', () => {
+    it('should set attributes', () => {
       action = SdRequestActions.SetTableMetadata({ data });
       const result: State = reducer(initialState, action);
 
@@ -82,6 +81,42 @@ describe('SdRequestReducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.needTickets).toEqual(true);
+    });
+  });
+
+  describe('loadSelected', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.loadSelected();
+      const result: State = reducer(initialState, action);
+
+      expect(result.selected).toBeNull();
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.needTicket).toBe(false);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('loadSelectedSuccess', () => {
+    it('should set attributes', () => {
+      const sdRequest = createSdRequest('AAA');
+      action = SdRequestActions.loadSelectedSuccess({ sdRequest });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selected).toEqual(sdRequest);
+      expect(result.loaded).toBe(true);
+      expect(result.loading).toBe(false);
+    });
+  });
+
+  describe('loadSelectedFailure', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.loadSelectedFailure({ error: 'fake-error' });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selected).toBeNull();
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
     });
   });
 

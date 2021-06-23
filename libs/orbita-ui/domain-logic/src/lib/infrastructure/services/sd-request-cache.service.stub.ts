@@ -16,4 +16,17 @@ export class SdRequestCacheServiceStub {
       },
     };
   }
+
+  static normalizeSdRequest(sdRequest: SdRequest = {} as SdRequest) {
+    return {
+      entities: {
+        sd_requests: sdRequest,
+        comments: [] as Message[],
+        works: [] as Work[],
+        histories: [] as History[],
+        workers: [] as Worker[],
+      },
+      result: sdRequest.id,
+    };
+  }
 }

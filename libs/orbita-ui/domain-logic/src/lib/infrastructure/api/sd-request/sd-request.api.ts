@@ -3,7 +3,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
 
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
-import { SdRequestServerData } from './../../../entities/server-data/sd-request-server-data.interface';
+import {
+  SdRequestsServerData,
+  SdRequestServerData,
+} from './../../../entities/server-data/sd-request-server-data.interface';
 import { SdRequestApiAbstract } from './sd-request.api.abstract';
 
 /**
@@ -28,6 +31,10 @@ export class SdRequestApi implements SdRequestApiAbstract {
       .append('perPage', `${perPage}`)
       .append('filters', `${JSON.stringify(filterValues)}`);
 
-    return this.http.get<SdRequestServerData>(this.api, { params });
+    return this.http.get<SdRequestsServerData>(this.api, { params });
+  }
+
+  show(id: number) {
+    return this.http.get<SdRequestServerData>(`${this.api}/${id}`);
   }
 }

@@ -9,13 +9,9 @@ import { SdRequestEffects } from './sd-request.effects';
 import * as SdRequestActions from './sd-request.actions';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestApiStub } from './../../api/sd-request/sd-request.api.stub';
-import {
-  SD_REQUEST_FEATURE_KEY,
-  initialState,
-  State,
-} from './sd-request.reducer';
+import { SD_REQUEST_FEATURE_KEY, initialState, State } from './sd-request.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY } from '../index';
-import { SdRequestServerDataBuilder } from './../../builders/sd-request-server-data.builder';
+import { SdRequestsServerDataBuilder } from './../../builders/sd-request-server-data.builder';
 
 describe('SdRequestEffects', () => {
   let actions$: Observable<Action>;
@@ -75,5 +71,7 @@ describe('SdRequestEffects', () => {
   //   });
   // });
 
-  it('fake-test', () => { /** */ });
+  it('fake-test', () => {
+    /** */
+  });
 });

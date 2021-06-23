@@ -19,24 +19,24 @@ describe('SdRequestSelectors', () => {
     'PRODUCT-BBB': arrEntities[1],
     'PRODUCT-CCC': arrEntities[2],
   };
-  const selectedId = 'PRODUCT-BBB';
   const totalCount = 3;
   const perPage = 4;
   const firstRowIndex = 0;
   const sortField = 'name';
   const sortOrder = 1;
   const filters = { foo: 'bar' };
+  const selected = createSdRequestEntity('PRODUCT-DDD');
   let state: any;
 
   beforeEach(() => {
     state = sdRequestAdapter.setAll(arrEntities, {
       ...initialState,
-      selectedId,
       firstRowIndex,
       totalCount,
       sortField,
       sortOrder,
       filters,
+      selected,
       perPage,
       error,
       loading: false,
@@ -69,10 +69,6 @@ describe('SdRequestSelectors', () => {
     expect(SdRequestSelectors.getFilters.projector(state)).toEqual(filters);
   });
 
-  it('getSelectedId() should return "selectedId" attribute', () => {
-    expect(SdRequestSelectors.getSelectedId.projector(state)).toEqual(selectedId);
-  });
-
   it('getLoading() should return "loading" attribute', () => {
     expect(SdRequestSelectors.getLoading.projector(state)).toEqual(false);
   });
@@ -102,7 +98,7 @@ describe('SdRequestSelectors', () => {
   });
 
   it('getSelected() should return selected entity', () => {
-    expect(SdRequestSelectors.getSelected.projector(entities, selectedId)).toEqual(arrEntities[1]);
+    expect(SdRequestSelectors.getSelected.projector(state)).toEqual(selected);
   });
 
   it('getPage', () => {

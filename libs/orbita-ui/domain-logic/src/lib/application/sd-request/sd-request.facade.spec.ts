@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { readFirst } from '@nrwl/angular/testing';
@@ -15,10 +16,11 @@ import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.a
 import { SdRequestApiStub } from './../../infrastructure/api/sd-request/sd-request.api.stub';
 import * as SdRequestActions from '../../infrastructure/store/sd-request/sd-request.actions';
 import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-request.selectors';
+import * as RouterSelector from '../../infrastructure/store/selectors/router.selectors';
 import { SD_REQUEST_FEATURE_KEY, State, initialState } from '../../infrastructure/store/sd-request/sd-request.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY, reducer } from '../../infrastructure/store/index';
-import { SdRequestServerDataBuilder } from './../../infrastructure/builders/sd-request-server-data.builder';
-import { SdRequestServerData } from '../../entities/server-data/sd-request-server-data.interface';
+import { SdRequestsServerDataBuilder } from './../../infrastructure/builders/sd-request-server-data.builder';
+import { SdRequestsServerData, SdRequestServerData } from '../../entities/server-data/sd-request-server-data.interface';
 import { MessageFacade } from './../message/message.facade';
 import { MessageFacadeStub } from './../message/message.facade.stub';
 import { WorkFacade } from './../work/work.facade';
@@ -77,11 +79,11 @@ describe('SdRequestFacade', () => {
 
     describe('loadSdRequests$ attribute', () => {
       let querySpy: jasmine.Spy;
-      let sdRequestServerData: SdRequestServerData;
+      let sdRequestsServerData: SdRequestsServerData;
 
       beforeEach(() => {
-        sdRequestServerData = new SdRequestServerDataBuilder().build();
         querySpy = spyOn(sdRequestApi, 'query');
+        sdRequestsServerData = new SdRequestsServerDataBuilder().build();
         spyOn(SdRequestCacheService, 'normalizeSdRequests').and.returnValue(
           SdRequestCacheServiceStub.normalizeSdRequests()
         );
@@ -108,7 +110,7 @@ describe('SdRequestFacade', () => {
 
       describe('when sdRequestApi finished successfully', () => {
         beforeEach(() => {
-          querySpy.and.returnValue(of(sdRequestServerData));
+          querySpy.and.returnValue(of(sdRequestsServerData));
         });
 
         it('should call loadAllSuccess action', () => {
@@ -118,46 +120,46 @@ describe('SdRequestFacade', () => {
 
           expect(storeSpy).toHaveBeenCalledWith(
             SdRequestActions.loadAllSuccess({
-              sdRequests: sdRequestServerData.sd_requests,
-              meta: sdRequestServerData.meta,
+              sdRequests: sdRequestsServerData.sd_requests,
+              meta: sdRequestsServerData.meta,
             })
           );
         });
 
-        it('should call setMessages() method from MessageFacade', () => {
+        it('should call replaceAllMessages() method from MessageFacade', () => {
           const messageFacade = TestBed.inject(MessageFacade);
-          spyOn(messageFacade, 'setMessages');
+          spyOn(messageFacade, 'replaceAllMessages');
 
           facade.loadSdRequests$.subscribe();
 
-          expect(messageFacade.setMessages).toHaveBeenCalled();
+          expect(messageFacade.replaceAllMessages).toHaveBeenCalled();
         });
 
-        it('should call setWorks() method from WorkFacade', () => {
+        it('should call replaceAllWorks() method from WorkFacade', () => {
           const workFacade = TestBed.inject(WorkFacade);
-          spyOn(workFacade, 'setWorks');
+          spyOn(workFacade, 'replaceAllWorks');
 
           facade.loadSdRequests$.subscribe();
 
-          expect(workFacade.setWorks).toHaveBeenCalled();
+          expect(workFacade.replaceAllWorks).toHaveBeenCalled();
         });
 
-        it('should call setHistories() method from HistoryFacade', () => {
+        it('should call replaceAllHistories() method from HistoryFacade', () => {
           const historyFacade = TestBed.inject(HistoryFacade);
-          spyOn(historyFacade, 'setHistories');
+          spyOn(historyFacade, 'replaceAllHistories');
 
           facade.loadSdRequests$.subscribe();
 
-          expect(historyFacade.setHistories).toHaveBeenCalled();
+          expect(historyFacade.replaceAllHistories).toHaveBeenCalled();
         });
 
-        it('should call setWorkers() method from WorkerFacade', () => {
+        it('should call replaceAllWorkers() method from WorkerFacade', () => {
           const workerFacade = TestBed.inject(WorkerFacade);
-          spyOn(workerFacade, 'setWorkers');
+          spyOn(workerFacade, 'replaceAllWorkers');
 
           facade.loadSdRequests$.subscribe();
 
-          expect(workerFacade.setWorkers).toHaveBeenCalled();
+          expect(workerFacade.replaceAllWorkers).toHaveBeenCalled();
         });
       });
 
@@ -169,6 +171,96 @@ describe('SdRequestFacade', () => {
         facade.loadSdRequests$.subscribe();
 
         expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAllFailure({ error }));
+      });
+    });
+
+    describe('loadSelected$ attribute', () => {
+      let showSpy: jasmine.Spy;
+      let sdRequestServerData: SdRequestServerData;
+
+      beforeEach(() => {
+        showSpy = spyOn(sdRequestApi, 'show');
+        sdRequestServerData = { sd_request: createSdRequestEntity(11) };
+        store.overrideSelector(RouterSelector.selectRouteParams, { id: 1 });
+        spyOn(SdRequestCacheService, 'normalizeSdRequest').and.returnValue(
+          SdRequestCacheServiceStub.normalizeSdRequest(sdRequestServerData.sd_request)
+        );
+      });
+
+      it('should call loadAll action', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        facade.loadSelected$.subscribe();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadSelected());
+      });
+
+      it('should call "show" method with attributes from store', () => {
+        facade.loadSelected$.subscribe();
+
+        expect(showSpy).toHaveBeenCalledWith(1);
+      });
+
+      describe('when sdRequestApi finished successfully', () => {
+        beforeEach(() => {
+          showSpy.and.returnValue(of(sdRequestServerData));
+        });
+
+        // it('should call loadAllSuccess action', () => {
+        //   const storeSpy = spyOn(store, 'dispatch');
+
+        //   facade.loadSelected$.subscribe();
+
+        //   expect(storeSpy).toHaveBeenCalledWith(
+        //     SdRequestActions.loadSelectedSuccess({ sdRequest: sdRequestServerData.sd_request })
+        //   );
+        // });
+
+        it('should call setMessages() method from MessageFacade', () => {
+          const messageFacade = TestBed.inject(MessageFacade);
+          spyOn(messageFacade, 'setMessages');
+
+          facade.loadSelected$.subscribe();
+
+          expect(messageFacade.setMessages).toHaveBeenCalled();
+        });
+
+        it('should call setWorks() method from MessageFacade', () => {
+          const workFacade = TestBed.inject(WorkFacade);
+          spyOn(workFacade, 'setWorks');
+
+          facade.loadSelected$.subscribe();
+
+          expect(workFacade.setWorks).toHaveBeenCalled();
+        });
+
+        it('should call setHistories() method from MessageFacade', () => {
+          const historyFacade = TestBed.inject(HistoryFacade);
+          spyOn(historyFacade, 'setHistories');
+
+          facade.loadSelected$.subscribe();
+
+          expect(historyFacade.setHistories).toHaveBeenCalled();
+        });
+
+        it('should call setWorkers() method from MessageFacade', () => {
+          const workerFacade = TestBed.inject(WorkerFacade);
+          spyOn(workerFacade, 'setWorkers');
+
+          facade.loadSelected$.subscribe();
+
+          expect(workerFacade.setWorkers).toHaveBeenCalled();
+        });
+      });
+
+      it('should call loadSelectedFailure action if sdRequestApi finished with error', () => {
+        const error = { error: 'Error message' };
+        showSpy.and.callFake(() => throwError(error));
+        const spy = spyOn(store, 'dispatch');
+
+        facade.loadSelected$.subscribe();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadSelectedFailure({ error }));
       });
     });
 
@@ -222,14 +314,14 @@ describe('SdRequestFacade', () => {
 
     it('all$ should return the loaded list; and loaded flag == true and another attributes', async (done) => {
       try {
-        const sdRequestServerData = new SdRequestServerDataBuilder()
+        const SdRequestsServerData = new SdRequestsServerDataBuilder()
           .sd_requests([createSdRequestEntity(1), createSdRequestEntity(2)])
           .current_page(2)
           .total_count(6)
           .build();
-        spyOn(sdRequestApi, 'query').and.returnValue(of(sdRequestServerData));
+        spyOn(sdRequestApi, 'query').and.returnValue(of(SdRequestsServerData));
         spyOn(SdRequestCacheService, 'normalizeSdRequests').and.returnValue(
-          SdRequestCacheServiceStub.normalizeSdRequests(sdRequestServerData.sd_requests)
+          SdRequestCacheServiceStub.normalizeSdRequests(SdRequestsServerData.sd_requests)
         );
         let isLoaded = await readFirst(facade.loaded$);
 
@@ -259,10 +351,10 @@ describe('SdRequestFacade', () => {
 
     it('setTableMetadata() should change firstRowIndex, perPage and all$ data', async (done) => {
       try {
-        const firstList = new SdRequestServerDataBuilder()
+        const firstList = new SdRequestsServerDataBuilder()
           .sd_requests([createSdRequestEntity(1), createSdRequestEntity(2)])
           .build();
-        const secondList = new SdRequestServerDataBuilder()
+        const secondList = new SdRequestsServerDataBuilder()
           .sd_requests([createSdRequestEntity(1), createSdRequestEntity(2), createSdRequestEntity(3)])
           .current_page(123)
           .build();

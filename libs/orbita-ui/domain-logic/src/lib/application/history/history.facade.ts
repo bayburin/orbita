@@ -15,7 +15,11 @@ import { HistoryFacadeAbstract } from './history.facade.abstract';
 export class HistoryFacade implements HistoryFacadeAbstract {
   constructor(private store: Store<HistoryFeature.HistoryPartialState>) {}
 
-  setHistories(histories: History[]) {
+  replaceAllHistories(histories: History[]) {
     this.store.dispatch(HistoryActions.setAll({ histories }));
+  }
+
+  setHistories(histories: History[]) {
+    this.store.dispatch(HistoryActions.setHistories({ histories }));
   }
 }

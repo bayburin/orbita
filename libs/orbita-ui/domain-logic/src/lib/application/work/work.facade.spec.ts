@@ -6,10 +6,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 
 import { WorkFacade } from './work.facade';
 import * as WorkActions from '../../infrastructure/store/work/work.actions';
-import {
-  WORK_FEATURE_KEY,
-  initialState,
-} from '../../infrastructure/store/work/work.reducer';
+import { WORK_FEATURE_KEY, initialState } from '../../infrastructure/store/work/work.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY } from '../../infrastructure/store/index';
 import { Work } from '../../entities/models/work.interface';
 
@@ -25,26 +22,30 @@ describe('WorkFacade', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        WorkFacade,
-        provideMockActions(() => actions$),
-        provideMockStore({ initialState: state }),
-      ],
+      providers: [WorkFacade, provideMockActions(() => actions$), provideMockStore({ initialState: state })],
     });
 
     store = TestBed.inject(MockStore);
     facade = TestBed.inject(WorkFacade);
   });
 
-  describe('setWorks()', () => {
+  describe('replaceAllWorks()', () => {
     it('should call init() action', () => {
+      const works = [{ id: 1 } as Work, { id: 2 } as Work];
+      spyOn(store, 'dispatch');
+      facade.replaceAllWorks(works);
+
+      expect(store.dispatch).toHaveBeenCalledWith(WorkActions.setAll({ works }));
+    });
+  });
+
+  describe('setWorks()', () => {
+    it('should call setWorks() action', () => {
       const works = [{ id: 1 } as Work, { id: 2 } as Work];
       spyOn(store, 'dispatch');
       facade.setWorks(works);
 
-      expect(store.dispatch).toHaveBeenCalledWith(
-        WorkActions.setAll({ works })
-      );
+      expect(store.dispatch).toHaveBeenCalledWith(WorkActions.setWorks({ works }));
     });
   });
 });

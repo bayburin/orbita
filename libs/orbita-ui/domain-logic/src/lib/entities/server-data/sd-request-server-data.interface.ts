@@ -4,7 +4,7 @@ import { Meta } from './meta.interface';
 /**
  * Описывает ответ с сервера по запросу списка заявок
  */
-export interface SdRequestServerData {
+export interface SdRequestsServerData {
   /**
    * Массив объектов заявки SdRequest
    */
@@ -14,4 +14,14 @@ export interface SdRequestServerData {
    * Объект метаданных
    */
   meta: Meta;
+}
+
+/**
+ * Описывает ответ с сервера по запросу выбранной заявки
+ */
+export interface SdRequestServerData {
+  /**
+   * Объект заявки
+   */
+  sd_request: SdRequest;
 }

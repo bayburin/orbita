@@ -2,14 +2,12 @@ import { Observable } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
-import { SdRequestServerData } from './../../entities/server-data/sd-request-server-data.interface';
+import {
+  SdRequestsServerData,
+  SdRequestServerData,
+} from './../../entities/server-data/sd-request-server-data.interface';
 
 export abstract class SdRequestFacadeAbstract {
-  /**
-   * Выбранная заявка
-   */
-  // selected$: Observable<"" | 0 | SdRequestViewModel | undefined>;
-
   /**
    * Индекс первой строки на странице
    */
@@ -33,11 +31,19 @@ export abstract class SdRequestFacadeAbstract {
   /**
    * Загружает список заявок с метаданными (количество заявок, номер страницы, и т.д.)
    */
-  loadSdRequests$: Observable<void | SdRequestServerData>;
+  loadSdRequests$: Observable<void | SdRequestsServerData>;
   /**
    * Список заявок
    */
   all$: Observable<SdRequestViewModel[]>;
+  /**
+   * Загружает указанную заявку
+   */
+  loadSelected$: Observable<void | SdRequestServerData>;
+  /**
+   * Выбранная заявка
+   */
+  selected$: Observable<SdRequestViewModel>;
 
   /**
    * Устанавливает метаданные таблицы

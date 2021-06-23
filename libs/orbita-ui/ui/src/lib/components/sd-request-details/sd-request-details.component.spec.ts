@@ -3,6 +3,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
 
 import { SdRequestDetailsComponent } from './sd-request-details.component';
+import { DatetimePipe } from '../../pipes/datetime/datetime.pipe';
 
 describe('SdRequestDetailsComponent', () => {
   let component: SdRequestDetailsComponent;
@@ -10,7 +11,7 @@ describe('SdRequestDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SdRequestDetailsComponent],
+      declarations: [SdRequestDetailsComponent, DatetimePipe],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
