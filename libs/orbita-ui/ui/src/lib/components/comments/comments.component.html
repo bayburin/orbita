@@ -1,4 +1,4 @@
-<p-card class="comments-card p-shadow-2">
+<div class="comments-card">
   <p-scrollPanel styleClass="comments-card-scroll-panel">
     <ng-container *ngIf="comments.length; else noComments">
       <div *ngFor="let comment of comments; trackBy: trackByComment">
@@ -22,7 +22,7 @@
       ></button>
     </div>
   </div>
-</p-card>
+</div>
 
 <ng-template #noComments>
   <div class="p-d-flex p-jc-center">

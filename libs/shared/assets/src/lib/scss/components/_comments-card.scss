@@ -1,13 +1,6 @@
 .comments-card {
-  display: block;
-
-  .p-card-body {
-    padding: 1rem 0 0 0;
-
-    .p-card-content {
-      padding: 0;
-    }
-  }
+  border: 1px solid var(--surface-d);
+  padding-top: 1rem;
 
   .comment {
     padding: 1rem;
