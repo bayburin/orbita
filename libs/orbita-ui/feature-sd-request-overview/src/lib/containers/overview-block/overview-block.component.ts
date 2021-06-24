@@ -1,5 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { SdRequestFacade } from '@orbita/orbita-ui/domain-logic';
+import {
+  SdRequestFacade,
+  HistoryViewModel,
+  Statuses,
+  StatusesViewModel,
+  getViewModelStatus,
+  Priorities,
+  PrioritiesViewModel,
+  getViewModelPriority,
+} from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-overview-block',
@@ -10,10 +19,33 @@ export class OverviewBlockComponent implements OnInit {
   sdRequest$ = this.sdRequestFacade.selected$;
   loading$ = this.sdRequestFacade.loading$;
   error$ = this.sdRequestFacade.error$;
+  orderedHistories$ = this.sdRequestFacade.orderedHistories$;
 
   constructor(private sdRequestFacade: SdRequestFacade) {}
 
   ngOnInit(): void {
     this.sdRequestFacade.loadSelectedSdRequest();
+  }
+
+  trackByHistory(index: number, history: HistoryViewModel): number {
+    return history.id;
+  }
+
+  /**
+   * Возвращает объект StatusesViewModel, в котором содержатся данные о статусе для представления
+   *
+   * @param status - статус
+   */
+  status(status: Statuses): StatusesViewModel {
+    return getViewModelStatus(status);
+  }
+
+  /**
+   * Возвращает объект PrioritiesViewModel, в котором содержатся данные о приоритете для представления
+   *
+   * @param priority - приоритет
+   */
+  priority(priority: Priorities): PrioritiesViewModel {
+    return getViewModelPriority(priority);
   }
 }

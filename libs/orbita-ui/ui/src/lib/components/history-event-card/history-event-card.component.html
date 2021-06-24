@@ -1,7 +1,7 @@
 <p-card class="history-card">
   <ng-template pTemplate="header">
     <div class="history-card-header">
-      <span>Событие {{ num }}</span>
+      <span>#{{ history.id }}</span>
       <i
         class="mdi mdi-18px"
         [class]="eventTypeName(history.eventType.name).icon"

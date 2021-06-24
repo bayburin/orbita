@@ -21,6 +21,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ToastModule } from 'primeng/toast';
 import { ToolbarModule } from 'primeng/toolbar';
 import { SkeletonModule } from 'primeng/skeleton';
+import { AccordionModule } from 'primeng/accordion';
 
 import { ConfirmationService } from 'primeng/api';
 
@@ -46,6 +47,7 @@ const modules: any[] = [
   ToastModule,
   ToolbarModule,
   SkeletonModule,
+  AccordionModule,
 ];
 
 @NgModule({

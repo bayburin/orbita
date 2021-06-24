@@ -1,4 +1,5 @@
 import { createSelector } from '@ngrx/store';
+import { oFlatMap } from '@orbita/orbita-ui/utils';
 
 import * as SdRequestSelectors from '../sd-request/sd-request.selectors';
 import * as MessageViewModelSelectors from './message-view-model.selectors';
@@ -77,4 +78,8 @@ export const getSelectedViewModel = createSelector(
       works,
     };
   }
+);
+
+export const getOrderedHistories = createSelector(getSelectedViewModel, (sdRequest) =>
+  oFlatMap((work) => work.histories, sdRequest.works).sort((a, b) => (a.id > b.id ? 1 : -1))
 );

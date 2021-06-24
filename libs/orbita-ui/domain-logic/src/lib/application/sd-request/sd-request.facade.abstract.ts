@@ -1,3 +1,4 @@
+import { HistoryViewModel } from './../../entities/view-models/history-view-model.interface';
 import { Observable } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 
@@ -44,6 +45,10 @@ export abstract class SdRequestFacadeAbstract {
    * Содержит ошибку, возникшую в процессе загрузки или обработки заявки
    */
   error$: Observable<any>;
+  /**
+   * Массив всех событий, произошедших с выбранной заявкой
+   */
+  orderedHistories$: Observable<HistoryViewModel[]>;
 
   /**
    * Устанавливает метаданные таблицы
