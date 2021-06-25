@@ -1,4 +1,4 @@
-import { Observable, Subject, Subscription } from 'rxjs';
+import { Observable, of, Subject, Subscription } from 'rxjs';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -27,7 +27,7 @@ import {
 } from '@orbita/orbita-ui/domain-logic';
 import { oFlatMap } from '@orbita/orbita-ui/utils';
 import { LazyLoadEvent } from 'primeng/api';
-import { distinctUntilChanged } from 'rxjs/operators';
+import { distinctUntilChanged, switchMap, delay } from 'rxjs/operators';
 import { Table } from 'primeng/table';
 
 @Component({
@@ -151,7 +151,10 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
   private subscribeToLazyLoadEvent() {
     this.subscriptions.add(
       this.lazyLoadStream
-        .pipe(distinctUntilChanged((a: LazyLoadEvent, b: LazyLoadEvent) => JSON.stringify(a) === JSON.stringify(b)))
+        .pipe(
+          distinctUntilChanged((a: LazyLoadEvent, b: LazyLoadEvent) => JSON.stringify(a) === JSON.stringify(b)),
+          switchMap((data) => of(data).pipe(delay(300)))
+        )
         .subscribe((event) => this.tableChanged.emit(event))
     );
   }

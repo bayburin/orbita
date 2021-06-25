@@ -45,7 +45,7 @@
               [value]="table.filters.id?.value"
               pInputText
               type="text"
-              (input)="table.filter($event.target.value, 'id', 'equals'); table.saveState()"
+              (input)="filter($event.target.value); table.saveState()"
             />
           </ng-template>
         </p-columnFilter>
