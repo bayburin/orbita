@@ -20,6 +20,7 @@ import { SdRequestDetailsComponent } from './components/sd-request-details/sd-re
 import { CommentComponent } from './components/comment/comment.component';
 import { TicketOverviewSkeletonComponent } from './components/ticket-overview-skeleton/ticket-overview-skeleton.component';
 import { PageErrorComponent } from './components/page-error/page-error.component';
+import { PanelPlaceholderComponent } from './components/panel-placeholder/panel-placeholder.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -34,6 +35,7 @@ const components: any[] = [
   SdRequestDetailsComponent,
   TicketOverviewSkeletonComponent,
   PageErrorComponent,
+  PanelPlaceholderComponent,
 ];
 
 const modules: any[] = [FormsModule, OrbitSpinnerModule];
