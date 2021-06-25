@@ -52,6 +52,23 @@ export const reducer: ActionReducerMap<OrbitaUiState> = {
   [fromEmployee.EMPLOYEE_FEATURE_KEY]: fromEmployee.reducer,
 };
 
+export const initialState = {
+  [fromApp.APP_FEATURE_KEY]: fromApp.initialState,
+  [fromSdRequest.SD_REQUEST_FEATURE_KEY]: fromSdRequest.initialState,
+  [fromUser.USER_FEATURE_KEY]: fromUser.initialState,
+  [fromGroup.GROUP_FEATURE_KEY]: fromGroup.initialState,
+  [fromMessage.MESSAGE_FEATURE_KEY]: fromMessage.initialState,
+  [fromWork.WORK_FEATURE_KEY]: fromWork.initialState,
+  [fromHistory.HISTORY_FEATURE_KEY]: fromHistory.initialState,
+  [fromEventType.EVENT_TYPE_FEATURE_KEY]: fromEventType.initialState,
+  [fromParameter.PARAMETER_FEATURE_KEY]: fromParameter.initialState,
+  [fromWorker.WORKER_FEATURE_KEY]: fromWorker.initialState,
+  [fromApplication.APPLICATION_FEATURE_KEY]: fromApplication.initialState,
+  [fromSdService.SD_SERVICE_FEATURE_KEY]: fromSdService.initialState,
+  [fromSdTicket.SD_TICKET_FEATURE_KEY]: fromSdTicket.initialState,
+  [fromEmployee.EMPLOYEE_FEATURE_KEY]: fromEmployee.initialState,
+};
+
 export const getOrbitaUiState = createFeatureSelector<OrbitaUiState>(TICKET_SYSTEM_FEATURE_KEY);
 
 export function metaReducer(reducer: ActionReducer<OrbitaUiState>): ActionReducer<OrbitaUiState> {
@@ -59,14 +76,14 @@ export function metaReducer(reducer: ActionReducer<OrbitaUiState>): ActionReduce
     if (action.type === INIT || action.type === UPDATE) {
       const storageValue = localStorage.getItem(fromSdRequest.SD_REQUEST_FEATURE_KEY);
 
-      if (storageValue && !state) {
+      if (storageValue) {
         try {
           const meta = JSON.parse(storageValue);
 
           return {
             ...state,
             [fromSdRequest.SD_REQUEST_FEATURE_KEY]: {
-              ...fromSdRequest.initialState,
+              ...state[fromSdRequest.SD_REQUEST_FEATURE_KEY],
               firstRowIndex: meta.first,
               perPage: meta.rows,
               sortField: meta.sortField,

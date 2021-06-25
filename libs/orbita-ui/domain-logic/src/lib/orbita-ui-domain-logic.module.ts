@@ -12,6 +12,7 @@ import { EmployeeEffects } from './infrastructure/store/employee/employee.effect
   imports: [
     CommonModule,
     StoreModule.forFeature(fromOrbitaUi.TICKET_SYSTEM_FEATURE_KEY, fromOrbitaUi.reducer, {
+      initialState: fromOrbitaUi.initialState,
       metaReducers: fromOrbitaUi.metaReducers,
     }),
     EffectsModule.forFeature([AppEffects, SdRequestEffects, EmployeeEffects]),
