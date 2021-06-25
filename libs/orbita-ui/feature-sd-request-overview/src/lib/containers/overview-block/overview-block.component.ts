@@ -8,6 +8,7 @@ import {
   Priorities,
   PrioritiesViewModel,
   getViewModelPriority,
+  EmployeeFacade,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -20,8 +21,11 @@ export class OverviewBlockComponent implements OnInit {
   loading$ = this.sdRequestFacade.loading$;
   error$ = this.sdRequestFacade.error$;
   orderedHistories$ = this.sdRequestFacade.orderedHistories$;
+  loadingEmployee$ = this.employeeFacade.loadingEmployee$;
+  loadedEmployee$ = this.employeeFacade.loadedEmployee$;
+  employee$ = this.employeeFacade.employee$;
 
-  constructor(private sdRequestFacade: SdRequestFacade) {}
+  constructor(private sdRequestFacade: SdRequestFacade, private employeeFacade: EmployeeFacade) {}
 
   ngOnInit(): void {
     this.sdRequestFacade.loadSelectedSdRequest();

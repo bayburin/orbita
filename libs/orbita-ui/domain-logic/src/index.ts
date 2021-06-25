@@ -28,3 +28,4 @@ export * from './lib/application/user/user.facade';
 export * from './lib/application/user/user.facade.stub';
 export * from './lib/application/service-desk/service-desk.facade';
 export * from './lib/application/service-desk/service-desk.facade.stub';
+export * from './lib/application/employee/employee.facade';

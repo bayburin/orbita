@@ -1,4 +1,3 @@
-import { tap } from 'rxjs/operators';
 import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { readFirst } from '@nrwl/angular/testing';
@@ -8,6 +7,7 @@ import { NxModule } from '@nrwl/angular';
 import { of, Observable, throwError } from 'rxjs';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
+import { tap } from 'rxjs/operators';
 
 import { SdRequest } from '../../entities/models/sd-request.interface';
 import { SdRequestEffects } from '../../infrastructure/store/sd-request/sd-request.effects';
