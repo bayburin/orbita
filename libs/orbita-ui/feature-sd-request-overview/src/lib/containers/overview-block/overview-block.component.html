@@ -41,7 +41,12 @@
         <div class="p-mt-3">
           <p-tabView>
             <p-tabPanel header="Детали">
-              <p-panel header="Описание">{{ sdRequest.description }}</p-panel>
+              <p-panel header="Описание">
+                <div *ngIf="sdRequest.description; else noDesc">{{ sdRequest.description }}</div>
+                <ng-template #noDesc>
+                  <lib-panel-placeholder>[ Пусто ]</lib-panel-placeholder>
+                </ng-template>
+              </p-panel>
             </p-tabPanel>
             <p-tabPanel header="Параметры">
               <p>
@@ -74,34 +79,33 @@
         </div>
       </div>
       <div class="p-col-3">
-        <div class="p-grid p-mb-2">
-          <div class="p-col-4">Статус</div>
-          <div class="p-col-8">
+        <lib-detail-row class="p-mb-2">
+          <div attribute>Статус</div>
+          <div value>
             <span [class]="'sd-request-badge status-' + status(sdRequest.status).badge">{{
               status(sdRequest.status).title
             }}</span>
           </div>
-        </div>
-        <div class="p-grid p-mb-2">
-          <div class="p-col-4">Приоритет</div>
-          <div class="p-col-8">
+        </lib-detail-row>
+
+        <lib-detail-row class="p-mb-2">
+          <div attribute>Приоритет</div>
+          <div value>
             <span [class]="'sd-request-badge priority-' + priority(sdRequest.priority).badge">{{
               priority(sdRequest.priority).title
             }}</span>
           </div>
-        </div>
-        <div class="p-grid p-mb-2">
-          <div class="p-col-4">Имя приложения</div>
-          <div class="p-col-8">
-            <b>{{ sdRequest.application?.name }}</b>
-          </div>
-        </div>
-        <div class="p-grid p-mb-2">
-          <div class="p-col-4">Внешний ID</div>
-          <div class="p-col-8">
-            <b>{{ sdRequest.integration_id }}</b>
-          </div>
-        </div>
+        </lib-detail-row>
+
+        <lib-detail-row class="p-mb-2">
+          <div attribute>Имя приложения</div>
+          <div value>{{ sdRequest.application?.name }}</div>
+        </lib-detail-row>
+
+        <lib-detail-row class="p-mb-2">
+          <div attribute>Внешний ID</div>
+          <div value>{{ sdRequest.integration_id }}</div>
+        </lib-detail-row>
 
         <p-divider></p-divider>
 
@@ -119,31 +123,26 @@
             <ng-template pTemplate="content">
               <div *ngIf="loadedEmployee$ | async; else loadingEmployee">
                 <div *ngIf="employee$ | async as employee; else unknownEmployeeData">
-                  <div class="p-grid p-mb-2">
-                    <div class="p-col-4">ФИО</div>
-                    <div class="p-col-8">
-                      <b>{{ employee.lastName }} {{ employee.firstName }} {{ employee.middleName }}</b>
-                    </div>
-                  </div>
+                  <lib-detail-row class="p-mb-2">
+                    <div attribute>ФИО</div>
+                    <div value>{{ employee.lastName }} {{ employee.firstName }} {{ employee.middleName }}</div>
+                  </lib-detail-row>
+
                   <div *ngIf="employee.employeePositions as positions">
-                    <div class="p-grid p-mb-2">
-                      <div class="p-col-4">Должность</div>
-                      <div class="p-col-8">
-                        <b>{{ positions[0].professionForAccounting }}</b>
-                      </div>
-                    </div>
-                    <div class="p-grid p-mb-2">
-                      <div class="p-col-4">Категория</div>
-                      <div class="p-col-8">
-                        <b>{{ positions[0].employeeCategory }}</b>
-                      </div>
-                    </div>
-                    <div class="p-grid p-mb-2">
-                      <div class="p-col-4">Подразделение</div>
-                      <div class="p-col-8">
-                        <b>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</b>
-                      </div>
-                    </div>
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>Должность</div>
+                      <div value>{{ positions[0].professionForAccounting }}</div>
+                    </lib-detail-row>
+
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>Категория</div>
+                      <div value>{{ positions[0].employeeCategory }}</div>
+                    </lib-detail-row>
+
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>Подразделение</div>
+                      <div value>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</div>
+                    </lib-detail-row>
                   </div>
                 </div>
               </div>

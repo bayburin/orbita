@@ -21,6 +21,7 @@ import { CommentComponent } from './components/comment/comment.component';
 import { TicketOverviewSkeletonComponent } from './components/ticket-overview-skeleton/ticket-overview-skeleton.component';
 import { PageErrorComponent } from './components/page-error/page-error.component';
 import { PanelPlaceholderComponent } from './components/panel-placeholder/panel-placeholder.component';
+import { DetailRowComponent } from './components/detail-row/detail-row.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -36,6 +37,7 @@ const components: any[] = [
   TicketOverviewSkeletonComponent,
   PageErrorComponent,
   PanelPlaceholderComponent,
+  DetailRowComponent,
 ];
 
 const modules: any[] = [FormsModule, OrbitSpinnerModule];

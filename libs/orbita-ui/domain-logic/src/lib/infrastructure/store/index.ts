@@ -52,7 +52,7 @@ export const reducer: ActionReducerMap<OrbitaUiState> = {
   [fromEmployee.EMPLOYEE_FEATURE_KEY]: fromEmployee.reducer,
 };
 
-export const initialState = {
+export const initialState: OrbitaUiState = {
   [fromApp.APP_FEATURE_KEY]: fromApp.initialState,
   [fromSdRequest.SD_REQUEST_FEATURE_KEY]: fromSdRequest.initialState,
   [fromUser.USER_FEATURE_KEY]: fromUser.initialState,
