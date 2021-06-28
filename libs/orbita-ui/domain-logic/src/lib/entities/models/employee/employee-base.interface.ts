@@ -22,12 +22,12 @@ export interface EmployeeBase {
   /**
    * Дата рождения
    */
-  readonly dateOfBirth: string;
+  readonly dateOfBirth?: string;
 
   /**
    * Пол
    */
-  readonly sex: GenderTypes;
+  readonly sex?: GenderTypes;
 }
 
 /**
