@@ -17,6 +17,7 @@ export abstract class SdRequestApiAbstract {
    *
    * @param page - номер страницы
    * @param perPage - число записей на странице
+   * @param filters - фильтры
    */
   abstract query(page: number, perPage: number, filters: PrimeFilter): Observable<SdRequestsServerData>;
 

@@ -7,6 +7,7 @@ import * as fromOrbitaUi from './infrastructure/store/index';
 import { AppEffects } from './infrastructure/store/app/app.effects';
 import { SdRequestEffects } from './infrastructure/store/sd-request/sd-request.effects';
 import { EmployeeEffects } from './infrastructure/store/employee/employee.effects';
+import { SvtItemEffects } from './infrastructure/store/svt-item/svt-item.effects';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { EmployeeEffects } from './infrastructure/store/employee/employee.effect
       initialState: fromOrbitaUi.initialState,
       metaReducers: fromOrbitaUi.metaReducers,
     }),
-    EffectsModule.forFeature([AppEffects, SdRequestEffects, EmployeeEffects]),
+    EffectsModule.forFeature([AppEffects, SdRequestEffects, EmployeeEffects, SvtItemEffects]),
   ],
   providers: [],
 })
