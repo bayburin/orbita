@@ -22,7 +22,6 @@ export class EmployeeEffects {
     this.actions$.pipe(
       ofType(EmployeeActions.loadSingleEmployee),
       withLatestFrom(this.store.select(EmployeeSelectors.getEmployeeSelectedId)),
-      filter(([_action, idTn]) => isNumber(idTn)),
       switchMap(([_action, idTn]) =>
         this.employeeApi.show(idTn).pipe(
           map((data) => EmployeeActions.loadSingleEmployeeSuccess({ employee: data.employee })),
@@ -33,6 +32,11 @@ export class EmployeeEffects {
   );
 
   selectEmployee$ = createEffect(() =>
-    this.actions$.pipe(ofType(EmployeeActions.selectEmployee), map(EmployeeActions.loadSingleEmployee))
+    this.actions$.pipe(
+      ofType(EmployeeActions.selectEmployee),
+      withLatestFrom(this.store.select(EmployeeSelectors.getEmployeeSelectedId)),
+      filter(([_action, idTn]) => isNumber(idTn)),
+      map(EmployeeActions.loadSingleEmployee)
+    )
   );
 }
