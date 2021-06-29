@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { SdRequestFacade, SdRequestFacadeStub } from '@orbita/orbita-ui/domain-logic';
+import {
+  SdRequestFacade,
+  SdRequestFacadeStub,
+  EmployeeFacade,
+  EmployeeFacadeStub,
+} from '@orbita/orbita-ui/domain-logic';
+import { DatetimePipe } from '@orbita/orbita-ui/ui';
 
 import { OverviewBlockComponent } from './overview-block.component';
 
@@ -11,8 +17,11 @@ describe('OverviewBlockComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [OverviewBlockComponent],
-      providers: [{ provide: SdRequestFacade, useClass: SdRequestFacadeStub }],
+      declarations: [OverviewBlockComponent, DatetimePipe],
+      providers: [
+        { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
+        { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });

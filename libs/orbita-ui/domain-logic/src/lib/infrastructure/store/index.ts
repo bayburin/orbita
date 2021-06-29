@@ -75,9 +75,13 @@ export const initialState: OrbitaUiState = {
 
 export const getOrbitaUiState = createFeatureSelector<OrbitaUiState>(TICKET_SYSTEM_FEATURE_KEY);
 
-export function metaReducer(reducer: ActionReducer<OrbitaUiState>): ActionReducer<OrbitaUiState> {
+export function metaReducer(reducer: ActionReducer<OrbitaUiState>): ActionReducer<OrbitaUiState | undefined> {
   return (state: OrbitaUiState | undefined, action: Action) => {
     if (action.type === INIT || action.type === UPDATE) {
+      if (!state) {
+        return undefined;
+      }
+
       const storageValue = localStorage.getItem(fromSdRequest.SD_REQUEST_FEATURE_KEY);
 
       if (storageValue) {
