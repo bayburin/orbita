@@ -5,15 +5,15 @@ import { SvtApiAbstract } from './svt.api.abstract';
 export class SvtApiStub implements SvtApiAbstract {
   api = '';
 
-  show() {
+  showItem() {
     return of(null);
   }
 
-  queryItems() {
-    return of([]);
-  }
+  // queryItems() {
+  //   return of([]);
+  // }
 
-  queryUserItems() {
-    return of(null);
-  }
+  // queryUserItems() {
+  //   return of(null);
+  // }
 }

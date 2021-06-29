@@ -14,21 +14,21 @@ export abstract class SvtApiAbstract {
    *
    * @param barcode - штрих-код
    */
-  abstract show(barcode: number): Observable<SvtItem>;
+  abstract showItem(barcode: number): Observable<SvtItem>;
 
-  /**
-   * Получает с сервера список ВТ, ограниченный указанной страницей и фильтрами.
-   *
-   * @param page - номер страницы
-   * @param perPage - число записей на странице
-   * @param filters - фильтры
-   */
-  abstract queryItems(page: number, perPage: number, filters: PrimeFilter): Observable<SvtItem[]>;
+  // /**
+  //  * Получает с сервера список ВТ, ограниченный указанной страницей и фильтрами.
+  //  *
+  //  * @param page - номер страницы
+  //  * @param perPage - число записей на странице
+  //  * @param filters - фильтры
+  //  */
+  // abstract queryItems(page: number, perPage: number, filters: PrimeFilter): Observable<SvtItem[]>;
 
-  /**
-   * Получает список ВТ, закрепленный за пользователем
-   *
-   * @param idTn - IdTn пользователя
-   */
-  abstract queryUserItems(idTn: number): Observable<SvtItem[]>;
+  // /**
+  //  * Получает список ВТ, закрепленный за пользователем
+  //  *
+  //  * @param idTn - IdTn пользователя
+  //  */
+  // abstract queryUserItems(idTn: number): Observable<SvtItem[]>;
 }

@@ -5,6 +5,8 @@ import {
   SdRequestFacadeStub,
   EmployeeFacade,
   EmployeeFacadeStub,
+  SvtFacade,
+  SvtFacadeStub,
 } from '@orbita/orbita-ui/domain-logic';
 import { DatetimePipe } from '@orbita/orbita-ui/ui';
 
@@ -21,6 +23,7 @@ describe('OverviewBlockComponent', () => {
       providers: [
         { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
         { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
+        { provide: SvtFacade, useClass: SvtFacadeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

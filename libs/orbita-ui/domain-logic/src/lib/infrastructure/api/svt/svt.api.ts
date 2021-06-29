@@ -1,3 +1,4 @@
+import { tap } from 'rxjs/operators';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
@@ -13,29 +14,29 @@ import { PrimeFilter } from './../../../entities/prime-filter.interface';
   providedIn: 'root',
 })
 export class SvtApi implements SvtApiAbstract {
-  readonly api = this.env.svtApi;
+  readonly api = `${this.env.serverApiUrl}/svt`;
 
   constructor(private http: HttpClient, @Inject(ORBITA_UI_ENV_TOKEN) private env: OrbitaUiEnvironment) {}
 
-  show(barcode: number) {
-    return this.http.get<SvtItem>(`${this.api}/api/v2/invent/items/${barcode}`);
+  showItem(barcode: number) {
+    return this.http.get<SvtItem>(`${this.api}/find_by_barcode/${barcode}`).pipe(tap((data) => console.log(data)));
   }
 
-  queryItems(page: number, perPage: number, filters: PrimeFilter = {}) {
-    const filterValues = Object.keys(filters).reduce((acc, key) => {
-      acc[key] = filters[key].value;
+  // queryItems(page: number, perPage: number, filters: PrimeFilter = {}) {
+  //   const filterValues = Object.keys(filters).reduce((acc, key) => {
+  //     acc[key] = filters[key].value;
 
-      return acc;
-    }, {} as { [key: string]: any });
-    const params = new HttpParams()
-      .append('page', `${page}`)
-      .append('perPage', `${perPage}`)
-      .append('filters', `${JSON.stringify(filterValues)}`);
+  //     return acc;
+  //   }, {} as { [key: string]: any });
+  //   const params = new HttpParams()
+  //     .append('page', `${page}`)
+  //     .append('perPage', `${perPage}`)
+  //     .append('filters', `${JSON.stringify(filterValues)}`);
 
-    return this.http.get<SvtItem[]>(`${this.api}/api/v2/invent/items`, { params });
-  }
+  //   return this.http.get<SvtItem[]>(`${this.api}/api/v2/invent/items`, { params });
+  // }
 
-  queryUserItems(idTn: number) {
-    return this.http.get<SvtItem[]>(`${this.api}/user_isses/${idTn}/items`);
-  }
+  // queryUserItems(idTn: number) {
+  //   return this.http.get<SvtItem[]>(`${this.api}/user_isses/${idTn}/items`);
+  // }
 }

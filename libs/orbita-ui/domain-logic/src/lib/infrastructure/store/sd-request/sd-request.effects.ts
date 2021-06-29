@@ -13,6 +13,7 @@ import * as WorkActions from '../work/work.actions';
 import * as HistoryActions from '../history/history.actions';
 import * as WorkerActions from '../worker/worker.actions';
 import * as EmployeeActions from '../employee/employee.actions';
+import * as SvtItemActions from '../svt-item/svt-item.actions';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../services/sd-request-cache.service';
 
@@ -49,7 +50,10 @@ export class SdRequestEffects {
   loadSelectedSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.loadSelectedSuccess),
-      map((action) => EmployeeActions.selectEmployee({ idTn: action.sdRequest.source_snapshot.id_tn }))
+      switchMap((action) => [
+        EmployeeActions.selectEmployee({ idTn: action.sdRequest.source_snapshot.id_tn }),
+        SvtItemActions.select({ barcode: action.sdRequest.source_snapshot.barcode }),
+      ])
     )
   );
 }

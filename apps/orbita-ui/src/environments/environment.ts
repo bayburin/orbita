@@ -9,7 +9,6 @@ export const environment: OrbitaUiEnvironment = {
   serverApiUrl: 'https://localhost.iss-reshetnev.ru:9443/api/v1',
   actionCableUrl: 'wss://localhost.iss-reshetnev.ru:9443/cable',
   serviceDeskApi: 'https://inv-dev.iss-reshetnev.ru/api',
-  svtApi: 'https://svt.iss-reshetnev.ru',
   auth: {
     clientId: '83',
     redirectUrl: 'https://localhost.iss-reshetnev.ru:4200/oauth2/callback',
@@ -17,9 +16,9 @@ export const environment: OrbitaUiEnvironment = {
     appName: 'Орбита (dev)',
     jwtOptions: {
       allowedDomains: ['localhost.iss-reshetnev.ru:9443'],
-      disallowedRoutes: []
-    }
-  }
+      disallowedRoutes: [],
+    },
+  },
 };
 
 /*

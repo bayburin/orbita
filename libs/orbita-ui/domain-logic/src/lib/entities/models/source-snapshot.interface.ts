@@ -68,9 +68,14 @@ export interface SourceSnapshot {
   readonly invent_num: string;
 
   /**
-   * Штрих-код ВТ
+   * Уникальный идентификатор ВТ (Раньше использовался как штрих-код)
    */
   readonly svt_item_id: number;
+
+  /**
+   * Штрих-код ВТ
+   */
+  readonly barcode: number;
 
   /**
    * Расположение ВТ
