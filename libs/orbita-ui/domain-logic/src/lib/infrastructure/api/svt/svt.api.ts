@@ -1,4 +1,3 @@
-import { tap } from 'rxjs/operators';
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
@@ -19,7 +18,7 @@ export class SvtApi implements SvtApiAbstract {
   constructor(private http: HttpClient, @Inject(ORBITA_UI_ENV_TOKEN) private env: OrbitaUiEnvironment) {}
 
   showItem(barcode: number) {
-    return this.http.get<SvtItem>(`${this.api}/find_by_barcode/${barcode}`).pipe(tap((data) => console.log(data)));
+    return this.http.get<SvtItem>(`${this.api}/find_by_barcode/${barcode}`);
   }
 
   // queryItems(page: number, perPage: number, filters: PrimeFilter = {}) {

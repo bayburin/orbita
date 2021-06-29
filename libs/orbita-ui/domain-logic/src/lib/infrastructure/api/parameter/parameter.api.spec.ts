@@ -1,9 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
-import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ORBITA_UI_ENV_TOKEN, orbitaUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { ParameterApi } from './parameter.api';
 import { Parameter } from './../../../entities/models/parameter.interface';
@@ -19,7 +16,7 @@ describe('ParameterApi', () => {
         ParameterApi,
         {
           provide: ORBITA_UI_ENV_TOKEN,
-          useValue: { serverApiUrl: 'http://test' },
+          useValue: orbitaUiEnvironmentStub,
         },
       ],
     });
@@ -33,7 +30,7 @@ describe('ParameterApi', () => {
   });
 
   describe('query()', () => {
-    const api = 'http://test/parameters';
+    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/parameters`;
     const response = { parameters: [] as Parameter[] };
 
     it('should return requests', () => {

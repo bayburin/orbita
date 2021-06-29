@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
+import { ORBITA_UI_ENV_TOKEN, orbitaUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { ServiceDeskApi } from './service-desk.api';
 
@@ -15,7 +15,7 @@ describe('ServiceDeskApi', () => {
         ServiceDeskApi,
         {
           provide: ORBITA_UI_ENV_TOKEN,
-          useValue: { serviceDeskApi: 'http://test' },
+          useValue: orbitaUiEnvironmentStub,
         },
       ],
     });
@@ -29,7 +29,7 @@ describe('ServiceDeskApi', () => {
   });
 
   describe('getTickets()', () => {
-    const api = 'http://test/v2/tickets';
+    const api = `${orbitaUiEnvironmentStub.serviceDeskApi}/v2/tickets`;
     const sdTickets = [{ id: 1 }, { id: 2 }];
 
     it('should return free_sd_request_types', () => {

@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
+import { ORBITA_UI_ENV_TOKEN, orbitaUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { SdRequestApi } from './sd-request.api';
 
@@ -15,7 +15,7 @@ describe('SdRequestApi', () => {
         SdRequestApi,
         {
           provide: ORBITA_UI_ENV_TOKEN,
-          useValue: { serverApiUrl: 'http://test' },
+          useValue: orbitaUiEnvironmentStub,
         },
       ],
     });
@@ -29,7 +29,7 @@ describe('SdRequestApi', () => {
   });
 
   describe('query()', () => {
-    const api = 'http://test/sd_requests';
+    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/sd_requests`;
     const sdRequests = [{ id: 1 }, { id: 2 }];
 
     it('should return requests', () => {
@@ -47,7 +47,7 @@ describe('SdRequestApi', () => {
   });
 
   describe('show()', () => {
-    const api = 'http://test/sd_requests/1';
+    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/sd_requests/1`;
     const sdRequest = { id: 1 };
 
     it('should return request', () => {

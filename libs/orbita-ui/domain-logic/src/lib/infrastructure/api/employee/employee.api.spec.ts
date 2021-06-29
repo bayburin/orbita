@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
+import { ORBITA_UI_ENV_TOKEN, orbitaUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { EmployeeApi } from './employee.api';
 
@@ -15,7 +15,7 @@ describe('Employeepi', () => {
         EmployeeApi,
         {
           provide: ORBITA_UI_ENV_TOKEN,
-          useValue: { serverApiUrl: 'http://test' },
+          useValue: { serverApiUrl: orbitaUiEnvironmentStub },
         },
       ],
     });
@@ -29,7 +29,7 @@ describe('Employeepi', () => {
   });
 
   describe('show()', () => {
-    const api = 'http://test/employees/1';
+    const api = `${orbitaUiEnvironmentStub}/employees/1`;
     const employee = { id: 1 };
 
     it('should return request', () => {

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
-import { map, switchMap, withLatestFrom, catchError } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom, catchError, filter } from 'rxjs/operators';
+import { isNumber } from '@orbita/orbita-ui/utils';
 
 import { SvtApi } from './../../api/svt/svt.api';
 import * as SvtItemFeature from './svt-item.reducer';
@@ -21,6 +22,7 @@ export class SvtItemEffects {
     this.actions$.pipe(
       ofType(SvtItemActions.loadSelected),
       withLatestFrom(this.store.select(SvtItemSelectors.getSelectedId)),
+      filter(([_action, barcode]) => isNumber(barcode)),
       switchMap(([_action, barcode]) =>
         this.svtItemApi.showItem(barcode).pipe(
           map((svtItem) => SvtItemActions.loadSelectedSuccess({ svtItem })),

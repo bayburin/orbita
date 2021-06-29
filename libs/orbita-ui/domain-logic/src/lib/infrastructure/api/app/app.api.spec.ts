@@ -1,9 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
-import { ORBITA_UI_ENV_TOKEN } from '@orbita/shared/environment';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { ORBITA_UI_ENV_TOKEN, orbitaUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { AppApi } from './app.api';
 import { Group } from './../../../entities/models/group.interface';
@@ -20,7 +17,7 @@ describe('AppApi', () => {
         AppApi,
         {
           provide: ORBITA_UI_ENV_TOKEN,
-          useValue: { serverApiUrl: 'http://test' },
+          useValue: orbitaUiEnvironmentStub,
         },
       ],
     });
@@ -34,7 +31,7 @@ describe('AppApi', () => {
   });
 
   describe('init()', () => {
-    const api = 'http://test/init';
+    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/init`;
     const initData = {
       groups: [] as Group[],
       users: [] as User[],
