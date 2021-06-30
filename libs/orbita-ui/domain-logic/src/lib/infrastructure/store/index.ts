@@ -17,6 +17,7 @@ import * as fromSdService from './sd-service/sd-service.reducer';
 import * as fromSdTicket from './sd-ticket/sd-ticket.reducer';
 import * as fromEmployee from './employee/employee.reducer';
 import * as fromSvtItem from './svt-item/svt-item.reducer';
+import * as fromHost from './host/host.reducer';
 
 export const TICKET_SYSTEM_FEATURE_KEY = 'orbitaUi';
 
@@ -35,7 +36,8 @@ export interface OrbitaUiState
     fromSdService.SdServicePartialState,
     fromSdTicket.SdTicketPartialState,
     fromEmployee.EmployeePartialState,
-    fromSvtItem.SvtItemPartialState {}
+    fromSvtItem.SvtItemPartialState,
+    fromHost.HostPartialState {}
 
 export const reducer: ActionReducerMap<OrbitaUiState> = {
   [fromApp.APP_FEATURE_KEY]: fromApp.reducer,
@@ -53,6 +55,7 @@ export const reducer: ActionReducerMap<OrbitaUiState> = {
   [fromSdTicket.SD_TICKET_FEATURE_KEY]: fromSdTicket.reducer,
   [fromEmployee.EMPLOYEE_FEATURE_KEY]: fromEmployee.reducer,
   [fromSvtItem.SVT_ITEM_FEATURE_KEY]: fromSvtItem.reducer,
+  [fromHost.HOST_FEATURE_KEY]: fromHost.reducer,
 };
 
 export const initialState: OrbitaUiState = {
@@ -71,6 +74,7 @@ export const initialState: OrbitaUiState = {
   [fromSdTicket.SD_TICKET_FEATURE_KEY]: fromSdTicket.initialState,
   [fromEmployee.EMPLOYEE_FEATURE_KEY]: fromEmployee.initialState,
   [fromSvtItem.SVT_ITEM_FEATURE_KEY]: fromSvtItem.initialState,
+  [fromHost.HOST_FEATURE_KEY]: fromHost.initialState,
 };
 
 export const getOrbitaUiState = createFeatureSelector<OrbitaUiState>(TICKET_SYSTEM_FEATURE_KEY);

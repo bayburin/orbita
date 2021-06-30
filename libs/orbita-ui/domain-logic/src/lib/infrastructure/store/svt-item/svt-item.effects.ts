@@ -34,8 +34,7 @@ export class SvtItemEffects {
   select$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SvtItemActions.select),
-      withLatestFrom(this.store.select(SvtItemSelectors.getSelectedId)),
-      filter(([_action, barcode]) => isNumber(barcode)),
+      filter((action) => isNumber(action.barcode)),
       map(SvtItemActions.loadSelected)
     )
   );
