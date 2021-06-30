@@ -36,6 +36,7 @@ const hostReducer = createReducer(
       loaded: true,
     })
   ),
+  on(HostActions.loadSelectedNotFound, (state) => ({ ...state, loading: false, loaded: false })),
   on(HostActions.loadSelectedFailure, (state, { error }) => ({ ...state, error, loading: false })),
   on(HostActions.select, (state, { inventNum }) => ({ ...state, selectedId: inventNum }))
 );

@@ -30,7 +30,7 @@ describe('AuthCenterApi', () => {
   });
 
   describe('showHost()', () => {
-    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/auth-center/show_host`;
+    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/auth_center/show_host`;
     const host = { id: '123' };
 
     it('should return free_sd_request_types', () => {

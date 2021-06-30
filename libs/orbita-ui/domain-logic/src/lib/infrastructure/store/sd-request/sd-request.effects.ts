@@ -14,6 +14,7 @@ import * as HistoryActions from '../history/history.actions';
 import * as WorkerActions from '../worker/worker.actions';
 import * as EmployeeActions from '../employee/employee.actions';
 import * as SvtItemActions from '../svt-item/svt-item.actions';
+import * as HostActions from '../host/host.actions';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../services/sd-request-cache.service';
 
@@ -53,6 +54,7 @@ export class SdRequestEffects {
       switchMap((action) => [
         EmployeeActions.selectEmployee({ idTn: action.sdRequest.source_snapshot.id_tn }),
         SvtItemActions.select({ barcode: action.sdRequest.source_snapshot.barcode }),
+        HostActions.select({ inventNum: action.sdRequest.source_snapshot.invent_num }),
       ])
     )
   );

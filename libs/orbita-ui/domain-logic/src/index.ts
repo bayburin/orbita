@@ -32,3 +32,5 @@ export * from './lib/application/employee/employee.facade';
 export * from './lib/application/employee/employee.facade.stub';
 export * from './lib/application/svt/svt.facade';
 export * from './lib/application/svt/svt.facade.stub';
+export * from './lib/application/auth-center/auth-center.facade';
+export * from './lib/application/auth-center/auth-center.facade.stub';

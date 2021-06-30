@@ -154,8 +154,63 @@
               </ng-template>
             </ng-template>
           </p-accordionTab>
-          <p-accordionTab header="Хост">
-            <lib-panel-placeholder>[Пусто]</lib-panel-placeholder>
+          <p-accordionTab [selected]="(loadingHost$ | async) === false && (host$ | async)">
+            <ng-template pTemplate="header">
+              <div class="panel-header">
+                <span>Хост</span>
+                <span *ngIf="loadingHost$ | async">
+                  <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
+                </span>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="content">
+              <ng-container *ngIf="loadingHost$ | async; then loadingData; else loadingHostComplete"></ng-container>
+              <ng-template #loadingHostComplete>
+                <div *ngIf="loadedHost$ | async; else emptyData">
+                  <div *ngIf="host$ | async as host; else unknownData">
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>IP</div>
+                      <div value>{{ host.ip }}</div>
+                    </lib-detail-row>
+
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>MAC</div>
+                      <div value>{{ host.mac }}</div>
+                    </lib-detail-row>
+
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>ОС</div>
+                      <div value>{{ host.os }}</div>
+                    </lib-detail-row>
+
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>Расположение</div>
+                      <div value>{{ host.room }}</div>
+                    </lib-detail-row>
+
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>ФИО владельца</div>
+                      <div value>{{ host.user }}</div>
+                    </lib-detail-row>
+
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>Отдел</div>
+                      <div value>{{ host.division }}</div>
+                    </lib-detail-row>
+
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>Аудит</div>
+                      <div value>{{ host.cms }}</div>
+                    </lib-detail-row>
+
+                    <lib-detail-row class="p-mb-2">
+                      <div attribute>Антивирус</div>
+                      <div value>{{ host.csa }}</div>
+                    </lib-detail-row>
+                  </div>
+                </div>
+              </ng-template>
+            </ng-template>
           </p-accordionTab>
           <p-accordionTab [selected]="(loadingSvtItem$ | async) === false && (svtItem$ | async)">
             <ng-template pTemplate="header">

@@ -10,6 +10,7 @@ import {
   getViewModelPriority,
   EmployeeFacade,
   SvtFacade,
+  AuthCenterFacade,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -28,11 +29,15 @@ export class OverviewBlockComponent implements OnInit {
   loadingSvtItem$ = this.svtFacade.loadingItem$;
   loadedSvtItem$ = this.svtFacade.loadedItem$;
   svtItem$ = this.svtFacade.selectedItem$;
+  loadingHost$ = this.acFacade.loadingHost$;
+  loadedHost$ = this.acFacade.loadedHost$;
+  host$ = this.acFacade.selectedHost$;
 
   constructor(
     private sdRequestFacade: SdRequestFacade,
     private employeeFacade: EmployeeFacade,
-    private svtFacade: SvtFacade
+    private svtFacade: SvtFacade,
+    private acFacade: AuthCenterFacade
   ) {}
 
   ngOnInit(): void {

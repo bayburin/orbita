@@ -36,6 +36,17 @@ describe('HostReducer', () => {
     });
   });
 
+  describe('loadSelectedNotFound', () => {
+    it('should set attributes', () => {
+      action = HostActions.loadSelectedNotFound();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
+      expect(result.ids.length).toBe(0);
+    });
+  });
+
   describe('loadSelectedFailure', () => {
     it('should set attributes', () => {
       const error = 'error message';

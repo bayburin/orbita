@@ -13,7 +13,7 @@ import { HostFilter } from './../../../entities/filter.interface';
   providedIn: 'root',
 })
 export class AuthCenterApi implements AuthCenterApiAbstract {
-  readonly api = `${this.env.serverApiUrl}/auth-center`;
+  readonly api = `${this.env.serverApiUrl}/auth_center`;
 
   constructor(private http: HttpClient, @Inject(ORBITA_UI_ENV_TOKEN) private env: OrbitaUiEnvironment) {}
 

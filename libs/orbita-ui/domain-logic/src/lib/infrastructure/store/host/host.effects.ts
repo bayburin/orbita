@@ -26,7 +26,7 @@ export class HostEffects {
         const filter = new HostFilterBuilder().idField('id').id(inventNum).build();
 
         return this.acApi.showHost(filter).pipe(
-          map((host) => HostActions.loadSelectedSuccess({ host })),
+          map((host) => (host.id ? HostActions.loadSelectedSuccess({ host }) : HostActions.loadSelectedNotFound())),
           catchError((error) => of(HostActions.loadSelectedFailure({ error })))
         );
       })

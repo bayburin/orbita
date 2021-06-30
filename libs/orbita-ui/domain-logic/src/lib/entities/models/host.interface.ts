@@ -23,6 +23,11 @@ export interface Host {
   readonly tn: string;
 
   /**
+   * Расположение
+   */
+  readonly room: string;
+
+  /**
    * ФИО текущего владельца
    */
   readonly user: string;
