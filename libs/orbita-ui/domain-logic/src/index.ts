@@ -9,6 +9,7 @@ export * from './lib/entities/models/event-type.interface';
 export * from './lib/entities/models/auth/current-user.interface';
 export * from './lib/entities/models/sd/sd-service.interface';
 export * from './lib/entities/models/sd/sd-ticket.interface';
+export * from './lib/entities/models/source-snapshot.interface';
 
 export * from './lib/entities/view-models/sd-request-view-model.interface';
 export * from './lib/entities/view-models/work-view-model.interface';

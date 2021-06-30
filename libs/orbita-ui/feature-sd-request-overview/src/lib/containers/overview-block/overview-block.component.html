@@ -75,6 +75,9 @@
                 eligendi optio cumque nihil impedit quo minus.
               </p>
             </p-tabPanel>
+            <p-tabPanel header="Данные на момент создания">
+              <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>
+            </p-tabPanel>
           </p-tabView>
         </div>
       </div>

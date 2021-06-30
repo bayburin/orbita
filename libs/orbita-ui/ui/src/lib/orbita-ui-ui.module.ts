@@ -22,6 +22,7 @@ import { TicketOverviewSkeletonComponent } from './components/ticket-overview-sk
 import { PageErrorComponent } from './components/page-error/page-error.component';
 import { PanelPlaceholderComponent } from './components/panel-placeholder/panel-placeholder.component';
 import { DetailRowComponent } from './components/detail-row/detail-row.component';
+import { SourceSnapshotComponent } from './components/source-snapshot/source-snapshot.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -44,7 +45,7 @@ const modules: any[] = [FormsModule, OrbitSpinnerModule];
 
 @NgModule({
   imports: [CommonModule, PrimengModule, ...modules],
-  exports: [...pipes, ...components, PrimengModule, ...modules],
-  declarations: [...pipes, ...components],
+  exports: [...pipes, ...components, PrimengModule, ...modules, SourceSnapshotComponent],
+  declarations: [...pipes, ...components, SourceSnapshotComponent],
 })
 export class OrbitaUiUiModule {}
