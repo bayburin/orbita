@@ -10,6 +10,7 @@ export * from './lib/entities/models/auth/current-user.interface';
 export * from './lib/entities/models/sd/sd-service.interface';
 export * from './lib/entities/models/sd/sd-ticket.interface';
 export * from './lib/entities/models/source-snapshot.interface';
+export * from './lib/entities/models/host.interface';
 
 export * from './lib/entities/view-models/sd-request-view-model.interface';
 export * from './lib/entities/view-models/work-view-model.interface';
@@ -20,6 +21,7 @@ export * from './lib/entities/view-models/priorities-view-model.enum';
 export * from './lib/entities/view-models/statuses-view-model.enum';
 export * from './lib/entities/view-models/worker-view-model.interface';
 export * from './lib/entities/view-models/user-group.interface';
+export * from './lib/entities/view-models/cms-statuses-view-model.enum';
 
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';

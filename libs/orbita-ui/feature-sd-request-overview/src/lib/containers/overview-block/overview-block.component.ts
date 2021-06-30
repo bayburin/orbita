@@ -11,6 +11,9 @@ import {
   EmployeeFacade,
   SvtFacade,
   AuthCenterFacade,
+  CmsStatuses,
+  CmsStatusesViewModel,
+  getViewModelCmsStatuses,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -64,5 +67,14 @@ export class OverviewBlockComponent implements OnInit {
    */
   priority(priority: Priorities): PrioritiesViewModel {
     return getViewModelPriority(priority);
+  }
+
+  /**
+   * Возвращает объект CmsStatusesViewModel, в котором содержатся данные о статусе программы Аудит
+   *
+   * @param status - статус
+   */
+  cmsStatus(status: CmsStatuses): CmsStatusesViewModel {
+    return getViewModelCmsStatuses(status);
   }
 }
