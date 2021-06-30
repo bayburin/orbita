@@ -14,6 +14,9 @@ import {
   CmsStatuses,
   CmsStatusesViewModel,
   getViewModelCmsStatuses,
+  CsaStatuses,
+  CsaStatusesViewModel,
+  getViewModelCsaStatuses,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -76,5 +79,14 @@ export class OverviewBlockComponent implements OnInit {
    */
   cmsStatus(status: CmsStatuses): CmsStatusesViewModel {
     return getViewModelCmsStatuses(status);
+  }
+
+  /**
+   * Возвращает объект CmsStatusesViewModel, в котором содержатся данные о статусе антивируса
+   *
+   * @param status - статус
+   */
+  csaStatus(status: CsaStatuses): CsaStatusesViewModel {
+    return getViewModelCsaStatuses(status);
   }
 }
