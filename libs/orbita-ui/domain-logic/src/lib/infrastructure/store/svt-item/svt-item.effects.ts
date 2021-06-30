@@ -24,7 +24,9 @@ export class SvtItemEffects {
       withLatestFrom(this.store.select(SvtItemSelectors.getSelectedId)),
       switchMap(([_action, barcode]) =>
         this.svtItemApi.showItem(barcode).pipe(
-          map((svtItem) => SvtItemActions.loadSelectedSuccess({ svtItem })),
+          map((svtItem) =>
+            svtItem.item_id ? SvtItemActions.loadSelectedSuccess({ svtItem }) : SvtItemActions.loadSelectedNotFound()
+          ),
           catchError((error) => of(SvtItemActions.loadSelectedFailure({ error })))
         )
       )

@@ -43,6 +43,7 @@ describe('HostReducer', () => {
 
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(false);
+      expect(result.error).toBeNull();
       expect(result.ids.length).toBe(0);
     });
   });

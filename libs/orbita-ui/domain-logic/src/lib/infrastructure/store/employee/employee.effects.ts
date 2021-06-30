@@ -24,7 +24,11 @@ export class EmployeeEffects {
       withLatestFrom(this.store.select(EmployeeSelectors.getEmployeeSelectedId)),
       switchMap(([_action, idTn]) =>
         this.employeeApi.show(idTn).pipe(
-          map((data) => EmployeeActions.loadSingleEmployeeSuccess({ employee: data.employee })),
+          map((employee) =>
+            employee.id
+              ? EmployeeActions.loadSingleEmployeeSuccess({ employee: employee })
+              : EmployeeActions.loadSingleEmployeeNotFound()
+          ),
           catchError((error) => of(EmployeeActions.loadSingleEmployeeFailure({ error })))
         )
       )
@@ -34,8 +38,7 @@ export class EmployeeEffects {
   selectEmployee$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeeActions.selectEmployee),
-      withLatestFrom(this.store.select(EmployeeSelectors.getEmployeeSelectedId)),
-      filter(([_action, idTn]) => isNumber(idTn)),
+      filter((action) => isNumber(action.idTn)),
       map(EmployeeActions.loadSingleEmployee)
     )
   );

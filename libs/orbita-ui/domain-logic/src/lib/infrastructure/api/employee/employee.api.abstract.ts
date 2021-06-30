@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { EmployeeServerData } from './../../../entities/server-data/employee-server-data.interface';
+import { Employee } from './../../../entities/models/employee/employee.interface';
 
 export abstract class EmployeeApiAbstract {
   /**
@@ -13,5 +13,5 @@ export abstract class EmployeeApiAbstract {
    *
    * @param idTn - IdTn пользователя
    */
-  abstract show(idTn: number): Observable<EmployeeServerData>;
+  abstract show(idTn: number): Observable<Employee>;
 }

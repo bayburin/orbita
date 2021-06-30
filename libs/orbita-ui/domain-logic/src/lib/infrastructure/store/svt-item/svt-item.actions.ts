@@ -12,6 +12,8 @@ export const loadSelected = createAction('[SvtItem/API] Load Selected');
 
 export const loadSelectedSuccess = createAction('[SvtItem/API] Load Selected Success', props<{ svtItem: SvtItem }>());
 
+export const loadSelectedNotFound = createAction('[SvtItem/API] Load Selected Not Found');
+
 export const loadSelectedFailure = createAction('[SvtItem/API] Load Selected Failure', props<{ error: any }>());
 
 export const select = createAction('[SvtItem] Select', props<{ barcode: number }>());

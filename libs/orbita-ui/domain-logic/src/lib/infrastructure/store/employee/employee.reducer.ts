@@ -44,6 +44,14 @@ const employeeReducer = createReducer(
     ...state,
     employee: employeeAdapter.setOne(employee, { ...state.employee, loaded: true, loading: false }),
   })),
+  on(EmployeeActions.loadSingleEmployeeNotFound, (state) => ({
+    ...state,
+    employee: {
+      ...state.employee,
+      loading: false,
+      loaded: false,
+    },
+  })),
   on(EmployeeActions.loadSingleEmployeeFailure, (state, { error }) => ({
     ...state,
     employee: {

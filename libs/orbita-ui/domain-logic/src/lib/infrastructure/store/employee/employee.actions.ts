@@ -9,6 +9,8 @@ export const loadSingleEmployeeSuccess = createAction(
   props<{ employee: Employee }>()
 );
 
+export const loadSingleEmployeeNotFound = createAction('[Employee/API] Load Single Employee Not Found');
+
 export const loadSingleEmployeeFailure = createAction(
   '[Employee/API] Load Single Employee Failure',
   props<{ error: any }>()

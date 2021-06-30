@@ -6,6 +6,6 @@ export class EmployeeApi implements EmployeeApiAbstract {
   readonly api = '';
 
   show() {
-    return of({ employee: null });
+    return of(null);
   }
 }

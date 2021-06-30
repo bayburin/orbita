@@ -38,6 +38,18 @@ describe('EmployeeReducer', () => {
     });
   });
 
+  describe('loadSingleEmployeeNotFound', () => {
+    it('should change attributes', () => {
+      action = EmployeeActions.loadSingleEmployeeNotFound();
+      const result: EmployeeState = reducer(initialState, action).employee;
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBeNull();
+      expect(result.ids.length).toBe(0);
+    });
+  });
+
   describe('loadSingleEmployeeFailure', () => {
     it('should change attributes', () => {
       const error = 'error message';

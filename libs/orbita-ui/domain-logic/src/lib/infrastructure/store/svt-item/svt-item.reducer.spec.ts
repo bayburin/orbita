@@ -36,10 +36,22 @@ describe('SvtItemReducer', () => {
     });
   });
 
-  describe('loadAllFailure', () => {
+  describe('loadSelectedFailure', () => {
+    it('should set attributes', () => {
+      action = SvtItemActions.loadSelectedNotFound();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBeNull();
+      expect(result.ids.length).toBe(0);
+    });
+  });
+
+  describe('loadSelectedFailure', () => {
     it('should set attributes', () => {
       const error = 'error message';
-      action = SvtItemActions.loadAllFailure({ error });
+      action = SvtItemActions.loadSelectedFailure({ error });
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(false);
