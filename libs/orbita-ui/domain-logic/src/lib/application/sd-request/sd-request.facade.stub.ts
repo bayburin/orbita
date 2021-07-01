@@ -26,4 +26,8 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   loadSelectedSdRequest() {
     /** */
   }
+
+  clearSelected() {
+    /** */
+  }
 }

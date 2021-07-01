@@ -17,3 +17,5 @@ export const loadSelectedNotFound = createAction('[SvtItem/API] Load Selected No
 export const loadSelectedFailure = createAction('[SvtItem/API] Load Selected Failure', props<{ error: any }>());
 
 export const select = createAction('[SvtItem] Select', props<{ barcode: number }>());
+
+export const clearSelected = createAction('[SvtItem] Clear Selected');

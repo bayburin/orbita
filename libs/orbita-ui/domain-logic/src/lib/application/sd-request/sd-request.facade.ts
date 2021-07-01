@@ -126,4 +126,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   loadSelectedSdRequest() {
     this.store.dispatch(SdRequestActions.loadSelected());
   }
+
+  clearSelected() {
+    this.store.dispatch(SdRequestActions.clearSelected());
+  }
 }

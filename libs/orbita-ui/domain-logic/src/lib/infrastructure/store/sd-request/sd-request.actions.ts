@@ -25,3 +25,5 @@ export const loadSelectedSuccess = createAction(
 );
 
 export const loadSelectedFailure = createAction('[SdRequest/API] Load Selected Failure', props<{ error: any }>());
+
+export const clearSelected = createAction('[SdRequest] Clear Selected');

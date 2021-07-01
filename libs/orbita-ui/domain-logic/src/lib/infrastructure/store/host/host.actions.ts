@@ -11,3 +11,5 @@ export const loadSelectedNotFound = createAction('[Host/API] Load Selected Not F
 export const loadSelectedFailure = createAction('[Host/API] Load Selected Failure', props<{ error: any }>());
 
 export const select = createAction('[Host] Select', props<{ inventNum: string }>());
+
+export const clearSelected = createAction('[Host] Clear Selected');

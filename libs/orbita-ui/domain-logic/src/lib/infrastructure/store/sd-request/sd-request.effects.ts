@@ -58,4 +58,15 @@ export class SdRequestEffects {
       ])
     )
   );
+
+  clearSelected$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.clearSelected),
+      switchMap(() => [
+        EmployeeActions.clearSelectedEmployee(),
+        SvtItemActions.clearSelected(),
+        HostActions.clearSelected(),
+      ])
+    )
+  );
 }

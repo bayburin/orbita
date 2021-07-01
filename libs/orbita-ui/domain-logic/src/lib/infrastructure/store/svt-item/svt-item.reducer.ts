@@ -44,7 +44,8 @@ const svtItemReducer = createReducer(
   ),
   on(SvtItemActions.loadSelectedNotFound, (state) => ({ ...state, loading: false, loaded: false })),
   on(SvtItemActions.loadSelectedFailure, (state, { error }) => ({ ...state, error, loading: false })),
-  on(SvtItemActions.select, (state, { barcode }) => ({ ...state, selectedId: barcode }))
+  on(SvtItemActions.select, (state, { barcode }) => ({ ...state, selectedId: barcode })),
+  on(SvtItemActions.clearSelected, (state) => ({ ...state, selectedId: null, loaded: false }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

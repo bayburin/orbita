@@ -120,6 +120,16 @@ describe('SdRequestReducer', () => {
     });
   });
 
+  describe('clearSelected', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.clearSelected();
+      const result: State = reducer(initialState, action);
+
+      expect(result.selected).toBeNull();
+      expect(result.loaded).toBe(false);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       action = {} as any;

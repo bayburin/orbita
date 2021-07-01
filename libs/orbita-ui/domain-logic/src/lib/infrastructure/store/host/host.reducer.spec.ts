@@ -60,6 +60,16 @@ describe('HostReducer', () => {
     });
   });
 
+  describe('clearSelected', () => {
+    it('should set attributes', () => {
+      action = HostActions.clearSelected();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.selectedId).toBeNull();
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;

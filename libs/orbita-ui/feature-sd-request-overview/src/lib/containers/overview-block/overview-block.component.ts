@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   SdRequestFacade,
   HistoryViewModel,
@@ -24,7 +24,7 @@ import {
   templateUrl: './overview-block.component.html',
   styleUrls: ['./overview-block.component.scss'],
 })
-export class OverviewBlockComponent implements OnInit {
+export class OverviewBlockComponent implements OnInit, OnDestroy {
   sdRequest$ = this.sdRequestFacade.selected$;
   loading$ = this.sdRequestFacade.loading$;
   error$ = this.sdRequestFacade.error$;
@@ -48,6 +48,10 @@ export class OverviewBlockComponent implements OnInit {
 
   ngOnInit(): void {
     this.sdRequestFacade.loadSelectedSdRequest();
+  }
+
+  ngOnDestroy(): void {
+    this.sdRequestFacade.clearSelected();
   }
 
   trackByHistory(index: number, history: HistoryViewModel): number {

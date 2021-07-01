@@ -66,6 +66,14 @@ const employeeReducer = createReducer(
       ...state.employee,
       selectedId: idTn,
     },
+  })),
+  on(EmployeeActions.clearSelectedEmployee, (state) => ({
+    ...state,
+    employee: {
+      ...state.employee,
+      loaded: false,
+      selectedId: null,
+    },
   }))
 );
 

@@ -292,6 +292,16 @@ describe('SdRequestFacade', () => {
         expect(spy).toHaveBeenCalledWith(SdRequestActions.loadSelected());
       });
     });
+
+    describe('clearSelected()', () => {
+      it('should call LoadSelected action', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        facade.clearSelected();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.clearSelected());
+      });
+    });
   });
 
   describe('used in NgModule', () => {

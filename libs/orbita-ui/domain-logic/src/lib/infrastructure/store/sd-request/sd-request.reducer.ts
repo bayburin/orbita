@@ -98,6 +98,11 @@ const sdRequestReducer = createReducer(
     ...state,
     error,
     loading: false,
+  })),
+  on(SdRequestActions.clearSelected, (state) => ({
+    ...state,
+    loaded: false,
+    selected: null,
   }))
 );
 

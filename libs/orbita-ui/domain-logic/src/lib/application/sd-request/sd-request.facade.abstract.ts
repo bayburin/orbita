@@ -66,4 +66,9 @@ export abstract class SdRequestFacadeAbstract {
    * Загружает выбранную заявку
    */
   abstract loadSelectedSdRequest(): void;
+
+  /**
+   * Очищает данные о выбранной заявке и связанные с ней объекты
+   */
+  abstract clearSelected(): void;
 }

@@ -17,3 +17,5 @@ export const loadSingleEmployeeFailure = createAction(
 );
 
 export const selectEmployee = createAction('[Employee] Select Employee', props<{ idTn: number }>());
+
+export const clearSelectedEmployee = createAction('[Employee] Clear Selected Employee');

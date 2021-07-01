@@ -72,6 +72,16 @@ describe('EmployeeReducer', () => {
     });
   });
 
+  describe('clearSelectedEmployee', () => {
+    it('should change attributes', () => {
+      action = EmployeeActions.clearSelectedEmployee();
+      const result: EmployeeState = reducer(initialState, action).employee;
+
+      expect(result.loaded).toBe(false);
+      expect(result.selectedId).toBe(null);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;
