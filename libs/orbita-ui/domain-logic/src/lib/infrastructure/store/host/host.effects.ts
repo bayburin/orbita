@@ -36,7 +36,7 @@ export class HostEffects {
   select$ = createEffect(() =>
     this.actions$.pipe(
       ofType(HostActions.select),
-      filter((action) => action.inventNum.length > 0),
+      filter((action) => action.inventNum && action.inventNum.length > 0),
       map(HostActions.loadSelected)
     )
   );

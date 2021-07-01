@@ -36,11 +36,7 @@ const svtItemReducer = createReducer(
   initialState,
   on(SvtItemActions.loadSelected, (state) => ({ ...state, loading: true, loaded: false, error: null })),
   on(SvtItemActions.loadSelectedSuccess, (state, { svtItem }) =>
-    svtItemAdapter.setOne(svtItem, {
-      ...state,
-      loading: false,
-      loaded: true,
-    })
+    svtItemAdapter.setOne(svtItem, { ...state, loading: false, loaded: true })
   ),
   on(SvtItemActions.loadSelectedNotFound, (state) => ({ ...state, loading: false, loaded: false })),
   on(SvtItemActions.loadSelectedFailure, (state, { error }) => ({ ...state, error, loading: false })),

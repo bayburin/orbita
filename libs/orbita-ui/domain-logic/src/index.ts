@@ -38,3 +38,5 @@ export * from './lib/application/svt/svt.facade';
 export * from './lib/application/svt/svt.facade.stub';
 export * from './lib/application/auth-center/auth-center.facade';
 export * from './lib/application/auth-center/auth-center.facade.stub';
+export * from './lib/application/parameter/parameter.facade';
+export * from './lib/application/parameter/parameter.facade.stub';

@@ -30,11 +30,7 @@ const hostReducer = createReducer(
   initialState,
   on(HostActions.loadSelected, (state) => ({ ...state, loading: true, loaded: false, error: null })),
   on(HostActions.loadSelectedSuccess, (state, { host }) =>
-    hostAdapter.setOne(host, {
-      ...state,
-      loading: false,
-      loaded: true,
-    })
+    hostAdapter.setOne(host, { ...state, loading: false, loaded: true })
   ),
   on(HostActions.loadSelectedNotFound, (state) => ({ ...state, loading: false, loaded: false })),
   on(HostActions.loadSelectedFailure, (state, { error }) => ({ ...state, error, loading: false })),

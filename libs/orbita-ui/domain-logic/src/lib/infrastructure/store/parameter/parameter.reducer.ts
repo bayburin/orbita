@@ -7,8 +7,9 @@ import { Parameter } from './../../../entities/models/parameter.interface';
 export const PARAMETER_FEATURE_KEY = 'parameter';
 
 export interface State extends EntityState<Parameter> {
+  loading: boolean;
   loaded: boolean;
-  error?: string | null;
+  error: string;
 }
 
 export interface ParameterPartialState {
@@ -18,23 +19,19 @@ export interface ParameterPartialState {
 export const parameterAdapter: EntityAdapter<Parameter> = createEntityAdapter<Parameter>();
 
 export const initialState: State = parameterAdapter.getInitialState({
+  loading: false,
   loaded: false,
+  error: null,
 });
 
 const parameterReducer = createReducer(
   initialState,
-  on(ParameterActions.loadAll, (state) => ({
-    ...state,
-    loaded: false,
-    error: null,
-  })),
+  on(ParameterActions.loadAll, (state) => ({ ...state, loading: true, loaded: false, error: null })),
   on(ParameterActions.loadAllSuccess, (state, { parameters }) =>
-    parameterAdapter.setAll(parameters, { ...state, loaded: true })
+    parameterAdapter.setAll(parameters, { ...state, loading: false, loaded: true })
   ),
-  on(ParameterActions.loadAllFailure, (state, { error }) => ({
-    ...state,
-    error,
-  }))
+  on(ParameterActions.loadAllFailure, (state, { error }) => ({ ...state, error, loading: false })),
+  on(ParameterActions.clearAll, (state) => parameterAdapter.removeAll({ ...state, loaded: false }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

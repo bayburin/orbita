@@ -6,6 +6,9 @@ import * as SvtActions from '../../infrastructure/store/svt-item/svt-item.action
 import * as SvtSelectors from '../../infrastructure/store/svt-item/svt-item.selectors';
 import { SvtFacadeAbstract } from './svt.facade.abstract';
 
+/**
+ * Фасад для работы с данными из СВТ (обращения к хранилищу SvtItem)
+ */
 @Injectable({
   providedIn: 'root',
 })

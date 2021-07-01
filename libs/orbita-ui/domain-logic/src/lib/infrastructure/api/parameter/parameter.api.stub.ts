@@ -6,7 +6,7 @@ import { ParameterApiAbstract } from './parameter.api.abstract';
 export class ParameterApiStub implements ParameterApiAbstract {
   api = '';
 
-  query(claim_id: number): Observable<ParameterServerData> {
+  query(): Observable<ParameterServerData> {
     return of({ parameters: [] });
   }
 }

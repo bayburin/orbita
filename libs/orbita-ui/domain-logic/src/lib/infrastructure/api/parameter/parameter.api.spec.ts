@@ -30,7 +30,7 @@ describe('ParameterApi', () => {
   });
 
   describe('query()', () => {
-    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/parameters`;
+    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/sd_requests`;
     const response = { parameters: [] as Parameter[] };
 
     it('should return requests', () => {
@@ -41,7 +41,7 @@ describe('ParameterApi', () => {
       httpMock
         .expectOne({
           method: 'GET',
-          url: `${api}?claim_id=1`,
+          url: `${api}/1/parameters`,
         })
         .flush(response);
     });

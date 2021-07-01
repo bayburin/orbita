@@ -6,6 +6,9 @@ import * as HostActions from '../../infrastructure/store/host/host.actions';
 import * as HostSelectors from '../../infrastructure/store/host/host.selectors';
 import { AuthCenterFacadeAbstract } from './auth-center.facade.abstract';
 
+/**
+ * Фасад для работы с данными из ЦА (обращения к хранилищу Host)
+ */
 @Injectable({
   providedIn: 'root',
 })

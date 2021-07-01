@@ -17,6 +17,8 @@ import {
   CsaStatuses,
   CsaStatusesViewModel,
   getViewModelCsaStatuses,
+  ParameterFacade,
+  Parameter,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -38,12 +40,16 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   loadingHost$ = this.acFacade.loadingHost$;
   loadedHost$ = this.acFacade.loadedHost$;
   host$ = this.acFacade.selectedHost$;
+  loadingParameters$ = this.parameterFacade.loading$;
+  loadedParameters$ = this.parameterFacade.loaded$;
+  parameters$ = this.parameterFacade.all$;
 
   constructor(
     private sdRequestFacade: SdRequestFacade,
     private employeeFacade: EmployeeFacade,
     private svtFacade: SvtFacade,
-    private acFacade: AuthCenterFacade
+    private acFacade: AuthCenterFacade,
+    private parameterFacade: ParameterFacade
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +62,10 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByHistory(index: number, history: HistoryViewModel): number {
     return history.id;
+  }
+
+  trackByParameter(index: number, parameter: Parameter): number {
+    return parameter.id;
   }
 
   /**

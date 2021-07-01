@@ -13,33 +13,51 @@ describe('ParameterReducer', () => {
     } as unknown) as Parameter);
 
   describe('loadAll()', () => {
-    it('should change "loaded" and "error" attributes', () => {
-      action = ParameterActions.loadAll({ claim_id: 1 });
+    it('should set attributes', () => {
+      action = ParameterActions.loadAll();
       const result: State = reducer(initialState, action);
 
+      expect(result.loading).toBe(true);
       expect(result.loaded).toBe(false);
       expect(result.error).toBe(null);
     });
   });
 
   describe('loadAllSuccess()', () => {
-    it('should change "loaded" and "loading" attributes', () => {
+    it('should set attributes', () => {
       const parameters = [createParameterEntity(1), createParameterEntity(2)];
       action = ParameterActions.loadAllSuccess({ parameters });
       const result: State = reducer(initialState, action);
 
+      expect(result.loading).toBe(false);
       expect(result.loaded).toBe(true);
       expect(result.ids.length).toEqual(2);
     });
   });
 
   describe('loadAllFailure()', () => {
-    it('should change "loading" and "error" attributes', () => {
+    it('should set attributes', () => {
       const error = { message: 'test message' };
       action = ParameterActions.loadAllFailure({ error });
       const result: State = reducer(initialState, action);
 
+      expect(result.loading).toBe(false);
+      expect(result.loaded).toBe(false);
       expect(result.error).toEqual(error);
+    });
+  });
+
+  describe('clearAll()', () => {
+    it('should set attributes', () => {
+      const parameters = [createParameterEntity(1), createParameterEntity(2)];
+      action = ParameterActions.loadAllSuccess({ parameters });
+      const state = reducer(initialState, action);
+      action = ParameterActions.clearAll();
+      const result: State = reducer(state, action);
+
+      expect(result.loading).toBe(false);
+      expect(result.loaded).toBe(false);
+      expect(result.ids.length).toBe(0);
     });
   });
 

@@ -9,11 +9,7 @@ describe('ParameterSelectors', () => {
       id,
       name: name || `name-${id}`,
     } as unknown) as Parameter);
-  const arrEntities = [
-    createParameterEntity(1),
-    createParameterEntity(2),
-    createParameterEntity(3),
-  ];
+  const arrEntities = [createParameterEntity(1), createParameterEntity(2), createParameterEntity(3)];
   const entities = {
     1: arrEntities[0],
     2: arrEntities[1],
@@ -24,9 +20,14 @@ describe('ParameterSelectors', () => {
   beforeEach(() => {
     state = parameterAdapter.setAll(arrEntities, {
       ...initialState,
+      loading: false,
       loaded: true,
       error,
     });
+  });
+
+  it('getLoading() should return "loading" attribute', () => {
+    expect(ParameterSelectors.getLoading.projector(state)).toEqual(false);
   });
 
   it('getLoaded() should return "loaded" attribute', () => {

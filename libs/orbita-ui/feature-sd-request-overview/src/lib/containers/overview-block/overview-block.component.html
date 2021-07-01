@@ -49,13 +49,20 @@
               </p-panel>
             </p-tabPanel>
             <p-tabPanel header="Параметры">
-              <p>
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
-                consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Consectetur, adipisci velit, sed
-                quia non numquam eius modi.
-              </p>
+              <p-panel header="Параметры заявки">
+                <div *ngIf="loadedParameters$ | async; else emptyData">
+                  <div *ngIf="parameters$ | async as parameters">
+                    <div *ngIf="parameters.length > 0; else emptyData">
+                      <div *ngFor="let parameter of parameters; trackByParameter">
+                        <lib-detail-row>
+                          <div attribute>{{ parameter.name }}</div>
+                          <div value>{{ parameter.value }}</div>
+                        </lib-detail-row>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </p-panel>
             </p-tabPanel>
             <p-tabPanel header="Исполнители">
               <p>
