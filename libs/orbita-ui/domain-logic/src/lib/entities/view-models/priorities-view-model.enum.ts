@@ -15,21 +15,21 @@ export interface PrioritiesViewModel {
 }
 
 /**
+ * Фабрика для создания представлений
+ */
+class PrioritiesViewModelFactory {
+  static create(title: string, badge: string): PrioritiesViewModel {
+    return { title, badge };
+  }
+}
+
+/**
  * Объект маппинга приоритета для отображения в представление
  */
 export const prioritiesViewModelMap: Record<Priorities, PrioritiesViewModel> = {
-  [Priorities.DEFAULT]: {
-    title: 'Стандартный',
-    badge: 'default',
-  },
-  [Priorities.LOW]: {
-    title: 'Низкий',
-    badge: 'low',
-  },
-  [Priorities.HIGH]: {
-    title: 'Высокий',
-    badge: 'high',
-  },
+  [Priorities.DEFAULT]: PrioritiesViewModelFactory.create('Стандартный', 'default'),
+  [Priorities.LOW]: PrioritiesViewModelFactory.create('Низкий', 'low'),
+  [Priorities.HIGH]: PrioritiesViewModelFactory.create('Высокий', 'high'),
 };
 
 /**

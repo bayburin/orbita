@@ -8,23 +8,29 @@ export interface EventTypeNamesViewModel {
 }
 
 /**
+ * Фабрика для создания представлений
+ */
+class EventTypeNamesViewModelFactory {
+  static create(icon: string): EventTypeNamesViewModel {
+    return { icon };
+  }
+}
+
+/**
  * Объект маппинга вида событий для отображения в представление
  */
-export const eventTypeNamesViewModelMap: Record<
-  EventTypeNames,
-  EventTypeNamesViewModel
-> = {
-  [EventTypeNames.OPEN]: { icon: 'mdi-room-service-outline' },
-  [EventTypeNames.WORKFLOW]: { icon: 'mdi-comment-text-outline' },
-  [EventTypeNames.ADD_WORKERS]: { icon: 'mdi-account-multiple-plus-outline' },
-  [EventTypeNames.DEL_WORKERS]: { icon: 'mdi-account-multiple-minus-outline' },
-  [EventTypeNames.ESCALATION]: { icon: 'mdi-alert-outline' },
-  [EventTypeNames.POSTPONE]: { icon: 'mdi-calendar-clock' },
-  [EventTypeNames.CLOSE]: { icon: 'mdi-close-box-outline' },
-  [EventTypeNames.ADD_FILES]: { icon: 'mdi-file-plus-outline' },
-  [EventTypeNames.DEL_FILES]: { icon: 'mdi-file-remove-outline' },
-  [EventTypeNames.ADD_TAGS]: { icon: 'mdi-code-tags' },
-  [EventTypeNames.PRIORITY]: { icon: 'mdi-priority-high' },
+export const eventTypeNamesViewModelMap: Record<EventTypeNames, EventTypeNamesViewModel> = {
+  [EventTypeNames.OPEN]: EventTypeNamesViewModelFactory.create('mdi-room-service-outline'),
+  [EventTypeNames.WORKFLOW]: EventTypeNamesViewModelFactory.create('mdi-comment-text-outline'),
+  [EventTypeNames.ADD_WORKERS]: EventTypeNamesViewModelFactory.create('mdi-account-multiple-plus-outline'),
+  [EventTypeNames.DEL_WORKERS]: EventTypeNamesViewModelFactory.create('mdi-account-multiple-minus-outline'),
+  [EventTypeNames.ESCALATION]: EventTypeNamesViewModelFactory.create('mdi-alert-outline'),
+  [EventTypeNames.POSTPONE]: EventTypeNamesViewModelFactory.create('mdi-calendar-clock'),
+  [EventTypeNames.CLOSE]: EventTypeNamesViewModelFactory.create('mdi-close-box-outline'),
+  [EventTypeNames.ADD_FILES]: EventTypeNamesViewModelFactory.create('mdi-file-plus-outline'),
+  [EventTypeNames.DEL_FILES]: EventTypeNamesViewModelFactory.create('mdi-file-remove-outline'),
+  [EventTypeNames.ADD_TAGS]: EventTypeNamesViewModelFactory.create('mdi-code-tags'),
+  [EventTypeNames.PRIORITY]: EventTypeNamesViewModelFactory.create('mdi-priority-high'),
 };
 
 /**
@@ -32,8 +38,6 @@ export const eventTypeNamesViewModelMap: Record<
  *
  * @param name - имя вида события
  */
-export function getViewModelEventTypeName(
-  name: EventTypeNames
-): EventTypeNamesViewModel {
+export function getViewModelEventTypeName(name: EventTypeNames): EventTypeNamesViewModel {
   return eventTypeNamesViewModelMap[name];
 }

@@ -15,25 +15,22 @@ export interface StatusesViewModel {
 }
 
 /**
+ * Фабрика для создания представлений
+ */
+class StatusesViewModelFactory {
+  static create(title: string, badge: string): StatusesViewModel {
+    return { title, badge };
+  }
+}
+
+/**
  * Объект маппинга статуса для отображения в представление
  */
 export const statusesViewModelMap: Record<Statuses, StatusesViewModel> = {
-  [Statuses.OPENED]: {
-    title: 'Открыта',
-    badge: 'opened',
-  },
-  [Statuses.AT_WORK]: {
-    title: 'В работе',
-    badge: 'at_work',
-  },
-  [Statuses.CANCELED]: {
-    title: 'Отменена',
-    badge: 'canceled',
-  },
-  [Statuses.DONE]: {
-    title: 'Выполнена',
-    badge: 'done',
-  },
+  [Statuses.OPENED]: StatusesViewModelFactory.create('Открыта', 'opened'),
+  [Statuses.AT_WORK]: StatusesViewModelFactory.create('В работе', 'at_work'),
+  [Statuses.CANCELED]: StatusesViewModelFactory.create('Отменена', 'canceled'),
+  [Statuses.DONE]: StatusesViewModelFactory.create('Выполнена', 'done'),
 };
 
 /**
