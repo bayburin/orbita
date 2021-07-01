@@ -13,6 +13,8 @@ export class SdRequestsBlockComponent {
   firstRowIndex$ = this.sdRequestFacade.firstRowIndex$;
   totalCount$ = this.sdRequestFacade.totalCount$;
   perPage$ = this.sdRequestFacade.perPage$;
+  sortField$ = this.sdRequestFacade.sortField$;
+  sortOrder$ = this.sdRequestFacade.sortOrder$;
   users$ = this.userFacade.all$;
   sdServices$ = this.sdFacade.sdServices$;
   sdTickets$ = this.sdFacade.sdTickets$;

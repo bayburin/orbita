@@ -105,6 +105,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   selected$ = this.store.select(SdRequestViewModelSelectors.getSelectedViewModel);
   error$ = this.store.select(SdRequestSelectors.getError);
   orderedHistories$ = this.store.select(SdRequestViewModelSelectors.getOrderedHistories);
+  sortField$ = this.store.select(SdRequestSelectors.getSortField);
+  sortOrder$ = this.store.select(SdRequestSelectors.getSortOrder);
 
   constructor(
     private store: Store<SdRequestFeature.SdRequestPartialState>,

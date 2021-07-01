@@ -99,7 +99,7 @@ export function metaReducer(reducer: ActionReducer<OrbitaUiState>): ActionReduce
               firstRowIndex: meta.first,
               perPage: meta.rows,
               sortField: meta.sortField,
-              sortOrder: meta.sortField,
+              sortOrder: meta.sortOrder,
               filters: processSdRequestTableFilters(meta.filters),
             },
           };

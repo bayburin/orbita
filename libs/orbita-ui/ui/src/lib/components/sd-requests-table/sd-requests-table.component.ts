@@ -77,6 +77,14 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
    */
   @Input() perPage$: Observable<number>;
   /**
+   * Поле для сортировки
+   */
+  @Input() sortField$: Observable<string>;
+  /**
+   * Порядок сортировки
+   */
+  @Input() sortOrder$: Observable<number>;
+  /**
    * Список услуг
    */
   @Input() sdServices$: Observable<SdService[]>;

@@ -49,6 +49,14 @@ export abstract class SdRequestFacadeAbstract {
    * Массив всех событий, произошедших с выбранной заявкой
    */
   orderedHistories$: Observable<HistoryViewModel[]>;
+  /**
+   * Поле для сортировки
+   */
+  sortField$: Observable<string>;
+  /**
+   * Порядок сортировки
+   */
+  sortOrder$: Observable<number>;
 
   /**
    * Устанавливает метаданные таблицы

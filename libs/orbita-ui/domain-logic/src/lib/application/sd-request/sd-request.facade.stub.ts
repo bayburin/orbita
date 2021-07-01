@@ -14,6 +14,8 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   selected$ = new BehaviorSubject(null);
   error$ = new BehaviorSubject(null);
   orderedHistories$ = new BehaviorSubject([]);
+  sortField$ = new BehaviorSubject(null);
+  sortOrder$ = new BehaviorSubject(null);
 
   setTableMetadata() {
     /** */
