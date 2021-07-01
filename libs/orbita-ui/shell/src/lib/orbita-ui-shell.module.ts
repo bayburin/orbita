@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-
 import { SharedDomainLogicModule } from '@orbita/shared/domain-logic';
 import { OrbitaUiUiModule } from '@orbita/orbita-ui/ui';
+
 import { LayoutComponent } from './containers/layout/layout.component';
+import { BreadcrumbComponent } from './containers/breadcrumb/breadcrumb.component';
 
 const routes: Routes = [
   {
@@ -18,17 +19,8 @@ const routes: Routes = [
       },
       {
         path: 'tickets',
-        loadChildren: () => import('@orbita/orbita-ui/feature-listing').then((m) => m.OrbitaUiFeatureListingModule),
-      },
-      {
-        path: 'tickets/new-sd-request',
-        loadChildren: () =>
-          import('@orbita/orbita-ui/feature-sd-request-wizzard').then((m) => m.OrbitaUiFeatureSdRequestWizzardModule),
-      },
-      {
-        path: 'tickets/sd-requests/:id',
-        loadChildren: () =>
-          import('@orbita/orbita-ui/feature-sd-request-overview').then((m) => m.OrbitaUiFeatureSdRequestOverviewModule),
+        loadChildren: () => import('@orbita/orbita-ui/feature-ticket').then((m) => m.OrbitaUiFeatureTicketModule),
+        data: { breadcrumb: 'Тикеты' },
       },
     ],
   },
@@ -37,6 +29,6 @@ const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), SharedDomainLogicModule, OrbitaUiUiModule],
   exports: [RouterModule],
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, BreadcrumbComponent],
 })
 export class OrbitaUiShellModule {}

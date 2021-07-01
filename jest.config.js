@@ -11,5 +11,6 @@ module.exports = {
     '<rootDir>/libs/shared/domain-logic',
     '<rootDir>/libs/shared/assets',
     '<rootDir>/libs/orbita-ui/feature-sd-request-overview',
+    '<rootDir>/libs/orbita-ui/feature-ticket',
   ],
 };

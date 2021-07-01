@@ -24,7 +24,8 @@
       "@orbita/orbita-ui/ui": ["libs/orbita-ui/ui/src/index.ts"],
       "@orbita/orbita-ui/utils": ["libs/orbita-ui/utils/src/index.ts"],
       "@orbita/orbita-ui/feature-sd-request-wizzard": ["libs/orbita-ui/feature-sd-request-wizzard/src/index.ts"],
-      "@orbita/orbita-ui/feature-sd-request-overview": ["libs/orbita-ui/feature-sd-request-overview/src/index.ts"]
+      "@orbita/orbita-ui/feature-sd-request-overview": ["libs/orbita-ui/feature-sd-request-overview/src/index.ts"],
+      "@orbita/orbita-ui/feature-ticket": ["libs/orbita-ui/feature-ticket/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -461,6 +461,33 @@
           }
         }
       }
+    },
+    "orbita-ui-feature-ticket": {
+      "projectType": "library",
+      "root": "libs/orbita-ui/feature-ticket",
+      "sourceRoot": "libs/orbita-ui/feature-ticket/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/orbita-ui/feature-ticket/src/**/*.ts",
+              "libs/orbita-ui/feature-ticket/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": [
+            "coverage/libs/orbita-ui/feature-ticket"
+          ],
+          "options": {
+            "jestConfig": "libs/orbita-ui/feature-ticket/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "cli": {

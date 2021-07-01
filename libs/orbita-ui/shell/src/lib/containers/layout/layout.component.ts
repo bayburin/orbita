@@ -58,7 +58,7 @@ export class LayoutComponent implements OnInit {
         routerLinkActiveOptions: { exact: false },
       },
       {
-        label: 'Заявки',
+        label: 'Тикеты',
         icon: 'mdi mdi-file-document-multiple-outline mdi-24px',
         routerLink: ['/tickets'],
         routerLinkActiveOptions: { exact: false },

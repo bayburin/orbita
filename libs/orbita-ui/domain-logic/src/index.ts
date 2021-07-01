@@ -40,3 +40,5 @@ export * from './lib/application/auth-center/auth-center.facade';
 export * from './lib/application/auth-center/auth-center.facade.stub';
 export * from './lib/application/parameter/parameter.facade';
 export * from './lib/application/parameter/parameter.facade.stub';
+export * from './lib/application/router/router.facade';
+export * from './lib/application/router/router.facade.stub';

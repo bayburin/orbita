@@ -20,6 +20,7 @@
     "orbita-ui-ui": { "tags": ["scope:orbita-ui", "type:ui"] },
     "orbita-ui-utils": { "tags": ["scope:orbita-ui", "type:util"] },
     "orbita-ui-feature-sd-request-wizzard": { "tags": ["scope:orbita-ui", "type:feature"] },
-    "orbita-ui-feature-sd-request-overview": { "tags": ["scope:orbita-ui", "type:feature"] }
+    "orbita-ui-feature-sd-request-overview": { "tags": ["scope:orbita-ui", "type:feature"] },
+    "orbita-ui-feature-ticket": { "tags": ["scope:orbita-ui", "type:feature"] }
   }
 }
