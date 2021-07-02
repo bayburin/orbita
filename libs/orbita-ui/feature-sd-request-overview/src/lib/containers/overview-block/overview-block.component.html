@@ -76,13 +76,7 @@
               </div>
             </p-tabPanel>
             <p-tabPanel header="Комментарии">
-              <p>
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-                provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
-                Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-                eligendi optio cumque nihil impedit quo minus.
-              </p>
+              <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>
             </p-tabPanel>
             <p-tabPanel header="Данные на момент создания">
               <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>

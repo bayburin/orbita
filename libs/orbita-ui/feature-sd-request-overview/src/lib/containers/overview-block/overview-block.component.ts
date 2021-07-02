@@ -103,4 +103,9 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   csaStatus(status: CsaStatuses): CsaStatusesViewModel {
     return getViewModelCsaStatuses(status);
   }
+
+  sendMessage(message: string): void {
+    // TODO: Отправить событие родительскому контроллеру
+    console.log(message);
+  }
 }
