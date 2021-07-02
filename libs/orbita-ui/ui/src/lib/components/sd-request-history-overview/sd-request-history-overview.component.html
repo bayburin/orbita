@@ -11,9 +11,7 @@
   <p-scrollPanel styleClass="history-overview-scroll-panel">
     <div class="history-overview-content">
       <div *ngFor="let work of works; trackBy: trackByWork" class="work-block">
-        <h4 [ngClass]="work.group.description ? 'text-primary' : 'text-secondary'">
-          {{ work.group.description || 'название группы отсутствует' }}
-        </h4>
+        <lib-group-header [group]="work.group"></lib-group-header>
         <div *ngIf="work.histories.length; else noActions">
           <lib-history-event-card
             [history]="work.histories[work.histories.length - 1]"

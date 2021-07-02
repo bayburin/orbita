@@ -23,6 +23,7 @@ import { PageErrorComponent } from './components/page-error/page-error.component
 import { PanelPlaceholderComponent } from './components/panel-placeholder/panel-placeholder.component';
 import { DetailRowComponent } from './components/detail-row/detail-row.component';
 import { SourceSnapshotComponent } from './components/source-snapshot/source-snapshot.component';
+import { GroupHeaderComponent } from './components/group-header/group-header.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -39,6 +40,7 @@ const components: any[] = [
   PageErrorComponent,
   PanelPlaceholderComponent,
   DetailRowComponent,
+  GroupHeaderComponent,
 ];
 
 const modules: any[] = [FormsModule, OrbitSpinnerModule];

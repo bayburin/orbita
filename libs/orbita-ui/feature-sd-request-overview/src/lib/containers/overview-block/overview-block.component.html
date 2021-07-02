@@ -66,7 +66,7 @@
             </p-tabPanel>
             <p-tabPanel header="Исполнители">
               <div *ngFor="let work of sdRequest.works">
-                <h4>{{ work.group.description }}</h4>
+                <lib-group-header [group]="work.group"></lib-group-header>
                 <div *ngIf="work.workers.length; else emptyData">
                   <div *ngFor="let worker of work.workers">
                     <div class="p-p-2">{{ worker.user.fio }}</div>
