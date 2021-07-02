@@ -36,7 +36,7 @@ describe('SvtItemReducer', () => {
     });
   });
 
-  describe('loadSelectedFailure', () => {
+  describe('loadSelectedNotFound', () => {
     it('should set attributes', () => {
       action = SvtItemActions.loadSelectedNotFound();
       const result: State = reducer(initialState, action);
@@ -57,6 +57,15 @@ describe('SvtItemReducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(false);
       expect(result.error).toBe(error);
+    });
+  });
+
+  describe('select', () => {
+    it('should set attributes', () => {
+      action = SvtItemActions.select({ barcode: 123 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toBe(123);
     });
   });
 

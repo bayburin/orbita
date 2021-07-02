@@ -60,6 +60,22 @@ describe('HostReducer', () => {
     });
   });
 
+  describe('select', () => {
+    it('should set attributes', () => {
+      action = HostActions.select({ inventNum: 'AAA' });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toBe('aaa');
+    });
+
+    it('should set null to selectedId if inventNum does not exist', () => {
+      action = HostActions.select({ inventNum: null });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toBe(null);
+    });
+  });
+
   describe('clearSelected', () => {
     it('should set attributes', () => {
       action = HostActions.clearSelected();
