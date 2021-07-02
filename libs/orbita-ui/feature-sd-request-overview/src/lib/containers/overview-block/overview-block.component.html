@@ -44,7 +44,7 @@
               <p-panel header="Описание">
                 <div *ngIf="sdRequest.description; else noDesc">{{ sdRequest.description }}</div>
                 <ng-template #noDesc>
-                  <lib-panel-placeholder>[ Пусто ]</lib-panel-placeholder>
+                  <lib-panel-placeholder>Пусто</lib-panel-placeholder>
                 </ng-template>
               </p-panel>
             </p-tabPanel>
@@ -270,13 +270,13 @@
 </div>
 
 <ng-template #loadingData>
-  <lib-panel-placeholder>[Загрузка...]</lib-panel-placeholder>
+  <lib-panel-placeholder>Загрузка...</lib-panel-placeholder>
 </ng-template>
 
 <ng-template #unknownData>
-  <lib-panel-placeholder>[Не удалось обработать данные]</lib-panel-placeholder>
+  <lib-panel-placeholder>Не удалось обработать данные</lib-panel-placeholder>
 </ng-template>
 
 <ng-template #emptyData>
-  <lib-panel-placeholder>[Пусто]</lib-panel-placeholder>
+  <lib-panel-placeholder>Пусто</lib-panel-placeholder>
 </ng-template>
