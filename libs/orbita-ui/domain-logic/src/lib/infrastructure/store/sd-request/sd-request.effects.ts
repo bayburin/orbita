@@ -57,6 +57,7 @@ export class SdRequestEffects {
         EmployeeActions.selectEmployee({ idTn: action.sdRequest.source_snapshot.id_tn }),
         SvtItemActions.select({ barcode: action.sdRequest.source_snapshot.barcode }),
         HostActions.select({ inventNum: action.sdRequest.source_snapshot.invent_num }),
+        SdRequestActions.initForm({ sdRequest: action.sdRequest }),
       ])
     )
   );
@@ -70,6 +71,31 @@ export class SdRequestEffects {
         SvtItemActions.clearSelected(),
         HostActions.clearSelected(),
       ])
+    )
+  );
+
+  // TODO: Возможно придется изменить эффект, так как данные планируется получать по сокету (или сделать эффект исключительно для изменения данных, т.е. без создания)
+  saveForm = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.updateForm),
+      withLatestFrom(this.store.select(SdRequestSelectors.getSelected), this.store.select(SdRequestSelectors.getForm)),
+      switchMap(([_action, sdRequest, formData]) =>
+        this.sdRequestApi.update(sdRequest.id, formData).pipe(
+          switchMap((data) => {
+            const normalizeData = SdRequestCacheService.normalizeSdRequest(data.sd_request);
+            const changedSdRequest = normalizeData.entities.sd_requests[normalizeData.result];
+
+            return [
+              SdRequestActions.saveFormSuccess({ sdRequest: changedSdRequest }),
+              MessageActions.setMessages({ messages: Object.values(normalizeData.entities.comments || []) }),
+              WorkActions.setWorks({ works: Object.values(normalizeData.entities.works || []) }),
+              HistoryActions.setHistories({ histories: Object.values(normalizeData.entities.histories || []) }),
+              WorkerActions.setWorkers({ workers: Object.values(normalizeData.entities.workers || []) }),
+            ];
+          }),
+          catchError((error) => of(SdRequestActions.saveFormFailure({ error })))
+        )
+      )
     )
   );
 }

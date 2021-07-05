@@ -3,8 +3,10 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SdRequestActions from './sd-request.actions';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
+import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
 import { processSdRequestTableFilters } from '../../utils/process-sd-request-table-filters.function';
+import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
 
 export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
@@ -20,7 +22,8 @@ export interface State extends EntityState<SdRequest> {
   loaded: boolean;
   needTickets: boolean;
   // needTicket: boolean;
-  error?: string | null;
+  error?: string;
+  form?: SdRequestForm;
 }
 
 export interface SdRequestPartialState {
@@ -103,6 +106,28 @@ const sdRequestReducer = createReducer(
     ...state,
     loaded: false,
     selected: null,
+  })),
+  on(SdRequestActions.initForm, (state, { sdRequest }) => ({
+    ...state,
+    form: SdRequestFormBuilder.build(sdRequest),
+  })),
+  on(SdRequestActions.changeForm, (state, { form }) => ({
+    ...state,
+    form,
+  })),
+  on(SdRequestActions.updateForm, (state) => ({
+    ...state,
+    loading: true,
+  })),
+  on(SdRequestActions.saveFormSuccess, (state, { sdRequest }) => ({
+    ...state,
+    loading: false,
+    selected: sdRequest,
+  })),
+  on(SdRequestActions.saveFormFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
   }))
 );
 

@@ -3,6 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { SdRequest } from './../../../entities/models/sd-request.interface';
 import { Meta } from './../../../entities/server-data/meta.interface';
 import { LazyLoadEvent } from 'primeng/api';
+import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 
 export const loadAll = createAction('[SdRequest/API] Load All');
 
@@ -27,3 +28,13 @@ export const loadSelectedSuccess = createAction(
 export const loadSelectedFailure = createAction('[SdRequest/API] Load Selected Failure', props<{ error: any }>());
 
 export const clearSelected = createAction('[SdRequest] Clear Selected');
+
+export const initForm = createAction('[SdRequest] Init Form', props<{ sdRequest: SdRequest }>());
+
+export const changeForm = createAction('[SdRequest] Change Form', props<{ form: SdRequestForm }>());
+
+export const updateForm = createAction('[SdRequest/API] Update Form');
+
+export const saveFormSuccess = createAction('[SdRequest/API] Save Form Success', props<{ sdRequest: SdRequest }>());
+
+export const saveFormFailure = createAction('[SdRequest/API] Save Form Failure', props<{ error: any }>());

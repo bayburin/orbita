@@ -7,6 +7,7 @@ import {
   SdRequestsServerData,
   SdRequestServerData,
 } from './../../entities/server-data/sd-request-server-data.interface';
+import { SdRequestForm } from '../../entities/forms/sd-request-form.interface';
 
 export abstract class SdRequestFacadeAbstract {
   /**
@@ -57,6 +58,10 @@ export abstract class SdRequestFacadeAbstract {
    * Порядок сортировки
    */
   sortOrder$: Observable<number>;
+  /**
+   * Форма заявки
+   */
+  form$: Observable<SdRequestForm>;
 
   /**
    * Устанавливает метаданные таблицы
@@ -79,4 +84,16 @@ export abstract class SdRequestFacadeAbstract {
    * Очищает данные о выбранной заявке и связанные с ней объекты
    */
   abstract clearSelected(): void;
+
+  /**
+   * Сохраняет данные формы в хранилище
+   *
+   * @param form - данные формы
+   */
+  abstract changeForm(form: SdRequestForm): void;
+
+  /**
+   * Обновляет данные по выбранной заявке
+   */
+  abstract updateForm(): void;
 }

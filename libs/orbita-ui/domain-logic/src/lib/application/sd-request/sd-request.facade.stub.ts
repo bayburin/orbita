@@ -16,6 +16,7 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   orderedHistories$ = new BehaviorSubject([]);
   sortField$ = new BehaviorSubject(null);
   sortOrder$ = new BehaviorSubject(null);
+  form$ = new BehaviorSubject(null);
 
   setTableMetadata() {
     /** */
@@ -30,6 +31,14 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   }
 
   clearSelected() {
+    /** */
+  }
+
+  changeForm() {
+    /** */
+  }
+
+  updateForm() {
     /** */
   }
 }

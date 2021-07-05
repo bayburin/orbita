@@ -30,6 +30,7 @@ import { WorkerFacade } from './../worker/worker.facade';
 import { WorkerFacadeStub } from './../worker/worker.facade.stub';
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { SdRequestCacheServiceStub } from './../../infrastructure/services/sd-request-cache.service.stub';
+import { SdRequestForm } from './../../entities/forms/sd-request-form.interface';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -300,6 +301,27 @@ describe('SdRequestFacade', () => {
         facade.clearSelected();
 
         expect(spy).toHaveBeenCalledWith(SdRequestActions.clearSelected());
+      });
+    });
+
+    describe('changeForm()', () => {
+      it('should call changeForm action', () => {
+        const spy = spyOn(store, 'dispatch');
+        const data = { id: 123 } as SdRequestForm;
+
+        facade.changeForm(data);
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.changeForm({ form: data }));
+      });
+    });
+
+    describe('updateForm()', () => {
+      it('should call updateForm action', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        facade.updateForm();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.updateForm());
       });
     });
   });

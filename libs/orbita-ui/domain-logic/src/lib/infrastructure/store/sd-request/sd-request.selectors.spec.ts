@@ -1,6 +1,7 @@
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { sdRequestAdapter, initialState } from './sd-request.reducer';
 import * as SdRequestSelectors from './sd-request.selectors';
+import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
 
 describe('SdRequestSelectors', () => {
   const error = { message: 'error' };
@@ -26,6 +27,7 @@ describe('SdRequestSelectors', () => {
   const sortOrder = 1;
   const filters = { foo: 'bar' };
   const selected = createSdRequestEntity('PRODUCT-DDD');
+  const form = SdRequestFormBuilder.build();
   let state: any;
 
   beforeEach(() => {
@@ -42,6 +44,7 @@ describe('SdRequestSelectors', () => {
       loading: false,
       loaded: true,
       needTickets: true,
+      form,
     });
   });
 
@@ -103,5 +106,9 @@ describe('SdRequestSelectors', () => {
 
   it('getPage', () => {
     expect(SdRequestSelectors.getPage.projector(firstRowIndex, perPage)).toEqual(1);
+  });
+
+  it('getForm', () => {
+    expect(SdRequestSelectors.getForm.projector(state)).toEqual(form);
   });
 });

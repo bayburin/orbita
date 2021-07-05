@@ -52,6 +52,8 @@ export const getPage = createSelector(
   (firstRowIndex, perPage) => firstRowIndex / perPage + 1
 );
 
+export const getForm = createSelector(getSdRequestState, (state: State) => state.form);
+
 // export const getProcessedFilters = createSelector(getFilters, (filters) => {
 //   let created_at: FilterMetadata;
 //   if (filters.created_at && filters.created_at.value) {

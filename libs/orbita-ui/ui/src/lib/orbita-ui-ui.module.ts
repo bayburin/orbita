@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PrimengModule } from './primeng.module';
 
@@ -43,7 +43,7 @@ const components: any[] = [
   GroupHeaderComponent,
 ];
 
-const modules: any[] = [FormsModule, OrbitSpinnerModule];
+const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
 @NgModule({
   imports: [CommonModule, PrimengModule, ...modules],

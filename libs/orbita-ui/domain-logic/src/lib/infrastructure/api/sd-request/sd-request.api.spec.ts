@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ORBITA_UI_ENV_TOKEN, orbitaUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { SdRequestApi } from './sd-request.api';
+import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 
 describe('SdRequestApi', () => {
   let service: SdRequestApi;
@@ -58,6 +59,24 @@ describe('SdRequestApi', () => {
       httpMock
         .expectOne({
           method: 'GET',
+          url: api,
+        })
+        .flush(sdRequest);
+    });
+  });
+
+  describe('update()', () => {
+    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/sd_requests/1`;
+    const sdRequest = { id: 1 } as SdRequestForm;
+
+    it('should return request', () => {
+      service.update(1, sdRequest).subscribe((result) => {
+        expect(result).toEqual(sdRequest);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'PUT',
           url: api,
         })
         .flush(sdRequest);

@@ -4,6 +4,8 @@ import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { Meta } from '../../../entities/server-data/meta.interface';
 import * as SdRequestActions from './sd-request.actions';
 import { State, initialState, reducer } from './sd-request.reducer';
+import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
+import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 
 describe('SdRequestReducer', () => {
   let action: Action;
@@ -111,12 +113,14 @@ describe('SdRequestReducer', () => {
 
   describe('loadSelectedFailure', () => {
     it('should set attributes', () => {
-      action = SdRequestActions.loadSelectedFailure({ error: 'fake-error' });
+      const error = 'fake-error';
+      action = SdRequestActions.loadSelectedFailure({ error });
       const result: State = reducer(initialState, action);
 
       expect(result.selected).toBeNull();
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(false);
+      expect(result.error).toBe(error);
     });
   });
 
@@ -127,6 +131,59 @@ describe('SdRequestReducer', () => {
 
       expect(result.selected).toBeNull();
       expect(result.loaded).toBe(false);
+    });
+  });
+
+  describe('initForm', () => {
+    it('should set attributes', () => {
+      const sdRequest = createSdRequest('PRODUCT-AAA');
+      const form = { id: 111 };
+      spyOn(SdRequestFormBuilder, 'build').and.returnValue(form);
+      action = SdRequestActions.initForm({ sdRequest });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form).toEqual(form);
+    });
+  });
+
+  describe('changeForm', () => {
+    it('should set attributes', () => {
+      const form = { id: 111 } as SdRequestForm;
+      action = SdRequestActions.changeForm({ form });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form).toEqual(form);
+    });
+  });
+
+  describe('updateForm', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.updateForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(true);
+    });
+  });
+
+  describe('saveFormSuccess', () => {
+    it('should set attributes', () => {
+      const sdRequest = { id: 456 } as SdRequest;
+      action = SdRequestActions.saveFormSuccess({ sdRequest });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(false);
+      expect(result.selected).toEqual(sdRequest);
+    });
+  });
+
+  describe('saveFormFailure', () => {
+    it('should set attributes', () => {
+      const error = 'fake-error';
+      action = SdRequestActions.saveFormFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(false);
+      expect(result.error).toEqual(error);
     });
   });
 

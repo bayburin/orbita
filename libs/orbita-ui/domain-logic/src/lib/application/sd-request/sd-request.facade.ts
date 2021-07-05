@@ -25,6 +25,7 @@ import { MessageFacade } from './../message/message.facade';
 import { WorkFacade } from './../work/work.facade';
 import { HistoryFacade } from './../history/history.facade';
 import { WorkerFacade } from './../worker/worker.facade';
+import { SdRequestForm } from './../../entities/forms/sd-request-form.interface';
 
 /**
  * Фасад для работы с заявками (обращения к хранилищу SdRequest)
@@ -107,6 +108,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   orderedHistories$ = this.store.select(SdRequestViewModelSelectors.getOrderedHistories);
   sortField$ = this.store.select(SdRequestSelectors.getSortField);
   sortOrder$ = this.store.select(SdRequestSelectors.getSortOrder);
+  form$ = this.store.select(SdRequestSelectors.getForm);
 
   constructor(
     private store: Store<SdRequestFeature.SdRequestPartialState>,
@@ -131,5 +133,13 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   clearSelected() {
     this.store.dispatch(SdRequestActions.clearSelected());
+  }
+
+  changeForm(form: SdRequestForm) {
+    this.store.dispatch(SdRequestActions.changeForm({ form }));
+  }
+
+  updateForm() {
+    this.store.dispatch(SdRequestActions.updateForm());
   }
 }
