@@ -28,7 +28,7 @@ export interface TicketForm {
   /**
    * Дедлайн
    */
-  readonly finished_at_plan: string;
+  readonly finished_at_plan: string | Date;
 }
 
 /**

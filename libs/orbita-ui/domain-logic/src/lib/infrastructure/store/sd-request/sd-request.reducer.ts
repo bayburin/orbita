@@ -1,5 +1,6 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import * as moment from 'moment';
 
 import * as SdRequestActions from './sd-request.actions';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
@@ -165,7 +166,10 @@ const sdRequestReducer = createReducer(
     ...state,
     form: {
       ...state.form,
-      entity,
+      entity: {
+        ...entity,
+        finished_at_plan: moment(entity.finished_at_plan).format(),
+      },
     },
   })),
   on(SdRequestActions.saveUpdateForm, (state) => ({

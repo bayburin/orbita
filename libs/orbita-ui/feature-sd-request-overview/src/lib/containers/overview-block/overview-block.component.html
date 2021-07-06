@@ -121,7 +121,16 @@
               <span class="p-ml-2">
                 <b>
                   выполнить до:
-                  <span class="p-ml-1">{{ sdRequest.runtime.finished_at_plan | datetime }}</span>
+                  <p-calendar
+                    *ngIf="editMode$ | async; else readModeFinishedAtPlan"
+                    formControlName="finished_at_plan"
+                    dateFormat="dd.mm.yy"
+                    appendTo="body"
+                    [showTime]="true"
+                  ></p-calendar>
+                  <ng-template #readModeFinishedAtPlan>
+                    <span class="p-ml-1">{{ sdRequest.runtime.finished_at_plan | datetime }}</span>
+                  </ng-template>
                 </b>
               </span>
             </div>

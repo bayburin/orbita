@@ -4,6 +4,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { Action } from '@ngrx/store';
 import { hot, cold } from '@nrwl/angular/testing';
+import { MessageService } from 'primeng/api';
 
 import { SdRequestEffects } from './sd-request.effects';
 import * as SdRequestActions from './sd-request.actions';
@@ -31,6 +32,7 @@ describe('SdRequestEffects', () => {
         provideMockActions(() => actions$),
         provideMockStore({ initialState: state }),
         { provide: SdRequestApi, useClass: SdRequestApiStub },
+        MessageService,
       ],
     });
 

@@ -91,7 +91,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   // ========== Форма заявки ==========
 
-  formEntity$ = this.store.select(SdRequestSelectors.getFormEntity);
+  formEntity$ = this.store.select(SdRequestViewModelSelectors.getFormEntityViewModel);
   formLoading$ = this.store.select(SdRequestSelectors.getFormLoading);
 
   constructor(

@@ -153,11 +153,14 @@ describe('SdRequestReducer', () => {
 
   describe('changeForm', () => {
     it('should set attributes', () => {
-      const form = { id: 111 } as SdRequestForm;
-      action = SdRequestActions.changeForm({ entity: form });
+      const dateStr = '2021-06-28T13:00:00+07:00';
+      const date = new Date('2021-06-28T13:00:00+07:00');
+      const sourceForm = { id: 111, finished_at_plan: date } as SdRequestForm;
+      const targetForm = { id: 111, finished_at_plan: dateStr } as SdRequestForm;
+      action = SdRequestActions.changeForm({ entity: sourceForm });
       const result: FormState = reducer(initialState, action).form;
 
-      expect(result.entity).toEqual(form);
+      expect(result.entity).toEqual(targetForm);
     });
   });
 

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
-import { switchMap, catchError, map, withLatestFrom } from 'rxjs/operators';
+import { switchMap, catchError, map, withLatestFrom, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
+import { MessageService } from 'primeng/api';
 
 import * as SdRequestActions from './sd-request.actions';
 import * as SdRequestFeature from './sd-request.reducer';
@@ -24,7 +25,8 @@ export class SdRequestEffects {
   constructor(
     private actions$: Actions,
     private sdRequestApi: SdRequestApi,
-    private store: Store<SdRequestFeature.SdRequestPartialState>
+    private store: Store<SdRequestFeature.SdRequestPartialState>,
+    private messageService: MessageService
   ) {}
 
   loadSelected$ = createEffect(() =>
@@ -100,5 +102,14 @@ export class SdRequestEffects {
         )
       )
     )
+  );
+
+  saveFormSuccess = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SdRequestActions.saveFormSuccess),
+        tap(() => this.messageService.add({ severity: 'success', detail: 'Заявка обновлена' }))
+      ),
+    { dispatch: false }
   );
 }

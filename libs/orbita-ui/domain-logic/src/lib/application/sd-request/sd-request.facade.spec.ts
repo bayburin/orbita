@@ -8,6 +8,7 @@ import { of, Observable, throwError } from 'rxjs';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { tap } from 'rxjs/operators';
+import { MessageService } from 'primeng/api';
 
 import { SdRequest } from '../../entities/models/sd-request.interface';
 import { SdRequestEffects } from '../../infrastructure/store/sd-request/sd-request.effects';
@@ -69,6 +70,7 @@ describe('SdRequestFacade', () => {
           { provide: WorkFacade, useClass: WorkFacadeStub },
           { provide: HistoryFacade, useClass: HistoryFacadeStub },
           { provide: WorkerFacade, useClass: WorkerFacadeStub },
+          MessageService,
         ],
       });
 
@@ -354,6 +356,7 @@ describe('SdRequestFacade', () => {
           { provide: WorkFacade, useClass: WorkFacadeStub },
           { provide: HistoryFacade, useClass: HistoryFacadeStub },
           { provide: WorkerFacade, useClass: WorkerFacadeStub },
+          MessageService,
         ],
       })
       class RootModule {}
