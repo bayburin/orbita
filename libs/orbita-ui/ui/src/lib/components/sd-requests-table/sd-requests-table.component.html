@@ -99,7 +99,22 @@
               itemSize="30"
               appendTo="body"
               (onChange)="filter($event.value); table.saveState()"
-            ></p-multiSelect>
+            >
+              <ng-template pTemplate="header">
+                <div>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="mdi mdi-filter-off-outline mdi-18px"
+                    class="p-button-text p-button-plain p-mr-2"
+                    pTooltip="Очистить фильтр видов услуг"
+                    tooltipPosition="top"
+                    (click)="filter(null); table.saveState()"
+                  ></button>
+                </div>
+              </ng-template>
+            </p-multiSelect>
           </ng-template>
         </p-columnFilter>
       </th>
@@ -117,7 +132,22 @@
               itemSize="30"
               appendTo="body"
               (onChange)="filter($event.value); table.saveState()"
-            ></p-multiSelect>
+            >
+              <ng-template pTemplate="header">
+                <div>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="mdi mdi-filter-off-outline mdi-18px"
+                    class="p-button-text p-button-plain p-mr-2"
+                    pTooltip="Очистить фильтр видов заявок"
+                    tooltipPosition="top"
+                    (click)="filter(null); table.saveState()"
+                  ></button>
+                </div>
+              </ng-template>
+            </p-multiSelect>
           </ng-template>
         </p-columnFilter>
       </th>
@@ -165,7 +195,22 @@
               itemSize="30"
               appendTo="body"
               (onChange)="filter($event.value); table.saveState()"
-            ></p-multiSelect>
+            >
+              <ng-template pTemplate="header">
+                <div>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="mdi mdi-filter-off-outline mdi-18px"
+                    class="p-button-text p-button-plain p-mr-2"
+                    pTooltip="Очистить фильтр исполнителей"
+                    tooltipPosition="top"
+                    (click)="filter(null); table.saveState()"
+                  ></button>
+                </div>
+              </ng-template>
+            </p-multiSelect>
           </ng-template>
         </p-columnFilter>
       </th>
