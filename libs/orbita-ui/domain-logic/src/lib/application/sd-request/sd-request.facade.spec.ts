@@ -311,7 +311,7 @@ describe('SdRequestFacade', () => {
 
         facade.changeForm(data);
 
-        expect(spy).toHaveBeenCalledWith(SdRequestActions.changeForm({ form: data }));
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.changeForm({ entity: data }));
       });
     });
 
@@ -321,7 +321,7 @@ describe('SdRequestFacade', () => {
 
         facade.updateForm();
 
-        expect(spy).toHaveBeenCalledWith(SdRequestActions.updateForm());
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.saveUpdateForm());
       });
     });
   });

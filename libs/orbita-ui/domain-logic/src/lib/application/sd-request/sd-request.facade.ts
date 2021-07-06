@@ -34,9 +34,13 @@ import { SdRequestForm } from './../../entities/forms/sd-request-form.interface'
   providedIn: 'root',
 })
 export class SdRequestFacade implements SdRequestFacadeAbstract {
+  // ========== Список заявок ==========
+
   firstRowIndex$ = this.store.select(SdRequestSelectors.getFirstRowIndex);
   totalCount$ = this.store.select(SdRequestSelectors.getTotalCount);
   perPage$ = this.store.select(SdRequestSelectors.getPerPage);
+  sortField$ = this.store.select(SdRequestSelectors.getSortField);
+  sortOrder$ = this.store.select(SdRequestSelectors.getSortOrder);
   loading$ = this.store.select(SdRequestSelectors.getLoading);
   loaded$ = this.store.select(SdRequestSelectors.getLoaded);
   loadSdRequests$ = this.store.select(SdRequestSelectors.getNeedTickets).pipe(
@@ -75,40 +79,20 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     map(([_dispatcher, selector]) => selector),
     distinctUntilChanged()
   );
-  // loadSelected$ = this.store.select(SdRequestSelectors.getNeedTicket).pipe(
-  //   filter((needTicket) => needTicket),
-  //   tap(() => this.store.dispatch(SdRequestActions.loadSelected())),
-  //   withLatestFrom(this.store.select(RouterSelector.selectRouteParams)),
-  //   switchMap(([_needTicket, routeParams]) =>
-  //     this.sdRequestApi.show(routeParams.id).pipe(
-  //       tap((data) => {
-  //         const normalizeData = SdRequestCacheService.normalizeSdRequest(data.sd_request);
-  //         const sdRequest = normalizeData.entities.sd_requests[normalizeData.result];
-
-  //         this.store.dispatch(SdRequestActions.loadSelectedSuccess({ sdRequest }));
-  //         this.messageFacade.setMessages(Object.values(normalizeData.entities.comments || []));
-  //         this.workFacade.setWorks(Object.values(normalizeData.entities.works || []));
-  //         this.historyFacade.setHistories(Object.values(normalizeData.entities.histories || []));
-  //         this.workerFacade.setWorkers(Object.values(normalizeData.entities.workers || []));
-  //       }),
-  //       catchError((error) => of(this.store.dispatch(SdRequestActions.loadSelectedFailure({ error }))))
-  //     )
-  //   ),
-  //   share()
-  // );
-  // selected$ = combineLatest([
-  //   this.loadSelected$.pipe(startWith(null)),
-  //   this.store.select(SdRequestViewModelSelectors.getSelectedViewModel),
-  // ]).pipe(
-  //   map(([_dispatcher, selector]) => selector),
-  //   distinctUntilChanged()
-  // );
-  selected$ = this.store.select(SdRequestViewModelSelectors.getSelectedViewModel);
   error$ = this.store.select(SdRequestSelectors.getError);
+
+  // ========== Просмотр выбранной заявки ==========
+
+  selectedEntity$ = this.store.select(SdRequestViewModelSelectors.getSelectedEntityViewModel);
+  selectedSkeleton$ = this.store.select(SdRequestSelectors.getSelectedSkeleton);
+  selectedEditMode$ = this.store.select(SdRequestSelectors.getSelectedEditMode);
+  selectedError$ = this.store.select(SdRequestSelectors.getSelectedError);
   orderedHistories$ = this.store.select(SdRequestViewModelSelectors.getOrderedHistories);
-  sortField$ = this.store.select(SdRequestSelectors.getSortField);
-  sortOrder$ = this.store.select(SdRequestSelectors.getSortOrder);
-  form$ = this.store.select(SdRequestSelectors.getForm);
+
+  // ========== Форма заявки ==========
+
+  formEntity$ = this.store.select(SdRequestSelectors.getFormEntity);
+  formLoading$ = this.store.select(SdRequestSelectors.getFormLoading);
 
   constructor(
     private store: Store<SdRequestFeature.SdRequestPartialState>,
@@ -136,10 +120,10 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   }
 
   changeForm(form: SdRequestForm) {
-    this.store.dispatch(SdRequestActions.changeForm({ form }));
+    this.store.dispatch(SdRequestActions.changeForm({ entity: form }));
   }
 
   updateForm() {
-    this.store.dispatch(SdRequestActions.updateForm());
+    this.store.dispatch(SdRequestActions.saveUpdateForm());
   }
 }

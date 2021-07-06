@@ -10,6 +10,19 @@ import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
 
 export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
+export interface SelectedState {
+  entity: SdRequest;
+  skeleton: boolean;
+  editMode: boolean;
+  error?: string;
+}
+
+export interface FormState {
+  entity: SdRequestForm;
+  loading: boolean;
+  error?: string;
+}
+
 export interface State extends EntityState<SdRequest> {
   firstRowIndex: number;
   totalCount: number;
@@ -17,18 +30,28 @@ export interface State extends EntityState<SdRequest> {
   sortField: string;
   sortOrder: number;
   filters: PrimeFilter;
-  selected: SdRequest;
   loading: boolean;
   loaded: boolean;
   needTickets: boolean;
-  // needTicket: boolean;
   error?: string;
-  form?: SdRequestForm;
+  selected?: SelectedState;
+  form?: FormState;
 }
 
 export interface SdRequestPartialState {
   readonly [SD_REQUEST_FEATURE_KEY]: State;
 }
+
+export const initSelectedState: SelectedState = {
+  entity: null,
+  skeleton: false,
+  editMode: false,
+};
+
+export const initFormState: FormState = {
+  entity: null,
+  loading: false,
+};
 
 export const sdRequestAdapter: EntityAdapter<SdRequest> = createEntityAdapter<SdRequest>();
 
@@ -39,15 +62,18 @@ export const initialState: State = sdRequestAdapter.getInitialState({
   sortOrder: -1,
   perPage: 25,
   filters: {},
-  selected: null,
   loading: false,
   loaded: false,
   needTickets: true,
-  // needTicket: true,
+  selected: initSelectedState,
+  form: initFormState,
 });
 
 const sdRequestReducer = createReducer(
   initialState,
+
+  // ========== Список заявок ==========
+
   on(SdRequestActions.loadAll, (state) => ({
     ...state,
     loaded: false,
@@ -83,51 +109,80 @@ const sdRequestReducer = createReducer(
     ...state,
     needTickets: true,
   })),
+
+  // ========== Просмотр выбранной заявки ==========
+
   on(SdRequestActions.loadSelected, (state) => ({
     ...state,
-    selected: null,
-    loaded: false,
-    loading: true,
-    // needTicket: false,
-    error: null,
+    selected: {
+      ...state.selected,
+      entity: null,
+      skeleton: true,
+      error: null,
+    },
   })),
   on(SdRequestActions.loadSelectedSuccess, (state, { sdRequest }) => ({
     ...state,
-    selected: sdRequest,
-    loading: false,
-    loaded: true,
+    selected: {
+      ...state.selected,
+      entity: sdRequest,
+      skeleton: false,
+    },
   })),
   on(SdRequestActions.loadSelectedFailure, (state, { error }) => ({
     ...state,
-    error,
-    loading: false,
+    selected: {
+      ...state.selected,
+      error,
+      skeleton: false,
+    },
   })),
   on(SdRequestActions.clearSelected, (state) => ({
     ...state,
-    loaded: false,
-    selected: null,
+    entity: null,
   })),
-  on(SdRequestActions.initForm, (state, { sdRequest }) => ({
+
+  // ========== Форма заявки ==========
+
+  on(SdRequestActions.initUpdateForm, (state, { sdRequest }) => ({
     ...state,
-    form: SdRequestFormBuilder.build(sdRequest),
+    form: {
+      ...state.form,
+      entity: SdRequestFormBuilder.build(sdRequest),
+    },
   })),
-  on(SdRequestActions.changeForm, (state, { form }) => ({
+  on(SdRequestActions.changeForm, (state, { entity }) => ({
     ...state,
-    form,
+    form: {
+      ...state.form,
+      entity,
+    },
   })),
-  on(SdRequestActions.updateForm, (state) => ({
+  on(SdRequestActions.saveUpdateForm, (state) => ({
     ...state,
-    loading: true,
+    form: {
+      ...state.form,
+      loading: true,
+    },
   })),
   on(SdRequestActions.saveFormSuccess, (state, { sdRequest }) => ({
     ...state,
-    loading: false,
-    selected: sdRequest,
+    form: {
+      ...state.form,
+      loading: false,
+    },
+    selected: {
+      ...state.selected,
+      entity: sdRequest,
+    },
   })),
   on(SdRequestActions.saveFormFailure, (state, { error }) => ({
     ...state,
-    loading: false,
-    error,
+    form: {
+      ...state.form,
+      loading: false,
+      error,
+    },
   }))
 );
 

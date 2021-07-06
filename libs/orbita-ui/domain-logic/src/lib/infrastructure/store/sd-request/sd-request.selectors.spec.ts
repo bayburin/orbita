@@ -1,24 +1,20 @@
+import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { sdRequestAdapter, initialState } from './sd-request.reducer';
 import * as SdRequestSelectors from './sd-request.selectors';
 import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
 
 describe('SdRequestSelectors', () => {
-  const error = { message: 'error' };
-  const createSdRequestEntity = (id: string, name = '') =>
+  const createSdRequestEntity = (id: number, name = '') =>
     (({
       id,
       name: name || `name-${id}`,
     } as unknown) as SdRequest);
-  const arrEntities = [
-    createSdRequestEntity('PRODUCT-AAA'),
-    createSdRequestEntity('PRODUCT-BBB'),
-    createSdRequestEntity('PRODUCT-CCC'),
-  ];
+  const arrEntities = [createSdRequestEntity(111), createSdRequestEntity(222), createSdRequestEntity(333)];
   const entities = {
-    'PRODUCT-AAA': arrEntities[0],
-    'PRODUCT-BBB': arrEntities[1],
-    'PRODUCT-CCC': arrEntities[2],
+    111: arrEntities[0],
+    222: arrEntities[1],
+    333: arrEntities[2],
   };
   const totalCount = 3;
   const perPage = 4;
@@ -26,46 +22,58 @@ describe('SdRequestSelectors', () => {
   const sortField = 'name';
   const sortOrder = 1;
   const filters = { foo: 'bar' };
-  const selected = createSdRequestEntity('PRODUCT-DDD');
-  const form = SdRequestFormBuilder.build();
+  const selectedEntity = createSdRequestEntity(444);
+  const formEntity = SdRequestFormBuilder.build();
+  let selectedState: any;
+  let formState: any;
   let state: any;
 
   beforeEach(() => {
+    selectedState = {
+      entity: selectedEntity,
+      skeleton: false,
+      editMode: true,
+      error: 'fake-selected-error',
+    };
+    formState = {
+      entity: formEntity,
+      loading: false,
+    };
     state = sdRequestAdapter.setAll(arrEntities, {
       ...initialState,
       firstRowIndex,
       totalCount,
+      perPage,
       sortField,
       sortOrder,
       filters,
-      selected,
-      perPage,
-      error,
       loading: false,
       loaded: true,
       needTickets: true,
-      form,
+      error: 'fake-error',
+      selected: selectedState,
+      form: formState,
     });
   });
 
   it('getFirstRowIndex() should return "page" attribute', () => {
-    expect(SdRequestSelectors.getFirstRowIndex.projector(state)).toEqual(firstRowIndex);
+    expect(SdRequestSelectors.getFirstRowIndex.projector(state)).toBe(firstRowIndex);
   });
 
   it('getTotalCount() should return "totalCount" attribute', () => {
-    expect(SdRequestSelectors.getTotalCount.projector(state)).toEqual(totalCount);
+    expect(SdRequestSelectors.getTotalCount.projector(state)).toBe(totalCount);
   });
 
   it('getSortField() should return "sortField" attribute', () => {
-    expect(SdRequestSelectors.getSortField.projector(state)).toEqual(sortField);
+    expect(SdRequestSelectors.getSortField.projector(state)).toBe(sortField);
   });
 
   it('getSortOrder() should return "sortOrder" attribute', () => {
-    expect(SdRequestSelectors.getSortOrder.projector(state)).toEqual(sortOrder);
+    expect(SdRequestSelectors.getSortOrder.projector(state)).toBe(sortOrder);
   });
 
   it('getPerPage() should return "perPage" attribute', () => {
-    expect(SdRequestSelectors.getPerPage.projector(state)).toEqual(perPage);
+    expect(SdRequestSelectors.getPerPage.projector(state)).toBe(perPage);
   });
 
   it('getFilters() should return "filters" attribute', () => {
@@ -73,19 +81,19 @@ describe('SdRequestSelectors', () => {
   });
 
   it('getLoading() should return "loading" attribute', () => {
-    expect(SdRequestSelectors.getLoading.projector(state)).toEqual(false);
+    expect(SdRequestSelectors.getLoading.projector(state)).toBe(false);
   });
 
   it('getLoaded() should return "loaded" attribute', () => {
-    expect(SdRequestSelectors.getLoaded.projector(state)).toEqual(true);
+    expect(SdRequestSelectors.getLoaded.projector(state)).toBe(true);
   });
 
   it('getNeedTickets() should return "needTickets" attribute', () => {
-    expect(SdRequestSelectors.getNeedTickets.projector(state)).toEqual(true);
+    expect(SdRequestSelectors.getNeedTickets.projector(state)).toBe(true);
   });
 
   it('getError() should return "error" attribute', () => {
-    expect(SdRequestSelectors.getError.projector(state)).toEqual(error);
+    expect(SdRequestSelectors.getError.projector(state)).toBe('fake-error');
   });
 
   it('getAll() should return array of entities', () => {
@@ -100,15 +108,39 @@ describe('SdRequestSelectors', () => {
     expect(SdRequestSelectors.getEntities.projector(state)).toEqual(entities);
   });
 
-  it('getSelected() should return selected entity', () => {
-    expect(SdRequestSelectors.getSelected.projector(state)).toEqual(selected);
+  it('getPage', () => {
+    expect(SdRequestSelectors.getPage.projector(firstRowIndex, perPage)).toBe(1);
   });
 
-  it('getPage', () => {
-    expect(SdRequestSelectors.getPage.projector(firstRowIndex, perPage)).toEqual(1);
+  it('getSelected() should return selected entity', () => {
+    expect(SdRequestSelectors.getSelected.projector(state)).toEqual(selectedState);
+  });
+
+  it('getSelectedEntity() should return selected entity', () => {
+    expect(SdRequestSelectors.getSelectedEntity.projector(selectedState)).toEqual(selectedEntity);
+  });
+
+  it('getSelectedSkeleton() should return selected entity', () => {
+    expect(SdRequestSelectors.getSelectedSkeleton.projector(selectedState)).toBe(false);
+  });
+
+  it('getSelectedEditMode() should return selected entity', () => {
+    expect(SdRequestSelectors.getSelectedEditMode.projector(selectedState)).toBe(true);
+  });
+
+  it('getSelectedError() should return selected entity', () => {
+    expect(SdRequestSelectors.getSelectedError.projector(selectedState)).toBe('fake-selected-error');
   });
 
   it('getForm', () => {
-    expect(SdRequestSelectors.getForm.projector(state)).toEqual(form);
+    expect(SdRequestSelectors.getForm.projector(state)).toEqual(formState);
+  });
+
+  it('getFormEntity', () => {
+    expect(SdRequestSelectors.getFormEntity.projector(formState)).toEqual(formEntity);
+  });
+
+  it('getFormLoading', () => {
+    expect(SdRequestSelectors.getFormLoading.projector(formState)).toBe(false);
   });
 });

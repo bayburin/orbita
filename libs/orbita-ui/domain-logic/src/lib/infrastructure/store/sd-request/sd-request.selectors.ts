@@ -1,9 +1,14 @@
-import { FilterMetadata } from 'primeng/api';
 import { createSelector } from '@ngrx/store';
 
 import { getOrbitaUiState } from './../index';
-import { SD_REQUEST_FEATURE_KEY, State, SdRequestPartialState, sdRequestAdapter } from './sd-request.reducer';
-// import { getLastHistory } from '../../utils/get-last-history.function';
+import {
+  SD_REQUEST_FEATURE_KEY,
+  State,
+  SdRequestPartialState,
+  sdRequestAdapter,
+  SelectedState,
+  FormState,
+} from './sd-request.reducer';
 
 export const getSdRequestState = createSelector(
   getOrbitaUiState,
@@ -11,6 +16,8 @@ export const getSdRequestState = createSelector(
 );
 
 const { selectAll, selectEntities } = sdRequestAdapter.getSelectors();
+
+// ========== Список заявок ==========
 
 export const getFirstRowIndex = createSelector(getSdRequestState, (state: State) => state.firstRowIndex);
 
@@ -44,26 +51,28 @@ export const getAllSorted = createSelector(getAll, getSortField, getSortOrder, (
 
 export const getEntities = createSelector(getSdRequestState, (state: State) => selectEntities(state));
 
-export const getSelected = createSelector(getSdRequestState, (state: State) => state.selected);
-
 export const getPage = createSelector(
   getFirstRowIndex,
   getPerPage,
   (firstRowIndex, perPage) => firstRowIndex / perPage + 1
 );
 
+// ========== Просмотр выбранной заявки ==========
+
+export const getSelected = createSelector(getSdRequestState, (state: State) => state.selected);
+
+export const getSelectedEntity = createSelector(getSelected, (state: SelectedState) => state.entity);
+
+export const getSelectedSkeleton = createSelector(getSelected, (state: SelectedState) => state.skeleton);
+
+export const getSelectedEditMode = createSelector(getSelected, (state: SelectedState) => state.editMode);
+
+export const getSelectedError = createSelector(getSelected, (state: SelectedState) => state.error);
+
+// ========== Форма заявки ==========
+
 export const getForm = createSelector(getSdRequestState, (state: State) => state.form);
 
-// export const getProcessedFilters = createSelector(getFilters, (filters) => {
-//   let created_at: FilterMetadata;
-//   if (filters.created_at && filters.created_at.value) {
-//     created_at = {
-//       value: new Date(filters.created_at.value),
-//       matchMode: 'equals',
-//     };
-//   }
-//   return {
-//     ...filters,
-//     created_at,
-//   };
-// });
+export const getFormEntity = createSelector(getForm, (state: FormState) => state.entity);
+
+export const getFormLoading = createSelector(getForm, (state: FormState) => state.loading);

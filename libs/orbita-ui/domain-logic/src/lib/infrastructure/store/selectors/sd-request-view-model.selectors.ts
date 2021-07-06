@@ -51,8 +51,8 @@ export const getAllViewModel = createSelector(
     })
 );
 
-export const getSelectedViewModel = createSelector(
-  SdRequestSelectors.getSelected,
+export const getSelectedEntityViewModel = createSelector(
+  SdRequestSelectors.getSelectedEntity,
   MessageViewModelSelectors.getEntitiesViewModel,
   WorkViewModelSelectors.getEntitiesViewModel,
   ApplicationSelectors.getEntities,
@@ -80,6 +80,6 @@ export const getSelectedViewModel = createSelector(
   }
 );
 
-export const getOrderedHistories = createSelector(getSelectedViewModel, (sdRequest) =>
+export const getOrderedHistories = createSelector(getSelectedEntityViewModel, (sdRequest) =>
   oFlatMap((work) => work.histories, sdRequest.works).sort((a, b) => (a.id > b.id ? 1 : -1))
 );

@@ -57,7 +57,7 @@ export class SdRequestEffects {
         EmployeeActions.selectEmployee({ idTn: action.sdRequest.source_snapshot.id_tn }),
         SvtItemActions.select({ barcode: action.sdRequest.source_snapshot.barcode }),
         HostActions.select({ inventNum: action.sdRequest.source_snapshot.invent_num }),
-        SdRequestActions.initForm({ sdRequest: action.sdRequest }),
+        SdRequestActions.initUpdateForm({ sdRequest: action.sdRequest }),
       ])
     )
   );
@@ -74,11 +74,13 @@ export class SdRequestEffects {
     )
   );
 
-  // TODO: Возможно придется изменить эффект, так как данные планируется получать по сокету (или сделать эффект исключительно для изменения данных, т.е. без создания)
-  saveForm = createEffect(() =>
+  saveUpdateForm = createEffect(() =>
     this.actions$.pipe(
-      ofType(SdRequestActions.updateForm),
-      withLatestFrom(this.store.select(SdRequestSelectors.getSelected), this.store.select(SdRequestSelectors.getForm)),
+      ofType(SdRequestActions.saveUpdateForm),
+      withLatestFrom(
+        this.store.select(SdRequestSelectors.getSelectedEntity),
+        this.store.select(SdRequestSelectors.getFormEntity)
+      ),
       switchMap(([_action, sdRequest, formData]) =>
         this.sdRequestApi.update(sdRequest.id, formData).pipe(
           switchMap((data) => {

@@ -20,7 +20,7 @@ export class ParameterEffects {
   loadAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ParameterActions.loadAll),
-      withLatestFrom(this.store.select(SdRequestSelectors.getSelected)),
+      withLatestFrom(this.store.select(SdRequestSelectors.getSelectedEntity)),
       switchMap(([_action, sdRequest]) =>
         this.parameterApi.query(sdRequest.id).pipe(
           map((data) => ParameterActions.loadAllSuccess({ parameters: data.parameters })),

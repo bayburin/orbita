@@ -23,6 +23,14 @@ export abstract class SdRequestFacadeAbstract {
    */
   perPage$: Observable<number>;
   /**
+   * Поле для сортировки
+   */
+  sortField$: Observable<string>;
+  /**
+   * Порядок сортировки
+   */
+  sortOrder$: Observable<number>;
+  /**
    * Индикатор, идет ли загрузка в данный момент
    */
   loading$: Observable<boolean>;
@@ -39,29 +47,37 @@ export abstract class SdRequestFacadeAbstract {
    */
   all$: Observable<SdRequestViewModel[]>;
   /**
-   * Выбранная заявка
-   */
-  selected$: Observable<SdRequestViewModel>;
-  /**
    * Содержит ошибку, возникшую в процессе загрузки или обработки заявки
    */
   error$: Observable<any>;
+  /**
+   * Выбранная заявка
+   */
+  selectedEntity$: Observable<SdRequestViewModel>;
+  /**
+   * Скелетон, показывающий начальную загрузку страницы просмотра заявки
+   */
+  selectedSkeleton$: Observable<boolean>;
+  /**
+   * Флаг, отображающий режим редактирования
+   */
+  selectedEditMode$: Observable<boolean>;
+  /**
+   * Содержит ошибку, возникшую в процессе загрузки или обработки заявки
+   */
+  selectedError$: Observable<string>;
   /**
    * Массив всех событий, произошедших с выбранной заявкой
    */
   orderedHistories$: Observable<HistoryViewModel[]>;
   /**
-   * Поле для сортировки
-   */
-  sortField$: Observable<string>;
-  /**
-   * Порядок сортировки
-   */
-  sortOrder$: Observable<number>;
-  /**
    * Форма заявки
    */
-  form$: Observable<SdRequestForm>;
+  formEntity$: Observable<SdRequestForm>;
+  /**
+   * Индикатор загрузки формы
+   */
+  formLoading$: Observable<boolean>;
 
   /**
    * Устанавливает метаданные таблицы

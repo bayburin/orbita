@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { Meta } from '../../../entities/server-data/meta.interface';
 import * as SdRequestActions from './sd-request.actions';
-import { State, initialState, reducer } from './sd-request.reducer';
+import { State, initialState, reducer, SelectedState, FormState } from './sd-request.reducer';
 import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
 import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 
@@ -72,7 +72,6 @@ describe('SdRequestReducer', () => {
       expect(result.sortField).toEqual(data.sortField);
       expect(result.sortOrder).toEqual(data.sortOrder);
       expect(result.filters).toEqual(data.filters);
-      expect(result.loaded).toEqual(false);
       expect(result.needTickets).toEqual(true);
     });
   });
@@ -89,12 +88,10 @@ describe('SdRequestReducer', () => {
   describe('loadSelected', () => {
     it('should set attributes', () => {
       action = SdRequestActions.loadSelected();
-      const result: State = reducer(initialState, action);
+      const result: SelectedState = reducer(initialState, action).selected;
 
-      expect(result.selected).toBeNull();
-      expect(result.loaded).toBe(false);
-      expect(result.loading).toBe(true);
-      // expect(result.needTicket).toBe(false);
+      expect(result.entity).toBeNull();
+      expect(result.skeleton).toBe(true);
       expect(result.error).toBeNull();
     });
   });
@@ -103,11 +100,10 @@ describe('SdRequestReducer', () => {
     it('should set attributes', () => {
       const sdRequest = createSdRequest('AAA');
       action = SdRequestActions.loadSelectedSuccess({ sdRequest });
-      const result: State = reducer(initialState, action);
+      const result: SelectedState = reducer(initialState, action).selected;
 
-      expect(result.selected).toEqual(sdRequest);
-      expect(result.loaded).toBe(true);
-      expect(result.loading).toBe(false);
+      expect(result.entity).toEqual(sdRequest);
+      expect(result.skeleton).toBe(false);
     });
   });
 
@@ -115,11 +111,9 @@ describe('SdRequestReducer', () => {
     it('should set attributes', () => {
       const error = 'fake-error';
       action = SdRequestActions.loadSelectedFailure({ error });
-      const result: State = reducer(initialState, action);
+      const result: SelectedState = reducer(initialState, action).selected;
 
-      expect(result.selected).toBeNull();
-      expect(result.loaded).toBe(false);
-      expect(result.loading).toBe(false);
+      expect(result.skeleton).toBe(false);
       expect(result.error).toBe(error);
     });
   });
@@ -127,39 +121,38 @@ describe('SdRequestReducer', () => {
   describe('clearSelected', () => {
     it('should set attributes', () => {
       action = SdRequestActions.clearSelected();
-      const result: State = reducer(initialState, action);
+      const result: SelectedState = reducer(initialState, action).selected;
 
-      expect(result.selected).toBeNull();
-      expect(result.loaded).toBe(false);
+      expect(result.entity).toBeNull();
     });
   });
 
-  describe('initForm', () => {
+  describe('initUpdateForm', () => {
     it('should set attributes', () => {
       const sdRequest = createSdRequest('PRODUCT-AAA');
       const form = { id: 111 };
       spyOn(SdRequestFormBuilder, 'build').and.returnValue(form);
-      action = SdRequestActions.initForm({ sdRequest });
-      const result: State = reducer(initialState, action);
+      action = SdRequestActions.initUpdateForm({ sdRequest });
+      const result: FormState = reducer(initialState, action).form;
 
-      expect(result.form).toEqual(form);
+      expect(result.entity).toEqual(form);
     });
   });
 
   describe('changeForm', () => {
     it('should set attributes', () => {
       const form = { id: 111 } as SdRequestForm;
-      action = SdRequestActions.changeForm({ form });
-      const result: State = reducer(initialState, action);
+      action = SdRequestActions.changeForm({ entity: form });
+      const result: FormState = reducer(initialState, action).form;
 
-      expect(result.form).toEqual(form);
+      expect(result.entity).toEqual(form);
     });
   });
 
-  describe('updateForm', () => {
+  describe('saveUpdateForm', () => {
     it('should set attributes', () => {
-      action = SdRequestActions.updateForm();
-      const result: State = reducer(initialState, action);
+      action = SdRequestActions.saveUpdateForm();
+      const result: FormState = reducer(initialState, action).form;
 
       expect(result.loading).toBe(true);
     });
@@ -171,8 +164,8 @@ describe('SdRequestReducer', () => {
       action = SdRequestActions.saveFormSuccess({ sdRequest });
       const result: State = reducer(initialState, action);
 
-      expect(result.loading).toBe(false);
-      expect(result.selected).toEqual(sdRequest);
+      expect(result.form.loading).toBe(false);
+      expect(result.selected.entity).toEqual(sdRequest);
     });
   });
 
@@ -180,7 +173,7 @@ describe('SdRequestReducer', () => {
     it('should set attributes', () => {
       const error = 'fake-error';
       action = SdRequestActions.saveFormFailure({ error });
-      const result: State = reducer(initialState, action);
+      const result: FormState = reducer(initialState, action).form;
 
       expect(result.loading).toBe(false);
       expect(result.error).toEqual(error);
