@@ -1,4 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 import {
   SdRequestFacade,
   HistoryViewModel,
@@ -19,6 +23,9 @@ import {
   getViewModelCsaStatuses,
   ParameterFacade,
   Parameter,
+  WorkViewModel,
+  WorkerViewModel,
+  prioritiesViewModelArray,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -27,9 +34,12 @@ import {
   styleUrls: ['./overview-block.component.scss'],
 })
 export class OverviewBlockComponent implements OnInit, OnDestroy {
-  sdRequest$ = this.sdRequestFacade.selected$;
-  loading$ = this.sdRequestFacade.loading$;
-  error$ = this.sdRequestFacade.error$;
+  // ========== Раздел вывода данных ==========
+
+  sdRequest$ = this.sdRequestFacade.selectedEntity$;
+  skeleton$ = this.sdRequestFacade.selectedSkeleton$;
+  editMode$ = this.sdRequestFacade.selectedEditMode$;
+  error$ = this.sdRequestFacade.selectedError$;
   orderedHistories$ = this.sdRequestFacade.orderedHistories$;
   loadingEmployee$ = this.employeeFacade.loadingEmployee$;
   loadedEmployee$ = this.employeeFacade.loadedEmployee$;
@@ -43,21 +53,34 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   loadingParameters$ = this.parameterFacade.loading$;
   loadedParameters$ = this.parameterFacade.loaded$;
   parameters$ = this.parameterFacade.all$;
+  priorities = prioritiesViewModelArray;
+
+  // ========== Раздел формы ==========
+
+  form: FormGroup;
+  loadingForm$ = this.sdRequestFacade.formLoading$;
+  storeForm: Subscription;
+  valueChanges: Subscription;
 
   constructor(
     private sdRequestFacade: SdRequestFacade,
     private employeeFacade: EmployeeFacade,
     private svtFacade: SvtFacade,
     private acFacade: AuthCenterFacade,
-    private parameterFacade: ParameterFacade
+    private parameterFacade: ParameterFacade,
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.sdRequestFacade.loadSelectedSdRequest();
+    this.buildForm();
   }
 
   ngOnDestroy(): void {
     this.sdRequestFacade.clearSelected();
+    this.storeForm.unsubscribe();
+    this.valueChanges.unsubscribe();
   }
 
   trackByHistory(index: number, history: HistoryViewModel): number {
@@ -66,6 +89,14 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByParameter(index: number, parameter: Parameter): number {
     return parameter.id;
+  }
+
+  trackByWork(index: number, work: WorkViewModel): number {
+    return work.id;
+  }
+
+  trackByWorker(index: number, worker: WorkerViewModel): number {
+    return worker.id;
   }
 
   /**
@@ -105,7 +136,48 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(message: string): void {
-    // TODO: Отправить событие родительскому контроллеру
     console.log(message);
+  }
+
+  /**
+   * Активирует/отключает режим редактирования
+   */
+  toggleEditMode(): void {
+    this.sdRequestFacade.toggleEditMode();
+  }
+
+  /**
+   * Сохраняет форму
+   */
+  saveForm() {
+    this.sdRequestFacade.updateForm();
+  }
+
+  /**
+   * Редиркетит на страницу заявок
+   */
+  navigateToSdRequests() {
+    this.router.navigate(['/tickets']);
+  }
+
+  private buildForm(): void {
+    this.form = this.fb.group({
+      id: [],
+      type: [],
+      description: [],
+      priority: [],
+      finished_at_plan: [],
+      service_id: [],
+      service_name: [],
+      ticket_identity: [],
+      ticket_name: [],
+      rating: [],
+    });
+    // Заполняет данные формы из хранилища
+    this.storeForm = this.sdRequestFacade.formEntity$
+      .pipe(first((data) => Boolean(data)))
+      .subscribe((formData) => this.form.patchValue(formData));
+    // Обновляет хранилище по любому изменению формы
+    this.valueChanges = this.form.valueChanges.subscribe((formData) => this.sdRequestFacade.changeForm(formData));
   }
 }

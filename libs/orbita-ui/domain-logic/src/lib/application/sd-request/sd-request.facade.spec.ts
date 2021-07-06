@@ -304,6 +304,16 @@ describe('SdRequestFacade', () => {
       });
     });
 
+    describe('toggleEditMode()', () => {
+      it('should call toggleEditMode action', () => {
+        const spy = spyOn(store, 'dispatch');
+
+        facade.toggleEditMode();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.toggleSelectedEditMode());
+      });
+    });
+
     describe('changeForm()', () => {
       it('should call changeForm action', () => {
         const spy = spyOn(store, 'dispatch');

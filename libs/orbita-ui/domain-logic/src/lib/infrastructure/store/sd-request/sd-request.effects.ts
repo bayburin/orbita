@@ -89,6 +89,7 @@ export class SdRequestEffects {
 
             return [
               SdRequestActions.saveFormSuccess({ sdRequest: changedSdRequest }),
+              SdRequestActions.toggleSelectedEditMode(),
               MessageActions.setMessages({ messages: Object.values(normalizeData.entities.comments || []) }),
               WorkActions.setWorks({ works: Object.values(normalizeData.entities.works || []) }),
               HistoryActions.setHistories({ histories: Object.values(normalizeData.entities.histories || []) }),

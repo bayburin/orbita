@@ -1,271 +1,375 @@
 <div class="card">
-  <lib-ticket-overview-skeleton *ngIf="loading$ | async"></lib-ticket-overview-skeleton>
+  <lib-ticket-overview-skeleton *ngIf="skeleton$ | async"></lib-ticket-overview-skeleton>
 
   <lib-page-error *ngIf="error$ | async as error" [error]="error">
     <p>Не удалось загрузить заявку. Попробуйте обновить страницу.</p>
   </lib-page-error>
 
   <div *ngIf="sdRequest$ | async as sdRequest">
-    <div class="p-grid">
-      <div class="p-col-3">
-        <div
-          *ngFor="
-            let history of (orderedHistories$ | async).slice().reverse();
-            trackBy: trackByHistory;
-            let index = index
-          "
-        >
-          <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
-        </div>
-      </div>
-      <div class="p-col-6">
-        <div class="p-m-3">
-          <div class="ticket-overview-header">
-            #{{ sdRequest.id }}
-            <span class="p-ml-3">{{ sdRequest.service_name }}. {{ sdRequest.ticket_name }}</span>
-          </div>
-          <div class="p-mt-2">
-            <span class="text-secondary">пользователь</span>
-            <span class="text-primary p-ml-2">{{ sdRequest.source_snapshot.fio }}</span>
-            <span class="text-secondary p-ml-2">от</span>
-            <span class="p-mr-2 p-ml-2">{{ sdRequest.runtime.created_at | datetime }}</span> |
-            <span class="p-ml-2">
-              <b>
-                выполнить до:
-                <span class="p-ml-1">{{ sdRequest.runtime.finished_at_plan | datetime }}</span>
-              </b>
-            </span>
+    <form [formGroup]="form">
+      <div class="p-grid">
+        <div class="p-col-3">
+          <div
+            *ngFor="
+              let history of (orderedHistories$ | async).slice().reverse();
+              trackBy: trackByHistory;
+              let index = index
+            "
+          >
+            <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
           </div>
         </div>
-
-        <div class="p-mt-3">
-          <p-tabView>
-            <p-tabPanel header="Детали">
-              <p-panel header="Описание">
-                <div *ngIf="sdRequest.description; else noDesc">{{ sdRequest.description }}</div>
-                <ng-template #noDesc>
-                  <lib-panel-placeholder>Пусто</lib-panel-placeholder>
+        <div class="p-col-6">
+          <p-toolbar styleClass="toolbar-sm">
+            <ng-container *ngIf="editMode$ | async; else readModeActions">
+              <div class="p-toolbar-group-left">
+                <p-button
+                  label="К заявкам"
+                  icon="mdi mdi-arrow-left-bold-outline mdi-18px"
+                  class="p-mr-2"
+                  styleClass="p-button-text p-button-plain"
+                  (click)="navigateToSdRequests()"
+                ></p-button>
+                <p-button
+                  *ngIf="loadingForm$ | async; else noSaving"
+                  label="Сохранение..."
+                  icon="mdi mdi-loading mdi-spin mdi-18px"
+                  class="p-mr-2"
+                  styleClass="p-button-outlined p-button-primary"
+                  [disabled]="true"
+                ></p-button>
+                <ng-template #noSaving>
+                  <p-button
+                    label="Сохранить"
+                    icon="mdi mdi-content-save-edit-outline mdi-18px"
+                    class="p-mr-2"
+                    styleClass="p-button-outlined p-button-primary"
+                    (click)="saveForm()"
+                  ></p-button>
+                  <!-- <p-splitButton
+                    label="Сохранить"
+                    icon="mdi mdi-content-save-edit-outline mdi-18px"
+                    (onClick)="saveForm()"
+                    [model]="actionItems"
+                  ></p-splitButton> -->
                 </ng-template>
-              </p-panel>
-            </p-tabPanel>
-            <p-tabPanel header="Параметры">
-              <p-panel header="Параметры заявки">
-                <div *ngIf="loadedParameters$ | async; else emptyData">
-                  <div *ngIf="parameters$ | async as parameters">
-                    <div *ngIf="parameters.length > 0; else emptyData">
-                      <div *ngFor="let parameter of parameters; trackByParameter">
-                        <lib-detail-row>
-                          <div attribute>{{ parameter.name }}</div>
-                          <div value>{{ parameter.value }}</div>
+                <!-- <p-button
+                  label="Показать изменения"
+                  icon="mdi mdi-refresh mdi-18px"
+                  styleClass="p-button-outlined p-button-help"
+                  class="p-mr-2"
+                ></p-button> -->
+              </div>
+              <div class="p-toolbar-group-right">
+                <p-button
+                  label="Режим просмотра"
+                  icon="mdi mdi-file-eye-outline mdi-18px"
+                  class="p-mr-2"
+                  styleClass="p-button-text p-button-plain"
+                  (click)="toggleEditMode()"
+                ></p-button>
+              </div>
+            </ng-container>
+            <ng-template #readModeActions>
+              <div class="p-toolbar-group-left">
+                <p-button
+                  label="К заявкам"
+                  icon="mdi mdi-arrow-left-bold-outline mdi-18px"
+                  class="p-mr-2"
+                  styleClass="p-button-text p-button-plain"
+                  (click)="navigateToSdRequests()"
+                ></p-button>
+                <!-- <p-button
+                  label="Выполнить заявку"
+                  icon="mdi mdi-check mdi-18px"
+                  class="p-mr-2"
+                  styleClass="p-button-outlined p-button-success"
+                ></p-button> -->
+              </div>
+              <div class="p-toolbar-group-right">
+                <!-- <p-button
+                  label="Отменить заявку"
+                  icon="mdi mdi-close mdi-18px"
+                  class="p-mr-2"
+                  styleClass="p-button-text p-button-plain"
+                ></p-button> -->
+                <p-button
+                  label="Режим редактирования"
+                  icon="mdi mdi-file-document-edit-outline mdi-18px"
+                  class="p-mr-2"
+                  styleClass="p-button-text p-button-plain"
+                  (click)="toggleEditMode()"
+                ></p-button>
+                <!-- <p-button
+                  label="Показать изменения"
+                  icon="mdi mdi-refresh mdi-18px"
+                  styleClass="p-button-text p-button-plain"
+                ></p-button> -->
+              </div>
+            </ng-template>
+          </p-toolbar>
+          <div class="p-m-3">
+            <div class="ticket-overview-header">
+              #{{ sdRequest.id }}
+              <span class="p-ml-3">{{ sdRequest.service_name }}. {{ sdRequest.ticket_name }}</span>
+            </div>
+            <div class="p-mt-2">
+              <span class="text-secondary">пользователь</span>
+              <span class="text-primary p-ml-2">{{ sdRequest.source_snapshot.fio }}</span>
+              <span class="text-secondary p-ml-2">от</span>
+              <span class="p-mr-2 p-ml-2">{{ sdRequest.runtime.created_at | datetime }}</span> |
+              <span class="p-ml-2">
+                <b>
+                  выполнить до:
+                  <span class="p-ml-1">{{ sdRequest.runtime.finished_at_plan | datetime }}</span>
+                </b>
+              </span>
+            </div>
+          </div>
+
+          <div class="p-mt-3">
+            <p-tabView>
+              <p-tabPanel header="Детали">
+                <p-panel header="Описание">
+                  <div *ngIf="sdRequest.description; else noDesc">{{ sdRequest.description }}</div>
+                  <ng-template #noDesc>
+                    <lib-panel-placeholder>Пусто</lib-panel-placeholder>
+                  </ng-template>
+                </p-panel>
+              </p-tabPanel>
+              <p-tabPanel header="Параметры">
+                <p-panel header="Параметры заявки">
+                  <div *ngIf="loadedParameters$ | async; else emptyData">
+                    <div *ngIf="parameters$ | async as parameters">
+                      <div *ngIf="parameters.length > 0; else emptyData">
+                        <div *ngFor="let parameter of parameters; trackByParameter">
+                          <lib-detail-row>
+                            <div attribute>{{ parameter.name }}</div>
+                            <div value>{{ parameter.value }}</div>
+                          </lib-detail-row>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </p-panel>
+              </p-tabPanel>
+              <p-tabPanel header="Исполнители">
+                <div *ngFor="let work of sdRequest.works; trackBy: trackByWork">
+                  <lib-group-header [group]="work.group"></lib-group-header>
+                  <div *ngIf="work.workers.length; else emptyData">
+                    <div *ngFor="let worker of work.workers; trackBy: trackByWorker">
+                      <div class="p-p-2">{{ worker.user.fio }}</div>
+                    </div>
+                  </div>
+                  <p-divider type="dashed"></p-divider>
+                </div>
+              </p-tabPanel>
+              <p-tabPanel header="Комментарии">
+                <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>
+              </p-tabPanel>
+              <p-tabPanel header="Данные на момент создания">
+                <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>
+              </p-tabPanel>
+            </p-tabView>
+          </div>
+        </div>
+        <div class="p-col-3">
+          <lib-detail-row class="p-mb-2">
+            <div attribute>Статус</div>
+            <div value>
+              <span [class]="'sd-request-badge status-' + status(sdRequest.status).badge">{{
+                status(sdRequest.status).title
+              }}</span>
+            </div>
+          </lib-detail-row>
+
+          <lib-detail-row class="p-mb-2">
+            <div attribute>Приоритет</div>
+            <div value>
+              <ng-container *ngIf="editMode$ | async; else readModePriority">
+                <p-dropdown
+                  formControlName="priority"
+                  [options]="priorities"
+                  optionValue="priority"
+                  optionLabel="title"
+                >
+                  <ng-template let-option pTemplate="item">
+                    <span [class]="'sd-request-badge priority-' + option.badge">{{ option.title }}</span>
+                  </ng-template>
+                </p-dropdown>
+              </ng-container>
+              <ng-template #readModePriority>
+                <span [class]="'sd-request-badge priority-' + priority(sdRequest.priority).badge">{{
+                  priority(sdRequest.priority).title
+                }}</span>
+              </ng-template>
+            </div>
+          </lib-detail-row>
+
+          <lib-detail-row class="p-mb-2">
+            <div attribute>Имя приложения</div>
+            <div value>{{ sdRequest.application?.name }}</div>
+          </lib-detail-row>
+
+          <lib-detail-row class="p-mb-2">
+            <div attribute>Внешний ID</div>
+            <div value>{{ sdRequest.integration_id }}</div>
+          </lib-detail-row>
+
+          <p-divider></p-divider>
+
+          <h3>Актуальные данные:</h3>
+          <p-accordion [multiple]="true">
+            <p-accordionTab [selected]="(loadingEmployee$ | async) === false && (employee$ | async)">
+              <ng-template pTemplate="header">
+                <div class="panel-header">
+                  <span>Пользователь</span>
+                  <span *ngIf="loadingEmployee$ | async">
+                    <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
+                  </span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <ng-container
+                  *ngIf="loadingEmployee$ | async; then loadingData; else loadingEmployeeComplete"
+                ></ng-container>
+
+                <ng-template #loadingEmployeeComplete>
+                  <div *ngIf="loadedEmployee$ | async; else emptyData">
+                    <div *ngIf="employee$ | async as employee; else unknownData">
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>ФИО</div>
+                        <div value>{{ employee.lastName }} {{ employee.firstName }} {{ employee.middleName }}</div>
+                      </lib-detail-row>
+
+                      <div *ngIf="employee.employeePositions as positions">
+                        <lib-detail-row class="p-mb-2">
+                          <div attribute>Должность</div>
+                          <div value>{{ positions[0].professionForAccounting }}</div>
+                        </lib-detail-row>
+
+                        <lib-detail-row class="p-mb-2">
+                          <div attribute>Категория</div>
+                          <div value>{{ positions[0].employeeCategory }}</div>
+                        </lib-detail-row>
+
+                        <lib-detail-row class="p-mb-2">
+                          <div attribute>Подразделение</div>
+                          <div value>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</div>
                         </lib-detail-row>
                       </div>
                     </div>
                   </div>
+                </ng-template>
+              </ng-template>
+            </p-accordionTab>
+            <p-accordionTab [selected]="(loadingHost$ | async) === false && (host$ | async)">
+              <ng-template pTemplate="header">
+                <div class="panel-header">
+                  <span>Хост</span>
+                  <span *ngIf="loadingHost$ | async">
+                    <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
+                  </span>
                 </div>
-              </p-panel>
-            </p-tabPanel>
-            <p-tabPanel header="Исполнители">
-              <div *ngFor="let work of sdRequest.works">
-                <lib-group-header [group]="work.group"></lib-group-header>
-                <div *ngIf="work.workers.length; else emptyData">
-                  <div *ngFor="let worker of work.workers">
-                    <div class="p-p-2">{{ worker.user.fio }}</div>
-                  </div>
-                </div>
-                <p-divider type="dashed"></p-divider>
-              </div>
-            </p-tabPanel>
-            <p-tabPanel header="Комментарии">
-              <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>
-            </p-tabPanel>
-            <p-tabPanel header="Данные на момент создания">
-              <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>
-            </p-tabPanel>
-          </p-tabView>
-        </div>
-      </div>
-      <div class="p-col-3">
-        <lib-detail-row class="p-mb-2">
-          <div attribute>Статус</div>
-          <div value>
-            <span [class]="'sd-request-badge status-' + status(sdRequest.status).badge">{{
-              status(sdRequest.status).title
-            }}</span>
-          </div>
-        </lib-detail-row>
-
-        <lib-detail-row class="p-mb-2">
-          <div attribute>Приоритет</div>
-          <div value>
-            <span [class]="'sd-request-badge priority-' + priority(sdRequest.priority).badge">{{
-              priority(sdRequest.priority).title
-            }}</span>
-          </div>
-        </lib-detail-row>
-
-        <lib-detail-row class="p-mb-2">
-          <div attribute>Имя приложения</div>
-          <div value>{{ sdRequest.application?.name }}</div>
-        </lib-detail-row>
-
-        <lib-detail-row class="p-mb-2">
-          <div attribute>Внешний ID</div>
-          <div value>{{ sdRequest.integration_id }}</div>
-        </lib-detail-row>
-
-        <p-divider></p-divider>
-
-        <h3>Актуальные данные:</h3>
-        <p-accordion [multiple]="true">
-          <p-accordionTab [selected]="(loadingEmployee$ | async) === false && (employee$ | async)">
-            <ng-template pTemplate="header">
-              <div class="panel-header">
-                <span>Пользователь</span>
-                <span *ngIf="loadingEmployee$ | async">
-                  <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
-                </span>
-              </div>
-            </ng-template>
-            <ng-template pTemplate="content">
-              <ng-container
-                *ngIf="loadingEmployee$ | async; then loadingData; else loadingEmployeeComplete"
-              ></ng-container>
-
-              <ng-template #loadingEmployeeComplete>
-                <div *ngIf="loadedEmployee$ | async; else emptyData">
-                  <div *ngIf="employee$ | async as employee; else unknownData">
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>ФИО</div>
-                      <div value>{{ employee.lastName }} {{ employee.firstName }} {{ employee.middleName }}</div>
-                    </lib-detail-row>
-
-                    <div *ngIf="employee.employeePositions as positions">
+              </ng-template>
+              <ng-template pTemplate="content">
+                <ng-container *ngIf="loadingHost$ | async; then loadingData; else loadingHostComplete"></ng-container>
+                <ng-template #loadingHostComplete>
+                  <div *ngIf="loadedHost$ | async; else emptyData">
+                    <div *ngIf="host$ | async as host; else unknownData">
                       <lib-detail-row class="p-mb-2">
-                        <div attribute>Должность</div>
-                        <div value>{{ positions[0].professionForAccounting }}</div>
+                        <div attribute>IP</div>
+                        <div value>{{ host.ip }}</div>
                       </lib-detail-row>
 
                       <lib-detail-row class="p-mb-2">
-                        <div attribute>Категория</div>
-                        <div value>{{ positions[0].employeeCategory }}</div>
+                        <div attribute>MAC</div>
+                        <div value>{{ host.mac }}</div>
                       </lib-detail-row>
 
                       <lib-detail-row class="p-mb-2">
-                        <div attribute>Подразделение</div>
-                        <div value>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</div>
+                        <div attribute>ОС</div>
+                        <div value>{{ host.os }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Расположение</div>
+                        <div value>{{ host.room }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>ФИО владельца</div>
+                        <div value>{{ host.user }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Отдел</div>
+                        <div value>{{ host.division }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Аудит</div>
+                        <div value>{{ cmsStatus(host.cms).title }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Антивирус</div>
+                        <div value>{{ csaStatus(host.csa).title }}</div>
                       </lib-detail-row>
                     </div>
                   </div>
+                </ng-template>
+              </ng-template>
+            </p-accordionTab>
+            <p-accordionTab [selected]="(loadingSvtItem$ | async) === false && (svtItem$ | async)">
+              <ng-template pTemplate="header">
+                <div class="panel-header">
+                  <span>Техника</span>
+                  <span *ngIf="loadingSvtItem$ | async">
+                    <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
+                  </span>
                 </div>
               </ng-template>
-            </ng-template>
-          </p-accordionTab>
-          <p-accordionTab [selected]="(loadingHost$ | async) === false && (host$ | async)">
-            <ng-template pTemplate="header">
-              <div class="panel-header">
-                <span>Хост</span>
-                <span *ngIf="loadingHost$ | async">
-                  <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
-                </span>
-              </div>
-            </ng-template>
-            <ng-template pTemplate="content">
-              <ng-container *ngIf="loadingHost$ | async; then loadingData; else loadingHostComplete"></ng-container>
-              <ng-template #loadingHostComplete>
-                <div *ngIf="loadedHost$ | async; else emptyData">
-                  <div *ngIf="host$ | async as host; else unknownData">
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>IP</div>
-                      <div value>{{ host.ip }}</div>
-                    </lib-detail-row>
+              <ng-template pTemplate="content">
+                <ng-container
+                  *ngIf="loadingSvtItem$ | async; then loadingData; else loadingSvtItemComplete"
+                ></ng-container>
+                <ng-template #loadingSvtItemComplete>
+                  <div *ngIf="loadedSvtItem$ | async; else emptyData">
+                    <div *ngIf="svtItem$ | async as svtItem; else unknownData">
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Тип</div>
+                        <div value>{{ svtItem.type.short_description }}</div>
+                      </lib-detail-row>
 
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>MAC</div>
-                      <div value>{{ host.mac }}</div>
-                    </lib-detail-row>
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Модель</div>
+                        <div value>{{ svtItem.short_item_model }}</div>
+                      </lib-detail-row>
 
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>ОС</div>
-                      <div value>{{ host.os }}</div>
-                    </lib-detail-row>
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Инв. №</div>
+                        <div value>{{ svtItem.invent_num }}</div>
+                      </lib-detail-row>
 
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>Расположение</div>
-                      <div value>{{ host.room }}</div>
-                    </lib-detail-row>
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Штрих-код</div>
+                        <div value>{{ svtItem.barcode_item?.id }}</div>
+                      </lib-detail-row>
 
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>ФИО владельца</div>
-                      <div value>{{ host.user }}</div>
-                    </lib-detail-row>
-
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>Отдел</div>
-                      <div value>{{ host.division }}</div>
-                    </lib-detail-row>
-
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>Аудит</div>
-                      <div value>{{ cmsStatus(host.cms).title }}</div>
-                    </lib-detail-row>
-
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>Антивирус</div>
-                      <div value>{{ csaStatus(host.csa).title }}</div>
-                    </lib-detail-row>
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>ID РМ</div>
+                        <div value>{{ svtItem.workplace_id }}</div>
+                      </lib-detail-row>
+                    </div>
                   </div>
-                </div>
+                </ng-template>
               </ng-template>
-            </ng-template>
-          </p-accordionTab>
-          <p-accordionTab [selected]="(loadingSvtItem$ | async) === false && (svtItem$ | async)">
-            <ng-template pTemplate="header">
-              <div class="panel-header">
-                <span>Техника</span>
-                <span *ngIf="loadingSvtItem$ | async">
-                  <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
-                </span>
-              </div>
-            </ng-template>
-            <ng-template pTemplate="content">
-              <ng-container
-                *ngIf="loadingSvtItem$ | async; then loadingData; else loadingSvtItemComplete"
-              ></ng-container>
-              <ng-template #loadingSvtItemComplete>
-                <div *ngIf="loadedSvtItem$ | async; else emptyData">
-                  <div *ngIf="svtItem$ | async as svtItem; else unknownData">
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>Тип</div>
-                      <div value>{{ svtItem.type.short_description }}</div>
-                    </lib-detail-row>
-
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>Модель</div>
-                      <div value>{{ svtItem.short_item_model }}</div>
-                    </lib-detail-row>
-
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>Инв. №</div>
-                      <div value>{{ svtItem.invent_num }}</div>
-                    </lib-detail-row>
-
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>Штрих-код</div>
-                      <div value>{{ svtItem.barcode_item?.id }}</div>
-                    </lib-detail-row>
-
-                    <lib-detail-row class="p-mb-2">
-                      <div attribute>ID РМ</div>
-                      <div value>{{ svtItem.workplace_id }}</div>
-                    </lib-detail-row>
-                  </div>
-                </div>
-              </ng-template>
-            </ng-template>
-          </p-accordionTab>
-        </p-accordion>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 </div>
 

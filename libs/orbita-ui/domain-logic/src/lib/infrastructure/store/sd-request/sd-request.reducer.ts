@@ -139,7 +139,17 @@ const sdRequestReducer = createReducer(
   })),
   on(SdRequestActions.clearSelected, (state) => ({
     ...state,
-    entity: null,
+    selected: {
+      ...state.selected,
+      entity: null,
+    },
+  })),
+  on(SdRequestActions.toggleSelectedEditMode, (state) => ({
+    ...state,
+    selected: {
+      ...state.selected,
+      editMode: !state.selected.editMode,
+    },
   })),
 
   // ========== Форма заявки ==========

@@ -33,6 +33,8 @@ export const loadSelectedFailure = createAction('[SdRequest/API] Load Selected F
 
 export const clearSelected = createAction('[SdRequest] Clear Selected');
 
+export const toggleSelectedEditMode = createAction('[SdRequest] Toggle Selected Edit Mode');
+
 // ========== Форма заявки ==========
 
 export const initUpdateForm = createAction('[SdRequest] Init Update Form', props<{ sdRequest: SdRequest }>());

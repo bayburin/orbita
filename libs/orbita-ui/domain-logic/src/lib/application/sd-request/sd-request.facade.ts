@@ -119,6 +119,10 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     this.store.dispatch(SdRequestActions.clearSelected());
   }
 
+  toggleEditMode() {
+    this.store.dispatch(SdRequestActions.toggleSelectedEditMode());
+  }
+
   changeForm(form: SdRequestForm) {
     this.store.dispatch(SdRequestActions.changeForm({ entity: form }));
   }

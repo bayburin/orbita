@@ -102,6 +102,11 @@ export abstract class SdRequestFacadeAbstract {
   abstract clearSelected(): void;
 
   /**
+   * Активирует или отключает режим редактирования при просмотре заявки
+   */
+  abstract toggleEditMode(): void;
+
+  /**
    * Сохраняет данные формы в хранилище
    *
    * @param form - данные формы

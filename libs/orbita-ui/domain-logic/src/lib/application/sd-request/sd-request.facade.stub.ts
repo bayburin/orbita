@@ -37,6 +37,10 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
     /** */
   }
 
+  toggleEditMode() {
+    /** */
+  }
+
   changeForm() {
     /** */
   }

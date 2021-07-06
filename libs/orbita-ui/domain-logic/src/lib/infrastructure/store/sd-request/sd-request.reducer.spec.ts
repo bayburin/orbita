@@ -120,10 +120,22 @@ describe('SdRequestReducer', () => {
 
   describe('clearSelected', () => {
     it('should set attributes', () => {
+      const sdRequest = createSdRequest('AAA');
+      action = SdRequestActions.loadSelectedSuccess({ sdRequest });
+      const tmpResult: State = reducer(initialState, action);
       action = SdRequestActions.clearSelected();
-      const result: SelectedState = reducer(initialState, action).selected;
+      const result: SelectedState = reducer(tmpResult, action).selected;
 
       expect(result.entity).toBeNull();
+    });
+  });
+
+  describe('toggleSelectedEditMode', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.toggleSelectedEditMode();
+      const result: SelectedState = reducer(initialState, action).selected;
+
+      expect(result.editMode).toBe(true);
     });
   });
 
