@@ -14,6 +14,8 @@ services:
         project-name: 'orbita-ui-test'
         environment: 'staging'
         maintainer: 'bayburin@iss-reshetnev.ru'
+      cache_from:
+        - ${CI_REGISTRY_IMAGE}/${DEPLOY_PROJECT_NAME}_orbita-ui:latest
     image: ${CI_REGISTRY_IMAGE}/${DEPLOY_PROJECT_NAME}_orbita-ui
     restart: unless-stopped
     ports:
