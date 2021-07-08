@@ -21,14 +21,6 @@ import { SD_REQUEST_FEATURE_KEY, State, initialState } from '../../infrastructur
 import { TICKET_SYSTEM_FEATURE_KEY, reducer } from '../../infrastructure/store/index';
 import { SdRequestsServerDataBuilder } from './../../infrastructure/builders/sd-request-server-data.builder';
 import { SdRequestsServerData } from '../../entities/server-data/sd-request-server-data.interface';
-import { MessageFacade } from './../message/message.facade';
-import { MessageFacadeStub } from './../message/message.facade.stub';
-import { WorkFacade } from './../work/work.facade';
-import { WorkFacadeStub } from './../work/work.facade.stub';
-import { HistoryFacade } from './../history/history.facade';
-import { HistoryFacadeStub } from './../history/history.facade.stub';
-import { WorkerFacade } from './../worker/worker.facade';
-import { WorkerFacadeStub } from './../worker/worker.facade.stub';
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { SdRequestCacheServiceStub } from './../../infrastructure/services/sd-request-cache.service.stub';
 import { SdRequestForm } from './../../entities/forms/sd-request-form.interface';
@@ -43,6 +35,7 @@ describe('SdRequestFacade', () => {
   let facade: SdRequestFacade;
   let store: MockStore<TestSchema>;
   let sdRequestApi: SdRequestApi;
+  let normalizedSdRequests: any;
   const createSdRequestEntity = (id: number, name = '') =>
     (({
       id,
@@ -66,10 +59,6 @@ describe('SdRequestFacade', () => {
           provideMockActions(() => actions$),
           provideMockStore({ initialState: state }),
           { provide: SdRequestApi, useClass: SdRequestApiStub },
-          { provide: MessageFacade, useClass: MessageFacadeStub },
-          { provide: WorkFacade, useClass: WorkFacadeStub },
-          { provide: HistoryFacade, useClass: HistoryFacadeStub },
-          { provide: WorkerFacade, useClass: WorkerFacadeStub },
           MessageService,
         ],
       });
@@ -86,9 +75,8 @@ describe('SdRequestFacade', () => {
       beforeEach(() => {
         querySpy = spyOn(sdRequestApi, 'query');
         sdRequestsServerData = new SdRequestsServerDataBuilder().build();
-        spyOn(SdRequestCacheService, 'normalizeSdRequests').and.returnValue(
-          SdRequestCacheServiceStub.normalizeSdRequests()
-        );
+        normalizedSdRequests = SdRequestCacheServiceStub.normalizeSdRequests();
+        spyOn(SdRequestCacheService, 'normalizeSdRequests').and.returnValue(normalizedSdRequests);
       });
 
       it('should call loadAll action', () => {
@@ -128,40 +116,14 @@ describe('SdRequestFacade', () => {
           );
         });
 
-        it('should call replaceAllMessages() method from MessageFacade', () => {
-          const messageFacade = TestBed.inject(MessageFacade);
-          spyOn(messageFacade, 'replaceAllMessages');
+        it('should call setPartials action', () => {
+          const storeSpy = spyOn(store, 'dispatch');
 
           facade.loadSdRequests$.subscribe();
 
-          expect(messageFacade.replaceAllMessages).toHaveBeenCalled();
-        });
-
-        it('should call replaceAllWorks() method from WorkFacade', () => {
-          const workFacade = TestBed.inject(WorkFacade);
-          spyOn(workFacade, 'replaceAllWorks');
-
-          facade.loadSdRequests$.subscribe();
-
-          expect(workFacade.replaceAllWorks).toHaveBeenCalled();
-        });
-
-        it('should call replaceAllHistories() method from HistoryFacade', () => {
-          const historyFacade = TestBed.inject(HistoryFacade);
-          spyOn(historyFacade, 'replaceAllHistories');
-
-          facade.loadSdRequests$.subscribe();
-
-          expect(historyFacade.replaceAllHistories).toHaveBeenCalled();
-        });
-
-        it('should call replaceAllWorkers() method from WorkerFacade', () => {
-          const workerFacade = TestBed.inject(WorkerFacade);
-          spyOn(workerFacade, 'replaceAllWorkers');
-
-          facade.loadSdRequests$.subscribe();
-
-          expect(workerFacade.replaceAllWorkers).toHaveBeenCalled();
+          expect(storeSpy).toHaveBeenCalledWith(
+            SdRequestActions.setPartials({ entities: normalizedSdRequests.entities })
+          );
         });
       });
 
@@ -217,43 +179,6 @@ describe('SdRequestFacade', () => {
     //     //     SdRequestActions.loadSelectedSuccess({ sdRequest: sdRequestServerData.sd_request })
     //     //   );
     //     // });
-
-    //     it('should call setMessages() method from MessageFacade', () => {
-    //       const messageFacade = TestBed.inject(MessageFacade);
-    //       spyOn(messageFacade, 'setMessages');
-
-    //       facade.loadSelected$.subscribe();
-
-    //       expect(messageFacade.setMessages).toHaveBeenCalled();
-    //     });
-
-    //     it('should call setWorks() method from MessageFacade', () => {
-    //       const workFacade = TestBed.inject(WorkFacade);
-    //       spyOn(workFacade, 'setWorks');
-
-    //       facade.loadSelected$.subscribe();
-
-    //       expect(workFacade.setWorks).toHaveBeenCalled();
-    //     });
-
-    //     it('should call setHistories() method from MessageFacade', () => {
-    //       const historyFacade = TestBed.inject(HistoryFacade);
-    //       spyOn(historyFacade, 'setHistories');
-
-    //       facade.loadSelected$.subscribe();
-
-    //       expect(historyFacade.setHistories).toHaveBeenCalled();
-    //     });
-
-    //     it('should call setWorkers() method from MessageFacade', () => {
-    //       const workerFacade = TestBed.inject(WorkerFacade);
-    //       spyOn(workerFacade, 'setWorkers');
-
-    //       facade.loadSelected$.subscribe();
-
-    //       expect(workerFacade.setWorkers).toHaveBeenCalled();
-    //     });
-    //   });
 
     //   it('should call loadSelectedFailure action if sdRequestApi finished with error', () => {
     //     const error = { error: 'Error message' };
@@ -351,13 +276,7 @@ describe('SdRequestFacade', () => {
 
       @NgModule({
         imports: [NxModule.forRoot(), StoreModule.forRoot({}), EffectsModule.forRoot([]), CustomFeatureModule],
-        providers: [
-          { provide: MessageFacade, useClass: MessageFacadeStub },
-          { provide: WorkFacade, useClass: WorkFacadeStub },
-          { provide: HistoryFacade, useClass: HistoryFacadeStub },
-          { provide: WorkerFacade, useClass: WorkerFacadeStub },
-          MessageService,
-        ],
+        providers: [MessageService],
       })
       class RootModule {}
       TestBed.configureTestingModule({ imports: [RootModule] });

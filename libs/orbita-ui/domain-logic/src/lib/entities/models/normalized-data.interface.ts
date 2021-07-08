@@ -42,16 +42,21 @@ export interface NormalizedWorker {
 }
 
 /**
+ * Интерфейс объектов, на которые раскладывается (нормализуется) заявка
+ */
+export interface NormalizedSdRequestEntities {
+  sd_requests: NormalizedSdRequest;
+  comments: NormalizedMessage;
+  works: NormalizedWork;
+  histories: NormalizedHistory;
+  workers: NormalizedWorker;
+}
+
+/**
  * Интерфейс нормализованных данных списка заявок, возвращаемый функцией normalize
  */
 export interface NormalizedSdRequests {
-  entities: {
-    sd_requests: NormalizedSdRequest;
-    comments: NormalizedMessage;
-    works: NormalizedWork;
-    histories: NormalizedHistory;
-    workers: NormalizedWorker;
-  };
+  entities: NormalizedSdRequestEntities;
   result: number[];
 }
 
@@ -59,13 +64,7 @@ export interface NormalizedSdRequests {
  * Интерфейс нормализованных данных заявки, возвращаемый функцией normalize
  */
 export interface NormalizedSdRequest {
-  entities: {
-    sd_requests: NormalizedSdRequest;
-    comments: NormalizedMessage;
-    works: NormalizedWork;
-    histories: NormalizedHistory;
-    workers: NormalizedWorker;
-  };
+  entities: NormalizedSdRequestEntities;
   result: number;
 }
 

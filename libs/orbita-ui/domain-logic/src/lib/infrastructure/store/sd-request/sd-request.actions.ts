@@ -5,6 +5,7 @@ import { Meta } from './../../../entities/server-data/meta.interface';
 import { LazyLoadEvent } from 'primeng/api';
 import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
+import { NormalizedSdRequestEntities } from './../../../entities/models/normalized-data.interface';
 
 // ========== Список заявок ==========
 
@@ -20,6 +21,13 @@ export const loadAllFailure = createAction('[SdRequest/API] Load All Failure', p
 export const SetTableMetadata = createAction('[SdRequest] Set Table Metadata', props<{ data: LazyLoadEvent }>());
 
 export const ReloadEntities = createAction('[SdRequest] Reload Entities');
+
+export const setPartials = createAction('[SdRequest] Set Partials', props<{ entities: NormalizedSdRequestEntities }>());
+
+export const updatePartials = createAction(
+  '[SdRequest] Update Partials',
+  props<{ entities: NormalizedSdRequestEntities }>()
+);
 
 // ========== Просмотр выбранной заявки ==========
 

@@ -21,10 +21,6 @@ import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-re
 import * as SdRequestViewModelSelectors from '../../infrastructure/store/selectors/sd-request-view-model.selectors';
 import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
-import { MessageFacade } from './../message/message.facade';
-import { WorkFacade } from './../work/work.facade';
-import { HistoryFacade } from './../history/history.facade';
-import { WorkerFacade } from './../worker/worker.facade';
 import { SdRequestForm } from './../../entities/forms/sd-request-form.interface';
 
 /**
@@ -56,16 +52,13 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
         tap((data) => {
           const normalizeData = SdRequestCacheService.normalizeSdRequests(data.sd_requests).entities;
 
+          this.store.dispatch(SdRequestActions.setPartials({ entities: normalizeData }));
           this.store.dispatch(
             SdRequestActions.loadAllSuccess({
               sdRequests: Object.values(normalizeData.sd_requests || []),
               meta: data.meta,
             })
           );
-          this.messageFacade.replaceAllMessages(Object.values(normalizeData.comments || []));
-          this.workFacade.replaceAllWorks(Object.values(normalizeData.works || []));
-          this.historyFacade.replaceAllHistories(Object.values(normalizeData.histories || []));
-          this.workerFacade.replaceAllWorkers(Object.values(normalizeData.workers || []));
         }),
         catchError((error) => of(this.store.dispatch(SdRequestActions.loadAllFailure({ error }))))
       )
@@ -94,14 +87,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   formEntity$ = this.store.select(SdRequestViewModelSelectors.getFormEntityViewModel);
   formLoading$ = this.store.select(SdRequestSelectors.getFormLoading);
 
-  constructor(
-    private store: Store<SdRequestFeature.SdRequestPartialState>,
-    private sdRequestApi: SdRequestApi,
-    private messageFacade: MessageFacade,
-    private workFacade: WorkFacade,
-    private historyFacade: HistoryFacade,
-    private workerFacade: WorkerFacade
-  ) {}
+  constructor(private store: Store<SdRequestFeature.SdRequestPartialState>, private sdRequestApi: SdRequestApi) {}
 
   setTableMetadata(event: LazyLoadEvent) {
     this.store.dispatch(SdRequestActions.SetTableMetadata({ data: event }));

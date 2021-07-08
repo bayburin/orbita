@@ -30,6 +30,30 @@ export class SdRequestEffects {
     private messageService: MessageService
   ) {}
 
+  setPartials$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.setPartials),
+      switchMap((action) => [
+        MessageActions.setAll({ messages: Object.values(action.entities.comments || []) }),
+        WorkActions.setAll({ works: Object.values(action.entities.works || []) }),
+        HistoryActions.setAll({ histories: Object.values(action.entities.histories || []) }),
+        WorkerActions.setAll({ workers: Object.values(action.entities.workers || []) }),
+      ])
+    )
+  );
+
+  updatePartials$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.updatePartials),
+      switchMap((action) => [
+        MessageActions.setMessages({ messages: Object.values(action.entities.comments || []) }),
+        WorkActions.setWorks({ works: Object.values(action.entities.works || []) }),
+        HistoryActions.setHistories({ histories: Object.values(action.entities.histories || []) }),
+        WorkerActions.setWorkers({ workers: Object.values(action.entities.workers || []) }),
+      ])
+    )
+  );
+
   loadSelected$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.loadSelected),
@@ -38,10 +62,7 @@ export class SdRequestEffects {
         this.sdRequestApi.show(routeParams.id).pipe(
           map((data) => SdRequestCacheService.normalizeSdRequest(data.sd_request)),
           switchMap((normalizeData) => [
-            MessageActions.setMessages({ messages: Object.values(normalizeData.entities.comments || []) }),
-            WorkActions.setWorks({ works: Object.values(normalizeData.entities.works || []) }),
-            HistoryActions.setHistories({ histories: Object.values(normalizeData.entities.histories || []) }),
-            WorkerActions.setWorkers({ workers: Object.values(normalizeData.entities.workers || []) }),
+            SdRequestActions.updatePartials({ entities: normalizeData.entities }),
             // Вызывать обновление хранилища заявок после того, как будут сохранены все его составные части
             SdRequestActions.loadSelectedSuccess({
               sdRequest: normalizeData.entities.sd_requests[normalizeData.result],
@@ -97,10 +118,7 @@ export class SdRequestEffects {
 
             return [
               SdRequestActions.toggleSelectedEditMode(),
-              MessageActions.setMessages({ messages: Object.values(normalizeData.entities.comments || []) }),
-              WorkActions.setWorks({ works: Object.values(normalizeData.entities.works || []) }),
-              HistoryActions.setHistories({ histories: Object.values(normalizeData.entities.histories || []) }),
-              WorkerActions.setWorkers({ workers: Object.values(normalizeData.entities.workers || []) }),
+              SdRequestActions.updatePartials({ entities: normalizeData.entities }),
               // Вызывать обновление хранилища заявок после того, как будут сохранены все его составные части
               SdRequestActions.saveFormSuccess({ sdRequest: changedSdRequest }),
             ];
