@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { tap, filter, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {
   SdRequestFacade,
@@ -26,6 +26,9 @@ import {
   WorkViewModel,
   WorkerViewModel,
   prioritiesViewModelArray,
+  UserFacade,
+  User,
+  UserGroup,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -54,6 +57,7 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   loadedParameters$ = this.parameterFacade.loaded$;
   parameters$ = this.parameterFacade.all$;
   priorities = prioritiesViewModelArray;
+  userGroups$ = this.userFacade.userGroups$;
 
   // ========== Раздел формы ==========
 
@@ -69,7 +73,8 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     private acFacade: AuthCenterFacade,
     private parameterFacade: ParameterFacade,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private userFacade: UserFacade
   ) {}
 
   ngOnInit(): void {
@@ -97,6 +102,14 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByWorker(index: number, worker: WorkerViewModel): number {
     return worker.id;
+  }
+
+  trackByUserGroup(index: number, group: UserGroup): number {
+    return group.id;
+  }
+
+  trackByUser(index: number, user: User): number {
+    return user.id;
   }
 
   /**
@@ -162,22 +175,20 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   private buildForm(): void {
     this.form = this.fb.group({
-      id: [],
-      type: [],
-      description: [],
       priority: [],
       finished_at_plan: [],
-      service_id: [],
-      service_name: [],
-      ticket_identity: [],
-      ticket_name: [],
-      rating: [],
+      works: [[]],
     });
     // Заполняет данные формы из хранилища
     this.storeForm = this.sdRequestFacade.formEntity$
-      .pipe(first((data) => Boolean(data)))
-      .subscribe((formData) => this.form.patchValue(formData));
+      .pipe(
+        filter((data) => Boolean(data)),
+        distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
+      )
+      .subscribe((formData) => this.form.patchValue(formData, { emitEvent: false }));
     // Обновляет хранилище по любому изменению формы
-    this.valueChanges = this.form.valueChanges.subscribe((formData) => this.sdRequestFacade.changeForm(formData));
+    this.valueChanges = this.form.valueChanges
+      .pipe(distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)))
+      .subscribe((formData) => this.sdRequestFacade.changeForm(formData));
   }
 }

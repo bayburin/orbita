@@ -14,6 +14,8 @@ import {
   AuthCenterFacadeStub,
   ParameterFacade,
   ParameterFacadeStub,
+  UserFacade,
+  UserFacadeStub,
 } from '@orbita/orbita-ui/domain-logic';
 import { DatetimePipe } from '@orbita/orbita-ui/ui';
 
@@ -34,6 +36,7 @@ describe('OverviewBlockComponent', () => {
         { provide: SvtFacade, useClass: SvtFacadeStub },
         { provide: AuthCenterFacade, useClass: AuthCenterFacadeStub },
         { provide: ParameterFacade, useClass: ParameterFacadeStub },
+        { provide: UserFacade, useClass: UserFacadeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

@@ -6,6 +6,7 @@ import { OrbitaUiDomainLogicModule } from '@orbita/orbita-ui/domain-logic';
 
 import { OverviewPageComponent } from './pages/overview-page/overview-page.component';
 import { OverviewBlockComponent } from './containers/overview-block/overview-block.component';
+import { WorkerFormControlComponent } from './containers/worker-form-control/worker-form-control.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +18,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), OrbitaUiUiModule, OrbitaUiDomainLogicModule],
-  declarations: [OverviewPageComponent, OverviewBlockComponent],
+  declarations: [OverviewPageComponent, OverviewBlockComponent, WorkerFormControlComponent],
   exports: [OverviewPageComponent],
 })
 export class OrbitaUiFeatureSdRequestOverviewModule {}

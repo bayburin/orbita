@@ -17,6 +17,11 @@ export interface WorkViewModel {
   readonly claim_id: number;
 
   /**
+   * Идентификатор группы
+   */
+  readonly group_id: number;
+
+  /**
    * Массив произошедших событий
    */
   readonly histories: HistoryViewModel[];

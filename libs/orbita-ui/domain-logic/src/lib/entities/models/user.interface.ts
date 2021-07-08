@@ -61,4 +61,9 @@ export interface User {
    * Флаг, показывающий, является ли пользователь "исполнителем по умолчанию"
    */
   readonly is_default_worker: boolean;
+
+  /**
+   * Флаг, показывающий, является ли пользователь текущим
+   */
+  readonly isCurrentUser?: boolean;
 }

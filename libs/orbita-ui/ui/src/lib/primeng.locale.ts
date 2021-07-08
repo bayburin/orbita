@@ -49,6 +49,6 @@ export const primeLocale = {
   medium: 'Средний',
   strong: 'Сильный',
   passwordPrompt: 'Введите пароль',
-  emptyMessage: 'Данные не найдены',
+  emptyMessage: 'Данные отсутствуют',
   emptyFilterMessage: 'Данные не найдены',
 };

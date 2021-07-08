@@ -152,14 +152,21 @@ const sdRequestReducer = createReducer(
       editMode: !state.selected.editMode,
     },
   })),
+  on(SdRequestActions.disableSelectedEditMode, (state) => ({
+    ...state,
+    selected: {
+      ...state.selected,
+      editMode: false,
+    },
+  })),
 
   // ========== Форма заявки ==========
 
-  on(SdRequestActions.initUpdateForm, (state, { sdRequest }) => ({
+  on(SdRequestActions.initUpdateForm, (state, { sdRequestViewModel }) => ({
     ...state,
     form: {
       ...state.form,
-      entity: SdRequestFormBuilder.build(sdRequest),
+      entity: SdRequestFormBuilder.build(sdRequestViewModel),
     },
   })),
   on(SdRequestActions.changeForm, (state, { entity }) => ({

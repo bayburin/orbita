@@ -163,15 +163,22 @@
                 </p-panel>
               </p-tabPanel>
               <p-tabPanel header="Исполнители">
-                <div *ngFor="let work of sdRequest.works; trackBy: trackByWork">
-                  <lib-group-header [group]="work.group"></lib-group-header>
-                  <div *ngIf="work.workers.length; else emptyData">
-                    <div *ngFor="let worker of work.workers; trackBy: trackByWorker">
-                      <div class="p-p-2">{{ worker.user.fio }}</div>
+                <lib-worker-form-control
+                  *ngIf="editMode$ | async; else readModeWorkers"
+                  [userGroups]="userGroups$ | async"
+                  formControlName="works"
+                ></lib-worker-form-control>
+                <ng-template #readModeWorkers>
+                  <div *ngFor="let work of sdRequest.works; trackBy: trackByWork">
+                    <lib-group-header [group]="work.group"></lib-group-header>
+                    <div *ngIf="work.workers.length; else emptyData">
+                      <div *ngFor="let worker of work.workers; trackBy: trackByWorker">
+                        <div class="p-p-2">{{ worker.user.fio }}</div>
+                      </div>
                     </div>
+                    <p-divider type="dashed"></p-divider>
                   </div>
-                  <p-divider type="dashed"></p-divider>
-                </div>
+                </ng-template>
               </p-tabPanel>
               <p-tabPanel header="Комментарии">
                 <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>

@@ -1,0 +1,16 @@
+<p-listbox
+  [options]="userGroups"
+  [group]="true"
+  [formControl]="users"
+  optionGroupChildren="users"
+  [metaKeySelection]="false"
+  [checkbox]="true"
+  [filter]="true"
+  [multiple]="true"
+  optionLabel="fio"
+  optionDisabled="isCurrentUser"
+>
+  <ng-template let-group pTemplate="group">
+    <lib-group-header [group]="group"></lib-group-header>
+  </ng-template>
+</p-listbox>

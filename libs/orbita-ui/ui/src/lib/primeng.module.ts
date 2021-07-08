@@ -23,6 +23,7 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { SkeletonModule } from 'primeng/skeleton';
 import { AccordionModule } from 'primeng/accordion';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
+import { ListboxModule } from 'primeng/listbox';
 
 import { ConfirmationService } from 'primeng/api';
 
@@ -50,6 +51,7 @@ const modules: any[] = [
   SkeletonModule,
   AccordionModule,
   BreadcrumbModule,
+  ListboxModule,
 ];
 
 @NgModule({

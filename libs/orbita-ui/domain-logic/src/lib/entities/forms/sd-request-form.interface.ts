@@ -1,4 +1,5 @@
 import { TicketForm } from './ticket-form.interface';
+import { WorkForm } from './work-form.interface';
 
 /**
  * Заявка
@@ -7,25 +8,30 @@ export interface SdRequestForm extends TicketForm {
   /**
    * ID Услуги
    */
-  readonly service_id: number;
+  service_id: number;
 
   /**
    * Имя услуги
    */
-  readonly service_name: string;
+  service_name: string;
 
   /**
    * ID вида заявки
    */
-  readonly ticket_identity: number;
+  ticket_identity: number;
 
   /**
    * Имя вида заявки
    */
-  readonly ticket_name: string;
+  ticket_name: string;
 
   /**
    * Оценка качества обслуживания
    */
-  readonly rating: number;
+  rating: number;
+
+  /**
+   * Массив работ
+   */
+  works: WorkForm[];
 }

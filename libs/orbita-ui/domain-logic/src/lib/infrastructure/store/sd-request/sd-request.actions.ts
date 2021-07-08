@@ -4,6 +4,7 @@ import { SdRequest } from './../../../entities/models/sd-request.interface';
 import { Meta } from './../../../entities/server-data/meta.interface';
 import { LazyLoadEvent } from 'primeng/api';
 import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
+import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 
 // ========== Список заявок ==========
 
@@ -35,9 +36,14 @@ export const clearSelected = createAction('[SdRequest] Clear Selected');
 
 export const toggleSelectedEditMode = createAction('[SdRequest] Toggle Selected Edit Mode');
 
+export const disableSelectedEditMode = createAction('[SdRequest] Disable Selected Edit Mode');
+
 // ========== Форма заявки ==========
 
-export const initUpdateForm = createAction('[SdRequest] Init Update Form', props<{ sdRequest: SdRequest }>());
+export const initUpdateForm = createAction(
+  '[SdRequest] Init Update Form',
+  props<{ sdRequestViewModel: SdRequestViewModel }>()
+);
 
 export const changeForm = createAction('[SdRequest] Change Form', props<{ entity: SdRequestForm }>());
 

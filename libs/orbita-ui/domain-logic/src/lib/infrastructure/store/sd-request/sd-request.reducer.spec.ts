@@ -6,6 +6,7 @@ import * as SdRequestActions from './sd-request.actions';
 import { State, initialState, reducer, SelectedState, FormState } from './sd-request.reducer';
 import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
 import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
+import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 
 describe('SdRequestReducer', () => {
   let action: Action;
@@ -14,6 +15,11 @@ describe('SdRequestReducer', () => {
       id,
       name: name || `name-${id}`,
     } as unknown) as SdRequest);
+  const createSdRequestViewModel = (id: string, name = '') =>
+    (({
+      id,
+      name: name || `name-${id}`,
+    } as unknown) as SdRequestViewModel);
 
   describe('loadAll', () => {
     it('should clear "loading" and "error" attributes', () => {
@@ -139,12 +145,23 @@ describe('SdRequestReducer', () => {
     });
   });
 
+  describe('disableSelectedEditMode', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.toggleSelectedEditMode();
+      const tmpResult: State = reducer(initialState, action);
+      action = SdRequestActions.toggleSelectedEditMode();
+      const result: SelectedState = reducer(tmpResult, action).selected;
+
+      expect(result.editMode).toBe(false);
+    });
+  });
+
   describe('initUpdateForm', () => {
     it('should set attributes', () => {
-      const sdRequest = createSdRequest('PRODUCT-AAA');
+      const sdRequestViewModel = createSdRequestViewModel('PRODUCT-AAA');
       const form = { id: 111 };
       spyOn(SdRequestFormBuilder, 'build').and.returnValue(form);
-      action = SdRequestActions.initUpdateForm({ sdRequest });
+      action = SdRequestActions.initUpdateForm({ sdRequestViewModel });
       const result: FormState = reducer(initialState, action).form;
 
       expect(result.entity).toEqual(form);

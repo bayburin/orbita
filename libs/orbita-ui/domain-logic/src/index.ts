@@ -1,5 +1,8 @@
 export * from './lib/orbita-ui-domain-logic.module';
 
+export * from './lib/entities/forms/work-form.interface';
+export * from './lib/entities/forms/worker-form.interface';
+
 export * from './lib/entities/models/ticket.interface';
 export * from './lib/entities/models/source-snapshot.interface';
 export * from './lib/entities/models/user.interface';
@@ -11,6 +14,7 @@ export * from './lib/entities/models/sd/sd-service.interface';
 export * from './lib/entities/models/sd/sd-ticket.interface';
 export * from './lib/entities/models/source-snapshot.interface';
 export * from './lib/entities/models/host.interface';
+export * from './lib/entities/models/user.interface';
 
 export * from './lib/entities/view-models/sd-request-view-model.interface';
 export * from './lib/entities/view-models/work-view-model.interface';
@@ -23,6 +27,7 @@ export * from './lib/entities/view-models/worker-view-model.interface';
 export * from './lib/entities/view-models/user-group.interface';
 export * from './lib/entities/view-models/cms-statuses-view-model.enum';
 export * from './lib/entities/view-models/csa-statuses-view-model.enum';
+export * from './lib/entities/view-models/user-group.interface';
 
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';
@@ -42,3 +47,5 @@ export * from './lib/application/parameter/parameter.facade';
 export * from './lib/application/parameter/parameter.facade.stub';
 export * from './lib/application/router/router.facade';
 export * from './lib/application/router/router.facade.stub';
+export * from './lib/application/user/user.facade';
+export * from './lib/application/user/user.facade.stub';

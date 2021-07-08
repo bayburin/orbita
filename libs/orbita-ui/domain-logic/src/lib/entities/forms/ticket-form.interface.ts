@@ -8,27 +8,27 @@ export interface TicketForm {
   /**
    * ID (номер) заявки.
    */
-  readonly id: number;
+  id: number;
 
   /**
    * Данные на момент создания заявки/кейса
    */
-  readonly source_snapshot?: SourceSnapshotForm;
+  source_snapshot?: SourceSnapshotForm;
 
   /**
    * Описание
    */
-  readonly description: string;
+  description: string;
 
   /**
    * Приоритет
    */
-  readonly priority: Priorities;
+  priority: Priorities;
 
   /**
    * Дедлайн
    */
-  readonly finished_at_plan: string | Date;
+  finished_at_plan: string | Date;
 }
 
 /**
