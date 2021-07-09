@@ -21,7 +21,7 @@
         </div>
         <div class="p-col-6">
           <p-toolbar styleClass="toolbar-sm">
-            <ng-container *ngIf="editMode$ | async; else readModeActions">
+            <ng-container *ngIf="editMode; else readModeActions">
               <div class="p-toolbar-group-left">
                 <p-button
                   label="К заявкам"
@@ -122,7 +122,7 @@
                 <b>
                   выполнить до:
                   <p-calendar
-                    *ngIf="editMode$ | async; else readModeFinishedAtPlan"
+                    *ngIf="editMode; else readModeFinishedAtPlan"
                     formControlName="finished_at_plan"
                     dateFormat="dd.mm.yy"
                     appendTo="body"
@@ -164,7 +164,7 @@
               </p-tabPanel>
               <p-tabPanel header="Исполнители">
                 <lib-worker-form-control
-                  *ngIf="editMode$ | async; else readModeWorkers"
+                  *ngIf="editMode; else readModeWorkers"
                   [userGroups]="userGroups$ | async"
                   formControlName="works"
                 ></lib-worker-form-control>
@@ -202,7 +202,7 @@
           <lib-detail-row class="p-mb-2">
             <div attribute>Приоритет</div>
             <div value>
-              <ng-container *ngIf="editMode$ | async; else readModePriority">
+              <ng-container *ngIf="editMode; else readModePriority">
                 <p-dropdown
                   formControlName="priority"
                   [options]="priorities"

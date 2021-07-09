@@ -58,13 +58,18 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   parameters$ = this.parameterFacade.all$;
   priorities = prioritiesViewModelArray;
   userGroups$ = this.userFacade.userGroups$;
+  editMode: boolean;
 
   // ========== Раздел формы ==========
 
   form: FormGroup;
   loadingForm$ = this.sdRequestFacade.formLoading$;
-  storeForm: Subscription;
-  valueChanges: Subscription;
+
+  // ========== Дополнительно ==========
+
+  storeFormSub: Subscription;
+  valueChangesSub: Subscription;
+  editModeSub: Subscription;
 
   constructor(
     private sdRequestFacade: SdRequestFacade,
@@ -80,12 +85,14 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sdRequestFacade.loadSelectedSdRequest();
     this.buildForm();
+    this.editModeSub = this.editMode$.subscribe((editMode) => (this.editMode = editMode));
   }
 
   ngOnDestroy(): void {
     this.sdRequestFacade.clearSelected();
-    this.storeForm.unsubscribe();
-    this.valueChanges.unsubscribe();
+    this.storeFormSub.unsubscribe();
+    this.valueChangesSub.unsubscribe();
+    this.editModeSub.unsubscribe();
   }
 
   trackByHistory(index: number, history: HistoryViewModel): number {
@@ -180,14 +187,14 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
       works: [[]],
     });
     // Заполняет данные формы из хранилища
-    this.storeForm = this.sdRequestFacade.formEntity$
+    this.storeFormSub = this.sdRequestFacade.formEntity$
       .pipe(
         filter((data) => Boolean(data)),
         distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
       )
       .subscribe((formData) => this.form.patchValue(formData, { emitEvent: false }));
     // Обновляет хранилище по любому изменению формы
-    this.valueChanges = this.form.valueChanges
+    this.valueChangesSub = this.form.valueChanges
       .pipe(distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)))
       .subscribe((formData) => this.sdRequestFacade.changeForm(formData));
   }
