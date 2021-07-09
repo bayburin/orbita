@@ -145,6 +145,8 @@
                     <lib-panel-placeholder>Пусто</lib-panel-placeholder>
                   </ng-template>
                 </p-panel>
+                <p-divider type="dashed"></p-divider>
+                <lib-workflow-form-control *ngIf="editMode" formControlName="works"></lib-workflow-form-control>
               </p-tabPanel>
               <p-tabPanel header="Параметры">
                 <p-panel header="Параметры заявки">

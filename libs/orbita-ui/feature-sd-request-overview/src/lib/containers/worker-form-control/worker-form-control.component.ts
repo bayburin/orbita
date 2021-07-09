@@ -22,7 +22,6 @@ export class WorkerFormControlComponent implements ControlValueAccessor, OnInit,
    * Список исполнителей, который выбирает пользователь (хранится в виде плоского массива)
    */
   users = new FormControl();
-  valueChanges: Subscription;
   /**
    * "Предыдущий" объект данных, сохраненный для его заполенения перед тем как вернуть в форму
    */
@@ -31,9 +30,13 @@ export class WorkerFormControlComponent implements ControlValueAccessor, OnInit,
    * "Предыдущий" список исполнителей. Используется для получения изменений.
    */
   private oldUsers: User[];
+  /**
+   * Объект подписки на список исполнителей, который выбирает пользователь
+   */
+  private valueChangesSub: Subscription;
 
   ngOnInit(): void {
-    this.valueChanges = this.users.valueChanges.subscribe((data) => {
+    this.valueChangesSub = this.users.valueChanges.subscribe((data) => {
       if (!this.oldUsers) {
         return;
       }
@@ -46,13 +49,13 @@ export class WorkerFormControlComponent implements ControlValueAccessor, OnInit,
   }
 
   ngOnDestroy(): void {
-    this.valueChanges.unsubscribe();
+    this.valueChangesSub.unsubscribe();
   }
 
   /**
    * Записывает новое значение в элемент формы из модели формы.
    *
-   * @param works - список работ
+   * @param value - список работ
    */
   writeValue(value: WorkForm[]) {
     if (!value || !(value instanceof Array) || JSON.stringify(value) === JSON.stringify(this.workForms)) {
@@ -63,7 +66,6 @@ export class WorkerFormControlComponent implements ControlValueAccessor, OnInit,
     const users = this.toArrayMode(value);
     this.users.setValue(users);
     this.oldUsers = users;
-    this.onChange(value);
   }
 
   /**

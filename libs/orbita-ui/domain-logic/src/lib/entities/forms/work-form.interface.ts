@@ -1,4 +1,5 @@
 import { WorkerForm } from './worker-form.interface';
+import { MessageForm } from './message-form.interface';
 
 /**
  * Форма работы по тикету
@@ -23,4 +24,9 @@ export interface WorkForm {
    * Массив исполнителей
    */
   workers: WorkerForm[];
+
+  /**
+   * Массив сообщений и ходе работы
+   */
+  workflows?: MessageForm[];
 }

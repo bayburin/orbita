@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { tap, filter, distinctUntilChanged } from 'rxjs/operators';
+import { filter, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {
   SdRequestFacade,
