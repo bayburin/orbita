@@ -3,7 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { SdRequest } from './../../../entities/models/sd-request.interface';
 import { Meta } from './../../../entities/server-data/meta.interface';
 import { LazyLoadEvent } from 'primeng/api';
-import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
+import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 import { NormalizedSdRequestEntities } from './../../../entities/models/normalized-data.interface';
 
@@ -53,7 +53,7 @@ export const initUpdateForm = createAction(
   props<{ sdRequestViewModel: SdRequestViewModel }>()
 );
 
-export const changeForm = createAction('[SdRequest] Change Form', props<{ entity: SdRequestForm }>());
+export const changeForm = createAction('[SdRequest] Change Form', props<{ entity: SdRequestViewForm }>());
 
 export const saveUpdateForm = createAction('[SdRequest/API] Save Update Form');
 

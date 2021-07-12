@@ -8,7 +8,7 @@ import * as ApplicationSelectors from './../application/application.selectors';
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 import { WorkViewModel } from './../../../entities/view-models/work-view-model.interface';
 import { MessageViewModel } from './../../../entities/view-models/message-view-model.interface';
-import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
+import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
 
 export const getAllViewModel = createSelector(
   SdRequestSelectors.getAllSorted,
@@ -85,6 +85,6 @@ export const getOrderedHistories = createSelector(getSelectedEntityViewModel, (s
   oFlatMap((work) => work.histories, sdRequest.works).sort((a, b) => (a.id > b.id ? 1 : -1))
 );
 
-export const getFormEntityViewModel = createSelector(SdRequestSelectors.getFormEntity, (entity: SdRequestForm) =>
+export const getFormEntityViewModel = createSelector(SdRequestSelectors.getFormEntity, (entity: SdRequestViewForm) =>
   entity ? { ...entity, finished_at_plan: new Date(entity.finished_at_plan) } : entity
 );

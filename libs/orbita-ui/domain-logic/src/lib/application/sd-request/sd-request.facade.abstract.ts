@@ -3,11 +3,8 @@ import { Observable } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
-import {
-  SdRequestsServerData,
-  SdRequestServerData,
-} from './../../entities/server-data/sd-request-server-data.interface';
-import { SdRequestForm } from '../../entities/forms/sd-request-form.interface';
+import { SdRequestsServerData } from './../../entities/server-data/sd-request-server-data.interface';
+import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
 
 export abstract class SdRequestFacadeAbstract {
   /**
@@ -73,7 +70,7 @@ export abstract class SdRequestFacadeAbstract {
   /**
    * Форма заявки
    */
-  formEntity$: Observable<SdRequestForm>;
+  formEntity$: Observable<SdRequestViewForm>;
   /**
    * Индикатор загрузки формы
    */
@@ -111,7 +108,7 @@ export abstract class SdRequestFacadeAbstract {
    *
    * @param form - данные формы
    */
-  abstract changeForm(form: SdRequestForm): void;
+  abstract changeForm(form: SdRequestViewForm): void;
 
   /**
    * Обновляет данные по выбранной заявке

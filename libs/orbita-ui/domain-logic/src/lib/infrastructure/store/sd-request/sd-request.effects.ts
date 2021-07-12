@@ -1,3 +1,5 @@
+import { SdRequestFactory } from './../../factories/sd-request.factory';
+import { AuthHelper } from '@iss/ng-auth-center';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
@@ -18,6 +20,7 @@ import * as EmployeeActions from '../employee/employee.actions';
 import * as SvtItemActions from '../svt-item/svt-item.actions';
 import * as HostActions from '../host/host.actions';
 import * as ParameterActions from '../parameter/parameter.actions';
+import * as UserSelectors from '../user/user.selectors';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../services/sd-request-cache.service';
 
@@ -27,7 +30,8 @@ export class SdRequestEffects {
     private actions$: Actions,
     private sdRequestApi: SdRequestApi,
     private store: Store<SdRequestFeature.SdRequestPartialState>,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private authHelper: AuthHelper
   ) {}
 
   setPartials$ = createEffect(() =>
@@ -107,24 +111,30 @@ export class SdRequestEffects {
     this.actions$.pipe(
       ofType(SdRequestActions.saveUpdateForm),
       withLatestFrom(
-        this.store.select(SdRequestSelectors.getSelectedEntity),
-        this.store.select(SdRequestSelectors.getFormEntity)
+        this.store.select(SdRequestViewModelSelectors.getSelectedEntityViewModel),
+        this.store.select(SdRequestSelectors.getFormEntity),
+        this.store.select(UserSelectors.getAll)
       ),
-      switchMap(([_action, sdRequest, formData]) =>
-        this.sdRequestApi.update(sdRequest.id, formData).pipe(
-          switchMap((data) => {
-            const normalizeData = SdRequestCacheService.normalizeSdRequest(data.sd_request);
-            const changedSdRequest = normalizeData.entities.sd_requests[normalizeData.result];
+      switchMap(([_action, sdRequestViewModel, formData, users]) =>
+        this.sdRequestApi
+          .update(
+            sdRequestViewModel.id,
+            SdRequestFactory.createServerForm(this.authHelper.getJwtPayload(), sdRequestViewModel, users, formData)
+          )
+          .pipe(
+            switchMap((data) => {
+              const normalizeData = SdRequestCacheService.normalizeSdRequest(data.sd_request);
+              const changedSdRequest = normalizeData.entities.sd_requests[normalizeData.result];
 
-            return [
-              SdRequestActions.toggleSelectedEditMode(),
-              SdRequestActions.updatePartials({ entities: normalizeData.entities }),
-              // Вызывать обновление хранилища заявок после того, как будут сохранены все его составные части
-              SdRequestActions.saveFormSuccess({ sdRequest: changedSdRequest }),
-            ];
-          }),
-          catchError((error) => of(SdRequestActions.saveFormFailure({ error })))
-        )
+              return [
+                SdRequestActions.toggleSelectedEditMode(),
+                SdRequestActions.updatePartials({ entities: normalizeData.entities }),
+                // Вызывать обновление хранилища заявок после того, как будут сохранены все его составные части
+                SdRequestActions.saveFormSuccess({ sdRequest: changedSdRequest }),
+              ];
+            }),
+            catchError((error) => of(SdRequestActions.saveFormFailure({ error })))
+          )
       )
     )
   );

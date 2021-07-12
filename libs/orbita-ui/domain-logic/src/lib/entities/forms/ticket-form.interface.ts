@@ -8,7 +8,7 @@ export interface TicketForm {
   /**
    * ID (номер) заявки.
    */
-  id: number;
+  id?: number;
 
   /**
    * Данные на момент создания заявки/кейса
@@ -18,7 +18,7 @@ export interface TicketForm {
   /**
    * Описание
    */
-  description: string;
+  description?: string;
 
   /**
    * Приоритет

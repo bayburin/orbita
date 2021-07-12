@@ -146,7 +146,14 @@
                   </ng-template>
                 </p-panel>
                 <p-divider type="dashed"></p-divider>
-                <lib-workflow-form-control *ngIf="editMode" formControlName="works"></lib-workflow-form-control>
+                <textarea
+                  rows="10"
+                  *ngIf="editMode"
+                  formControlName="workflow"
+                  pInputTextarea
+                  placeholder="Введите описание хода работы..."
+                  class="w-100"
+                ></textarea>
               </p-tabPanel>
               <p-tabPanel header="Параметры">
                 <p-panel header="Параметры заявки">
@@ -165,11 +172,25 @@
                 </p-panel>
               </p-tabPanel>
               <p-tabPanel header="Исполнители">
-                <lib-worker-form-control
+                <p-listbox
                   *ngIf="editMode; else readModeWorkers"
-                  [userGroups]="userGroups$ | async"
-                  formControlName="works"
-                ></lib-worker-form-control>
+                  [options]="userGroups$ | async"
+                  [group]="true"
+                  formControlName="workers"
+                  optionGroupChildren="users"
+                  [metaKeySelection]="false"
+                  [checkbox]="true"
+                  [filter]="true"
+                  [multiple]="true"
+                  optionLabel="fio"
+                  optionDisabled="isCurrentUser"
+                  optionValue="id"
+                >
+                  <ng-template let-group pTemplate="group">
+                    <lib-group-header [group]="group"></lib-group-header>
+                  </ng-template>
+                </p-listbox>
+
                 <ng-template #readModeWorkers>
                   <div *ngFor="let work of sdRequest.works; trackBy: trackByWork">
                     <lib-group-header [group]="work.group"></lib-group-header>

@@ -1,10 +1,9 @@
 import { TicketForm } from './ticket-form.interface';
-import { WorkForm } from './work-form.interface';
 
 /**
- * Форма заявки, которую обрабатывает сервер
+ * Форма заявки, которую заполняет пользователь
  */
-export interface SdRequestForm extends TicketForm {
+export interface SdRequestViewForm extends TicketForm {
   /**
    * ID Услуги
    */
@@ -31,7 +30,12 @@ export interface SdRequestForm extends TicketForm {
   rating?: number;
 
   /**
-   * Массив работ
+   * Список исполнителей
    */
-  works: WorkForm[];
+  workers: number[];
+
+  /**
+   * Сообщение вида "ход работы"
+   */
+  workflow: string;
 }

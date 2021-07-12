@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 import * as SdRequestActions from './sd-request.actions';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
-import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
+import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
 import { processSdRequestTableFilters } from '../../utils/process-sd-request-table-filters.function';
 import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
@@ -19,7 +19,7 @@ export interface SelectedState {
 }
 
 export interface FormState {
-  entity: SdRequestForm;
+  entity: SdRequestViewForm;
   loading: boolean;
   error?: string;
 }
@@ -166,7 +166,7 @@ const sdRequestReducer = createReducer(
     ...state,
     form: {
       ...state.form,
-      entity: SdRequestFormBuilder.build(sdRequestViewModel),
+      entity: SdRequestFormBuilder.convertToViewForm(sdRequestViewModel),
     },
   })),
   on(SdRequestActions.changeForm, (state, { entity }) => ({

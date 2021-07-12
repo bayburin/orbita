@@ -1,3 +1,5 @@
+import { oFlatMap } from '@orbita/orbita-ui/utils';
+import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
 import { SdRequestForm } from '../../entities/forms/sd-request-form.interface';
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
 import { WorkViewModel } from './../../entities/view-models/work-view-model.interface';
@@ -16,8 +18,22 @@ export class SdRequestFormBuilder {
       service_name: original.service_name,
       ticket_identity: original.ticket_identity,
       ticket_name: original.ticket_name,
-      rating: original.rating,
       works: WorkFormBuilder.build(original.works || []),
+    };
+  }
+
+  static convertToViewForm(data: SdRequestViewModel): SdRequestViewForm {
+    return {
+      id: data.id,
+      description: data.description,
+      priority: data.priority,
+      finished_at_plan: data.runtime?.finished_at_plan,
+      service_id: data.service_id,
+      service_name: data.service_name,
+      ticket_identity: data.ticket_identity,
+      ticket_name: data.ticket_name,
+      workers: oFlatMap((work: WorkViewModel) => work.workers.map((worker) => worker.user_id), data.works),
+      workflow: null,
     };
   }
 }
