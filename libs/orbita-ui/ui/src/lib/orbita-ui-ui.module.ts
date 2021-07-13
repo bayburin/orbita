@@ -24,6 +24,8 @@ import { PanelPlaceholderComponent } from './components/panel-placeholder/panel-
 import { DetailRowComponent } from './components/detail-row/detail-row.component';
 import { SourceSnapshotComponent } from './components/source-snapshot/source-snapshot.component';
 import { GroupHeaderComponent } from './components/group-header/group-header.component';
+import { WorkflowsComponent } from './components/workflows/workflows.component';
+import { WorkflowComponent } from './components/workflow/workflow.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -41,13 +43,15 @@ const components: any[] = [
   PanelPlaceholderComponent,
   DetailRowComponent,
   GroupHeaderComponent,
+  SourceSnapshotComponent,
+  WorkflowsComponent,
 ];
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
 @NgModule({
   imports: [CommonModule, PrimengModule, ...modules],
-  exports: [...pipes, ...components, PrimengModule, ...modules, SourceSnapshotComponent],
-  declarations: [...pipes, ...components, SourceSnapshotComponent],
+  exports: [...pipes, ...components, PrimengModule, ...modules, WorkflowComponent],
+  declarations: [...pipes, ...components, WorkflowComponent],
 })
 export class OrbitaUiUiModule {}

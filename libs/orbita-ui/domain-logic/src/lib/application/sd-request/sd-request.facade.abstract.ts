@@ -1,10 +1,11 @@
-import { HistoryViewModel } from './../../entities/view-models/history-view-model.interface';
 import { Observable } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
 import { SdRequestsServerData } from './../../entities/server-data/sd-request-server-data.interface';
 import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
+import { HistoryViewModel } from './../../entities/view-models/history-view-model.interface';
+import { MessageViewModel } from './../../entities/view-models/message-view-model.interface';
 
 export abstract class SdRequestFacadeAbstract {
   /**
@@ -67,6 +68,10 @@ export abstract class SdRequestFacadeAbstract {
    * Массив всех событий, произошедших с выбранной заявкой
    */
   orderedHistories$: Observable<HistoryViewModel[]>;
+  /**
+   * Массив всех записей о ходе работ по заявке
+   */
+  orderedWorkflows$: Observable<MessageViewModel[]>;
   /**
    * Форма заявки
    */

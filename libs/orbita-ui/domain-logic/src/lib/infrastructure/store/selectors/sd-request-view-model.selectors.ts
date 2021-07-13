@@ -85,6 +85,10 @@ export const getOrderedHistories = createSelector(getSelectedEntityViewModel, (s
   oFlatMap((work) => work.histories, sdRequest.works).sort((a, b) => (a.id > b.id ? 1 : -1))
 );
 
+export const getOrderedWorkflows = createSelector(getSelectedEntityViewModel, (sdRequest) =>
+  oFlatMap((work) => work.workflows, sdRequest.works).sort((a, b) => (a.id > b.id ? 1 : -1))
+);
+
 export const getFormEntityViewModel = createSelector(SdRequestSelectors.getFormEntity, (entity: SdRequestViewForm) =>
   entity ? { ...entity, finished_at_plan: new Date(entity.finished_at_plan) } : entity
 );

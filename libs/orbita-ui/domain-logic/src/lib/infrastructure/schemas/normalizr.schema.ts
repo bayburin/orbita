@@ -8,9 +8,12 @@ export const historySchema = new schema.Entity('histories');
 
 export const workerSchema = new schema.Entity('workers');
 
+export const workflowSchema = new schema.Entity('workflows');
+
 export const workSchema = new schema.Entity('works', {
   histories: [historySchema],
   workers: [workerSchema],
+  workflows: [workflowSchema],
 });
 
 export const sdRequestSchema = new schema.Entity('sd_requests', {

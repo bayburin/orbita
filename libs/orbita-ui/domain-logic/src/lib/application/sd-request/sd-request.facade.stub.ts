@@ -18,6 +18,7 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   selectedEditMode$ = new BehaviorSubject(null);
   selectedError$ = new BehaviorSubject(null);
   orderedHistories$ = new BehaviorSubject([]);
+  orderedWorkflows$ = new BehaviorSubject([]);
   formEntity$ = new BehaviorSubject(null);
   formLoading$ = new BehaviorSubject(null);
 

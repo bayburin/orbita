@@ -145,15 +145,6 @@
                     <lib-panel-placeholder>Пусто</lib-panel-placeholder>
                   </ng-template>
                 </p-panel>
-                <p-divider type="dashed"></p-divider>
-                <textarea
-                  rows="10"
-                  *ngIf="editMode"
-                  formControlName="workflow"
-                  pInputTextarea
-                  placeholder="Введите описание хода работы..."
-                  class="w-100"
-                ></textarea>
               </p-tabPanel>
               <p-tabPanel header="Параметры">
                 <p-panel header="Параметры заявки">
@@ -202,6 +193,19 @@
                     <p-divider type="dashed"></p-divider>
                   </div>
                 </ng-template>
+              </p-tabPanel>
+              <p-tabPanel header="Работа по заявке">
+                <div *ngIf="editMode">
+                  <textarea
+                    rows="10"
+                    formControlName="workflow"
+                    pInputTextarea
+                    placeholder="Введите описание хода работы..."
+                    class="w-100"
+                  ></textarea>
+                  <p-divider type="dashed"></p-divider>
+                </div>
+                <lib-workflows [workflows]="orderedWorkflows$ | async"></lib-workflows>
               </p-tabPanel>
               <p-tabPanel header="Комментарии">
                 <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>

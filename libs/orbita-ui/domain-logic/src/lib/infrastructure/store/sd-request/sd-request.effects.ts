@@ -51,6 +51,7 @@ export class SdRequestEffects {
       ofType(SdRequestActions.updatePartials),
       switchMap((action) => [
         MessageActions.setMessages({ messages: Object.values(action.entities.comments || []) }),
+        MessageActions.setMessages({ messages: Object.values(action.entities.workflows || []) }),
         WorkActions.setWorks({ works: Object.values(action.entities.works || []) }),
         HistoryActions.setHistories({ histories: Object.values(action.entities.histories || []) }),
         WorkerActions.setWorkers({ workers: Object.values(action.entities.workers || []) }),

@@ -50,6 +50,7 @@ export interface NormalizedSdRequestEntities {
   works: NormalizedWork;
   histories: NormalizedHistory;
   workers: NormalizedWorker;
+  workflows: NormalizedMessage;
 }
 
 /**

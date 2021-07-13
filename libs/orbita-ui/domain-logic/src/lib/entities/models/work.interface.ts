@@ -26,4 +26,9 @@ export interface Work {
    * Массив исполнителей
    */
   readonly workers: number[];
+
+  /**
+   * Массив сообщений о ходе работы по заявке
+   */
+  readonly workflows: number[];
 }

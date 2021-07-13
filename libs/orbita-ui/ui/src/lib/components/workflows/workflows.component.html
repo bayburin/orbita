@@ -1,0 +1,12 @@
+<ng-container *ngIf="workflows.length; else noWorkflows">
+  <div *ngFor="let workflow of workflows; trackBy: trackByWorkflow">
+    <lib-workflow [workflow]="workflow"></lib-workflow>
+    <p-divider></p-divider>
+  </div>
+</ng-container>
+
+<ng-template #noWorkflows>
+  <div class="p-d-flex p-jc-center p-m-3">
+    <lib-panel-placeholder>Ход работы отсутствует</lib-panel-placeholder>
+  </div>
+</ng-template>

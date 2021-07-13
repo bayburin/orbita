@@ -81,6 +81,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   selectedEditMode$ = this.store.select(SdRequestSelectors.getSelectedEditMode);
   selectedError$ = this.store.select(SdRequestSelectors.getSelectedError);
   orderedHistories$ = this.store.select(SdRequestViewModelSelectors.getOrderedHistories);
+  orderedWorkflows$ = this.store.select(SdRequestViewModelSelectors.getOrderedWorkflows);
 
   // ========== Форма заявки ==========
 

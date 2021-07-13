@@ -2,14 +2,12 @@
   <p-scrollPanel styleClass="comments-card-scroll-panel">
     <ng-container *ngIf="comments.length; else noComments">
       <div *ngFor="let comment of comments; trackBy: trackByComment">
-        <div class="comment">
-          <lib-comment [comment]="comment"></lib-comment>
-        </div>
+        <lib-comment [comment]="comment"></lib-comment>
         <p-divider></p-divider>
       </div>
     </ng-container>
   </p-scrollPanel>
-  <div class="comment-sender">
+  <div class="comment-form-block">
     <div class="p-inputgroup">
       <textarea #comment placeholder="Комментарий..." rows="5" pInputTextarea></textarea>
       <button
