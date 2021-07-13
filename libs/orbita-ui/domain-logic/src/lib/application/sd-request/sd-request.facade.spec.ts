@@ -1,3 +1,4 @@
+import { AuthHelper, AuthHelperStub } from '@iss/ng-auth-center';
 import { NgModule } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { readFirst } from '@nrwl/angular/testing';
@@ -23,7 +24,7 @@ import { SdRequestsServerDataBuilder } from './../../infrastructure/builders/sd-
 import { SdRequestsServerData } from '../../entities/server-data/sd-request-server-data.interface';
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { SdRequestCacheServiceStub } from './../../infrastructure/services/sd-request-cache.service.stub';
-import { SdRequestForm } from './../../entities/forms/sd-request-form.interface';
+import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -59,6 +60,7 @@ describe('SdRequestFacade', () => {
           provideMockActions(() => actions$),
           provideMockStore({ initialState: state }),
           { provide: SdRequestApi, useClass: SdRequestApiStub },
+          { provide: AuthHelper, useClass: AuthHelperStub },
           MessageService,
         ],
       });
@@ -244,7 +246,7 @@ describe('SdRequestFacade', () => {
     describe('changeForm()', () => {
       it('should call changeForm action', () => {
         const spy = spyOn(store, 'dispatch');
-        const data = { id: 123 } as SdRequestForm;
+        const data = { id: 123 } as SdRequestViewForm;
 
         facade.changeForm(data);
 
@@ -270,7 +272,11 @@ describe('SdRequestFacade', () => {
           StoreModule.forFeature(TICKET_SYSTEM_FEATURE_KEY, reducer),
           EffectsModule.forFeature([SdRequestEffects]),
         ],
-        providers: [SdRequestFacade, { provide: SdRequestApi, useClass: SdRequestApiStub }],
+        providers: [
+          SdRequestFacade,
+          { provide: SdRequestApi, useClass: SdRequestApiStub },
+          { provide: AuthHelper, useClass: AuthHelperStub },
+        ],
       })
       class CustomFeatureModule {}
 

@@ -1,11 +1,11 @@
+import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
+import { SdRequestFactory } from './../../factories/sd-request.factory';
 import { Action } from '@ngrx/store';
 
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { Meta } from '../../../entities/server-data/meta.interface';
 import * as SdRequestActions from './sd-request.actions';
 import { State, initialState, reducer, SelectedState, FormState } from './sd-request.reducer';
-import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
-import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 
 describe('SdRequestReducer', () => {
@@ -160,7 +160,7 @@ describe('SdRequestReducer', () => {
     it('should set attributes', () => {
       const sdRequestViewModel = createSdRequestViewModel('PRODUCT-AAA');
       const form = { id: 111 };
-      spyOn(SdRequestFormBuilder, 'build').and.returnValue(form);
+      spyOn(SdRequestFactory, 'createViewForm').and.returnValue(form);
       action = SdRequestActions.initUpdateForm({ sdRequestViewModel });
       const result: FormState = reducer(initialState, action).form;
 
@@ -172,8 +172,8 @@ describe('SdRequestReducer', () => {
     it('should set attributes', () => {
       const dateStr = '2021-06-28T13:00:00+07:00';
       const date = new Date('2021-06-28T13:00:00+07:00');
-      const sourceForm = { id: 111, finished_at_plan: date } as SdRequestForm;
-      const targetForm = { id: 111, finished_at_plan: dateStr } as SdRequestForm;
+      const sourceForm = { id: 111, finished_at_plan: date } as SdRequestViewForm;
+      const targetForm = { id: 111, finished_at_plan: dateStr } as SdRequestViewForm;
       action = SdRequestActions.changeForm({ entity: sourceForm });
       const result: FormState = reducer(initialState, action).form;
 

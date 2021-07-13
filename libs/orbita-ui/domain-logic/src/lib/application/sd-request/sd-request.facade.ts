@@ -21,7 +21,7 @@ import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-re
 import * as SdRequestViewModelSelectors from '../../infrastructure/store/selectors/sd-request-view-model.selectors';
 import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
-import { SdRequestForm } from './../../entities/forms/sd-request-form.interface';
+import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
 
 /**
  * Фасад для работы с заявками (обращения к хранилищу SdRequest)
@@ -109,7 +109,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     this.store.dispatch(SdRequestActions.toggleSelectedEditMode());
   }
 
-  changeForm(form: SdRequestForm) {
+  changeForm(form: SdRequestViewForm) {
     this.store.dispatch(SdRequestActions.changeForm({ entity: form }));
   }
 

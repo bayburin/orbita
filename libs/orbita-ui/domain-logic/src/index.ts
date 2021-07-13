@@ -1,9 +1,5 @@
 export * from './lib/orbita-ui-domain-logic.module';
 
-export * from './lib/entities/forms/work-form.interface';
-export * from './lib/entities/forms/worker-form.interface';
-export * from './lib/entities/forms/message-form.interface';
-
 export * from './lib/entities/models/ticket.interface';
 export * from './lib/entities/models/source-snapshot.interface';
 export * from './lib/entities/models/user.interface';
