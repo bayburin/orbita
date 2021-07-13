@@ -2,7 +2,7 @@ import { SdRequestForm } from './../../../entities/forms/sd-request-form.interfa
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { sdRequestAdapter, initialState } from './sd-request.reducer';
 import * as SdRequestSelectors from './sd-request.selectors';
-import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
+import { SdRequestFactory } from './../../factories/sd-request.factory';
 
 describe('SdRequestSelectors', () => {
   const createSdRequestEntity = (id: number, name = '') =>
@@ -23,7 +23,7 @@ describe('SdRequestSelectors', () => {
   const sortOrder = 1;
   const filters = { foo: 'bar' };
   const selectedEntity = createSdRequestEntity(444);
-  const formEntity = SdRequestFormBuilder.build();
+  const formEntity = SdRequestFactory.createViewForm();
   let selectedState: any;
   let formState: any;
   let state: any;

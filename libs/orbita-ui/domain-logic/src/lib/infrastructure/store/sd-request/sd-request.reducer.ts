@@ -7,7 +7,7 @@ import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
 import { processSdRequestTableFilters } from '../../utils/process-sd-request-table-filters.function';
-import { SdRequestFormBuilder } from './../../builders/sd-request-form.builder';
+import { SdRequestFactory } from './../../factories/sd-request.factory';
 
 export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
@@ -166,7 +166,7 @@ const sdRequestReducer = createReducer(
     ...state,
     form: {
       ...state.form,
-      entity: SdRequestFormBuilder.convertToViewForm(sdRequestViewModel),
+      entity: SdRequestFactory.createViewForm(sdRequestViewModel),
     },
   })),
   on(SdRequestActions.changeForm, (state, { entity }) => ({

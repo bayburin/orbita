@@ -28,5 +28,5 @@ export interface WorkForm {
   /**
    * Массив сообщений и ходе работы
    */
-  workflows?: MessageForm[];
+  workflows: MessageForm[];
 }

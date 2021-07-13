@@ -119,7 +119,7 @@ export class SdRequestEffects {
         this.sdRequestApi
           .update(
             sdRequestViewModel.id,
-            SdRequestFactory.createServerForm(this.authHelper.getJwtPayload(), sdRequestViewModel, users, formData)
+            SdRequestFactory.createServerForm(formData, sdRequestViewModel, this.authHelper.getJwtPayload(), users)
           )
           .pipe(
             switchMap((data) => {

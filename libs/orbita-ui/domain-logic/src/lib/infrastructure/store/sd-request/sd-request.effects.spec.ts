@@ -12,7 +12,7 @@ import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestApiStub } from './../../api/sd-request/sd-request.api.stub';
 import { SD_REQUEST_FEATURE_KEY, initialState, State } from './sd-request.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY } from '../index';
-import { SdRequestsServerDataBuilder } from './../../builders/sd-request-server-data.builder';
+import { AuthHelper, AuthHelperStub } from '@iss/ng-auth-center';
 
 describe('SdRequestEffects', () => {
   let actions$: Observable<Action>;
@@ -32,6 +32,7 @@ describe('SdRequestEffects', () => {
         provideMockActions(() => actions$),
         provideMockStore({ initialState: state }),
         { provide: SdRequestApi, useClass: SdRequestApiStub },
+        { provide: AuthHelper, useClass: AuthHelperStub },
         MessageService,
       ],
     });

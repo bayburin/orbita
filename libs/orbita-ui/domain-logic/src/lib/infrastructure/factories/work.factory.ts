@@ -19,6 +19,8 @@ export class WorkFactory {
       claim_id: model.claim_id,
       group_id: model.group.id,
       workers: model.workers.map((worker) => WorkerFactory.createExistingForm(worker)),
+      // TODO: Заменить на model.workflows
+      workflows: [],
     };
   }
 
