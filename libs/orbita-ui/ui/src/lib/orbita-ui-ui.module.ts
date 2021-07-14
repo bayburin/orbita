@@ -26,6 +26,7 @@ import { SourceSnapshotComponent } from './components/source-snapshot/source-sna
 import { GroupHeaderComponent } from './components/group-header/group-header.component';
 import { WorkflowsComponent } from './components/workflows/workflows.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
+import { AttachmentsComponent } from './components/attachments/attachments.component';
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
@@ -45,6 +46,7 @@ const components: any[] = [
   GroupHeaderComponent,
   SourceSnapshotComponent,
   WorkflowsComponent,
+  AttachmentsComponent,
 ];
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
