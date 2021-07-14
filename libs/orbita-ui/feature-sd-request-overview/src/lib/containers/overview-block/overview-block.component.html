@@ -9,6 +9,7 @@
     <form [formGroup]="form">
       <div class="p-grid">
         <div class="p-col-3">
+          <h3>История событий</h3>
           <div
             *ngFor="
               let history of (orderedHistories$ | async).slice().reverse();
@@ -134,33 +135,29 @@
                 </b>
               </span>
             </div>
+            <p-divider type="dashed"></p-divider>
+            <div class="p-mt-2">
+              <div *ngIf="sdRequest.description; else noDesc"><b>Описание:</b> {{ sdRequest.description }}</div>
+              <ng-template #noDesc>
+                <lib-panel-placeholder>Описание заявки отсутствует</lib-panel-placeholder>
+              </ng-template>
+            </div>
           </div>
 
           <div class="p-mt-3">
             <p-tabView>
-              <p-tabPanel header="Детали">
-                <p-panel header="Описание">
-                  <div *ngIf="sdRequest.description; else noDesc">{{ sdRequest.description }}</div>
-                  <ng-template #noDesc>
-                    <lib-panel-placeholder>Пусто</lib-panel-placeholder>
-                  </ng-template>
-                </p-panel>
-              </p-tabPanel>
-              <p-tabPanel header="Параметры">
-                <p-panel header="Параметры заявки">
-                  <div *ngIf="loadedParameters$ | async; else emptyData">
-                    <div *ngIf="parameters$ | async as parameters">
-                      <div *ngIf="parameters.length > 0; else emptyData">
-                        <div *ngFor="let parameter of parameters; trackByParameter">
-                          <lib-detail-row>
-                            <div attribute>{{ parameter.name }}</div>
-                            <div value>{{ parameter.value }}</div>
-                          </lib-detail-row>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </p-panel>
+              <p-tabPanel header="Работа по заявке">
+                <div *ngIf="editMode">
+                  <textarea
+                    rows="10"
+                    formControlName="workflow"
+                    pInputTextarea
+                    placeholder="Введите описание хода работы..."
+                    class="w-100"
+                  ></textarea>
+                  <p-divider type="dashed"></p-divider>
+                </div>
+                <lib-workflows [workflows]="orderedWorkflows$ | async"></lib-workflows>
               </p-tabPanel>
               <p-tabPanel header="Исполнители">
                 <p-listbox
@@ -194,24 +191,27 @@
                   </div>
                 </ng-template>
               </p-tabPanel>
-              <p-tabPanel header="Работа по заявке">
-                <div *ngIf="editMode">
-                  <textarea
-                    rows="10"
-                    formControlName="workflow"
-                    pInputTextarea
-                    placeholder="Введите описание хода работы..."
-                    class="w-100"
-                  ></textarea>
-                  <p-divider type="dashed"></p-divider>
-                </div>
-                <lib-workflows [workflows]="orderedWorkflows$ | async"></lib-workflows>
+              <p-tabPanel header="Данные на момент создания">
+                <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>
+              </p-tabPanel>
+              <p-tabPanel header="Параметры">
+                <p-panel header="Параметры заявки">
+                  <div *ngIf="loadedParameters$ | async; else emptyData">
+                    <div *ngIf="parameters$ | async as parameters">
+                      <div *ngIf="parameters.length > 0; else emptyData">
+                        <div *ngFor="let parameter of parameters; trackByParameter">
+                          <lib-detail-row>
+                            <div attribute>{{ parameter.name }}</div>
+                            <div value>{{ parameter.value }}</div>
+                          </lib-detail-row>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </p-panel>
               </p-tabPanel>
               <p-tabPanel header="Комментарии">
                 <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>
-              </p-tabPanel>
-              <p-tabPanel header="Данные на момент создания">
-                <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>
               </p-tabPanel>
             </p-tabView>
           </div>
@@ -285,6 +285,16 @@
                         <div value>{{ employee.lastName }} {{ employee.firstName }} {{ employee.middleName }}</div>
                       </lib-detail-row>
 
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Телефон</div>
+                        <div value>{{ employee.employeeContact.phone[0] }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="p-mb-2">
+                        <div attribute>Расположение</div>
+                        <div value>{{ employee.employeeContact.position }}</div>
+                      </lib-detail-row>
+
                       <div *ngIf="employee.employeePositions as positions">
                         <lib-detail-row class="p-mb-2">
                           <div attribute>Должность</div>
@@ -292,13 +302,19 @@
                         </lib-detail-row>
 
                         <lib-detail-row class="p-mb-2">
-                          <div attribute>Категория</div>
-                          <div value>{{ positions[0].employeeCategory }}</div>
+                          <div attribute>Подразделение</div>
+                          <div value>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</div>
                         </lib-detail-row>
 
                         <lib-detail-row class="p-mb-2">
-                          <div attribute>Подразделение</div>
-                          <div value>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</div>
+                          <div attribute>Отпуск</div>
+                          <div value>
+                            <ng-container *ngIf="positions[0].vacation; else noVacation">
+                              {{ positions[0].vacation }} с {{ positions[0].vacationFrom }} до
+                              {{ positions[0].vacationTo }}
+                            </ng-container>
+                            <ng-template #noVacation>Нет</ng-template>
+                          </div>
                         </lib-detail-row>
                       </div>
                     </div>

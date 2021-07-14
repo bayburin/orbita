@@ -1,9 +1,10 @@
 import { EmployeeBase } from './employee-base.interface';
+import { EmployeeVacation } from './employee-vacation.interface';
 
 /**
- * Интерфейс работника
+ * Работник ИСС
  */
-export interface EmployeeShort extends EmployeeBase {
+export interface EmployeeShort extends EmployeeBase, EmployeeVacation {
   /**
    * ФИО
    */
@@ -23,21 +24,6 @@ export interface EmployeeShort extends EmployeeBase {
    * Находится ли в отпуске/больничном/декрете
    */
   readonly inVacation: boolean;
-
-  /**
-   * Причина отдыха
-   */
-  readonly vacation?: string;
-
-  /**
-   * Дата начала отдыха
-   */
-  readonly vacationFrom?: string;
-
-  /**
-   * Дата окончания отдыха
-   */
-  readonly vacationTo?: string;
 
   /**
    * Самоятоятельная структурная единица

@@ -2,7 +2,7 @@ import { EmployeeBase } from './employee-base.interface';
 import { EmployeeContact } from './employee-contact.interface';
 
 /**
- * Интерфейс работников смежных компаний
+ * Работник смежных компаний
  */
 export interface EmployeeAffiliated extends EmployeeBase {
   /**

@@ -1,8 +1,9 @@
 import { EmployeeContact } from './employee-contact.interface';
 import { EmployeeBase } from './employee-base.interface';
+import { EmployeeVacation } from './employee-vacation.interface';
 
 /**
- * Интерфейс работника, полученный по id_tn
+ * Работник, полученный по id_tn
  */
 export interface Employee extends EmployeeBase {
   /**
@@ -22,9 +23,9 @@ export interface Employee extends EmployeeBase {
 }
 
 /**
- * Интерфейс данных о должности
+ * Должность работника ИСС
  */
-export interface EmployeePosition {
+export interface EmployeePosition extends EmployeeVacation {
   /**
    * Уникальный IdTn
    */
@@ -56,6 +57,9 @@ export interface EmployeePosition {
   readonly struct: string;
 }
 
+/**
+ * Рабочее и обеденное время
+ */
 export interface EmployeeSchedules {
   /**
    * Уникальный IdTn
