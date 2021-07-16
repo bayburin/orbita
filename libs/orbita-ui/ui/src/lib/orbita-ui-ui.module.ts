@@ -28,6 +28,8 @@ import { WorkflowsComponent } from './components/workflows/workflows.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { AttachmentsComponent } from './components/attachments/attachments.component';
 
+import { DndFilesDirective } from './directives/dnd-files/dnd-files.directive';
+
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
 const components: any[] = [
@@ -46,14 +48,17 @@ const components: any[] = [
   GroupHeaderComponent,
   SourceSnapshotComponent,
   WorkflowsComponent,
+  WorkflowComponent,
   AttachmentsComponent,
 ];
+
+const directives: any[] = [DndFilesDirective];
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
 @NgModule({
   imports: [CommonModule, PrimengModule, ...modules],
-  exports: [...pipes, ...components, PrimengModule, ...modules, WorkflowComponent],
-  declarations: [...pipes, ...components, WorkflowComponent],
+  exports: [...pipes, ...components, PrimengModule, ...modules, ...directives],
+  declarations: [...pipes, ...components, ...directives],
 })
 export class OrbitaUiUiModule {}
