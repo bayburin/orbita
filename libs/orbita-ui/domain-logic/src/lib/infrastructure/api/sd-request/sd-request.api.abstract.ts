@@ -5,7 +5,6 @@ import {
   SdRequestServerData,
 } from './../../../entities/server-data/sd-request-server-data.interface';
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
-import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 
 export abstract class SdRequestApiAbstract {
   /**
@@ -35,5 +34,5 @@ export abstract class SdRequestApiAbstract {
    * @param id - ID заявки
    * @param formData - новые данные заявки
    */
-  abstract update(id: number, formData: SdRequestForm): Observable<SdRequestServerData>;
+  abstract update(id: number, formData: FormData): Observable<SdRequestServerData>;
 }

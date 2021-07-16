@@ -1,0 +1,29 @@
+.dropzone-file {
+  padding: $spacer * 0.5 0;
+
+  input[type='file'] {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+  }
+}
+
+.dropshow-file {
+  display: flex;
+  flex-direction: column;
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacer * 0.5 $spacer * 0.75;
+    margin: 0 $spacer * 0.75;
+  }
+
+  .file-item + .file-item {
+    border-top: 1px solid var(--surface-d);
+  }
+}

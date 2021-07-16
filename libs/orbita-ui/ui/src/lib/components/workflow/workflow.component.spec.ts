@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { WorkflowComponent } from './workflow.component';
+import { DatetimePipe } from './../../pipes/datetime/datetime.pipe';
 
 describe('WorkflowComponent', () => {
   let component: WorkflowComponent;
@@ -9,7 +10,7 @@ describe('WorkflowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [WorkflowComponent],
+      declarations: [WorkflowComponent, DatetimePipe],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
@@ -17,6 +18,7 @@ describe('WorkflowComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(WorkflowComponent);
     component = fixture.componentInstance;
+    component.workflow = { sender: {} } as any;
     fixture.detectChanges();
   });
 

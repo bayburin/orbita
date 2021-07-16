@@ -1,9 +1,9 @@
-import { TicketForm } from './ticket-form.interface';
+import { TicketViewForm } from './ticket-view-form.interface';
 
 /**
  * Форма заявки, которую заполняет пользователь
  */
-export interface SdRequestViewForm extends TicketForm {
+export interface SdRequestViewForm extends TicketViewForm {
   /**
    * ID Услуги
    */

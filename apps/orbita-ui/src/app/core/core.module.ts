@@ -30,7 +30,7 @@ import { FakeBackendInterceptor } from './interceptors/fake-backend.interceptor'
   ],
   providers: [
     { provide: ORBITA_UI_ENV_TOKEN, useValue: environment },
-    { provide: HTTP_INTERCEPTORS, useClass: JsonInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: JsonInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     // { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
     MessageService,

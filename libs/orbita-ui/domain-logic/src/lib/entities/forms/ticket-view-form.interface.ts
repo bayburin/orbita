@@ -5,7 +5,7 @@ import { AttachmentForm } from './attachment-form.interface';
 /**
  * Форма тикета
  */
-export interface TicketForm {
+export interface TicketViewForm {
   /**
    * ID (номер) заявки.
    */
@@ -29,12 +29,17 @@ export interface TicketForm {
   /**
    * Дедлайн
    */
-  finished_at_plan: string;
+  finished_at_plan: string | Date;
 
   /**
    * Список прикрепленных файлов, которые уже сохранены на сервере
    */
   attachments: AttachmentForm[];
+
+  /**
+   * Список новых прикрепленных файлов
+   */
+  newAttachments: File[];
 }
 
 /**

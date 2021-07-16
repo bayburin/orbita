@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { filter, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
@@ -71,6 +71,10 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   storeFormSub: Subscription;
   valueChangesSub: Subscription;
   editModeSub: Subscription;
+
+  get attachmentsForm(): FormArray {
+    return this.form.get('newAttachments') as FormArray;
+  }
 
   constructor(
     private sdRequestFacade: SdRequestFacade,
@@ -188,6 +192,8 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
       finished_at_plan: [],
       workers: [[]],
       workflow: [null],
+      attachments: [],
+      newAttachments: this.fb.array([]),
     });
     // Заполняет данные формы из хранилища
     this.storeFormSub = this.sdRequestFacade.formEntity$

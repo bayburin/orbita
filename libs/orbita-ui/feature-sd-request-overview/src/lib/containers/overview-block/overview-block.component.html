@@ -259,7 +259,12 @@
             <div value>{{ sdRequest.integration_id }}</div>
           </lib-detail-row>
 
-          <p-divider></p-divider>
+          <p-divider type="dashed"></p-divider>
+
+          <div *ngIf="editMode">
+            <lib-attachments [attachmentsForm]="attachmentsForm"></lib-attachments>
+            <p-divider type="dashed"></p-divider>
+          </div>
 
           <h3>Актуальные данные:</h3>
           <p-accordion [multiple]="true">

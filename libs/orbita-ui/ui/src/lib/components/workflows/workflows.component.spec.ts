@@ -10,13 +10,14 @@ describe('WorkflowsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [WorkflowsComponent],
-      chemas: [NO_ERRORS_SCHEMA],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(WorkflowsComponent);
     component = fixture.componentInstance;
+    component.workflows = [];
     fixture.detectChanges();
   });
 

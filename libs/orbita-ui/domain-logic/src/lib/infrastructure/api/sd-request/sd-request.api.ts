@@ -8,7 +8,6 @@ import {
   SdRequestServerData,
 } from './../../../entities/server-data/sd-request-server-data.interface';
 import { SdRequestApiAbstract } from './sd-request.api.abstract';
-import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
 
 /**
  * Содержит API заявок для обращения к серверу
@@ -39,7 +38,7 @@ export class SdRequestApi implements SdRequestApiAbstract {
     return this.http.get<SdRequestServerData>(`${this.api}/${id}`);
   }
 
-  update(id: number, formData: SdRequestForm) {
-    return this.http.put<SdRequestServerData>(`${this.api}/${id}`, { sd_request: formData });
+  update(id: number, formData: FormData) {
+    return this.http.put<SdRequestServerData>(`${this.api}/${id}`, formData);
   }
 }

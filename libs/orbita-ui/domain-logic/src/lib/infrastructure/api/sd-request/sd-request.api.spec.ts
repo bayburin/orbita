@@ -68,9 +68,10 @@ describe('SdRequestApi', () => {
   describe('update()', () => {
     const api = `${orbitaUiEnvironmentStub.serverApiUrl}/sd_requests/1`;
     const sdRequest = { id: 1 } as SdRequestForm;
+    const formData = new FormData();
 
     it('should return request', () => {
-      service.update(1, sdRequest).subscribe((result) => {
+      service.update(1, formData).subscribe((result) => {
         expect(result).toEqual(sdRequest);
       });
 
