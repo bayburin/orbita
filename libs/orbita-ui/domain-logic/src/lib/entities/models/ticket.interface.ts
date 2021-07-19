@@ -43,6 +43,16 @@ export interface Ticket {
    * Массив идентификаторов комментариев
    */
   readonly comments: number[];
+
+  /**
+   * Массив идентификаторов Work
+   */
+  readonly works: number[];
+
+  /**
+   * Массив идентификатор прикрепленных файлов
+   */
+  readonly attachments: number[];
 }
 
 /**

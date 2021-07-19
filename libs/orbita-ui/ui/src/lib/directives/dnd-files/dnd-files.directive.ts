@@ -16,7 +16,7 @@ export class DndFilesDirective {
     this.fileOver = false;
   }
 
-  // FIXME: тип события event: DragEvent. Но jest выдает ошибку "Jest выдает ошибку "ReferenceError: DragEvent is not defined""
+  // FIXME: тип события event: DragEvent. Но jest выдает ошибку "ReferenceError: DragEvent is not defined"
   @HostListener('drop', ['$event']) onDrop(event: any): void {
     event.preventDefault();
     event.stopPropagation();

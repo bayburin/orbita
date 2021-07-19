@@ -10,6 +10,8 @@ export const workerSchema = new schema.Entity('workers');
 
 export const workflowSchema = new schema.Entity('workflows');
 
+export const attachmentSchema = new schema.Entity('attachments');
+
 export const workSchema = new schema.Entity('works', {
   histories: [historySchema],
   workers: [workerSchema],
@@ -20,6 +22,7 @@ export const sdRequestSchema = new schema.Entity('sd_requests', {
   parameters: [parameterSchema],
   works: [workSchema],
   comments: [commentSchema],
+  attachments: [attachmentSchema],
 });
 
 // export const sdRequestsSchema = { sd_requests: [sdRequestSchema] };

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
+import { Attachment } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-attachments',
@@ -7,7 +8,12 @@ import { FormArray, FormControl } from '@angular/forms';
   styleUrls: ['./attachments.component.scss'],
 })
 export class AttachmentsComponent {
+  @Input() attachments: Attachment[];
   @Input() attachmentsForm: FormArray;
+
+  trackByAttachment(index: number, attachment: Attachment): number {
+    return attachment.id;
+  }
 
   /**
    * Обрабатывает загруженные файлы.

@@ -5,6 +5,7 @@ import * as SdRequestSelectors from '../sd-request/sd-request.selectors';
 import * as MessageViewModelSelectors from './message-view-model.selectors';
 import * as WorkViewModelSelectors from './work-view-model.selectors';
 import * as ApplicationSelectors from './../application/application.selectors';
+import * as AttachmentSelectors from './../attachment/attachment.selectors';
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 import { WorkViewModel } from './../../../entities/view-models/work-view-model.interface';
 import { MessageViewModel } from './../../../entities/view-models/message-view-model.interface';
@@ -48,6 +49,7 @@ export const getAllViewModel = createSelector(
         lastHistory,
         comments,
         works,
+        attachments: [],
       };
     })
 );
@@ -57,7 +59,8 @@ export const getSelectedEntityViewModel = createSelector(
   MessageViewModelSelectors.getEntitiesViewModel,
   WorkViewModelSelectors.getEntitiesViewModel,
   ApplicationSelectors.getEntities,
-  (sdRequest, messageEntities, workEntities, applicationEntities): SdRequestViewModel => {
+  AttachmentSelectors.getEntities,
+  (sdRequest, messageEntities, workEntities, applicationEntities, attachmentEntities): SdRequestViewModel => {
     if (!sdRequest) {
       return null;
     }
@@ -71,12 +74,17 @@ export const getSelectedEntityViewModel = createSelector(
       [] as WorkViewModel[]
     );
     const application = applicationEntities[sdRequest.application_id];
+    const attachments = sdRequest.attachments.reduce(
+      (arr, attachmentId) => (attachmentEntities[attachmentId] ? arr.concat(attachmentEntities[attachmentId]) : arr),
+      []
+    );
 
     return {
       ...sdRequest,
       application,
       comments,
       works,
+      attachments,
     };
   }
 );

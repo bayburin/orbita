@@ -1,7 +1,7 @@
 import { TicketViewModel } from './ticket-view-model.interface';
-import { WorkViewModel } from './work-view-model.interface';
 import { Application } from './../models/application.interface';
 import { HistoryViewModel } from './history-view-model.interface';
+import { Parameter } from './../models/parameter.interface';
 
 /**
  * Интерфейс заявки
@@ -51,11 +51,6 @@ export interface SdRequestViewModel extends TicketViewModel {
    * Массив объектов Parameter
    */
   // readonly parameters: Parameter[];
-
-  /**
-   * Массив объектов Work
-   */
-  readonly works: WorkViewModel[];
 
   /**
    * Событие, произошедшее последним в заявке

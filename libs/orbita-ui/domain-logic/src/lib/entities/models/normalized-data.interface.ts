@@ -5,6 +5,7 @@ import { History } from './history.interface';
 import { Worker } from './worker.interface';
 import { SdTicket } from './sd/sd-ticket.interface';
 import { SdService } from './sd/sd-service.interface';
+import { Attachment } from './attachment.interface';
 
 /**
  * Интерфейс нормализованного объекта заявки
@@ -42,6 +43,13 @@ export interface NormalizedWorker {
 }
 
 /**
+ * Интерфейс нормализованного объекта прикрепленного файла
+ */
+export interface NormalizedAttachment {
+  [key: number]: Attachment;
+}
+
+/**
  * Интерфейс объектов, на которые раскладывается (нормализуется) заявка
  */
 export interface NormalizedSdRequestEntities {
@@ -51,6 +59,7 @@ export interface NormalizedSdRequestEntities {
   histories: NormalizedHistory;
   workers: NormalizedWorker;
   workflows: NormalizedMessage;
+  attachments: NormalizedAttachment;
 }
 
 /**

@@ -12,6 +12,7 @@ export * from './lib/entities/models/sd/sd-ticket.interface';
 export * from './lib/entities/models/source-snapshot.interface';
 export * from './lib/entities/models/host.interface';
 export * from './lib/entities/models/user.interface';
+export * from './lib/entities/models/attachment.interface';
 
 export * from './lib/entities/view-models/sd-request-view-model.interface';
 export * from './lib/entities/view-models/work-view-model.interface';

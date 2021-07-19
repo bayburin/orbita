@@ -29,6 +29,7 @@ import {
   UserFacade,
   User,
   UserGroup,
+  Attachment,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -122,6 +123,10 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByUser(index: number, user: User): number {
     return user.id;
+  }
+
+  trackByAttachment(index: number, attachment: Attachment): number {
+    return attachment.id;
   }
 
   /**

@@ -43,9 +43,4 @@ export interface SdRequest extends Ticket {
    * Массив идентификаторов Parameter
    */
   readonly parameters: number[];
-
-  /**
-   * Массив идентификаторов Work
-   */
-  readonly works: number[];
 }

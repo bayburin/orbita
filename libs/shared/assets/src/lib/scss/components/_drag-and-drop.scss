@@ -29,18 +29,18 @@
 .dropshow-file {
   display: flex;
   flex-direction: column;
+}
 
-  .file-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: $spacer * 0.5 $spacer * 0.75;
-    margin: 0 $spacer * 0.75;
-  }
+.file-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: $spacer * 0.5 $spacer * 0.75;
+  margin: 0 $spacer * 0.75;
+}
 
-  .file-item + .file-item {
-    border-top: 1px solid var(--surface-d);
-  }
+.file-item + .file-item {
+  border-top: 1px solid var(--surface-d);
 }
 
 @keyframes shake {

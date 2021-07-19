@@ -21,6 +21,7 @@ import * as SvtItemActions from '../svt-item/svt-item.actions';
 import * as HostActions from '../host/host.actions';
 import * as ParameterActions from '../parameter/parameter.actions';
 import * as UserSelectors from '../user/user.selectors';
+import * as AttachmentActions from '../attachment/attachment.actions';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../services/sd-request-cache.service';
 
@@ -55,6 +56,7 @@ export class SdRequestEffects {
         WorkActions.setWorks({ works: Object.values(action.entities.works || []) }),
         HistoryActions.setHistories({ histories: Object.values(action.entities.histories || []) }),
         WorkerActions.setWorkers({ workers: Object.values(action.entities.workers || []) }),
+        AttachmentActions.setAttachments({ attachments: Object.values(action.entities.attachments) || [] }),
       ])
     )
   );

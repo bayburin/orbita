@@ -13,6 +13,10 @@
 </div>
 
 <div class="dropshow-file">
+  <div *ngFor="let attachment of attachments; trackByAttachment" class="file-item">
+    <div>{{ attachment.filename }}</div>
+  </div>
+
   <div *ngFor="let attachment of attachmentsForm.controls; let index = index" class="file-item">
     <div>{{ attachment.value.name }}</div>
     <div class="p-ml-2">
