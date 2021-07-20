@@ -28,7 +28,8 @@
               {
                 "glob": "**/*",
                 "input": "libs/shared/assets/src/lib/",
-                "output": "assets"
+                "output": "assets",
+                "ignore": ["**/*.scss"]
               }
             ],
             "styles": [
