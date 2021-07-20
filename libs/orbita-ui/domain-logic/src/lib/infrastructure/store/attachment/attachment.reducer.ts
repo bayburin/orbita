@@ -8,6 +8,8 @@ export const ATTACHMENT_FEATURE_KEY = 'attachment';
 
 export interface State extends EntityState<Attachment> {
   loaded: boolean;
+  loadingIds: number[];
+  errorIds: number[];
 }
 
 export interface AttachmentPartialState {
@@ -18,6 +20,8 @@ export const attachmentAdapter: EntityAdapter<Attachment> = createEntityAdapter<
 
 export const initialState: State = attachmentAdapter.getInitialState({
   loaded: false,
+  loadingIds: [],
+  errorIds: [],
 });
 
 const attachmentReducer = createReducer(
@@ -25,7 +29,21 @@ const attachmentReducer = createReducer(
   on(AttachmentActions.setAll, (state, { attachments }) =>
     attachmentAdapter.setAll(attachments, { ...state, loaded: true })
   ),
-  on(AttachmentActions.setAttachments, (state, { attachments }) => attachmentAdapter.upsertMany(attachments, state))
+  on(AttachmentActions.setAttachments, (state, { attachments }) => attachmentAdapter.upsertMany(attachments, state)),
+  on(AttachmentActions.download, (state, { attachment }) => ({
+    ...state,
+    loadingIds: [...state.loadingIds, attachment.id],
+    errorIds: state.errorIds.filter((loadingId) => loadingId !== attachment.id),
+  })),
+  on(AttachmentActions.downloadSuccess, (state, { id }) => ({
+    ...state,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+  })),
+  on(AttachmentActions.downloadFailure, (state, { id }) => ({
+    ...state,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+    errorIds: [...state.errorIds, id],
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

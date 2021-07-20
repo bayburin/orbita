@@ -16,6 +16,9 @@ import {
   ParameterFacadeStub,
   UserFacade,
   UserFacadeStub,
+  AttachmentFacade,
+  AttachmentFacadeStub,
+  Attachment,
 } from '@orbita/orbita-ui/domain-logic';
 import { DatetimePipe } from '@orbita/orbita-ui/ui';
 
@@ -25,6 +28,7 @@ describe('OverviewBlockComponent', () => {
   let component: OverviewBlockComponent;
   let fixture: ComponentFixture<OverviewBlockComponent>;
   let sdRequestFacade: SdRequestFacade;
+  let attachmentFacade: AttachmentFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -37,6 +41,7 @@ describe('OverviewBlockComponent', () => {
         { provide: AuthCenterFacade, useClass: AuthCenterFacadeStub },
         { provide: ParameterFacade, useClass: ParameterFacadeStub },
         { provide: UserFacade, useClass: UserFacadeStub },
+        { provide: AttachmentFacade, useClass: AttachmentFacadeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -46,6 +51,7 @@ describe('OverviewBlockComponent', () => {
     fixture = TestBed.createComponent(OverviewBlockComponent);
     component = fixture.componentInstance;
     sdRequestFacade = TestBed.inject(SdRequestFacade);
+    attachmentFacade = TestBed.inject(AttachmentFacade);
     fixture.detectChanges();
   });
 
@@ -81,6 +87,47 @@ describe('OverviewBlockComponent', () => {
       component.navigateToSdRequests();
 
       expect(spy).toHaveBeenCalledWith(['/tickets']);
+    });
+  });
+
+  describe('downloadAttachment()', () => {
+    it('should call download() method', () => {
+      const attachment = { id: 1 } as Attachment;
+      const spy = spyOn(attachmentFacade, 'download');
+
+      component.downloadAttachment(attachment);
+
+      expect(spy).toHaveBeenCalledWith(attachment);
+    });
+  });
+
+  describe('isAttachmentDownloading()', () => {
+    it('should return true if attachment is into loading array', () => {
+      const attachment = { id: 1 } as Attachment;
+      component.loadingAttachments = [1, 2];
+
+      expect(component.isAttachmentDownloading(attachment)).toBeTruthy();
+    });
+
+    it('should return false if attachment is not into loading array', () => {
+      const attachment = { id: 1 } as Attachment;
+
+      expect(component.isAttachmentDownloading(attachment)).toBeFalsy();
+    });
+  });
+
+  describe('isAttachmentError()', () => {
+    it('should return true if attachment is into error array', () => {
+      const attachment = { id: 1 } as Attachment;
+      component.errorAttachments = [1, 2];
+
+      expect(component.isAttachmentError(attachment)).toBeTruthy();
+    });
+
+    it('should return false if attachment is not into error array', () => {
+      const attachment = { id: 1 } as Attachment;
+
+      expect(component.isAttachmentError(attachment)).toBeFalsy();
     });
   });
 });

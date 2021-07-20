@@ -47,3 +47,5 @@ export * from './lib/application/router/router.facade';
 export * from './lib/application/router/router.facade.stub';
 export * from './lib/application/user/user.facade';
 export * from './lib/application/user/user.facade.stub';
+export * from './lib/application/attachment/attachment.facade';
+export * from './lib/application/attachment/attachment.facade.stub';

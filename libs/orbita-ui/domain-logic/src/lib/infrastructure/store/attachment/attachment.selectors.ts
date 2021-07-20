@@ -15,3 +15,7 @@ export const getLoaded = createSelector(getAttachmentState, (state: State) => st
 export const getAll = createSelector(getAttachmentState, (state: State) => selectAll(state));
 
 export const getEntities = createSelector(getAttachmentState, (state: State) => selectEntities(state));
+
+export const getLoadingIds = createSelector(getAttachmentState, (state: State) => state.loadingIds);
+
+export const getErrorIds = createSelector(getAttachmentState, (state: State) => state.errorIds);

@@ -30,6 +30,7 @@ import {
   User,
   UserGroup,
   Attachment,
+  AttachmentFacade,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -61,6 +62,10 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   priorities = prioritiesViewModelArray;
   userGroups$ = this.userFacade.userGroups$;
   editMode: boolean;
+  loadingAttachments$ = this.attachmentFacade.loadingIds$;
+  loadingAttachments: number[];
+  errorAttachments$ = this.attachmentFacade.errorIds$;
+  errorAttachments: number[];
 
   // ========== Раздел формы ==========
 
@@ -72,6 +77,8 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   storeFormSub: Subscription;
   valueChangesSub: Subscription;
   editModeSub: Subscription;
+  loadingAttachmentsSub: Subscription;
+  errorAttachmentsSub: Subscription;
 
   get attachmentsForm(): FormArray {
     return this.form.get('newAttachments') as FormArray;
@@ -85,13 +92,16 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     private parameterFacade: ParameterFacade,
     private fb: FormBuilder,
     private router: Router,
-    private userFacade: UserFacade
+    private userFacade: UserFacade,
+    private attachmentFacade: AttachmentFacade
   ) {}
 
   ngOnInit(): void {
     this.sdRequestFacade.loadSelectedSdRequest();
     this.buildForm();
     this.editModeSub = this.editMode$.subscribe((editMode) => (this.editMode = editMode));
+    this.loadingAttachmentsSub = this.loadingAttachments$.subscribe((ids) => (this.loadingAttachments = ids));
+    this.errorAttachmentsSub = this.errorAttachments$.subscribe((ids) => (this.errorAttachments = ids));
   }
 
   ngOnDestroy(): void {
@@ -99,6 +109,8 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     this.storeFormSub.unsubscribe();
     this.valueChangesSub.unsubscribe();
     this.editModeSub.unsubscribe();
+    this.loadingAttachmentsSub.unsubscribe();
+    this.errorAttachmentsSub.unsubscribe();
   }
 
   trackByHistory(index: number, history: HistoryViewModel): number {
@@ -179,15 +191,40 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   /**
    * Сохраняет форму
    */
-  saveForm() {
+  saveForm(): void {
     this.sdRequestFacade.updateForm();
   }
 
   /**
    * Редиркетит на страницу заявок
    */
-  navigateToSdRequests() {
+  navigateToSdRequests(): void {
     this.router.navigate(['/tickets']);
+  }
+
+  /**
+   * Скачивает файл
+   */
+  downloadAttachment(attachment: Attachment): void {
+    this.attachmentFacade.download(attachment);
+  }
+
+  /**
+   * Проверяет, скачивается ли файл в данный момент
+   *
+   * @param attachment - файл
+   */
+  isAttachmentDownloading(attachment: Attachment): boolean {
+    return this.loadingAttachments.indexOf(attachment.id) !== -1;
+  }
+
+  /**
+   * Проверяет, появилась ли ошибка при скачивании файла
+   *
+   * @param attachment - файл
+   */
+  isAttachmentError(attachment: Attachment): boolean {
+    return this.errorAttachments.indexOf(attachment.id) !== -1;
   }
 
   private buildForm(): void {

@@ -10,6 +10,7 @@ import { EmployeeEffects } from './infrastructure/store/employee/employee.effect
 import { SvtItemEffects } from './infrastructure/store/svt-item/svt-item.effects';
 import { HostEffects } from './infrastructure/store/host/host.effects';
 import { ParameterEffects } from './infrastructure/store/parameter/parameter.effects';
+import { AttachmentEffects } from './infrastructure/store/attachment/attachment.effects';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ParameterEffects } from './infrastructure/store/parameter/parameter.eff
       SvtItemEffects,
       HostEffects,
       ParameterEffects,
+      AttachmentEffects,
     ]),
   ],
   providers: [],

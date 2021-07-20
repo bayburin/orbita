@@ -11,10 +11,6 @@ export class AttachmentsComponent {
   @Input() attachments: Attachment[];
   @Input() attachmentsForm: FormArray;
 
-  trackByAttachment(index: number, attachment: Attachment): number {
-    return attachment.id;
-  }
-
   /**
    * Обрабатывает загруженные файлы.
    *

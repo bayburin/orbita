@@ -1,12 +1,11 @@
-import { of, Observable } from 'rxjs';
+import { of } from 'rxjs';
 
-import { ParameterServerData } from './../../../entities/server-data/parameter-server-data.interface';
 import { ParameterApiAbstract } from './parameter.api.abstract';
 
 export class ParameterApiStub implements ParameterApiAbstract {
   api = '';
 
-  query(): Observable<ParameterServerData> {
+  query() {
     return of({ parameters: [] });
   }
 }

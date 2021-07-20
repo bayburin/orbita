@@ -20,6 +20,8 @@ describe('AttachmentSelectors', () => {
     state = attachmentAdapter.setAll(arrEntities, {
       ...initialState,
       loaded: true,
+      loadingIds: [1, 2, 3],
+      errorIds: [4, 5],
     });
   });
 
@@ -33,5 +35,13 @@ describe('AttachmentSelectors', () => {
 
   it('getEntities() should return entities', () => {
     expect(AttachmentSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+
+  it('getLoadingIds() should return entities', () => {
+    expect(AttachmentSelectors.getLoadingIds.projector(state)).toEqual([1, 2, 3]);
+  });
+
+  it('getErrorIds() should return entities', () => {
+    expect(AttachmentSelectors.getErrorIds.projector(state)).toEqual([4, 5]);
   });
 });
