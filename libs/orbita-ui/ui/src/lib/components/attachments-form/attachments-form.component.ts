@@ -3,11 +3,11 @@ import { FormArray, FormControl } from '@angular/forms';
 import { Attachment } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
-  selector: 'lib-attachments',
-  templateUrl: './attachments.component.html',
-  styleUrls: ['./attachments.component.scss'],
+  selector: 'lib-attachments-form',
+  templateUrl: './attachments-form.component.html',
+  styleUrls: ['./attachments-form.component.scss'],
 })
-export class AttachmentsComponent {
+export class AttachmentsFormComponent {
   @Input() attachments: Attachment[];
   @Input() attachmentsForm: FormArray;
 

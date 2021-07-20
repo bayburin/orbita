@@ -261,30 +261,7 @@
 
           <p-divider type="dashed"></p-divider>
 
-          <div *ngIf="editMode; else readModeAttachments">
-            <lib-attachments [attachments]="sdRequest.attachments" [attachmentsForm]="attachmentsForm">
-              <ng-container *ngTemplateOutlet="readModeAttachments"></ng-container>
-            </lib-attachments>
-          </div>
-          <ng-template #readModeAttachments>
-            <div *ngIf="sdRequest.attachments.length; else emptyData">
-              <div *ngFor="let attachment of sdRequest.attachments; trackByAttachment" class="file-item">
-                <div>
-                  <div>{{ attachment.filename }}</div>
-                  <small class="p-error" *ngIf="isAttachmentError(attachment)">Не удалось скачать файл</small>
-                </div>
-                <div class="p-ml-2">
-                  <i
-                    class="mdi mdi-loading mdi-spin mdi-18px"
-                    *ngIf="isAttachmentDownloading(attachment); else downloadIcon"
-                  ></i>
-                  <ng-template #downloadIcon>
-                    <i class="mdi mdi-download-outline mdi-18px pointer" (click)="downloadAttachment(attachment)"></i>
-                  </ng-template>
-                </div>
-              </div>
-            </div>
-          </ng-template>
+          <lib-attachments [sdRequest]="sdRequest" [editMode]="editMode" [attachmentsForm]="attachmentsForm"></lib-attachments>
 
           <p-divider type="dashed"></p-divider>
 

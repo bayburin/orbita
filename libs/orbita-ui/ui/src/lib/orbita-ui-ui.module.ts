@@ -26,7 +26,7 @@ import { SourceSnapshotComponent } from './components/source-snapshot/source-sna
 import { GroupHeaderComponent } from './components/group-header/group-header.component';
 import { WorkflowsComponent } from './components/workflows/workflows.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
-import { AttachmentsComponent } from './components/attachments/attachments.component';
+import { AttachmentsFormComponent } from './components/attachments-form/attachments-form.component';
 
 import { DndFilesDirective } from './directives/dnd-files/dnd-files.directive';
 
@@ -49,7 +49,7 @@ const components: any[] = [
   SourceSnapshotComponent,
   WorkflowsComponent,
   WorkflowComponent,
-  AttachmentsComponent,
+  AttachmentsFormComponent,
 ];
 
 const directives: any[] = [DndFilesDirective];

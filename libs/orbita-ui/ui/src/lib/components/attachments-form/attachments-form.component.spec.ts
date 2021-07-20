@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { AttachmentsComponent } from './attachments.component';
+import { AttachmentsFormComponent } from './attachments-form.component';
 import { FormArray, ReactiveFormsModule } from '@angular/forms';
 
-describe('AttachmentsComponent', () => {
-  let component: AttachmentsComponent;
-  let fixture: ComponentFixture<AttachmentsComponent>;
+describe('AttachmentsFormComponent', () => {
+  let component: AttachmentsFormComponent;
+  let fixture: ComponentFixture<AttachmentsFormComponent>;
   let file: File;
   let fileList: FileList;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
-      declarations: [AttachmentsComponent],
+      declarations: [AttachmentsFormComponent],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
@@ -26,7 +26,7 @@ describe('AttachmentsComponent', () => {
       item: (index: number) => file,
     };
 
-    fixture = TestBed.createComponent(AttachmentsComponent);
+    fixture = TestBed.createComponent(AttachmentsFormComponent);
     component = fixture.componentInstance;
     component.attachmentsForm = new FormArray([]);
     fixture.detectChanges();
