@@ -41,7 +41,7 @@ describe('SdRequestsBlockComponent', () => {
 
   describe('tableChanged', () => {
     it('should call setTableMetadata method', () => {
-      const spy = spyOn(sdRequestFacade, 'setTableMetadata');
+      const spy = jest.spyOn(sdRequestFacade, 'setTableMetadata');
       component.tableChanged({});
 
       expect(spy).toHaveBeenCalledWith({});
@@ -50,7 +50,7 @@ describe('SdRequestsBlockComponent', () => {
 
   describe('reloadTable', () => {
     it('should call reloadTableData method', () => {
-      const spy = spyOn(sdRequestFacade, 'reloadTableData');
+      const spy = jest.spyOn(sdRequestFacade, 'reloadTableData');
       component.reloadTable();
 
       expect(spy).toHaveBeenCalled();

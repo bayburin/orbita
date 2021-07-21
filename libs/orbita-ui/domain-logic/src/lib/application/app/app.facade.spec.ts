@@ -6,10 +6,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 
 import { AppFacade } from './app.facade';
 import * as AppActions from '../../infrastructure/store/app/app.actions';
-import {
-  APP_FEATURE_KEY,
-  initialState,
-} from '../../infrastructure/store/app/app.reducer';
+import { APP_FEATURE_KEY, initialState } from '../../infrastructure/store/app/app.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY } from '../../infrastructure/store/index';
 
 describe('AppFacade', () => {
@@ -24,11 +21,7 @@ describe('AppFacade', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        AppFacade,
-        provideMockActions(() => actions$),
-        provideMockStore({ initialState: state }),
-      ],
+      providers: [AppFacade, provideMockActions(() => actions$), provideMockStore({ initialState: state })],
     });
 
     store = TestBed.inject(MockStore);
@@ -37,7 +30,7 @@ describe('AppFacade', () => {
 
   describe('init()', () => {
     it('should call init() action', () => {
-      spyOn(store, 'dispatch');
+      jest.spyOn(store, 'dispatch');
       facade.init();
 
       expect(store.dispatch).toHaveBeenCalledWith(AppActions.init());

@@ -23,7 +23,7 @@ describe('ErrorHandlerService', () => {
 
     service = TestBed.inject(ErrorHandlerService);
     messageService = TestBed.inject(MessageService);
-    spyOn(messageService, 'add');
+    jest.spyOn(messageService, 'add');
   });
 
   it('should be created', () => {

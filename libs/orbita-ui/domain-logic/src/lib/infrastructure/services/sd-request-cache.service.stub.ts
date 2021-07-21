@@ -1,3 +1,4 @@
+import { NormalizedSdRequest, NormalizedSdRequests } from './../../entities/models/normalized-data.interface';
 import { SdRequest } from '../../entities/models/sd-request.interface';
 import { Message } from '../../entities/models/message.interface';
 import { Work } from '../../entities/models/work.interface';
@@ -14,7 +15,7 @@ export class SdRequestCacheServiceStub {
         histories: [] as History[],
         workers: [] as Worker[],
       },
-    };
+    } as unknown as NormalizedSdRequests;
   }
 
   static normalizeSdRequest(sdRequest: SdRequest = {} as SdRequest) {
@@ -27,6 +28,6 @@ export class SdRequestCacheServiceStub {
         workers: [] as Worker[],
       },
       result: sdRequest.id,
-    };
+    } as unknown as NormalizedSdRequest;
   }
 }

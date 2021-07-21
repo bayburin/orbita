@@ -32,7 +32,8 @@ describe('MessageFacade', () => {
   describe('replaceAllMessages()', () => {
     it('should call init() action', () => {
       const messages = [{ id: 1 } as Message, { id: 2 } as Message];
-      spyOn(store, 'dispatch');
+      jest.spyOn(store, 'dispatch');
+
       facade.replaceAllMessages(messages);
 
       expect(store.dispatch).toHaveBeenCalledWith(MessageActions.setAll({ messages }));
@@ -42,7 +43,8 @@ describe('MessageFacade', () => {
   describe('setMessages()', () => {
     it('should call setMessages() action', () => {
       const messages = [{ id: 1 } as Message, { id: 2 } as Message];
-      spyOn(store, 'dispatch');
+      jest.spyOn(store, 'dispatch');
+
       facade.setMessages(messages);
 
       expect(store.dispatch).toHaveBeenCalledWith(MessageActions.setMessages({ messages }));

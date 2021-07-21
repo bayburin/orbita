@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Component } from '@angular/core';
 import {
   SdRequestFacade,
   SdRequestFacadeStub,
@@ -21,6 +21,9 @@ import { DatetimePipe } from '@orbita/orbita-ui/ui';
 
 import { OverviewBlockComponent } from './overview-block.component';
 
+@Component({})
+class ExampleComponent {}
+
 describe('OverviewBlockComponent', () => {
   let component: OverviewBlockComponent;
   let fixture: ComponentFixture<OverviewBlockComponent>;
@@ -28,8 +31,11 @@ describe('OverviewBlockComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, ReactiveFormsModule],
-      declarations: [OverviewBlockComponent, DatetimePipe],
+      imports: [
+        RouterTestingModule.withRoutes([{ path: 'tickets', component: ExampleComponent }]),
+        ReactiveFormsModule,
+      ],
+      declarations: [OverviewBlockComponent, DatetimePipe, ExampleComponent],
       providers: [
         { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
         { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
@@ -55,7 +61,7 @@ describe('OverviewBlockComponent', () => {
 
   describe('toggleEditMode()', () => {
     it('should call toggleEditMode() method', () => {
-      const spy = spyOn(sdRequestFacade, 'toggleEditMode');
+      const spy = jest.spyOn(sdRequestFacade, 'toggleEditMode');
 
       component.toggleEditMode();
 
@@ -65,7 +71,7 @@ describe('OverviewBlockComponent', () => {
 
   describe('saveForm()', () => {
     it('should call updateForm() method', () => {
-      const spy = spyOn(sdRequestFacade, 'updateForm');
+      const spy = jest.spyOn(sdRequestFacade, 'updateForm');
 
       component.saveForm();
 
@@ -76,7 +82,7 @@ describe('OverviewBlockComponent', () => {
   describe('navigateToSdRequests()', () => {
     it('should call updateForm() method', () => {
       const router = TestBed.inject(Router);
-      const spy = spyOn(router, 'navigate');
+      const spy = jest.spyOn(router, 'navigate');
 
       component.navigateToSdRequests();
 

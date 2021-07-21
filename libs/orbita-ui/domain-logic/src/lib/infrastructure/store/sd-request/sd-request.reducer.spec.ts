@@ -11,15 +11,15 @@ import { SdRequestViewModel } from './../../../entities/view-models/sd-request-v
 describe('SdRequestReducer', () => {
   let action: Action;
   const createSdRequest = (id: string, name = '') =>
-    (({
+    ({
       id,
       name: name || `name-${id}`,
-    } as unknown) as SdRequest);
+    } as unknown as SdRequest);
   const createSdRequestViewModel = (id: string, name = '') =>
-    (({
+    ({
       id,
       name: name || `name-${id}`,
-    } as unknown) as SdRequestViewModel);
+    } as unknown as SdRequestViewModel);
 
   describe('loadAll', () => {
     it('should clear "loading" and "error" attributes', () => {
@@ -159,8 +159,8 @@ describe('SdRequestReducer', () => {
   describe('initUpdateForm', () => {
     it('should set attributes', () => {
       const sdRequestViewModel = createSdRequestViewModel('PRODUCT-AAA');
-      const form = { id: 111 };
-      spyOn(SdRequestFactory, 'createViewForm').and.returnValue(form);
+      const form = { id: 111 } as SdRequestViewForm;
+      jest.spyOn(SdRequestFactory, 'createViewForm').mockReturnValue(form);
       action = SdRequestActions.initUpdateForm({ sdRequestViewModel });
       const result: FormState = reducer(initialState, action).form;
 

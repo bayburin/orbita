@@ -34,8 +34,8 @@ describe('LayoutComponent', () => {
     component = fixture.componentInstance;
     userFacade = TestBed.inject(AppFacade);
     layoutFacade = TestBed.inject(LayoutFacade);
-    spyOn(userFacade, 'init');
-    spyOn(layoutFacade, 'initTheme');
+    jest.spyOn(userFacade, 'init');
+    jest.spyOn(layoutFacade, 'initTheme');
     fixture.detectChanges();
   });
 
@@ -53,7 +53,7 @@ describe('LayoutComponent', () => {
 
   describe('setTheme()', () => {
     it('should call setTheme method', () => {
-      const spy = spyOn(layoutFacade, 'setTheme');
+      const spy = jest.spyOn(layoutFacade, 'setTheme');
       component.setTheme('fake-theme');
 
       expect(spy).toHaveBeenCalledWith('fake-theme');

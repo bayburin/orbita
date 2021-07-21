@@ -32,7 +32,8 @@ describe('WorkerFacade', () => {
   describe('replaceAllWorkers()', () => {
     it('should call init() action', () => {
       const workers = [{ id: 1 } as Worker, { id: 2 } as Worker];
-      spyOn(store, 'dispatch');
+      jest.spyOn(store, 'dispatch');
+
       facade.replaceAllWorkers(workers);
 
       expect(store.dispatch).toHaveBeenCalledWith(WorkerActions.setAll({ workers }));
@@ -42,7 +43,8 @@ describe('WorkerFacade', () => {
   describe('setWorkers()', () => {
     it('should call setWorkers() action', () => {
       const workers = [{ id: 1 } as Worker, { id: 2 } as Worker];
-      spyOn(store, 'dispatch');
+      jest.spyOn(store, 'dispatch');
+
       facade.setWorkers(workers);
 
       expect(store.dispatch).toHaveBeenCalledWith(WorkerActions.setWorkers({ workers }));

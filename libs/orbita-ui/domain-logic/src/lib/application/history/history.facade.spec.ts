@@ -32,7 +32,8 @@ describe('HistoryFacade', () => {
   describe('replaceAllHistories()', () => {
     it('should call setAll() action', () => {
       const histories = [{ id: 1 } as History, { id: 2 } as History];
-      spyOn(store, 'dispatch');
+      jest.spyOn(store, 'dispatch');
+
       facade.replaceAllHistories(histories);
 
       expect(store.dispatch).toHaveBeenCalledWith(HistoryActions.setAll({ histories }));
@@ -42,7 +43,8 @@ describe('HistoryFacade', () => {
   describe('setHistories()', () => {
     it('should call setHistories() action', () => {
       const histories = [{ id: 1 } as History, { id: 2 } as History];
-      spyOn(store, 'dispatch');
+      jest.spyOn(store, 'dispatch');
+
       facade.setHistories(histories);
 
       expect(store.dispatch).toHaveBeenCalledWith(HistoryActions.setHistories({ histories }));

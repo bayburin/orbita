@@ -32,7 +32,8 @@ describe('AttachmentFacade', () => {
   describe('download()', () => {
     it('should call download() action', () => {
       const attachment = { id: 1, claim_id: 2 } as Attachment;
-      spyOn(store, 'dispatch');
+      jest.spyOn(store, 'dispatch');
+
       facade.download(attachment);
 
       expect(store.dispatch).toHaveBeenCalledWith(AttachmentActions.download({ attachment }));
