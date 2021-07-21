@@ -28,10 +28,10 @@ export class ServiceDeskFacade implements ServiceDeskFacadeAbstract {
           const normalizeData = SdTicketCacheService.normalizeSdTickets(data).entities;
 
           this.sdTicketStore.dispatch(
-            SdTicketActions.loadAllSuccess({ tickets: Object.values(normalizeData.tickets) || [] })
+            SdTicketActions.loadAllSuccess({ tickets: Object.values(normalizeData.tickets || []) })
           );
           this.sdServiceStore.dispatch(
-            SdServiceActions.setAll({ services: Object.values(normalizeData.services) || [] })
+            SdServiceActions.setAll({ services: Object.values(normalizeData.services || []) })
           );
         }),
         catchError((error) => of(this.sdTicketStore.dispatch(SdTicketActions.loadAllFailure({ error }))))

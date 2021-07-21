@@ -56,7 +56,7 @@ export class SdRequestEffects {
         WorkActions.setWorks({ works: Object.values(action.entities.works || []) }),
         HistoryActions.setHistories({ histories: Object.values(action.entities.histories || []) }),
         WorkerActions.setWorkers({ workers: Object.values(action.entities.workers || []) }),
-        AttachmentActions.setAttachments({ attachments: Object.values(action.entities.attachments) || [] }),
+        AttachmentActions.setAttachments({ attachments: Object.values(action.entities.attachments || []) }),
       ])
     )
   );
