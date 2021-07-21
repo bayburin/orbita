@@ -14,6 +14,8 @@ export * from './lib/entities/models/host.interface';
 export * from './lib/entities/models/user.interface';
 export * from './lib/entities/models/attachment.interface';
 
+export * from './lib/entities/forms/attachment-view-form.interface';
+
 export * from './lib/entities/view-models/sd-request-view-model.interface';
 export * from './lib/entities/view-models/work-view-model.interface';
 export * from './lib/entities/view-models/history-view-model.interface';

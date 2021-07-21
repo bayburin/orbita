@@ -76,3 +76,5 @@ export const getForm = createSelector(getSdRequestState, (state: State) => state
 export const getFormEntity = createSelector(getForm, (state: FormState) => state.entity);
 
 export const getFormLoading = createSelector(getForm, (state: FormState) => state.loading);
+
+export const getFormUpdateView = createSelector(getForm, (state: FormState) => state.updateView);

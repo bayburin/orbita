@@ -1,3 +1,4 @@
+import { FormGroup, FormControl } from '@angular/forms';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { Attachment, AttachmentFacade, AttachmentFacadeStub, SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
@@ -33,7 +34,7 @@ describe('AttachmentsComponent', () => {
   describe('downloadAttachment()', () => {
     it('should call download() method', () => {
       const attachment = { id: 1 } as Attachment;
-      const spy = spyOn(attachmentFacade, 'download');
+      const spy = jest.spyOn(attachmentFacade, 'download');
 
       component.downloadAttachment(attachment);
 
@@ -68,6 +69,30 @@ describe('AttachmentsComponent', () => {
       const attachment = { id: 1 } as Attachment;
 
       expect(component.isAttachmentError(attachment)).toBeFalsy();
+    });
+  });
+
+  describe('markForDestruction()', () => {
+    it('should set true value into _destroy attribute', () => {
+      const attachment = new FormGroup({
+        _destroy: new FormControl(false),
+      });
+
+      component.markForDestruction(attachment);
+
+      expect(attachment.get('_destroy').value).toBe(true);
+    });
+  });
+
+  describe('demarkForDestruction()', () => {
+    it('should set true value into _destroy attribute', () => {
+      const attachment = new FormGroup({
+        _destroy: new FormControl(true),
+      });
+
+      component.demarkForDestruction(attachment);
+
+      expect(attachment.get('_destroy').value).toBe(false);
     });
   });
 });

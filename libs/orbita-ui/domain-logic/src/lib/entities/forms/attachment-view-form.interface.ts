@@ -1,7 +1,7 @@
 /**
- * Форма существующего прикрепленного файла, отправляемая на сервер
+ * Форма существующего прикрепленного файла
  */
-export interface AttachmentForm {
+export interface AttachmentViewForm {
   /**
    * Идентификатор прикрепленного файла
    */
@@ -11,6 +11,11 @@ export interface AttachmentForm {
    * Идентификатор тикета
    */
   claim_id: number;
+
+  /**
+   * Имя файла
+   */
+  filename: string;
 
   /**
    * Флаг удаления файла

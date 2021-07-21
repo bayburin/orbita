@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
 import { Attachment } from '@orbita/orbita-ui/domain-logic';
 
@@ -6,6 +6,7 @@ import { Attachment } from '@orbita/orbita-ui/domain-logic';
   selector: 'lib-attachments-form',
   templateUrl: './attachments-form.component.html',
   styleUrls: ['./attachments-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AttachmentsFormComponent {
   @Input() attachments: Attachment[];

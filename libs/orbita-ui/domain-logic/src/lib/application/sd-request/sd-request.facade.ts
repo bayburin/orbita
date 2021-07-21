@@ -85,7 +85,11 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   // ========== Форма заявки ==========
 
-  formEntity$ = this.store.select(SdRequestViewModelSelectors.getFormEntityViewModel);
+  formEntity$ = this.store.select(SdRequestViewModelSelectors.getFormEntityViewModel).pipe(
+    withLatestFrom(this.store.select(SdRequestSelectors.getFormUpdateView)),
+    filter(([_form, updateView]) => updateView),
+    map(([form, _updateView]) => form)
+  );
   formLoading$ = this.store.select(SdRequestSelectors.getFormLoading);
 
   constructor(private store: Store<SdRequestFeature.SdRequestPartialState>, private sdRequestApi: SdRequestApi) {}

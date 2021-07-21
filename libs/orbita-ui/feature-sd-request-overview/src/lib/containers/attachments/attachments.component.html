@@ -1,8 +1,28 @@
 <div *ngIf="editMode; else readModeAttachments">
-  <lib-attachments-form [attachments]="sdRequest.attachments" [attachmentsForm]="attachmentsForm">
-    <ng-container *ngTemplateOutlet="readModeAttachments"></ng-container>
+  <lib-attachments-form [attachments]="sdRequest.attachments" [attachmentsForm]="newAttachmentsForm">
+    <ng-container *ngTemplateOutlet="editModeAttachments"></ng-container>
   </lib-attachments-form>
 </div>
+
+<ng-template #editModeAttachments>
+  <div
+    *ngFor="let attachment of attachmentsForm.controls"
+    class="file-item"
+    [ngClass]="{ 'file-marked-for-destruction': attachment.get('_destroy').value === true }"
+  >
+    <div [ngClass]="">{{ attachment.get('filename').value }}</div>
+    <div class="p-ml-2">
+      <i
+        *ngIf="attachment.get('_destroy').value; else actionToDestroy"
+        class="mdi mdi-delete-restore mdi-18px pointer"
+        (click)="demarkForDestruction(toFormGroup(attachment))"
+      ></i>
+      <ng-template #actionToDestroy>
+        <i class="mdi mdi-delete-outline mdi-18px pointer" (click)="markForDestruction(toFormGroup(attachment))"></i>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>
 
 <ng-template #readModeAttachments>
   <div *ngIf="sdRequest.attachments.length; else noFiles">
@@ -12,7 +32,8 @@
         <small class="p-error" *ngIf="isAttachmentError(attachment)">Не удалось скачать файл</small>
       </div>
       <div class="p-ml-2">
-        <i class="mdi mdi-loading mdi-spin mdi-18px" *ngIf="isAttachmentDownloading(attachment); else downloadIcon"></i>
+        <i *ngIf="isAttachmentDownloading(attachment); else downloadIcon" class="mdi mdi-loading mdi-spin mdi-18px"></i>
+
         <ng-template #downloadIcon>
           <i class="mdi mdi-download-outline mdi-18px pointer" (click)="downloadAttachment(attachment)"></i>
         </ng-template>

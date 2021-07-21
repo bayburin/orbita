@@ -22,6 +22,7 @@ export interface FormState {
   entity: SdRequestViewForm;
   loading: boolean;
   error?: string;
+  updateView: boolean;
 }
 
 export interface State extends EntityState<SdRequest> {
@@ -52,6 +53,7 @@ export const initSelectedState: SelectedState = {
 export const initFormState: FormState = {
   entity: null,
   loading: false,
+  updateView: true,
 };
 
 export const sdRequestAdapter: EntityAdapter<SdRequest> = createEntityAdapter<SdRequest>();
@@ -177,6 +179,7 @@ const sdRequestReducer = createReducer(
         ...entity,
         finished_at_plan: moment(entity.finished_at_plan).format(),
       },
+      updateView: false,
     },
   })),
   on(SdRequestActions.saveUpdateForm, (state) => ({
@@ -191,6 +194,7 @@ const sdRequestReducer = createReducer(
     form: {
       ...state.form,
       loading: false,
+      updateView: true,
     },
     selected: {
       ...state.selected,

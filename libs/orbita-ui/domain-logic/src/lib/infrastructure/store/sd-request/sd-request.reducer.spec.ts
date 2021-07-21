@@ -170,14 +170,19 @@ describe('SdRequestReducer', () => {
 
   describe('changeForm', () => {
     it('should set attributes', () => {
+      const sdRequest = { id: 456 } as SdRequest;
+      action = SdRequestActions.saveFormSuccess({ sdRequest });
+      const state: State = reducer(initialState, action);
+
       const dateStr = '2021-06-28T13:00:00+07:00';
       const date = new Date('2021-06-28T13:00:00+07:00');
       const sourceForm = { id: 111, finished_at_plan: date } as SdRequestViewForm;
       const targetForm = { id: 111, finished_at_plan: dateStr } as SdRequestViewForm;
       action = SdRequestActions.changeForm({ entity: sourceForm });
-      const result: FormState = reducer(initialState, action).form;
+      const result: FormState = reducer(state, action).form;
 
       expect(result.entity).toEqual(targetForm);
+      expect(result.updateView).toBe(false);
     });
   });
 
@@ -197,6 +202,7 @@ describe('SdRequestReducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.form.loading).toBe(false);
+      expect(result.form.updateView).toBe(true);
       expect(result.selected.entity).toEqual(sdRequest);
     });
   });

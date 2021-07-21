@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { filter, distinctUntilChanged } from 'rxjs/operators';
+import { filter, distinctUntilChanged, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {
   SdRequestFacade,
@@ -29,6 +29,7 @@ import {
   UserFacade,
   User,
   UserGroup,
+  AttachmentViewForm,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -72,8 +73,12 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   valueChangesSub: Subscription;
   editModeSub: Subscription;
 
-  get attachmentsForm(): FormArray {
+  get newAttachmentsForm(): FormArray {
     return this.form.get('newAttachments') as FormArray;
+  }
+
+  get attachmentsForm(): FormArray {
+    return this.form.get('attachments') as FormArray;
   }
 
   constructor(
@@ -192,7 +197,7 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
       finished_at_plan: [],
       workers: [[]],
       workflow: [null],
-      attachments: [],
+      attachments: this.fb.array([]),
       newAttachments: this.fb.array([]),
     });
     // Заполняет данные формы из хранилища
@@ -201,10 +206,43 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
         filter((data) => Boolean(data)),
         distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
       )
-      .subscribe((formData) => this.form.patchValue(formData, { emitEvent: false }));
+      .subscribe((formData) => {
+        this.clearForm();
+        this.form.patchValue(formData, { emitEvent: false });
+        formData.attachments.forEach((attachment: AttachmentViewForm) =>
+          this.attachmentsForm.push(this.buildAttachment(attachment), { emitEvent: false })
+        );
+      });
     // Обновляет хранилище по любому изменению формы
     this.valueChangesSub = this.form.valueChanges
       .pipe(distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)))
       .subscribe((formData) => this.sdRequestFacade.changeForm(formData));
+  }
+
+  /**
+   * Создает объект формы для работы с файлами на основании существующих файлов
+   *
+   * @param attachment - файл
+   */
+  private buildAttachment(attachment: AttachmentViewForm): FormGroup {
+    return this.fb.group({
+      id: [attachment.id],
+      claim_id: [attachment.claim_id],
+      filename: [attachment.filename],
+      _destroy: [attachment._destroy],
+    });
+  }
+
+  /**
+   * Очищает форму
+   */
+  private clearForm(): void {
+    this.form.reset({}, { emitEvent: false });
+    while (this.attachmentsForm.length !== 0) {
+      this.attachmentsForm.removeAt(0, { emitEvent: false });
+    }
+    while (this.newAttachmentsForm.length !== 0) {
+      this.newAttachmentsForm.removeAt(0, { emitEvent: false });
+    }
   }
 }

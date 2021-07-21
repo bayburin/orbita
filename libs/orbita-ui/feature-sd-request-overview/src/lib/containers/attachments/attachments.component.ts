@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Attachment, AttachmentFacade, SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
-import { FormArray } from '@angular/forms';
+import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'lib-attachments',
@@ -17,6 +17,7 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
   errorAttachmentsSub: Subscription;
   @Input() sdRequest: SdRequestViewModel;
   @Input() editMode: boolean;
+  @Input() newAttachmentsForm: FormArray;
   @Input() attachmentsForm: FormArray;
 
   constructor(private attachmentFacade: AttachmentFacade) {}
@@ -33,6 +34,15 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
 
   trackByAttachment(index: number, attachment: Attachment): number {
     return attachment.id;
+  }
+
+  /**
+   * Преобразовать полученный объект AbstractControl в FormGroup
+   *
+   * @param point - объект AbstractControl
+   */
+  toFormGroup(point: AbstractControl): FormGroup {
+    return point as FormGroup;
   }
 
   /**
@@ -58,5 +68,23 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
    */
   isAttachmentError(attachment: Attachment): boolean {
     return this.errorAttachments.indexOf(attachment.id) !== -1;
+  }
+
+  /**
+   * Пометить файл для удаления
+   *
+   * @param attachment - файл
+   */
+  markForDestruction(attachment: FormGroup): void {
+    attachment.get('_destroy').setValue(true);
+  }
+
+  /**
+   * Отменить пометку файла на удаление
+   *
+   * @param attachment - файл
+   */
+  demarkForDestruction(attachment: FormGroup): void {
+    attachment.get('_destroy').setValue(false);
   }
 }

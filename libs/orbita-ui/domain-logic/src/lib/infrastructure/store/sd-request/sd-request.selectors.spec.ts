@@ -38,6 +38,7 @@ describe('SdRequestSelectors', () => {
     formState = {
       entity: formEntity,
       loading: false,
+      updateView: true,
     };
     state = sdRequestAdapter.setAll(arrEntities, {
       ...initialState,
@@ -142,5 +143,9 @@ describe('SdRequestSelectors', () => {
 
   it('getFormLoading', () => {
     expect(SdRequestSelectors.getFormLoading.projector(formState)).toBe(false);
+  });
+
+  it('getFormUpdateView', () => {
+    expect(SdRequestSelectors.getFormUpdateView.projector(formState)).toBe(true);
   });
 });

@@ -1,6 +1,6 @@
+import { oFlatMap } from '@orbita/orbita-ui/utils';
 import { SdRequestForm } from './../../entities/forms/sd-request-form.interface';
 import { WorkViewModel } from './../../entities/view-models/work-view-model.interface';
-import { oFlatMap } from './../../../../../utils/src/lib/o-flat-map.function';
 import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
 import { CurrentUser } from './../../entities/models/auth/current-user.interface';
@@ -8,6 +8,7 @@ import { User } from '../../entities/models/user.interface';
 import { WorkFactory } from './../factories/work.factory';
 import { WorkerFactory } from './../factories/worker.factory';
 import { MessageFactory } from './../factories/message.factory';
+import { AttachmentFactory } from './attachment.factory';
 
 /**
  * Фабрика по созданию заявок
@@ -27,7 +28,7 @@ export class SdRequestFactory {
         ? oFlatMap((work: WorkViewModel) => work.workers.map((worker) => worker.user_id), sdRequest.works)
         : [],
       workflow: null,
-      attachments: [],
+      attachments: sdRequest.attachments?.map((attachment) => AttachmentFactory.createViewForm(attachment)) || [],
       newAttachments: [],
     };
   }
@@ -115,7 +116,7 @@ export class SdRequestFactory {
       ticket_identity: viewForm.ticket_identity || sdRequest.ticket_identity,
       ticket_name: viewForm.ticket_name || sdRequest.service_name,
       works,
-      attachments: [],
+      attachments: viewForm.attachments?.map((attachment) => AttachmentFactory.createForm(attachment)) || [],
     };
 
     formData.set('sd_request', JSON.stringify(dataForServer));

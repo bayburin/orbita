@@ -1,6 +1,6 @@
 import { Priorities } from './../models/ticket.interface';
 import { SourceSnapshotForm } from './source-snapshot-form.interface';
-import { AttachmentForm } from './attachment-form.interface';
+import { AttachmentViewForm } from './attachment-view-form.interface';
 
 /**
  * Форма тикета
@@ -34,7 +34,7 @@ export interface TicketViewForm {
   /**
    * Список прикрепленных файлов, которые уже сохранены на сервере
    */
-  attachments: AttachmentForm[];
+  attachments: AttachmentViewForm[];
 
   /**
    * Список новых прикрепленных файлов
