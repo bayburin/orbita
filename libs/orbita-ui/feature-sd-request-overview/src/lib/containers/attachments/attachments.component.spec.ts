@@ -42,21 +42,6 @@ describe('AttachmentsComponent', () => {
     });
   });
 
-  describe('isAttachmentDownloading()', () => {
-    it('should return true if attachment is into loading array', () => {
-      const attachment = { id: 1 } as Attachment;
-      component.loadingAttachments = [1, 2];
-
-      expect(component.isAttachmentDownloading(attachment)).toBeTruthy();
-    });
-
-    it('should return false if attachment is not into loading array', () => {
-      const attachment = { id: 1 } as Attachment;
-
-      expect(component.isAttachmentDownloading(attachment)).toBeFalsy();
-    });
-  });
-
   describe('isAttachmentError()', () => {
     it('should return true if attachment is into error array', () => {
       const attachment = { id: 1 } as Attachment;

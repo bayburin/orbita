@@ -1,0 +1,5 @@
+<i *ngIf="isAttachmentDownloading(attachment); else downloadIcon" class="mdi mdi-loading mdi-spin mdi-18px"></i>
+
+<ng-template #downloadIcon>
+  <i class="mdi mdi-download-outline mdi-18px pointer" (click)="downloadAttachment.emit()"></i>
+</ng-template>

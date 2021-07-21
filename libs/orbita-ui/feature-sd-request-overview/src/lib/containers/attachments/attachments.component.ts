@@ -53,15 +53,6 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Проверяет, скачивается ли файл в данный момент
-   *
-   * @param attachment - файл
-   */
-  isAttachmentDownloading(attachment: Attachment): boolean {
-    return this.loadingAttachments.indexOf(attachment.id) !== -1;
-  }
-
-  /**
    * Проверяет, появилась ли ошибка при скачивании файла
    *
    * @param attachment - файл

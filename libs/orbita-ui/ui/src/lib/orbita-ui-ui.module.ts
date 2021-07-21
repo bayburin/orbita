@@ -10,6 +10,8 @@ import { FioMiddleNamePipe } from './pipes/fio-middle-name/fio-middle-name.pipe'
 
 import { OrbitSpinnerModule } from 'angular-epic-spinners';
 
+import { DndFilesDirective } from './directives/dnd-files/dnd-files.directive';
+
 import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requests-table.component';
 import { SdRequestHistoryOverviewComponent } from './components/sd-request-history-overview/sd-request-history-overview.component';
 import { HistoryEventCardComponent } from './components/history-event-card/history-event-card.component';
@@ -27,9 +29,7 @@ import { GroupHeaderComponent } from './components/group-header/group-header.com
 import { WorkflowsComponent } from './components/workflows/workflows.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { AttachmentsFormComponent } from './components/attachments-form/attachments-form.component';
-
-import { DndFilesDirective } from './directives/dnd-files/dnd-files.directive';
-
+import { AttachmentsLoadingComponent } from './components/attachments-loading/attachments-loading.component';
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
 
 const components: any[] = [
@@ -50,6 +50,7 @@ const components: any[] = [
   WorkflowsComponent,
   WorkflowComponent,
   AttachmentsFormComponent,
+  AttachmentsLoadingComponent,
 ];
 
 const directives: any[] = [DndFilesDirective];

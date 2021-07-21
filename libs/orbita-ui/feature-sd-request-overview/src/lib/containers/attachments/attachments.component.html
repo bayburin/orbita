@@ -32,11 +32,11 @@
         <small class="p-error" *ngIf="isAttachmentError(attachment)">Не удалось скачать файл</small>
       </div>
       <div class="p-ml-2">
-        <i *ngIf="isAttachmentDownloading(attachment); else downloadIcon" class="mdi mdi-loading mdi-spin mdi-18px"></i>
-
-        <ng-template #downloadIcon>
-          <i class="mdi mdi-download-outline mdi-18px pointer" (click)="downloadAttachment(attachment)"></i>
-        </ng-template>
+        <lib-attachments-loading
+          [attachment]="attachment"
+          [loadingAttachments]="loadingAttachments$ | async"
+          (downloadAttachment)="downloadAttachment(attachment)"
+        ></lib-attachments-loading>
       </div>
     </div>
   </div>
