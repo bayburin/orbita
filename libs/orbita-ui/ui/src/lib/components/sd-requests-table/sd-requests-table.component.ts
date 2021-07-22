@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import {
   WorkViewModel,
-  statusesArray,
-  prioritiesArray,
+  statusesViewModelArray,
+  prioritiesViewModelArray,
   SdRequestViewModel,
   WorkerViewModel,
   User,
@@ -40,11 +40,11 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
   /**
    * Список статусов
    */
-  statuses = statusesArray;
+  statuses = statusesViewModelArray;
   /**
    * Список приоритетов
    */
-  priorities = prioritiesArray;
+  priorities = prioritiesViewModelArray;
 
   /**
    * Массив заявок

@@ -79,7 +79,7 @@
             >
               <ng-template let-item pTemplate="selectedItem">{{ item.title }}</ng-template>
               <ng-template let-option pTemplate="item">
-                <lib-ticket-status [status]="option"></lib-ticket-status>
+                <span [class]="'sd-request-badge status-' + option.badge">{{ option.title }}</span>
               </ng-template>
             </p-dropdown>
           </ng-template>
@@ -175,8 +175,7 @@
             >
               <ng-template let-item pTemplate="selectedItem">{{ item.title }}</ng-template>
               <ng-template let-option pTemplate="item">
-                <!-- <span [class]="'sd-request-badge priority-' + option.badge">{{ option.title }}</span> -->
-                <lib-ticket-priority [priority]="option"></lib-ticket-priority>
+                <span [class]="'sd-request-badge priority-' + option.badge">{{ option.title }}</span>
               </ng-template>
             </p-dropdown>
           </ng-template>
