@@ -30,7 +30,13 @@ import { WorkflowsComponent } from './components/workflows/workflows.component';
 import { WorkflowComponent } from './components/workflow/workflow.component';
 import { AttachmentsFormComponent } from './components/attachments-form/attachments-form.component';
 import { AttachmentsLoadingComponent } from './components/attachments-loading/attachments-loading.component';
+import { AttachmentsErrorComponent } from './components/attachments-error/attachments-error.component';
+
+const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
+
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
+
+const directives: any[] = [DndFilesDirective];
 
 const components: any[] = [
   SdRequestsTableComponent,
@@ -51,11 +57,8 @@ const components: any[] = [
   WorkflowComponent,
   AttachmentsFormComponent,
   AttachmentsLoadingComponent,
+  AttachmentsErrorComponent,
 ];
-
-const directives: any[] = [DndFilesDirective];
-
-const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
 @NgModule({
   imports: [CommonModule, PrimengModule, ...modules],

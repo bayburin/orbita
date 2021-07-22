@@ -29,12 +29,12 @@
     <div *ngFor="let attachment of sdRequest.attachments; trackByAttachment" class="file-item">
       <div>
         <div>{{ attachment.filename }}</div>
-        <small class="p-error" *ngIf="isAttachmentError(attachment)">Не удалось скачать файл</small>
+        <lib-attachments-error [attachment]="attachment" [errorAttachments]="errorAttachments"></lib-attachments-error>
       </div>
       <div class="p-ml-2">
         <lib-attachments-loading
           [attachment]="attachment"
-          [loadingAttachments]="loadingAttachments$ | async"
+          [loadingAttachments]="loadingAttachments"
           (downloadAttachment)="downloadAttachment(attachment)"
         ></lib-attachments-loading>
       </div>

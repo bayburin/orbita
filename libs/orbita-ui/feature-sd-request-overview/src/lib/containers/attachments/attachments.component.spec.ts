@@ -42,21 +42,6 @@ describe('AttachmentsComponent', () => {
     });
   });
 
-  describe('isAttachmentError()', () => {
-    it('should return true if attachment is into error array', () => {
-      const attachment = { id: 1 } as Attachment;
-      component.errorAttachments = [1, 2];
-
-      expect(component.isAttachmentError(attachment)).toBeTruthy();
-    });
-
-    it('should return false if attachment is not into error array', () => {
-      const attachment = { id: 1 } as Attachment;
-
-      expect(component.isAttachmentError(attachment)).toBeFalsy();
-    });
-  });
-
   describe('markForDestruction()', () => {
     it('should set true value into _destroy attribute', () => {
       const attachment = new FormGroup({

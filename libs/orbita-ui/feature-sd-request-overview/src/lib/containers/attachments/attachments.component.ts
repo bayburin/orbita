@@ -9,9 +9,7 @@ import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
   styleUrls: ['./attachments.component.scss'],
 })
 export class AttachmentsComponent implements OnInit, OnDestroy {
-  loadingAttachments$ = this.attachmentFacade.loadingIds$;
   loadingAttachments: number[];
-  errorAttachments$ = this.attachmentFacade.errorIds$;
   errorAttachments: number[];
   loadingAttachmentsSub: Subscription;
   errorAttachmentsSub: Subscription;
@@ -23,8 +21,8 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
   constructor(private attachmentFacade: AttachmentFacade) {}
 
   ngOnInit(): void {
-    this.loadingAttachmentsSub = this.loadingAttachments$.subscribe((ids) => (this.loadingAttachments = ids));
-    this.errorAttachmentsSub = this.errorAttachments$.subscribe((ids) => (this.errorAttachments = ids));
+    this.loadingAttachmentsSub = this.attachmentFacade.loadingIds$.subscribe((ids) => (this.loadingAttachments = ids));
+    this.errorAttachmentsSub = this.attachmentFacade.errorIds$.subscribe((ids) => (this.errorAttachments = ids));
   }
 
   ngOnDestroy(): void {
@@ -50,15 +48,6 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
    */
   downloadAttachment(attachment: Attachment): void {
     this.attachmentFacade.download(attachment);
-  }
-
-  /**
-   * Проверяет, появилась ли ошибка при скачивании файла
-   *
-   * @param attachment - файл
-   */
-  isAttachmentError(attachment: Attachment): boolean {
-    return this.errorAttachments.indexOf(attachment.id) !== -1;
   }
 
   /**
