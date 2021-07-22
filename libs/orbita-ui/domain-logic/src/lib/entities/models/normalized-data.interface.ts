@@ -10,42 +10,42 @@ import { Attachment } from './attachment.interface';
 /**
  * Интерфейс нормализованного объекта заявки
  */
-export interface NormalizedSdRequest {
+export interface SdRequestEntity {
   [key: number]: SdRequest;
 }
 
 /**
  * Интерфейс нормализованного объекта сообщения
  */
-export interface NormalizedMessage {
+export interface MessageEntity {
   [key: number]: Message;
 }
 
 /**
  * Интерфейс нормализованного объекта работы
  */
-export interface NormalizedWork {
+export interface WorkEntity {
   [key: number]: Work;
 }
 
 /**
  * Интерфейс нормализованного объекта истории
  */
-export interface NormalizedHistory {
+export interface HistoryEntity {
   [key: number]: History;
 }
 
 /**
  * Интерфейс нормализованного объекта работника
  */
-export interface NormalizedWorker {
+export interface WorkerEntity {
   [key: number]: Worker;
 }
 
 /**
  * Интерфейс нормализованного объекта прикрепленного файла
  */
-export interface NormalizedAttachment {
+export interface AttachmentEntity {
   [key: number]: Attachment;
 }
 
@@ -53,13 +53,13 @@ export interface NormalizedAttachment {
  * Интерфейс объектов, на которые раскладывается (нормализуется) заявка
  */
 export interface NormalizedSdRequestEntities {
-  sd_requests: NormalizedSdRequest;
-  comments: NormalizedMessage;
-  works: NormalizedWork;
-  histories: NormalizedHistory;
-  workers: NormalizedWorker;
-  workflows: NormalizedMessage;
-  attachments: NormalizedAttachment;
+  sd_requests: SdRequestEntity;
+  comments: MessageEntity;
+  works: WorkEntity;
+  histories: HistoryEntity;
+  workers: WorkerEntity;
+  workflows: MessageEntity;
+  attachments: AttachmentEntity;
 }
 
 /**
@@ -81,14 +81,14 @@ export interface NormalizedSdRequest {
 /**
  * Интерфейс нормализованного вида заявки
  */
-export interface NormalizedSdTicket {
+export interface SdTicketEntity {
   [key: number]: SdTicket;
 }
 
 /**
  * Интерфейс нормализованного вида заявки
  */
-export interface NormalizedSdService {
+export interface SdServiceEntity {
   [key: number]: SdService;
 }
 
@@ -97,7 +97,7 @@ export interface NormalizedSdService {
  */
 export interface NormalizedSdTickets {
   entities: {
-    tickets: NormalizedSdTicket;
-    services: NormalizedSdService;
+    tickets: SdTicketEntity;
+    services: SdServiceEntity;
   };
 }
