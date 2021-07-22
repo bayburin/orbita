@@ -1,18 +1,18 @@
-<div class="p-grid">
-  <div class="p-col-4">
+<div class="grid">
+  <div class="col-4">
     <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>
   </div>
-  <div class="p-col-8">
-    <div class="p-mb-3">
+  <div class="col-8">
+    <div class="mb-3">
       <p-panel header="Последнее событие">
         <div *ngIf="sdRequest.lastHistory; else noHistory">
-          <div class="p-d-flex p-ai-center">
+          <div class="flex align-items-center">
             <span>
               <b>{{ sdRequest.lastHistory.user.fio }}</b>
             </span>
-            <small class="p-ml-2">{{ sdRequest.lastHistory.created_at | datetime }}</small>
+            <small class="ml-2">{{ sdRequest.lastHistory.created_at | datetime }}</small>
           </div>
-          <div class="p-mt-2">{{ sdRequest.lastHistory.action }}</div>
+          <div class="mt-2">{{ sdRequest.lastHistory.action }}</div>
         </div>
       </p-panel>
     </div>

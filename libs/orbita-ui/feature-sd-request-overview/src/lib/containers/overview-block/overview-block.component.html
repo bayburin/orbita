@@ -7,8 +7,8 @@
 
   <div *ngIf="sdRequest$ | async as sdRequest">
     <form [formGroup]="form">
-      <div class="p-grid">
-        <div class="p-col-3">
+      <div class="grid">
+        <div class="col-3">
           <h3>История событий</h3>
           <div
             *ngFor="
@@ -20,14 +20,14 @@
             <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
           </div>
         </div>
-        <div class="p-col-6">
+        <div class="col-6">
           <p-toolbar styleClass="toolbar-sm">
             <ng-container *ngIf="editMode; else readModeActions">
               <div class="p-toolbar-group-left">
                 <p-button
                   label="К заявкам"
                   icon="mdi mdi-arrow-left-bold-outline mdi-18px"
-                  class="p-mr-2"
+                  class="mr-2"
                   styleClass="p-button-text p-button-plain"
                   (click)="navigateToSdRequests()"
                 ></p-button>
@@ -35,7 +35,7 @@
                   *ngIf="loadingForm$ | async; else noSaving"
                   label="Сохранение..."
                   icon="mdi mdi-loading mdi-spin mdi-18px"
-                  class="p-mr-2"
+                  class="mr-2"
                   styleClass="p-button-outlined p-button-primary"
                   [disabled]="true"
                 ></p-button>
@@ -43,7 +43,7 @@
                   <p-button
                     label="Сохранить"
                     icon="mdi mdi-content-save-edit-outline mdi-18px"
-                    class="p-mr-2"
+                    class="mr-2"
                     styleClass="p-button-outlined p-button-primary"
                     (click)="saveForm()"
                   ></p-button>
@@ -58,14 +58,14 @@
                   label="Показать изменения"
                   icon="mdi mdi-refresh mdi-18px"
                   styleClass="p-button-outlined p-button-help"
-                  class="p-mr-2"
+                  class="mr-2"
                 ></p-button> -->
               </div>
               <div class="p-toolbar-group-right">
                 <p-button
                   label="Режим просмотра"
                   icon="mdi mdi-file-eye-outline mdi-18px"
-                  class="p-mr-2"
+                  class="mr-2"
                   styleClass="p-button-text p-button-plain"
                   (click)="toggleEditMode()"
                 ></p-button>
@@ -76,14 +76,14 @@
                 <p-button
                   label="К заявкам"
                   icon="mdi mdi-arrow-left-bold-outline mdi-18px"
-                  class="p-mr-2"
+                  class="mr-2"
                   styleClass="p-button-text p-button-plain"
                   (click)="navigateToSdRequests()"
                 ></p-button>
                 <!-- <p-button
                   label="Выполнить заявку"
                   icon="mdi mdi-check mdi-18px"
-                  class="p-mr-2"
+                  class="mr-2"
                   styleClass="p-button-outlined p-button-success"
                 ></p-button> -->
               </div>
@@ -91,13 +91,13 @@
                 <!-- <p-button
                   label="Отменить заявку"
                   icon="mdi mdi-close mdi-18px"
-                  class="p-mr-2"
+                  class="mr-2"
                   styleClass="p-button-text p-button-plain"
                 ></p-button> -->
                 <p-button
                   label="Режим редактирования"
                   icon="mdi mdi-file-document-edit-outline mdi-18px"
-                  class="p-mr-2"
+                  class="mr-2"
                   styleClass="p-button-text p-button-plain"
                   (click)="toggleEditMode()"
                 ></p-button>
@@ -109,17 +109,17 @@
               </div>
             </ng-template>
           </p-toolbar>
-          <div class="p-m-3">
+          <div class="m-3">
             <div class="ticket-overview-header">
               #{{ sdRequest.id }}
-              <span class="p-ml-3">{{ sdRequest.service_name }}. {{ sdRequest.ticket_name }}</span>
+              <span class="ml-3">{{ sdRequest.service_name }}. {{ sdRequest.ticket_name }}</span>
             </div>
-            <div class="p-mt-2">
+            <div class="mt-2">
               <span class="text-secondary">пользователь</span>
-              <span class="text-primary p-ml-2">{{ sdRequest.source_snapshot.fio }}</span>
-              <span class="text-secondary p-ml-2">от</span>
-              <span class="p-mr-2 p-ml-2">{{ sdRequest.runtime.created_at | datetime }}</span> |
-              <span class="p-ml-2">
+              <span class="text-primary ml-2">{{ sdRequest.source_snapshot.fio }}</span>
+              <span class="text-secondary ml-2">от</span>
+              <span class="mx-2">{{ sdRequest.runtime.created_at | datetime }}</span> |
+              <span class="ml-2">
                 <b>
                   выполнить до:
                   <p-calendar
@@ -130,13 +130,13 @@
                     [showTime]="true"
                   ></p-calendar>
                   <ng-template #readModeFinishedAtPlan>
-                    <span class="p-ml-1">{{ sdRequest.runtime.finished_at_plan | datetime }}</span>
+                    <span class="ml-1">{{ sdRequest.runtime.finished_at_plan | datetime }}</span>
                   </ng-template>
                 </b>
               </span>
             </div>
             <p-divider type="dashed"></p-divider>
-            <div class="p-mt-2">
+            <div class="mt-2">
               <div *ngIf="sdRequest.description; else noDesc"><b>Описание:</b> {{ sdRequest.description }}</div>
               <ng-template #noDesc>
                 <lib-panel-placeholder>Описание заявки отсутствует</lib-panel-placeholder>
@@ -144,7 +144,7 @@
             </div>
           </div>
 
-          <div class="p-mt-3">
+          <div class="mt-3">
             <p-tabView>
               <p-tabPanel header="Работа по заявке">
                 <div *ngIf="editMode">
@@ -184,7 +184,7 @@
                     <lib-group-header [group]="work.group"></lib-group-header>
                     <div *ngIf="work.workers.length; else emptyData">
                       <div *ngFor="let worker of work.workers; trackBy: trackByWorker">
-                        <div class="p-p-2">{{ worker.user.fio }}</div>
+                        <div class="p-2">{{ worker.user.fio }}</div>
                       </div>
                     </div>
                     <p-divider type="dashed"></p-divider>
@@ -216,15 +216,15 @@
             </p-tabView>
           </div>
         </div>
-        <div class="p-col-3">
-          <lib-detail-row class="p-mb-2">
+        <div class="col-3">
+          <lib-detail-row class="mb-2">
             <div attribute>Статус</div>
             <div value>
               <lib-ticket-status [status]="sdRequest.status"></lib-ticket-status>
             </div>
           </lib-detail-row>
 
-          <lib-detail-row class="p-mb-2">
+          <lib-detail-row class="mb-2">
             <div attribute>Приоритет</div>
             <div value>
               <ng-container *ngIf="editMode; else readModePriority">
@@ -245,12 +245,12 @@
             </div>
           </lib-detail-row>
 
-          <lib-detail-row class="p-mb-2">
+          <lib-detail-row class="mb-2">
             <div attribute>Имя приложения</div>
             <div value>{{ sdRequest.application?.name }}</div>
           </lib-detail-row>
 
-          <lib-detail-row class="p-mb-2">
+          <lib-detail-row class="mb-2">
             <div attribute>Внешний ID</div>
             <div value>{{ sdRequest.integration_id }}</div>
           </lib-detail-row>
@@ -284,33 +284,33 @@
                 <ng-template #loadingEmployeeComplete>
                   <div *ngIf="loadedEmployee$ | async; else emptyData">
                     <div *ngIf="employee$ | async as employee; else unknownData">
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>ФИО</div>
                         <div value>{{ employee.lastName }} {{ employee.firstName }} {{ employee.middleName }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Телефон</div>
                         <div value>{{ employee.employeeContact.phone[0] }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Расположение</div>
                         <div value>{{ employee.employeeContact.position }}</div>
                       </lib-detail-row>
 
                       <div *ngIf="employee.employeePositions as positions">
-                        <lib-detail-row class="p-mb-2">
+                        <lib-detail-row class="mb-2">
                           <div attribute>Должность</div>
                           <div value>{{ positions[0].professionForAccounting }}</div>
                         </lib-detail-row>
 
-                        <lib-detail-row class="p-mb-2">
+                        <lib-detail-row class="mb-2">
                           <div attribute>Подразделение</div>
                           <div value>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</div>
                         </lib-detail-row>
 
-                        <lib-detail-row class="p-mb-2">
+                        <lib-detail-row class="mb-2">
                           <div attribute>Отпуск</div>
                           <div value>
                             <ng-container *ngIf="positions[0].vacation; else noVacation">
@@ -340,44 +340,44 @@
                 <ng-template #loadingHostComplete>
                   <div *ngIf="loadedHost$ | async; else emptyData">
                     <div *ngIf="host$ | async as host; else unknownData">
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>IP</div>
                         <div value>{{ host.ip }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>MAC</div>
                         <div value>{{ host.mac }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>ОС</div>
                         <div value>{{ host.os }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Расположение</div>
                         <div value>{{ host.room }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>ФИО владельца</div>
                         <div value>{{ host.user }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Отдел</div>
                         <div value>{{ host.division }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Аудит</div>
                         <div value>
                           <lib-cms-status [status]="host.cms"></lib-cms-status>
                         </div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Антивирус</div>
                         <div value>
                           <lib-csa-status [status]="host.csa"></lib-csa-status>
@@ -404,27 +404,27 @@
                 <ng-template #loadingSvtItemComplete>
                   <div *ngIf="loadedSvtItem$ | async; else emptyData">
                     <div *ngIf="svtItem$ | async as svtItem; else unknownData">
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Тип</div>
                         <div value>{{ svtItem.type.short_description }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Модель</div>
                         <div value>{{ svtItem.short_item_model }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Инв. №</div>
                         <div value>{{ svtItem.invent_num }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>Штрих-код</div>
                         <div value>{{ svtItem.barcode_item?.id }}</div>
                       </lib-detail-row>
 
-                      <lib-detail-row class="p-mb-2">
+                      <lib-detail-row class="mb-2">
                         <div attribute>ID РМ</div>
                         <div value>{{ svtItem.workplace_id }}</div>
                       </lib-detail-row>

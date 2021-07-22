@@ -107,7 +107,7 @@
                     pRipple
                     type="button"
                     icon="mdi mdi-filter-off-outline mdi-18px"
-                    class="p-button-text p-button-plain p-mr-2"
+                    class="p-button-text p-button-plain mr-2"
                     pTooltip="Очистить фильтр видов услуг"
                     tooltipPosition="top"
                     (click)="filter(null); table.saveState()"
@@ -140,7 +140,7 @@
                     pRipple
                     type="button"
                     icon="mdi mdi-filter-off-outline mdi-18px"
-                    class="p-button-text p-button-plain p-mr-2"
+                    class="p-button-text p-button-plain mr-2"
                     pTooltip="Очистить фильтр видов заявок"
                     tooltipPosition="top"
                     (click)="filter(null); table.saveState()"
@@ -203,7 +203,7 @@
                     pRipple
                     type="button"
                     icon="mdi mdi-filter-off-outline mdi-18px"
-                    class="p-button-text p-button-plain p-mr-2"
+                    class="p-button-text p-button-plain mr-2"
                     pTooltip="Очистить фильтр исполнителей"
                     tooltipPosition="top"
                     (click)="filter(null); table.saveState()"
@@ -264,8 +264,8 @@
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-req>
     <tr>
-      <td colspan="11" class="p-pt-0">
-        <div class="p-p-2">
+      <td colspan="11" class="pt-0">
+        <div class="p-2">
           <lib-show-sd-request [sdRequest]="req"></lib-show-sd-request>
         </div>
       </td>
