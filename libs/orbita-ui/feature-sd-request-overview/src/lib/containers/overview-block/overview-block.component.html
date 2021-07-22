@@ -220,9 +220,7 @@
           <lib-detail-row class="p-mb-2">
             <div attribute>Статус</div>
             <div value>
-              <span [class]="'sd-request-badge status-' + status(sdRequest.status).badge">{{
-                status(sdRequest.status).title
-              }}</span>
+              <lib-ticket-status [status]="sdRequest.status"></lib-ticket-status>
             </div>
           </lib-detail-row>
 
@@ -242,9 +240,7 @@
                 </p-dropdown>
               </ng-container>
               <ng-template #readModePriority>
-                <span [class]="'sd-request-badge priority-' + priority(sdRequest.priority).badge">{{
-                  priority(sdRequest.priority).title
-                }}</span>
+                <lib-ticket-priority [priority]="sdRequest.priority"></lib-ticket-priority>
               </ng-template>
             </div>
           </lib-detail-row>

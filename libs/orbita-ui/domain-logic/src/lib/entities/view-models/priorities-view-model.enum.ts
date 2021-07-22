@@ -35,11 +35,19 @@ export const prioritiesViewModelMap: Record<Priorities, PrioritiesViewModel> = {
 /**
  * Массив приоритетов
  */
-export const prioritiesViewModelArray = Object.keys(prioritiesViewModelMap).reduce(
+export const prioritiesArray: Priorities[] = Object.values(Priorities).reduce(
+  (arr, priority) => arr.concat(priority as Priorities),
+  []
+);
+
+/**
+ * Массив приоритетов
+ */
+export const prioritiesViewModelArray: PrioritiesViewModel[] = Object.keys(prioritiesViewModelMap).reduce(
   (arr, priority) =>
     arr.concat({
       priority,
-      ...prioritiesViewModelMap[priority as Priorities],
+      ...getViewModelPriority(priority as Priorities),
     }),
   []
 );

@@ -1,17 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { filter, distinctUntilChanged, first } from 'rxjs/operators';
+import { filter, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {
   SdRequestFacade,
   HistoryViewModel,
-  Statuses,
-  StatusesViewModel,
-  getViewModelStatus,
-  Priorities,
-  PrioritiesViewModel,
-  getViewModelPriority,
   EmployeeFacade,
   SvtFacade,
   AuthCenterFacade,
@@ -127,24 +121,6 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByUser(index: number, user: User): number {
     return user.id;
-  }
-
-  /**
-   * Возвращает объект StatusesViewModel, в котором содержатся данные о статусе для представления
-   *
-   * @param status - статус
-   */
-  status(status: Statuses): StatusesViewModel {
-    return getViewModelStatus(status);
-  }
-
-  /**
-   * Возвращает объект PrioritiesViewModel, в котором содержатся данные о приоритете для представления
-   *
-   * @param priority - приоритет
-   */
-  priority(priority: Priorities): PrioritiesViewModel {
-    return getViewModelPriority(priority);
   }
 
   /**

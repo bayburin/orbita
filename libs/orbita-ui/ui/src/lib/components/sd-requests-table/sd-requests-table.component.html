@@ -79,7 +79,7 @@
             >
               <ng-template let-item pTemplate="selectedItem">{{ item.title }}</ng-template>
               <ng-template let-option pTemplate="item">
-                <span [class]="'sd-request-badge status-' + option.badge">{{ option.title }}</span>
+                <lib-ticket-status [status]="option"></lib-ticket-status>
               </ng-template>
             </p-dropdown>
           </ng-template>
@@ -175,7 +175,8 @@
             >
               <ng-template let-item pTemplate="selectedItem">{{ item.title }}</ng-template>
               <ng-template let-option pTemplate="item">
-                <span [class]="'sd-request-badge priority-' + option.badge">{{ option.title }}</span>
+                <!-- <span [class]="'sd-request-badge priority-' + option.badge">{{ option.title }}</span> -->
+                <lib-ticket-priority [priority]="option"></lib-ticket-priority>
               </ng-template>
             </p-dropdown>
           </ng-template>
@@ -238,16 +239,13 @@
       <td>{{ req.runtime.created_at | datetime }}</td>
       <!-- <td>{{ req.runtime.finished_at_plan | datetime }}</td> -->
       <td>
-        <span [class]="'sd-request-badge status-' + status(req.status).badge">{{ status(req.status).title }}</span>
+        <lib-ticket-status [status]="req.status"></lib-ticket-status>
       </td>
       <td>{{ req.service_name }}</td>
       <td>{{ req.ticket_name }}</td>
       <td>{{ req.description }}</td>
       <td>
-        <span [class]="'sd-request-badge priority-' + priority(req.priority).badge">{{
-          priority(req.priority).title
-        }}</span>
-        <!-- {{ priority(req.priority).title }} -->
+        <lib-ticket-priority [priority]="req.priority"></lib-ticket-priority>
       </td>
       <td>
         <div *ngFor="let worker of workers(req); trackBy: trackByWorker">{{ worker.user?.fio | fioMiddleName }}</div>

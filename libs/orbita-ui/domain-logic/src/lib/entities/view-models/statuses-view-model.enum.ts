@@ -36,11 +36,19 @@ export const statusesViewModelMap: Record<Statuses, StatusesViewModel> = {
 /**
  * Массив статусов
  */
-export const statusesViewModelArray = Object.keys(statusesViewModelMap).reduce(
+export const statusesArray: Statuses[] = Object.keys(statusesViewModelMap).reduce(
+  (arr, status) => arr.concat(status as Statuses),
+  []
+);
+
+/**
+ * Массив статусов
+ */
+export const statusesViewModelArray: StatusesViewModel[] = Object.keys(statusesViewModelMap).reduce(
   (arr, status) =>
     arr.concat({
       status,
-      ...statusesViewModelMap[status as Statuses],
+      ...getViewModelStatus(status as Statuses),
     }),
   []
 );

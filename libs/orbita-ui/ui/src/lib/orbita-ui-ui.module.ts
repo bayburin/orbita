@@ -31,6 +31,8 @@ import { WorkflowComponent } from './components/workflow/workflow.component';
 import { AttachmentsFormComponent } from './components/attachments-form/attachments-form.component';
 import { AttachmentsLoadingComponent } from './components/attachments-loading/attachments-loading.component';
 import { AttachmentsErrorComponent } from './components/attachments-error/attachments-error.component';
+import { TicketPriorityComponent } from './components/ticket-priority/ticket-priority.component';
+import { TicketStatusComponent } from './components/ticket-status/ticket-status.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
@@ -58,6 +60,8 @@ const components: any[] = [
   AttachmentsFormComponent,
   AttachmentsLoadingComponent,
   AttachmentsErrorComponent,
+  TicketPriorityComponent,
+  TicketStatusComponent,
 ];
 
 @NgModule({

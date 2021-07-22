@@ -10,15 +10,9 @@ import {
   ViewChild,
 } from '@angular/core';
 import {
-  Priorities,
-  PrioritiesViewModel,
-  getViewModelPriority,
   WorkViewModel,
-  Statuses,
-  StatusesViewModel,
-  getViewModelStatus,
-  statusesViewModelArray,
-  prioritiesViewModelArray,
+  statusesArray,
+  prioritiesArray,
   SdRequestViewModel,
   WorkerViewModel,
   User,
@@ -46,11 +40,11 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
   /**
    * Список статусов
    */
-  statuses = statusesViewModelArray;
+  statuses = statusesArray;
   /**
    * Список приоритетов
    */
-  priorities = prioritiesViewModelArray;
+  priorities = prioritiesArray;
 
   /**
    * Массив заявок
@@ -99,24 +93,6 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeToLazyLoadEvent();
-  }
-
-  /**
-   * Возвращает объект PrioritiesViewModel, в котором содержатся данные о приоритете для представления
-   *
-   * @param priority - приоритет
-   */
-  priority(priority: Priorities): PrioritiesViewModel {
-    return getViewModelPriority(priority);
-  }
-
-  /**
-   * Возвращает объект StatusesViewModel, в котором содержатся данные о статусе для представления
-   *
-   * @param status - статус
-   */
-  status(status: Statuses): StatusesViewModel {
-    return getViewModelStatus(status);
   }
 
   /**
