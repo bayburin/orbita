@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { WorkViewModel, HistoryViewModel, SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-sd-request-history-overview',
   templateUrl: './sd-request-history-overview.component.html',
   styleUrls: ['./sd-request-history-overview.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SdRequestHistoryOverviewComponent {
   /**

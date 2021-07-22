@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { MessageViewModel } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-workflows',
   templateUrl: './workflows.component.html',
   styleUrls: ['./workflows.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkflowsComponent {
   @Input() workflows: MessageViewModel[];

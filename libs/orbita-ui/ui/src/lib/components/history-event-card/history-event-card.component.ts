@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   HistoryViewModel,
   EventTypeNames,
@@ -10,6 +10,7 @@ import {
   selector: 'lib-history-event-card',
   templateUrl: './history-event-card.component.html',
   styleUrls: ['./history-event-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HistoryEventCardComponent {
   /**
