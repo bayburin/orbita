@@ -33,6 +33,8 @@ import { AttachmentsLoadingComponent } from './components/attachments-loading/at
 import { AttachmentsErrorComponent } from './components/attachments-error/attachments-error.component';
 import { TicketPriorityComponent } from './components/ticket-priority/ticket-priority.component';
 import { TicketStatusComponent } from './components/ticket-status/ticket-status.component';
+import { CmsStatusComponent } from './components/cms-status/cms-status.component';
+import { CsaStatusComponent } from './components/csa-status/csa-status.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
@@ -62,6 +64,8 @@ const components: any[] = [
   AttachmentsErrorComponent,
   TicketPriorityComponent,
   TicketStatusComponent,
+  CmsStatusComponent,
+  CsaStatusComponent,
 ];
 
 @NgModule({

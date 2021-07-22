@@ -372,12 +372,16 @@
 
                       <lib-detail-row class="p-mb-2">
                         <div attribute>Аудит</div>
-                        <div value>{{ cmsStatus(host.cms).title }}</div>
+                        <div value>
+                          <lib-cms-status [status]="host.cms"></lib-cms-status>
+                        </div>
                       </lib-detail-row>
 
                       <lib-detail-row class="p-mb-2">
                         <div attribute>Антивирус</div>
-                        <div value>{{ csaStatus(host.csa).title }}</div>
+                        <div value>
+                          <lib-csa-status [status]="host.csa"></lib-csa-status>
+                        </div>
                       </lib-detail-row>
                     </div>
                   </div>

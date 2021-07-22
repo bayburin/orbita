@@ -9,12 +9,6 @@ import {
   EmployeeFacade,
   SvtFacade,
   AuthCenterFacade,
-  CmsStatuses,
-  CmsStatusesViewModel,
-  getViewModelCmsStatuses,
-  CsaStatuses,
-  CsaStatusesViewModel,
-  getViewModelCsaStatuses,
   ParameterFacade,
   Parameter,
   WorkViewModel,
@@ -121,24 +115,6 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByUser(index: number, user: User): number {
     return user.id;
-  }
-
-  /**
-   * Возвращает объект CmsStatusesViewModel, в котором содержатся данные о статусе программы Аудит
-   *
-   * @param status - статус
-   */
-  cmsStatus(status: CmsStatuses): CmsStatusesViewModel {
-    return getViewModelCmsStatuses(status);
-  }
-
-  /**
-   * Возвращает объект CmsStatusesViewModel, в котором содержатся данные о статусе антивируса
-   *
-   * @param status - статус
-   */
-  csaStatus(status: CsaStatuses): CsaStatusesViewModel {
-    return getViewModelCsaStatuses(status);
   }
 
   sendMessage(message: string): void {
