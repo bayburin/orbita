@@ -132,7 +132,9 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
    * Сохраняет форму
    */
   saveForm(): void {
-    this.sdRequestFacade.updateForm();
+    if (this.form.valid) {
+      this.sdRequestFacade.updateForm();
+    }
   }
 
   /**

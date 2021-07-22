@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
 import { Attachment } from '@orbita/orbita-ui/domain-logic';
 
+import { maxFileSizeValidator } from '../../validators/max-file-size.validator';
+
 @Component({
   selector: 'lib-attachments-form',
   templateUrl: './attachments-form.component.html',
@@ -48,7 +50,8 @@ export class AttachmentsFormComponent {
    */
   private addAttachments(files: FileList): void {
     for (const file of Array.from(files)) {
-      this.attachmentsForm.push(new FormControl(file));
+      // Максимальный размер 50 Мб
+      this.attachmentsForm.push(new FormControl(file, [maxFileSizeValidator(50 * 1024 * 1024)]));
     }
   }
 }

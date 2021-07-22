@@ -45,6 +45,7 @@
                     icon="mdi mdi-content-save-edit-outline mdi-18px"
                     class="mr-2"
                     styleClass="p-button-outlined p-button-primary"
+                    [disabled]="!form.valid"
                     (click)="saveForm()"
                   ></p-button>
                   <!-- <p-splitButton

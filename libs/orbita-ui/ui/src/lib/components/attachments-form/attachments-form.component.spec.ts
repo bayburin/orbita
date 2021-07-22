@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { AttachmentsFormComponent } from './attachments-form.component';
-import { FormArray, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
 
 describe('AttachmentsFormComponent', () => {
   let component: AttachmentsFormComponent;
@@ -19,7 +19,7 @@ describe('AttachmentsFormComponent', () => {
   });
 
   beforeEach(() => {
-    file = new File([new Blob()], 'image.png');
+    file = new File([new Blob()], 'image.png', { type: 'image/png' });
     fileList = {
       0: file,
       length: 1,
@@ -53,6 +53,22 @@ describe('AttachmentsFormComponent', () => {
       component.removeAttachment(0);
 
       expect(component.attachmentsForm.value.length).toEqual(0);
+    });
+  });
+
+  describe('Test forms', () => {
+    it('should have maxFileSizeValidator and show maxValue error', () => {
+      Object.defineProperty(file, 'size', { value: 53477376, writable: false });
+      component.onFileDropped(fileList);
+
+      expect((component.attachmentsForm as FormArray).at(0).hasError('maxValue')).toBe(true);
+    });
+
+    it('should have maxFileSizeValidator and does not show maxValue error', () => {
+      Object.defineProperty(file, 'size', { value: 51380224, writable: false });
+      component.onFileDropped(fileList);
+
+      expect((component.attachmentsForm as FormArray).at(0).hasError('maxValue')).toBe(false);
     });
   });
 });
