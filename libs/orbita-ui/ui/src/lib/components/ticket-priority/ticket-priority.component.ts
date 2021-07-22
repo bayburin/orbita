@@ -12,10 +12,8 @@ export class TicketPriorityComponent {
 
   /**
    * Возвращает объект PrioritiesViewModel, в котором содержатся данные о приоритете для представления
-   *
-   * @param priority - приоритет
    */
-  priorityVm(priority: Priorities): PrioritiesViewModel {
-    return getViewModelPriority(priority);
+  get priorityVm(): PrioritiesViewModel {
+    return getViewModelPriority(this.priority);
   }
 }

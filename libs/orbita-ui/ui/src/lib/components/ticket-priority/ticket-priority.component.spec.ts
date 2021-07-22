@@ -29,7 +29,7 @@ describe('TicketPriorityComponent', () => {
 
   describe('priorityVm()', () => {
     it('should call getViewModelPriority() function', () => {
-      expect(component.priorityVm(priority)).toEqual(getViewModelPriority(priority));
+      expect(component.priorityVm).toEqual(getViewModelPriority(priority));
     });
   });
 });

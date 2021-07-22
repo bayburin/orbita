@@ -12,10 +12,8 @@ export class TicketStatusComponent {
 
   /**
    * Возвращает объект StatusesViewModel, в котором содержатся данные о статусе для представления
-   *
-   * @param status - статус
    */
-  statusVm(status: Statuses): StatusesViewModel {
-    return getViewModelStatus(status);
+  get statusVm(): StatusesViewModel {
+    return getViewModelStatus(this.status);
   }
 }

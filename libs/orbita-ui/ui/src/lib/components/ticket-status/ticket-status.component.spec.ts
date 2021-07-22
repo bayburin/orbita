@@ -29,7 +29,7 @@ describe('TicketStatusComponent', () => {
 
   describe('statusVm()', () => {
     it('should call getViewModelPriority() function', () => {
-      expect(component.statusVm(status)).toEqual(getViewModelStatus(status));
+      expect(component.statusVm).toEqual(getViewModelStatus(status));
     });
   });
 });
