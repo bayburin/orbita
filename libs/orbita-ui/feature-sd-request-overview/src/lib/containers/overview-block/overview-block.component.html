@@ -10,11 +10,12 @@
       <div class="grid">
         <div class="col-3">
           <h3>История событий</h3>
-          <div
+          <lib-history-event-card
             *ngFor="let history of sdRequest.histories.slice().reverse(); trackBy: trackByHistory; let index = index"
+            [history]="history"
+            [num]="index + 1"
           >
-            <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
-          </div>
+          </lib-history-event-card>
         </div>
         <div class="col-6">
           <p-toolbar styleClass="toolbar-sm">

@@ -17,6 +17,15 @@ export class SdRequestHistoryOverviewComponent {
    */
   @Input() lastHistory: HistoryViewModel;
 
+  /**
+   * Возвращает последнее событие для указанной работы
+   *
+   * @param work - работа
+   */
+  lastHistoryForWork(work: WorkViewModel) {
+    return work.histories[work.histories.length - 1];
+  }
+
   trackByWork(_index: number, work: WorkViewModel): number {
     return work.id;
   }

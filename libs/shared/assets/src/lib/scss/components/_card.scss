@@ -7,11 +7,18 @@
   margin-bottom: 2 * $spacer;
 }
 
+lib-history-event-card {
+  display: block;
+}
+
+lib-history-event-card + lib-history-event-card {
+  margin-top: $spacer;
+}
+
 .history-card {
   display: block;
-  margin-bottom: $spacer;
   border: 1px solid var(--surface-d);
-  border-radius: 2px;
+  border-radius: var(--border-radius);
 
   .history-card-header,
   .history-card-body {

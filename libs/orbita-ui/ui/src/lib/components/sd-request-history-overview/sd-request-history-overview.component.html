@@ -4,28 +4,39 @@
 </ng-template>
 
 <ng-template #noActions>
-  <p>Зафиксированных действий нет</p>
+  <p class="text-center">Зафиксированных действий нет</p>
 </ng-template>
 
 <div *ngIf="works.length; else noWorks">
+  <div class="history-overview-header">
+    <h3 class="text-center text-primary">Последние события в группах</h3>
+    <div class="header-block">
+      <div *ngFor="let work of works; trackBy: trackByWork" class="work-block header-content">
+        <lib-group-header [group]="work.group" class="header-groupname"></lib-group-header>
+      </div>
+    </div>
+
+    <div class="header-block">
+      <div *ngFor="let work of works; trackBy: trackByWork" class="work-block header-content">
+        <lib-history-event-card
+          *ngIf="work.histories.length; else noActions"
+          [history]="lastHistoryForWork(work)"
+          [num]="work.histories.length"
+          [isLast]="lastHistoryForWork(work) === lastHistory"
+        ></lib-history-event-card>
+      </div>
+    </div>
+  </div>
+
   <p-scrollPanel styleClass="history-overview-scroll-panel">
     <div class="history-overview-content">
       <div *ngFor="let work of works; trackBy: trackByWork" class="work-block">
-        <lib-group-header [group]="work.group"></lib-group-header>
-        <div *ngIf="work.histories.length; else noActions">
-          <lib-history-event-card
-            [history]="work.histories[work.histories.length - 1]"
-            [num]="work.histories.length"
-            [isLast]="work.histories[work.histories.length - 1] == lastHistory"
-          ></lib-history-event-card>
-        </div>
-        <div class="my-5">
-          <p-divider></p-divider>
-        </div>
         <div class="history-block">
-          <div *ngFor="let history of work.histories; trackBy: trackByHistory; let index = index">
-            <lib-history-event-card [history]="history" [num]="index + 1"></lib-history-event-card>
-          </div>
+          <lib-history-event-card
+            *ngFor="let history of work.histories; trackBy: trackByHistory; let index = index"
+            [history]="history"
+            [num]="index + 1"
+          ></lib-history-event-card>
         </div>
       </div>
     </div>
