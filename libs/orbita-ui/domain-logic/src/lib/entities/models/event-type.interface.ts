@@ -38,4 +38,5 @@ export enum EventTypeNames {
   DEL_FILES = 'del_files',
   ADD_TAGS = 'add_tags',
   PRIORITY = 'priority',
+  ADD_SELF = 'add_self',
 }

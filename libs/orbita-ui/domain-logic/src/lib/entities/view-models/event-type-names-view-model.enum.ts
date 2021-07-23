@@ -31,6 +31,7 @@ export const eventTypeNamesViewModelMap: Record<EventTypeNames, EventTypeNamesVi
   [EventTypeNames.DEL_FILES]: EventTypeNamesViewModelFactory.create('mdi-file-remove-outline'),
   [EventTypeNames.ADD_TAGS]: EventTypeNamesViewModelFactory.create('mdi-code-tags'),
   [EventTypeNames.PRIORITY]: EventTypeNamesViewModelFactory.create('mdi-priority-high'),
+  [EventTypeNames.ADD_SELF]: EventTypeNamesViewModelFactory.create('mdi-account-check-outline'),
 };
 
 /**
