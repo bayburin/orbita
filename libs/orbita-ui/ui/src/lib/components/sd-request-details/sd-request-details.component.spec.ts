@@ -19,7 +19,7 @@ describe('SdRequestDetailsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SdRequestDetailsComponent);
     component = fixture.componentInstance;
-    component.sdRequest = { comments: [] } as SdRequestViewModel;
+    component.sdRequest = { comments: [], histories: [] } as SdRequestViewModel;
     fixture.detectChanges();
   });
 

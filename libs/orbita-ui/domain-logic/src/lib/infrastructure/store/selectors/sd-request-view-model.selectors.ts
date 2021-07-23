@@ -26,30 +26,15 @@ export const getAllViewModel = createSelector(
         (arr, workId) => (workEntities[workId] ? arr.concat(workEntities[workId]) : arr),
         [] as WorkViewModel[]
       );
-      const application = applicationEntities[sdRequest.application_id];
-      // Находит первую работу, у которой есть история
-      const work = works.find((work) => work.histories.length);
-      let lastHistory = null;
-
-      // Вычисление последнего события для текущей заявки
-      if (work) {
-        lastHistory = works.reduce((last, work) => {
-          if (!work.histories.length) {
-            return last;
-          }
-          const history = work.histories.reduce((max, hist) => (hist.id > max.id ? hist : max), work.histories[0]);
-
-          return history.id > last.id ? history : last;
-        }, work.histories[0]);
-      }
 
       return {
         ...sdRequest,
-        application,
-        lastHistory,
+        application: applicationEntities[sdRequest.application_id],
         comments,
         works,
         attachments: [],
+        histories: oFlatMap((work) => work.histories, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
+        workflows: oFlatMap((work) => work.workflows, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
       };
     })
 );
@@ -85,17 +70,19 @@ export const getSelectedEntityViewModel = createSelector(
       comments,
       works,
       attachments,
+      histories: oFlatMap((work) => work.histories, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
+      workflows: oFlatMap((work) => work.workflows, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
     };
   }
 );
 
-export const getOrderedHistories = createSelector(getSelectedEntityViewModel, (sdRequest) =>
-  oFlatMap((work) => work.histories, sdRequest.works).sort((a, b) => (a.id > b.id ? 1 : -1))
-);
+// export const getOrderedHistories = createSelector(getSelectedEntityViewModel, (sdRequest) =>
+//   oFlatMap((work) => work.histories, sdRequest.works).sort((a, b) => (a.id > b.id ? 1 : -1))
+// );
 
-export const getOrderedWorkflows = createSelector(getSelectedEntityViewModel, (sdRequest) =>
-  oFlatMap((work) => work.workflows, sdRequest.works).sort((a, b) => (a.id > b.id ? 1 : -1))
-);
+// export const getOrderedWorkflows = createSelector(getSelectedEntityViewModel, (sdRequest) =>
+//   oFlatMap((work) => work.workflows, sdRequest.works).sort((a, b) => (a.id > b.id ? 1 : -1))
+// );
 
 export const getFormEntityViewModel = createSelector(SdRequestSelectors.getFormEntity, (entity: SdRequestViewForm) =>
   entity ? { ...entity, finished_at_plan: new Date(entity.finished_at_plan) } : entity

@@ -1,3 +1,4 @@
+import { MessageViewModel } from './message-view-model.interface';
 import { TicketViewModel } from './ticket-view-model.interface';
 import { Application } from './../models/application.interface';
 import { HistoryViewModel } from './history-view-model.interface';
@@ -55,5 +56,15 @@ export interface SdRequestViewModel extends TicketViewModel {
   /**
    * Событие, произошедшее последним в заявке
    */
-  readonly lastHistory?: HistoryViewModel;
+  // readonly lastHistory?: HistoryViewModel;
+
+  /**
+   * Упорядоченный список событий по всем работам
+   */
+  readonly histories: HistoryViewModel[];
+
+  /**
+   * Упорядоченный список хода работы по всем работам
+   */
+  readonly workflows: MessageViewModel[];
 }

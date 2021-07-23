@@ -32,8 +32,6 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   skeleton$ = this.sdRequestFacade.selectedSkeleton$;
   editMode$ = this.sdRequestFacade.selectedEditMode$;
   error$ = this.sdRequestFacade.selectedError$;
-  orderedHistories$ = this.sdRequestFacade.orderedHistories$;
-  orderedWorkflows$ = this.sdRequestFacade.orderedWorkflows$;
   loadingEmployee$ = this.employeeFacade.loadingEmployee$;
   loadedEmployee$ = this.employeeFacade.loadedEmployee$;
   employee$ = this.employeeFacade.employee$;

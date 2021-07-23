@@ -5,7 +5,7 @@
   <p-tabPanel header="История">
     <lib-sd-request-history-overview
       [works]="sdRequest.works"
-      [lastHistory]="sdRequest.lastHistory"
+      [lastHistory]="sdRequest.histories[sdRequest.histories.length - 1]"
     ></lib-sd-request-history-overview>
   </p-tabPanel>
   <p-tabPanel header="Комментарии">
