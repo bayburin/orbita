@@ -73,6 +73,14 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "buildOptimizer": false,
+              "sourceMap": true,
+              "optimization": false,
+              "namedChunks": true
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -127,12 +135,14 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
+          "defaultConfiguration": "",
           "executor": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "orbita-ui:build"
+            "browserTarget": "orbita-ui:build:development"
           },
           "configurations": {
             "production": {
