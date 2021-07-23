@@ -9,15 +9,15 @@
 
 <div *ngIf="works.length; else noWorks">
   <div class="history-overview-header">
-    <h3 class="text-center text-primary">Последние события в группах</h3>
+    <h3 class="text-center text-primary mt-0">Последние события в группах</h3>
     <div class="header-block">
-      <div *ngFor="let work of works; trackBy: trackByWork" class="work-block header-content">
+      <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block header-content">
         <lib-group-header [group]="work.group" class="header-groupname"></lib-group-header>
       </div>
     </div>
 
     <div class="header-block">
-      <div *ngFor="let work of works; trackBy: trackByWork" class="work-block header-content">
+      <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block header-content">
         <lib-history-event-card
           *ngIf="work.histories.length; else noActions"
           [history]="lastHistoryForWork(work)"
@@ -30,7 +30,7 @@
 
   <p-scrollPanel styleClass="history-overview-scroll-panel">
     <div class="history-overview-content">
-      <div *ngFor="let work of works; trackBy: trackByWork" class="work-block">
+      <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block">
         <div class="history-block">
           <lib-history-event-card
             *ngFor="let history of work.histories; trackBy: trackByHistory; let index = index"

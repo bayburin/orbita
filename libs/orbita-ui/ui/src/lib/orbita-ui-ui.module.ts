@@ -7,6 +7,7 @@ import { PrimengModule } from './primeng.module';
 import { DatetimePipe } from './pipes/datetime/datetime.pipe';
 import { FioInitialsPipe } from './pipes/fio-initials/fio-initials.pipe';
 import { FioMiddleNamePipe } from './pipes/fio-middle-name/fio-middle-name.pipe';
+import { SortWorkByHistoryPipe } from './pipes/sort-work-by-history/sort-work-by-history.pipe';
 
 import { OrbitSpinnerModule } from 'angular-epic-spinners';
 
@@ -38,7 +39,7 @@ import { CsaStatusComponent } from './components/csa-status/csa-status.component
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
-const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe];
+const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe, SortWorkByHistoryPipe];
 
 const directives: any[] = [DndFilesDirective];
 
