@@ -330,7 +330,7 @@
             <p-accordionTab [selected]="(loadingHost$ | async) === false && (host$ | async)">
               <ng-template pTemplate="header">
                 <div class="panel-header">
-                  <span>Хост</span>
+                  <span>Хост (поиск по инв. №)</span>
                   <span *ngIf="loadingHost$ | async">
                     <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
                   </span>
@@ -392,7 +392,7 @@
             <p-accordionTab [selected]="(loadingSvtItem$ | async) === false && (svtItem$ | async)">
               <ng-template pTemplate="header">
                 <div class="panel-header">
-                  <span>Техника</span>
+                  <span>Техника (поиск по штрих-коду)</span>
                   <span *ngIf="loadingSvtItem$ | async">
                     <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
                   </span>
