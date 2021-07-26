@@ -13,11 +13,15 @@
     <div class="header-block">
       <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block header-content">
         <lib-group-header [group]="work.group" class="header-groupname"></lib-group-header>
+        <p-divider></p-divider>
+        <div class="inline-list-sm mb-3">
+          <p-chip *ngFor="let worker of work.workers; trackByWorker" [label]="worker.user.fio | fioInitials"></p-chip>
+        </div>
       </div>
     </div>
 
-    <div class="header-block">
-      <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block header-content">
+    <div class="last-action-block">
+      <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block last-action-content">
         <lib-history-event-card
           *ngIf="work.histories.length; else noActions"
           [history]="lastHistoryForWork(work)"

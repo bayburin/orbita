@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { WorkViewModel, HistoryViewModel } from '@orbita/orbita-ui/domain-logic';
+import { WorkViewModel, HistoryViewModel, WorkerViewModel } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-sd-request-history-overview',
@@ -32,5 +32,9 @@ export class SdRequestHistoryOverviewComponent {
 
   trackByHistory(_index: number, history: HistoryViewModel): number {
     return history.id;
+  }
+
+  trackByWorker(_index: number, worker: WorkerViewModel): number {
+    return worker.id;
   }
 }

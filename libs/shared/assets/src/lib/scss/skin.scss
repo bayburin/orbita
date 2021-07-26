@@ -32,3 +32,19 @@
     margin-right: 0.25 * $spacer;
   }
 }
+
+.inline-list-sm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0.25 * $spacer;
+}
+
+@supports (gap: $spacer) {
+  .inline-list-sm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25 * $spacer;
+  }
+}
