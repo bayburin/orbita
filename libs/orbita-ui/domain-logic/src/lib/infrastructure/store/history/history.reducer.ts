@@ -23,7 +23,8 @@ export const initialState: State = historyAdapter.getInitialState({
 const historyReducer = createReducer(
   initialState,
   on(HistoryActions.setAll, (state, { histories }) => historyAdapter.setAll(histories, { ...state, loaded: true })),
-  on(HistoryActions.setHistories, (state, { histories }) => historyAdapter.upsertMany(histories, state))
+  on(HistoryActions.setHistories, (state, { histories }) => historyAdapter.upsertMany(histories, state)),
+  on(HistoryActions.clearAll, (state) => historyAdapter.removeAll({ ...state, loaded: false }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

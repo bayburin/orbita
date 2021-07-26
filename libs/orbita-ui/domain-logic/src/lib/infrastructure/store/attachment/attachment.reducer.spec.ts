@@ -7,10 +7,10 @@ import { State, initialState, reducer } from './attachment.reducer';
 describe('AttachmentReducer', () => {
   let action: Action;
   const createAttachmentEntity = (id: number, name = '') =>
-    (({
+    ({
       id,
       name: name || `name-${id}`,
-    } as unknown) as Attachment);
+    } as unknown as Attachment);
 
   describe('setAll()', () => {
     it('should change "loaded" and "entities" attributes', () => {
@@ -72,6 +72,19 @@ describe('AttachmentReducer', () => {
 
       expect(result.loadingIds).toEqual([2]);
       expect(result.errorIds).toEqual([1]);
+    });
+  });
+
+  describe('clearAll()', () => {
+    it('should change  "entities" attributes', () => {
+      const attachments = [createAttachmentEntity(1), createAttachmentEntity(2)];
+      action = AttachmentActions.setAll({ attachments });
+      let result: State = reducer(initialState, action);
+      action = AttachmentActions.clearAll();
+      result = reducer(result, action);
+
+      expect(result.ids.length).toBe(0);
+      expect(result.loaded).toBe(false);
     });
   });
 

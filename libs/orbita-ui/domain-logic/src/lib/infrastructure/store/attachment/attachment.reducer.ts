@@ -43,7 +43,8 @@ const attachmentReducer = createReducer(
     ...state,
     loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
     errorIds: [...state.errorIds, id],
-  }))
+  })),
+  on(AttachmentActions.clearAll, (state) => attachmentAdapter.removeAll({ ...state, loaded: false }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

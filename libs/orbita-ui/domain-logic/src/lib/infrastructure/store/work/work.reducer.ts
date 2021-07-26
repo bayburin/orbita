@@ -23,7 +23,8 @@ export const initialState: State = workAdapter.getInitialState({
 const workReducer = createReducer(
   initialState,
   on(WorkActions.setAll, (state, { works }) => workAdapter.setAll(works, { ...state, loaded: true })),
-  on(WorkActions.setWorks, (state, { works }) => workAdapter.upsertMany(works, state))
+  on(WorkActions.setWorks, (state, { works }) => workAdapter.upsertMany(works, state)),
+  on(WorkActions.clearAll, (state) => workAdapter.removeAll({ ...state, loaded: false }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

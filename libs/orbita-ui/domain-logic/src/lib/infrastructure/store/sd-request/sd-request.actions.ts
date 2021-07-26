@@ -18,9 +18,9 @@ export const loadAllSuccess = createAction(
 
 export const loadAllFailure = createAction('[SdRequest/API] Load All Failure', props<{ error: any }>());
 
-export const SetTableMetadata = createAction('[SdRequest] Set Table Metadata', props<{ data: LazyLoadEvent }>());
+export const setTableMetadata = createAction('[SdRequest] Set Table Metadata', props<{ data: LazyLoadEvent }>());
 
-export const ReloadEntities = createAction('[SdRequest] Reload Entities');
+export const reloadEntities = createAction('[SdRequest] Reload Entities');
 
 export const setPartials = createAction('[SdRequest] Set Partials', props<{ entities: NormalizedSdRequestEntities }>());
 
@@ -28,6 +28,8 @@ export const updatePartials = createAction(
   '[SdRequest] Update Partials',
   props<{ entities: NormalizedSdRequestEntities }>()
 );
+
+export const clearAll = createAction('[SdRequest] Clear All');
 
 // ========== Просмотр выбранной заявки ==========
 

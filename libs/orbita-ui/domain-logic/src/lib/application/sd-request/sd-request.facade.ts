@@ -93,11 +93,11 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   constructor(private store: Store<SdRequestFeature.SdRequestPartialState>, private sdRequestApi: SdRequestApi) {}
 
   setTableMetadata(event: LazyLoadEvent) {
-    this.store.dispatch(SdRequestActions.SetTableMetadata({ data: event }));
+    this.store.dispatch(SdRequestActions.setTableMetadata({ data: event }));
   }
 
   reloadTableData() {
-    this.store.dispatch(SdRequestActions.ReloadEntities());
+    this.store.dispatch(SdRequestActions.reloadEntities());
   }
 
   loadSelectedSdRequest() {
@@ -118,5 +118,9 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   updateForm() {
     this.store.dispatch(SdRequestActions.saveUpdateForm());
+  }
+
+  clearAll() {
+    this.store.dispatch(SdRequestActions.clearAll());
   }
 }

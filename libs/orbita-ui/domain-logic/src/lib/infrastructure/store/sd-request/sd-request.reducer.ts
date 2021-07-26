@@ -99,7 +99,7 @@ const sdRequestReducer = createReducer(
       loading: false,
     })
   ),
-  on(SdRequestActions.SetTableMetadata, (state, { data }) => ({
+  on(SdRequestActions.setTableMetadata, (state, { data }) => ({
     ...state,
     firstRowIndex: data.first,
     perPage: data.rows,
@@ -108,10 +108,17 @@ const sdRequestReducer = createReducer(
     filters: processSdRequestTableFilters(data.filters ? JSON.parse(JSON.stringify(data.filters)) : {}),
     needTickets: true,
   })),
-  on(SdRequestActions.ReloadEntities, (state) => ({
+  on(SdRequestActions.reloadEntities, (state) => ({
     ...state,
     needTickets: true,
   })),
+  on(SdRequestActions.clearAll, (state) =>
+    sdRequestAdapter.removeAll({
+      ...state,
+      needTickets: true,
+      loaded: false,
+    })
+  ),
 
   // ========== Просмотр выбранной заявки ==========
 

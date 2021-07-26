@@ -150,4 +150,17 @@ export class SdRequestEffects {
       map(([_action, sdRequestViewModel]) => SdRequestActions.initUpdateForm({ sdRequestViewModel }))
     )
   );
+
+  clearAll = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.clearAll),
+      switchMap(() => [
+        MessageActions.clearAll(),
+        WorkActions.clearAll(),
+        HistoryActions.clearAll(),
+        WorkerActions.clearAll(),
+        AttachmentActions.clearAll(),
+      ])
+    )
+  );
 }

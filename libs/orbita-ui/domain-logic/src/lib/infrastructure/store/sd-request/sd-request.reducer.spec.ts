@@ -1,7 +1,7 @@
-import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
-import { SdRequestFactory } from './../../factories/sd-request.factory';
 import { Action } from '@ngrx/store';
 
+import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
+import { SdRequestFactory } from './../../factories/sd-request.factory';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { Meta } from '../../../entities/server-data/meta.interface';
 import * as SdRequestActions from './sd-request.actions';
@@ -70,7 +70,7 @@ describe('SdRequestReducer', () => {
     };
 
     it('should set attributes', () => {
-      action = SdRequestActions.SetTableMetadata({ data });
+      action = SdRequestActions.setTableMetadata({ data });
       const result: State = reducer(initialState, action);
 
       expect(result.firstRowIndex).toEqual(data.first);
@@ -82,9 +82,9 @@ describe('SdRequestReducer', () => {
     });
   });
 
-  describe('ReloadEntities', () => {
+  describe('reloadEntities', () => {
     it('should set "needTickets" attribute', () => {
-      action = SdRequestActions.ReloadEntities();
+      action = SdRequestActions.reloadEntities();
       const result: State = reducer(initialState, action);
 
       expect(result.needTickets).toEqual(true);

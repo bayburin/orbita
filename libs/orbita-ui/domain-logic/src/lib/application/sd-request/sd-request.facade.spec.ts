@@ -194,22 +194,22 @@ describe('SdRequestFacade', () => {
     // });
 
     describe('setTableMetadata()', () => {
-      it('should call ReloadEntities action', () => {
+      it('should call setTableMetadata action', () => {
         const spy = jest.spyOn(store, 'dispatch');
 
         facade.setTableMetadata({});
 
-        expect(spy).toHaveBeenCalledWith(SdRequestActions.SetTableMetadata({ data: {} }));
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.setTableMetadata({ data: {} }));
       });
     });
 
     describe('reloadTableData()', () => {
-      it('should call ReloadEntities action', () => {
+      it('should call reloadEntities action', () => {
         const spy = jest.spyOn(store, 'dispatch');
 
         facade.reloadTableData();
 
-        expect(spy).toHaveBeenCalledWith(SdRequestActions.ReloadEntities());
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.reloadEntities());
       });
     });
 
@@ -261,6 +261,16 @@ describe('SdRequestFacade', () => {
         facade.updateForm();
 
         expect(spy).toHaveBeenCalledWith(SdRequestActions.saveUpdateForm());
+      });
+    });
+
+    describe('clearAll()', () => {
+      it('should call clearAll action', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.clearAll();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.clearAll());
       });
     });
   });

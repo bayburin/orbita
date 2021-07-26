@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { SdRequestFacade, UserFacade, ServiceDeskFacade } from '@orbita/orbita-ui/domain-logic';
 
@@ -7,7 +7,7 @@ import { SdRequestFacade, UserFacade, ServiceDeskFacade } from '@orbita/orbita-u
   templateUrl: './sd-requests-block.component.html',
   styleUrls: ['./sd-requests-block.component.scss'],
 })
-export class SdRequestsBlockComponent {
+export class SdRequestsBlockComponent implements OnDestroy {
   loading$ = this.sdRequestFacade.loading$;
   sdRequests$ = this.sdRequestFacade.all$;
   firstRowIndex$ = this.sdRequestFacade.firstRowIndex$;
@@ -39,5 +39,9 @@ export class SdRequestsBlockComponent {
    */
   reloadTable(): void {
     this.sdRequestFacade.reloadTableData();
+  }
+
+  ngOnDestroy(): void {
+    this.sdRequestFacade.clearAll();
   }
 }

@@ -109,4 +109,9 @@ export abstract class SdRequestFacadeAbstract {
    * Обновляет данные по выбранной заявке
    */
   abstract updateForm(): void;
+
+  /**
+   * Очищает все данные по заявкам и их составляющих
+   */
+  abstract clearAll(): void;
 }

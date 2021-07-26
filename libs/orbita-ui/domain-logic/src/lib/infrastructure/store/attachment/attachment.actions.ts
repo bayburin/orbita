@@ -11,3 +11,5 @@ export const download = createAction('[Attachment] Download', props<{ attachment
 export const downloadSuccess = createAction('[Attachment] Download Success', props<{ id: number }>());
 
 export const downloadFailure = createAction('[Attachment] Download Failure', props<{ id: number }>());
+
+export const clearAll = createAction('[Message] Clear All');

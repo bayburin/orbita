@@ -7,12 +7,12 @@ import { State, initialState, reducer } from './history.reducer';
 describe('HistoryReducer', () => {
   let action: Action;
   const createHistoryEntity = (id: number, name = '') =>
-    (({
+    ({
       id,
       name: name || `name-${id}`,
-    } as unknown) as History);
+    } as unknown as History);
 
-  describe('SetAll()', () => {
+  describe('setAll()', () => {
     it('should change "loaded" and "entities" attributes', () => {
       const histories = [createHistoryEntity(1), createHistoryEntity(2)];
       action = HistoryActions.setAll({ histories });
@@ -20,6 +20,19 @@ describe('HistoryReducer', () => {
 
       expect(result.loaded).toBe(true);
       expect(result.ids.length).toEqual(2);
+    });
+  });
+
+  describe('clearAll()', () => {
+    it('should change "entities" attributes', () => {
+      const histories = [createHistoryEntity(1), createHistoryEntity(2)];
+      action = HistoryActions.setAll({ histories });
+      let result: State = reducer(initialState, action);
+      action = HistoryActions.clearAll();
+      result = reducer(result, action);
+
+      expect(result.ids.length).toBe(0);
+      expect(result.loaded).toBe(false);
     });
   });
 
