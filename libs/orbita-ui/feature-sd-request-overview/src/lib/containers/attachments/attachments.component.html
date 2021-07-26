@@ -14,11 +14,14 @@
     <div class="ml-2">
       <i
         *ngIf="attachment.get('_destroy').value; else actionToDestroy"
-        class="mdi mdi-delete-restore mdi-18px pointer"
+        class="mdi mdi-delete-restore mdi-18px cursor-pointer"
         (click)="demarkForDestruction(toFormGroup(attachment))"
       ></i>
       <ng-template #actionToDestroy>
-        <i class="mdi mdi-delete-outline mdi-18px pointer" (click)="markForDestruction(toFormGroup(attachment))"></i>
+        <i
+          class="mdi mdi-delete-outline mdi-18px cursor-pointer"
+          (click)="markForDestruction(toFormGroup(attachment))"
+        ></i>
       </ng-template>
     </div>
   </div>
