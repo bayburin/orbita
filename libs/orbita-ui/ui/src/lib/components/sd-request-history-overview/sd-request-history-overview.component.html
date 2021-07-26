@@ -12,7 +12,15 @@
     <h3 class="text-center text-primary mt-0">Последние события в группах</h3>
     <div class="header-block">
       <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block header-content">
-        <lib-group-header [group]="work.group" class="header-groupname"></lib-group-header>
+        <div>
+          <lib-group-header
+            [group]="work.group"
+            class="header-groupname block"
+            [pTooltip]="work.group.description"
+            tooltipPosition="top"
+            appendTo="body"
+          ></lib-group-header>
+        </div>
         <p-divider></p-divider>
         <div class="inline-list-sm mb-3">
           <p-chip *ngFor="let worker of work.workers; trackByWorker" [label]="worker.user.fio | fioInitials"></p-chip>
