@@ -3,6 +3,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as EmployeeActions from './employee.actions';
 import { Employee } from '../../../entities/models/employee/employee.interface';
+import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
 
 export const EMPLOYEE_FEATURE_KEY = 'employee';
 
@@ -13,8 +14,15 @@ export interface EmployeeState extends EntityState<Employee> {
   error?: string | null;
 }
 
+export interface EmployeeShortState extends EntityState<EmployeeShort> {
+  loaded: boolean;
+  loading: boolean;
+  error?: string | null;
+}
+
 export interface State {
   employee: EmployeeState;
+  employeeShort: EmployeeShortState;
 }
 
 export interface EmployeePartialState {
@@ -23,6 +31,8 @@ export interface EmployeePartialState {
 
 export const employeeAdapter: EntityAdapter<Employee> = createEntityAdapter<Employee>();
 
+export const employeeShortAdapter: EntityAdapter<EmployeeShort> = createEntityAdapter<EmployeeShort>();
+
 export const employeeInitialState: EmployeeState = employeeAdapter.getInitialState({
   loaded: false,
   loading: false,
@@ -30,12 +40,22 @@ export const employeeInitialState: EmployeeState = employeeAdapter.getInitialSta
   error: null,
 });
 
+export const employeeShortInitialState: EmployeeShortState = employeeShortAdapter.getInitialState({
+  loaded: false,
+  loading: false,
+  error: null,
+});
+
 export const initialState: State = {
   employee: employeeInitialState,
+  employeeShort: employeeShortInitialState,
 };
 
 const employeeReducer = createReducer(
   initialState,
+
+  // ========== Подтип хранилища Employee ==========
+
   on(EmployeeActions.loadSingleEmployee, (state) => ({
     ...state,
     employee: employeeAdapter.removeAll({ ...state.employee, loading: true, loaded: false, error: null }),
@@ -73,6 +93,31 @@ const employeeReducer = createReducer(
       ...state.employee,
       loaded: false,
       selectedId: null,
+    },
+  })),
+
+  // ========== Подтип хранилища EmployeeShort ==========
+
+  on(EmployeeActions.loadAllEmployeeShort, (state) => ({
+    ...state,
+    employeeShort: employeeShortAdapter.removeAll({
+      ...state.employeeShort,
+      loaded: false,
+      loading: true,
+      error: null,
+    }),
+  })),
+  on(EmployeeActions.loadAllEmployeeShortSuccess, (state, { employees }) => ({
+    ...state,
+    employeeShort: employeeShortAdapter.setAll(employees, { ...state.employeeShort, loaded: true, loading: false }),
+  })),
+  on(EmployeeActions.loadAllEmployeeShortFailure, (state, { error }) => ({
+    ...state,
+    employeeShort: {
+      ...state.employeeShort,
+      loaded: false,
+      loading: false,
+      error,
     },
   }))
 );

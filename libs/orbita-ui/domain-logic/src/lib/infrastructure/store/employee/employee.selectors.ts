@@ -1,12 +1,22 @@
 import { createSelector } from '@ngrx/store';
 
 import { getOrbitaUiState } from './../index';
-import { EMPLOYEE_FEATURE_KEY, State, EmployeePartialState, employeeAdapter, EmployeeState } from './employee.reducer';
+import {
+  EMPLOYEE_FEATURE_KEY,
+  State,
+  EmployeePartialState,
+  employeeAdapter,
+  EmployeeState,
+  employeeShortAdapter,
+  EmployeeShortState,
+} from './employee.reducer';
 
 export const getEmployeeBaseState = createSelector(
   getOrbitaUiState,
   (state: EmployeePartialState) => state[EMPLOYEE_FEATURE_KEY]
 );
+
+// ========== Подтип хранилища Employee ==========
 
 export const getEmployeeState = createSelector(getEmployeeBaseState, (state: State) => state.employee);
 
@@ -30,4 +40,31 @@ export const getEmployeeSelected = createSelector(
   getEmployeeEntities,
   getEmployeeSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
+);
+
+// ========== Подтип хранилища EmployeeShort ==========
+
+export const getEmployeeShortState = createSelector(getEmployeeBaseState, (state: State) => state.employeeShort);
+
+const { selectAll: selectAllEmployeeShort, selectEntities: selectEntitiesEmployeeShort } =
+  employeeShortAdapter.getSelectors();
+
+export const getEmployeeShortLoading = createSelector(
+  getEmployeeShortState,
+  (state: EmployeeShortState) => state.loading
+);
+
+export const getEmployeeShortLoaded = createSelector(
+  getEmployeeShortState,
+  (state: EmployeeShortState) => state.loaded
+);
+
+export const getEmployeeShortError = createSelector(getEmployeeShortState, (state: EmployeeShortState) => state.error);
+
+export const getEmployeeShortAll = createSelector(getEmployeeShortState, (state: EmployeeShortState) =>
+  selectAllEmployeeShort(state)
+);
+
+export const getEmployeeShortEntities = createSelector(getEmployeeShortState, (state: EmployeeShortState) =>
+  selectEntitiesEmployeeShort(state)
 );
