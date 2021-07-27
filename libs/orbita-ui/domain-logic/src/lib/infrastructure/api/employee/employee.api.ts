@@ -1,9 +1,11 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
 
 import { Employee } from './../../../entities/models/employee/employee.interface';
 import { EmployeeApiAbstract } from './employee.api.abstract';
+import { SearchEmployeeKeys } from './../../../entities/search-employee-keys.enum';
+import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -15,5 +17,15 @@ export class EmployeeApi implements EmployeeApiAbstract {
 
   show(idTn: number) {
     return this.http.get<Employee>(`${this.api}/${idTn}`);
+  }
+
+  query(key?: SearchEmployeeKeys, value?: string) {
+    let params = {};
+
+    if (key) {
+      params = new HttpParams().set('key', key).set('value', value);
+    }
+
+    return this.http.get<EmployeeShort[]>(this.api, { params });
   }
 }

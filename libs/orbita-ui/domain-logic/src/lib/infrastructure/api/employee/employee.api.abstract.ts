@@ -1,6 +1,8 @@
 import { Observable } from 'rxjs';
 
 import { Employee } from './../../../entities/models/employee/employee.interface';
+import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
+import { SearchEmployeeKeys } from './../../../entities/search-employee-keys.enum';
 
 export abstract class EmployeeApiAbstract {
   /**
@@ -14,4 +16,12 @@ export abstract class EmployeeApiAbstract {
    * @param idTn - IdTn пользователя
    */
   abstract show(idTn: number): Observable<Employee>;
+
+  /**
+   * Получает список работников, отфильтрованный по указанным параметрам
+   *
+   * @param key - имя поля
+   * @param value - значение
+   */
+  abstract query(key?: SearchEmployeeKeys, value?: string): Observable<EmployeeShort[]>;
 }

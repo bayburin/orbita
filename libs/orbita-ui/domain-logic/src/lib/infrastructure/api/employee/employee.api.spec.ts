@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { ORBITA_UI_ENV_TOKEN, orbitaUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { EmployeeApi } from './employee.api';
+import { SearchEmployeeKeys } from './../../../entities/search-employee-keys.enum';
 
 describe('Employeepi', () => {
   let service: EmployeeApi;
@@ -43,6 +44,24 @@ describe('Employeepi', () => {
           url: api,
         })
         .flush(employee);
+    });
+  });
+
+  describe('query()', () => {
+    const api = `${orbitaUiEnvironmentStub}/employees?key=fullName&value=fio`;
+    const employees = [{ id: 1 }];
+
+    it('should return request', () => {
+      service.query(SearchEmployeeKeys.FIO, 'fio').subscribe((result) => {
+        expect(result).toEqual(employees);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: api,
+        })
+        .flush(employees);
     });
   });
 });

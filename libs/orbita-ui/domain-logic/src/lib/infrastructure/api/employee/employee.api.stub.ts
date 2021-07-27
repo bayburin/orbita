@@ -8,4 +8,8 @@ export class EmployeeApi implements EmployeeApiAbstract {
   show() {
     return of(null);
   }
+
+  query() {
+    return of([]);
+  }
 }
