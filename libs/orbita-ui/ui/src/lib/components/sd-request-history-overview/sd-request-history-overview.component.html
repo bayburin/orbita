@@ -8,39 +8,46 @@
 </ng-template>
 
 <div *ngIf="works.length; else noWorks">
-  <div class="history-overview-header">
-    <h3 class="text-center text-primary mt-0">Последние события в группах</h3>
-    <div class="header-block">
-      <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block header-content">
-        <div>
-          <lib-group-header
-            [group]="work.group"
-            class="header-groupname block"
-            [pTooltip]="work.group.description"
-            tooltipPosition="top"
-            appendTo="body"
-          ></lib-group-header>
-        </div>
-        <p-divider></p-divider>
-        <div class="inline-list-sm mb-3">
-          <p-chip *ngFor="let worker of work.workers; trackByWorker" [label]="worker.user.fio | fioInitials"></p-chip>
-        </div>
-      </div>
-    </div>
-
-    <div class="last-action-block">
-      <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block last-action-content">
-        <lib-history-event-card
-          *ngIf="work.histories.length; else noActions"
-          [history]="lastHistoryForWork(work)"
-          [num]="work.histories.length"
-          [isLast]="lastHistoryForWork(work) === lastHistory"
-        ></lib-history-event-card>
-      </div>
-    </div>
-  </div>
-
   <p-scrollPanel styleClass="history-overview-scroll-panel">
+    <div libCalcScrollWidthByWorks [calculatedElements]="worksEl" class="history-overview-header">
+      <h3 class="text-center text-primary mt-0">Последние события в группах</h3>
+      <div class="header-block">
+        <div
+          #worksEl
+          *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork"
+          class="work-block header-content"
+        >
+          <div>
+            <lib-group-header
+              [group]="work.group"
+              class="header-groupname block"
+              [pTooltip]="work.group.description"
+              tooltipPosition="top"
+              appendTo="body"
+            ></lib-group-header>
+          </div>
+          <p-divider></p-divider>
+          <div class="inline-list-sm mb-3">
+            <p-chip *ngFor="let worker of work.workers; trackByWorker" [label]="worker.user.fio | fioInitials"></p-chip>
+          </div>
+        </div>
+      </div>
+
+      <div class="last-action-block">
+        <div
+          *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork"
+          class="work-block last-action-content"
+        >
+          <lib-history-event-card
+            *ngIf="work.histories.length; else noActions"
+            [history]="lastHistoryForWork(work)"
+            [num]="work.histories.length"
+            [isLast]="lastHistoryForWork(work) === lastHistory"
+          ></lib-history-event-card>
+        </div>
+      </div>
+    </div>
+
     <div class="history-overview-content">
       <div *ngFor="let work of works | sortWorkByHistory; trackBy: trackByWork" class="work-block">
         <div class="history-block">

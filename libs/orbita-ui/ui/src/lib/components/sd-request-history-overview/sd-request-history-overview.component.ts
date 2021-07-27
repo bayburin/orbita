@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  AfterViewChecked,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Input,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import { WorkViewModel, HistoryViewModel, WorkerViewModel } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -7,7 +16,7 @@ import { WorkViewModel, HistoryViewModel, WorkerViewModel } from '@orbita/orbita
   styleUrls: ['./sd-request-history-overview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SdRequestHistoryOverviewComponent {
+export class SdRequestHistoryOverviewComponent implements AfterViewChecked {
   /**
    * Работы по заявке
    */
@@ -16,6 +25,17 @@ export class SdRequestHistoryOverviewComponent {
    * Событие, которое произошло самым последним в текущей заявке
    */
   @Input() lastHistory: HistoryViewModel;
+  /**
+   * Список элементов, ширину которых необходимо учитывать
+   */
+  @ViewChildren('worksEl') worksEl: QueryList<ElementRef>;
+
+  constructor(private changeDetection: ChangeDetectorRef) {}
+
+  ngAfterViewChecked(): void {
+    // Необходимо вызывать для корректной работы директивы libCalcScrollWidthByWorks
+    this.changeDetection.detectChanges();
+  }
 
   /**
    * Возвращает последнее событие для указанной работы

@@ -12,6 +12,7 @@ import { SortWorkByHistoryPipe } from './pipes/sort-work-by-history/sort-work-by
 import { OrbitSpinnerModule } from 'angular-epic-spinners';
 
 import { DndFilesDirective } from './directives/dnd-files/dnd-files.directive';
+import { CalcScrollWidthByWorksDirective } from './directives/calc-scroll-width-by-works/calc-scroll-width-by-works.directive';
 
 import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requests-table.component';
 import { SdRequestHistoryOverviewComponent } from './components/sd-request-history-overview/sd-request-history-overview.component';
@@ -67,6 +68,7 @@ const components: any[] = [
   TicketStatusComponent,
   CmsStatusComponent,
   CsaStatusComponent,
+  CalcScrollWidthByWorksDirective,
 ];
 
 @NgModule({
