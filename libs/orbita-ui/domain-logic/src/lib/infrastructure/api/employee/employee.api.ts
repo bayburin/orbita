@@ -5,7 +5,7 @@ import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environ
 import { Employee } from './../../../entities/models/employee/employee.interface';
 import { EmployeeApiAbstract } from './employee.api.abstract';
 import { SearchEmployeeKeys } from './../../../entities/search-employee-keys.enum';
-import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
+import { EmployeeShortServerData } from './../../../entities/server-data/employee-server-data.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,6 @@ export class EmployeeApi implements EmployeeApiAbstract {
       params = new HttpParams().set('key', key).set('value', value);
     }
 
-    return this.http.get<EmployeeShort[]>(this.api, { params });
+    return this.http.get<EmployeeShortServerData>(this.api, { params });
   }
 }

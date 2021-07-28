@@ -42,4 +42,16 @@ export class EmployeeEffects {
       map(EmployeeActions.loadSingleEmployee)
     )
   );
+
+  loadAllEmployeeShort$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeActions.loadAllEmployeeShort),
+      switchMap((action) =>
+        this.employeeApi.query(action.key, action.value).pipe(
+          map((data) => EmployeeActions.loadAllEmployeeShortSuccess({ employees: data.employees })),
+          catchError((error) => of(EmployeeActions.loadSingleEmployeeFailure({ error })))
+        )
+      )
+    )
+  );
 }

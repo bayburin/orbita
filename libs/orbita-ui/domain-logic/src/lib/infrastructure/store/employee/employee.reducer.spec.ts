@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import { Employee } from '../../../entities/models/employee/employee.interface';
+import { SearchEmployeeKeys } from '../../../entities/search-employee-keys.enum';
 import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
 import * as EmployeeActions from './employee.actions';
 import { initialState, reducer, EmployeeState, EmployeeShortState, State } from './employee.reducer';
@@ -97,7 +98,7 @@ describe('EmployeeReducer', () => {
       const employees = [createEmployeeShortEntity(1), createEmployeeShortEntity(2)];
       action = EmployeeActions.loadAllEmployeeShortSuccess({ employees });
       const partialResult: State = reducer(initialState, action);
-      action = EmployeeActions.loadAllEmployeeShort();
+      action = EmployeeActions.loadAllEmployeeShort({ key: SearchEmployeeKeys.FIO, value: 'value' });
       const result: EmployeeShortState = reducer(partialResult, action).employeeShort;
 
       expect(result.ids.length).toBe(0);

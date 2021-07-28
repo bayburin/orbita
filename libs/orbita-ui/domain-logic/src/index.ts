@@ -1,5 +1,7 @@
 export * from './lib/orbita-ui-domain-logic.module';
 
+export * from './lib/entities/search-employee-keys.enum';
+
 export * from './lib/entities/models/ticket.interface';
 export * from './lib/entities/models/source-snapshot.interface';
 export * from './lib/entities/models/user.interface';

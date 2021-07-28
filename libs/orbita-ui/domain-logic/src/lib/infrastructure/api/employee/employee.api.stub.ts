@@ -10,6 +10,6 @@ export class EmployeeApi implements EmployeeApiAbstract {
   }
 
   query() {
-    return of([]);
+    return of(null);
   }
 }
