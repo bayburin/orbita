@@ -25,6 +25,7 @@ import { AccordionModule } from 'primeng/accordion';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ListboxModule } from 'primeng/listbox';
 import { ChipModule } from 'primeng/chip';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { ConfirmationService } from 'primeng/api';
 
@@ -54,6 +55,7 @@ const modules: any[] = [
   BreadcrumbModule,
   ListboxModule,
   ChipModule,
+  AutoCompleteModule,
 ];
 
 @NgModule({

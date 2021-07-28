@@ -101,7 +101,6 @@ describe('EmployeeReducer', () => {
       action = EmployeeActions.loadAllEmployeeShort({ key: SearchEmployeeKeys.FIO, value: 'value' });
       const result: EmployeeShortState = reducer(partialResult, action).employeeShort;
 
-      expect(result.ids.length).toBe(0);
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
       expect(result.error).toBeNull();

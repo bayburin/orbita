@@ -46,8 +46,11 @@ export const getEmployeeSelected = createSelector(
 
 export const getEmployeeShortState = createSelector(getEmployeeBaseState, (state: State) => state.employeeShort);
 
-const { selectAll: selectAllEmployeeShort, selectEntities: selectEntitiesEmployeeShort } =
-  employeeShortAdapter.getSelectors();
+const {
+  selectAll: selectAllEmployeeShort,
+  selectEntities: selectEntitiesEmployeeShort,
+  selectTotal: selectShortTotalCount,
+} = employeeShortAdapter.getSelectors();
 
 export const getEmployeeShortLoading = createSelector(
   getEmployeeShortState,
@@ -67,4 +70,8 @@ export const getEmployeeShortAll = createSelector(getEmployeeShortState, (state:
 
 export const getEmployeeShortEntities = createSelector(getEmployeeShortState, (state: EmployeeShortState) =>
   selectEntitiesEmployeeShort(state)
+);
+
+export const getEmployeeShortTotalCount = createSelector(getEmployeeShortState, (state: EmployeeShortState) =>
+  selectShortTotalCount(state)
 );

@@ -15,6 +15,8 @@ export class EmployeeFacade implements EmployeeFacadeAbstract {
   loadedEmployee$ = this.store.select(EmployeeSelectors.getEmployeeLoaded);
   employee$ = this.store.select(EmployeeSelectors.getEmployeeSelected);
   allShort$ = this.store.select(EmployeeSelectors.getEmployeeShortAll);
+  loadedAllShort$ = this.store.select(EmployeeSelectors.getEmployeeShortLoaded);
+  totalCountShort$ = this.store.select(EmployeeSelectors.getEmployeeShortTotalCount);
 
   constructor(private store: Store<EmployeeFeature.EmployeePartialState>) {}
 

@@ -100,12 +100,12 @@ const employeeReducer = createReducer(
 
   on(EmployeeActions.loadAllEmployeeShort, (state) => ({
     ...state,
-    employeeShort: employeeShortAdapter.removeAll({
+    employeeShort: {
       ...state.employeeShort,
       loaded: false,
       loading: true,
       error: null,
-    }),
+    },
   })),
   on(EmployeeActions.loadAllEmployeeShortSuccess, (state, { employees }) => ({
     ...state,

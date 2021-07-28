@@ -21,6 +21,14 @@ export abstract class EmployeeFacadeAbstract {
    * Список работников
    */
   allShort$: Observable<EmployeeShort[]>;
+  /**
+   * Индикатор, загружены ли данные
+   */
+  loadedAllShort$: Observable<boolean>;
+  /**
+   * Число найденных записей
+   */
+  totalCountShort$: Observable<number>;
 
   /**
    * Поиск работников

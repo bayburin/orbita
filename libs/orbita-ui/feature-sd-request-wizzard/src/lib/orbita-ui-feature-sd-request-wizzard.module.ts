@@ -5,6 +5,7 @@ import { OrbitaUiUiModule } from '@orbita/orbita-ui/ui';
 import { OrbitaUiDomainLogicModule } from '@orbita/orbita-ui/domain-logic';
 
 import { NewSdRequestPageComponent } from './pages/new-sd-request-page/new-sd-request-page.component';
+import { NewSdRequestBlockComponent } from './containers/new-sd-request-block/new-sd-request-block.component';
 
 export const routes: Routes = [
   {
@@ -16,7 +17,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), OrbitaUiUiModule, OrbitaUiDomainLogicModule],
-  declarations: [NewSdRequestPageComponent],
+  declarations: [NewSdRequestPageComponent, NewSdRequestBlockComponent],
   exports: [NewSdRequestPageComponent],
 })
 export class OrbitaUiFeatureSdRequestWizzardModule {}

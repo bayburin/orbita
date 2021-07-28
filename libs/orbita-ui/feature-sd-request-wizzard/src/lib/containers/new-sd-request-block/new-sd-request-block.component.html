@@ -1,0 +1,24 @@
+<div class="card">
+  <form [formGroup]="form">
+    <p-autoComplete
+      #autoComplete
+      name="employee"
+      [formControl]="employee"
+      [suggestions]="employees$ | async"
+      [showEmptyMessage]="true"
+      [autofocus]="true"
+      [minLength]="3"
+      field="fullName"
+      placeholder="Введите ФИО"
+      appendTo="body"
+      (completeMethod)="search($event)"
+      (onFocus)="autoComplete.show()"
+      (onClear)="clearEmployee()"
+      (onSelect)="selectEmployee()"
+    >
+      <ng-template let-employee pTemplate="item">
+        {{ employee.departmentForAccounting }} {{ employee.fullName }}
+      </ng-template>
+    </p-autoComplete>
+  </form>
+</div>

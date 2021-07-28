@@ -114,4 +114,8 @@ describe('EmployeeSelectors', () => {
   it('getEmployeeShortEntities() should return employee state', () => {
     expect(EmployeeSelectors.getEmployeeShortEntities.projector(state.employeeShort)).toEqual(shortEntities);
   });
+
+  it('getEmployeeShortTotalCount() should return employee state', () => {
+    expect(EmployeeSelectors.getEmployeeShortTotalCount.projector(state.employeeShort)).toEqual(3);
+  });
 });
