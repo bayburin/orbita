@@ -1,20 +1,19 @@
-<div class="card">
+<div class="card col-6">
   <form [formGroup]="form">
     <div class="field grid">
-      <label for="employee" class="col-fixed">Пользователь</label>
-      <div class="col-6">
+      <label for="employee" class="col-2">Работник</label>
+      <div class="col-10">
         <p-selectButton
-          class="pb-2 block"
+          class="block mb-3"
           [options]="employeeFilters"
           [formControl]="employeeFilterKey"
           optionLabel="title"
-          optionValue="filter"
         ></p-selectButton>
 
         <p-autoComplete
           #autoComplete
           id="employee"
-          class="block"
+          class="block mb-3"
           [formControl]="employee"
           [suggestions]="employees$ | async"
           [showEmptyMessage]="true"
@@ -24,7 +23,7 @@
           scrollHeight="300px"
           [itemSize]="40"
           field="fullName"
-          placeholder="Введите ФИО"
+          [placeholder]="employeeFilterKey.value?.inputPlaceHolder"
           appendTo="body"
           styleClass="w-full"
           inputStyleClass="w-full"
@@ -38,6 +37,38 @@
             <span class="ml-3">{{ employee.fullName }}</span>
           </ng-template>
         </p-autoComplete>
+
+        <div class="field-checkbox">
+          <p-checkbox formControlName="employeeManuallyFlag" binary="true" inputId="employeeManuallyFlag"></p-checkbox>
+          <label for="employeeManuallyFlag">Ввести данные о работнике вручную</label>
+        </div>
+
+        <div *ngIf="form.get('employeeManuallyFlag').value" formGroupName="source_snapshot">
+          <div class="formgrid grid">
+            <div class="field col">
+              <label for="tn">Таб. номер</label>
+              <input type="text" id="tn" formControlName="tn" class="inputfield w-full" pInputText />
+            </div>
+            <div class="field col">
+              <label for="fullname">ФИО</label>
+              <input type="text" id="fullname" formControlName="fio" class="inputfield w-full" pInputText />
+            </div>
+            <div class="field col">
+              <label for="dept">Отдел</label>
+              <input type="text" id="dept" formControlName="dept" class="inputfield w-full" pInputText />
+            </div>
+          </div>
+          <div class="formgrid grid" formGroupName="user_attrs">
+            <div class="field col">
+              <label for="email">Электронная почта</label>
+              <input type="text" id="email" formControlName="email" class="inputfield w-full" pInputText />
+            </div>
+            <div class="field col">
+              <label for="phone">Телефон</label>
+              <input type="text" id="phone" formControlName="phone" class="inputfield w-full" pInputText />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </form>

@@ -8,14 +8,18 @@ export interface EmployeeFiltersViewModel {
    * Название фильтра
    */
   title: string;
+  /**
+   * placeholder для input-элемента, фильтрующему работников
+   */
+  inputPlaceHolder: string;
 }
 
 /**
  * Фабрика для создания представлений
  */
 class EmployeeFiltersViewModelFactory {
-  static create(title: string): EmployeeFiltersViewModel {
-    return { title };
+  static create(title: string, inputPlaceHolder: string): EmployeeFiltersViewModel {
+    return { title, inputPlaceHolder };
   }
 }
 
@@ -23,10 +27,10 @@ class EmployeeFiltersViewModelFactory {
  * Объект маппинга фильтров для отображения в представление
  */
 export const employeeFiltersViewModelMap: Record<EmployeeFilters, EmployeeFiltersViewModel> = {
-  [EmployeeFilters.PHONE]: EmployeeFiltersViewModelFactory.create('Телефон'),
-  [EmployeeFilters.TN]: EmployeeFiltersViewModelFactory.create('Таб. номер'),
-  [EmployeeFilters.FIO]: EmployeeFiltersViewModelFactory.create('ФИО'),
-  [EmployeeFilters.DEPT]: EmployeeFiltersViewModelFactory.create('Подразделение'),
+  [EmployeeFilters.FIO]: EmployeeFiltersViewModelFactory.create('ФИО', 'Введите ФИО...'),
+  [EmployeeFilters.TN]: EmployeeFiltersViewModelFactory.create('Таб. номер', 'Введите табельный номер...'),
+  [EmployeeFilters.DEPT]: EmployeeFiltersViewModelFactory.create('Подразделение', 'Введите номер подразделения...'),
+  [EmployeeFilters.PHONE]: EmployeeFiltersViewModelFactory.create('Телефон', 'Введите номер телефона...'),
 };
 
 /**

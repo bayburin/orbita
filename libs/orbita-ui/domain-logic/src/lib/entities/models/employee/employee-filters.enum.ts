@@ -2,8 +2,8 @@
  * Список фильтров работников
  */
 export enum EmployeeFilters {
-  'PHONE' = 'phoneText',
-  'TN' = 'personnelNo',
   'FIO' = 'fullName',
+  'TN' = 'personnelNo',
   'DEPT' = 'departmentForAccounting',
+  'PHONE' = 'phoneText',
 }

@@ -27,6 +27,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { ChipModule } from 'primeng/chip';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { CheckboxModule } from 'primeng/checkbox';
 
 import { ConfirmationService } from 'primeng/api';
 
@@ -58,6 +59,7 @@ const modules: any[] = [
   ChipModule,
   AutoCompleteModule,
   SelectButtonModule,
+  CheckboxModule,
 ];
 
 @NgModule({
