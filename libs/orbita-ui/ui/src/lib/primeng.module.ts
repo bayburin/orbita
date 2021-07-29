@@ -26,6 +26,7 @@ import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ListboxModule } from 'primeng/listbox';
 import { ChipModule } from 'primeng/chip';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { ConfirmationService } from 'primeng/api';
 
@@ -56,6 +57,7 @@ const modules: any[] = [
   ListboxModule,
   ChipModule,
   AutoCompleteModule,
+  SelectButtonModule,
 ];
 
 @NgModule({

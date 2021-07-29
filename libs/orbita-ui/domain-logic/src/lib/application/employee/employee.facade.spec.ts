@@ -9,7 +9,7 @@ import { EMPLOYEE_FEATURE_KEY, State, initialState } from '../../infrastructure/
 import { TICKET_SYSTEM_FEATURE_KEY } from '../../infrastructure/store/index';
 import { EmployeeFacade } from './employee.facade';
 import { Employee } from './../../entities/models/employee/employee.interface';
-import { SearchEmployeeKeys } from '../../entities/search-employee-keys.enum';
+import { EmployeeFilters } from '../../entities/models/employee/employee-filters.enum';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -51,19 +51,19 @@ describe('EmployeeFacade', () => {
       it('should call loadAllEmployeeShort action', () => {
         const spy = jest.spyOn(store, 'dispatch');
 
-        facade.search(SearchEmployeeKeys.FIO, 'fake-value');
+        facade.search(EmployeeFilters.FIO, 'fake-value');
         expect(spy).toHaveBeenCalledWith(
-          EmployeeActions.loadAllEmployeeShort({ key: SearchEmployeeKeys.FIO, value: 'fake-value' })
+          EmployeeActions.loadAllEmployeeShort({ key: EmployeeFilters.FIO, value: 'fake-value' })
         );
       });
 
       it('should not call loadAllEmployeeShort action if value is empty', () => {
         const spy = jest.spyOn(store, 'dispatch');
 
-        facade.search(SearchEmployeeKeys.FIO, '');
+        facade.search(EmployeeFilters.FIO, '');
 
         expect(spy).not.toHaveBeenCalledWith(
-          EmployeeActions.loadAllEmployeeShort({ key: SearchEmployeeKeys.FIO, value: '' })
+          EmployeeActions.loadAllEmployeeShort({ key: EmployeeFilters.FIO, value: '' })
         );
       });
     });

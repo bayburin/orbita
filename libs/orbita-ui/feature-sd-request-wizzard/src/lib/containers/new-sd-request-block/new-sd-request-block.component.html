@@ -1,24 +1,44 @@
 <div class="card">
   <form [formGroup]="form">
-    <p-autoComplete
-      #autoComplete
-      name="employee"
-      [formControl]="employee"
-      [suggestions]="employees$ | async"
-      [showEmptyMessage]="true"
-      [autofocus]="true"
-      [minLength]="3"
-      field="fullName"
-      placeholder="Введите ФИО"
-      appendTo="body"
-      (completeMethod)="search($event)"
-      (onFocus)="autoComplete.show()"
-      (onClear)="clearEmployee()"
-      (onSelect)="selectEmployee()"
-    >
-      <ng-template let-employee pTemplate="item">
-        {{ employee.departmentForAccounting }} {{ employee.fullName }}
-      </ng-template>
-    </p-autoComplete>
+    <div class="field grid">
+      <label for="employee" class="col-fixed">Пользователь</label>
+      <div class="col-6">
+        <p-selectButton
+          class="pb-2 block"
+          [options]="employeeFilters"
+          [formControl]="employeeFilterKey"
+          optionLabel="title"
+          optionValue="filter"
+        ></p-selectButton>
+
+        <p-autoComplete
+          #autoComplete
+          id="employee"
+          class="block"
+          [formControl]="employee"
+          [suggestions]="employees$ | async"
+          [showEmptyMessage]="true"
+          [autofocus]="true"
+          [minLength]="3"
+          [virtualScroll]="true"
+          scrollHeight="300px"
+          [itemSize]="40"
+          field="fullName"
+          placeholder="Введите ФИО"
+          appendTo="body"
+          styleClass="w-full"
+          inputStyleClass="w-full"
+          (completeMethod)="search($event)"
+          (onFocus)="autoComplete.show()"
+          (onClear)="clearEmployee()"
+          (onSelect)="selectEmployee()"
+        >
+          <ng-template let-employee pTemplate="item">
+            <p-chip [label]="employee.departmentForAccounting"></p-chip>
+            <span class="ml-3">{{ employee.fullName }}</span>
+          </ng-template>
+        </p-autoComplete>
+      </div>
+    </div>
   </form>
 </div>

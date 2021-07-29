@@ -1,8 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { Employee } from './../../../entities/models/employee/employee.interface';
-import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
-import { SearchEmployeeKeys } from './../../../entities/search-employee-keys.enum';
+import { EmployeeFilters } from './../../../entities/models/employee/employee-filters.enum';
 import { EmployeeShortServerData } from './../../../entities/server-data/employee-server-data.interface';
 
 export abstract class EmployeeApiAbstract {
@@ -24,5 +23,5 @@ export abstract class EmployeeApiAbstract {
    * @param key - имя поля
    * @param value - значение
    */
-  abstract query(key?: SearchEmployeeKeys, value?: string): Observable<EmployeeShortServerData>;
+  abstract query(key?: EmployeeFilters, value?: string): Observable<EmployeeShortServerData>;
 }

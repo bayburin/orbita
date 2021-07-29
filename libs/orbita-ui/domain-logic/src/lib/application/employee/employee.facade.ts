@@ -5,7 +5,7 @@ import * as EmployeeFeature from '../../infrastructure/store/employee/employee.r
 import * as EmployeeActions from '../../infrastructure/store/employee/employee.actions';
 import * as EmployeeSelectors from '../../infrastructure/store/employee/employee.selectors';
 import { EmployeeFacadeAbstract } from './employee.facade.abstract';
-import { SearchEmployeeKeys } from './../../entities/search-employee-keys.enum';
+import { EmployeeFilters } from './../../entities/models/employee/employee-filters.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ export class EmployeeFacade implements EmployeeFacadeAbstract {
 
   constructor(private store: Store<EmployeeFeature.EmployeePartialState>) {}
 
-  search(key: SearchEmployeeKeys, value: string) {
+  search(key: EmployeeFilters, value: string) {
     if (value) {
       this.store.dispatch(EmployeeActions.loadAllEmployeeShort({ key, value }));
     }

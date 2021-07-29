@@ -2,7 +2,7 @@ import { EmployeeShort } from './../../entities/models/employee/employee-short.i
 import { Observable } from 'rxjs';
 
 import { Employee } from './../../entities/models/employee/employee.interface';
-import { SearchEmployeeKeys } from './../../entities/search-employee-keys.enum';
+import { EmployeeFilters } from './../../entities/models/employee/employee-filters.enum';
 
 export abstract class EmployeeFacadeAbstract {
   /**
@@ -36,5 +36,5 @@ export abstract class EmployeeFacadeAbstract {
    * @param key - атрибут поиска
    * @param value - значение
    */
-  abstract search(key: SearchEmployeeKeys, value: string): void;
+  abstract search(key: EmployeeFilters, value: string): void;
 }

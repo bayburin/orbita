@@ -1,7 +1,5 @@
 export * from './lib/orbita-ui-domain-logic.module';
 
-export * from './lib/entities/search-employee-keys.enum';
-
 export * from './lib/entities/models/ticket.interface';
 export * from './lib/entities/models/source-snapshot.interface';
 export * from './lib/entities/models/user.interface';
@@ -15,6 +13,7 @@ export * from './lib/entities/models/source-snapshot.interface';
 export * from './lib/entities/models/host.interface';
 export * from './lib/entities/models/user.interface';
 export * from './lib/entities/models/attachment.interface';
+export * from './lib/entities/models/employee/employee-filters.enum';
 
 export * from './lib/entities/forms/attachment-view-form.interface';
 
@@ -30,6 +29,7 @@ export * from './lib/entities/view-models/user-group.interface';
 export * from './lib/entities/view-models/cms-statuses-view-model.enum';
 export * from './lib/entities/view-models/csa-statuses-view-model.enum';
 export * from './lib/entities/view-models/user-group.interface';
+export * from './lib/entities/view-models/employee-filters-view-model.enum';
 
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';

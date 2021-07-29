@@ -1,8 +1,9 @@
-import { AutoCompleteModule } from 'primeng/autocomplete';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EmployeeFacade, EmployeeFacadeStub, SearchEmployeeKeys } from '@orbita/orbita-ui/domain-logic';
+import { EmployeeFacade, EmployeeFacadeStub, EmployeeFilters } from '@orbita/orbita-ui/domain-logic';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 import { NewSdRequestBlockComponent } from './new-sd-request-block.component';
 
@@ -13,7 +14,7 @@ describe('NewSdRequestBlockComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, AutoCompleteModule],
+      imports: [ReactiveFormsModule, AutoCompleteModule, SelectButtonModule],
       declarations: [NewSdRequestBlockComponent],
       providers: [{ provide: EmployeeFacade, useClass: EmployeeFacadeStub }],
       schemas: [NO_ERRORS_SCHEMA],
@@ -38,7 +39,7 @@ describe('NewSdRequestBlockComponent', () => {
 
       component.search(event);
 
-      expect(spy).toHaveBeenCalledWith(SearchEmployeeKeys.FIO, 'fake-value');
+      expect(spy).toHaveBeenCalledWith(EmployeeFilters.FIO, 'fake-value');
     });
   });
 
