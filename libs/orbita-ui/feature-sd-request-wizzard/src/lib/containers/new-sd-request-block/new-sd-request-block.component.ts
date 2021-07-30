@@ -57,7 +57,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     this.employeeSubs = this.employeeFilterKey.valueChanges
       .pipe(distinctUntilChanged())
       .subscribe(() => this.search({ query: this.employee.value }));
-    this.employeeManuallyFlag.valueChanges.subscribe((flag) => {
+    this.employeeManuallyFlagSubs = this.employeeManuallyFlag.valueChanges.subscribe((flag) => {
       if (flag) {
         this.employeeFilterKey.disable();
         this.employee.disable();
