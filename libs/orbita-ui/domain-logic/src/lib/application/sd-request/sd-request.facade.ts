@@ -1,18 +1,9 @@
 import { LazyLoadEvent } from 'primeng/api';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest, of } from 'rxjs';
-import {
-  tap,
-  switchMap,
-  catchError,
-  map,
-  withLatestFrom,
-  distinctUntilChanged,
-  share,
-  startWith,
-  filter,
-} from 'rxjs/operators';
+import { of } from 'rxjs';
+import { tap, switchMap, catchError, map, withLatestFrom, share, startWith, filter } from 'rxjs/operators';
+import { muteFirst } from '@orbita/orbita-ui/utils';
 
 import { SdRequestFacadeAbstract } from './sd-request.facade.abstract';
 import * as SdRequestActions from '../../infrastructure/store/sd-request/sd-request.actions';
@@ -65,12 +56,10 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     ),
     share()
   );
-  all$ = combineLatest([
+
+  all$ = muteFirst(
     this.loadSdRequests$.pipe(startWith(null)),
-    this.store.select(SdRequestViewModelSelectors.getAllViewModel),
-  ]).pipe(
-    map(([_dispatcher, selector]) => selector),
-    distinctUntilChanged()
+    this.store.select(SdRequestViewModelSelectors.getAllViewModel)
   );
   error$ = this.store.select(SdRequestSelectors.getError);
 

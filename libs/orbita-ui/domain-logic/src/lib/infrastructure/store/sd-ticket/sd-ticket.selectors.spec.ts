@@ -1,14 +1,14 @@
 import { sdTicketAdapter, initialState } from './sd-ticket.reducer';
 import * as SdTicketSelectors from './sd-ticket.selectors';
-import { SdTicket } from './../../../entities/models/sd/sd-ticket.interface';
+import { SdTicket, SdTicketTypes } from './../../../entities/models/sd/sd-ticket.interface';
 
 describe('SdTicketSelectors', () => {
-  const createSdTicketEntity = (identity: number, name = '') =>
-    (({
+  const createSdTicketEntity = (identity: number, type: SdTicketTypes = 'FreeApplication') =>
+    ({
       identity,
-      name: name || `name-${identity}`,
-    } as unknown) as SdTicket);
-  const arrEntities = [createSdTicketEntity(1), createSdTicketEntity(2), createSdTicketEntity(3)];
+      ticketable_type: type,
+    } as unknown as SdTicket);
+  const arrEntities = [createSdTicketEntity(1), createSdTicketEntity(2, 'AppForm'), createSdTicketEntity(3, null)];
   const entities = {
     1: arrEntities[0],
     2: arrEntities[1],
@@ -48,5 +48,9 @@ describe('SdTicketSelectors', () => {
 
   it('getEntities() should return entities', () => {
     expect(SdTicketSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+
+  it('getAllFreeApplications() should return entities', () => {
+    expect(SdTicketSelectors.getAllFreeApplications.projector(arrEntities)).toEqual([arrEntities[0]]);
   });
 });

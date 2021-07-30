@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { of, combineLatest } from 'rxjs';
-import { filter, tap, switchMap, catchError, startWith, map, distinctUntilChanged, share } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { filter, tap, switchMap, catchError, startWith, share } from 'rxjs/operators';
+import { muteFirst } from '@orbita/orbita-ui/utils';
 
 import { ServiceDeskFacadeAbstract } from './service-desk.facade.abstract';
 import * as SdServiceActions from '../../infrastructure/store/sd-service/sd-service.actions';
@@ -10,6 +11,7 @@ import * as SdServiceSelectors from '../../infrastructure/store/sd-service/sd-se
 import * as SdTicketActions from '../../infrastructure/store/sd-ticket/sd-ticket.actions';
 import * as SdTicketFeature from '../../infrastructure/store/sd-ticket/sd-ticket.reducer';
 import * as SdTicketSelectors from '../../infrastructure/store/sd-ticket/sd-ticket.selectors';
+import * as ServiceDeskViewModelSelectors from '../../infrastructure/store/selectors/service-desk-view-model.selectors';
 import { ServiceDeskApi } from './../../infrastructure/api/service-desk/service-desk.api';
 import { SdTicketCacheService } from './../../infrastructure/services/sd-ticket-cache.service';
 
@@ -39,19 +41,18 @@ export class ServiceDeskFacade implements ServiceDeskFacadeAbstract {
     ),
     share()
   );
-  sdTickets$ = combineLatest([
+
+  sdTickets$ = muteFirst(
     this.loadSdTickets$.pipe(startWith(null)),
-    this.sdTicketStore.select(SdTicketSelectors.getAll),
-  ]).pipe(
-    map(([_dispatcher, selector]) => selector),
-    distinctUntilChanged()
+    this.sdTicketStore.select(SdTicketSelectors.getAll)
   );
-  sdServices$ = combineLatest([
+  sdServices$ = muteFirst(
     this.loadSdTickets$.pipe(startWith(null)),
-    this.sdServiceStore.select(SdServiceSelectors.getAll),
-  ]).pipe(
-    map(([_dispatcher, selector]) => selector),
-    distinctUntilChanged()
+    this.sdServiceStore.select(SdServiceSelectors.getAll)
+  );
+  allFreeApplicationsViewModel$ = muteFirst(
+    this.loadSdTickets$.pipe(startWith(null)),
+    this.sdTicketStore.select(ServiceDeskViewModelSelectors.getAllFreeApplicationsViewModel)
   );
 
   constructor(

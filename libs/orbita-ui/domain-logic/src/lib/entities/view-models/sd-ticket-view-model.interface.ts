@@ -1,7 +1,10 @@
+import { SdTicketTypes } from './../models/sd/sd-ticket.interface';
+import { SdService } from './../models/sd/sd-service.interface';
+import { User } from './../models/user.interface';
 /**
  * Интерфейс типа заявки в свободной форме
  */
-export interface SdTicket {
+export interface SdTicketViewModel {
   /**
    * Идентификатор вида заявки
    */
@@ -15,6 +18,11 @@ export interface SdTicket {
    * Идентификатор услуги
    */
   readonly service_id: number;
+
+  /**
+   * Вид услуги
+   */
+  readonly service: SdService;
 
   /**
    * Имя вида заявки
@@ -39,15 +47,5 @@ export interface SdTicket {
   /**
    * Список табельных номеров ответственных исполнителей
    */
-  readonly responsible_users: { tn: number }[];
+  readonly responsible_users: User[];
 }
-
-/**
- * Типы тикета на портале техподдержки
- */
-export type SdTicketTypes = 'FreeApplication' | 'AppForm' | null;
-
-/**
- * Состояния тикета: черновое или публичное
- */
-export type States = 'draft' | 'published';

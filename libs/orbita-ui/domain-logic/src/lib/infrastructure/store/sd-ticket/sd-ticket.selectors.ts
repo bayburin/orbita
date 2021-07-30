@@ -21,3 +21,7 @@ export const getError = createSelector(getSdTicketState, (state: State) => state
 export const getAll = createSelector(getSdTicketState, (state: State) => selectAll(state));
 
 export const getEntities = createSelector(getSdTicketState, (state: State) => selectEntities(state));
+
+export const getAllFreeApplications = createSelector(getAll, (sdTickets) =>
+  sdTickets.filter((sdTicket) => sdTicket.ticketable_type === 'FreeApplication')
+);

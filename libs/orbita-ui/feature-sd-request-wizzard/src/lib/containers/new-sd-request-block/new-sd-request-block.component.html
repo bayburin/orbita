@@ -11,7 +11,7 @@
         ></p-selectButton>
 
         <p-autoComplete
-          #autoComplete
+          #employeeAutoComplete
           id="employee"
           class="block mb-3"
           [formControl]="employee"
@@ -28,7 +28,7 @@
           styleClass="w-full"
           inputStyleClass="w-full"
           (completeMethod)="search($event)"
-          (onFocus)="autoComplete.show()"
+          (onFocus)="employeeAutoComplete.show()"
           (onClear)="clearEmployee()"
           (onSelect)="selectEmployee()"
         >
@@ -68,6 +68,40 @@
               <input type="text" id="phone" formControlName="phone" class="inputfield w-full" pInputText />
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <p-divider></p-divider>
+
+    <div class="field grid">
+      <label for="sd_ticket" class="col-2">Услуга</label>
+      <div class="col-10">
+        <p-autoComplete
+          #ticketAppautoComplete
+          id="ticket"
+          class="block mb-3"
+          [formControl]="ticket"
+          [suggestions]="tickets$ | async"
+          [showEmptyMessage]="true"
+          [autofocus]="true"
+          [virtualScroll]="true"
+          scrollHeight="300px"
+          [itemSize]="30"
+          field="name"
+          placeholder="Выберите услугу..."
+          appendTo="body"
+          styleClass="w-full"
+          inputStyleClass="w-full"
+          (completeMethod)="search($event)"
+          (onFocus)="ticketAppautoComplete.show()"
+          (onClear)="clearTicket()"
+          (onSelect)="selectTicket()"
+        ></p-autoComplete>
+
+        <div class="field-checkbox">
+          <p-checkbox formControlName="noTicketFlag" binary="true" inputId="noTicketFlag"></p-checkbox>
+          <label for="noTicketFlag">Услуга не найдена</label>
         </div>
       </div>
     </div>

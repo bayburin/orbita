@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { AutoComplete } from 'primeng/autocomplete';
-import { EmployeeFacade, employeeFiltersViewModelArray } from '@orbita/orbita-ui/domain-logic';
+import { EmployeeFacade, employeeFiltersViewModelArray, ServiceDeskFacade } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'orbita-ui-sd-request-wizzard-new-sd-request-block',
@@ -11,28 +11,40 @@ import { EmployeeFacade, employeeFiltersViewModelArray } from '@orbita/orbita-ui
   styleUrls: ['./new-sd-request-block.component.scss'],
 })
 export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
+  form: FormGroup;
+
+  // ========== Раздел формы работника ==========
+
   employees$ = this.employeeFacade.allShort$.pipe(
     tap((employees) => {
-      if (this.autoComplete) {
+      if (this.employeeAutoComplete) {
         // Почему-то при ручном вызове поиска выдается строка "данные не найдены".
         // Чтобы исправить это далее атрибут noResults устанавливается вручную.
-        this.autoComplete.noResults = employees.length ? false : true;
+        this.employeeAutoComplete.noResults = employees.length ? false : true;
       }
     })
   );
-  form: FormGroup;
   employeeFilters = employeeFiltersViewModelArray;
   employeeFilterKey = new FormControl(this.employeeFilters[0]);
   employee = new FormControl();
   employeeSubs: Subscription;
   employeeManuallyFlagSubs: Subscription;
-  @ViewChild('autoComplete') autoComplete: AutoComplete;
+  @ViewChild('employeeAutoComplete') employeeAutoComplete: AutoComplete;
+
+  // ========== Раздел формы услуги ==========
+
+  tickets$ = this.serviceDeskFacade.allFreeApplicationsViewModel$;
+  ticket = new FormControl();
 
   get employeeManuallyFlag(): FormControl {
     return this.form?.get('employeeManuallyFlag') as FormControl;
   }
 
-  constructor(private employeeFacade: EmployeeFacade, private fb: FormBuilder) {}
+  constructor(
+    private employeeFacade: EmployeeFacade,
+    private serviceDeskFacade: ServiceDeskFacade,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -47,6 +59,8 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       }),
       employee: [],
       employeeManuallyFlag: [false],
+      ticket: [],
+      noTicketFlag: [false],
       description: [],
       priority: [],
       finished_at_plan: [],
@@ -67,6 +81,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       }
     });
 
+    // TODO: Удалить
     this.form.valueChanges.subscribe((data) => console.log(data));
   }
 
@@ -88,13 +103,27 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    * Добавляет выбранного пользователя в форму заявки
    */
   selectEmployee(): void {
-    this.form.get('employee').setValue(this.employee.value);
+    this.form.patchValue({ employee: this.employee.value });
   }
 
   /**
    * Очищает работника из формы заявки
    */
   clearEmployee(): void {
-    this.form.get('employee').setValue(null);
+    this.form.patchValue({ employee: null });
+  }
+
+  /**
+   * Добавляет выбранную услугу в форму заявки
+   */
+  selectTicket(): void {
+    this.form.patchValue({ ticket: this.ticket.value });
+  }
+
+  /**
+   * Очищает услугу из формы заявки
+   */
+  clearTicket(): void {
+    this.form.patchValue({ ticket: null });
   }
 }
