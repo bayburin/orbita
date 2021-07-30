@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged, tap } from 'rxjs/operators';
 import { AutoComplete } from 'primeng/autocomplete';
@@ -35,9 +35,14 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
   tickets$ = this.serviceDeskFacade.allFreeApplicationsViewModel$;
   ticket = new FormControl();
+  noTicketFlag: Subscription;
 
   get employeeManuallyFlag(): FormControl {
     return this.form?.get('employeeManuallyFlag') as FormControl;
+  }
+
+  get newAttachmentsForm(): FormArray {
+    return this.form.get('newAttachments') as FormArray;
   }
 
   constructor(
@@ -47,39 +52,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.form = this.fb.group({
-      source_snapshot: this.fb.group({
-        tn: [],
-        fio: [],
-        dept: [],
-        user_attrs: this.fb.group({
-          email: [],
-          phone: [],
-        }),
-      }),
-      employee: [],
-      employeeManuallyFlag: [false],
-      ticket: [],
-      noTicketFlag: [false],
-      description: [],
-      priority: [],
-      finished_at_plan: [],
-      workers: [[]],
-      attachments: this.fb.array([]),
-      newAttachments: this.fb.array([]),
-    });
-    this.employeeSubs = this.employeeFilterKey.valueChanges
-      .pipe(distinctUntilChanged())
-      .subscribe(() => this.search({ query: this.employee.value }));
-    this.employeeManuallyFlagSubs = this.employeeManuallyFlag.valueChanges.subscribe((flag) => {
-      if (flag) {
-        this.employeeFilterKey.disable();
-        this.employee.disable();
-      } else {
-        this.employeeFilterKey.enable();
-        this.employee.enable();
-      }
-    });
+    this.buildForm();
 
     // TODO: Удалить
     this.form.valueChanges.subscribe((data) => console.log(data));
@@ -88,6 +61,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.employeeSubs.unsubscribe();
     this.employeeManuallyFlagSubs.unsubscribe();
+    this.noTicketFlag.unsubscribe();
   }
 
   /**
@@ -125,5 +99,43 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    */
   clearTicket(): void {
     this.form.patchValue({ ticket: null });
+  }
+
+  private buildForm(): void {
+    this.form = this.fb.group({
+      source_snapshot: this.fb.group({
+        tn: [],
+        fio: [],
+        dept: [],
+        user_attrs: this.fb.group({
+          email: [],
+          phone: [],
+        }),
+      }),
+      employee: [],
+      employeeManuallyFlag: [false],
+      ticket: [],
+      noTicketFlag: [false],
+      description: [],
+      priority: [],
+      finished_at_plan: [],
+      workers: [[]],
+      newAttachments: this.fb.array([]),
+    });
+    this.employeeSubs = this.employeeFilterKey.valueChanges
+      .pipe(distinctUntilChanged())
+      .subscribe(() => this.search({ query: this.employee.value }));
+    this.employeeManuallyFlagSubs = this.employeeManuallyFlag.valueChanges.subscribe((flag) => {
+      if (flag) {
+        this.employeeFilterKey.disable();
+        this.employee.disable();
+      } else {
+        this.employeeFilterKey.enable();
+        this.employee.enable();
+      }
+    });
+    this.noTicketFlag = this.form
+      .get('noTicketFlag')
+      .valueChanges.subscribe((flag) => (flag ? this.ticket.disable() : this.ticket.enable()));
   }
 }

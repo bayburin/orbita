@@ -1,9 +1,16 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { EmployeeFacade, EmployeeFacadeStub, EmployeeFilters } from '@orbita/orbita-ui/domain-logic';
+import {
+  EmployeeFacade,
+  EmployeeFacadeStub,
+  EmployeeFilters,
+  ServiceDeskFacade,
+  ServiceDeskFacadeStub,
+} from '@orbita/orbita-ui/domain-logic';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { CheckboxModule } from 'primeng/checkbox';
 
 import { NewSdRequestBlockComponent } from './new-sd-request-block.component';
 
@@ -14,9 +21,12 @@ describe('NewSdRequestBlockComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, AutoCompleteModule, SelectButtonModule],
+      imports: [ReactiveFormsModule, AutoCompleteModule, SelectButtonModule, CheckboxModule],
       declarations: [NewSdRequestBlockComponent],
-      providers: [{ provide: EmployeeFacade, useClass: EmployeeFacadeStub }],
+      providers: [
+        { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
+        { provide: ServiceDeskFacade, useClass: ServiceDeskFacadeStub },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });

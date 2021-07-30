@@ -1,6 +1,6 @@
 <div class="card col-6">
   <form [formGroup]="form">
-    <div class="field grid">
+    <div class="field grid mb-5">
       <label for="employee" class="col-2">Работник</label>
       <div class="col-10">
         <p-selectButton
@@ -72,9 +72,9 @@
       </div>
     </div>
 
-    <p-divider></p-divider>
+    <p-divider type="dashed"></p-divider>
 
-    <div class="field grid">
+    <div class="field grid my-5">
       <label for="sd_ticket" class="col-2">Услуга</label>
       <div class="col-10">
         <p-autoComplete
@@ -103,6 +103,29 @@
           <p-checkbox formControlName="noTicketFlag" binary="true" inputId="noTicketFlag"></p-checkbox>
           <label for="noTicketFlag">Услуга не найдена</label>
         </div>
+      </div>
+    </div>
+
+    <div class="field grid mb-5">
+      <label for="description" class="col-2">Описание</label>
+      <div class="col-10">
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="10"
+          placeholder="Введите описание заявки..."
+          pInputTextarea
+          class="w-full"
+        ></textarea>
+      </div>
+    </div>
+
+    <p-divider type="dashed"></p-divider>
+
+    <div class="field grid my-5">
+      <label for="files" class="col-2">Файлы</label>
+      <div class="col-10">
+        <lib-attachments-form [attachmentsForm]="newAttachmentsForm"></lib-attachments-form>
       </div>
     </div>
   </form>
