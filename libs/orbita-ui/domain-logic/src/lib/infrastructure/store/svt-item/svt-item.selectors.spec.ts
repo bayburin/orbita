@@ -5,10 +5,10 @@ import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
 describe('SvtItem Selectors', () => {
   const error = { message: 'error' };
   const createSvtItemEntity = (id: number, name = '') =>
-    (({
+    ({
       barcode_item: { id },
       item_model: name || `name-${id}`,
-    } as unknown) as SvtItem);
+    } as unknown as SvtItem);
   const arrEntities = [createSvtItemEntity(111), createSvtItemEntity(222), createSvtItemEntity(333)];
   const entities = {
     111: arrEntities[0],
@@ -16,6 +16,7 @@ describe('SvtItem Selectors', () => {
     333: arrEntities[2],
   };
   const selectedId = 111;
+  const filters = { foo: 'bar' };
   let state: any;
 
   beforeEach(() => {
@@ -25,6 +26,8 @@ describe('SvtItem Selectors', () => {
       error,
       loading: false,
       loaded: true,
+      filters,
+      needItems: true,
     });
   });
 
@@ -38,6 +41,14 @@ describe('SvtItem Selectors', () => {
 
   it('getError() should return "error" attribute', () => {
     expect(SvtItemSelectors.getError.projector(state)).toEqual(error);
+  });
+
+  it('getFilters() should return "filters" attribute', () => {
+    expect(SvtItemSelectors.getFilters.projector(state)).toEqual(filters);
+  });
+
+  it('getNeedItems() should return "needItems" attribute', () => {
+    expect(SvtItemSelectors.getNeedItems.projector(state)).toBe(true);
   });
 
   it('getAll() should return array of entities', () => {

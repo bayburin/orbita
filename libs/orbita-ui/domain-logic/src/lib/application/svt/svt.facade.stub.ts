@@ -6,4 +6,6 @@ export class SvtFacadeStub implements SvtFacadeAbstract {
   loadingItem$ = new BehaviorSubject(false);
   loadedItem$ = new BehaviorSubject(false);
   selectedItem$ = new BehaviorSubject(null);
+  loadItems$ = new BehaviorSubject(null);
+  allItems$ = new BehaviorSubject(null);
 }

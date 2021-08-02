@@ -16,6 +16,10 @@ export const getLoaded = createSelector(getSvtItemState, (state: State) => state
 
 export const getError = createSelector(getSvtItemState, (state: State) => state.error);
 
+export const getFilters = createSelector(getSvtItemState, (state: State) => state.filters);
+
+export const getNeedItems = createSelector(getSvtItemState, (state: State) => state.needItems);
+
 export const getAll = createSelector(getSvtItemState, (state: State) => selectAll(state));
 
 export const getEntities = createSelector(getSvtItemState, (state: State) => selectEntities(state));

@@ -2,7 +2,7 @@ import { createAction, props } from '@ngrx/store';
 
 import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
 
-export const loadByInventNum = createAction('[SvtItem/Api] Load All');
+export const loadAll = createAction('[SvtItem/Api] Load All');
 
 export const loadAllSuccess = createAction('[SvtItem/API] Load All Success', props<{ svtItems: SvtItem[] }>());
 

@@ -6,10 +6,10 @@ import { SdRequestFactory } from './../../factories/sd-request.factory';
 
 describe('SdRequestSelectors', () => {
   const createSdRequestEntity = (id: number, name = '') =>
-    (({
+    ({
       id,
       name: name || `name-${id}`,
-    } as unknown) as SdRequest);
+    } as unknown as SdRequest);
   const arrEntities = [createSdRequestEntity(111), createSdRequestEntity(222), createSdRequestEntity(333)];
   const entities = {
     111: arrEntities[0],

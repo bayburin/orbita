@@ -184,6 +184,32 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     //   return of(new HttpResponse({ body: sdTickets, status: 200 })).pipe(materialize(), delay(1500), dematerialize());
     // }
 
-    return next.handle(req).pipe(materialize(), delay(1500), dematerialize());
+    const svtItems = [
+      {
+        item_id: 12345,
+        barcode_item: { id: 123456 },
+        type_id: 2,
+        workplace_id: 3,
+        workplace: { workplace_id: 23, id_tn: 12880 },
+        model_id: 4,
+        item_model: 'Model 1',
+        invent_num: '453627',
+        serial_num: null,
+        status: 'in_workplace',
+        short_item_model: 'Model 1',
+        type: {
+          type_id: 2,
+          name: 'monitor',
+          short_description: 'Монитор',
+          long_description: 'Монитор',
+        },
+      },
+    ];
+
+    if (req.url.endsWith('items')) {
+      return of(new HttpResponse({ body: svtItems, status: 200 }));
+    }
+
+    return next.handle(req).pipe(materialize(), delay(300), dematerialize());
   }
 }

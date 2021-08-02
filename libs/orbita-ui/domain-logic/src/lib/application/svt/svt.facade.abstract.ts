@@ -15,4 +15,12 @@ export abstract class SvtFacadeAbstract {
    * Выбранная ВТ
    */
   selectedItem$: Observable<SvtItem>;
+  /**
+   * Загружает список ВТ
+   */
+  loadItems$: Observable<void | SvtItem[]>;
+  /**
+   * Список ВТ
+   */
+  allItems$: Observable<SvtItem[]>;
 }

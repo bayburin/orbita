@@ -21,21 +21,14 @@ export class SvtApi implements SvtApiAbstract {
     return this.http.get<SvtItem>(`${this.api}/find_by_barcode/${barcode}`);
   }
 
-  // queryItems(page: number, perPage: number, filters: PrimeFilter = {}) {
-  //   const filterValues = Object.keys(filters).reduce((acc, key) => {
-  //     acc[key] = filters[key].value;
+  queryItems(filters: PrimeFilter = {}) {
+    const filterValues = Object.keys(filters).reduce((acc, key) => {
+      acc[key] = filters[key].value;
 
-  //     return acc;
-  //   }, {} as { [key: string]: any });
-  //   const params = new HttpParams()
-  //     .append('page', `${page}`)
-  //     .append('perPage', `${perPage}`)
-  //     .append('filters', `${JSON.stringify(filterValues)}`);
+      return acc;
+    }, {} as { [key: string]: any });
+    const params = new HttpParams().append('filters', `${JSON.stringify(filterValues)}`);
 
-  //   return this.http.get<SvtItem[]>(`${this.api}/api/v2/invent/items`, { params });
-  // }
-
-  // queryUserItems(idTn: number) {
-  //   return this.http.get<SvtItem[]>(`${this.api}/user_isses/${idTn}/items`);
-  // }
+    return this.http.get<SvtItem[]>(`${this.api}/items`, { params });
+  }
 }

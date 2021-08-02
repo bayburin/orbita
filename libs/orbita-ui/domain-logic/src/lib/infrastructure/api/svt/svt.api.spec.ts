@@ -46,39 +46,21 @@ describe('SvtApi', () => {
     });
   });
 
-  // describe('queryItems()', () => {
-  //   const api = 'http://test/api/v2/invent/items';
-  //   const items = [{ item_id: 1 }];
+  describe('queryItems()', () => {
+    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/svt/items`;
+    const items = [{ item_id: 1 }];
 
-  //   it('should return free_sd_request_types', () => {
-  //     service.queryItems(1, 2, {}).subscribe((result) => {
-  //       expect(result).toEqual(items);
-  //     });
+    it('should return free_sd_request_types', () => {
+      service.queryItems({}).subscribe((result) => {
+        expect(result).toEqual(items);
+      });
 
-  //     httpMock
-  //       .expectOne({
-  //         method: 'GET',
-  //         url: `${api}?page=1&perPage=2&filters=%7B%7D`,
-  //       })
-  //       .flush(items);
-  //   });
-  // });
-
-  // describe('queryUserItems()', () => {
-  //   const api = 'http://test/user_isses/123/items';
-  //   const items = [{ item_id: 1 }];
-
-  //   it('should return free_sd_request_types', () => {
-  //     service.queryUserItems(123).subscribe((result) => {
-  //       expect(result).toEqual(items);
-  //     });
-
-  //     httpMock
-  //       .expectOne({
-  //         method: 'GET',
-  //         url: api,
-  //       })
-  //       .flush(items);
-  //   });
-  // });
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: `${api}?filters=%7B%7D`,
+        })
+        .flush(items);
+    });
+  });
 });
