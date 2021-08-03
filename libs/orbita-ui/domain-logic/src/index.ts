@@ -32,6 +32,7 @@ export * from './lib/entities/view-models/cms-statuses-view-model.enum';
 export * from './lib/entities/view-models/csa-statuses-view-model.enum';
 export * from './lib/entities/view-models/user-group.interface';
 export * from './lib/entities/view-models/employee-filters-view-model.enum';
+export * from './lib/entities/view-models/sd-ticket-view-model.interface';
 
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';

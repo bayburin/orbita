@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -12,6 +13,7 @@ import {
   EmployeeShort,
   SdTicket,
   SvtItem,
+  SdTicketViewModel,
 } from '@orbita/orbita-ui/domain-logic';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -24,6 +26,7 @@ describe('NewSdRequestBlockComponent', () => {
   let component: NewSdRequestBlockComponent;
   let fixture: ComponentFixture<NewSdRequestBlockComponent>;
   let employeeFacade: EmployeeFacade;
+  let serviceDeskFacade: ServiceDeskFacade;
   let svtFacade: SvtFacade;
 
   beforeEach(async () => {
@@ -43,6 +46,7 @@ describe('NewSdRequestBlockComponent', () => {
     fixture = TestBed.createComponent(NewSdRequestBlockComponent);
     component = fixture.componentInstance;
     employeeFacade = TestBed.inject(EmployeeFacade);
+    serviceDeskFacade = TestBed.inject(ServiceDeskFacade);
     svtFacade = TestBed.inject(SvtFacade);
     fixture.detectChanges();
   });
@@ -72,6 +76,26 @@ describe('NewSdRequestBlockComponent', () => {
       expect(component.form.getRawValue().employee).toEqual(employee);
       expect(spy).toHaveBeenCalledWith({ fio: employee.fullName });
     });
+
+    it('should not call svtFacade.loadItemsForForm() if svtItemManually is true', () => {
+      const employee = { fullName: 'fake-employee' } as EmployeeShort;
+      const spy = jest.spyOn(svtFacade, 'loadItemsForForm');
+
+      component.svtItemManually.setValue(true);
+      component.selectEmployee(employee);
+
+      expect(spy).not.toHaveBeenCalledWith({ fio: employee.fullName });
+    });
+
+    it('should call svtFacade.loadItemsForForm() if svtItemManually is false', () => {
+      const employee = { fullName: 'fake-employee' } as EmployeeShort;
+      const spy = jest.spyOn(svtFacade, 'loadItemsForForm');
+
+      component.svtItemManually.setValue(false);
+      component.selectEmployee(employee);
+
+      expect(spy).toHaveBeenCalledWith({ fio: employee.fullName });
+    });
   });
 
   describe('clearEmployee()', () => {
@@ -88,7 +112,12 @@ describe('NewSdRequestBlockComponent', () => {
 
   describe('searchTicket()', () => {
     it('should filter tickets', () => {
-      /** */
+      const tickets = [{ name: 'first name' } as SdTicketViewModel, { name: 'second name' } as SdTicketViewModel];
+
+      (serviceDeskFacade.allFreeApplicationsViewModel$ as BehaviorSubject<any>).next(tickets);
+      component.searchTicket({ query: 'sec' });
+
+      expect(component.tickets).toEqual([tickets[1]]);
     });
   });
 

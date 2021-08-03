@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { distinctUntilChanged, tap, filter } from 'rxjs/operators';
+import { distinctUntilChanged, tap, filter, map, first } from 'rxjs/operators';
 import { AutoComplete } from 'primeng/autocomplete';
 import {
   EmployeeFacade,
@@ -10,6 +10,7 @@ import {
   SvtFacade,
   SvtItem,
   EmployeeShort,
+  SdTicketViewModel,
 } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
@@ -41,8 +42,10 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   // ========== Раздел формы услуги ==========
 
   tickets$ = this.serviceDeskFacade.allFreeApplicationsViewModel$;
+  tickets: SdTicketViewModel[];
   ticket = new FormControl();
   noTicketFlag: Subscription;
+  ticketsSubs: Subscription;
 
   // ========== Раздел формы ВТ ==========
 
@@ -76,6 +79,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.buildForm();
+    this.ticketsSubs = this.tickets$.subscribe((tickets) => (this.tickets = tickets));
 
     // TODO: Удалить
     this.form.valueChanges.subscribe((data) => console.log(data));
@@ -87,6 +91,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     this.noTicketFlag.unsubscribe();
     this.svtItemFilterKeySubs.unsubscribe();
     this.svtItemManuallySubs.unsubscribe();
+    this.ticketsSubs.unsubscribe();
   }
 
   /**
@@ -100,10 +105,16 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
   /**
    * Добавляет выбранного пользователя в форму заявки
+   *
+   * @param employee - выбранный работник
    */
   selectEmployee(employee: EmployeeShort): void {
     this.form.patchValue({ employee: employee });
-    this.svtFacade.loadItemsForForm({ fio: employee.fullName });
+
+    // Запустить поиск работников по ФИО, если не выбран чекбокс "Поиск выч. техники вручную"
+    if (!this.svtItemManually.value) {
+      this.svtFacade.loadItemsForForm({ fio: employee.fullName });
+    }
   }
 
   /**
@@ -115,9 +126,16 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
   /**
    * Фильтрует существующий массив видов заявок
+   *
+   * @param event - событие поиска вида услуги
    */
-  searchTicket(): void {
-    // TODO: Отфильтровать виды заявок
+  searchTicket(event: any): void {
+    this.tickets$
+      .pipe(
+        first(),
+        map((tickets) => tickets.filter((ticket) => ticket.name.toLowerCase().includes(event.query.toLowerCase())))
+      )
+      .subscribe((tickets) => (this.tickets = tickets));
   }
 
   /**
@@ -136,6 +154,8 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
   /**
    * Выполняет поиск ВТ, либо фильтрует существующий массив ВТ
+   *
+   * @param event - событие поиска ВТ
    */
   searchSvtItem(event: any): void {
     const type = this.svtItemFilterKey.value;
@@ -145,6 +165,8 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
   /**
    * Добавляет выбранную ВТ в форму заявки
+   *
+   * @param svtItem - выбранная ВТ
    */
   selectSvtItem(svtItem: SvtItem): void {
     this.form.patchValue({ svtItem: svtItem });
