@@ -43,7 +43,7 @@
           <label for="employeeManuallyFlag">Ввести данные о работнике вручную</label>
         </div>
 
-        <div *ngIf="form.get('employeeManuallyFlag').value" formGroupName="source_snapshot">
+        <div *ngIf="employeeManuallyFlag.value" formGroupName="source_snapshot">
           <div class="formgrid grid">
             <div class="field col">
               <label for="tn">Таб. номер</label>
@@ -69,54 +69,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <p-divider type="dashed"></p-divider>
-
-    <div class="field grid my-5">
-      <label for="sd_ticket" class="col-2">Услуга</label>
-      <div class="col-10">
-        <p-autoComplete
-          #ticketAppAutoComplete
-          id="ticket"
-          class="block mb-3"
-          [formControl]="ticket"
-          [suggestions]="tickets"
-          [showEmptyMessage]="true"
-          [autofocus]="true"
-          [virtualScroll]="true"
-          scrollHeight="300px"
-          [itemSize]="30"
-          field="name"
-          placeholder="Выберите услугу..."
-          appendTo="body"
-          styleClass="w-full"
-          inputStyleClass="w-full"
-          (completeMethod)="searchTicket($event)"
-          (onFocus)="ticketAppAutoComplete.show()"
-          (onClear)="clearTicket()"
-          (onSelect)="selectTicket()"
-        ></p-autoComplete>
-
-        <div class="field-checkbox">
-          <p-checkbox formControlName="noTicketFlag" binary="true" inputId="noTicketFlag"></p-checkbox>
-          <label for="noTicketFlag">Услуга не найдена</label>
-        </div>
-      </div>
-    </div>
-
-    <div class="field grid mb-5">
-      <label for="description" class="col-2">Описание</label>
-      <div class="col-10">
-        <textarea
-          id="description"
-          formControlName="description"
-          rows="10"
-          placeholder="Введите описание заявки..."
-          pInputTextarea
-          class="w-full"
-        ></textarea>
       </div>
     </div>
 
@@ -190,6 +142,54 @@
             </ng-template>
           </p-autoComplete>
         </div>
+      </div>
+    </div>
+
+    <p-divider type="dashed"></p-divider>
+
+    <div class="field grid my-5">
+      <label for="sd_ticket" class="col-2">Услуга</label>
+      <div class="col-10">
+        <p-autoComplete
+          #ticketAppAutoComplete
+          id="ticket"
+          class="block mb-3"
+          [formControl]="ticket"
+          [suggestions]="tickets"
+          [showEmptyMessage]="true"
+          [autofocus]="true"
+          [virtualScroll]="true"
+          scrollHeight="300px"
+          [itemSize]="30"
+          field="name"
+          placeholder="Выберите услугу..."
+          appendTo="body"
+          styleClass="w-full"
+          inputStyleClass="w-full"
+          (completeMethod)="searchTicket($event)"
+          (onFocus)="ticketAppAutoComplete.show()"
+          (onClear)="clearTicket()"
+          (onSelect)="selectTicket()"
+        ></p-autoComplete>
+
+        <div class="field-checkbox">
+          <p-checkbox formControlName="noTicketFlag" binary="true" inputId="noTicketFlag"></p-checkbox>
+          <label for="noTicketFlag">Услуга не найдена</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field grid mb-5">
+      <label for="description" class="col-2">Описание</label>
+      <div class="col-10">
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="10"
+          placeholder="Введите описание заявки..."
+          pInputTextarea
+          class="w-full"
+        ></textarea>
       </div>
     </div>
 

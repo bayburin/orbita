@@ -238,6 +238,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       if (flag) {
         this.employeeSvtItem.disable();
         this.svtFacade.removeAllItems();
+        this.employeeSvtItem.reset();
       } else {
         this.employeeSvtItem.enable();
         this.customSvtItem.reset();
