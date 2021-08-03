@@ -7,10 +7,48 @@ import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
 describe('SvtItemReducer', () => {
   let action: Action;
   const createSvtItemEntity = (id: number, name = '') =>
-    (({
+    ({
       barcode_item: { id },
       item_model: name || `name-${id}`,
-    } as unknown) as SvtItem);
+    } as unknown as SvtItem);
+
+  describe('loadAll', () => {
+    it('should set attributes', () => {
+      action = SvtItemActions.loadAll();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+      expect(result.needItems).toBe(false);
+    });
+  });
+
+  describe('loadAllSuccess', () => {
+    it('should set attributes', () => {
+      const svtItems = [createSvtItemEntity(1), createSvtItemEntity(2)];
+      action = SvtItemActions.loadAllSuccess({ svtItems });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(2);
+      expect(result.loaded).toBe(true);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('loadAllFailure', () => {
+    it('should set attributes', () => {
+      const error = 'fake-error';
+      action = SvtItemActions.loadAllFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(0);
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBe(error);
+    });
+  });
 
   describe('loadSelected', () => {
     it('should set attributes', () => {
@@ -76,6 +114,66 @@ describe('SvtItemReducer', () => {
 
       expect(result.loaded).toBe(false);
       expect(result.selectedId).toBeNull();
+    });
+  });
+
+  describe('loadAllForForm', () => {
+    it('should set attributes', () => {
+      action = SvtItemActions.loadAllForForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+      expect(result.needFormItems).toBe(false);
+    });
+  });
+
+  describe('loadAllForFormSuccess', () => {
+    it('should set attributes', () => {
+      const svtItems = [createSvtItemEntity(1), createSvtItemEntity(2)];
+      action = SvtItemActions.loadAllForFormSuccess({ svtItems });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(2);
+      expect(result.loaded).toBe(true);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('loadAllForFormFailure', () => {
+    it('should set attributes', () => {
+      const error = 'fake-error';
+      action = SvtItemActions.loadAllForFormFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(0);
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBe(error);
+    });
+  });
+
+  describe('setFormFilters', () => {
+    it('should set attributes', () => {
+      const filters = { tn: 12345 };
+      action = SvtItemActions.setFormFilters({ filters });
+      const result: State = reducer(initialState, action);
+
+      expect(result.formFilters).toBe(filters);
+    });
+  });
+
+  describe('clearAll', () => {
+    it('should set attributes', () => {
+      const svtItems = [createSvtItemEntity(1), createSvtItemEntity(2)];
+      action = SvtItemActions.loadAllSuccess({ svtItems });
+      let result: State = reducer(initialState, action);
+      action = SvtItemActions.clearAll();
+      result = reducer(result, action);
+
+      expect(result.ids.length).toBe(0);
     });
   });
 

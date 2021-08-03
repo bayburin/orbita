@@ -8,6 +8,8 @@ import { SVT_ITEM_FEATURE_KEY, State, initialState } from '../../infrastructure/
 import { TICKET_SYSTEM_FEATURE_KEY } from '../../infrastructure/store/index';
 import { SvtFacade } from './svt.facade';
 import { SvtItem } from './../../entities/models/svt/svt-item.interface';
+import { SvtApi } from '../../infrastructure/api/svt/svt.api';
+import { SvtApiStub } from './../../infrastructure/api/svt/svt.api.stub';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -19,10 +21,10 @@ describe('SvtItemFacade', () => {
   let facade: SvtFacade;
   let store: MockStore<TestSchema>;
   const createItemEntity = (id: number, name = '') =>
-    (({
+    ({
       barcode_item: { id },
       lastName: name || `name-${id}`,
-    } as unknown) as SvtItem);
+    } as unknown as SvtItem);
 
   describe('Unit', () => {
     let actions$: Observable<Action>;
@@ -34,7 +36,12 @@ describe('SvtItemFacade', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        providers: [SvtFacade, provideMockActions(() => actions$), provideMockStore({ initialState: state })],
+        providers: [
+          SvtFacade,
+          { provide: SvtApi, useClass: SvtApiStub },
+          provideMockActions(() => actions$),
+          provideMockStore({ initialState: state }),
+        ],
       });
 
       store = TestBed.inject(MockStore);

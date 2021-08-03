@@ -1,0 +1,16 @@
+.svt-items {
+  display: block;
+
+  .p-dropdown-item {
+    padding: $spacer !important;
+    margin: 0 $spacer !important;
+  }
+
+  .p-dropdown-items {
+    p-dropdownitem + p-dropdownitem {
+      .p-dropdown-item {
+        border-top: 1px solid var(--surface-d);
+      }
+    }
+  }
+}

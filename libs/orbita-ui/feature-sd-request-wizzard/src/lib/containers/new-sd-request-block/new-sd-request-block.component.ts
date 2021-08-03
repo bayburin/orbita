@@ -1,9 +1,16 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { distinctUntilChanged, tap } from 'rxjs/operators';
+import { distinctUntilChanged, tap, filter } from 'rxjs/operators';
 import { AutoComplete } from 'primeng/autocomplete';
-import { EmployeeFacade, employeeFiltersViewModelArray, ServiceDeskFacade } from '@orbita/orbita-ui/domain-logic';
+import {
+  EmployeeFacade,
+  employeeFiltersViewModelArray,
+  ServiceDeskFacade,
+  SvtFacade,
+  SvtItem,
+  EmployeeShort,
+} from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'orbita-ui-sd-request-wizzard-new-sd-request-block',
@@ -27,7 +34,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   employeeFilters = employeeFiltersViewModelArray;
   employeeFilterKey = new FormControl(this.employeeFilters[0]);
   employee = new FormControl();
-  employeeSubs: Subscription;
+  employeeFilterKeySubs: Subscription;
   employeeManuallyFlagSubs: Subscription;
   @ViewChild('employeeAutoComplete') employeeAutoComplete: AutoComplete;
 
@@ -36,6 +43,21 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   tickets$ = this.serviceDeskFacade.allFreeApplicationsViewModel$;
   ticket = new FormControl();
   noTicketFlag: Subscription;
+
+  // ========== Раздел формы ВТ ==========
+
+  svtItems$ = this.svtFacade.allForFormItems$;
+  svtItemFilters = [
+    { title: 'Инв. номер', value: 'invent_num' },
+    { title: 'Штрих-код', value: 'barcode' },
+    { title: 'Отдел', value: 'dept' },
+  ];
+  svtItemFilterKey = new FormControl(this.svtItemFilters[0]);
+  employeeSvtItem = new FormControl();
+  customSvtItem = new FormControl();
+  svtItemManually = new FormControl();
+  svtItemFilterKeySubs: Subscription;
+  svtItemManuallySubs: Subscription;
 
   get employeeManuallyFlag(): FormControl {
     return this.form?.get('employeeManuallyFlag') as FormControl;
@@ -48,6 +70,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   constructor(
     private employeeFacade: EmployeeFacade,
     private serviceDeskFacade: ServiceDeskFacade,
+    private svtFacade: SvtFacade,
     private fb: FormBuilder
   ) {}
 
@@ -59,9 +82,11 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.employeeSubs.unsubscribe();
+    this.employeeFilterKeySubs.unsubscribe();
     this.employeeManuallyFlagSubs.unsubscribe();
     this.noTicketFlag.unsubscribe();
+    this.svtItemFilterKeySubs.unsubscribe();
+    this.svtItemManuallySubs.unsubscribe();
   }
 
   /**
@@ -69,15 +94,16 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    *
    * @param event - событие поиска
    */
-  search(event: any): void {
+  searchEmployee(event: any): void {
     this.employeeFacade.search(this.employeeFilterKey.value.filter, event.query);
   }
 
   /**
    * Добавляет выбранного пользователя в форму заявки
    */
-  selectEmployee(): void {
-    this.form.patchValue({ employee: this.employee.value });
+  selectEmployee(employee: EmployeeShort): void {
+    this.form.patchValue({ employee: employee });
+    this.svtFacade.loadItemsForForm({ fio: employee.fullName });
   }
 
   /**
@@ -85,6 +111,13 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    */
   clearEmployee(): void {
     this.form.patchValue({ employee: null });
+  }
+
+  /**
+   * Фильтрует существующий массив видов заявок
+   */
+  searchTicket(): void {
+    // TODO: Отфильтровать виды заявок
   }
 
   /**
@@ -99,6 +132,36 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    */
   clearTicket(): void {
     this.form.patchValue({ ticket: null });
+  }
+
+  /**
+   * Выполняет поиск ВТ, либо фильтрует существующий массив ВТ
+   */
+  searchSvtItem(event: any): void {
+    const type = this.svtItemFilterKey.value;
+
+    this.svtFacade.loadItemsForForm({ [type.value]: event.query });
+  }
+
+  /**
+   * Добавляет выбранную ВТ в форму заявки
+   */
+  selectSvtItem(svtItem: SvtItem): void {
+    this.form.patchValue({ svtItem: svtItem });
+  }
+
+  /**
+   * Очищает ВТ из формы заявки
+   */
+  clearSvtItem(): void {
+    this.form.patchValue({ svtItem: null });
+  }
+
+  /**
+   * Возвращает строку, содержащую данные о выбранной ВТ
+   */
+  selectedSvtItemView(item: SvtItem): string {
+    return `${item.type.short_description} ${item.short_item_model} Инвентарный: ${item.invent_num} | Штрих-код: ${item.barcode_item.id}`;
   }
 
   private buildForm(): void {
@@ -117,14 +180,17 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       ticket: [],
       noTicketFlag: [false],
       description: [],
+      svtItem: [],
       priority: [],
       finished_at_plan: [],
       workers: [[]],
       newAttachments: this.fb.array([]),
     });
-    this.employeeSubs = this.employeeFilterKey.valueChanges
+    // Поиск работника по параметру
+    this.employeeFilterKeySubs = this.employeeFilterKey.valueChanges
       .pipe(distinctUntilChanged())
-      .subscribe(() => this.search({ query: this.employee.value }));
+      .subscribe(() => this.searchEmployee({ query: this.employee.value }));
+    // Отключение/включение поля "Работник"
     this.employeeManuallyFlagSubs = this.employeeManuallyFlag.valueChanges.subscribe((flag) => {
       if (flag) {
         this.employeeFilterKey.disable();
@@ -134,8 +200,30 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
         this.employee.enable();
       }
     });
+    // Отключение/включение поля "Услуга"
     this.noTicketFlag = this.form
       .get('noTicketFlag')
       .valueChanges.subscribe((flag) => (flag ? this.ticket.disable() : this.ticket.enable()));
+    // Поиск ВТ по параметру
+    this.svtItemFilterKeySubs = this.svtItemFilterKey.valueChanges
+      .pipe(
+        distinctUntilChanged(),
+        filter((str) => str.length)
+      )
+      .subscribe(() => this.searchSvtItem({ query: this.customSvtItem.value }));
+    // Отключение/включение поля "Выч. техника"
+    this.svtItemManuallySubs = this.svtItemManually.valueChanges.subscribe((flag) => {
+      if (flag) {
+        this.employeeSvtItem.disable();
+        this.svtFacade.removeAllItems();
+      } else {
+        this.employeeSvtItem.enable();
+        this.customSvtItem.reset();
+
+        if (this.form.get('employee').value) {
+          this.svtFacade.loadItemsForForm({ fio: this.form.get('employee').value.fullName });
+        }
+      }
+    });
   }
 }

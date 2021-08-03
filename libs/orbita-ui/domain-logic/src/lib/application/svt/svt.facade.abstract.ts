@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { SvtItem } from './../../entities/models/svt/svt-item.interface';
+import { SvtFilters } from './../../entities/models/svt/svt-filters.interface';
 
 export abstract class SvtFacadeAbstract {
   /**
@@ -18,9 +19,19 @@ export abstract class SvtFacadeAbstract {
   /**
    * Загружает список ВТ
    */
-  loadItems$: Observable<void | SvtItem[]>;
+  loadAllItems$: Observable<void | SvtItem[]>;
   /**
    * Список ВТ
    */
   allItems$: Observable<SvtItem[]>;
+
+  /**
+   * Загружает список ВТ для формы создания заявки
+   */
+  abstract loadItemsForForm(filters: SvtFilters): void;
+
+  /**
+   * Удаляет всю ВТ из хранилища
+   */
+  abstract removeAllItems(): void;
 }

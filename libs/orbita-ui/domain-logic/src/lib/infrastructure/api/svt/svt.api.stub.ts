@@ -9,11 +9,7 @@ export class SvtApiStub implements SvtApiAbstract {
     return of(null);
   }
 
-  // queryItems() {
-  //   return of([]);
-  // }
-
-  // queryUserItems() {
-  //   return of(null);
-  // }
+  queryItems() {
+    return of([]);
+  }
 }

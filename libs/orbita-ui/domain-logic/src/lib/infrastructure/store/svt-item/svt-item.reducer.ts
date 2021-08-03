@@ -4,6 +4,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as SvtItemActions from './svt-item.actions';
 import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
+import { SvtFilters } from './../../../entities/models/svt/svt-filters.interface';
 
 export const SVT_ITEM_FEATURE_KEY = 'svtItem';
 
@@ -14,6 +15,8 @@ export interface State extends EntityState<SvtItem> {
   error?: string | null;
   filters: PrimeFilter;
   needItems: boolean;
+  needFormItems: boolean;
+  formFilters?: SvtFilters;
 }
 
 export interface SvtItemPartialState {
@@ -31,36 +34,36 @@ export const initialState: State = svtItemAdapter.getInitialState({
   error: null,
   filters: {},
   needItems: true,
+  needFormItems: false,
 });
 
 const svtItemReducer = createReducer(
   initialState,
-  on(SvtItemActions.loadAll, (state) => ({
+  on(SvtItemActions.loadAll, SvtItemActions.loadSelected, (state) => ({
     ...state,
     loading: true,
     loaded: false,
     error: null,
+    needItems: false,
   })),
-  on(SvtItemActions.loadAllSuccess, (state, { svtItems }) =>
+  on(SvtItemActions.loadAllSuccess, SvtItemActions.loadAllForFormSuccess, (state, { svtItems }) =>
     svtItemAdapter.setAll(svtItems, {
       ...state,
       loading: false,
       loaded: true,
     })
   ),
-  on(SvtItemActions.loadAllFailure, (state, { error }) =>
-    svtItemAdapter.removeAll({
-      ...state,
-      error,
-      loading: false,
-    })
+  on(
+    SvtItemActions.loadAllFailure,
+    SvtItemActions.loadSelectedFailure,
+    SvtItemActions.loadAllForFormFailure,
+    (state, { error }) =>
+      svtItemAdapter.removeAll({
+        ...state,
+        error,
+        loading: false,
+      })
   ),
-  on(SvtItemActions.loadSelected, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null,
-  })),
   on(SvtItemActions.loadSelectedSuccess, (state, { svtItem }) =>
     svtItemAdapter.setOne(svtItem, { ...state, loading: false, loaded: true })
   ),
@@ -68,11 +71,6 @@ const svtItemReducer = createReducer(
     ...state,
     loading: false,
     loaded: false,
-  })),
-  on(SvtItemActions.loadSelectedFailure, (state, { error }) => ({
-    ...state,
-    error,
-    loading: false,
   })),
   on(SvtItemActions.select, (state, { barcode }) => ({
     ...state,
@@ -82,7 +80,20 @@ const svtItemReducer = createReducer(
     ...state,
     selectedId: null,
     loaded: false,
-  }))
+  })),
+  on(SvtItemActions.setFormFilters, (state, { filters }) => ({
+    ...state,
+    formFilters: filters,
+    needFormItems: true,
+  })),
+  on(SvtItemActions.loadAllForForm, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+    needFormItems: false,
+  })),
+  on(SvtItemActions.clearAll, (state) => svtItemAdapter.removeAll({ ...state }))
 );
 
 export function reducer(state: State | undefined, action: Action) {
