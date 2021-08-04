@@ -8,6 +8,7 @@ import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-for
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
 import { processSdRequestTableFilters } from '../../utils/process-sd-request-table-filters.function';
 import { SdRequestFactory } from './../../factories/sd-request.factory';
+import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
 
 export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
@@ -25,6 +26,12 @@ export interface FormState {
   updateView: boolean;
 }
 
+export interface NewFormState {
+  entity: NewSdRequestViewForm;
+  loading: boolean;
+  error?: string;
+}
+
 export interface State extends EntityState<SdRequest> {
   firstRowIndex: number;
   totalCount: number;
@@ -38,6 +45,7 @@ export interface State extends EntityState<SdRequest> {
   error?: string;
   selected?: SelectedState;
   form?: FormState;
+  newForm: NewFormState;
 }
 
 export interface SdRequestPartialState {
@@ -56,6 +64,11 @@ export const initFormState: FormState = {
   updateView: true,
 };
 
+export const initNewFormState: NewFormState = {
+  entity: null,
+  loading: false,
+};
+
 export const sdRequestAdapter: EntityAdapter<SdRequest> = createEntityAdapter<SdRequest>();
 
 export const initialState: State = sdRequestAdapter.getInitialState({
@@ -70,6 +83,7 @@ export const initialState: State = sdRequestAdapter.getInitialState({
   needTickets: true,
   selected: initSelectedState,
   form: initFormState,
+  newForm: initNewFormState,
 });
 
 const sdRequestReducer = createReducer(
@@ -169,7 +183,7 @@ const sdRequestReducer = createReducer(
     },
   })),
 
-  // ========== Форма заявки ==========
+  // ========== Форма существующей заявки ==========
 
   on(SdRequestActions.initUpdateForm, (state, { sdRequestViewModel }) => ({
     ...state,
@@ -212,6 +226,38 @@ const sdRequestReducer = createReducer(
     ...state,
     form: {
       ...state.form,
+      loading: false,
+      error,
+    },
+  })),
+
+  // ========== Форма новой заявки ==========
+
+  on(SdRequestActions.changeNewForm, (state, { entity }) => ({
+    ...state,
+    newForm: {
+      ...state.newForm,
+      entity,
+    },
+  })),
+  on(SdRequestActions.saveNewForm, (state) => ({
+    ...state,
+    newForm: {
+      ...state.newForm,
+      loading: true,
+    },
+  })),
+  on(SdRequestActions.saveNewFormSuccess, (state) => ({
+    ...state,
+    newForm: {
+      ...state.newForm,
+      loading: false,
+    },
+  })),
+  on(SdRequestActions.saveNewFormFailure, (state, { error }) => ({
+    ...state,
+    newForm: {
+      ...state.newForm,
       loading: false,
       error,
     },

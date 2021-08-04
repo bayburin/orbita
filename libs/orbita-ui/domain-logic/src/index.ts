@@ -18,6 +18,7 @@ export * from './lib/entities/models/svt/svt-item.interface';
 export * from './lib/entities/models/employee/employee-short.interface';
 
 export * from './lib/entities/forms/attachment-view-form.interface';
+export * from './lib/entities/forms/sd-request-view-form.interface';
 
 export * from './lib/entities/view-models/sd-request-view-model.interface';
 export * from './lib/entities/view-models/work-view-model.interface';

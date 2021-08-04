@@ -4,6 +4,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
 import { SdRequestsServerData } from './../../entities/server-data/sd-request-server-data.interface';
 import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
+import { NewSdRequestViewForm } from './../../entities/forms/new-sd-request-view-form.interface';
 
 export abstract class SdRequestFacadeAbstract {
   /**
@@ -99,7 +100,7 @@ export abstract class SdRequestFacadeAbstract {
   abstract toggleEditMode(): void;
 
   /**
-   * Сохраняет данные формы в хранилище
+   * Сохраняет данные существующей формы в хранилище
    *
    * @param form - данные формы
    */
@@ -114,4 +115,11 @@ export abstract class SdRequestFacadeAbstract {
    * Очищает все данные по заявкам и их составляющих
    */
   abstract clearAll(): void;
+
+  /**
+   * Сохраняет данные новой формы в хранилище
+   *
+   * @param form - данные формы
+   */
+  abstract changeNewForm(form: NewSdRequestViewForm): void;
 }

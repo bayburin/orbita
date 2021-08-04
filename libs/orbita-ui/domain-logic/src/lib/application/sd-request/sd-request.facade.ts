@@ -13,6 +13,7 @@ import * as SdRequestViewModelSelectors from '../../infrastructure/store/selecto
 import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
+import { NewSdRequestViewForm } from './../../entities/forms/new-sd-request-view-form.interface';
 
 /**
  * Фасад для работы с заявками (обращения к хранилищу SdRequest)
@@ -70,7 +71,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   selectedEditMode$ = this.store.select(SdRequestSelectors.getSelectedEditMode);
   selectedError$ = this.store.select(SdRequestSelectors.getSelectedError);
 
-  // ========== Форма заявки ==========
+  // ========== Форма существующей заявки ==========
 
   formEntity$ = this.store.select(SdRequestViewModelSelectors.getFormEntityViewModel).pipe(
     withLatestFrom(this.store.select(SdRequestSelectors.getFormUpdateView)),
@@ -111,5 +112,9 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   clearAll() {
     this.store.dispatch(SdRequestActions.clearAll());
+  }
+
+  changeNewForm(form: NewSdRequestViewForm) {
+    this.store.dispatch(SdRequestActions.changeNewForm({ entity: form }));
   }
 }

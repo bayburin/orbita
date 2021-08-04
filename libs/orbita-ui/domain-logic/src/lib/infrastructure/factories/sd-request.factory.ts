@@ -21,7 +21,6 @@ export class SdRequestFactory {
    */
   static createViewForm(sdRequest: SdRequestViewModel = {} as SdRequestViewModel): SdRequestViewForm {
     return {
-      description: sdRequest.description,
       priority: sdRequest.priority,
       finished_at_plan: sdRequest.runtime?.finished_at_plan,
       workers: sdRequest.works
@@ -107,7 +106,6 @@ export class SdRequestFactory {
 
     const formData = new FormData();
     const dataForServer: SdRequestForm = {
-      description: viewForm.description,
       priority: viewForm.priority,
       finished_at_plan: `${viewForm.finished_at_plan}`,
       works,

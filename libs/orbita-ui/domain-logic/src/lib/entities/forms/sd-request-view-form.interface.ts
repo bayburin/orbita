@@ -1,5 +1,4 @@
 import { Priorities } from './../models/ticket.interface';
-import { SourceSnapshotForm } from './source-snapshot-form.interface';
 import { AttachmentViewForm } from './attachment-view-form.interface';
 
 /**
@@ -7,14 +6,9 @@ import { AttachmentViewForm } from './attachment-view-form.interface';
  */
 export interface SdRequestViewForm {
   /**
-   * Данные на момент создания заявки/кейса
+   * Идентификатор заявки
    */
-  source_snapshot?: SourceSnapshotForm;
-
-  /**
-   * Описание
-   */
-  description?: string;
+  id?: number;
 
   /**
    * Приоритет

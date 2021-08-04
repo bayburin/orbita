@@ -25,6 +25,7 @@ import { SdRequestsServerData } from '../../entities/server-data/sd-request-serv
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { SdRequestCacheServiceStub } from './../../infrastructure/services/sd-request-cache.service.stub';
 import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
+import { NewSdRequestViewForm } from './../../entities/forms/new-sd-request-view-form.interface';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -271,6 +272,17 @@ describe('SdRequestFacade', () => {
         facade.clearAll();
 
         expect(spy).toHaveBeenCalledWith(SdRequestActions.clearAll());
+      });
+    });
+
+    describe('changeNewForm()', () => {
+      it('should call changeNewForm action', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+        const data = { description: 'test' } as NewSdRequestViewForm;
+
+        facade.changeNewForm(data);
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.changeNewForm({ entity: data }));
       });
     });
   });

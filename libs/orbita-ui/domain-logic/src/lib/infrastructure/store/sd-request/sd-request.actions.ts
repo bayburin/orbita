@@ -6,6 +6,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 import { NormalizedSdRequestEntities } from './../../../entities/models/normalized-data.interface';
+import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
 
 // ========== Список заявок ==========
 
@@ -48,7 +49,7 @@ export const toggleSelectedEditMode = createAction('[SdRequest] Toggle Selected 
 
 export const disableSelectedEditMode = createAction('[SdRequest] Disable Selected Edit Mode');
 
-// ========== Форма заявки ==========
+// ========== Форма существующей заявки ==========
 
 export const initUpdateForm = createAction(
   '[SdRequest] Init Update Form',
@@ -62,3 +63,13 @@ export const saveUpdateForm = createAction('[SdRequest/API] Save Update Form');
 export const saveFormSuccess = createAction('[SdRequest/API] Save Form Success', props<{ sdRequest: SdRequest }>());
 
 export const saveFormFailure = createAction('[SdRequest/API] Save Form Failure', props<{ error: any }>());
+
+// ========== Форма новой заявки ==========
+
+export const changeNewForm = createAction('[SdRequest] Change New Form', props<{ entity: NewSdRequestViewForm }>());
+
+export const saveNewForm = createAction('[SdRequest/API] Save New Form');
+
+export const saveNewFormSuccess = createAction('[SdRequest/API] Save New Form Success');
+
+export const saveNewFormFailure = createAction('[SdRequest/API] Save New Form Failure', props<{ error: any }>());

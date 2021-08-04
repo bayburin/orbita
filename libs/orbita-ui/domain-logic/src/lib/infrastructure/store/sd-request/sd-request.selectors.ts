@@ -8,6 +8,7 @@ import {
   sdRequestAdapter,
   SelectedState,
   FormState,
+  NewFormState,
 } from './sd-request.reducer';
 
 export const getSdRequestState = createSelector(
@@ -69,7 +70,7 @@ export const getSelectedEditMode = createSelector(getSelected, (state: SelectedS
 
 export const getSelectedError = createSelector(getSelected, (state: SelectedState) => state.error);
 
-// ========== Форма заявки ==========
+// ========== Форма существующей заявки ==========
 
 export const getForm = createSelector(getSdRequestState, (state: State) => state.form);
 
@@ -78,3 +79,11 @@ export const getFormEntity = createSelector(getForm, (state: FormState) => state
 export const getFormLoading = createSelector(getForm, (state: FormState) => state.loading);
 
 export const getFormUpdateView = createSelector(getForm, (state: FormState) => state.updateView);
+
+// ========== Форма новой заявки ==========
+
+export const getNewForm = createSelector(getSdRequestState, (state: State) => state.newForm);
+
+export const getNewFormEntity = createSelector(getNewForm, (state: NewFormState) => state.entity);
+
+export const getNewFormLoading = createSelector(getNewForm, (state: NewFormState) => state.loading);

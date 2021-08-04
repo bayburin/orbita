@@ -5,8 +5,9 @@ import { SdRequestFactory } from './../../factories/sd-request.factory';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { Meta } from '../../../entities/server-data/meta.interface';
 import * as SdRequestActions from './sd-request.actions';
-import { State, initialState, reducer, SelectedState, FormState } from './sd-request.reducer';
+import { State, initialState, reducer, SelectedState, FormState, NewFormState } from './sd-request.reducer';
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
+import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
 
 describe('SdRequestReducer', () => {
   let action: Action;
@@ -212,6 +213,45 @@ describe('SdRequestReducer', () => {
       const error = 'fake-error';
       action = SdRequestActions.saveFormFailure({ error });
       const result: FormState = reducer(initialState, action).form;
+
+      expect(result.loading).toBe(false);
+      expect(result.error).toEqual(error);
+    });
+  });
+
+  describe('changeNewForm', () => {
+    it('should set attributes', () => {
+      const form = { description: 'test' } as NewSdRequestViewForm;
+      action = SdRequestActions.changeNewForm({ entity: form });
+      const result: NewFormState = reducer(initialState, action).newForm;
+
+      expect(result.entity).toEqual(form);
+    });
+  });
+
+  describe('saveNewForm', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.saveNewForm();
+      const result: NewFormState = reducer(initialState, action).newForm;
+
+      expect(result.loading).toBe(true);
+    });
+  });
+
+  describe('saveNewFormSuccess', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.saveNewFormSuccess();
+      const result: NewFormState = reducer(initialState, action).newForm;
+
+      expect(result.loading).toBe(false);
+    });
+  });
+
+  describe('saveNewFormFailure', () => {
+    it('should set attributes', () => {
+      const error = 'fake-error';
+      action = SdRequestActions.saveNewFormFailure({ error });
+      const result: NewFormState = reducer(initialState, action).newForm;
 
       expect(result.loading).toBe(false);
       expect(result.error).toEqual(error);

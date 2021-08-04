@@ -1,4 +1,4 @@
-import { SdRequestForm } from './../../../entities/forms/sd-request-form.interface';
+import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { sdRequestAdapter, initialState } from './sd-request.reducer';
 import * as SdRequestSelectors from './sd-request.selectors';
@@ -24,8 +24,10 @@ describe('SdRequestSelectors', () => {
   const filters = { foo: 'bar' };
   const selectedEntity = createSdRequestEntity(444);
   const formEntity = SdRequestFactory.createViewForm();
+  const newFormEntity = { description: 'test' } as NewSdRequestViewForm;
   let selectedState: any;
   let formState: any;
+  let newFormState: any;
   let state: any;
 
   beforeEach(() => {
@@ -39,6 +41,10 @@ describe('SdRequestSelectors', () => {
       entity: formEntity,
       loading: false,
       updateView: true,
+    };
+    newFormState = {
+      entity: newFormEntity,
+      loading: false,
     };
     state = sdRequestAdapter.setAll(arrEntities, {
       ...initialState,
@@ -54,8 +60,11 @@ describe('SdRequestSelectors', () => {
       error: 'fake-error',
       selected: selectedState,
       form: formState,
+      newForm: newFormState,
     });
   });
+
+  // ========== Список заявок ==========
 
   it('getFirstRowIndex() should return "page" attribute', () => {
     expect(SdRequestSelectors.getFirstRowIndex.projector(state)).toBe(firstRowIndex);
@@ -113,6 +122,8 @@ describe('SdRequestSelectors', () => {
     expect(SdRequestSelectors.getPage.projector(firstRowIndex, perPage)).toBe(1);
   });
 
+  // ========== Просмотр выбранной заявки ==========
+
   it('getSelected() should return selected entity', () => {
     expect(SdRequestSelectors.getSelected.projector(state)).toEqual(selectedState);
   });
@@ -133,19 +144,35 @@ describe('SdRequestSelectors', () => {
     expect(SdRequestSelectors.getSelectedError.projector(selectedState)).toBe('fake-selected-error');
   });
 
-  it('getForm', () => {
+  // ========== Форма существующей заявки ==========
+
+  it('getForm() should return form state', () => {
     expect(SdRequestSelectors.getForm.projector(state)).toEqual(formState);
   });
 
-  it('getFormEntity', () => {
+  it('getFormEntity() should return form entity', () => {
     expect(SdRequestSelectors.getFormEntity.projector(formState)).toEqual(formEntity);
   });
 
-  it('getFormLoading', () => {
+  it('getFormLoading() should return loading attribute', () => {
     expect(SdRequestSelectors.getFormLoading.projector(formState)).toBe(false);
   });
 
-  it('getFormUpdateView', () => {
+  it('getFormUpdateView() should return updateView attribute', () => {
     expect(SdRequestSelectors.getFormUpdateView.projector(formState)).toBe(true);
+  });
+
+  // ========== Форма новой заявки ==========
+
+  it('getNewForm() should return newForm state', () => {
+    expect(SdRequestSelectors.getNewForm.projector(state)).toEqual(newFormState);
+  });
+
+  it('getNewFormEntity() should return form entity', () => {
+    expect(SdRequestSelectors.getNewFormEntity.projector(newFormState)).toEqual(newFormEntity);
+  });
+
+  it('getNewFormLoading() should return loading attribute', () => {
+    expect(SdRequestSelectors.getNewFormLoading.projector(newFormState)).toBe(false);
   });
 });

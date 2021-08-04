@@ -51,4 +51,8 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   clearAll() {
     /** */
   }
+
+  changeNewForm() {
+    /** */
+  }
 }
