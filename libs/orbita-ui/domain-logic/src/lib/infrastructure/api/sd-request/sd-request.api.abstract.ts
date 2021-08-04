@@ -29,6 +29,13 @@ export abstract class SdRequestApiAbstract {
   abstract show(id: number): Observable<SdRequestServerData>;
 
   /**
+   * Создает заявку
+   *
+   * @param formData - данные новой заявки
+   */
+  abstract create(formData: FormData): Observable<SdRequestServerData>;
+
+  /**
    * Обновляет данные по заявке
    *
    * @param id - ID заявки

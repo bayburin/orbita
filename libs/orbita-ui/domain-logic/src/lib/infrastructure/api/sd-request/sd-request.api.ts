@@ -38,6 +38,10 @@ export class SdRequestApi implements SdRequestApiAbstract {
     return this.http.get<SdRequestServerData>(`${this.api}/${id}`);
   }
 
+  create(formData: FormData) {
+    return this.http.post<SdRequestServerData>(this.api, formData);
+  }
+
   update(id: number, formData: FormData) {
     return this.http.put<SdRequestServerData>(`${this.api}/${id}`, formData);
   }

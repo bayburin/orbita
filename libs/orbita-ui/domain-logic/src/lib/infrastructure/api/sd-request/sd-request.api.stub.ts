@@ -14,6 +14,10 @@ export class SdRequestApiStub implements SdRequestApiAbstract {
     return of({ sd_request: null });
   }
 
+  create() {
+    return of({ sd_request: null });
+  }
+
   update() {
     return of({ sd_request: null });
   }

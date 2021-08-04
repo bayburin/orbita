@@ -65,6 +65,25 @@ describe('SdRequestApi', () => {
     });
   });
 
+  describe('create()', () => {
+    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/sd_requests`;
+    const sdRequest = { id: 1 } as SdRequestForm;
+    const formData = new FormData();
+
+    it('should return request', () => {
+      service.create(formData).subscribe((result) => {
+        expect(result).toEqual(sdRequest);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'POST',
+          url: api,
+        })
+        .flush(sdRequest);
+    });
+  });
+
   describe('update()', () => {
     const api = `${orbitaUiEnvironmentStub.serverApiUrl}/sd_requests/1`;
     const sdRequest = { id: 1 } as SdRequestForm;
