@@ -144,7 +144,6 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   private buildForm(): void {
     this.form = this.fb.group({
-      description: [],
       priority: [],
       finished_at_plan: [],
       workers: [[]],

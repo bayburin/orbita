@@ -107,14 +107,9 @@ export class SdRequestFactory {
 
     const formData = new FormData();
     const dataForServer: SdRequestForm = {
-      id: viewForm.id || sdRequest.id,
       description: viewForm.description,
       priority: viewForm.priority,
       finished_at_plan: `${viewForm.finished_at_plan}`,
-      service_id: viewForm.service_id || sdRequest.service_id,
-      service_name: viewForm.service_name || sdRequest.service_name,
-      ticket_identity: viewForm.ticket_identity || sdRequest.ticket_identity,
-      ticket_name: viewForm.ticket_name || sdRequest.service_name,
       works,
       attachments: viewForm.attachments?.map((attachment) => AttachmentFactory.createForm(attachment)) || [],
     };

@@ -1,41 +1,48 @@
-import { TicketViewForm } from './ticket-view-form.interface';
+import { Priorities } from './../models/ticket.interface';
+import { SourceSnapshotForm } from './source-snapshot-form.interface';
+import { AttachmentViewForm } from './attachment-view-form.interface';
 
 /**
- * Форма заявки, которую заполняет пользователь
+ * Форма существующей заявки, которую заполняет пользователь
  */
-export interface SdRequestViewForm extends TicketViewForm {
+export interface SdRequestViewForm {
   /**
-   * ID Услуги
+   * Данные на момент создания заявки/кейса
    */
-  service_id?: number;
+  source_snapshot?: SourceSnapshotForm;
 
   /**
-   * Имя услуги
+   * Описание
    */
-  service_name?: string;
+  description?: string;
 
   /**
-   * ID вида заявки
+   * Приоритет
    */
-  ticket_identity?: number;
+  priority: Priorities;
 
   /**
-   * Имя вида заявки
+   * Дедлайн
    */
-  ticket_name?: string;
+  finished_at_plan: string | Date;
 
   /**
-   * Оценка качества обслуживания
+   * Список прикрепленных файлов, которые уже сохранены на сервере
    */
-  rating?: number;
+  attachments?: AttachmentViewForm[];
 
   /**
-   * Список исполнителей
+   * Список новых прикрепленных файлов
+   */
+  newAttachments: File[];
+
+  /**
+   * Список идентификаторов исполнителей
    */
   workers: number[];
 
   /**
    * Сообщение вида "ход работы"
    */
-  workflow: string;
+  workflow?: string;
 }
