@@ -1,0 +1,94 @@
+<div class="sd-request-preview-content">
+  <div class="grid preview-row">
+    <div class="col-3">Описание</div>
+    <div class="col-9">
+      <div class="preview-row-content">
+        <div *ngIf="sdRequest.description; else noData">{{ sdRequest.description }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="grid preview-row">
+    <div class="col-3">Заказчик</div>
+    <div class="col-9">
+      <div class="preview-row-content">
+        <div *ngIf="sdRequest.employeeManuallyFlag; else selectedEmployee">
+          <div class="p-1"><b>ФИО:</b> {{ sdRequest.source_snapshot.fio }}</div>
+          <div class="p-1"><b>Табельный:</b> {{ sdRequest.source_snapshot.tn }}</div>
+          <div class="p-1"><b>Отдел:</b> {{ sdRequest.source_snapshot.dept }}</div>
+          <div class="p-1"><b>Почта:</b> {{ sdRequest.source_snapshot.user_attrs['email'] }}</div>
+          <div class="p-1"><b>Телефон:</b> {{ sdRequest.source_snapshot.user_attrs['phone'] }}</div>
+        </div>
+        <ng-template #selectedEmployee>
+          <div *ngIf="sdRequest.employee; else noData">
+            <div class="p-1"><b>ФИО:</b> {{ sdRequest.employee.fullName }}</div>
+            <div class="p-1"><b>Табельный:</b> {{ sdRequest.employee.personnelNo }}</div>
+            <div class="p-1"><b>Отдел:</b> {{ sdRequest.employee.departmentForAccounting }}</div>
+            <div class="p-1"><b>Почта:</b> {{ sdRequest.employee.emailText }}</div>
+            <div class="p-1"><b>Телефон:</b> {{ sdRequest.employee.phoneText }}</div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  <div class="grid preview-row">
+    <div class="col-3">Устройство</div>
+    <div class="col-9">
+      <div class="preview-row-content">
+        <div *ngIf="sdRequest.svtItem; else noData">
+          <div class="p-1">
+            <b>{{ sdRequest.svtItem.type.short_description }}</b> {{ sdRequest.svtItem.short_item_model }}
+          </div>
+          <div class="p-1">
+            <b>Инвентарный:</b> {{ sdRequest.svtItem.invent_num }} | <b>Штрих-код:</b>
+            {{ sdRequest.svtItem.barcode_item.id }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid preview-row">
+    <div class="col-3">Услуга</div>
+    <div class="col-9">
+      <div class="preview-row-content">
+        <div *ngIf="!sdRequest.noTicketFlag && sdRequest.ticket; else noData">{{ sdRequest.ticket.name }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="grid preview-row">
+    <div class="col-3">Исполнители</div>
+    <div class="col-9">
+      <div class="preview-row-content">
+        <div *ngIf="sdRequest.ticket?.responsible_users.length; else noData">
+          <div *ngFor="let user of sdRequest.ticket.responsible_users; trackBy: trackByUser" class="p-1">
+            {{ user.fio }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid preview-row">
+    <div class="col-3">Файлы</div>
+    <div class="col-9">
+      <div class="preview-row-content last">
+        <div *ngIf="sdRequest.attachments?.length; else noData">
+          <div *ngFor="let file of sdRequest.attachments" class="p-1">{{ file.name }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex justify-content-center">
+  <button pButton pRipple type="button" label="Создать заявку" class="p-button-outlined"></button>
+  <button
+    pButton
+    pRipple
+    type="button"
+    label="Вернуться к заявке"
+    class="p-button-text p-button-plain ml-2"
+    (click)="returnToForm()"
+  ></button>
+</div>
+
+<ng-template #noData>
+  <lib-panel-placeholder>Пусто</lib-panel-placeholder>
+</ng-template>

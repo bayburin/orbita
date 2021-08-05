@@ -64,13 +64,21 @@ export abstract class SdRequestFacadeAbstract {
    */
   selectedError$: Observable<string>;
   /**
-   * Форма заявки
+   * Форма существующей заявки
    */
   formEntity$: Observable<SdRequestViewForm>;
   /**
-   * Индикатор загрузки формы
+   * Индикатор загрузки существующей формы
    */
   formLoading$: Observable<boolean>;
+  /**
+   * Форма новой заявки
+   */
+  newFormEntity$: Observable<NewSdRequestViewForm>;
+  /**
+   * Индикатор загрузки новой формы
+   */
+  newFormLoading$: Observable<boolean>;
 
   /**
    * Устанавливает метаданные таблицы
@@ -122,4 +130,9 @@ export abstract class SdRequestFacadeAbstract {
    * @param form - данные формы
    */
   abstract changeNewForm(form: NewSdRequestViewForm): void;
+
+  /**
+   * Сохраняет данные формы новой заявки
+   */
+  abstract createForm(): void;
 }

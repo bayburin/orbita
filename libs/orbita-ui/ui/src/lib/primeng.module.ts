@@ -28,7 +28,7 @@ import { ChipModule } from 'primeng/chip';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { CheckboxModule } from 'primeng/checkbox';
-
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmationService } from 'primeng/api';
 
 const modules: any[] = [
@@ -60,11 +60,12 @@ const modules: any[] = [
   AutoCompleteModule,
   SelectButtonModule,
   CheckboxModule,
+  DynamicDialogModule,
 ];
 
 @NgModule({
   imports: [...modules],
   exports: [...modules],
-  providers: [ConfirmationService],
+  providers: [ConfirmationService, DialogService],
 })
 export class PrimengModule {}

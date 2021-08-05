@@ -11,7 +11,10 @@ import {
   SvtItem,
   EmployeeShort,
   SdTicketViewModel,
+  SdRequestFacade,
 } from '@orbita/orbita-ui/domain-logic';
+import { DialogService } from 'primeng/dynamicdialog';
+import { NewSdRequestPreviewComponent } from '@orbita/orbita-ui/ui';
 
 @Component({
   selector: 'orbita-ui-sd-request-wizzard-new-sd-request-block',
@@ -20,6 +23,7 @@ import {
 })
 export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   form: FormGroup;
+  valueChangesSub: Subscription;
 
   // ========== Раздел формы работника ==========
 
@@ -66,15 +70,17 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     return this.form?.get('employeeManuallyFlag') as FormControl;
   }
 
-  get newAttachmentsForm(): FormArray {
-    return this.form.get('newAttachments') as FormArray;
+  get attachmentsForm(): FormArray {
+    return this.form.get('attachments') as FormArray;
   }
 
   constructor(
+    private sdRequestFacade: SdRequestFacade,
     private employeeFacade: EmployeeFacade,
     private serviceDeskFacade: ServiceDeskFacade,
     private svtFacade: SvtFacade,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -92,6 +98,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     this.svtItemFilterKeySubs.unsubscribe();
     this.svtItemManuallySubs.unsubscribe();
     this.ticketsSubs.unsubscribe();
+    this.valueChangesSub.unsubscribe();
   }
 
   /**
@@ -150,6 +157,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    */
   clearTicket(): void {
     this.form.patchValue({ ticket: null });
+    this.tickets$.pipe(first()).subscribe((tickets) => (this.tickets = tickets));
   }
 
   /**
@@ -186,6 +194,16 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     return `${item.type.short_description} ${item.short_item_model} Инвентарный: ${item.invent_num} | Штрих-код: ${item.barcode_item.id}`;
   }
 
+  previewForm(): void {
+    this.dialogService.open(NewSdRequestPreviewComponent, {
+      data: {
+        form: this.form.getRawValue(),
+      },
+      header: 'Предпросмотр заявки',
+      width: '40%',
+    });
+  }
+
   private buildForm(): void {
     this.form = this.fb.group({
       source_snapshot: this.fb.group({
@@ -203,11 +221,12 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       noTicketFlag: [false],
       description: [],
       svtItem: [],
-      priority: [],
-      finished_at_plan: [],
-      workers: [[]],
-      newAttachments: this.fb.array([]),
+      attachments: this.fb.array([]),
     });
+    // Обновляет хранилище по любому изменению формы
+    this.valueChangesSub = this.form.valueChanges
+      .pipe(distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)))
+      .subscribe((formData) => this.sdRequestFacade.changeNewForm(formData));
     // Поиск работника по параметру
     this.employeeFilterKeySubs = this.employeeFilterKey.valueChanges
       .pipe(distinctUntilChanged())

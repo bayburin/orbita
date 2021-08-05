@@ -9,6 +9,9 @@ import { WorkFactory } from './../factories/work.factory';
 import { WorkerFactory } from './../factories/worker.factory';
 import { MessageFactory } from './../factories/message.factory';
 import { AttachmentFactory } from './attachment.factory';
+import { NewSdRequestViewForm } from './../../entities/forms/new-sd-request-view-form.interface';
+import { SourceSnapshotForm } from './../../entities/forms/source-snapshot-form.interface';
+import { WorkForm } from './../../entities/forms/work-form.interface';
 
 /**
  * Фабрика по созданию заявок
@@ -30,6 +33,87 @@ export class SdRequestFactory {
       attachments: sdRequest.attachments?.map((attachment) => AttachmentFactory.createViewForm(attachment)) || [],
       newAttachments: [],
     };
+  }
+
+  /**
+   * Создает новую заявку в виде формы, адаптированной под сервер, на основании заполненной формы
+   *
+   * @param viewForm - клиентская форма, заполненная пользователем
+   * @param users - список пользователей системы
+   */
+  static createNewServerForm(viewForm: NewSdRequestViewForm): FormData {
+    let snapshot: SourceSnapshotForm;
+
+    // Обработка работника
+    if (viewForm.employeeManuallyFlag) {
+      snapshot = viewForm.source_snapshot;
+    } else {
+      snapshot = {
+        id_tn: viewForm.employee.id,
+      };
+    }
+
+    // Обработка ВТ
+    const svtItem = viewForm.svtItem;
+    snapshot.invent_num = svtItem.invent_num;
+    snapshot.svt_item_id = svtItem.item_id;
+    snapshot.barcode = svtItem.barcode_item.id;
+
+    // Обработка услуги и списка исполнителей (массив пользователей)
+    let service_id;
+    let service_name;
+    let ticket_identity;
+    let ticket_name;
+    const works: WorkForm[] = [];
+
+    if (viewForm.noTicketFlag) {
+      service_id = null;
+      service_name = null;
+      ticket_identity = null;
+      ticket_name = null;
+    } else {
+      const ticket = viewForm.ticket;
+
+      service_id = ticket.service_id;
+      service_name = ticket.service.name;
+      ticket_identity = ticket.identity;
+      ticket_name = ticket.name;
+
+      ticket.responsible_users.forEach((user) => {
+        // Ищет работу для текущего пользователя цикла
+        let currentWork = works.find((work) => work.group_id === user.group_id);
+
+        // Создает работу указанной группы, если она не существует
+        if (!currentWork) {
+          currentWork = WorkFactory.createNewWorkForm(user.group_id);
+          works.push(currentWork);
+        }
+
+        // Ищет исполнителя
+        const currentWorker = currentWork.workers.find((worker) => worker.user_id === user.id);
+
+        // Добавляет исполнителя, если он отсутствует
+        if (!currentWorker) {
+          currentWork.workers.push(WorkerFactory.createNewWorkerForm(user.id));
+        }
+      });
+    }
+
+    const formData = new FormData();
+    const dataForServer: SdRequestForm = {
+      source_snapshot: snapshot,
+      description: viewForm.description,
+      service_id,
+      service_name,
+      ticket_identity,
+      ticket_name,
+      works,
+    };
+
+    formData.set('sd_request', JSON.stringify(dataForServer));
+    viewForm.attachments.forEach((attach) => formData.append('new_attachments[]', attach));
+
+    return formData;
   }
 
   /**

@@ -285,6 +285,16 @@ describe('SdRequestFacade', () => {
         expect(spy).toHaveBeenCalledWith(SdRequestActions.changeNewForm({ entity: data }));
       });
     });
+
+    describe('createForm()', () => {
+      it('should call createForm action', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.createForm();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.saveNewForm());
+      });
+    });
   });
 
   // describe('used in NgModule', () => {

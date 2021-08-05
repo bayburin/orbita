@@ -1,0 +1,28 @@
+.sd-request-preview-content {
+  margin-bottom: 3 * $spacer;
+
+  .preview-row {
+    margin-top: 0;
+
+    & > div:first-child {
+      display: flex;
+      align-items: center;
+      border-right: 1px solid var(--surface-d);
+      padding: $spacer;
+    }
+
+    .preview-row-content {
+      padding: 1.5 * $spacer 0.5 * $spacer;
+      margin: 0 $spacer;
+    }
+
+    .preview-row-content:not(.last) {
+      border-bottom: 1px dashed var(--surface-d);
+    }
+
+    & > div:last-child {
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+  }
+}

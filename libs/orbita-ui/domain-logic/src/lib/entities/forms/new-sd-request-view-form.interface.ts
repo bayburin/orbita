@@ -1,5 +1,5 @@
 import { SvtItem } from './../models/svt/svt-item.interface';
-import { SdTicket } from '../models/sd/sd-ticket.interface';
+import { SdTicketViewModel } from './../view-models/sd-ticket-view-model.interface';
 import { EmployeeShort } from './../models/employee/employee-short.interface';
 import { SourceSnapshotForm } from './source-snapshot-form.interface';
 
@@ -25,7 +25,7 @@ export interface NewSdRequestViewForm {
   /**
    * Вид услуги
    */
-  ticket: SdTicket;
+  ticket: SdTicketViewModel;
 
   /**
    * Флаг, показывающий, что услуга не найдена

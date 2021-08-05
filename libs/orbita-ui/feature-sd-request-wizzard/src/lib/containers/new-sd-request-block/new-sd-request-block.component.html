@@ -145,8 +145,6 @@
       </div>
     </div>
 
-    <p-divider type="dashed"></p-divider>
-
     <div class="field grid my-5">
       <label for="sd_ticket" class="col-2">Услуга</label>
       <div class="col-10">
@@ -193,13 +191,20 @@
       </div>
     </div>
 
-    <p-divider type="dashed"></p-divider>
+    <p-divider align="center" type="dashed">Файлы</p-divider>
+    <div class="my-5">
+      <lib-attachments-form [attachmentsForm]="attachmentsForm"></lib-attachments-form>
+    </div>
 
-    <div class="field grid my-5">
-      <label for="files" class="col-2">Файлы</label>
-      <div class="col-10">
-        <lib-attachments-form [attachmentsForm]="newAttachmentsForm"></lib-attachments-form>
-      </div>
+    <div class="flex justify-content-center">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Предпросмотр"
+        class="p-button-outlined"
+        (click)="previewForm()"
+      ></button>
     </div>
   </form>
 </div>

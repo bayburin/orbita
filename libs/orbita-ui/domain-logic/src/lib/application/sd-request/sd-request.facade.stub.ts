@@ -19,6 +19,8 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   selectedError$ = new BehaviorSubject(null);
   formEntity$ = new BehaviorSubject(null);
   formLoading$ = new BehaviorSubject(null);
+  newFormEntity$ = new BehaviorSubject(null);
+  newFormLoading$ = new BehaviorSubject(null);
 
   setTableMetadata() {
     /** */
@@ -53,6 +55,10 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   }
 
   changeNewForm() {
+    /** */
+  }
+
+  createForm() {
     /** */
   }
 }

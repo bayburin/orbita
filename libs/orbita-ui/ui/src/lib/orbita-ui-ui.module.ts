@@ -37,12 +37,13 @@ import { TicketPriorityComponent } from './components/ticket-priority/ticket-pri
 import { TicketStatusComponent } from './components/ticket-status/ticket-status.component';
 import { CmsStatusComponent } from './components/cms-status/cms-status.component';
 import { CsaStatusComponent } from './components/csa-status/csa-status.component';
+import { NewSdRequestPreviewComponent } from './components/new-sd-request-preview/new-sd-request-preview.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe, SortWorkByHistoryPipe];
 
-const directives: any[] = [DndFilesDirective];
+const directives: any[] = [DndFilesDirective, CalcScrollWidthByWorksDirective];
 
 const components: any[] = [
   SdRequestsTableComponent,
@@ -68,7 +69,7 @@ const components: any[] = [
   TicketStatusComponent,
   CmsStatusComponent,
   CsaStatusComponent,
-  CalcScrollWidthByWorksDirective,
+  NewSdRequestPreviewComponent,
 ];
 
 @NgModule({

@@ -5,40 +5,40 @@ export interface SourceSnapshotForm {
   /**
    * IdTn пользователя
    */
-  readonly id_tn: number;
+  id_tn?: number;
 
   /**
    * Табельный номер
    */
-  readonly tn: number;
+  tn?: number;
 
   /**
    * ФИО
    */
-  readonly fio: string;
+  fio?: string;
 
   /**
    * Отдел
    */
-  readonly dept: number;
+  dept?: number;
 
   /**
    * Дополнительные атрибуты
    */
-  readonly user_attrs: any;
+  user_attrs?: any;
 
   /**
    * Инвентарный номер ВТ
    */
-  readonly invent_num: string;
+  invent_num?: string;
 
   /**
    * Уникальный идентификатор ВТ (Раньше использовался как штрих-код)
    */
-  readonly svt_item_id: number;
+  svt_item_id?: number;
 
   /**
    * Штрих-код ВТ
    */
-  readonly barcode: number;
+  barcode?: number;
 }

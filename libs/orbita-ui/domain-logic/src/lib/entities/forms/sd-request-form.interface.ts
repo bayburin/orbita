@@ -25,17 +25,18 @@ export interface SdRequestForm {
   /**
    * Приоритет
    */
-  priority: Priorities;
+  priority?: Priorities;
 
   /**
    * Дедлайн
    */
-  finished_at_plan: string;
+  finished_at_plan?: string;
 
   /**
    * Список прикрепленных файлов, которые уже сохранены на сервере
    */
-  attachments: AttachmentForm[];
+  attachments?: AttachmentForm[];
+
   /**
    * ID Услуги
    */

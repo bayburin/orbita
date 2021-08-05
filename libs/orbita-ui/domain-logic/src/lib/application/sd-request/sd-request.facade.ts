@@ -80,6 +80,11 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   );
   formLoading$ = this.store.select(SdRequestSelectors.getFormLoading);
 
+  // ========== Форма новой заявки ==========
+
+  newFormEntity$ = this.store.select(SdRequestSelectors.getNewFormEntity);
+  newFormLoading$ = this.store.select(SdRequestSelectors.getNewFormLoading);
+
   constructor(private store: Store<SdRequestFeature.SdRequestPartialState>, private sdRequestApi: SdRequestApi) {}
 
   setTableMetadata(event: LazyLoadEvent) {
@@ -116,5 +121,9 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   changeNewForm(form: NewSdRequestViewForm) {
     this.store.dispatch(SdRequestActions.changeNewForm({ entity: form }));
+  }
+
+  createForm() {
+    this.store.dispatch(SdRequestActions.saveNewForm());
   }
 }
