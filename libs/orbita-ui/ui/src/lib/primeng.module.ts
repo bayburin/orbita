@@ -30,6 +30,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmationService } from 'primeng/api';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 const modules: any[] = [
   TableModule,
@@ -61,6 +63,8 @@ const modules: any[] = [
   SelectButtonModule,
   CheckboxModule,
   DynamicDialogModule,
+  MessagesModule,
+  MessageModule,
 ];
 
 @NgModule({

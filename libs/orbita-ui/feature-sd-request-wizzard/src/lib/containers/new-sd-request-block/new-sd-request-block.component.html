@@ -1,7 +1,7 @@
 <div class="card col-6">
   <form [formGroup]="form">
     <div class="field grid mb-5">
-      <label for="employee" class="col-2">Работник</label>
+      <label for="employee" class="col-2">Работник*</label>
       <div class="col-10">
         <p-selectButton
           class="block mb-3"
@@ -10,33 +10,37 @@
           optionLabel="title"
         ></p-selectButton>
 
-        <p-autoComplete
-          #employeeAutoComplete
-          id="employee"
-          class="block mb-3"
-          [formControl]="employee"
-          [suggestions]="employees$ | async"
-          [showEmptyMessage]="true"
-          [autofocus]="true"
-          [minLength]="3"
-          [virtualScroll]="true"
-          scrollHeight="300px"
-          [itemSize]="40"
-          field="fullName"
-          [placeholder]="employeeFilterKey.value?.inputPlaceHolder"
-          appendTo="body"
-          styleClass="w-full"
-          inputStyleClass="w-full"
-          (completeMethod)="searchEmployee($event)"
-          (onFocus)="employeeAutoComplete.show()"
-          (onClear)="clearEmployee()"
-          (onSelect)="selectEmployee($event)"
-        >
-          <ng-template let-employee pTemplate="item">
-            <p-chip [label]="employee.departmentForAccounting"></p-chip>
-            <span class="ml-3">{{ employee.fullName }}</span>
-          </ng-template>
-        </p-autoComplete>
+        <div class="mb-2">
+          <p-autoComplete
+            #employeeAutoComplete
+            id="employee"
+            [formControl]="employee"
+            [suggestions]="employees$ | async"
+            [showEmptyMessage]="true"
+            [autofocus]="true"
+            [minLength]="3"
+            [virtualScroll]="true"
+            scrollHeight="300px"
+            [itemSize]="40"
+            field="fullName"
+            [placeholder]="employeeFilterKey.value?.inputPlaceHolder"
+            appendTo="body"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+            (completeMethod)="searchEmployee($event)"
+            (onFocus)="employeeAutoComplete.show()"
+            (onClear)="clearEmployee()"
+            (onSelect)="selectEmployee($event)"
+          >
+            <ng-template let-employee pTemplate="item">
+              <p-chip [label]="employee.departmentForAccounting"></p-chip>
+              <span class="ml-3">{{ employee.fullName }}</span>
+            </ng-template>
+          </p-autoComplete>
+          <small class="p-error" *ngIf="form.get('employee').invalid && (employee.dirty || employee.touched)"
+            >Необходимо выбрать работника, либо ввести данные о нем вручную</small
+          >
+        </div>
 
         <div class="field-checkbox">
           <p-checkbox formControlName="employeeManuallyFlag" binary="true" inputId="employeeManuallyFlag"></p-checkbox>
@@ -48,10 +52,26 @@
             <div class="field col">
               <label for="tn">Таб. номер</label>
               <input type="text" id="tn" formControlName="tn" class="inputfield w-full" pInputText />
+              <small
+                class="p-error"
+                *ngIf="
+                  sourceSnapshot.get('tn').invalid &&
+                  (sourceSnapshot.get('tn').dirty || sourceSnapshot.get('tn').touched)
+                "
+                >Не может быть пустым</small
+              >
             </div>
             <div class="field col">
-              <label for="fullname">ФИО</label>
-              <input type="text" id="fullname" formControlName="fio" class="inputfield w-full" pInputText />
+              <label for="fio">ФИО</label>
+              <input type="text" id="fio" formControlName="fio" class="inputfield w-full" pInputText />
+              <small
+                class="p-error"
+                *ngIf="
+                  sourceSnapshot.get('fio').invalid &&
+                  (sourceSnapshot.get('fio').dirty || sourceSnapshot.get('fio').touched)
+                "
+                >Не может быть пустым</small
+              >
             </div>
             <div class="field col">
               <label for="dept">Отдел</label>
@@ -82,7 +102,7 @@
           [showClear]="true"
           scrollHeight="300px"
           styleClass="w-full"
-          class="svt-items mb-3"
+          class="svt-items mb-2"
           (onChange)="selectSvtItem($event.value)"
         >
           <ng-template let-item pTemplate="selectedItem">
@@ -113,7 +133,7 @@
           <p-autoComplete
             #svtItemAutoComplete
             id="svt_item"
-            class="block mb-3"
+            class="block mb-2"
             [formControl]="customSvtItem"
             [suggestions]="svtItems$ | async"
             [showEmptyMessage]="true"
@@ -146,29 +166,33 @@
     </div>
 
     <div class="field grid my-5">
-      <label for="sd_ticket" class="col-2">Услуга</label>
+      <label for="sd_ticket" class="col-2">Услуга*</label>
       <div class="col-10">
-        <p-autoComplete
-          #ticketAppAutoComplete
-          id="ticket"
-          class="block mb-3"
-          [formControl]="ticket"
-          [suggestions]="tickets"
-          [showEmptyMessage]="true"
-          [autofocus]="true"
-          [virtualScroll]="true"
-          scrollHeight="300px"
-          [itemSize]="30"
-          field="name"
-          placeholder="Выберите услугу..."
-          appendTo="body"
-          styleClass="w-full"
-          inputStyleClass="w-full"
-          (completeMethod)="searchTicket($event)"
-          (onFocus)="ticketAppAutoComplete.show()"
-          (onClear)="clearTicket()"
-          (onSelect)="selectTicket()"
-        ></p-autoComplete>
+        <div class="mb-2">
+          <p-autoComplete
+            #ticketAppAutoComplete
+            id="ticket"
+            [formControl]="ticket"
+            [suggestions]="tickets"
+            [showEmptyMessage]="true"
+            [autofocus]="true"
+            [virtualScroll]="true"
+            scrollHeight="300px"
+            [itemSize]="30"
+            field="name"
+            placeholder="Выберите услугу..."
+            appendTo="body"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+            (completeMethod)="searchTicket($event)"
+            (onFocus)="ticketAppAutoComplete.show()"
+            (onClear)="clearTicket()"
+            (onSelect)="selectTicket()"
+          ></p-autoComplete>
+          <small class="p-error" *ngIf="form.get('ticket').invalid && (ticket.dirty || ticket.touched)"
+            >Необходимо выбрать услугу или поставить галочку, если услуга отсутствует в списке</small
+          >
+        </div>
 
         <div class="field-checkbox">
           <p-checkbox formControlName="noTicketFlag" binary="true" inputId="noTicketFlag"></p-checkbox>
@@ -178,7 +202,7 @@
     </div>
 
     <div class="field grid mb-5">
-      <label for="description" class="col-2">Описание</label>
+      <label for="description" class="col-2">Описание*</label>
       <div class="col-10">
         <textarea
           id="description"
@@ -188,8 +212,15 @@
           pInputTextarea
           class="w-full"
         ></textarea>
+        <small
+          class="p-error"
+          *ngIf="form.get('description').invalid && (form.get('description').dirty || form.get('description').touched)"
+          >Не может быть пустым</small
+        >
       </div>
     </div>
+
+    * - обязательно для заполнения
 
     <p-divider align="center" type="dashed">Файлы</p-divider>
     <div class="my-5">

@@ -12,6 +12,10 @@ export class NewSdRequestPreviewComponent {
    * Заполненная форма заявки
    */
   sdRequest: NewSdRequestViewForm = this.config.data?.form;
+  /**
+   * Флаг валидации формы
+   */
+  valid = this.config.data?.valid;
 
   constructor(private ref: DynamicDialogRef, private config: DynamicDialogConfig) {}
 
@@ -20,7 +24,14 @@ export class NewSdRequestPreviewComponent {
   }
 
   /**
-   * Закрыть предпросмотр
+   * Создает заявку
+   */
+  saveForm() {
+    console.log(this.valid);
+  }
+
+  /**
+   * Закрывает предпросмотр
    */
   returnToForm() {
     this.ref.close();

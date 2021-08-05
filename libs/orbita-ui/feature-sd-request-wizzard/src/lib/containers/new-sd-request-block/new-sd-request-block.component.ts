@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { distinctUntilChanged, tap, filter, map, first } from 'rxjs/operators';
 import { AutoComplete } from 'primeng/autocomplete';
@@ -72,6 +72,10 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
   get attachmentsForm(): FormArray {
     return this.form.get('attachments') as FormArray;
+  }
+
+  get sourceSnapshot(): FormGroup {
+    return this.form.get('source_snapshot') as FormGroup;
   }
 
   constructor(
@@ -198,6 +202,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     this.dialogService.open(NewSdRequestPreviewComponent, {
       data: {
         form: this.form.getRawValue(),
+        valid: this.form.valid,
       },
       header: 'Предпросмотр заявки',
       width: '40%',
@@ -215,11 +220,11 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
           phone: [],
         }),
       }),
-      employee: [],
+      employee: [null, Validators.required],
       employeeManuallyFlag: [false],
-      ticket: [],
+      ticket: [null, Validators.required],
       noTicketFlag: [false],
-      description: [],
+      description: [null, Validators.required],
       svtItem: [],
       attachments: this.fb.array([]),
     });
@@ -236,10 +241,20 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       if (flag) {
         this.employeeFilterKey.disable();
         this.employee.disable();
+        this.sourceSnapshot.get('tn').setValidators([Validators.required]);
+        this.sourceSnapshot.get('fio').setValidators([Validators.required]);
+        this.form.get('employee').clearValidators();
       } else {
         this.employeeFilterKey.enable();
         this.employee.enable();
+        this.sourceSnapshot.get('tn').clearValidators();
+        this.sourceSnapshot.get('fio').clearValidators();
+        this.form.get('employee').setValidators([Validators.required]);
       }
+
+      this.form.get('employee').updateValueAndValidity();
+      this.sourceSnapshot.get('tn').updateValueAndValidity();
+      this.sourceSnapshot.get('fio').updateValueAndValidity();
     });
     // Отключение/включение поля "Услуга"
     this.noTicketFlag = this.form
