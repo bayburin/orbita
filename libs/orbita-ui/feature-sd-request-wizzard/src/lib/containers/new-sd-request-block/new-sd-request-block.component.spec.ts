@@ -14,11 +14,14 @@ import {
   SdTicket,
   SvtItem,
   SdTicketViewModel,
+  SdRequestFacade,
+  SdRequestFacadeStub,
 } from '@orbita/orbita-ui/domain-logic';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
+import { DialogService } from 'primeng/dynamicdialog';
 
 import { NewSdRequestBlockComponent } from './new-sd-request-block.component';
 
@@ -37,6 +40,8 @@ describe('NewSdRequestBlockComponent', () => {
         { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
         { provide: ServiceDeskFacade, useClass: ServiceDeskFacadeStub },
         { provide: SvtFacade, useClass: SvtFacadeStub },
+        { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
+        DialogService,
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
