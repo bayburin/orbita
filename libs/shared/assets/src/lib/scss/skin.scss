@@ -48,3 +48,9 @@
     gap: 0.25 * $spacer;
   }
 }
+
+.without-icon {
+  .p-inline-message-icon {
+    display: none;
+  }
+}

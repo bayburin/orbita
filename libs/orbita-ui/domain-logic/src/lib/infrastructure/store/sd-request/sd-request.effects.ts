@@ -110,7 +110,7 @@ export class SdRequestEffects {
     )
   );
 
-  saveUpdateForm = createEffect(() =>
+  saveUpdateForm$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.saveUpdateForm),
       withLatestFrom(
@@ -142,7 +142,7 @@ export class SdRequestEffects {
     )
   );
 
-  saveFormSuccess = createEffect(() =>
+  saveFormSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.saveFormSuccess),
       tap(() => this.messageService.add({ severity: 'success', detail: 'Заявка обновлена' })),
@@ -151,7 +151,7 @@ export class SdRequestEffects {
     )
   );
 
-  clearAll = createEffect(() =>
+  clearAll$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.clearAll),
       switchMap(() => [
@@ -161,6 +161,29 @@ export class SdRequestEffects {
         WorkerActions.clearAll(),
         AttachmentActions.clearAll(),
       ])
+    )
+  );
+
+  saveNewForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.saveNewForm),
+      withLatestFrom(this.store.select(SdRequestSelectors.getNewFormEntity)),
+      switchMap(([_action, form]) =>
+        this.sdRequestApi.create(SdRequestFactory.createNewServerForm(form)).pipe(
+          switchMap((data) => {
+            const normalizeData = SdRequestCacheService.normalizeSdRequest(data.sd_request);
+            const newSdRequest = normalizeData.entities.sd_requests[normalizeData.result];
+
+            return [
+              SdRequestActions.updatePartials({ entities: normalizeData.entities }),
+              // Вызывать обновление хранилища заявок после того, как будут сохранены все его составные части
+              SdRequestActions.saveNewFormSuccess({ sdRequest: newSdRequest }),
+              SdRequestActions.showModalAfterCreateNewForm(),
+            ];
+          }),
+          catchError((error) => of(SdRequestActions.saveNewFormFailure({ error })))
+        )
+      )
     )
   );
 }

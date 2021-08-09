@@ -21,6 +21,8 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   formLoading$ = new BehaviorSubject(null);
   newFormEntity$ = new BehaviorSubject(null);
   newFormLoading$ = new BehaviorSubject(null);
+  newFormCreated$ = new BehaviorSubject(null);
+  newFormShowModalAfterCreate$ = new BehaviorSubject(null);
 
   setTableMetadata() {
     /** */
@@ -59,6 +61,14 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   }
 
   createForm() {
+    /** */
+  }
+
+  closeModalAfterCreateSdRequest() {
+    /** */
+  }
+
+  clearCreatedForm() {
     /** */
   }
 }

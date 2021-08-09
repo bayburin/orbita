@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { NewSdRequestViewForm, User } from '@orbita/orbita-ui/domain-logic';
+import { NewSdRequestViewForm, User, SdRequestFacade } from '@orbita/orbita-ui/domain-logic';
 
 @Component({
   selector: 'lib-new-sd-request-preview',
@@ -16,8 +16,16 @@ export class NewSdRequestPreviewComponent {
    * Флаг валидации формы
    */
   valid = this.config.data?.valid;
+  /**
+   * ИНдикатор загрузки
+   */
+  loading$ = this.sdRequestFacade.newFormLoading$;
 
-  constructor(private ref: DynamicDialogRef, private config: DynamicDialogConfig) {}
+  constructor(
+    private sdRequestFacade: SdRequestFacade,
+    private ref: DynamicDialogRef,
+    private config: DynamicDialogConfig
+  ) {}
 
   trackByUser(index: number, user: User): number {
     return user.id;
@@ -27,7 +35,7 @@ export class NewSdRequestPreviewComponent {
    * Создает заявку
    */
   saveForm() {
-    console.log(this.valid);
+    this.sdRequestFacade.createForm();
   }
 
   /**

@@ -84,6 +84,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   newFormEntity$ = this.store.select(SdRequestSelectors.getNewFormEntity);
   newFormLoading$ = this.store.select(SdRequestSelectors.getNewFormLoading);
+  newFormCreated$ = this.store.select(SdRequestViewModelSelectors.getNewFormCreatedViewModel);
+  newFormShowModalAfterCreate$ = this.store.select(SdRequestSelectors.getNewFormShowModalAfterCreate);
 
   constructor(private store: Store<SdRequestFeature.SdRequestPartialState>, private sdRequestApi: SdRequestApi) {}
 
@@ -125,5 +127,13 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   createForm() {
     this.store.dispatch(SdRequestActions.saveNewForm());
+  }
+
+  closeModalAfterCreateSdRequest(): void {
+    this.store.dispatch(SdRequestActions.closeModalAfterCreateNewForm());
+  }
+
+  clearCreatedForm() {
+    this.store.dispatch(SdRequestActions.clearNewForm());
   }
 }

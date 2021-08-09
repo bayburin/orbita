@@ -3,7 +3,9 @@
 </div>
 <div class="sd-request-preview-content">
   <div class="grid preview-row">
-    <div class="col-3">Описание</div>
+    <div class="col-3">
+      <b>Описание*</b>
+    </div>
     <div class="col-9">
       <div class="preview-row-content">
         <div *ngIf="sdRequest.description; else noData">{{ sdRequest.description }}</div>
@@ -11,7 +13,9 @@
     </div>
   </div>
   <div class="grid preview-row">
-    <div class="col-3">Заказчик</div>
+    <div class="col-3">
+      <b>Работник*</b>
+    </div>
     <div class="col-9">
       <div class="preview-row-content">
         <div *ngIf="sdRequest.employeeManuallyFlag; else selectedEmployee">
@@ -50,10 +54,17 @@
     </div>
   </div>
   <div class="grid preview-row">
-    <div class="col-3">Услуга</div>
+    <div class="col-3">
+      <b>Услуга*</b>
+    </div>
     <div class="col-9">
       <div class="preview-row-content">
-        <div *ngIf="!sdRequest.noTicketFlag && sdRequest.ticket; else noData">{{ sdRequest.ticket.name }}</div>
+        <div *ngIf="!sdRequest.noTicketFlag; else defaultTicket">
+          <div *ngIf="sdRequest.ticket; else noData">{{ sdRequest.ticket.name }}</div>
+        </div>
+        <ng-template #defaultTicket>
+          <lib-panel-placeholder>Услуга по умолчанию</lib-panel-placeholder>
+        </ng-template>
       </div>
     </div>
   </div>
@@ -61,12 +72,16 @@
     <div class="col-3">Исполнители</div>
     <div class="col-9">
       <div class="preview-row-content">
-        <div *ngIf="sdRequest.ticket?.responsible_users.length; else noData">
+        <div *ngIf="sdRequest.ticket?.responsible_users.length; else defaultResponsibleUsers">
           <div *ngFor="let user of sdRequest.ticket.responsible_users; trackBy: trackByUser" class="p-1">
             {{ user.fio }}
           </div>
         </div>
       </div>
+
+      <ng-template #defaultResponsibleUsers>
+        <lib-panel-placeholder>Исполнители по умолчанию</lib-panel-placeholder>
+      </ng-template>
     </div>
   </div>
   <div class="grid preview-row">
@@ -80,16 +95,29 @@
     </div>
   </div>
 </div>
+
+<p-message severity="info" text="* - обязательно для заполнения" class="without-icon"></p-message>
+
 <div class="flex justify-content-center">
-  <button
-    pButton
-    pRipple
-    type="button"
-    label="Создать заявку"
-    class="p-button-outlined"
-    (click)="saveForm()"
-    [disabled]="!valid"
-  ></button>
+  <p-button
+    *ngIf="loading$ | async; else noSaving"
+    label="Сохранение..."
+    icon="mdi mdi-loading mdi-spin mdi-18px"
+    class="mr-2"
+    styleClass="p-button-outlined p-button-primary"
+    [disabled]="true"
+  ></p-button>
+  <ng-template #noSaving>
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Создать заявку"
+      class="p-button-outlined"
+      (click)="saveForm()"
+      [disabled]="!valid"
+    ></button>
+  </ng-template>
   <button
     pButton
     pRipple

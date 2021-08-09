@@ -178,15 +178,7 @@
                 </p-listbox>
 
                 <ng-template #readModeWorkers>
-                  <div *ngFor="let work of sdRequest.works; trackBy: trackByWork">
-                    <lib-group-header [group]="work.group"></lib-group-header>
-                    <div *ngIf="work.workers.length; else emptyData">
-                      <div *ngFor="let worker of work.workers; trackBy: trackByWorker">
-                        <div class="p-2">{{ worker.user.fio }}</div>
-                      </div>
-                    </div>
-                    <p-divider type="dashed"></p-divider>
-                  </div>
+                  <lib-workers [works]="sdRequest.works"></lib-workers>
                 </ng-template>
               </p-tabPanel>
               <p-tabPanel header="Данные на момент создания">

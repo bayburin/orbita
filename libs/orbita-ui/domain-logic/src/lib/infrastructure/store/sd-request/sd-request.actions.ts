@@ -70,6 +70,15 @@ export const changeNewForm = createAction('[SdRequest] Change New Form', props<{
 
 export const saveNewForm = createAction('[SdRequest/API] Save New Form');
 
-export const saveNewFormSuccess = createAction('[SdRequest/API] Save New Form Success');
+export const saveNewFormSuccess = createAction(
+  '[SdRequest/API] Save New Form Success',
+  props<{ sdRequest: SdRequest }>()
+);
 
 export const saveNewFormFailure = createAction('[SdRequest/API] Save New Form Failure', props<{ error: any }>());
+
+export const showModalAfterCreateNewForm = createAction('[SdRequest] Show Modal After Create New Form');
+
+export const closeModalAfterCreateNewForm = createAction('[SdRequest] Close Modal After Create New Form');
+
+export const clearNewForm = createAction('[SdRequest] Clear New Form');

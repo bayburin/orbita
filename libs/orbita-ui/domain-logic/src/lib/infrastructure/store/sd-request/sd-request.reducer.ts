@@ -30,6 +30,8 @@ export interface NewFormState {
   entity: NewSdRequestViewForm;
   loading: boolean;
   error?: string;
+  created?: SdRequest;
+  showModalAfterCreate: boolean;
 }
 
 export interface State extends EntityState<SdRequest> {
@@ -67,6 +69,7 @@ export const initFormState: FormState = {
 export const initNewFormState: NewFormState = {
   entity: null,
   loading: false,
+  showModalAfterCreate: false,
 };
 
 export const sdRequestAdapter: EntityAdapter<SdRequest> = createEntityAdapter<SdRequest>();
@@ -247,11 +250,12 @@ const sdRequestReducer = createReducer(
       loading: true,
     },
   })),
-  on(SdRequestActions.saveNewFormSuccess, (state) => ({
+  on(SdRequestActions.saveNewFormSuccess, (state, { sdRequest }) => ({
     ...state,
     newForm: {
       ...state.newForm,
       loading: false,
+      created: sdRequest,
     },
   })),
   on(SdRequestActions.saveNewFormFailure, (state, { error }) => ({
@@ -261,6 +265,24 @@ const sdRequestReducer = createReducer(
       loading: false,
       error,
     },
+  })),
+  on(SdRequestActions.showModalAfterCreateNewForm, (state) => ({
+    ...state,
+    newForm: {
+      ...state.newForm,
+      showModalAfterCreate: true,
+    },
+  })),
+  on(SdRequestActions.closeModalAfterCreateNewForm, (state) => ({
+    ...state,
+    newForm: {
+      ...state.newForm,
+      showModalAfterCreate: false,
+    },
+  })),
+  on(SdRequestActions.clearNewForm, (state) => ({
+    ...state,
+    newForm: { ...initNewFormState },
   }))
 );
 

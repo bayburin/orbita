@@ -25,6 +25,7 @@ describe('SdRequestSelectors', () => {
   const selectedEntity = createSdRequestEntity(444);
   const formEntity = SdRequestFactory.createViewForm();
   const newFormEntity = { description: 'test' } as NewSdRequestViewForm;
+  const created = createSdRequestEntity(555);
   let selectedState: any;
   let formState: any;
   let newFormState: any;
@@ -45,6 +46,8 @@ describe('SdRequestSelectors', () => {
     newFormState = {
       entity: newFormEntity,
       loading: false,
+      created,
+      showModalAfterCreate: true,
     };
     state = sdRequestAdapter.setAll(arrEntities, {
       ...initialState,
@@ -174,5 +177,13 @@ describe('SdRequestSelectors', () => {
 
   it('getNewFormLoading() should return loading attribute', () => {
     expect(SdRequestSelectors.getNewFormLoading.projector(newFormState)).toBe(false);
+  });
+
+  it('getNewFormCreated() should return created attribute', () => {
+    expect(SdRequestSelectors.getNewFormCreated.projector(newFormState)).toEqual(created);
+  });
+
+  it('getNewFormShowModalAfterCreate() should return created attribute', () => {
+    expect(SdRequestSelectors.getNewFormShowModalAfterCreate.projector(newFormState)).toBe(true);
   });
 });

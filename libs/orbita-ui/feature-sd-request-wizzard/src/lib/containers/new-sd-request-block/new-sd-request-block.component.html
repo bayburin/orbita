@@ -1,7 +1,9 @@
 <div class="card col-6">
   <form [formGroup]="form">
     <div class="field grid mb-5">
-      <label for="employee" class="col-2">Работник*</label>
+      <label for="employee" class="col-2">
+        <b>Работник*</b>
+      </label>
       <div class="col-10">
         <p-selectButton
           class="block mb-3"
@@ -37,9 +39,9 @@
               <span class="ml-3">{{ employee.fullName }}</span>
             </ng-template>
           </p-autoComplete>
-          <small class="p-error" *ngIf="form.get('employee').invalid && (employee.dirty || employee.touched)"
-            >Необходимо выбрать работника, либо ввести данные о нем вручную</small
-          >
+          <small class="p-error" *ngIf="form.get('employee').invalid && (employee.dirty || employee.touched)">
+            Необходимо выбрать работника, либо ввести данные о нем вручную
+          </small>
         </div>
 
         <div class="field-checkbox">
@@ -50,19 +52,28 @@
         <div *ngIf="employeeManuallyFlag.value" formGroupName="source_snapshot">
           <div class="formgrid grid">
             <div class="field col">
-              <label for="tn">Таб. номер</label>
+              <label for="tn">
+                <b>Таб. номер*</b>
+              </label>
               <input type="text" id="tn" formControlName="tn" class="inputfield w-full" pInputText />
-              <small
-                class="p-error"
+              <ng-container
                 *ngIf="
                   sourceSnapshot.get('tn').invalid &&
                   (sourceSnapshot.get('tn').dirty || sourceSnapshot.get('tn').touched)
                 "
-                >Не может быть пустым</small
+              >
+                <small class="p-error" *ngIf="sourceSnapshot.get('tn').hasError('required')">
+                  Не может быть пустым
+                </small>
+              </ng-container>
+              <small class="p-error" *ngIf="sourceSnapshot.get('tn').hasError('pattern')"
+                >Должен быть числом и не может начинаться с 0</small
               >
             </div>
             <div class="field col">
-              <label for="fio">ФИО</label>
+              <label for="fio">
+                <b>ФИО*</b>
+              </label>
               <input type="text" id="fio" formControlName="fio" class="inputfield w-full" pInputText />
               <small
                 class="p-error"
@@ -138,6 +149,7 @@
             [suggestions]="svtItems$ | async"
             [showEmptyMessage]="true"
             [autofocus]="true"
+            [minLength]="3"
             [virtualScroll]="true"
             scrollHeight="400px"
             [itemSize]="80"
@@ -166,7 +178,7 @@
     </div>
 
     <div class="field grid my-5">
-      <label for="sd_ticket" class="col-2">Услуга*</label>
+      <label for="sd_ticket" class="col-2"><b>Услуга*</b></label>
       <div class="col-10">
         <div class="mb-2">
           <p-autoComplete
@@ -202,7 +214,9 @@
     </div>
 
     <div class="field grid mb-5">
-      <label for="description" class="col-2">Описание*</label>
+      <label for="description" class="col-2">
+        <b>Описание*</b>
+      </label>
       <div class="col-10">
         <textarea
           id="description"
@@ -220,7 +234,7 @@
       </div>
     </div>
 
-    * - обязательно для заполнения
+    <p-message severity="info" text="* - обязательно для заполнения" class="without-icon"></p-message>
 
     <p-divider align="center" type="dashed">Файлы</p-divider>
     <div class="my-5">
@@ -239,3 +253,11 @@
     </div>
   </form>
 </div>
+
+<lib-sd-request-created
+  [sdRequest]="sdRequest$ | async"
+  [openModal]="displayModal$ | async"
+  (createAnotherSdRequest)="resetForm()"
+  (backToCurrentSdRequest)="backToCurrentSdRequest($event)"
+  (backToSdRequestList)="backToSdRequestList()"
+></lib-sd-request-created>

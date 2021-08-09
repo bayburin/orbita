@@ -13,8 +13,9 @@ import {
   SdTicketViewModel,
   SdRequestFacade,
 } from '@orbita/orbita-ui/domain-logic';
-import { DialogService } from 'primeng/dynamicdialog';
-import { NewSdRequestPreviewComponent } from '@orbita/orbita-ui/ui';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { NewSdRequestPreviewComponent } from '../new-sd-request-preview/new-sd-request-preview.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'orbita-ui-sd-request-wizzard-new-sd-request-block',
@@ -66,6 +67,15 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   svtItemFilterKeySubs: Subscription;
   svtItemManuallySubs: Subscription;
 
+  // ========== Созданная заявка ==========
+
+  sdRequest$ = this.sdRequestFacade.newFormCreated$;
+  displayModal$ = this.sdRequestFacade.newFormShowModalAfterCreate$;
+
+  // ========== Другое ==========
+
+  previewRef: DynamicDialogRef;
+
   get employeeManuallyFlag(): FormControl {
     return this.form?.get('employeeManuallyFlag') as FormControl;
   }
@@ -84,15 +94,13 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     private serviceDeskFacade: ServiceDeskFacade,
     private svtFacade: SvtFacade,
     private fb: FormBuilder,
-    private dialogService: DialogService
+    private dialogService: DialogService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.buildForm();
     this.ticketsSubs = this.tickets$.subscribe((tickets) => (this.tickets = tickets));
-
-    // TODO: Удалить
-    this.form.valueChanges.subscribe((data) => console.log(data));
   }
 
   ngOnDestroy(): void {
@@ -103,6 +111,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     this.svtItemManuallySubs.unsubscribe();
     this.ticketsSubs.unsubscribe();
     this.valueChangesSub.unsubscribe();
+    this.sdRequestFacade.clearCreatedForm();
   }
 
   /**
@@ -111,7 +120,9 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    * @param event - событие поиска
    */
   searchEmployee(event: any): void {
-    this.employeeFacade.search(this.employeeFilterKey.value.filter, event.query);
+    if (event.query && typeof event.query === 'string') {
+      this.employeeFacade.search(this.employeeFilterKey.value.filter, event.query.trim());
+    }
   }
 
   /**
@@ -172,7 +183,9 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   searchSvtItem(event: any): void {
     const type = this.svtItemFilterKey.value;
 
-    this.svtFacade.loadItemsForForm({ [type.value]: event.query });
+    if (event.query) {
+      this.svtFacade.loadItemsForForm({ [type.value]: event.query.trim() });
+    }
   }
 
   /**
@@ -198,8 +211,11 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     return `${item.type.short_description} ${item.short_item_model} Инвентарный: ${item.invent_num} | Штрих-код: ${item.barcode_item.id}`;
   }
 
+  /**
+   * Открывает компонент для предпросмотра заявки
+   */
   previewForm(): void {
-    this.dialogService.open(NewSdRequestPreviewComponent, {
+    this.previewRef = this.dialogService.open(NewSdRequestPreviewComponent, {
       data: {
         form: this.form.getRawValue(),
         valid: this.form.valid,
@@ -207,6 +223,53 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       header: 'Предпросмотр заявки',
       width: '40%',
     });
+  }
+
+  /**
+   * Закрывает модальные окна и переходит к созданной заявке
+   *
+   * @param id - идентификатор заявки
+   */
+  backToCurrentSdRequest(id: number): void {
+    this.router.navigate(['/tickets', 'sd-requests', id]);
+    this.sdRequestFacade.closeModalAfterCreateSdRequest();
+    this.previewRef.close();
+  }
+
+  /**
+   * Закрывает модальные окна и пререходит к списку заявок
+   */
+  backToSdRequestList(): void {
+    this.router.navigate(['/tickets']);
+    this.sdRequestFacade.closeModalAfterCreateSdRequest();
+    this.previewRef.close();
+  }
+
+  /**
+   * Очистить форму для создания новой заявки
+   */
+  resetForm(): void {
+    // Закрывает все окна
+    this.sdRequestFacade.closeModalAfterCreateSdRequest();
+    this.previewRef.close();
+
+    // Обновляет поля, связанные с работником
+    this.employee.reset();
+    this.employeeFilterKey.setValue(this.employeeFilters[0]);
+
+    // Обновляет поля, связанные с услугой
+    this.ticket.reset();
+    this.searchTicket({ query: '' });
+
+    // Обновляет поля, связанные с ВТ
+    this.employeeSvtItem.reset();
+    this.customSvtItem.reset();
+    this.svtItemManually.reset();
+    this.svtItemFilterKey.setValue(this.svtItemFilters[0]);
+
+    // Очищает саму форму
+    this.form.reset();
+    this.sdRequestFacade.clearCreatedForm();
   }
 
   private buildForm(): void {
@@ -228,20 +291,23 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       svtItem: [],
       attachments: this.fb.array([]),
     });
+
     // Обновляет хранилище по любому изменению формы
     this.valueChangesSub = this.form.valueChanges
       .pipe(distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)))
       .subscribe((formData) => this.sdRequestFacade.changeNewForm(formData));
+
     // Поиск работника по параметру
     this.employeeFilterKeySubs = this.employeeFilterKey.valueChanges
       .pipe(distinctUntilChanged())
       .subscribe(() => this.searchEmployee({ query: this.employee.value }));
+
     // Отключение/включение поля "Работник"
     this.employeeManuallyFlagSubs = this.employeeManuallyFlag.valueChanges.subscribe((flag) => {
       if (flag) {
         this.employeeFilterKey.disable();
         this.employee.disable();
-        this.sourceSnapshot.get('tn').setValidators([Validators.required]);
+        this.sourceSnapshot.get('tn').setValidators([Validators.required, Validators.pattern('^[^0][0-9]*$')]);
         this.sourceSnapshot.get('fio').setValidators([Validators.required]);
         this.form.get('employee').clearValidators();
       } else {
@@ -256,10 +322,20 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       this.sourceSnapshot.get('tn').updateValueAndValidity();
       this.sourceSnapshot.get('fio').updateValueAndValidity();
     });
+
     // Отключение/включение поля "Услуга"
-    this.noTicketFlag = this.form
-      .get('noTicketFlag')
-      .valueChanges.subscribe((flag) => (flag ? this.ticket.disable() : this.ticket.enable()));
+    this.noTicketFlag = this.form.get('noTicketFlag').valueChanges.subscribe((flag) => {
+      if (flag) {
+        this.ticket.disable();
+        this.form.get('ticket').clearValidators();
+      } else {
+        this.ticket.enable();
+        this.form.get('ticket').setValidators([Validators.required]);
+      }
+
+      this.form.get('ticket').updateValueAndValidity();
+    });
+
     // Поиск ВТ по параметру
     this.svtItemFilterKeySubs = this.svtItemFilterKey.valueChanges
       .pipe(
@@ -267,6 +343,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
         filter((str) => str.length)
       )
       .subscribe(() => this.searchSvtItem({ query: this.customSvtItem.value }));
+
     // Отключение/включение поля "Выч. техника"
     this.svtItemManuallySubs = this.svtItemManually.valueChanges.subscribe((flag) => {
       if (flag) {

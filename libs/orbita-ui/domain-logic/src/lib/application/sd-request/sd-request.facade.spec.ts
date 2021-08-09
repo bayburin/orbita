@@ -295,6 +295,26 @@ describe('SdRequestFacade', () => {
         expect(spy).toHaveBeenCalledWith(SdRequestActions.saveNewForm());
       });
     });
+
+    describe('closeModalAfterCreateSdRequest()', () => {
+      it('should call closeModalAfterCreateSdRequest action', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.closeModalAfterCreateSdRequest();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.closeModalAfterCreateNewForm());
+      });
+    });
+
+    describe('clearCreatedForm()', () => {
+      it('should call clearNewForm action', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.clearCreatedForm();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.clearNewForm());
+      });
+    });
   });
 
   // describe('used in NgModule', () => {

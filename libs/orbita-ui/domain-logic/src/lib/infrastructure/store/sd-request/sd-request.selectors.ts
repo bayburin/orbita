@@ -87,3 +87,10 @@ export const getNewForm = createSelector(getSdRequestState, (state: State) => st
 export const getNewFormEntity = createSelector(getNewForm, (state: NewFormState) => state.entity);
 
 export const getNewFormLoading = createSelector(getNewForm, (state: NewFormState) => state.loading);
+
+export const getNewFormCreated = createSelector(getNewForm, (state: NewFormState) => state.created);
+
+export const getNewFormShowModalAfterCreate = createSelector(
+  getNewForm,
+  (state: NewFormState) => state.showModalAfterCreate
+);

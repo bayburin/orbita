@@ -37,7 +37,8 @@ import { TicketPriorityComponent } from './components/ticket-priority/ticket-pri
 import { TicketStatusComponent } from './components/ticket-status/ticket-status.component';
 import { CmsStatusComponent } from './components/cms-status/cms-status.component';
 import { CsaStatusComponent } from './components/csa-status/csa-status.component';
-import { NewSdRequestPreviewComponent } from './components/new-sd-request-preview/new-sd-request-preview.component';
+import { SdRequestCreatedComponent } from './components/sd-request-created/sd-request-created.component';
+import { WorkersComponent } from './components/workers/workers.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
@@ -69,7 +70,8 @@ const components: any[] = [
   TicketStatusComponent,
   CmsStatusComponent,
   CsaStatusComponent,
-  NewSdRequestPreviewComponent,
+  SdRequestCreatedComponent,
+  WorkersComponent,
 ];
 
 @NgModule({

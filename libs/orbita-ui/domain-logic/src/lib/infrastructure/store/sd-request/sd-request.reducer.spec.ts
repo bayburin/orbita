@@ -5,7 +5,15 @@ import { SdRequestFactory } from './../../factories/sd-request.factory';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { Meta } from '../../../entities/server-data/meta.interface';
 import * as SdRequestActions from './sd-request.actions';
-import { State, initialState, reducer, SelectedState, FormState, NewFormState } from './sd-request.reducer';
+import {
+  State,
+  initialState,
+  reducer,
+  SelectedState,
+  FormState,
+  NewFormState,
+  initNewFormState,
+} from './sd-request.reducer';
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
 
@@ -240,10 +248,12 @@ describe('SdRequestReducer', () => {
 
   describe('saveNewFormSuccess', () => {
     it('should set attributes', () => {
-      action = SdRequestActions.saveNewFormSuccess();
-      const result: NewFormState = reducer(initialState, action).newForm;
+      const sdRequest = createSdRequest('AAA');
+      action = SdRequestActions.saveNewFormSuccess({ sdRequest });
+      const result: State = reducer(initialState, action);
 
-      expect(result.loading).toBe(false);
+      expect(result.newForm.loading).toBe(false);
+      expect(result.newForm.created).toEqual(sdRequest);
     });
   });
 
@@ -255,6 +265,36 @@ describe('SdRequestReducer', () => {
 
       expect(result.loading).toBe(false);
       expect(result.error).toEqual(error);
+    });
+  });
+
+  describe('showModalAfterCreateNewForm', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.showModalAfterCreateNewForm();
+      const result: NewFormState = reducer(initialState, action).newForm;
+
+      expect(result.showModalAfterCreate).toBe(true);
+    });
+  });
+
+  describe('closeModalAfterCreateNewForm', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.closeModalAfterCreateNewForm();
+      const result: NewFormState = reducer(initialState, action).newForm;
+
+      expect(result.showModalAfterCreate).toBe(false);
+    });
+  });
+
+  describe('clearNewForm', () => {
+    it('should set attributes', () => {
+      const form = { description: 'test' } as NewSdRequestViewForm;
+      action = SdRequestActions.changeNewForm({ entity: form });
+      const state: State = reducer(initialState, action);
+      action = SdRequestActions.clearNewForm();
+      const result: NewFormState = reducer(state, action).newForm;
+
+      expect(result).toEqual(initNewFormState);
     });
   });
 

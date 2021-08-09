@@ -32,6 +32,7 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { ConfirmationService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { DialogModule } from 'primeng/dialog';
 
 const modules: any[] = [
   TableModule,
@@ -65,6 +66,7 @@ const modules: any[] = [
   DynamicDialogModule,
   MessagesModule,
   MessageModule,
+  DialogModule,
 ];
 
 @NgModule({

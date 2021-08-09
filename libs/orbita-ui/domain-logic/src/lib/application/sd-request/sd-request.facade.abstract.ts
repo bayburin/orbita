@@ -79,7 +79,14 @@ export abstract class SdRequestFacadeAbstract {
    * Индикатор загрузки новой формы
    */
   newFormLoading$: Observable<boolean>;
-
+  /**
+   * Созданаая заявка
+   */
+  newFormCreated$: Observable<SdRequestViewModel>;
+  /**
+   * Флаг, определяющий, показывать ли модальное окно с созданной заявкой
+   */
+  newFormShowModalAfterCreate$: Observable<boolean>;
   /**
    * Устанавливает метаданные таблицы
    *
@@ -135,4 +142,14 @@ export abstract class SdRequestFacadeAbstract {
    * Сохраняет данные формы новой заявки
    */
   abstract createForm(): void;
+
+  /**
+   * Закрывает модальное окно с созданной заявкой
+   */
+  abstract closeModalAfterCreateSdRequest(): void;
+
+  /**
+   * Очищает хранилище, содержащее данные по созданной заявке (форму, саму заявку, различные флаги...)
+   */
+  abstract clearCreatedForm(): void;
 }

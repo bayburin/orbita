@@ -46,7 +46,7 @@ export class SdRequestFactory {
 
     // Обработка работника
     if (viewForm.employeeManuallyFlag) {
-      snapshot = viewForm.source_snapshot;
+      snapshot = Object.assign({}, viewForm.source_snapshot);
     } else {
       snapshot = {
         id_tn: viewForm.employee.id,
@@ -55,9 +55,12 @@ export class SdRequestFactory {
 
     // Обработка ВТ
     const svtItem = viewForm.svtItem;
-    snapshot.invent_num = svtItem.invent_num;
-    snapshot.svt_item_id = svtItem.item_id;
-    snapshot.barcode = svtItem.barcode_item.id;
+
+    if (svtItem) {
+      snapshot.invent_num = svtItem.invent_num;
+      snapshot.svt_item_id = svtItem.item_id;
+      snapshot.barcode = svtItem.barcode_item.id;
+    }
 
     // Обработка услуги и списка исполнителей (массив пользователей)
     let service_id;

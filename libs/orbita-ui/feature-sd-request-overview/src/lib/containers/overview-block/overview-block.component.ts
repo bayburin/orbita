@@ -99,14 +99,6 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     return parameter.id;
   }
 
-  trackByWork(index: number, work: WorkViewModel): number {
-    return work.id;
-  }
-
-  trackByWorker(index: number, worker: WorkerViewModel): number {
-    return worker.id;
-  }
-
   trackByUserGroup(index: number, group: UserGroup): number {
     return group.id;
   }

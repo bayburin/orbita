@@ -80,7 +80,8 @@ describe('OverviewBlockComponent', () => {
 
     it('should not call updateForm() if form is invalid', () => {
       const spy = jest.spyOn(sdRequestFacade, 'updateForm');
-      component.form.controls['description'].setErrors({ incorrect: true });
+      // component.form.controls['description'].setErrors({ incorrect: true });
+      component.form.controls['priority'].setErrors({ incorrect: true });
       component.saveForm();
 
       expect(spy).not.toHaveBeenCalled();

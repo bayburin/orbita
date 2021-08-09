@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
@@ -22,8 +22,13 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogService } from 'primeng/dynamicdialog';
+import { RouterTestingModule } from '@angular/router/testing';
+import { Router } from '@angular/router';
 
 import { NewSdRequestBlockComponent } from './new-sd-request-block.component';
+
+@Component({})
+class ExampleComponent {}
 
 describe('NewSdRequestBlockComponent', () => {
   let component: NewSdRequestBlockComponent;
@@ -31,10 +36,21 @@ describe('NewSdRequestBlockComponent', () => {
   let employeeFacade: EmployeeFacade;
   let serviceDeskFacade: ServiceDeskFacade;
   let svtFacade: SvtFacade;
+  let sdRequestFacade: SdRequestFacade;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, AutoCompleteModule, SelectButtonModule, CheckboxModule, DropdownModule],
+      imports: [
+        ReactiveFormsModule,
+        AutoCompleteModule,
+        SelectButtonModule,
+        CheckboxModule,
+        DropdownModule,
+        RouterTestingModule.withRoutes([
+          { path: 'tickets/sd-requests/:id', component: ExampleComponent },
+          { path: 'tickets', component: ExampleComponent },
+        ]),
+      ],
       declarations: [NewSdRequestBlockComponent],
       providers: [
         { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
@@ -52,6 +68,7 @@ describe('NewSdRequestBlockComponent', () => {
     component = fixture.componentInstance;
     employeeFacade = TestBed.inject(EmployeeFacade);
     serviceDeskFacade = TestBed.inject(ServiceDeskFacade);
+    sdRequestFacade = TestBed.inject(SdRequestFacade);
     svtFacade = TestBed.inject(SvtFacade);
     fixture.detectChanges();
   });
@@ -61,13 +78,31 @@ describe('NewSdRequestBlockComponent', () => {
   });
 
   describe('searchEmployee()', () => {
-    it('should call employeeFacade.searchEmployee() method', () => {
+    it('should call searchEmployee() method', () => {
       const spy = jest.spyOn(employeeFacade, 'search');
       const event = { query: 'fake-value' };
 
       component.searchEmployee(event);
 
       expect(spy).toHaveBeenCalledWith(EmployeeFilters.FIO, 'fake-value');
+    });
+
+    it('should not call searchEmployee() if value is empty', () => {
+      const spy = jest.spyOn(employeeFacade, 'search');
+      const event = { query: '' };
+
+      component.searchEmployee(event);
+
+      expect(spy).not.toHaveBeenCalledWith(EmployeeFilters.FIO, 'fake-value');
+    });
+
+    it('should not call searchEmployee() if value is not string', () => {
+      const spy = jest.spyOn(employeeFacade, 'search');
+      const event = { query: { foo: 'bar' } };
+
+      component.searchEmployee(event);
+
+      expect(spy).not.toHaveBeenCalledWith(EmployeeFilters.FIO, 'fake-value');
     });
   });
 
@@ -150,13 +185,26 @@ describe('NewSdRequestBlockComponent', () => {
   });
 
   describe('searchSvtItem()', () => {
-    it('should call employeeFacade.loadItemsForForm() method', () => {
-      const svtItem = { short_item_model: 'fake-ticket' } as SvtItem;
-      const spy = jest.spyOn(svtFacade, 'loadItemsForForm');
+    let svtItem: SvtItem;
+    let spy: jest.SpyInstance;
 
+    beforeEach(() => {
+      svtItem = { short_item_model: 'fake-ticket' } as SvtItem;
+      spy = jest.spyOn(svtFacade, 'loadItemsForForm');
+    });
+
+    it('should call loadItemsForForm() method', () => {
       component.searchSvtItem({ query: svtItem.short_item_model });
 
       expect(spy).toHaveBeenCalledWith({ [component.svtItemFilterKey.value.value]: svtItem.short_item_model });
+    });
+
+    it('should not call loadItemsForForm() if value is empty', () => {
+      const event = { query: '' };
+
+      component.searchSvtItem(event);
+
+      expect(spy).not.toHaveBeenCalledWith();
     });
   });
 
@@ -178,6 +226,95 @@ describe('NewSdRequestBlockComponent', () => {
       component.clearSvtItem();
 
       expect(component.form.getRawValue().svtItem).toBeNull();
+    });
+  });
+
+  describe('backToCurrentSdRequest()', () => {
+    let router: Router;
+    let sdRequestFacade: SdRequestFacade;
+    const id = 1;
+
+    beforeEach(() => {
+      router = TestBed.inject(Router);
+      sdRequestFacade = TestBed.inject(SdRequestFacade);
+      component.previewForm();
+      jest.spyOn(router, 'navigate');
+    });
+
+    it('should navigate to created sd_request', () => {
+      component.backToCurrentSdRequest(id);
+
+      expect(router.navigate).toHaveBeenCalledWith(['/tickets', 'sd-requests', id]);
+    });
+
+    it('should call closeModalAfterCreateSdRequest method', () => {
+      jest.spyOn(sdRequestFacade, 'closeModalAfterCreateSdRequest');
+      component.backToCurrentSdRequest(id);
+
+      expect(sdRequestFacade.closeModalAfterCreateSdRequest).toHaveBeenCalled();
+    });
+
+    it('should call close dialog window', () => {
+      jest.spyOn(component.previewRef, 'close');
+      component.backToCurrentSdRequest(id);
+
+      expect(component.previewRef.close).toHaveBeenCalled();
+    });
+  });
+
+  describe('backToSdRequestList()', () => {
+    let router: Router;
+
+    beforeEach(() => {
+      router = TestBed.inject(Router);
+      component.previewForm();
+      jest.spyOn(router, 'navigate');
+    });
+
+    it('should navigate to created sd_request', () => {
+      component.backToSdRequestList();
+
+      expect(router.navigate).toHaveBeenCalledWith(['/tickets']);
+    });
+
+    it('should call closeModalAfterCreateSdRequest method', () => {
+      jest.spyOn(sdRequestFacade, 'closeModalAfterCreateSdRequest');
+      component.backToSdRequestList();
+
+      expect(sdRequestFacade.closeModalAfterCreateSdRequest).toHaveBeenCalled();
+    });
+
+    it('should call close dialog window', () => {
+      jest.spyOn(component.previewRef, 'close');
+      component.backToSdRequestList();
+
+      expect(component.previewRef.close).toHaveBeenCalled();
+    });
+  });
+
+  describe('resetForm()', () => {
+    it('should clear all FormControls', () => {
+      component.previewForm();
+      jest.spyOn(sdRequestFacade, 'closeModalAfterCreateSdRequest');
+      jest.spyOn(component.previewRef, 'close');
+      jest.spyOn(component, 'searchTicket');
+      jest.spyOn(component.form, 'reset');
+      jest.spyOn(sdRequestFacade, 'clearCreatedForm');
+
+      component.resetForm();
+
+      expect(sdRequestFacade.closeModalAfterCreateSdRequest).toHaveBeenCalled();
+      expect(component.previewRef.close).toHaveBeenCalled();
+      expect(component.employee.value).toBeNull();
+      expect(component.employeeFilterKey.value).toEqual(component.employeeFilters[0]);
+      expect(component.ticket.value).toBeNull();
+      expect(component.searchTicket).toHaveBeenCalledWith({ query: '' });
+      expect(component.employeeSvtItem.value).toBeNull();
+      expect(component.customSvtItem.value).toBeNull();
+      expect(component.svtItemManually.value).toBeNull();
+      expect(component.svtItemFilterKey.value).toEqual(component.svtItemFilters[0]);
+      expect(component.form.reset).toHaveBeenCalled();
+      expect(sdRequestFacade.clearCreatedForm).toHaveBeenCalled();
     });
   });
 });
