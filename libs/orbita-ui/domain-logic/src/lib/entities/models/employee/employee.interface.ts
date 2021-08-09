@@ -47,6 +47,11 @@ export interface EmployeePosition extends EmployeeVacation {
   readonly departmentForAccounting: number;
 
   /**
+   * Номер (название для внешних) подразделения
+   */
+  readonly departmentForDocuments: number;
+
+  /**
    * Категория
    */
   readonly employeeCategory: string;

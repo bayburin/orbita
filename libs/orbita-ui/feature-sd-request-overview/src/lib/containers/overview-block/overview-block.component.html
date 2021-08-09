@@ -297,7 +297,15 @@
 
                         <lib-detail-row class="mb-2">
                           <div attribute>Подразделение</div>
-                          <div value>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</div>
+                          <div value>
+                            <div>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</div>
+                            <div
+                              class="mt-1"
+                              *ngIf="positions[0].departmentForAccounting != positions[0].departmentForDocuments"
+                            >
+                              <p-tag severity="info" value="Военное представительство"></p-tag>
+                            </div>
+                          </div>
                         </lib-detail-row>
 
                         <lib-detail-row class="mb-2">
