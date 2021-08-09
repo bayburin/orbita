@@ -7,8 +7,18 @@
     & > div:first-child {
       display: flex;
       align-items: center;
+      flex-direction: row-reverse;
       border-right: 1px solid var(--surface-d);
       padding: $spacer;
+    }
+
+    & > div:last-child {
+      padding-bottom: 0;
+      padding-top: 0;
+
+      * {
+        text-align: left !important;
+      }
     }
 
     .preview-row-content {
@@ -18,11 +28,6 @@
 
     .preview-row-content:not(.last) {
       border-bottom: 1px dashed var(--surface-d);
-    }
-
-    & > div:last-child {
-      padding-bottom: 0;
-      padding-top: 0;
     }
   }
 }

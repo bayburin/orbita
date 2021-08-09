@@ -221,7 +221,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
         valid: this.form.valid,
       },
       header: 'Предпросмотр заявки',
-      width: '40%',
+      width: '50%',
     });
   }
 
