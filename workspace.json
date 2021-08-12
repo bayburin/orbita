@@ -159,19 +159,36 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/orbita-ui/src/**/*.ts",
-              "apps/orbita-ui/src/**/*.html"
-            ]
+            "lintFilePatterns": ["apps/orbita-ui/src/**/*.ts", "apps/orbita-ui/src/**/*.html"]
           }
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/apps/orbita-ui"
-          ],
+          "outputs": ["coverage/apps/orbita-ui"],
           "options": {
             "jestConfig": "apps/orbita-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "orbita-ui-domain-logic": {
+      "projectType": "library",
+      "root": "libs/orbita-ui/domain-logic",
+      "sourceRoot": "libs/orbita-ui/domain-logic/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/orbita-ui/domain-logic/src/**/*.ts", "libs/orbita-ui/domain-logic/src/**/*.html"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/orbita-ui/domain-logic"],
+          "options": {
+            "jestConfig": "libs/orbita-ui/domain-logic/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -198,115 +215,57 @@
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
-            "lintFilePatterns": [
-              "apps/orbita-ui-e2e/**/*.{js,ts}"
-            ]
+            "lintFilePatterns": ["apps/orbita-ui-e2e/**/*.{js,ts}"]
           }
         }
       }
     },
-    "shared-environment": {
+    "orbita-ui-feature-employee": {
       "projectType": "library",
-      "root": "libs/shared/environment",
-      "sourceRoot": "libs/shared/environment/src",
+      "root": "libs/orbita-ui/feature-employee",
+      "sourceRoot": "libs/orbita-ui/feature-employee/src",
       "prefix": "orbita",
       "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/orbita-ui/feature-employee"],
+          "options": {
+            "jestConfig": "libs/orbita-ui/feature-employee/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/shared/environment/src/**/*.ts",
-              "libs/shared/environment/src/**/*.html"
+              "libs/orbita-ui/feature-employee/src/**/*.ts",
+              "libs/orbita-ui/feature-employee/src/**/*.html"
             ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/environment"
-          ],
-          "options": {
-            "jestConfig": "libs/shared/environment/jest.config.js",
-            "passWithNoTests": true
           }
         }
       }
     },
-    "shared-domain-logic": {
+    "orbita-ui-feature-employee-listing": {
       "projectType": "library",
-      "root": "libs/shared/domain-logic",
-      "sourceRoot": "libs/shared/domain-logic/src",
+      "root": "libs/orbita-ui/feature-employee-listing",
+      "sourceRoot": "libs/orbita-ui/feature-employee-listing/src",
       "prefix": "orbita",
       "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/orbita-ui/feature-employee-listing"],
+          "options": {
+            "jestConfig": "libs/orbita-ui/feature-employee-listing/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
         "lint": {
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/shared/domain-logic/src/**/*.ts",
-              "libs/shared/domain-logic/src/**/*.html"
+              "libs/orbita-ui/feature-employee-listing/src/**/*.ts",
+              "libs/orbita-ui/feature-employee-listing/src/**/*.html"
             ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/domain-logic"
-          ],
-          "options": {
-            "jestConfig": "libs/shared/domain-logic/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "shared-assets": {
-      "root": "libs/shared/assets",
-      "sourceRoot": "libs/shared/assets/src",
-      "projectType": "library",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/shared/assets/**/*.ts"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/shared/assets"
-          ],
-          "options": {
-            "jestConfig": "libs/shared/assets/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "orbita-ui-domain-logic": {
-      "projectType": "library",
-      "root": "libs/orbita-ui/domain-logic",
-      "sourceRoot": "libs/orbita-ui/domain-logic/src",
-      "prefix": "orbita",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/orbita-ui/domain-logic/src/**/*.ts",
-              "libs/orbita-ui/domain-logic/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/orbita-ui/domain-logic"
-          ],
-          "options": {
-            "jestConfig": "libs/orbita-ui/domain-logic/jest.config.js",
-            "passWithNoTests": true
           }
         }
       }
@@ -328,119 +287,9 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/orbita-ui/feature-listing"
-          ],
+          "outputs": ["coverage/libs/orbita-ui/feature-listing"],
           "options": {
             "jestConfig": "libs/orbita-ui/feature-listing/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "orbita-ui-shell": {
-      "projectType": "library",
-      "root": "libs/orbita-ui/shell",
-      "sourceRoot": "libs/orbita-ui/shell/src",
-      "prefix": "orbita",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/orbita-ui/shell/src/**/*.ts",
-              "libs/orbita-ui/shell/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/orbita-ui/shell"
-          ],
-          "options": {
-            "jestConfig": "libs/orbita-ui/shell/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "orbita-ui-ui": {
-      "projectType": "library",
-      "root": "libs/orbita-ui/ui",
-      "sourceRoot": "libs/orbita-ui/ui/src",
-      "prefix": "orbita",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/orbita-ui/ui/src/**/*.ts",
-              "libs/orbita-ui/ui/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/orbita-ui/ui"
-          ],
-          "options": {
-            "jestConfig": "libs/orbita-ui/ui/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "orbita-ui-utils": {
-      "projectType": "library",
-      "root": "libs/orbita-ui/utils",
-      "sourceRoot": "libs/orbita-ui/utils/src",
-      "prefix": "orbita",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/orbita-ui/utils/src/**/*.ts",
-              "libs/orbita-ui/utils/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/orbita-ui/utils"
-          ],
-          "options": {
-            "jestConfig": "libs/orbita-ui/utils/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      }
-    },
-    "orbita-ui-feature-sd-request-wizzard": {
-      "projectType": "library",
-      "root": "libs/orbita-ui/feature-sd-request-wizzard",
-      "sourceRoot": "libs/orbita-ui/feature-sd-request-wizzard/src",
-      "prefix": "orbita",
-      "targets": {
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/orbita-ui/feature-sd-request-wizzard/src/**/*.ts",
-              "libs/orbita-ui/feature-sd-request-wizzard/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/orbita-ui/feature-sd-request-wizzard"
-          ],
-          "options": {
-            "jestConfig": "libs/orbita-ui/feature-sd-request-wizzard/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -463,11 +312,34 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/orbita-ui/feature-sd-request-overview"
-          ],
+          "outputs": ["coverage/libs/orbita-ui/feature-sd-request-overview"],
           "options": {
             "jestConfig": "libs/orbita-ui/feature-sd-request-overview/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "orbita-ui-feature-sd-request-wizzard": {
+      "projectType": "library",
+      "root": "libs/orbita-ui/feature-sd-request-wizzard",
+      "sourceRoot": "libs/orbita-ui/feature-sd-request-wizzard/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/orbita-ui/feature-sd-request-wizzard/src/**/*.ts",
+              "libs/orbita-ui/feature-sd-request-wizzard/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/orbita-ui/feature-sd-request-wizzard"],
+          "options": {
+            "jestConfig": "libs/orbita-ui/feature-sd-request-wizzard/jest.config.js",
             "passWithNoTests": true
           }
         }
@@ -490,11 +362,140 @@
         },
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": [
-            "coverage/libs/orbita-ui/feature-ticket"
-          ],
+          "outputs": ["coverage/libs/orbita-ui/feature-ticket"],
           "options": {
             "jestConfig": "libs/orbita-ui/feature-ticket/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "orbita-ui-shell": {
+      "projectType": "library",
+      "root": "libs/orbita-ui/shell",
+      "sourceRoot": "libs/orbita-ui/shell/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/orbita-ui/shell/src/**/*.ts", "libs/orbita-ui/shell/src/**/*.html"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/orbita-ui/shell"],
+          "options": {
+            "jestConfig": "libs/orbita-ui/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "orbita-ui-ui": {
+      "projectType": "library",
+      "root": "libs/orbita-ui/ui",
+      "sourceRoot": "libs/orbita-ui/ui/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/orbita-ui/ui/src/**/*.ts", "libs/orbita-ui/ui/src/**/*.html"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/orbita-ui/ui"],
+          "options": {
+            "jestConfig": "libs/orbita-ui/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "orbita-ui-utils": {
+      "projectType": "library",
+      "root": "libs/orbita-ui/utils",
+      "sourceRoot": "libs/orbita-ui/utils/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/orbita-ui/utils/src/**/*.ts", "libs/orbita-ui/utils/src/**/*.html"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/orbita-ui/utils"],
+          "options": {
+            "jestConfig": "libs/orbita-ui/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-assets": {
+      "root": "libs/shared/assets",
+      "sourceRoot": "libs/shared/assets/src",
+      "projectType": "library",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/assets/**/*.ts"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/assets"],
+          "options": {
+            "jestConfig": "libs/shared/assets/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-domain-logic": {
+      "projectType": "library",
+      "root": "libs/shared/domain-logic",
+      "sourceRoot": "libs/shared/domain-logic/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/domain-logic/src/**/*.ts", "libs/shared/domain-logic/src/**/*.html"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/domain-logic"],
+          "options": {
+            "jestConfig": "libs/shared/domain-logic/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "shared-environment": {
+      "projectType": "library",
+      "root": "libs/shared/environment",
+      "sourceRoot": "libs/shared/environment/src",
+      "prefix": "orbita",
+      "targets": {
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/shared/environment/src/**/*.ts", "libs/shared/environment/src/**/*.html"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/environment"],
+          "options": {
+            "jestConfig": "libs/shared/environment/jest.config.js",
             "passWithNoTests": true
           }
         }

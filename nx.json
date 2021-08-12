@@ -1,26 +1,69 @@
 {
   "npmScope": "orbita",
-  "affected": { "defaultBase": "master" },
-  "implicitDependencies": { "package.json": { "dependencies": "*", "devDependencies": "*" }, ".eslintrc.json": "*" },
+  "affected": {
+    "defaultBase": "master"
+  },
+  "implicitDependencies": {
+    "package.json": {
+      "dependencies": "*",
+      "devDependencies": "*"
+    },
+    ".eslintrc.json": "*"
+  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": { "cacheableOperations": ["build", "lint", "test", "e2e"] }
+      "options": {
+        "cacheableOperations": ["build", "lint", "test", "e2e"]
+      }
     }
   },
   "projects": {
-    "orbita-ui": { "tags": ["type:app"] },
-    "orbita-ui-e2e": { "tags": ["type:e2e"], "implicitDependencies": ["orbita-ui"] },
-    "shared-environment": { "tags": ["scope:shared", "type:util", "type:env"] },
-    "shared-domain-logic": { "tags": ["scope:shared", "type:domain-logic"] },
-    "shared-assets": { "tags": ["scope:shared", "type:assets"] },
-    "orbita-ui-domain-logic": { "tags": ["scope:orbita-ui", "type:domain-logic"] },
-    "orbita-ui-feature-listing": { "tags": ["scope:orbita-ui", "type:feature"] },
-    "orbita-ui-shell": { "tags": ["scope:orbita-ui", "type:shell"] },
-    "orbita-ui-ui": { "tags": ["scope:orbita-ui", "type:ui"] },
-    "orbita-ui-utils": { "tags": ["scope:orbita-ui", "type:util"] },
-    "orbita-ui-feature-sd-request-wizzard": { "tags": ["scope:orbita-ui", "type:feature"] },
-    "orbita-ui-feature-sd-request-overview": { "tags": ["scope:orbita-ui", "type:feature"] },
-    "orbita-ui-feature-ticket": { "tags": ["scope:orbita-ui", "type:feature"] }
+    "orbita-ui": {
+      "tags": ["type:app"]
+    },
+    "orbita-ui-domain-logic": {
+      "tags": ["scope:orbita-ui", "type:domain-logic"]
+    },
+    "orbita-ui-e2e": {
+      "tags": ["type:e2e"],
+      "implicitDependencies": ["orbita-ui"]
+    },
+    "orbita-ui-feature-employee": {
+      "tags": ["scope:orbita-ui", "type:feature"]
+    },
+    "orbita-ui-feature-employee-listing": {
+      "tags": ["scope:orbita-ui", "type:feature"]
+    },
+    "orbita-ui-feature-listing": {
+      "tags": ["scope:orbita-ui", "type:feature"]
+    },
+    "orbita-ui-feature-sd-request-overview": {
+      "tags": ["scope:orbita-ui", "type:feature"]
+    },
+    "orbita-ui-feature-sd-request-wizzard": {
+      "tags": ["scope:orbita-ui", "type:feature"]
+    },
+    "orbita-ui-feature-ticket": {
+      "tags": ["scope:orbita-ui", "type:feature"]
+    },
+    "orbita-ui-shell": {
+      "tags": ["scope:orbita-ui", "type:shell"]
+    },
+    "orbita-ui-ui": {
+      "tags": ["scope:orbita-ui", "type:ui"]
+    },
+    "orbita-ui-utils": {
+      "tags": ["scope:orbita-ui", "type:util"]
+    },
+    "shared-assets": {
+      "tags": ["scope:shared", "type:assets"]
+    },
+    "shared-domain-logic": {
+      "tags": ["scope:shared", "type:domain-logic"]
+    },
+    "shared-environment": {
+      "tags": ["scope:shared", "type:util", "type:env"]
+    }
   }
 }

@@ -22,6 +22,11 @@ const routes: Routes = [
         loadChildren: () => import('@orbita/orbita-ui/feature-ticket').then((m) => m.OrbitaUiFeatureTicketModule),
         data: { breadcrumb: 'Тикеты' },
       },
+      {
+        path: 'employees',
+        loadChildren: () => import('@orbita/orbita-ui/feature-employee').then((m) => m.OrbitaUiFeatureEmployeeModule),
+        data: { breadcrumb: 'Работники' },
+      },
     ],
   },
 ];

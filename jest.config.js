@@ -13,5 +13,7 @@ module.exports = {
     '<rootDir>/libs/orbita-ui/feature-sd-request-overview',
     '<rootDir>/libs/orbita-ui/feature-ticket',
     '<rootDir>/libs/orbita-ui/foo',
+    '<rootDir>/libs/orbita-ui/feature-employee-listing',
+    '<rootDir>/libs/orbita-ui/feature-employee',
   ],
 };
