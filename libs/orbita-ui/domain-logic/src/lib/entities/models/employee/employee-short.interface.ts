@@ -21,6 +21,11 @@ export interface EmployeeShort extends EmployeeBase, EmployeeVacation {
   readonly departmentForAccounting: number;
 
   /**
+   * Должность
+   */
+  readonly professionForAccounting: string;
+
+  /**
    * Находится ли в отпуске/больничном/декрете
    */
   readonly inVacation: boolean;

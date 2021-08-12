@@ -4,6 +4,7 @@ import { ORBITA_UI_ENV_TOKEN, orbitaUiEnvironmentStub } from '@orbita/shared/env
 
 import { EmployeeApi } from './employee.api';
 import { EmployeeFilters } from './../../../entities/models/employee/employee-filters.enum';
+import { PrimeFilterFactory } from './../../factories/prime-filter.factory';
 
 describe('Employeepi', () => {
   let service: EmployeeApi;
@@ -48,18 +49,19 @@ describe('Employeepi', () => {
   });
 
   describe('query()', () => {
-    const api = `${orbitaUiEnvironmentStub}/employees?key=fullName&value=fio`;
+    const api = `${orbitaUiEnvironmentStub}/employees`;
     const employees = [{ id: 1 }];
+    const filters = PrimeFilterFactory.createFilter(EmployeeFilters.FIO, 'fio');
 
     it('should return request', () => {
-      service.query(EmployeeFilters.FIO, 'fio').subscribe((result) => {
+      service.query(filters).subscribe((result) => {
         expect(result).toEqual(employees);
       });
 
       httpMock
         .expectOne({
           method: 'GET',
-          url: api,
+          url: `${api}?filters=%7B%22fullName%22:%7B%22value%22:%22fio%22,%22matchMode%22:%22equals%22%7D%7D`,
         })
         .flush(employees);
     });

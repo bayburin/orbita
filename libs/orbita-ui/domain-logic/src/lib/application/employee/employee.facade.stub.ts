@@ -7,10 +7,15 @@ export class EmployeeFacadeStub implements EmployeeFacadeAbstract {
   loadedEmployee$ = new BehaviorSubject(false);
   employee$ = new BehaviorSubject(null);
   allShort$ = new BehaviorSubject(null);
-  loadedAllShort$ = new BehaviorSubject(null);
+  loadedAllShort$ = new BehaviorSubject(false);
   totalCountShort$ = new BehaviorSubject(null);
+  loadingShort$ = new BehaviorSubject(false);
 
   search() {
+    /** */
+  }
+
+  searchBySingleProp() {
     /** */
   }
 }

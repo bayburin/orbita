@@ -2,7 +2,7 @@ import { EmployeeShort } from './../../entities/models/employee/employee-short.i
 import { Observable } from 'rxjs';
 
 import { Employee } from './../../entities/models/employee/employee.interface';
-import { EmployeeFilters } from './../../entities/models/employee/employee-filters.enum';
+import { PrimeFilter } from '../../entities/prime-filter.interface';
 
 export abstract class EmployeeFacadeAbstract {
   /**
@@ -29,12 +29,23 @@ export abstract class EmployeeFacadeAbstract {
    * Число найденных записей
    */
   totalCountShort$: Observable<number>;
+  /**
+   * Индикатор загрузки
+   */
+  loadingShort$: Observable<boolean>;
 
   /**
    * Поиск работников
    *
-   * @param key - атрибут поиска
-   * @param value - значение
+   * @param filters - атрибуты поиска
    */
-  abstract search(key: EmployeeFilters, value: string): void;
+  abstract search(filters: PrimeFilter): void;
+
+  /**
+   * Поиск работник по одному указанному фильтру
+   *
+   * @param key - имя фильтра
+   * @param value - значение фильтра
+   */
+  abstract searchBySingleProp(key: string, value: string): void;
 }

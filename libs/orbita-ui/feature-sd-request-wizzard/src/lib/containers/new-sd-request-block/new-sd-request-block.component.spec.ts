@@ -79,7 +79,7 @@ describe('NewSdRequestBlockComponent', () => {
 
   describe('searchEmployee()', () => {
     it('should call searchEmployee() method', () => {
-      const spy = jest.spyOn(employeeFacade, 'search');
+      const spy = jest.spyOn(employeeFacade, 'searchBySingleProp');
       const event = { query: 'fake-value' };
 
       component.searchEmployee(event);

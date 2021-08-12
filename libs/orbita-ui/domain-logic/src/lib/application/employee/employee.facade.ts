@@ -5,7 +5,8 @@ import * as EmployeeFeature from '../../infrastructure/store/employee/employee.r
 import * as EmployeeActions from '../../infrastructure/store/employee/employee.actions';
 import * as EmployeeSelectors from '../../infrastructure/store/employee/employee.selectors';
 import { EmployeeFacadeAbstract } from './employee.facade.abstract';
-import { EmployeeFilters } from './../../entities/models/employee/employee-filters.enum';
+import { PrimeFilter } from '../../entities/prime-filter.interface';
+import { PrimeFilterFactory } from './../../infrastructure/factories/prime-filter.factory';
 
 @Injectable({
   providedIn: 'root',
@@ -17,12 +18,21 @@ export class EmployeeFacade implements EmployeeFacadeAbstract {
   allShort$ = this.store.select(EmployeeSelectors.getEmployeeShortAll);
   loadedAllShort$ = this.store.select(EmployeeSelectors.getEmployeeShortLoaded);
   totalCountShort$ = this.store.select(EmployeeSelectors.getEmployeeShortTotalCount);
+  loadingShort$ = this.store.select(EmployeeSelectors.getEmployeeShortLoading);
 
   constructor(private store: Store<EmployeeFeature.EmployeePartialState>) {}
 
-  search(key: EmployeeFilters, value: string) {
-    if (value) {
-      this.store.dispatch(EmployeeActions.loadAllEmployeeShort({ key, value }));
+  search(filters: PrimeFilter) {
+    const searchFlag = Object.keys(filters).some((filter) => Boolean(filters[filter].value));
+
+    if (searchFlag) {
+      this.store.dispatch(EmployeeActions.loadAllEmployeeShort({ filters }));
     }
+  }
+
+  searchBySingleProp(key: string, value: string) {
+    const filter = PrimeFilterFactory.createFilter(key, value, 'contains');
+
+    this.search(filter);
   }
 }

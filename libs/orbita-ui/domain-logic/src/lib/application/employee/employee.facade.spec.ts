@@ -10,6 +10,7 @@ import { TICKET_SYSTEM_FEATURE_KEY } from '../../infrastructure/store/index';
 import { EmployeeFacade } from './employee.facade';
 import { Employee } from './../../entities/models/employee/employee.interface';
 import { EmployeeFilters } from '../../entities/models/employee/employee-filters.enum';
+import { PrimeFilterFactory } from './../../infrastructure/factories/prime-filter.factory';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -50,21 +51,30 @@ describe('EmployeeFacade', () => {
     describe('search()', () => {
       it('should call loadAllEmployeeShort action', () => {
         const spy = jest.spyOn(store, 'dispatch');
+        const filters = PrimeFilterFactory.createFilter(EmployeeFilters.FIO, 'fake-value');
 
-        facade.search(EmployeeFilters.FIO, 'fake-value');
-        expect(spy).toHaveBeenCalledWith(
-          EmployeeActions.loadAllEmployeeShort({ key: EmployeeFilters.FIO, value: 'fake-value' })
-        );
+        facade.search(filters);
+        expect(spy).toHaveBeenCalledWith(EmployeeActions.loadAllEmployeeShort({ filters }));
       });
 
       it('should not call loadAllEmployeeShort action if value is empty', () => {
         const spy = jest.spyOn(store, 'dispatch');
+        const filters = PrimeFilterFactory.createFilter(EmployeeFilters.FIO, '');
 
-        facade.search(EmployeeFilters.FIO, '');
+        facade.search(filters);
 
-        expect(spy).not.toHaveBeenCalledWith(
-          EmployeeActions.loadAllEmployeeShort({ key: EmployeeFilters.FIO, value: '' })
-        );
+        expect(spy).not.toHaveBeenCalledWith(EmployeeActions.loadAllEmployeeShort({ filters }));
+      });
+    });
+
+    describe('searchBySingleProp()', () => {
+      it('should call search() method with received params', () => {
+        const spy = jest.spyOn(facade, 'search');
+        const filter = PrimeFilterFactory.createFilter(EmployeeFilters.FIO, 'fake-value', 'contains');
+
+        facade.searchBySingleProp(EmployeeFilters.FIO, 'fake-value');
+
+        expect(spy).toHaveBeenCalledWith(filter);
       });
     });
   });

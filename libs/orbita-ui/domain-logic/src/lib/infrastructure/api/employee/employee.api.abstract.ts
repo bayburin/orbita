@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
 import { Employee } from './../../../entities/models/employee/employee.interface';
-import { EmployeeFilters } from './../../../entities/models/employee/employee-filters.enum';
 import { EmployeeShortServerData } from './../../../entities/server-data/employee-server-data.interface';
+import { PrimeFilter } from '../../../entities/prime-filter.interface';
 
 export abstract class EmployeeApiAbstract {
   /**
@@ -20,8 +20,7 @@ export abstract class EmployeeApiAbstract {
   /**
    * Получает список работников, отфильтрованный по указанным параметрам
    *
-   * @param key - имя поля
-   * @param value - значение
+   * @param filters - фильтры
    */
-  abstract query(key?: EmployeeFilters, value?: string): Observable<EmployeeShortServerData>;
+  abstract query(filters: PrimeFilter): Observable<EmployeeShortServerData>;
 }

@@ -1,0 +1,7 @@
+<div class="card">
+  <lib-employees-table
+    [employees]="employees$ | async"
+    [loading]="loadingEmployees$ | async"
+    (tableChanged)="tableChanged($event)"
+  ></lib-employees-table>
+</div>

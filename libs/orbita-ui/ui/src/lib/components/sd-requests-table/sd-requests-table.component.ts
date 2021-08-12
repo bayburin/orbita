@@ -32,8 +32,10 @@ import { Table } from 'primeng/table';
 })
 export class SdRequestsTableComponent implements OnInit, OnDestroy {
   // ================================= Атрибуты для исправления бага, описанного ниже =================================
+
   lazyLoadStream = new Subject<LazyLoadEvent>();
   subscriptions = new Subscription();
+
   // ==================================================================================================================
 
   @ViewChild('table', { static: false }) table: Table;

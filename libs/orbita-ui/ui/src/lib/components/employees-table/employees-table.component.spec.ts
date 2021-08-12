@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { EmployeesPageComponent } from './employees-page.component';
+import { EmployeesTableComponent } from './employees-table.component';
 
-describe('EmployeesPageComponent', () => {
-  let component: EmployeesPageComponent;
-  let fixture: ComponentFixture<EmployeesPageComponent>;
+describe('EmployeesTableComponent', () => {
+  let component: EmployeesTableComponent;
+  let fixture: ComponentFixture<EmployeesTableComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [EmployeesPageComponent],
+      declarations: [EmployeesTableComponent],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmployeesPageComponent);
+    fixture = TestBed.createComponent(EmployeesTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

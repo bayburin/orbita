@@ -1,3 +1,4 @@
+import { PrimeFilterFactory } from './../../factories/prime-filter.factory';
 import { Action } from '@ngrx/store';
 
 import { Employee } from '../../../entities/models/employee/employee.interface';
@@ -98,7 +99,9 @@ describe('EmployeeReducer', () => {
       const employees = [createEmployeeShortEntity(1), createEmployeeShortEntity(2)];
       action = EmployeeActions.loadAllEmployeeShortSuccess({ employees });
       const partialResult: State = reducer(initialState, action);
-      action = EmployeeActions.loadAllEmployeeShort({ key: EmployeeFilters.FIO, value: 'value' });
+      action = EmployeeActions.loadAllEmployeeShort({
+        filters: PrimeFilterFactory.createFilter(EmployeeFilters.FIO, 'value'),
+      });
       const result: EmployeeShortState = reducer(partialResult, action).employeeShort;
 
       expect(result.loaded).toBe(false);

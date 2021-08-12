@@ -121,7 +121,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    */
   searchEmployee(event: any): void {
     if (event.query && typeof event.query === 'string') {
-      this.employeeFacade.search(this.employeeFilterKey.value.filter, event.query.trim());
+      this.employeeFacade.searchBySingleProp(this.employeeFilterKey.value.filter, event.query.trim());
     }
   }
 
