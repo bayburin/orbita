@@ -18,11 +18,18 @@ export class EmployeesBlockComponent implements OnDestroy {
   }
 
   /**
-   * Событие изменения метаданных таблицы
+   * Вызывает метод для поиска новых данных для таблицы
    *
    * @param event - метаданные для загрузки данных таблицы
    */
-  tableChanged(event: LazyLoadEvent): void {
+  changeTable(event: LazyLoadEvent): void {
     this.employeeFacade.search(event.filters);
+  }
+
+  /**
+   * Очищает таблицу
+   */
+  clearTable(): void {
+    this.employeeFacade.clearEmployeeShortEntities();
   }
 }

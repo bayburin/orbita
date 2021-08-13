@@ -2,6 +2,7 @@
   <lib-employees-table
     [employees]="employees$ | async"
     [loading]="loadingEmployees$ | async"
-    (tableChanged)="tableChanged($event)"
+    (filterChanged)="changeTable($event)"
+    (filterCleared)="clearTable()"
   ></lib-employees-table>
 </div>

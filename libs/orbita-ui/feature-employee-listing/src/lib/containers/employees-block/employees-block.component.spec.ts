@@ -29,14 +29,24 @@ describe('EmployeesBlockComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('tableChanged()', () => {
+  describe('changeTable()', () => {
     it('should call search() method', () => {
       const spy = jest.spyOn(employeeFacade, 'search');
       const filters = { foo: 'bar' };
 
-      component.tableChanged({ filters } as LazyLoadEvent);
+      component.changeTable({ filters } as LazyLoadEvent);
 
       expect(spy).toHaveBeenCalledWith(filters);
+    });
+  });
+
+  describe('clearTable()', () => {
+    it('should call search() method', () => {
+      const spy = jest.spyOn(employeeFacade, 'clearEmployeeShortEntities');
+
+      component.clearTable();
+
+      expect(spy).toHaveBeenCalled();
     });
   });
 

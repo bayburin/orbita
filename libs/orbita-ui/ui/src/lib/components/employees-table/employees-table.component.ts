@@ -1,9 +1,19 @@
 import { distinctUntilChanged, switchMap, delay } from 'rxjs/operators';
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { EmployeeShort } from '@orbita/orbita-ui/domain-logic';
 import { LazyLoadEvent } from 'primeng/api';
 import { Subject, Subscription, of } from 'rxjs';
 import { EmployeeFilters } from '@orbita/orbita-ui/domain-logic';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'lib-employees-table',
@@ -11,7 +21,7 @@ import { EmployeeFilters } from '@orbita/orbita-ui/domain-logic';
   styleUrls: ['./employees-table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EmployeesTableComponent {
+export class EmployeesTableComponent implements OnInit, OnDestroy {
   // ================================= Атрибуты для исправления бага, описанного ниже =================================
 
   lazyLoadStream = new Subject<LazyLoadEvent>();
@@ -32,12 +42,26 @@ export class EmployeesTableComponent {
    */
   @Input() loading: boolean;
   /**
-   * События изменения метаданных таблицы (пагинация, сортировка, фильтры)
+   * События изменения фильтров таблицы
    */
-  @Output() tableChanged = new EventEmitter<LazyLoadEvent>();
+  @Output() filterChanged = new EventEmitter<LazyLoadEvent>();
+  /**
+   * Событие очистики всех фильтров таблицы
+   */
+  @Output() filterCleared = new EventEmitter<void>();
+  @ViewChild('table') table: Table;
 
   ngOnInit(): void {
     this.subscribeToLazyLoadEvent();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
+
+  clearTable() {
+    this.table.clear();
+    this.filterCleared.emit();
   }
 
   // ======= Решение бага, когда генерируется одно и тоже событие перезагрузки таблицы с пустыми фильтрами =======
@@ -53,10 +77,6 @@ export class EmployeesTableComponent {
     this.lazyLoadStream.next(eventObj);
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
-
   /**
    * Подписывается на события изменения метаданных таблицы
    */
@@ -67,7 +87,7 @@ export class EmployeesTableComponent {
           distinctUntilChanged((a: LazyLoadEvent, b: LazyLoadEvent) => JSON.stringify(a) === JSON.stringify(b)),
           switchMap((data) => of(data).pipe(delay(300)))
         )
-        .subscribe((event) => this.tableChanged.emit(event))
+        .subscribe((event) => this.filterChanged.emit(event))
     );
   }
 }

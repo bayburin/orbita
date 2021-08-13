@@ -27,6 +27,8 @@ export class EmployeeFacade implements EmployeeFacadeAbstract {
 
     if (searchFlag) {
       this.store.dispatch(EmployeeActions.loadAllEmployeeShort({ filters }));
+    } else {
+      this.clearEmployeeShortEntities();
     }
   }
 

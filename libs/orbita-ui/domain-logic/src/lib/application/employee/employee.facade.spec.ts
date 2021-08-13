@@ -57,13 +57,13 @@ describe('EmployeeFacade', () => {
         expect(spy).toHaveBeenCalledWith(EmployeeActions.loadAllEmployeeShort({ filters }));
       });
 
-      it('should not call loadAllEmployeeShort action if value is empty', () => {
-        const spy = jest.spyOn(store, 'dispatch');
+      it('should call clearEmployeeShortEntities() method if value is empty', () => {
+        const spy = jest.spyOn(facade, 'clearEmployeeShortEntities');
         const filters = PrimeFilterFactory.createFilter(EmployeeFilters.FIO, '');
 
         facade.search(filters);
 
-        expect(spy).not.toHaveBeenCalledWith(EmployeeActions.loadAllEmployeeShort({ filters }));
+        expect(spy).toHaveBeenCalled();
       });
     });
 
