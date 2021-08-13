@@ -77,5 +77,15 @@ describe('EmployeeFacade', () => {
         expect(spy).toHaveBeenCalledWith(filter);
       });
     });
+
+    describe('clearEmployeeShortEntities()', () => {
+      it('should call search() method with received params', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.clearEmployeeShortEntities();
+
+        expect(spy).toHaveBeenCalledWith(EmployeeActions.clearAllEmployeeShort());
+      });
+    });
   });
 });

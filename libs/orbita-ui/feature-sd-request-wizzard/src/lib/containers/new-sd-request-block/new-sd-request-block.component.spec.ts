@@ -317,4 +317,14 @@ describe('NewSdRequestBlockComponent', () => {
       expect(sdRequestFacade.clearCreatedForm).toHaveBeenCalled();
     });
   });
+
+  describe('ngOnDestroy()', () => {
+    it('should call clearEmployeeShortEntities() method', () => {
+      const spy = jest.spyOn(employeeFacade, 'clearEmployeeShortEntities');
+
+      component.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 });

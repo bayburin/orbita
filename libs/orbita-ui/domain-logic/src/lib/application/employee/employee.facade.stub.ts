@@ -18,4 +18,8 @@ export class EmployeeFacadeStub implements EmployeeFacadeAbstract {
   searchBySingleProp() {
     /** */
   }
+
+  clearEmployeeShortEntities() {
+    /** */
+  }
 }

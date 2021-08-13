@@ -119,6 +119,10 @@ const employeeReducer = createReducer(
       loading: false,
       error,
     },
+  })),
+  on(EmployeeActions.clearAllEmployeeShort, (state) => ({
+    ...state,
+    employeeShort: employeeShortAdapter.removeAll({ ...state.employeeShort }),
   }))
 );
 

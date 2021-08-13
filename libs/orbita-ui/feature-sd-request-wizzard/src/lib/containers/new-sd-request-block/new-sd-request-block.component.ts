@@ -112,6 +112,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     this.ticketsSubs.unsubscribe();
     this.valueChangesSub.unsubscribe();
     this.sdRequestFacade.clearCreatedForm();
+    this.employeeFacade.clearEmployeeShortEntities();
   }
 
   /**

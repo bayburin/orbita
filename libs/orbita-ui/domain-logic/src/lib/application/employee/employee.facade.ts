@@ -35,4 +35,8 @@ export class EmployeeFacade implements EmployeeFacadeAbstract {
 
     this.search(filter);
   }
+
+  clearEmployeeShortEntities() {
+    this.store.dispatch(EmployeeActions.clearAllEmployeeShort());
+  }
 }

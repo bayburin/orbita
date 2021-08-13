@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { EmployeeFacade } from '@orbita/orbita-ui/domain-logic';
 import { LazyLoadEvent } from 'primeng/api';
 
@@ -7,11 +7,15 @@ import { LazyLoadEvent } from 'primeng/api';
   templateUrl: './employees-block.component.html',
   styleUrls: ['./employees-block.component.scss'],
 })
-export class EmployeesBlockComponent {
+export class EmployeesBlockComponent implements OnDestroy {
   employees$ = this.employeeFacade.allShort$;
   loadingEmployees$ = this.employeeFacade.loadingShort$;
 
   constructor(private employeeFacade: EmployeeFacade) {}
+
+  ngOnDestroy(): void {
+    this.employeeFacade.clearEmployeeShortEntities();
+  }
 
   /**
    * Событие изменения метаданных таблицы

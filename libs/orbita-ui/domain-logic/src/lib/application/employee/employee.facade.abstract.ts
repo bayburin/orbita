@@ -48,4 +48,9 @@ export abstract class EmployeeFacadeAbstract {
    * @param value - значение фильтра
    */
   abstract searchBySingleProp(key: string, value: string): void;
+
+  /**
+   * Очищает список работников
+   */
+  abstract clearEmployeeShortEntities(): void;
 }

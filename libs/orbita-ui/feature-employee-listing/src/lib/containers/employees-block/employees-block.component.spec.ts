@@ -29,7 +29,7 @@ describe('EmployeesBlockComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('#tableChanged', () => {
+  describe('tableChanged()', () => {
     it('should call search() method', () => {
       const spy = jest.spyOn(employeeFacade, 'search');
       const filters = { foo: 'bar' };
@@ -37,6 +37,16 @@ describe('EmployeesBlockComponent', () => {
       component.tableChanged({ filters } as LazyLoadEvent);
 
       expect(spy).toHaveBeenCalledWith(filters);
+    });
+  });
+
+  describe('ngOnDestroy()', () => {
+    it('should call clearEmployeeShortEntities() method', () => {
+      const spy = jest.spyOn(employeeFacade, 'clearEmployeeShortEntities');
+
+      component.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
     });
   });
 });

@@ -2,7 +2,6 @@ import { createAction, props } from '@ngrx/store';
 
 import { Employee } from '../../../entities/models/employee/employee.interface';
 import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
-import { EmployeeFilters } from './../../../entities/models/employee/employee-filters.enum';
 import { PrimeFilter } from '../../../entities/prime-filter.interface';
 
 // ========== Подтип хранилища Employee ==========
@@ -41,3 +40,5 @@ export const loadAllEmployeeShortFailure = createAction(
   '[Employee/Api] Load All Employee Short Failure',
   props<{ error: any }>()
 );
+
+export const clearAllEmployeeShort = createAction('[Employee] Clear All Employee Short');

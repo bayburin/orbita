@@ -135,6 +135,18 @@ describe('EmployeeReducer', () => {
     });
   });
 
+  describe('clearAllEmployeeShort', () => {
+    it('should change attributes', () => {
+      const employees = [createEmployeeShortEntity(1), createEmployeeShortEntity(2)];
+      action = EmployeeActions.loadAllEmployeeShortSuccess({ employees });
+      const state: State = reducer(initialState, action);
+      action = EmployeeActions.clearAllEmployeeShort();
+      const result: EmployeeShortState = reducer(state, action).employeeShort;
+
+      expect(result.ids.length).toBe(0);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;
