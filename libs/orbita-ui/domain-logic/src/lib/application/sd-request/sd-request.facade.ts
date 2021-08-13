@@ -14,6 +14,7 @@ import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.a
 import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
 import { NewSdRequestViewForm } from './../../entities/forms/new-sd-request-view-form.interface';
+import { convertPrimeFilter } from './../../infrastructure/utils/convert-prime-filter.function';
 
 /**
  * Фасад для работы с заявками (обращения к хранилищу SdRequest)
@@ -40,7 +41,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
       this.store.select(SdRequestSelectors.getFilters)
     ),
     switchMap(([_need, page, perPage, filters]) =>
-      this.sdRequestApi.query(page, perPage, filters).pipe(
+      this.sdRequestApi.query(page, perPage, convertPrimeFilter(filters)).pipe(
         tap((data) => {
           const normalizeData = SdRequestCacheService.normalizeSdRequests(data.sd_requests).entities;
 

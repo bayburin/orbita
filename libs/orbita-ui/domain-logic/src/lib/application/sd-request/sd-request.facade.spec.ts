@@ -98,7 +98,7 @@ describe('SdRequestFacade', () => {
 
         facade.loadSdRequests$.subscribe();
 
-        expect(querySpy).toHaveBeenCalledWith(2, 10, filter);
+        expect(querySpy).toHaveBeenCalledWith(2, 10, { id: '123' });
       });
 
       describe('when sdRequestApi finished successfully', () => {

@@ -1,4 +1,11 @@
 /**
+ * Фильтр
+ */
+export interface SimpleFilter {
+  [key: string]: any;
+}
+
+/**
  * Фильтр, использующийся для определения хоста
  */
 export interface HostFilter {
@@ -7,3 +14,12 @@ export interface HostFilter {
 }
 
 export type HostFilterTypes = 'id' | 'ip' | 'mac' | 'name';
+
+/**
+ * Фильтры использующиеся для определения ВТ
+ */
+export type SvtFilters = {
+  [key in SvtFilterTypes]?: string | number;
+};
+
+export type SvtFilterTypes = 'tn' | 'fio' | 'dept' | 'invent_num' | 'barcode';

@@ -4,7 +4,7 @@ import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environ
 
 import { SvtApiAbstract } from './svt.api.abstract';
 import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
-import { SvtFilters } from './../../../entities/models/svt/svt-filters.interface';
+import { SvtFilters } from './../../../entities/filter.interface';
 
 /**
  * Содержит API заявок для обращения к серверу СВТ

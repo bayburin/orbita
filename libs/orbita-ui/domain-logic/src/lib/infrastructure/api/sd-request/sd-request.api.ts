@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
 
-import { PrimeFilter } from './../../../entities/prime-filter.interface';
+import { SimpleFilter } from './../../../entities/filter.interface';
 import {
   SdRequestsServerData,
   SdRequestServerData,
@@ -20,16 +20,11 @@ export class SdRequestApi implements SdRequestApiAbstract {
 
   constructor(private http: HttpClient, @Inject(ORBITA_UI_ENV_TOKEN) private env: OrbitaUiEnvironment) {}
 
-  query(page: number, perPage: number, filters: PrimeFilter = {}) {
-    const filterValues = Object.keys(filters).reduce((acc, key) => {
-      acc[key] = filters[key].value;
-
-      return acc;
-    }, {} as { [key: string]: any });
+  query(page: number, perPage: number, filters: SimpleFilter) {
     const params = new HttpParams()
       .append('page', `${page}`)
       .append('perPage', `${perPage}`)
-      .append('filters', `${JSON.stringify(filterValues)}`);
+      .append('filters', `${JSON.stringify(filters)}`);
 
     return this.http.get<SdRequestsServerData>(this.api, { params });
   }

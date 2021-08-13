@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
-import { SvtFilters } from './../../../entities/models/svt/svt-filters.interface';
+import { SvtFilters } from './../../../entities/filter.interface';
 
 export const loadAll = createAction('[SvtItem/Api] Load All');
 

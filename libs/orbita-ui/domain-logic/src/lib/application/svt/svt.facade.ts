@@ -10,7 +10,7 @@ import * as SvtItemSelectors from '../../infrastructure/store/svt-item/svt-item.
 import { SvtFacadeAbstract } from './svt.facade.abstract';
 import { SvtApi } from './../../infrastructure/api/svt/svt.api';
 import { convertPrimeFilter } from './../../infrastructure/utils/convert-prime-filter.function';
-import { SvtFilters } from './../../entities/models/svt/svt-filters.interface';
+import { SvtFilters } from './../../entities/filter.interface';
 
 /**
  * Фасад для работы с данными из СВТ (обращения к хранилищу SvtItem)

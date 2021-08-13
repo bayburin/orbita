@@ -4,7 +4,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import * as SvtItemActions from './svt-item.actions';
 import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
-import { SvtFilters } from './../../../entities/models/svt/svt-filters.interface';
+import { SvtFilters } from './../../../entities/filter.interface';
 
 export const SVT_ITEM_FEATURE_KEY = 'svtItem';
 

@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { SvtItem } from './../../entities/models/svt/svt-item.interface';
-import { SvtFilters } from './../../entities/models/svt/svt-filters.interface';
+import { SvtFilters } from './../../entities/filter.interface';
 
 export abstract class SvtFacadeAbstract {
   /**
