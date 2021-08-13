@@ -58,6 +58,11 @@ export interface SdRequestForm {
   ticket_name?: string;
 
   /**
+   * Срок исполнения в часах
+   */
+  sla?: number;
+
+  /**
    * Оценка качества обслуживания
    */
   rating?: number;

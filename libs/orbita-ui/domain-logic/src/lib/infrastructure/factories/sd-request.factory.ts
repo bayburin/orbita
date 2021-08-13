@@ -63,24 +63,21 @@ export class SdRequestFactory {
     }
 
     // Обработка услуги и списка исполнителей (массив пользователей)
-    let service_id;
-    let service_name;
-    let ticket_identity;
-    let ticket_name;
+    let service_id = null;
+    let service_name = null;
+    let ticket_identity = null;
+    let ticket_name = null;
+    let sla = null;
     const works: WorkForm[] = [];
 
-    if (viewForm.noTicketFlag) {
-      service_id = null;
-      service_name = null;
-      ticket_identity = null;
-      ticket_name = null;
-    } else {
+    if (!viewForm.noTicketFlag) {
       const ticket = viewForm.ticket;
 
       service_id = ticket.service_id;
       service_name = ticket.service.name;
       ticket_identity = ticket.identity;
       ticket_name = ticket.name;
+      sla = ticket.sla;
 
       ticket.responsible_users.forEach((user) => {
         // Ищет работу для текущего пользователя цикла
@@ -110,6 +107,7 @@ export class SdRequestFactory {
       service_name,
       ticket_identity,
       ticket_name,
+      sla,
       works,
     };
 
