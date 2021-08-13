@@ -288,9 +288,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
     // Поиск работника по параметру
     this.subscriptions.add(
-      this.employeeFilterKey.valueChanges
-        .pipe(distinctUntilChanged())
-        .subscribe(() => this.searchEmployee({ query: this.employee.value }))
+      this.employeeFilterKey.valueChanges.pipe(distinctUntilChanged()).subscribe(() => this.employee.setValue(null))
     );
 
     // Отключение/включение поля "Работник"

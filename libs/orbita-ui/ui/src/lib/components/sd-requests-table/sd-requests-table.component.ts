@@ -51,43 +51,43 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
   /**
    * Массив заявок
    */
-  @Input() sdRequests$: Observable<SdRequestViewModel[]>;
+  @Input() sdRequests: SdRequestViewModel[];
   /**
    * Массив пользователей
    */
-  @Input() users$: Observable<User[]>;
+  @Input() users: User[];
   /**
    * Индикатор загрузки
    */
-  @Input() loading$: Observable<boolean>;
+  @Input() loading: boolean;
   /**
    * Индекс первой строки на странице
    */
-  @Input() firstRowIndex$: Observable<number>;
+  @Input() firstRowIndex: number;
   /**
    * Общее число записей
    */
-  @Input() totalCount$: Observable<number>;
+  @Input() totalCount: number;
   /**
    * Максимальный размер записей на странице
    */
-  @Input() perPage$: Observable<number>;
+  @Input() perPage: number;
   /**
    * Поле для сортировки
    */
-  @Input() sortField$: Observable<string>;
+  @Input() sortField: string;
   /**
    * Порядок сортировки
    */
-  @Input() sortOrder$: Observable<number>;
+  @Input() sortOrder: number;
   /**
    * Список услуг
    */
-  @Input() sdServices$: Observable<SdService[]>;
+  @Input() sdServices: SdService[];
   /**
    * Список видов заявок
    */
-  @Input() sdTickets$: Observable<SdTicket[]>;
+  @Input() sdTickets: SdTicket[];
   /**
    * События изменения метаданных таблицы (пагинация, сортировка, фильтры)
    */

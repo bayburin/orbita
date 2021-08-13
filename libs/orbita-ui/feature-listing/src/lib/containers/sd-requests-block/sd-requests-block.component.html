@@ -23,16 +23,16 @@
     </div>
   </p-toolbar>
   <lib-sd-requests-table
-    [sdRequests$]="sdRequests$"
-    [loading$]="loading$"
-    [firstRowIndex$]="firstRowIndex$"
-    [totalCount$]="totalCount$"
-    [perPage$]="perPage$"
-    [sortField$]="sortField$"
-    [sortOrder$]="sortOrder$"
-    [users$]="users$"
-    [sdServices$]="sdServices$"
-    [sdTickets$]="sdTickets$"
+    [sdRequests]="sdRequests$ | async"
+    [loading]="loading$ | async"
+    [firstRowIndex]="firstRowIndex$ | async"
+    [totalCount]="totalCount$ | async"
+    [perPage]="perPage$ | async"
+    [sortField]="sortField$ | async"
+    [sortOrder]="sortOrder$ | async"
+    [users]="users$ | async"
+    [sdServices]="sdServices$ | async"
+    [sdTickets]="sdTickets$ | async"
     (tableChanged)="tableChanged($event)"
   ></lib-sd-requests-table>
 </div>

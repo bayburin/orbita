@@ -1,20 +1,20 @@
 <p-table
   #table
-  [value]="sdRequests$ | async"
+  [value]="sdRequests"
   [lazy]="true"
   [lazyLoadOnInit]="false"
   dataKey="id"
   [paginator]="true"
   paginatorPosition="both"
-  [first]="firstRowIndex$ | async"
-  [rows]="perPage$ | async"
+  [first]="firstRowIndex"
+  [rows]="perPage"
   [rowsPerPageOptions]="[10, 25, 50]"
-  [totalRecords]="totalCount$ | async"
+  [totalRecords]="totalCount"
   [showCurrentPageReport]="true"
   currentPageReportTemplate="Показано {first}-{last} из {totalRecords} заявок"
-  [loading]="loading$ | async"
-  [sortField]="(sortField$ | async) || 'id'"
-  [sortOrder]="(sortOrder$ | async) || -1"
+  [loading]="loading"
+  [sortField]="sortField || 'id'"
+  [sortOrder]="sortOrder || -1"
   [resetPageOnSort]="false"
   stateKey="sdRequestTable"
   stateStorage="local"
@@ -90,7 +90,7 @@
           <ng-template pTemplate="filter" let-value let-filter="filterCallback">
             <p-multiSelect
               [ngModel]="table.filters.service_id?.value"
-              [options]="sdServices$ | async"
+              [options]="sdServices"
               [virtualScroll]="true"
               optionValue="id"
               optionLabel="name"
@@ -123,7 +123,7 @@
           <ng-template pTemplate="filter" let-value let-filter="filterCallback">
             <p-multiSelect
               [ngModel]="table.filters.ticket_identity?.value"
-              [options]="sdTickets$ | async"
+              [options]="sdTickets"
               [virtualScroll]="true"
               optionValue="id"
               optionLabel="name"
@@ -186,7 +186,7 @@
           <ng-template pTemplate="filter" let-value let-filter="filterCallback">
             <p-multiSelect
               [ngModel]="table.filters.users?.value"
-              [options]="users$ | async"
+              [options]="users"
               [virtualScroll]="true"
               optionValue="id"
               optionLabel="fio"
