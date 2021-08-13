@@ -14,8 +14,9 @@ import {
   SdRequestFacade,
 } from '@orbita/orbita-ui/domain-logic';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { NewSdRequestPreviewComponent } from '../new-sd-request-preview/new-sd-request-preview.component';
 import { Router } from '@angular/router';
+
+import { NewSdRequestPreviewComponent } from '../new-sd-request-preview/new-sd-request-preview.component';
 
 @Component({
   selector: 'orbita-ui-sd-request-wizzard-new-sd-request-block',
@@ -24,7 +25,8 @@ import { Router } from '@angular/router';
 })
 export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  valueChangesSub: Subscription;
+  previewRef: DynamicDialogRef;
+  subscriptions = new Subscription();
 
   // ========== Раздел формы работника ==========
 
@@ -40,8 +42,6 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   employeeFilters = employeeFiltersViewModelArray;
   employeeFilterKey = new FormControl(this.employeeFilters[0]);
   employee = new FormControl();
-  employeeFilterKeySubs: Subscription;
-  employeeManuallyFlagSubs: Subscription;
   @ViewChild('employeeAutoComplete') employeeAutoComplete: AutoComplete;
 
   // ========== Раздел формы услуги ==========
@@ -49,8 +49,6 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   tickets$ = this.serviceDeskFacade.allFreeApplicationsViewModel$;
   tickets: SdTicketViewModel[];
   ticket = new FormControl();
-  noTicketFlag: Subscription;
-  ticketsSubs: Subscription;
 
   // ========== Раздел формы ВТ ==========
 
@@ -64,17 +62,11 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   employeeSvtItem = new FormControl();
   customSvtItem = new FormControl();
   svtItemManually = new FormControl();
-  svtItemFilterKeySubs: Subscription;
-  svtItemManuallySubs: Subscription;
 
   // ========== Созданная заявка ==========
 
   sdRequest$ = this.sdRequestFacade.newFormCreated$;
   displayModal$ = this.sdRequestFacade.newFormShowModalAfterCreate$;
-
-  // ========== Другое ==========
-
-  previewRef: DynamicDialogRef;
 
   get employeeManuallyFlag(): FormControl {
     return this.form?.get('employeeManuallyFlag') as FormControl;
@@ -100,17 +92,11 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.buildForm();
-    this.ticketsSubs = this.tickets$.subscribe((tickets) => (this.tickets = tickets));
+    this.subscriptions.add(this.tickets$.subscribe((tickets) => (this.tickets = tickets)));
   }
 
   ngOnDestroy(): void {
-    this.employeeFilterKeySubs.unsubscribe();
-    this.employeeManuallyFlagSubs.unsubscribe();
-    this.noTicketFlag.unsubscribe();
-    this.svtItemFilterKeySubs.unsubscribe();
-    this.svtItemManuallySubs.unsubscribe();
-    this.ticketsSubs.unsubscribe();
-    this.valueChangesSub.unsubscribe();
+    this.subscriptions.unsubscribe();
     this.sdRequestFacade.clearCreatedForm();
     this.employeeFacade.clearEmployeeShortEntities();
   }
@@ -294,71 +280,83 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     });
 
     // Обновляет хранилище по любому изменению формы
-    this.valueChangesSub = this.form.valueChanges
-      .pipe(distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)))
-      .subscribe((formData) => this.sdRequestFacade.changeNewForm(formData));
+    this.subscriptions.add(
+      this.form.valueChanges
+        .pipe(distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)))
+        .subscribe((formData) => this.sdRequestFacade.changeNewForm(formData))
+    );
 
     // Поиск работника по параметру
-    this.employeeFilterKeySubs = this.employeeFilterKey.valueChanges
-      .pipe(distinctUntilChanged())
-      .subscribe(() => this.searchEmployee({ query: this.employee.value }));
+    this.subscriptions.add(
+      this.employeeFilterKey.valueChanges
+        .pipe(distinctUntilChanged())
+        .subscribe(() => this.searchEmployee({ query: this.employee.value }))
+    );
 
     // Отключение/включение поля "Работник"
-    this.employeeManuallyFlagSubs = this.employeeManuallyFlag.valueChanges.subscribe((flag) => {
-      if (flag) {
-        this.employeeFilterKey.disable();
-        this.employee.disable();
-        this.sourceSnapshot.get('tn').setValidators([Validators.required, Validators.pattern('^[^0][0-9]*$')]);
-        this.sourceSnapshot.get('fio').setValidators([Validators.required]);
-        this.form.get('employee').clearValidators();
-      } else {
-        this.employeeFilterKey.enable();
-        this.employee.enable();
-        this.sourceSnapshot.get('tn').clearValidators();
-        this.sourceSnapshot.get('fio').clearValidators();
-        this.form.get('employee').setValidators([Validators.required]);
-      }
+    this.subscriptions.add(
+      this.employeeManuallyFlag.valueChanges.subscribe((flag) => {
+        if (flag) {
+          this.employeeFilterKey.disable();
+          this.employee.disable();
+          this.sourceSnapshot.get('tn').setValidators([Validators.required, Validators.pattern('^[^0][0-9]*$')]);
+          this.sourceSnapshot.get('fio').setValidators([Validators.required]);
+          this.form.get('employee').clearValidators();
+        } else {
+          this.employeeFilterKey.enable();
+          this.employee.enable();
+          this.sourceSnapshot.get('tn').clearValidators();
+          this.sourceSnapshot.get('fio').clearValidators();
+          this.form.get('employee').setValidators([Validators.required]);
+        }
 
-      this.form.get('employee').updateValueAndValidity();
-      this.sourceSnapshot.get('tn').updateValueAndValidity();
-      this.sourceSnapshot.get('fio').updateValueAndValidity();
-    });
+        this.form.get('employee').updateValueAndValidity();
+        this.sourceSnapshot.get('tn').updateValueAndValidity();
+        this.sourceSnapshot.get('fio').updateValueAndValidity();
+      })
+    );
 
     // Отключение/включение поля "Услуга"
-    this.noTicketFlag = this.form.get('noTicketFlag').valueChanges.subscribe((flag) => {
-      if (flag) {
-        this.ticket.disable();
-        this.form.get('ticket').clearValidators();
-      } else {
-        this.ticket.enable();
-        this.form.get('ticket').setValidators([Validators.required]);
-      }
+    this.subscriptions.add(
+      this.form.get('noTicketFlag').valueChanges.subscribe((flag) => {
+        if (flag) {
+          this.ticket.disable();
+          this.form.get('ticket').clearValidators();
+        } else {
+          this.ticket.enable();
+          this.form.get('ticket').setValidators([Validators.required]);
+        }
 
-      this.form.get('ticket').updateValueAndValidity();
-    });
+        this.form.get('ticket').updateValueAndValidity();
+      })
+    );
 
     // Поиск ВТ по параметру
-    this.svtItemFilterKeySubs = this.svtItemFilterKey.valueChanges
-      .pipe(
-        distinctUntilChanged(),
-        filter((str) => str.length)
-      )
-      .subscribe(() => this.searchSvtItem({ query: this.customSvtItem.value }));
+    this.subscriptions.add(
+      this.svtItemFilterKey.valueChanges
+        .pipe(
+          distinctUntilChanged(),
+          filter((str) => str.length)
+        )
+        .subscribe(() => this.searchSvtItem({ query: this.customSvtItem.value }))
+    );
 
     // Отключение/включение поля "Выч. техника"
-    this.svtItemManuallySubs = this.svtItemManually.valueChanges.subscribe((flag) => {
-      if (flag) {
-        this.employeeSvtItem.disable();
-        this.svtFacade.removeAllItems();
-        this.employeeSvtItem.reset();
-      } else {
-        this.employeeSvtItem.enable();
-        this.customSvtItem.reset();
+    this.subscriptions.add(
+      this.svtItemManually.valueChanges.subscribe((flag) => {
+        if (flag) {
+          this.employeeSvtItem.disable();
+          this.svtFacade.removeAllItems();
+          this.employeeSvtItem.reset();
+        } else {
+          this.employeeSvtItem.enable();
+          this.customSvtItem.reset();
 
-        if (this.form.get('employee').value) {
-          this.svtFacade.loadItemsForForm({ fio: this.form.get('employee').value.fullName });
+          if (this.form.get('employee').value) {
+            this.svtFacade.loadItemsForForm({ fio: this.form.get('employee').value.fullName });
+          }
         }
-      }
-    });
+      })
+    );
   }
 }

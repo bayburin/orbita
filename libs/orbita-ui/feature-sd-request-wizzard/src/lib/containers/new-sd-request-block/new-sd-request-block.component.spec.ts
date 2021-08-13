@@ -319,6 +319,22 @@ describe('NewSdRequestBlockComponent', () => {
   });
 
   describe('ngOnDestroy()', () => {
+    it('should call unsubscribe() method', () => {
+      const spy = jest.spyOn(component.subscriptions, 'unsubscribe');
+
+      component.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should call clearCreatedForm() method', () => {
+      const spy = jest.spyOn(sdRequestFacade, 'clearCreatedForm');
+
+      component.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
     it('should call clearEmployeeShortEntities() method', () => {
       const spy = jest.spyOn(employeeFacade, 'clearEmployeeShortEntities');
 
