@@ -98,4 +98,22 @@ describe('OverviewBlockComponent', () => {
       expect(spy).toHaveBeenCalledWith(['/tickets']);
     });
   });
+
+  describe('ngOnDestroy()', () => {
+    it('should call unsubscribe() method', () => {
+      const spy = jest.spyOn(component.subscriptions, 'unsubscribe');
+
+      component.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
+    it('should call clearSelected() method', () => {
+      const spy = jest.spyOn(sdRequestFacade, 'clearSelected');
+
+      component.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 });

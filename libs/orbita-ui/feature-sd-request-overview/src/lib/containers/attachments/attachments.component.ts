@@ -11,8 +11,7 @@ import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 export class AttachmentsComponent implements OnInit, OnDestroy {
   loadingAttachments: number[];
   errorAttachments: number[];
-  loadingAttachmentsSub: Subscription;
-  errorAttachmentsSub: Subscription;
+  subscriptions = new Subscription();
   @Input() sdRequest: SdRequestViewModel;
   @Input() editMode: boolean;
   @Input() newAttachmentsForm: FormArray;
@@ -21,13 +20,12 @@ export class AttachmentsComponent implements OnInit, OnDestroy {
   constructor(private attachmentFacade: AttachmentFacade) {}
 
   ngOnInit(): void {
-    this.loadingAttachmentsSub = this.attachmentFacade.loadingIds$.subscribe((ids) => (this.loadingAttachments = ids));
-    this.errorAttachmentsSub = this.attachmentFacade.errorIds$.subscribe((ids) => (this.errorAttachments = ids));
+    this.subscriptions.add(this.attachmentFacade.loadingIds$.subscribe((ids) => (this.loadingAttachments = ids)));
+    this.subscriptions.add(this.attachmentFacade.errorIds$.subscribe((ids) => (this.errorAttachments = ids)));
   }
 
   ngOnDestroy(): void {
-    this.loadingAttachmentsSub.unsubscribe();
-    this.errorAttachmentsSub.unsubscribe();
+    this.subscriptions.unsubscribe();
   }
 
   trackByAttachment(index: number, attachment: Attachment): number {

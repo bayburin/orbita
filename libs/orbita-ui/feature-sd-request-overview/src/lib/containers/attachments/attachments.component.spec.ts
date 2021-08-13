@@ -65,4 +65,14 @@ describe('AttachmentsComponent', () => {
       expect(attachment.get('_destroy').value).toBe(false);
     });
   });
+
+  describe('ngOnDestroy()', () => {
+    it('should call unsubscribe() method', () => {
+      const spy = jest.spyOn(component.subscriptions, 'unsubscribe');
+
+      component.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
 });

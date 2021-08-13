@@ -52,12 +52,7 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   loadingForm$ = this.sdRequestFacade.formLoading$;
-
-  // ========== Дополнительно ==========
-
-  storeFormSub: Subscription;
-  valueChangesSub: Subscription;
-  editModeSub: Subscription;
+  subscriptions = new Subscription();
 
   get newAttachmentsForm(): FormArray {
     return this.form.get('newAttachments') as FormArray;
@@ -81,14 +76,12 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sdRequestFacade.loadSelectedSdRequest();
     this.buildForm();
-    this.editModeSub = this.editMode$.subscribe((editMode) => (this.editMode = editMode));
+    this.subscriptions.add(this.editMode$.subscribe((editMode) => (this.editMode = editMode)));
   }
 
   ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
     this.sdRequestFacade.clearSelected();
-    this.storeFormSub.unsubscribe();
-    this.valueChangesSub.unsubscribe();
-    this.editModeSub.unsubscribe();
   }
 
   trackByHistory(index: number, history: HistoryViewModel): number {
@@ -143,23 +136,29 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
       attachments: this.fb.array([]),
       newAttachments: this.fb.array([]),
     });
+
     // Заполняет данные формы из хранилища
-    this.storeFormSub = this.sdRequestFacade.formEntity$
-      .pipe(
-        filter((data) => Boolean(data)),
-        distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
-      )
-      .subscribe((formData) => {
-        this.clearForm();
-        this.form.patchValue(formData, { emitEvent: false });
-        formData.attachments.forEach((attachment: AttachmentViewForm) =>
-          this.attachmentsForm.push(this.buildAttachment(attachment), { emitEvent: false })
-        );
-      });
+    this.subscriptions.add(
+      this.sdRequestFacade.formEntity$
+        .pipe(
+          filter((data) => Boolean(data)),
+          distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
+        )
+        .subscribe((formData) => {
+          this.clearForm();
+          this.form.patchValue(formData, { emitEvent: false });
+          formData.attachments.forEach((attachment: AttachmentViewForm) =>
+            this.attachmentsForm.push(this.buildAttachment(attachment), { emitEvent: false })
+          );
+        })
+    );
+
     // Обновляет хранилище по любому изменению формы
-    this.valueChangesSub = this.form.valueChanges
-      .pipe(distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)))
-      .subscribe((formData) => this.sdRequestFacade.changeForm(formData));
+    this.subscriptions.add(
+      this.form.valueChanges
+        .pipe(distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b)))
+        .subscribe((formData) => this.sdRequestFacade.changeForm(formData))
+    );
   }
 
   /**
