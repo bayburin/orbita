@@ -33,6 +33,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
 import { DialogModule } from 'primeng/dialog';
+import { ContextMenuModule } from 'primeng/contextmenu';
 
 const modules: any[] = [
   TableModule,
@@ -67,6 +68,7 @@ const modules: any[] = [
   MessagesModule,
   MessageModule,
   DialogModule,
+  ContextMenuModule,
 ];
 
 @NgModule({

@@ -10,7 +10,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { EmployeeShort } from '@orbita/orbita-ui/domain-logic';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MenuItem } from 'primeng/api';
 import { Subject, Subscription, of } from 'rxjs';
 import { EmployeeFilters } from '@orbita/orbita-ui/domain-logic';
 import { Table } from 'primeng/table';
@@ -34,6 +34,14 @@ export class EmployeesTableComponent implements OnInit, OnDestroy {
    */
   filters = EmployeeFilters;
   /**
+   * Список свойств контекстного меню
+   */
+  contextMenuItems: MenuItem[];
+  /**
+   * Выбранный работник
+   */
+  selectedEmployee: EmployeeShort;
+  /**
    * Список найденных работников
    */
   @Input() employees: EmployeeShort[];
@@ -49,10 +57,30 @@ export class EmployeesTableComponent implements OnInit, OnDestroy {
    * Событие очистики всех фильтров таблицы
    */
   @Output() filterCleared = new EventEmitter<void>();
+  /**
+   * Событие выбора пользователя для его детального просмотра
+   */
+  @Output() viewEmployee = new EventEmitter<EmployeeShort>();
+  /**
+   * Событие выбора пользователя для создания заявки
+   */
+  @Output() newSdRequest = new EventEmitter<EmployeeShort>();
   @ViewChild('table') table: Table;
 
   ngOnInit(): void {
     this.subscribeToLazyLoadEvent();
+    this.contextMenuItems = [
+      {
+        label: 'Подробно',
+        icon: 'mdi mdi-account-search-outline mdi-18px',
+        command: () => this.viewEmployee.emit(this.selectedEmployee),
+      },
+      {
+        label: 'Новая заявка',
+        icon: 'mdi mdi-file-plus-outline mdi-18px',
+        command: () => this.newSdRequest.emit(this.selectedEmployee),
+      },
+    ];
   }
 
   ngOnDestroy() {

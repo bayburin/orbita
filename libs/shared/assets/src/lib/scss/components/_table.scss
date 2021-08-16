@@ -6,3 +6,11 @@
 .p-datatable tr.expanded-row > td {
   border-bottom: none;
 }
+
+table {
+  .p-highlight-contextmenu {
+    td {
+      background-color: var(--surface-b);
+    }
+  }
+}
