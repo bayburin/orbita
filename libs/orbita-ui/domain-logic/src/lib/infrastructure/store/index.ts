@@ -90,7 +90,7 @@ export function metaReducer(reducer: ActionReducer<OrbitaUiState>): ActionReduce
         return undefined;
       }
 
-      const storageValue = localStorage.getItem(fromSdRequest.SD_REQUEST_FEATURE_KEY);
+      const storageValue = localStorage.getItem(`${fromSdRequest.SD_REQUEST_FEATURE_KEY}Table`);
 
       if (storageValue) {
         try {
