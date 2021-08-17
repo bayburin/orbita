@@ -11,6 +11,7 @@ import * as EmployeeActions from './employee.actions';
 import * as EmployeeSelectors from './employee.selectors';
 import * as SdRequestActions from '../sd-request/sd-request.actions';
 import * as SvtItemActions from '../svt-item/svt-item.actions';
+import * as RouterSelectors from '../selectors/router.selectors';
 import { PrimeFilterFactory } from './../../factories/prime-filter.factory';
 import { EmployeeFilters } from './../../../entities/models/employee/employee-filters.enum';
 
@@ -36,6 +37,14 @@ export class EmployeeEffects {
           catchError((error) => of(EmployeeActions.loadSingleEmployeeFailure({ error })))
         )
       )
+    )
+  );
+
+  selectEmployeeByRoute = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeActions.selectEmployeeByRoute),
+      withLatestFrom(this.store.select(RouterSelectors.selectRouteParams)),
+      map(([_action, routerParams]) => EmployeeActions.selectEmployee({ idTn: routerParams.id_tn }))
     )
   );
 

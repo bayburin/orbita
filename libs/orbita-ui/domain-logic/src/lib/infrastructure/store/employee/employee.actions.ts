@@ -22,6 +22,8 @@ export const loadSingleEmployeeFailure = createAction(
 
 export const selectEmployee = createAction('[Employee] Select Employee', props<{ idTn: number }>());
 
+export const selectEmployeeByRoute = createAction('[Employee] Select Employee By Route');
+
 export const clearSelectedEmployee = createAction('[Employee] Clear Selected Employee');
 
 // ========== Подтип хранилища EmployeeShort ==========

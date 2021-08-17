@@ -35,6 +35,11 @@ export abstract class EmployeeFacadeAbstract {
   loadingShort$: Observable<boolean>;
 
   /**
+   * Загружает указанного работника по его идентификатору из URL
+   */
+  abstract loadEmployeeByRoute(): void;
+
+  /**
    * Поиск работников
    *
    * @param filters - атрибуты поиска

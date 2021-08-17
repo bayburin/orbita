@@ -11,6 +11,10 @@ export class EmployeeFacadeStub implements EmployeeFacadeAbstract {
   totalCountShort$ = new BehaviorSubject(null);
   loadingShort$ = new BehaviorSubject(false);
 
+  loadEmployeeByRoute() {
+    /** */
+  }
+
   search() {
     /** */
   }

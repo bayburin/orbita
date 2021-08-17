@@ -44,8 +44,14 @@ describe('EmployeeFacade', () => {
       facade = TestBed.inject(EmployeeFacade);
     });
 
-    it('', () => {
-      /**  */
+    describe('loadEmployeeByRoute()', () => {
+      it('should call search() method with received params', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.loadEmployeeByRoute();
+
+        expect(spy).toHaveBeenCalledWith(EmployeeActions.selectEmployeeByRoute());
+      });
     });
 
     describe('search()', () => {

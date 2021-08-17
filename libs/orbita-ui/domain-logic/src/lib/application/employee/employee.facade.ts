@@ -12,15 +12,24 @@ import { PrimeFilterFactory } from './../../infrastructure/factories/prime-filte
   providedIn: 'root',
 })
 export class EmployeeFacade implements EmployeeFacadeAbstract {
+  // ========== Подтип хранилища Employee ==========
+
   loadingEmployee$ = this.store.select(EmployeeSelectors.getEmployeeLoading);
   loadedEmployee$ = this.store.select(EmployeeSelectors.getEmployeeLoaded);
   employee$ = this.store.select(EmployeeSelectors.getEmployeeSelected);
+
+  // ========== Подтип хранилища EmployeeShort ==========
+
   allShort$ = this.store.select(EmployeeSelectors.getEmployeeShortAll);
   loadedAllShort$ = this.store.select(EmployeeSelectors.getEmployeeShortLoaded);
   totalCountShort$ = this.store.select(EmployeeSelectors.getEmployeeShortTotalCount);
   loadingShort$ = this.store.select(EmployeeSelectors.getEmployeeShortLoading);
 
   constructor(private store: Store<EmployeeFeature.EmployeePartialState>) {}
+
+  loadEmployeeByRoute() {
+    this.store.dispatch(EmployeeActions.selectEmployeeByRoute());
+  }
 
   search(filters: PrimeFilter) {
     const searchFlag = Object.keys(filters).some((filter) => Boolean(filters[filter].value));
