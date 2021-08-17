@@ -100,6 +100,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
     this.sdRequestFacade.clearCreatedForm();
     this.employeeFacade.clearEmployeeShortEntities();
+    this.svtFacade.removeAllItems();
   }
 
   /**
@@ -345,12 +346,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
     // Поиск ВТ по параметру
     this.subscriptions.add(
-      this.svtItemFilterKey.valueChanges
-        .pipe(
-          distinctUntilChanged(),
-          filter((str) => str.length)
-        )
-        .subscribe(() => this.searchSvtItem({ query: this.customSvtItem.value }))
+      this.svtItemFilterKey.valueChanges.pipe(distinctUntilChanged()).subscribe(() => this.customSvtItem.setValue(null))
     );
 
     // Отключение/включение поля "Выч. техника"

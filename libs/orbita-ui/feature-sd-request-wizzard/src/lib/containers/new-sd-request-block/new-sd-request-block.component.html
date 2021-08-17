@@ -169,7 +169,7 @@
               <div>
                 <b>{{ item.type.short_description }}</b> {{ item.short_item_model }}
               </div>
-              <div><b>Ответственный:</b> {{ item.workplace.id_tn }}</div>
+              <div><b>Ответственный:</b> {{ item.workplace.user_fio }}</div>
               <div><b>Инвентарный:</b> {{ item.invent_num }} | <b>Штрих-код:</b> {{ item.barcode_item.id }}</div>
             </ng-template>
           </p-autoComplete>

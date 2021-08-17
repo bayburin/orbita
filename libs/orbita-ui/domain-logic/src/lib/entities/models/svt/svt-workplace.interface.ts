@@ -8,7 +8,12 @@ export interface SvtWorkplace {
   readonly workplace_id: number;
 
   /**
-   * IdTn Ответственного
+   * Идентификатор Ответственного
    */
   readonly id_tn: number;
+
+  /**
+   * ФИО ответственного
+   */
+  readonly user_fio: string;
 }

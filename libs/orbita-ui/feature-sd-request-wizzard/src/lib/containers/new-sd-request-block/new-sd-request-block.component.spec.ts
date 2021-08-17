@@ -340,6 +340,14 @@ describe('NewSdRequestBlockComponent', () => {
       expect(spy).toHaveBeenCalled();
     });
 
+    it('should call removeAllItems() method', () => {
+      const spy = jest.spyOn(svtFacade, 'removeAllItems');
+
+      component.ngOnDestroy();
+
+      expect(spy).toHaveBeenCalled();
+    });
+
     it('should call clearEmployeeShortEntities() method', () => {
       const spy = jest.spyOn(employeeFacade, 'clearEmployeeShortEntities');
 
