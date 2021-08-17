@@ -270,6 +270,31 @@
         }
       }
     },
+    "orbita-ui-feature-employee-overview": {
+      "projectType": "library",
+      "root": "libs/orbita-ui/feature-employee-overview",
+      "sourceRoot": "libs/orbita-ui/feature-employee-overview/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/orbita-ui/feature-employee-overview"],
+          "options": {
+            "jestConfig": "libs/orbita-ui/feature-employee-overview/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/orbita-ui/feature-employee-overview/src/**/*.ts",
+              "libs/orbita-ui/feature-employee-overview/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "orbita-ui-feature-listing": {
       "projectType": "library",
       "root": "libs/orbita-ui/feature-listing",

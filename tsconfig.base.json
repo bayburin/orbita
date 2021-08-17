@@ -18,6 +18,7 @@
       "@orbita/orbita-ui/domain-logic": ["libs/orbita-ui/domain-logic/src/index.ts"],
       "@orbita/orbita-ui/feature-employee": ["libs/orbita-ui/feature-employee/src/index.ts"],
       "@orbita/orbita-ui/feature-employee-listing": ["libs/orbita-ui/feature-employee-listing/src/index.ts"],
+      "@orbita/orbita-ui/feature-employee-overview": ["libs/orbita-ui/feature-employee-overview/src/index.ts"],
       "@orbita/orbita-ui/feature-empoloyee": ["libs/orbita-ui/feature-empoloyee/src/index.ts"],
       "@orbita/orbita-ui/feature-listing": ["libs/orbita-ui/feature-listing/src/index.ts"],
       "@orbita/orbita-ui/feature-sd-request-overview": ["libs/orbita-ui/feature-sd-request-overview/src/index.ts"],

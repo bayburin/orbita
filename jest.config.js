@@ -15,5 +15,6 @@ module.exports = {
     '<rootDir>/libs/orbita-ui/foo',
     '<rootDir>/libs/orbita-ui/feature-employee-listing',
     '<rootDir>/libs/orbita-ui/feature-employee',
+    '<rootDir>/libs/orbita-ui/feature-employee-overview',
   ],
 };

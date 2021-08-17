@@ -35,6 +35,9 @@
     "orbita-ui-feature-employee-listing": {
       "tags": ["scope:orbita-ui", "type:feature"]
     },
+    "orbita-ui-feature-employee-overview": {
+      "tags": ["scope:orbita-ui", "type:feature"]
+    },
     "orbita-ui-feature-listing": {
       "tags": ["scope:orbita-ui", "type:feature"]
     },
