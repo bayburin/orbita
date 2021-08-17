@@ -70,11 +70,16 @@ describe('NewSdRequestBlockComponent', () => {
     serviceDeskFacade = TestBed.inject(ServiceDeskFacade);
     sdRequestFacade = TestBed.inject(SdRequestFacade);
     svtFacade = TestBed.inject(SvtFacade);
+    jest.spyOn(sdRequestFacade, 'initNewForm');
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call initNewForm() method', () => {
+    expect(sdRequestFacade.initNewForm).toHaveBeenCalled();
   });
 
   describe('searchEmployee()', () => {
@@ -108,33 +113,33 @@ describe('NewSdRequestBlockComponent', () => {
 
   describe('selectEmployee()', () => {
     it('should set employee into form', () => {
-      const employee = { fullName: 'fake-employee' } as EmployeeShort;
+      const employee = { id: 123, fullName: 'fake-employee' } as EmployeeShort;
       const spy = jest.spyOn(svtFacade, 'loadItemsForForm');
 
       component.selectEmployee(employee);
 
       expect(component.form.getRawValue().employee).toEqual(employee);
-      expect(spy).toHaveBeenCalledWith({ fio: employee.fullName });
+      expect(spy).toHaveBeenCalledWith({ id_tn: employee.id });
     });
 
     it('should not call svtFacade.loadItemsForForm() if svtItemManually is true', () => {
-      const employee = { fullName: 'fake-employee' } as EmployeeShort;
+      const employee = { id: 123, fullName: 'fake-employee' } as EmployeeShort;
       const spy = jest.spyOn(svtFacade, 'loadItemsForForm');
 
       component.svtItemManually.setValue(true);
       component.selectEmployee(employee);
 
-      expect(spy).not.toHaveBeenCalledWith({ fio: employee.fullName });
+      expect(spy).not.toHaveBeenCalledWith({ id_tn: employee.id });
     });
 
     it('should call svtFacade.loadItemsForForm() if svtItemManually is false', () => {
-      const employee = { fullName: 'fake-employee' } as EmployeeShort;
+      const employee = { id: 123, fullName: 'fake-employee' } as EmployeeShort;
       const spy = jest.spyOn(svtFacade, 'loadItemsForForm');
 
       component.svtItemManually.setValue(false);
       component.selectEmployee(employee);
 
-      expect(spy).toHaveBeenCalledWith({ fio: employee.fullName });
+      expect(spy).toHaveBeenCalledWith({ id_tn: employee.id });
     });
   });
 

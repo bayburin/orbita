@@ -236,6 +236,16 @@ const sdRequestReducer = createReducer(
 
   // ========== Форма новой заявки ==========
 
+  on(SdRequestActions.setEmployeeToNewForm, (state, { employee }) => ({
+    ...state,
+    newForm: {
+      ...state.newForm,
+      entity: {
+        ...state.newForm.entity,
+        employee,
+      },
+    },
+  })),
   on(SdRequestActions.changeNewForm, (state, { entity }) => ({
     ...state,
     newForm: {

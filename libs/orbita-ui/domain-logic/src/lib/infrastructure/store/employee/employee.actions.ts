@@ -42,3 +42,18 @@ export const loadAllEmployeeShortFailure = createAction(
 );
 
 export const clearAllEmployeeShort = createAction('[Employee] Clear All Employee Short');
+
+export const loadEmployeeShortForNewForm = createAction(
+  '[Employee/Api] Load Employee Short For New Form',
+  props<{ idTn: number }>()
+);
+
+export const loadEmployeeShortForNewFormSuccess = createAction(
+  '[Employee/Api] Load Employee Short For New Form Success',
+  props<{ employees: EmployeeShort[] }>()
+);
+
+export const loadEmployeeShortForNewFormFailure = createAction(
+  '[Employee/Api] Load Employee Short For New Form Failure',
+  props<{ error: any }>()
+);

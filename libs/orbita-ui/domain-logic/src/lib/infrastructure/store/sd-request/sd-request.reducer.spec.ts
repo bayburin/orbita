@@ -16,6 +16,7 @@ import {
 } from './sd-request.reducer';
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
+import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
 
 describe('SdRequestReducer', () => {
   let action: Action;
@@ -224,6 +225,16 @@ describe('SdRequestReducer', () => {
 
       expect(result.loading).toBe(false);
       expect(result.error).toEqual(error);
+    });
+  });
+
+  describe('setEmployeeToNewForm', () => {
+    it('should set attributes', () => {
+      const employee = { id: 123 } as EmployeeShort;
+      action = SdRequestActions.setEmployeeToNewForm({ employee });
+      const result: NewFormState = reducer(initialState, action).newForm;
+
+      expect(result.entity.employee).toEqual(employee);
     });
   });
 

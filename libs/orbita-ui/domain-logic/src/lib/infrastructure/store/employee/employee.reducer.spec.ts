@@ -147,6 +147,45 @@ describe('EmployeeReducer', () => {
     });
   });
 
+  describe('loadEmployeeShortForNewForm', () => {
+    it('should change attributes', () => {
+      const employees = [createEmployeeShortEntity(1), createEmployeeShortEntity(2)];
+      action = EmployeeActions.loadAllEmployeeShortSuccess({ employees });
+      const partialResult: State = reducer(initialState, action);
+      action = EmployeeActions.loadEmployeeShortForNewForm({ idTn: 123 });
+      const result: EmployeeShortState = reducer(partialResult, action).employeeShort;
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('loadEmployeeShortForNewFormSuccess', () => {
+    it('should change attributes', () => {
+      const employees = [createEmployeeShortEntity(1), createEmployeeShortEntity(2)];
+      action = EmployeeActions.loadEmployeeShortForNewFormSuccess({ employees });
+      const result: EmployeeShortState = reducer(initialState, action).employeeShort;
+
+      expect(result.ids).toEqual([1, 2]);
+      expect(result.loaded).toBe(true);
+      expect(result.loading).toBe(false);
+    });
+  });
+
+  describe('loadEmployeeShortForNewFormFailure', () => {
+    it('should change attributes', () => {
+      const error = 'fake-error';
+      action = EmployeeActions.loadEmployeeShortForNewFormFailure({ error });
+      const result: EmployeeShortState = reducer(initialState, action).employeeShort;
+
+      expect(result.ids.length).toBe(0);
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBe(error);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as any;

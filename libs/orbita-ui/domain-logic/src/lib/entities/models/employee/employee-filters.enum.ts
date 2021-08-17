@@ -6,4 +6,5 @@ export enum EmployeeFilters {
   'TN' = 'personnelNo',
   'DEPT' = 'departmentForAccounting',
   'PHONE' = 'phoneText',
+  'ID_TN' = 'id',
 }

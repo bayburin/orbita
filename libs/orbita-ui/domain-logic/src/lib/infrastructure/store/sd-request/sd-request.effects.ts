@@ -1,4 +1,3 @@
-import { SdRequestFactory } from './../../factories/sd-request.factory';
 import { AuthHelper } from '@iss/ng-auth-center';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
@@ -22,8 +21,12 @@ import * as HostActions from '../host/host.actions';
 import * as ParameterActions from '../parameter/parameter.actions';
 import * as UserSelectors from '../user/user.selectors';
 import * as AttachmentActions from '../attachment/attachment.actions';
+import * as EmployeeSelectors from '../employee/employee.selectors';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../services/sd-request-cache.service';
+import { SdRequestFactory } from './../../factories/sd-request.factory';
+import { PrimeFilterFactory } from './../../factories/prime-filter.factory';
+import { EmployeeFilters } from '../../../entities/models/employee/employee-filters.enum';
 
 @Injectable()
 export class SdRequestEffects {
@@ -161,6 +164,22 @@ export class SdRequestEffects {
         WorkerActions.clearAll(),
         AttachmentActions.clearAll(),
       ])
+    )
+  );
+
+  initNewForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.initNewForm),
+      withLatestFrom(this.store.select(RouterSelector.selectQueryParams)),
+      switchMap(([_action, queryParams]) => {
+        const result = [];
+
+        if (queryParams.id_tn) {
+          result.push(EmployeeActions.loadEmployeeShortForNewForm({ idTn: queryParams.id_tn }));
+        }
+
+        return result;
+      })
     )
   );
 

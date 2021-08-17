@@ -7,6 +7,7 @@ import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-for
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 import { NormalizedSdRequestEntities } from './../../../entities/models/normalized-data.interface';
 import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
+import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
 
 // ========== Список заявок ==========
 
@@ -65,6 +66,13 @@ export const saveFormSuccess = createAction('[SdRequest/API] Save Form Success',
 export const saveFormFailure = createAction('[SdRequest/API] Save Form Failure', props<{ error: any }>());
 
 // ========== Форма новой заявки ==========
+
+export const initNewForm = createAction('[SdRequest] Init New Form');
+
+export const setEmployeeToNewForm = createAction(
+  '[SdRequest] Set Employee To New Form',
+  props<{ employee: EmployeeShort }>()
+);
 
 export const changeNewForm = createAction('[SdRequest] Change New Form', props<{ entity: NewSdRequestViewForm }>());
 

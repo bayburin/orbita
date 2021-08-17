@@ -22,4 +22,4 @@ export type SvtFilters = {
   [key in SvtFilterTypes]?: string | number;
 };
 
-export type SvtFilterTypes = 'tn' | 'fio' | 'dept' | 'invent_num' | 'barcode';
+export type SvtFilterTypes = 'id_tn' | 'fio' | 'dept' | 'invent_num' | 'barcode';

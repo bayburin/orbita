@@ -275,6 +275,16 @@ describe('SdRequestFacade', () => {
       });
     });
 
+    describe('initNewForm()', () => {
+      it('should call initNewForm action', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.initNewForm();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.initNewForm());
+      });
+    });
+
     describe('changeNewForm()', () => {
       it('should call changeNewForm action', () => {
         const spy = jest.spyOn(store, 'dispatch');

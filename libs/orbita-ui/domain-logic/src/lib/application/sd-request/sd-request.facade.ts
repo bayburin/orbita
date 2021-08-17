@@ -122,6 +122,10 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     this.store.dispatch(SdRequestActions.clearAll());
   }
 
+  initNewForm() {
+    this.store.dispatch(SdRequestActions.initNewForm());
+  }
+
   changeNewForm(form: NewSdRequestViewForm) {
     this.store.dispatch(SdRequestActions.changeNewForm({ entity: form }));
   }

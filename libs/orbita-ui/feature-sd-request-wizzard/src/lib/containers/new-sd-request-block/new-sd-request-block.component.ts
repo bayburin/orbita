@@ -91,6 +91,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.sdRequestFacade.initNewForm();
     this.buildForm();
     this.subscriptions.add(this.tickets$.subscribe((tickets) => (this.tickets = tickets)));
   }
@@ -120,9 +121,9 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   selectEmployee(employee: EmployeeShort): void {
     this.form.patchValue({ employee: employee });
 
-    // Запустить поиск работников по ФИО, если не выбран чекбокс "Поиск выч. техники вручную"
+    // Запустить поиск работников по id_tn, если не выбран чекбокс "Поиск выч. техники вручную"
     if (!this.svtItemManually.value) {
-      this.svtFacade.loadItemsForForm({ fio: employee.fullName });
+      this.svtFacade.loadItemsForForm({ id_tn: employee.id });
     }
   }
 
@@ -279,6 +280,19 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       attachments: this.fb.array([]),
     });
 
+    // Заполняет данные формы из хранилища
+    this.subscriptions.add(
+      this.sdRequestFacade.newFormEntity$
+        .pipe(
+          filter((data) => Boolean(data)),
+          distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
+        )
+        .subscribe((formData) => {
+          this.form.patchValue(formData, { emitEvent: false });
+          this.employee.setValue(formData.employee);
+        })
+    );
+
     // Обновляет хранилище по любому изменению формы
     this.subscriptions.add(
       this.form.valueChanges
@@ -350,8 +364,10 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
           this.employeeSvtItem.enable();
           this.customSvtItem.reset();
 
-          if (this.form.get('employee').value) {
-            this.svtFacade.loadItemsForForm({ fio: this.form.get('employee').value.fullName });
+          const employeeVal = this.form.get('employee').value;
+
+          if (employeeVal) {
+            this.svtFacade.loadItemsForForm({ id_tn: employeeVal.id });
           }
         }
       })

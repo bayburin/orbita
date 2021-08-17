@@ -9,6 +9,10 @@ import { EmployeeApi } from './../../api/employee/employee.api';
 import * as EmployeeFeature from './employee.reducer';
 import * as EmployeeActions from './employee.actions';
 import * as EmployeeSelectors from './employee.selectors';
+import * as SdRequestActions from '../sd-request/sd-request.actions';
+import * as SvtItemActions from '../svt-item/svt-item.actions';
+import { PrimeFilterFactory } from './../../factories/prime-filter.factory';
+import { EmployeeFilters } from './../../../entities/models/employee/employee-filters.enum';
 
 @Injectable()
 export class EmployeeEffects {
@@ -52,6 +56,34 @@ export class EmployeeEffects {
           catchError((error) => of(EmployeeActions.loadSingleEmployeeFailure({ error })))
         )
       )
+    )
+  );
+
+  loadEmployeeShortForNewForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeActions.loadEmployeeShortForNewForm),
+      switchMap((action) => {
+        const filters = PrimeFilterFactory.createFilter(EmployeeFilters.ID_TN, action.idTn);
+
+        return this.employeeApi.query(filters).pipe(
+          map((data) => EmployeeActions.loadEmployeeShortForNewFormSuccess({ employees: data.employees })),
+          catchError((error) => of(EmployeeActions.loadEmployeeShortForNewFormFailure({ error })))
+        );
+      })
+    )
+  );
+
+  loadEmployeeShortForNewFormSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeActions.loadEmployeeShortForNewFormSuccess),
+      switchMap((action) => {
+        const employee = action.employees[0];
+
+        return [
+          SdRequestActions.setEmployeeToNewForm({ employee }),
+          SvtItemActions.setFormFilters({ filters: { id_tn: employee.id } }),
+        ];
+      })
     )
   );
 }

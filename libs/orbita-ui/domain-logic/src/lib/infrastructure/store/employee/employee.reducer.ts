@@ -98,7 +98,7 @@ const employeeReducer = createReducer(
 
   // ========== Подтип хранилища EmployeeShort ==========
 
-  on(EmployeeActions.loadAllEmployeeShort, (state) => ({
+  on(EmployeeActions.loadAllEmployeeShort, EmployeeActions.loadEmployeeShortForNewForm, (state) => ({
     ...state,
     employeeShort: {
       ...state.employeeShort,
@@ -107,19 +107,27 @@ const employeeReducer = createReducer(
       error: null,
     },
   })),
-  on(EmployeeActions.loadAllEmployeeShortSuccess, (state, { employees }) => ({
-    ...state,
-    employeeShort: employeeShortAdapter.setAll(employees, { ...state.employeeShort, loaded: true, loading: false }),
-  })),
-  on(EmployeeActions.loadAllEmployeeShortFailure, (state, { error }) => ({
-    ...state,
-    employeeShort: {
-      ...state.employeeShort,
-      loaded: false,
-      loading: false,
-      error,
-    },
-  })),
+  on(
+    EmployeeActions.loadAllEmployeeShortSuccess,
+    EmployeeActions.loadEmployeeShortForNewFormSuccess,
+    (state, { employees }) => ({
+      ...state,
+      employeeShort: employeeShortAdapter.setAll(employees, { ...state.employeeShort, loaded: true, loading: false }),
+    })
+  ),
+  on(
+    EmployeeActions.loadAllEmployeeShortFailure,
+    EmployeeActions.loadEmployeeShortForNewFormFailure,
+    (state, { error }) => ({
+      ...state,
+      employeeShort: {
+        ...state.employeeShort,
+        loaded: false,
+        loading: false,
+        error,
+      },
+    })
+  ),
   on(EmployeeActions.clearAllEmployeeShort, (state) => ({
     ...state,
     employeeShort: employeeShortAdapter.removeAll({ ...state.employeeShort }),

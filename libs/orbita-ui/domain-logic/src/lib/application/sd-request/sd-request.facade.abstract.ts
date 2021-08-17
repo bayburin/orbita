@@ -132,6 +132,11 @@ export abstract class SdRequestFacadeAbstract {
   abstract clearAll(): void;
 
   /**
+   * Инициализирует форму: загружает дополнительные данные, если это необходимо
+   */
+  abstract initNewForm(): void;
+
+  /**
    * Сохраняет данные новой формы в хранилище
    *
    * @param form - данные формы

@@ -31,6 +31,7 @@ export const employeeFiltersViewModelMap: Record<EmployeeFilters, EmployeeFilter
   [EmployeeFilters.TN]: EmployeeFiltersViewModelFactory.create('Таб. номер', 'Введите табельный номер...'),
   [EmployeeFilters.DEPT]: EmployeeFiltersViewModelFactory.create('Подразделение', 'Введите номер подразделения...'),
   [EmployeeFilters.PHONE]: EmployeeFiltersViewModelFactory.create('Телефон', 'Введите номер телефона...'),
+  [EmployeeFilters.ID_TN]: EmployeeFiltersViewModelFactory.create('Идентификатор', ''),
 };
 
 /**
