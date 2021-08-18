@@ -1,3 +1,4 @@
+import { convertPrimeFilter } from './../../utils/convert-prime-filter.function';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -17,6 +18,18 @@ export class SvtItemEffects {
     private svtItemApi: SvtApi,
     private store: Store<SvtItemFeature.SvtItemPartialState>
   ) {}
+
+  loadAll$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SvtItemActions.loadAll),
+      switchMap((action) =>
+        this.svtItemApi.queryItems(convertPrimeFilter(action.filters)).pipe(
+          map((items) => SvtItemActions.loadAllSuccess({ svtItems: items })),
+          catchError((error) => of(SvtItemActions.loadAllFailure({ error })))
+        )
+      )
+    )
+  );
 
   loadSelected$ = createEffect(() =>
     this.actions$.pipe(

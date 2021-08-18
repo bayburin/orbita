@@ -23,30 +23,7 @@ export class EmployeeEffects {
     private store: Store<EmployeeFeature.EmployeePartialState>
   ) {}
 
-  loadSingleEmployee$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(EmployeeActions.loadSingleEmployee),
-      withLatestFrom(this.store.select(EmployeeSelectors.getEmployeeSelectedId)),
-      switchMap(([_action, idTn]) =>
-        this.employeeApi.show(idTn).pipe(
-          map((employee) =>
-            employee.id
-              ? EmployeeActions.loadSingleEmployeeSuccess({ employee: employee })
-              : EmployeeActions.loadSingleEmployeeNotFound()
-          ),
-          catchError((error) => of(EmployeeActions.loadSingleEmployeeFailure({ error })))
-        )
-      )
-    )
-  );
-
-  selectEmployeeByRoute = createEffect(() =>
-    this.actions$.pipe(
-      ofType(EmployeeActions.selectEmployeeByRoute),
-      withLatestFrom(this.store.select(RouterSelectors.selectRouteParams)),
-      map(([_action, routerParams]) => EmployeeActions.selectEmployee({ idTn: routerParams.id_tn }))
-    )
-  );
+  // ========== Подтип хранилища Employee ==========
 
   selectEmployee$ = createEffect(() =>
     this.actions$.pipe(
@@ -55,6 +32,58 @@ export class EmployeeEffects {
       map(EmployeeActions.loadSingleEmployee)
     )
   );
+
+  loadSingleEmployee$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeActions.loadSingleEmployee),
+      withLatestFrom(this.store.select(EmployeeSelectors.getEmployeeSelectedId)),
+      switchMap(([_action, idTn]) =>
+        this.employeeApi.show(idTn).pipe(
+          map((employee) =>
+            employee.id
+              ? EmployeeActions.loadSingleEmployeeSuccess({ employee })
+              : EmployeeActions.loadSingleEmployeeNotFound()
+          ),
+          catchError((error) => of(EmployeeActions.loadSingleEmployeeFailure({ error })))
+        )
+      )
+    )
+  );
+
+  overviewSingleEmployee$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeActions.overviewSingleEmployee),
+      withLatestFrom(this.store.select(RouterSelectors.selectRouteParams)),
+      map(([_action, routerParams]) => EmployeeActions.loadSingleEmployeeForOverview({ idTn: routerParams.id_tn }))
+    )
+  );
+
+  loadSingleEmployeeForOverview$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeActions.loadSingleEmployeeForOverview),
+      switchMap((action) =>
+        this.employeeApi.show(action.idTn).pipe(
+          map((employee) =>
+            employee.id
+              ? EmployeeActions.loadSingleEmployeeForOverviewSuccess({ employee: employee })
+              : EmployeeActions.loadSingleEmployeeForOverviewNotFound()
+          ),
+          catchError((error) => of(EmployeeActions.loadSingleEmployeForOverviewFailure({ error })))
+        )
+      )
+    )
+  );
+
+  loadSingleEmployeeForOverviewSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeActions.loadSingleEmployeeForOverviewSuccess),
+      switchMap((action) => [
+        SvtItemActions.loadAll({ filters: PrimeFilterFactory.createFilter('id_tn', action.employee.id) }),
+      ])
+    )
+  );
+
+  // ========== Подтип хранилища EmployeeShort ==========
 
   loadAllEmployeeShort$ = createEffect(() =>
     this.actions$.pipe(

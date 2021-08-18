@@ -16,11 +16,7 @@ export const getLoaded = createSelector(getSvtItemState, (state: State) => state
 
 export const getError = createSelector(getSvtItemState, (state: State) => state.error);
 
-export const getFilters = createSelector(getSvtItemState, (state: State) => state.filters);
-
 export const getFormFilters = createSelector(getSvtItemState, (state: State) => state.formFilters);
-
-export const getNeedItems = createSelector(getSvtItemState, (state: State) => state.needItems);
 
 export const getNeedFormItems = createSelector(getSvtItemState, (state: State) => state.needFormItems);
 

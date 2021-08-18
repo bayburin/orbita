@@ -46,16 +46,8 @@ describe('SvtItem Selectors', () => {
     expect(SvtItemSelectors.getError.projector(state)).toEqual(error);
   });
 
-  it('getFilters() should return "filters" attribute', () => {
-    expect(SvtItemSelectors.getFilters.projector(state)).toEqual(filters);
-  });
-
   it('getFormFilters() should return "filters" attribute', () => {
     expect(SvtItemSelectors.getFormFilters.projector(state)).toEqual(formFilters);
-  });
-
-  it('getNeedItems() should return "needItems" attribute', () => {
-    expect(SvtItemSelectors.getNeedItems.projector(state)).toBe(true);
   });
 
   it('getNeedFormItems() should return "needFormItems" attribute', () => {

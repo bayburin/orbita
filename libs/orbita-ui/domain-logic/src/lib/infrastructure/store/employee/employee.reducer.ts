@@ -56,15 +56,19 @@ const employeeReducer = createReducer(
 
   // ========== Подтип хранилища Employee ==========
 
-  on(EmployeeActions.loadSingleEmployee, (state) => ({
+  on(EmployeeActions.loadSingleEmployee, EmployeeActions.loadSingleEmployeeForOverview, (state) => ({
     ...state,
     employee: employeeAdapter.removeAll({ ...state.employee, loading: true, loaded: false, error: null }),
   })),
-  on(EmployeeActions.loadSingleEmployeeSuccess, (state, { employee }) => ({
-    ...state,
-    employee: employeeAdapter.setOne(employee, { ...state.employee, loaded: true, loading: false }),
-  })),
-  on(EmployeeActions.loadSingleEmployeeNotFound, (state) => ({
+  on(
+    EmployeeActions.loadSingleEmployeeSuccess,
+    EmployeeActions.loadSingleEmployeeForOverviewSuccess,
+    (state, { employee }) => ({
+      ...state,
+      employee: employeeAdapter.setOne(employee, { ...state.employee, loaded: true, loading: false }),
+    })
+  ),
+  on(EmployeeActions.loadSingleEmployeeNotFound, EmployeeActions.loadSingleEmployeeForOverviewNotFound, (state) => ({
     ...state,
     employee: {
       ...state.employee,
@@ -72,14 +76,18 @@ const employeeReducer = createReducer(
       loaded: false,
     },
   })),
-  on(EmployeeActions.loadSingleEmployeeFailure, (state, { error }) => ({
-    ...state,
-    employee: {
-      ...state.employee,
-      loading: false,
-      error,
-    },
-  })),
+  on(
+    EmployeeActions.loadSingleEmployeeFailure,
+    EmployeeActions.loadSingleEmployeForOverviewFailure,
+    (state, { error }) => ({
+      ...state,
+      employee: {
+        ...state.employee,
+        loading: false,
+        error,
+      },
+    })
+  ),
   on(EmployeeActions.selectEmployee, (state, { idTn }) => ({
     ...state,
     employee: {

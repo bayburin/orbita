@@ -2,8 +2,9 @@ import { createAction, props } from '@ngrx/store';
 
 import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
 import { SvtFilters } from './../../../entities/filter.interface';
+import { PrimeFilter } from './../../../entities/prime-filter.interface';
 
-export const loadAll = createAction('[SvtItem/Api] Load All');
+export const loadAll = createAction('[SvtItem/Api] Load All', props<{ filters: PrimeFilter }>());
 
 export const loadAllSuccess = createAction('[SvtItem/API] Load All Success', props<{ svtItems: SvtItem[] }>());
 

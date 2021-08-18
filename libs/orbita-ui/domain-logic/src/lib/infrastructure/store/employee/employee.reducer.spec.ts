@@ -73,6 +73,57 @@ describe('EmployeeReducer', () => {
     });
   });
 
+  describe('loadSingleEmployeeForOverview', () => {
+    it('should change attributes', () => {
+      action = EmployeeActions.loadSingleEmployeeForOverview({ idTn: 123 });
+      const result: EmployeeState = reducer(initialState, action).employee;
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+      expect(result.ids.length).toBe(0);
+    });
+  });
+
+  describe('loadSingleEmployeeForOverviewSuccess', () => {
+    it('should change attributes', () => {
+      const employee = createEmployeeEntity(1);
+      action = EmployeeActions.loadSingleEmployeeForOverviewSuccess({ employee });
+      const result: EmployeeState = reducer(initialState, action).employee;
+
+      expect(result.loaded).toBe(true);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBeNull();
+      expect(result.ids.length).toBe(1);
+      expect(result.ids[0]).toBe(employee.id);
+    });
+  });
+
+  describe('loadSingleEmployeeForOverviewNotFound', () => {
+    it('should change attributes', () => {
+      action = EmployeeActions.loadSingleEmployeeForOverviewNotFound();
+      const result: EmployeeState = reducer(initialState, action).employee;
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBeNull();
+      expect(result.ids.length).toBe(0);
+    });
+  });
+
+  describe('loadSingleEmployeForOverviewFailure', () => {
+    it('should change attributes', () => {
+      const error = 'error message';
+      action = EmployeeActions.loadSingleEmployeForOverviewFailure({ error });
+      const result: EmployeeState = reducer(initialState, action).employee;
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
+      expect(result.error).toEqual(error);
+      expect(result.ids.length).toBe(0);
+    });
+  });
+
   describe('selectEmployee', () => {
     it('should change attributes', () => {
       action = EmployeeActions.selectEmployee({ idTn: 12 });

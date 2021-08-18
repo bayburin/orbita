@@ -37,7 +37,7 @@ export abstract class EmployeeFacadeAbstract {
   /**
    * Загружает указанного работника по его идентификатору из URL
    */
-  abstract loadEmployeeByRoute(): void;
+  abstract overviewSingleEmployee(): void;
 
   /**
    * Поиск работников

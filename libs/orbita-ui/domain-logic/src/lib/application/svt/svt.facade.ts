@@ -9,7 +9,6 @@ import * as SvtItemActions from '../../infrastructure/store/svt-item/svt-item.ac
 import * as SvtItemSelectors from '../../infrastructure/store/svt-item/svt-item.selectors';
 import { SvtFacadeAbstract } from './svt.facade.abstract';
 import { SvtApi } from './../../infrastructure/api/svt/svt.api';
-import { convertPrimeFilter } from './../../infrastructure/utils/convert-prime-filter.function';
 import { SvtFilters } from './../../entities/filter.interface';
 
 /**
@@ -22,19 +21,6 @@ export class SvtFacade implements SvtFacadeAbstract {
   loadingItem$ = this.store.select(SvtItemSelectors.getLoading);
   loadedItem$ = this.store.select(SvtItemSelectors.getLoaded);
   selectedItem$ = this.store.select(SvtItemSelectors.getSelected);
-  loadAllItems$ = this.store.select(SvtItemSelectors.getNeedItems).pipe(
-    filter((needItems) => needItems),
-    tap(() => this.store.dispatch(SvtItemActions.loadAll())),
-    withLatestFrom(this.store.select(SvtItemSelectors.getFilters)),
-    switchMap(([_need, filters]) =>
-      this.svtApi.queryItems(convertPrimeFilter(filters)).pipe(
-        tap((svtItems) => this.store.dispatch(SvtItemActions.loadAllSuccess({ svtItems }))),
-        catchError((error) => of(this.store.dispatch(SvtItemActions.loadAllFailure({ error }))))
-      )
-    ),
-    share()
-  );
-  allItems$ = muteFirst(this.loadAllItems$.pipe(startWith(null)), this.store.select(SvtItemSelectors.getAll));
   loadForFormItems$ = this.store.select(SvtItemSelectors.getNeedFormItems).pipe(
     filter((needItems) => needItems),
     tap(() => this.store.dispatch(SvtItemActions.loadAllForForm())),

@@ -3,7 +3,6 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SvtItemActions from './svt-item.actions';
 import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
-import { PrimeFilter } from './../../../entities/prime-filter.interface';
 import { SvtFilters } from './../../../entities/filter.interface';
 
 export const SVT_ITEM_FEATURE_KEY = 'svtItem';
@@ -13,8 +12,6 @@ export interface State extends EntityState<SvtItem> {
   loaded: boolean;
   selectedId: number;
   error?: string | null;
-  filters: PrimeFilter;
-  needItems: boolean;
   needFormItems: boolean;
   formFilters?: SvtFilters;
 }
@@ -32,8 +29,6 @@ export const initialState: State = svtItemAdapter.getInitialState({
   loaded: false,
   selectedId: null,
   error: null,
-  filters: {},
-  needItems: true,
   needFormItems: false,
 });
 
@@ -44,7 +39,6 @@ const svtItemReducer = createReducer(
     loading: true,
     loaded: false,
     error: null,
-    needItems: false,
   })),
   on(SvtItemActions.loadAllSuccess, SvtItemActions.loadAllForFormSuccess, (state, { svtItems }) =>
     svtItemAdapter.setAll(svtItems, {

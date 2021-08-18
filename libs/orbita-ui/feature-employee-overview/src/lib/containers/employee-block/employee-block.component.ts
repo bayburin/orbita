@@ -12,6 +12,6 @@ export class EmployeeBlockComponent implements OnInit {
   constructor(private employeeFacade: EmployeeFacade) {}
 
   ngOnInit(): void {
-    this.employeeFacade.loadEmployeeByRoute();
+    this.employeeFacade.overviewSingleEmployee();
   }
 }

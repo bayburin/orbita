@@ -22,9 +22,28 @@ export const loadSingleEmployeeFailure = createAction(
 
 export const selectEmployee = createAction('[Employee] Select Employee', props<{ idTn: number }>());
 
-export const selectEmployeeByRoute = createAction('[Employee] Select Employee By Route');
-
 export const clearSelectedEmployee = createAction('[Employee] Clear Selected Employee');
+
+export const overviewSingleEmployee = createAction('[Employee] Overview Single Employee');
+
+export const loadSingleEmployeeForOverview = createAction(
+  '[Employee/API] Load Single Employee For Overview',
+  props<{ idTn: number }>()
+);
+
+export const loadSingleEmployeeForOverviewSuccess = createAction(
+  '[Employee/API] Load Single Employee For Overview Success',
+  props<{ employee: Employee }>()
+);
+
+export const loadSingleEmployeeForOverviewNotFound = createAction(
+  '[Employee/API] Load Single Employee For Overview Not Found'
+);
+
+export const loadSingleEmployeForOverviewFailure = createAction(
+  '[Employee/API] Load Single Employee For Overview Failure',
+  props<{ error: any }>()
+);
 
 // ========== Подтип хранилища EmployeeShort ==========
 

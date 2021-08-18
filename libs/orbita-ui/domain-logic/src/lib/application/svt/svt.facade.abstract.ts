@@ -19,11 +19,11 @@ export abstract class SvtFacadeAbstract {
   /**
    * Загружает список ВТ
    */
-  loadAllItems$: Observable<void | SvtItem[]>;
+  loadForFormItems$: Observable<void | SvtItem[]>;
   /**
    * Список ВТ
    */
-  allItems$: Observable<SvtItem[]>;
+  allForFormItems$: Observable<SvtItem[]>;
 
   /**
    * Загружает список ВТ для формы создания заявки

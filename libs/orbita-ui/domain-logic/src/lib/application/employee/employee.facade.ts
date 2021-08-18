@@ -27,8 +27,8 @@ export class EmployeeFacade implements EmployeeFacadeAbstract {
 
   constructor(private store: Store<EmployeeFeature.EmployeePartialState>) {}
 
-  loadEmployeeByRoute() {
-    this.store.dispatch(EmployeeActions.selectEmployeeByRoute());
+  overviewSingleEmployee() {
+    this.store.dispatch(EmployeeActions.overviewSingleEmployee());
   }
 
   search(filters: PrimeFilter) {
