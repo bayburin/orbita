@@ -54,7 +54,10 @@ export class EmployeeEffects {
     this.actions$.pipe(
       ofType(EmployeeActions.overviewSingleEmployee),
       withLatestFrom(this.store.select(RouterSelectors.selectRouteParams)),
-      map(([_action, routerParams]) => EmployeeActions.loadSingleEmployeeForOverview({ idTn: routerParams.id_tn }))
+      switchMap(([_action, routerParams]) => [
+        EmployeeActions.setSelectedId({ idTn: parseInt(routerParams.id_tn) }),
+        EmployeeActions.loadSingleEmployeeForOverview({ idTn: routerParams.id_tn }),
+      ])
     )
   );
 

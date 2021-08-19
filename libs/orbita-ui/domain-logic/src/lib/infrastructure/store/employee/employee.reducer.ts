@@ -88,7 +88,7 @@ const employeeReducer = createReducer(
       },
     })
   ),
-  on(EmployeeActions.selectEmployee, (state, { idTn }) => ({
+  on(EmployeeActions.selectEmployee, EmployeeActions.setSelectedId, (state, { idTn }) => ({
     ...state,
     employee: {
       ...state.employee,

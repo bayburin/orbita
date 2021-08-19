@@ -1,3 +1,99 @@
 <div class="card">
-  <p>employee-block works!</p>
+  <div *ngIf="employeeLoading$ | async">
+    <!-- TODO: Тут скелетон -->
+    <h1>Loading...</h1>
+  </div>
+  <div *ngIf="employeeLoaded$ | async">
+    <div *ngIf="employee$ | async as emp">
+      <div class="flex">
+        <h2 class="my-0">
+          {{ emp.lastName | capitalize }} {{ emp.firstName | capitalize }} {{ emp.middleName | capitalize }}
+        </h2>
+        <p-tag *ngIf="emp.employeePositions[0].vacation" class="ml-2" severity="info" value="В отпуске"></p-tag>
+      </div>
+      <div class="mb-4 font-italic text-secondary">
+        {{ emp.employeePositions[0].professionForAccounting | lowercase }}
+      </div>
+
+      <div class="grid">
+        <div class="col-6">
+          <lib-detail-row>
+            <div attribute>Идентификатор</div>
+            <div value>{{ emp.id }}</div>
+          </lib-detail-row>
+
+          <div *ngIf="emp.employeePositions as positions">
+            <p-divider align="center" type="dashed">Основные данные</p-divider>
+
+            <lib-detail-row>
+              <div attribute>Табельный</div>
+              <div value>{{ positions[0].personnelNo }}</div>
+            </lib-detail-row>
+
+            <lib-detail-row>
+              <div attribute>Подразделение</div>
+              <div value>{{ positions[0].departmentForAccounting }}</div>
+            </lib-detail-row>
+
+            <lib-detail-row>
+              <div attribute>Категория</div>
+              <div value>{{ positions[0].employeeCategory }}</div>
+            </lib-detail-row>
+
+            <div *ngIf="positions[0].vacation">
+              <lib-detail-row>
+                <div attribute>Отпуск</div>
+                <div value>
+                  {{ positions[0].vacation }} с {{ positions[0].vacationFrom }} до {{ positions[0].vacationTo }}
+                </div>
+              </lib-detail-row>
+            </div>
+          </div>
+
+          <div *ngIf="emp.employeeContact as contact">
+            <p-divider align="center" type="dashed">Контакты</p-divider>
+
+            <lib-detail-row>
+              <div attribute>Телефон</div>
+              <div value>{{ contact.phone[0] }}</div>
+            </lib-detail-row>
+
+            <lib-detail-row>
+              <div attribute>Почта</div>
+              <div value>{{ contact.email[0] }}</div>
+            </lib-detail-row>
+
+            <lib-detail-row>
+              <div attribute>Логин AD</div>
+              <div value>{{ contact.login }}</div>
+            </lib-detail-row>
+
+            <lib-detail-row>
+              <div attribute>Расположение (из ЛК)</div>
+              <div value>{{ contact.position }}</div>
+            </lib-detail-row>
+          </div>
+
+          <div *ngIf="emp.employeeSchedules as schedules">
+            <p-divider align="center" type="dashed">Рабочий график</p-divider>
+
+            <lib-detail-row>
+              <div attribute>Время прихода</div>
+              <div value>{{ schedules[0].shiftStartTime }}</div>
+            </lib-detail-row>
+
+            <lib-detail-row>
+              <div attribute>Время ухода</div>
+              <div value>{{ schedules[0].shiftEndTime }}</div>
+            </lib-detail-row>
+
+            <lib-detail-row>
+              <div attribute>Обеденный перерыв</div>
+              <div value>{{ schedules[0].dinnerStartTime }} - {{ schedules[0].dinnerEndTime }}</div>
+            </lib-detail-row>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

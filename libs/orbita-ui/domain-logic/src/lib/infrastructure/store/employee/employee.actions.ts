@@ -45,6 +45,8 @@ export const loadSingleEmployeForOverviewFailure = createAction(
   props<{ error: any }>()
 );
 
+export const setSelectedId = createAction('[Employee] Set SelectedId', props<{ idTn: number }>());
+
 // ========== Подтип хранилища EmployeeShort ==========
 
 export const loadAllEmployeeShort = createAction(

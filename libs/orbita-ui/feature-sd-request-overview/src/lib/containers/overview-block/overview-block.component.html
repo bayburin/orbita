@@ -303,7 +303,7 @@
                               class="mt-1"
                               *ngIf="positions[0].departmentForAccounting != positions[0].departmentForDocuments"
                             >
-                              <p-tag severity="info" value="Военное представительство"></p-tag>
+                              <p-tag severity="info" [value]="positions[0].departmentForDocuments"></p-tag>
                             </div>
                           </div>
                         </lib-detail-row>
