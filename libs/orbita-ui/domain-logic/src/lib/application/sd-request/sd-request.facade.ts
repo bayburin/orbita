@@ -1,20 +1,16 @@
 import { LazyLoadEvent } from 'primeng/api';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
-import { tap, switchMap, catchError, map, withLatestFrom, share, startWith, filter } from 'rxjs/operators';
-import { muteFirst } from '@orbita/orbita-ui/utils';
+import { map, withLatestFrom, filter } from 'rxjs/operators';
 
 import { SdRequestFacadeAbstract } from './sd-request.facade.abstract';
 import * as SdRequestActions from '../../infrastructure/store/sd-request/sd-request.actions';
 import * as SdRequestFeature from '../../infrastructure/store/sd-request/sd-request.reducer';
 import * as SdRequestSelectors from '../../infrastructure/store/sd-request/sd-request.selectors';
 import * as SdRequestViewModelSelectors from '../../infrastructure/store/selectors/sd-request-view-model.selectors';
-import { SdRequestApi } from './../../infrastructure/api/sd-request/sd-request.api';
-import { SdRequestCacheService } from './../../infrastructure/services/sd-request-cache.service';
 import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
 import { NewSdRequestViewForm } from './../../entities/forms/new-sd-request-view-form.interface';
-import { convertPrimeFilter } from './../../infrastructure/utils/convert-prime-filter.function';
+import { processSdRequestTableFilters } from '../../infrastructure/utils/process-sd-request-table-filters.function';
 
 /**
  * Фасад для работы с заявками (обращения к хранилищу SdRequest)
@@ -25,44 +21,10 @@ import { convertPrimeFilter } from './../../infrastructure/utils/convert-prime-f
 export class SdRequestFacade implements SdRequestFacadeAbstract {
   // ========== Список заявок ==========
 
-  firstRowIndex$ = this.store.select(SdRequestSelectors.getFirstRowIndex);
   totalCount$ = this.store.select(SdRequestSelectors.getTotalCount);
-  perPage$ = this.store.select(SdRequestSelectors.getPerPage);
-  sortField$ = this.store.select(SdRequestSelectors.getSortField);
-  sortOrder$ = this.store.select(SdRequestSelectors.getSortOrder);
   loading$ = this.store.select(SdRequestSelectors.getLoading);
   loaded$ = this.store.select(SdRequestSelectors.getLoaded);
-  loadSdRequests$ = this.store.select(SdRequestSelectors.getNeedTickets).pipe(
-    filter((needTickets) => needTickets),
-    tap(() => this.store.dispatch(SdRequestActions.loadAll())),
-    withLatestFrom(
-      this.store.select(SdRequestSelectors.getPage),
-      this.perPage$,
-      this.store.select(SdRequestSelectors.getFilters)
-    ),
-    switchMap(([_need, page, perPage, filters]) =>
-      this.sdRequestApi.query(page, perPage, convertPrimeFilter(filters)).pipe(
-        tap((data) => {
-          const normalizeData = SdRequestCacheService.normalizeSdRequests(data.sd_requests).entities;
-
-          this.store.dispatch(SdRequestActions.setPartials({ entities: normalizeData }));
-          this.store.dispatch(
-            SdRequestActions.loadAllSuccess({
-              sdRequests: Object.values(normalizeData.sd_requests || []),
-              meta: data.meta,
-            })
-          );
-        }),
-        catchError((error) => of(this.store.dispatch(SdRequestActions.loadAllFailure({ error }))))
-      )
-    ),
-    share()
-  );
-
-  all$ = muteFirst(
-    this.loadSdRequests$.pipe(startWith(null)),
-    this.store.select(SdRequestViewModelSelectors.getAllViewModel)
-  );
+  all$ = this.store.select(SdRequestViewModelSelectors.getAllViewModel);
   error$ = this.store.select(SdRequestSelectors.getError);
 
   // ========== Просмотр выбранной заявки ==========
@@ -88,14 +50,12 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   newFormCreated$ = this.store.select(SdRequestViewModelSelectors.getNewFormCreatedViewModel);
   newFormShowModalAfterCreate$ = this.store.select(SdRequestSelectors.getNewFormShowModalAfterCreate);
 
-  constructor(private store: Store<SdRequestFeature.SdRequestPartialState>, private sdRequestApi: SdRequestApi) {}
+  constructor(private store: Store<SdRequestFeature.SdRequestPartialState>) {}
 
-  setTableMetadata(event: LazyLoadEvent) {
-    this.store.dispatch(SdRequestActions.setTableMetadata({ data: event }));
-  }
+  loadSdRequestsTable(event: LazyLoadEvent) {
+    event.filters = event.filters ? processSdRequestTableFilters(JSON.parse(JSON.stringify(event.filters))) : {};
 
-  reloadTableData() {
-    this.store.dispatch(SdRequestActions.reloadEntities());
+    this.store.dispatch(SdRequestActions.loadAll({ data: event }));
   }
 
   loadSelectedSdRequest() {

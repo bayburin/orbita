@@ -41,16 +41,24 @@ describe('SdRequestsBlockComponent', () => {
 
   describe('tableChanged', () => {
     it('should call setTableMetadata method', () => {
-      const spy = jest.spyOn(sdRequestFacade, 'setTableMetadata');
+      const spy = jest.spyOn(sdRequestFacade, 'loadSdRequestsTable');
       component.tableChanged({});
 
       expect(spy).toHaveBeenCalledWith({});
+    });
+
+    it('should save event data', () => {
+      const data = { rows: 20 };
+
+      component.tableChanged(data);
+
+      expect(component.tableEventData).toEqual(data);
     });
   });
 
   describe('reloadTable', () => {
     it('should call reloadTableData method', () => {
-      const spy = jest.spyOn(sdRequestFacade, 'reloadTableData');
+      const spy = jest.spyOn(sdRequestFacade, 'loadSdRequestsTable');
       component.reloadTable();
 
       expect(spy).toHaveBeenCalled();

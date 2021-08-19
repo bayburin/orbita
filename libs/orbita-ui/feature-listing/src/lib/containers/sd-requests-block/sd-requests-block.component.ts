@@ -10,14 +10,11 @@ import { SdRequestFacade, UserFacade, ServiceDeskFacade } from '@orbita/orbita-u
 export class SdRequestsBlockComponent implements OnDestroy {
   loading$ = this.sdRequestFacade.loading$;
   sdRequests$ = this.sdRequestFacade.all$;
-  firstRowIndex$ = this.sdRequestFacade.firstRowIndex$;
   totalCount$ = this.sdRequestFacade.totalCount$;
-  perPage$ = this.sdRequestFacade.perPage$;
-  sortField$ = this.sdRequestFacade.sortField$;
-  sortOrder$ = this.sdRequestFacade.sortOrder$;
   users$ = this.userFacade.all$;
   sdServices$ = this.sdFacade.sdServices$;
   sdTickets$ = this.sdFacade.sdTickets$;
+  tableEventData: LazyLoadEvent;
 
   constructor(
     private sdRequestFacade: SdRequestFacade,
@@ -31,14 +28,15 @@ export class SdRequestsBlockComponent implements OnDestroy {
    * @param event - метаданные для загрузки данных таблицы
    */
   tableChanged(event: LazyLoadEvent): void {
-    this.sdRequestFacade.setTableMetadata(event);
+    this.tableEventData = event;
+    this.sdRequestFacade.loadSdRequestsTable(event);
   }
 
   /**
    * Перезагружает таблицу
    */
   reloadTable(): void {
-    this.sdRequestFacade.reloadTableData();
+    this.sdRequestFacade.loadSdRequestsTable(this.tableEventData);
   }
 
   ngOnDestroy(): void {

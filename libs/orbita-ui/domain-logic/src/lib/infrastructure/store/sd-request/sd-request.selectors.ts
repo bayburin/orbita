@@ -20,43 +20,17 @@ const { selectAll, selectEntities } = sdRequestAdapter.getSelectors();
 
 // ========== Список заявок ==========
 
-export const getFirstRowIndex = createSelector(getSdRequestState, (state: State) => state.firstRowIndex);
-
 export const getTotalCount = createSelector(getSdRequestState, (state: State) => state.totalCount);
-
-export const getSortField = createSelector(getSdRequestState, (state: State) => state.sortField);
-
-export const getSortOrder = createSelector(getSdRequestState, (state: State) => state.sortOrder);
-
-export const getPerPage = createSelector(getSdRequestState, (state: State) => state.perPage);
-
-export const getFilters = createSelector(getSdRequestState, (state: State) => state.filters);
 
 export const getLoading = createSelector(getSdRequestState, (state: State) => state.loading);
 
 export const getLoaded = createSelector(getSdRequestState, (state: State) => state.loaded);
 
-export const getNeedTickets = createSelector(getSdRequestState, (state: State) => state.needTickets);
-
-// export const getNeedTicket = createSelector(getSdRequestState, (state: State) => state.needTicket);
-
 export const getError = createSelector(getSdRequestState, (state: State) => state.error);
 
 export const getAll = createSelector(getSdRequestState, (state: State) => selectAll(state));
 
-export const getAllSorted = createSelector(getAll, getSortField, getSortOrder, (sdRequests, sortField, sortOrder) =>
-  sdRequests.sort((a: Record<string, any>, b: Record<string, any>) =>
-    a[sortField] > b[sortField] ? sortOrder : sortOrder * -1
-  )
-);
-
 export const getEntities = createSelector(getSdRequestState, (state: State) => selectEntities(state));
-
-export const getPage = createSelector(
-  getFirstRowIndex,
-  getPerPage,
-  (firstRowIndex, perPage) => firstRowIndex / perPage + 1
-);
 
 // ========== Просмотр выбранной заявки ==========
 

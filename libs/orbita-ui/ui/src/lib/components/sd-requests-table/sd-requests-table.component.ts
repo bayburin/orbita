@@ -61,25 +61,9 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
    */
   @Input() loading: boolean;
   /**
-   * Индекс первой строки на странице
-   */
-  @Input() firstRowIndex: number;
-  /**
    * Общее число записей
    */
   @Input() totalCount: number;
-  /**
-   * Максимальный размер записей на странице
-   */
-  @Input() perPage: number;
-  /**
-   * Поле для сортировки
-   */
-  @Input() sortField: string;
-  /**
-   * Порядок сортировки
-   */
-  @Input() sortOrder: number;
   /**
    * Список услуг
    */
@@ -95,6 +79,10 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscribeToLazyLoadEvent();
+  }
+
+  get sortedSdRequests(): SdRequestViewModel[] {
+    return this.sdRequests.sort((a, b) => (a.id > b.id ? -1 : 1));
   }
 
   /**

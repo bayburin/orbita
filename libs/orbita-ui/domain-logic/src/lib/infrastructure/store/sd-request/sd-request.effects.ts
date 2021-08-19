@@ -21,12 +21,11 @@ import * as HostActions from '../host/host.actions';
 import * as ParameterActions from '../parameter/parameter.actions';
 import * as UserSelectors from '../user/user.selectors';
 import * as AttachmentActions from '../attachment/attachment.actions';
-import * as EmployeeSelectors from '../employee/employee.selectors';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../services/sd-request-cache.service';
 import { SdRequestFactory } from './../../factories/sd-request.factory';
-import { PrimeFilterFactory } from './../../factories/prime-filter.factory';
-import { EmployeeFilters } from '../../../entities/models/employee/employee-filters.enum';
+import { convertPrimeFilter } from './../../utils/convert-prime-filter.function';
+import { calculatePage } from '../../utils/calculate-page.function';
 
 @Injectable()
 export class SdRequestEffects {
@@ -63,6 +62,50 @@ export class SdRequestEffects {
       ])
     )
   );
+
+  // ========== Список заявок ==========
+
+  loadAll$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.loadAll),
+      switchMap((action) => {
+        const data = action.data;
+
+        return this.sdRequestApi
+          .query(calculatePage(data.first, data.rows), data.rows, convertPrimeFilter(data.filters))
+          .pipe(
+            switchMap((data) => {
+              console.log(data);
+              const normalizeData = SdRequestCacheService.normalizeSdRequests(data.sd_requests).entities;
+
+              return [
+                SdRequestActions.setPartials({ entities: normalizeData }),
+                SdRequestActions.loadAllSuccess({
+                  sdRequests: Object.values(normalizeData.sd_requests || []),
+                  meta: data.meta,
+                }),
+              ];
+            }),
+            catchError((error) => of(SdRequestActions.loadAllFailure({ error })))
+          );
+      })
+    )
+  );
+
+  clearAll$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.clearAll),
+      switchMap(() => [
+        MessageActions.clearAll(),
+        WorkActions.clearAll(),
+        HistoryActions.clearAll(),
+        WorkerActions.clearAll(),
+        AttachmentActions.clearAll(),
+      ])
+    )
+  );
+
+  // ========== Просмотр выбранной заявки ==========
 
   loadSelected$ = createEffect(() =>
     this.actions$.pipe(
@@ -113,6 +156,8 @@ export class SdRequestEffects {
     )
   );
 
+  // ========== Форма существующей заявки ==========
+
   saveUpdateForm$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.saveUpdateForm),
@@ -154,18 +199,7 @@ export class SdRequestEffects {
     )
   );
 
-  clearAll$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(SdRequestActions.clearAll),
-      switchMap(() => [
-        MessageActions.clearAll(),
-        WorkActions.clearAll(),
-        HistoryActions.clearAll(),
-        WorkerActions.clearAll(),
-        AttachmentActions.clearAll(),
-      ])
-    )
-  );
+  // ========== Форма новой заявки ==========
 
   initNewForm$ = createEffect(() =>
     this.actions$.pipe(

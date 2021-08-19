@@ -11,7 +11,7 @@ import { EmployeeShort } from './../../../entities/models/employee/employee-shor
 
 // ========== Список заявок ==========
 
-export const loadAll = createAction('[SdRequest/API] Load All');
+export const loadAll = createAction('[SdRequest/API] Load All', props<{ data: LazyLoadEvent }>());
 
 export const loadAllSuccess = createAction(
   '[SdRequest/API] Load All Success',
@@ -19,10 +19,6 @@ export const loadAllSuccess = createAction(
 );
 
 export const loadAllFailure = createAction('[SdRequest/API] Load All Failure', props<{ error: any }>());
-
-export const setTableMetadata = createAction('[SdRequest] Set Table Metadata', props<{ data: LazyLoadEvent }>());
-
-export const reloadEntities = createAction('[SdRequest] Reload Entities');
 
 export const setPartials = createAction('[SdRequest] Set Partials', props<{ entities: NormalizedSdRequestEntities }>());
 

@@ -85,35 +85,35 @@ export const getOrbitaUiState = createFeatureSelector<OrbitaUiState>(TICKET_SYST
 
 export function metaReducer(reducer: ActionReducer<OrbitaUiState>): ActionReducer<OrbitaUiState | undefined> {
   return (state: OrbitaUiState | undefined, action: Action) => {
-    if (action.type === INIT || action.type === UPDATE) {
-      if (!state) {
-        return undefined;
-      }
+    // if (action.type === INIT || action.type === UPDATE) {
+    //   if (!state) {
+    //     return undefined;
+    //   }
 
-      const storageValue = localStorage.getItem(`${fromSdRequest.SD_REQUEST_FEATURE_KEY}Table`);
+    //   const storageValue = localStorage.getItem(`${fromSdRequest.SD_REQUEST_FEATURE_KEY}Table`);
 
-      if (storageValue) {
-        try {
-          const meta = JSON.parse(storageValue);
+    //   if (storageValue) {
+    //     try {
+    //       const meta = JSON.parse(storageValue);
 
-          return {
-            ...state,
-            [fromSdRequest.SD_REQUEST_FEATURE_KEY]: {
-              ...state[fromSdRequest.SD_REQUEST_FEATURE_KEY],
-              firstRowIndex: meta.first,
-              perPage: meta.rows,
-              sortField: meta.sortField,
-              sortOrder: meta.sortOrder,
-              filters: processSdRequestTableFilters(meta.filters),
-            },
-          };
-        } catch (e) {
-          console.log('Ошибка. Не удалось считать данные фильтров из localStorage');
-          console.log(e);
-          localStorage.removeItem(fromSdRequest.SD_REQUEST_FEATURE_KEY);
-        }
-      }
-    }
+    //       return {
+    //         ...state,
+    //         [fromSdRequest.SD_REQUEST_FEATURE_KEY]: {
+    //           ...state[fromSdRequest.SD_REQUEST_FEATURE_KEY],
+    //           firstRowIndex: meta.first,
+    //           perPage: meta.rows,
+    //           sortField: meta.sortField,
+    //           sortOrder: meta.sortOrder,
+    //           filters: processSdRequestTableFilters(meta.filters),
+    //         },
+    //       };
+    //     } catch (e) {
+    //       console.log('Ошибка. Не удалось считать данные фильтров из localStorage');
+    //       console.log(e);
+    //       localStorage.removeItem(fromSdRequest.SD_REQUEST_FEATURE_KEY);
+    //     }
+    //   }
+    // }
 
     return reducer(state, action);
   };

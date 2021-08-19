@@ -3,14 +3,9 @@ import { BehaviorSubject } from 'rxjs';
 import { SdRequestFacadeAbstract } from './sd-request.facade.abstract';
 
 export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
-  firstRowIndex$ = new BehaviorSubject(0);
   totalCount$ = new BehaviorSubject(0);
-  perPage$ = new BehaviorSubject(0);
-  sortField$ = new BehaviorSubject(null);
-  sortOrder$ = new BehaviorSubject(null);
   loading$ = new BehaviorSubject(false);
   loaded$ = new BehaviorSubject(false);
-  loadSdRequests$ = new BehaviorSubject(null);
   all$ = new BehaviorSubject([]);
   error$ = new BehaviorSubject(null);
   selectedEntity$ = new BehaviorSubject(null);
@@ -24,11 +19,7 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   newFormCreated$ = new BehaviorSubject(null);
   newFormShowModalAfterCreate$ = new BehaviorSubject(null);
 
-  setTableMetadata() {
-    /** */
-  }
-
-  reloadTableData() {
+  loadSdRequestsTable() {
     /** */
   }
 

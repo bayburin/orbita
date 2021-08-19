@@ -12,7 +12,7 @@ import { MessageViewModel } from './../../../entities/view-models/message-view-m
 import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
 
 export const getAllViewModel = createSelector(
-  SdRequestSelectors.getAllSorted,
+  SdRequestSelectors.getAll,
   MessageViewModelSelectors.getEntitiesViewModel,
   WorkViewModelSelectors.getEntitiesViewModel,
   ApplicationSelectors.getEntities,

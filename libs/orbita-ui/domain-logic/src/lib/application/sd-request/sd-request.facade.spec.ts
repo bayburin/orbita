@@ -26,6 +26,8 @@ import { SdRequestCacheService } from './../../infrastructure/services/sd-reques
 import { SdRequestCacheServiceStub } from './../../infrastructure/services/sd-request-cache.service.stub';
 import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
 import { NewSdRequestViewForm } from './../../entities/forms/new-sd-request-view-form.interface';
+import * as helperFunction from '../../infrastructure/utils/process-sd-request-table-filters.function';
+import { PrimeFilterFactory } from './../../infrastructure/factories/prime-filter.factory';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -36,8 +38,6 @@ interface TestSchema {
 describe('SdRequestFacade', () => {
   let facade: SdRequestFacade;
   let store: MockStore<TestSchema>;
-  let sdRequestApi: SdRequestApi;
-  let normalizedSdRequests: any;
   const createSdRequestEntity = (id: number, name = '') =>
     ({
       id,
@@ -60,7 +60,6 @@ describe('SdRequestFacade', () => {
           SdRequestFacade,
           provideMockActions(() => actions$),
           provideMockStore({ initialState: state }),
-          { provide: SdRequestApi, useClass: SdRequestApiStub },
           { provide: AuthHelper, useClass: AuthHelperStub },
           MessageService,
         ],
@@ -68,149 +67,24 @@ describe('SdRequestFacade', () => {
 
       store = TestBed.inject(MockStore);
       facade = TestBed.inject(SdRequestFacade);
-      sdRequestApi = TestBed.inject(SdRequestApi);
     });
 
-    describe('loadSdRequests$ attribute', () => {
-      let querySpy: jest.SpyInstance;
-      let sdRequestsServerData: SdRequestsServerData;
+    describe('loadSdRequestsTable()', () => {
+      it('chould process event data', () => {
+        const spy = jest.spyOn(helperFunction, 'processSdRequestTableFilters');
+        const filters = PrimeFilterFactory.createFilter('id_tn', 123);
 
-      beforeEach(() => {
-        querySpy = jest.spyOn(sdRequestApi, 'query');
-        sdRequestsServerData = new SdRequestsServerDataBuilder().build();
-        normalizedSdRequests = SdRequestCacheServiceStub.normalizeSdRequests();
-        jest.spyOn(SdRequestCacheService, 'normalizeSdRequests').mockReturnValue(normalizedSdRequests);
+        facade.loadSdRequestsTable({ filters });
+
+        expect(spy).toHaveBeenCalledWith(filters);
       });
 
-      it('should call loadAll action', () => {
+      it('should call loadSdRequests action', () => {
         const spy = jest.spyOn(store, 'dispatch');
 
-        facade.loadSdRequests$.subscribe();
+        facade.loadSdRequestsTable({});
 
-        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAll());
-      });
-
-      it('should call "query" method with attributes from store', () => {
-        const filter = { id: { value: '123' } };
-        store.overrideSelector(SdRequestSelectors.getPage, 2);
-        store.overrideSelector(SdRequestSelectors.getPerPage, 10);
-        store.overrideSelector(SdRequestSelectors.getFilters, filter);
-
-        facade.loadSdRequests$.subscribe();
-
-        expect(querySpy).toHaveBeenCalledWith(2, 10, { id: '123' });
-      });
-
-      describe('when sdRequestApi finished successfully', () => {
-        beforeEach(() => {
-          querySpy.mockReturnValue(of(sdRequestsServerData));
-        });
-
-        it('should call loadAllSuccess action', () => {
-          const storeSpy = jest.spyOn(store, 'dispatch');
-
-          facade.loadSdRequests$.subscribe();
-
-          expect(storeSpy).toHaveBeenCalledWith(
-            SdRequestActions.loadAllSuccess({
-              sdRequests: sdRequestsServerData.sd_requests,
-              meta: sdRequestsServerData.meta,
-            })
-          );
-        });
-
-        it('should call setPartials action', () => {
-          const storeSpy = jest.spyOn(store, 'dispatch');
-
-          facade.loadSdRequests$.subscribe();
-
-          expect(storeSpy).toHaveBeenCalledWith(
-            SdRequestActions.setPartials({ entities: normalizedSdRequests.entities })
-          );
-        });
-      });
-
-      it('should call loadAllFailure action if sdRequestApi finished with error', () => {
-        const error = { error: 'Error message' };
-        querySpy.mockImplementation(() => throwError(error));
-        const spy = jest.spyOn(store, 'dispatch');
-
-        facade.loadSdRequests$.subscribe();
-
-        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAllFailure({ error }));
-      });
-    });
-
-    // describe('loadSelected$ attribute', () => {
-    //   let showSpy: jasmine.Spy;
-    //   let sdRequestServerData: SdRequestServerData;
-
-    //   beforeEach(() => {
-    //     showSpy = spyOn(sdRequestApi, 'show');
-    //     sdRequestServerData = { sd_request: createSdRequestEntity(11) };
-    //     store.overrideSelector(RouterSelector.selectRouteParams, { id: 1 });
-    //     spyOn(SdRequestCacheService, 'normalizeSdRequest').and.returnValue(
-    //       SdRequestCacheServiceStub.normalizeSdRequest(sdRequestServerData.sd_request)
-    //     );
-    //   });
-
-    //   it('should call loadAll action', () => {
-    //     const spy = spyOn(store, 'dispatch');
-
-    //     facade.loadSelected$.subscribe();
-
-    //     expect(spy).toHaveBeenCalledWith(SdRequestActions.loadSelected());
-    //   });
-
-    //   it('should call "show" method with attributes from store', () => {
-    //     facade.loadSelected$.subscribe();
-
-    //     expect(showSpy).toHaveBeenCalledWith(1);
-    //   });
-
-    //   describe('when sdRequestApi finished successfully', () => {
-    //     beforeEach(() => {
-    //       showSpy.and.returnValue(of(sdRequestServerData));
-    //     });
-
-    //     // it('should call loadAllSuccess action', () => {
-    //     //   const storeSpy = spyOn(store, 'dispatch');
-
-    //     //   facade.loadSelected$.subscribe();
-
-    //     //   expect(storeSpy).toHaveBeenCalledWith(
-    //     //     SdRequestActions.loadSelectedSuccess({ sdRequest: sdRequestServerData.sd_request })
-    //     //   );
-    //     // });
-
-    //   it('should call loadSelectedFailure action if sdRequestApi finished with error', () => {
-    //     const error = { error: 'Error message' };
-    //     showSpy.and.callFake(() => throwError(error));
-    //     const spy = spyOn(store, 'dispatch');
-
-    //     facade.loadSelected$.subscribe();
-
-    //     expect(spy).toHaveBeenCalledWith(SdRequestActions.loadSelectedFailure({ error }));
-    //   });
-    // });
-
-    describe('setTableMetadata()', () => {
-      it('should call setTableMetadata action', () => {
-        const spy = jest.spyOn(store, 'dispatch');
-
-        facade.setTableMetadata({});
-
-        expect(spy).toHaveBeenCalledWith(SdRequestActions.setTableMetadata({ data: {} }));
-      });
-    });
-
-    describe('reloadTableData()', () => {
-      it('should call reloadEntities action', () => {
-        const spy = jest.spyOn(store, 'dispatch');
-
-        facade.reloadTableData();
-
-        expect(spy).toHaveBeenCalledWith(SdRequestActions.reloadEntities());
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAll({ data: { filters: {} } }));
       });
     });
 

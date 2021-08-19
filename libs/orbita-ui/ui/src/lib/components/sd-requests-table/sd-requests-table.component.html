@@ -1,21 +1,16 @@
 <p-table
   #table
-  [value]="sdRequests"
+  [value]="sortedSdRequests"
   [lazy]="true"
-  [lazyLoadOnInit]="false"
   dataKey="id"
   [paginator]="true"
   paginatorPosition="both"
-  [first]="firstRowIndex"
-  [rows]="perPage"
+  [rows]="10"
   [rowsPerPageOptions]="[10, 25, 50]"
   [totalRecords]="totalCount"
   [showCurrentPageReport]="true"
   currentPageReportTemplate="Показано {first}-{last} из {totalRecords} заявок"
   [loading]="loading"
-  [sortField]="sortField || 'id'"
-  [sortOrder]="sortOrder || -1"
-  [resetPageOnSort]="false"
   stateKey="sdRequestTable"
   stateStorage="local"
   styleClass="p-datatable-sm"
@@ -23,7 +18,7 @@
 >
   <ng-template pTemplate="header">
     <tr>
-      <th pSortableColumn="id" width="5%">№ <p-sortIcon field="id"></p-sortIcon></th>
+      <th width="5%">№</th>
       <th width="7%">Внешн №</th>
       <th width="7%">Внешн имя</th>
       <th width="7%">Дата подачи</th>

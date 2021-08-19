@@ -5,8 +5,6 @@ import * as moment from 'moment';
 import * as SdRequestActions from './sd-request.actions';
 import { SdRequest } from '../../../entities/models/sd-request.interface';
 import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
-import { PrimeFilter } from './../../../entities/prime-filter.interface';
-import { processSdRequestTableFilters } from '../../utils/process-sd-request-table-filters.function';
 import { SdRequestFactory } from './../../factories/sd-request.factory';
 import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
 
@@ -35,15 +33,9 @@ export interface NewFormState {
 }
 
 export interface State extends EntityState<SdRequest> {
-  firstRowIndex: number;
   totalCount: number;
-  perPage: number;
-  sortField: string;
-  sortOrder: number;
-  filters: PrimeFilter;
   loading: boolean;
   loaded: boolean;
-  needTickets: boolean;
   error?: string;
   selected?: SelectedState;
   form?: FormState;
@@ -75,15 +67,9 @@ export const initNewFormState: NewFormState = {
 export const sdRequestAdapter: EntityAdapter<SdRequest> = createEntityAdapter<SdRequest>();
 
 export const initialState: State = sdRequestAdapter.getInitialState({
-  firstRowIndex: 0,
   totalCount: 0,
-  sortField: 'id',
-  sortOrder: -1,
-  perPage: 25,
-  filters: {},
   loading: false,
   loaded: false,
-  needTickets: true,
   selected: initSelectedState,
   form: initFormState,
   newForm: initNewFormState,
@@ -98,7 +84,6 @@ const sdRequestReducer = createReducer(
     ...state,
     loaded: false,
     loading: true,
-    needTickets: false,
     error: null,
   })),
   on(SdRequestActions.loadAllSuccess, (state, { sdRequests, meta }) =>
@@ -116,23 +101,9 @@ const sdRequestReducer = createReducer(
       loading: false,
     })
   ),
-  on(SdRequestActions.setTableMetadata, (state, { data }) => ({
-    ...state,
-    firstRowIndex: data.first,
-    perPage: data.rows,
-    sortField: data.sortField,
-    sortOrder: data.sortOrder,
-    filters: processSdRequestTableFilters(data.filters ? JSON.parse(JSON.stringify(data.filters)) : {}),
-    needTickets: true,
-  })),
-  on(SdRequestActions.reloadEntities, (state) => ({
-    ...state,
-    needTickets: true,
-  })),
   on(SdRequestActions.clearAll, (state) =>
     sdRequestAdapter.removeAll({
       ...state,
-      needTickets: true,
       loaded: false,
     })
   ),

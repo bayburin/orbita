@@ -33,12 +33,11 @@ describe('SdRequestReducer', () => {
 
   describe('loadAll', () => {
     it('should clear "loading" and "error" attributes', () => {
-      action = SdRequestActions.loadAll();
+      action = SdRequestActions.loadAll({ data: {} });
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
-      expect(result.needTickets).toBe(false);
       expect(result.error).toBeNull();
     });
   });
@@ -67,37 +66,6 @@ describe('SdRequestReducer', () => {
 
       expect(result.error).toEqual(error);
       expect(result.loading).toEqual(false);
-    });
-  });
-
-  describe('setTableMetadata', () => {
-    const data = {
-      first: 4,
-      rows: 2,
-      sortField: 'id',
-      sortOrder: -1,
-      filters: {},
-    };
-
-    it('should set attributes', () => {
-      action = SdRequestActions.setTableMetadata({ data });
-      const result: State = reducer(initialState, action);
-
-      expect(result.firstRowIndex).toEqual(data.first);
-      expect(result.perPage).toEqual(data.rows);
-      expect(result.sortField).toEqual(data.sortField);
-      expect(result.sortOrder).toEqual(data.sortOrder);
-      expect(result.filters).toEqual(data.filters);
-      expect(result.needTickets).toEqual(true);
-    });
-  });
-
-  describe('reloadEntities', () => {
-    it('should set "needTickets" attribute', () => {
-      action = SdRequestActions.reloadEntities();
-      const result: State = reducer(initialState, action);
-
-      expect(result.needTickets).toEqual(true);
     });
   });
 
