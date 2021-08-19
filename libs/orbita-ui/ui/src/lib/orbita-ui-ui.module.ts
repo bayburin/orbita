@@ -8,6 +8,7 @@ import { DatetimePipe } from './pipes/datetime/datetime.pipe';
 import { FioInitialsPipe } from './pipes/fio-initials/fio-initials.pipe';
 import { FioMiddleNamePipe } from './pipes/fio-middle-name/fio-middle-name.pipe';
 import { SortWorkByHistoryPipe } from './pipes/sort-work-by-history/sort-work-by-history.pipe';
+import { CapitalizePipe } from './pipes/capitalize/capitalize.pipe';
 
 import { OrbitSpinnerModule } from 'angular-epic-spinners';
 
@@ -43,7 +44,7 @@ import { EmployeesTableComponent } from './components/employees-table/employees-
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
-const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe, SortWorkByHistoryPipe];
+const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe, SortWorkByHistoryPipe, CapitalizePipe];
 
 const directives: any[] = [DndFilesDirective, CalcScrollWidthByWorksDirective];
 
