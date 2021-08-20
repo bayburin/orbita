@@ -80,9 +80,7 @@ export class EmployeeEffects {
   loadSingleEmployeeForOverviewSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeeActions.loadSingleEmployeeForOverviewSuccess),
-      switchMap((action) => [
-        SvtItemActions.loadAll({ filters: PrimeFilterFactory.createFilter('id_tn', action.employee.id) }),
-      ])
+      map((action) => SvtItemActions.loadAll({ filters: PrimeFilterFactory.createFilter('id_tn', action.employee.id) }))
     )
   );
 

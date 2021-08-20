@@ -74,6 +74,13 @@ export abstract class SdRequestFacadeAbstract {
   abstract loadSdRequestsTable(data: LazyLoadEvent): void;
 
   /**
+   * Загружает список заявок по указанным фильтрам
+   *
+   * @param data - метаданные для загрузки данных таблицы
+   */
+  abstract loadFiltered(data: LazyLoadEvent): void;
+
+  /**
    * Загружает выбранную заявку
    */
   abstract loadSelectedSdRequest(): void;

@@ -75,7 +75,6 @@ export class SdRequestEffects {
           .query(calculatePage(data.first, data.rows), data.rows, convertPrimeFilter(data.filters))
           .pipe(
             switchMap((data) => {
-              console.log(data);
               const normalizeData = SdRequestCacheService.normalizeSdRequests(data.sd_requests).entities;
 
               return [

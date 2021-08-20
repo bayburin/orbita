@@ -88,6 +88,16 @@ describe('SdRequestFacade', () => {
       });
     });
 
+    describe('loadFiltered()', () => {
+      it('should call loadSdRequests action', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.loadFiltered({ rows: 10 });
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.loadAll({ data: { rows: 10 } }));
+      });
+    });
+
     describe('loadSelectedSdRequest()', () => {
       it('should call LoadSelected action', () => {
         const spy = jest.spyOn(store, 'dispatch');

@@ -97,3 +97,17 @@
     </div>
   </div>
 </div>
+
+<div class="card" *ngIf="employeeLoaded$ | async">
+  <p-tabView>
+    <p-tabPanel header="Заявки">
+      <lib-employee-sd-requests-table
+        [employee]="employee$ | async"
+        [sdRequests]="sdRequests$ | async"
+        [loading]="loadingSdRequests$ | async"
+        [totalCount]="totalCountSdRequests$ | async"
+        (tableChanged)="tableChanged($event)"
+      ></lib-employee-sd-requests-table>
+    </p-tabPanel>
+  </p-tabView>
+</div>

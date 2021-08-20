@@ -58,6 +58,10 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     this.store.dispatch(SdRequestActions.loadAll({ data: event }));
   }
 
+  loadFiltered(event: LazyLoadEvent) {
+    this.store.dispatch(SdRequestActions.loadAll({ data: event }));
+  }
+
   loadSelectedSdRequest() {
     this.store.dispatch(SdRequestActions.loadSelected());
   }

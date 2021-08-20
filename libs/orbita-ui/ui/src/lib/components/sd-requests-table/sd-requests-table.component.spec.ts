@@ -21,6 +21,7 @@ describe('SdRequestsTableComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SdRequestsTableComponent);
     component = fixture.componentInstance;
+    component.sdRequests = [];
     fixture.detectChanges();
   });
 

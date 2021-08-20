@@ -41,6 +41,7 @@ import { CsaStatusComponent } from './components/csa-status/csa-status.component
 import { SdRequestCreatedComponent } from './components/sd-request-created/sd-request-created.component';
 import { WorkersComponent } from './components/workers/workers.component';
 import { EmployeesTableComponent } from './components/employees-table/employees-table.component';
+import { EmployeeSdRequestsTableComponent } from './components/employee-sd-requests-table/employee-sd-requests-table.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
@@ -75,6 +76,7 @@ const components: any[] = [
   SdRequestCreatedComponent,
   WorkersComponent,
   EmployeesTableComponent,
+  EmployeeSdRequestsTableComponent,
 ];
 
 @NgModule({

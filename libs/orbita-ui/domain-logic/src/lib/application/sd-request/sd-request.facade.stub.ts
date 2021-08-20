@@ -23,6 +23,10 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
     /** */
   }
 
+  loadFiltered() {
+    /** */
+  }
+
   loadSelectedSdRequest() {
     /** */
   }
