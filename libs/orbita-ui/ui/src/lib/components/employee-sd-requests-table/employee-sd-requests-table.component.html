@@ -1,3 +1,5 @@
+<p-contextMenu #cm [model]="contextMenuItems"></p-contextMenu>
+
 <p-table
   #table
   [value]="sortedSdRequests"
@@ -14,6 +16,8 @@
   stateKey="sdRequestEmployeeTable"
   stateStorage="local"
   styleClass="p-datatable-sm"
+  [(contextMenuSelection)]="selectedSdRequest"
+  [contextMenu]="cm"
   (onLazyLoad)="onLazyLoad($event)"
 >
   <ng-template pTemplate="header">
@@ -28,7 +32,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-req>
-    <tr>
+    <tr [pContextMenuRow]="req">
       <td>{{ req.id }}</td>
       <td>{{ req.runtime.created_at | datetime }}</td>
       <td>

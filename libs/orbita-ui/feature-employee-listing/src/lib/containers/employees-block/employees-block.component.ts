@@ -39,7 +39,7 @@ export class EmployeesBlockComponent implements OnDestroy {
    *
    * @param employee - выбранный работник
    */
-  redicrectToEmployeePage(employee: EmployeeShort) {
+  redirectToEmployeePage(employee: EmployeeShort) {
     this.router.navigate([employee.id], { relativeTo: this.route });
   }
 
@@ -48,7 +48,7 @@ export class EmployeesBlockComponent implements OnDestroy {
    *
    * @param employee - выбранный работник
    */
-  redicrectToNewSdRequestPage(employee: EmployeeShort) {
+  redirectToNewSdRequestPage(employee: EmployeeShort) {
     this.router.navigate(['/tickets', 'new-sd-request'], { queryParams: { id_tn: employee.id } });
   }
 }

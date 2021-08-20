@@ -4,7 +4,7 @@
     [loading]="loadingEmployees$ | async"
     (filterChanged)="changeTable($event)"
     (filterCleared)="clearTable()"
-    (viewEmployee)="redicrectToEmployeePage($event)"
-    (newSdRequest)="redicrectToNewSdRequestPage($event)"
+    (viewEmployee)="redirectToEmployeePage($event)"
+    (newSdRequest)="redirectToNewSdRequestPage($event)"
   ></lib-employees-table>
 </div>

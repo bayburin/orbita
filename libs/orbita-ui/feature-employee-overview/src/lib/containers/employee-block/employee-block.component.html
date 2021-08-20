@@ -107,6 +107,7 @@
         [loading]="loadingSdRequests$ | async"
         [totalCount]="totalCountSdRequests$ | async"
         (tableChanged)="tableChanged($event)"
+        (viewSdRequest)="redirectToSdRequestPage($event)"
       ></lib-employee-sd-requests-table>
     </p-tabPanel>
   </p-tabView>

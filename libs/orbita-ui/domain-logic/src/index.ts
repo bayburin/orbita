@@ -13,9 +13,10 @@ export * from './lib/entities/models/source-snapshot.interface';
 export * from './lib/entities/models/host.interface';
 export * from './lib/entities/models/user.interface';
 export * from './lib/entities/models/attachment.interface';
-export * from './lib/entities/models/employee/employee-filters.enum';
 export * from './lib/entities/models/svt/svt-item.interface';
+export * from './lib/entities/models/employee/employee-filters.enum';
 export * from './lib/entities/models/employee/employee-short.interface';
+export * from './lib/entities/models/employee/employee.interface';
 
 export * from './lib/entities/forms/attachment-view-form.interface';
 export * from './lib/entities/forms/sd-request-view-form.interface';

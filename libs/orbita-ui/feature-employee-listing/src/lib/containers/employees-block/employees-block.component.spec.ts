@@ -96,12 +96,12 @@ describe('EmployeesBlockComponent', () => {
   //   });
   // });
 
-  describe('redicrectToNewSdRequestPage()', () => {
+  describe('redirectToNewSdRequestPage()', () => {
     it('should redirect to employee page', () => {
       const employee = { id: 123 } as EmployeeShort;
       const spy = jest.spyOn(router, 'navigate');
 
-      component.redicrectToNewSdRequestPage(employee);
+      component.redirectToNewSdRequestPage(employee);
 
       expect(spy).toHaveBeenCalledWith(['/tickets', 'new-sd-request'], { queryParams: { id_tn: 123 } });
     });

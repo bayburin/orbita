@@ -1,6 +1,7 @@
 import { LazyLoadEvent } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
-import { EmployeeFacade, SdRequestFacade } from '@orbita/orbita-ui/domain-logic';
+import { EmployeeFacade, SdRequestFacade, SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lib-employee-block',
@@ -20,7 +21,11 @@ export class EmployeeBlockComponent implements OnInit {
   loadingSdRequests$ = this.sdRequestFacade.loading$;
   totalCountSdRequests$ = this.sdRequestFacade.totalCount$;
 
-  constructor(private employeeFacade: EmployeeFacade, private sdRequestFacade: SdRequestFacade) {}
+  constructor(
+    private employeeFacade: EmployeeFacade,
+    private sdRequestFacade: SdRequestFacade,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.employeeFacade.overviewSingleEmployee();
@@ -33,5 +38,14 @@ export class EmployeeBlockComponent implements OnInit {
    */
   tableChanged(event: LazyLoadEvent): void {
     this.sdRequestFacade.loadFiltered(event);
+  }
+
+  /**
+   * Переходит на страницу детального просмотра выбранной заявки
+   *
+   * @param sdRequest - выбранный работник
+   */
+  redirectToSdRequestPage(sdRequest: SdRequestViewModel) {
+    this.router.navigate(['/tickets', 'sd-requests', sdRequest.id]);
   }
 }
