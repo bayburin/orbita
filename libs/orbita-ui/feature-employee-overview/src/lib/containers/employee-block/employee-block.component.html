@@ -59,12 +59,12 @@
 
           <lib-detail-row styleClassHeader="col-3" styleClassValue="col-9">
             <div attribute>Телефон</div>
-            <div value>{{ contact.phone[0] }}</div>
+            <div value>{{ contact.phone ? contact.phone[0] : '' }}</div>
           </lib-detail-row>
 
           <lib-detail-row styleClassHeader="col-3" styleClassValue="col-9">
             <div attribute>Почта</div>
-            <div value>{{ contact.email[0] }}</div>
+            <div value>{{ contact.email ? contact.email[0] : '' }}</div>
           </lib-detail-row>
 
           <lib-detail-row styleClassHeader="col-3" styleClassValue="col-9">
