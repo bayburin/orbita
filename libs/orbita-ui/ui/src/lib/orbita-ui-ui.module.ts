@@ -42,6 +42,7 @@ import { SdRequestCreatedComponent } from './components/sd-request-created/sd-re
 import { WorkersComponent } from './components/workers/workers.component';
 import { EmployeesTableComponent } from './components/employees-table/employees-table.component';
 import { EmployeeSdRequestsTableComponent } from './components/employee-sd-requests-table/employee-sd-requests-table.component';
+import { EmployeeOverviewSkeletonComponent } from './components/employee-overview-skeleton/employee-overview-skeleton.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
@@ -77,6 +78,7 @@ const components: any[] = [
   WorkersComponent,
   EmployeesTableComponent,
   EmployeeSdRequestsTableComponent,
+  EmployeeOverviewSkeletonComponent,
 ];
 
 @NgModule({

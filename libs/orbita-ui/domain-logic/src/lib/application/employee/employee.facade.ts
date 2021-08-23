@@ -50,4 +50,8 @@ export class EmployeeFacade implements EmployeeFacadeAbstract {
   clearEmployeeShortEntities() {
     this.store.dispatch(EmployeeActions.clearAllEmployeeShort());
   }
+
+  clearSelectedEmployee() {
+    this.store.dispatch(EmployeeActions.clearSelectedEmployee());
+  }
 }

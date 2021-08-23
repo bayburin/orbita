@@ -58,4 +58,9 @@ export abstract class EmployeeFacadeAbstract {
    * Очищает список работников
    */
   abstract clearEmployeeShortEntities(): void;
+
+  /**
+   * Очищает данные о выбранном работнике
+   */
+  abstract clearSelectedEmployee(): void;
 }

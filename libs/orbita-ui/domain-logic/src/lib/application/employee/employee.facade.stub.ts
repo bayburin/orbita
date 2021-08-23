@@ -26,4 +26,8 @@ export class EmployeeFacadeStub implements EmployeeFacadeAbstract {
   clearEmployeeShortEntities() {
     /** */
   }
+
+  clearSelectedEmployee() {
+    /** */
+  }
 }

@@ -58,14 +58,23 @@ const employeeReducer = createReducer(
 
   on(EmployeeActions.loadSingleEmployee, EmployeeActions.loadSingleEmployeeForOverview, (state) => ({
     ...state,
-    employee: employeeAdapter.removeAll({ ...state.employee, loading: true, loaded: false, error: null }),
+    employee: {
+      ...state.employee,
+      loading: true,
+      loaded: false,
+      error: null,
+    },
   })),
   on(
     EmployeeActions.loadSingleEmployeeSuccess,
     EmployeeActions.loadSingleEmployeeForOverviewSuccess,
     (state, { employee }) => ({
       ...state,
-      employee: employeeAdapter.setOne(employee, { ...state.employee, loaded: true, loading: false }),
+      employee: employeeAdapter.setOne(employee, {
+        ...state.employee,
+        loaded: true,
+        loading: false,
+      }),
     })
   ),
   on(EmployeeActions.loadSingleEmployeeNotFound, EmployeeActions.loadSingleEmployeeForOverviewNotFound, (state) => ({
@@ -81,11 +90,11 @@ const employeeReducer = createReducer(
     EmployeeActions.loadSingleEmployeForOverviewFailure,
     (state, { error }) => ({
       ...state,
-      employee: {
+      employee: employeeAdapter.removeAll({
         ...state.employee,
         loading: false,
         error,
-      },
+      }),
     })
   ),
   on(EmployeeActions.selectEmployee, EmployeeActions.setSelectedId, (state, { idTn }) => ({
@@ -97,11 +106,11 @@ const employeeReducer = createReducer(
   })),
   on(EmployeeActions.clearSelectedEmployee, (state) => ({
     ...state,
-    employee: {
+    employee: employeeAdapter.removeOne(state.employee.selectedId, {
       ...state.employee,
       loaded: false,
       selectedId: null,
-    },
+    }),
   })),
 
   // ========== Подтип хранилища EmployeeShort ==========

@@ -1,5 +1,6 @@
+import { filter, first } from 'rxjs/operators';
 import { LazyLoadEvent } from 'primeng/api';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EmployeeFacade, SdRequestFacade, SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
 import { Router } from '@angular/router';
 
@@ -8,7 +9,9 @@ import { Router } from '@angular/router';
   templateUrl: './employee-block.component.html',
   styleUrls: ['./employee-block.component.scss'],
 })
-export class EmployeeBlockComponent implements OnInit {
+export class EmployeeBlockComponent implements OnInit, OnDestroy {
+  skeleton = true;
+
   // ========== Работник ==========
 
   employee$ = this.employeeFacade.employee$;
@@ -29,6 +32,16 @@ export class EmployeeBlockComponent implements OnInit {
 
   ngOnInit(): void {
     this.employeeFacade.overviewSingleEmployee();
+    this.employeeLoaded$
+      .pipe(
+        filter((val) => val),
+        first()
+      )
+      .subscribe(() => (this.skeleton = false));
+  }
+
+  ngOnDestroy(): void {
+    this.employeeFacade.clearSelectedEmployee();
   }
 
   /**

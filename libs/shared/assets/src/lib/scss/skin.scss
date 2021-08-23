@@ -24,6 +24,7 @@
 @import 'components/autocomplete';
 @import 'components/sd-request-preview';
 @import 'components/contextmenu';
+@import 'components/tabview';
 
 .icon-group {
   display: flex;
@@ -54,4 +55,10 @@
   .p-inline-message-icon {
     display: none;
   }
+}
+
+.header-spacer {
+  flex: 1 1 auto;
+  margin-left: 3 * $spacer;
+  border-bottom: 2px solid var(--surface-d);
 }

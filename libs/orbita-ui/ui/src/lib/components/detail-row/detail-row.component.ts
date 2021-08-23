@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'lib-detail-row',
@@ -6,4 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./detail-row.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailRowComponent {}
+export class DetailRowComponent {
+  @Input() styleClassHeader: string;
+  @Input() styleClassValue: string;
+}

@@ -1,10 +1,10 @@
 <div class="grid">
-  <div class="col-4">
+  <div [class]="styleClassHeader || 'col-4'">
     <div class="flex align-items-center h-full">
       <ng-content select="[attribute]"></ng-content>
     </div>
   </div>
-  <div class="col-8">
+  <div [class]="styleClassValue || 'col-8'">
     <b><ng-content select="[value]"></ng-content></b>
   </div>
 </div>

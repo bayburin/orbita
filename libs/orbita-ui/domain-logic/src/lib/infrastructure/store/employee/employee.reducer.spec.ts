@@ -30,7 +30,6 @@ describe('EmployeeReducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
       expect(result.error).toBeNull();
-      expect(result.ids.length).toBe(0);
     });
   });
 
@@ -56,7 +55,6 @@ describe('EmployeeReducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(false);
       expect(result.error).toBeNull();
-      expect(result.ids.length).toBe(0);
     });
   });
 
@@ -70,6 +68,7 @@ describe('EmployeeReducer', () => {
       expect(result.loading).toBe(false);
       expect(result.error).toEqual(error);
       expect(result.ids.length).toBe(0);
+      expect(result.ids.length).toBe(0);
     });
   });
 
@@ -81,7 +80,6 @@ describe('EmployeeReducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
       expect(result.error).toBeNull();
-      expect(result.ids.length).toBe(0);
     });
   });
 
@@ -107,7 +105,6 @@ describe('EmployeeReducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(false);
       expect(result.error).toBeNull();
-      expect(result.ids.length).toBe(0);
     });
   });
 
@@ -135,11 +132,14 @@ describe('EmployeeReducer', () => {
 
   describe('clearSelectedEmployee', () => {
     it('should change attributes', () => {
+      action = EmployeeActions.selectEmployee({ idTn: 12 });
+      const state: State = reducer(initialState, action);
       action = EmployeeActions.clearSelectedEmployee();
-      const result: EmployeeState = reducer(initialState, action).employee;
+      const result: EmployeeState = reducer(state, action).employee;
 
       expect(result.loaded).toBe(false);
       expect(result.selectedId).toBe(null);
+      expect(result.ids.length).toBe(0);
     });
   });
 

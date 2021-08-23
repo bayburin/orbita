@@ -93,5 +93,15 @@ describe('EmployeeFacade', () => {
         expect(spy).toHaveBeenCalledWith(EmployeeActions.clearAllEmployeeShort());
       });
     });
+
+    describe('clearSelectedEmployee()', () => {
+      it('should call search() method with received params', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.clearSelectedEmployee();
+
+        expect(spy).toHaveBeenCalledWith(EmployeeActions.clearSelectedEmployee());
+      });
+    });
   });
 });
