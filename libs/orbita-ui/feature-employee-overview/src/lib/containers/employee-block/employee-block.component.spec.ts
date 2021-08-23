@@ -52,7 +52,7 @@ describe('EmployeeBlockComponent', () => {
   });
 
   it('should change "skeleton" attribute', () => {
-    (component.employeeLoaded$ as BehaviorSubject<boolean>).next(true);
+    (component.employeeLoading$ as BehaviorSubject<boolean>).next(false);
 
     expect(component.skeleton).toBe(false);
   });

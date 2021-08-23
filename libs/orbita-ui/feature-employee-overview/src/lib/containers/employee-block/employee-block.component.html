@@ -1,6 +1,14 @@
 <lib-employee-overview-skeleton *ngIf="skeleton"></lib-employee-overview-skeleton>
 
-<div *ngIf="!skeleton && employee$ | async as emp">
+<lib-page-error *ngIf="employeeError$ | async as employeeError" [error]="employeeError">
+  <p>Не удалось загрузить работника. Попробуйте обновить страницу.</p>
+</lib-page-error>
+
+<lib-page-error *ngIf="!(skeleton || emp)">
+  <p>Указанный работник не найден</p>
+</lib-page-error>
+
+<div *ngIf="!skeleton && emp">
   <div class="mb-5">
     <div class="flex align-items-center">
       <div>
@@ -104,7 +112,7 @@
     <p-tabPanel header="Заявки">
       <div class="card">
         <lib-employee-sd-requests-table
-          [employee]="employee$ | async"
+          [employee]="emp"
           [sdRequests]="sdRequests$ | async"
           [loading]="loadingSdRequests$ | async"
           [totalCount]="totalCountSdRequests$ | async"

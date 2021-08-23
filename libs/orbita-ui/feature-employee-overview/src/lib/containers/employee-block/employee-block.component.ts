@@ -1,8 +1,15 @@
 import { filter, first } from 'rxjs/operators';
 import { LazyLoadEvent } from 'primeng/api';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { EmployeeFacade, SdRequestFacade, SdRequestViewModel, SvtFacade } from '@orbita/orbita-ui/domain-logic';
+import {
+  Employee,
+  EmployeeFacade,
+  SdRequestFacade,
+  SdRequestViewModel,
+  SvtFacade,
+} from '@orbita/orbita-ui/domain-logic';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'lib-employee-block',
@@ -11,12 +18,15 @@ import { Router } from '@angular/router';
 })
 export class EmployeeBlockComponent implements OnInit, OnDestroy {
   skeleton = true;
+  subscriptions = new Subscription();
 
   // ========== Работник ==========
 
   employee$ = this.employeeFacade.employee$;
   employeeLoading$ = this.employeeFacade.loadingEmployee$;
   employeeLoaded$ = this.employeeFacade.loadedEmployee$;
+  employeeError$ = this.employeeFacade.errorEmployee$;
+  emp: Employee;
 
   // ========== Заявки работника ==========
 
@@ -38,15 +48,17 @@ export class EmployeeBlockComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.employeeFacade.overviewSingleEmployee();
-    this.employeeLoaded$
+    this.subscriptions.add(this.employee$.subscribe((emp) => (this.emp = emp)));
+    this.employeeLoading$
       .pipe(
-        filter((val) => val),
+        filter((val) => !val),
         first()
       )
       .subscribe(() => (this.skeleton = false));
   }
 
   ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
     this.employeeFacade.clearSelectedEmployee();
   }
 

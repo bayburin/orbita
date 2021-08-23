@@ -18,6 +18,10 @@ export abstract class EmployeeFacadeAbstract {
    */
   employee$: Observable<Employee>;
   /**
+   * Ошибка, полученная при загрузке работника
+   */
+  errorEmployee$: Observable<any>;
+  /**
    * Список работников
    */
   allShort$: Observable<EmployeeShort[]>;

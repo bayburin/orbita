@@ -17,6 +17,7 @@ export class EmployeeFacade implements EmployeeFacadeAbstract {
   loadingEmployee$ = this.store.select(EmployeeSelectors.getEmployeeLoading);
   loadedEmployee$ = this.store.select(EmployeeSelectors.getEmployeeLoaded);
   employee$ = this.store.select(EmployeeSelectors.getEmployeeSelected);
+  errorEmployee$ = this.store.select(EmployeeSelectors.getEmployeeError);
 
   // ========== Подтип хранилища EmployeeShort ==========
 
