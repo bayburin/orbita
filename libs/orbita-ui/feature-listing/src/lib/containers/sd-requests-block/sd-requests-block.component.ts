@@ -1,6 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
-import { SdRequestFacade, UserFacade, ServiceDeskFacade } from '@orbita/orbita-ui/domain-logic';
+import { SdRequestFacade, UserFacade, ServiceDeskFacade, SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'lib-sd-requests-block',
@@ -19,7 +20,9 @@ export class SdRequestsBlockComponent implements OnDestroy {
   constructor(
     private sdRequestFacade: SdRequestFacade,
     private userFacade: UserFacade,
-    private sdFacade: ServiceDeskFacade
+    private sdFacade: ServiceDeskFacade,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   /**
@@ -41,5 +44,14 @@ export class SdRequestsBlockComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.sdRequestFacade.clearAll();
+  }
+
+  /**
+   * Переходит на страницу детального просмотра выбранной заявки
+   *
+   * @param sdRequest - выбранный работник
+   */
+  redirectToSdRequestPage(sdRequest: SdRequestViewModel) {
+    this.router.navigate(['sd-requests', sdRequest.id], { relativeTo: this.route });
   }
 }

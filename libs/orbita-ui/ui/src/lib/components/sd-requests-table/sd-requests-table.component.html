@@ -1,3 +1,5 @@
+<p-contextMenu #cm [model]="contextMenuItems"></p-contextMenu>
+
 <p-table
   #table
   [value]="sortedSdRequests"
@@ -14,6 +16,8 @@
   stateKey="sdRequestTable"
   stateStorage="local"
   styleClass="p-datatable-sm"
+  [(contextMenuSelection)]="selectedSdRequest"
+  [contextMenu]="cm"
   (onLazyLoad)="onLazyLoad($event)"
 >
   <ng-template pTemplate="header">
@@ -224,10 +228,8 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-req let-expanded="expanded">
-    <tr [ngClass]="{ 'expanded-row': expanded }">
-      <td>
-        <a [routerLink]="['sd-requests', req.id]">{{ req.id }}</a>
-      </td>
+    <tr [pContextMenuRow]="req" [ngClass]="{ 'expanded-row': expanded }">
+      <td>{{ req.id }}</td>
       <td>{{ req.integration_id }}</td>
       <td>{{ req.application?.name }}</td>
       <td>{{ req.runtime.created_at | datetime }}</td>

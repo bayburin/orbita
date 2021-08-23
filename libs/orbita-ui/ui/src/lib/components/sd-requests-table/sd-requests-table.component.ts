@@ -1,4 +1,3 @@
-import { Observable, of, Subject, Subscription } from 'rxjs';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,6 +8,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
+import { of, Subject, Subscription } from 'rxjs';
 import {
   WorkViewModel,
   statusesViewModelArray,
@@ -20,7 +20,7 @@ import {
   SdTicket,
 } from '@orbita/orbita-ui/domain-logic';
 import { oFlatMap } from '@orbita/orbita-ui/utils';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, MenuItem } from 'primeng/api';
 import { distinctUntilChanged, switchMap, delay } from 'rxjs/operators';
 import { Table } from 'primeng/table';
 
@@ -35,9 +35,17 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
 
   lazyLoadStream = new Subject<LazyLoadEvent>();
   subscriptions = new Subscription();
-
-  // ==================================================================================================================
-
+  /**
+   * Список свойств контекстного меню
+   */
+  contextMenuItems: MenuItem[];
+  /**
+   * Выбранная заявка
+   */
+  selectedSdRequest: SdRequestViewModel;
+  /**
+   * Таблица заявок
+   */
   @ViewChild('table', { static: false }) table: Table;
   /**
    * Список статусов
@@ -76,9 +84,20 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
    * События изменения метаданных таблицы (пагинация, сортировка, фильтры)
    */
   @Output() tableChanged = new EventEmitter<LazyLoadEvent>();
+  /**
+   * Событие выбора заявки для ее детального просмотра
+   */
+  @Output() viewSdRequest = new EventEmitter<SdRequestViewModel>();
 
   ngOnInit(): void {
     this.subscribeToLazyLoadEvent();
+    this.contextMenuItems = [
+      {
+        label: 'Подробно',
+        icon: 'mdi mdi-file-find-outline mdi-18px',
+        command: () => this.viewSdRequest.emit(this.selectedSdRequest),
+      },
+    ];
   }
 
   get sortedSdRequests(): SdRequestViewModel[] {

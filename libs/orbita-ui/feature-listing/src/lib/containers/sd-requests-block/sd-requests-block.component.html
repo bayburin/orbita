@@ -30,5 +30,6 @@
     [sdServices]="sdServices$ | async"
     [sdTickets]="sdTickets$ | async"
     (tableChanged)="tableChanged($event)"
+    (viewSdRequest)="redirectToSdRequestPage($event)"
   ></lib-sd-requests-table>
 </div>
