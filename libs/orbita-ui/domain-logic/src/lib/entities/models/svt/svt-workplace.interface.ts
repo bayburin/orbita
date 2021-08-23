@@ -1,3 +1,5 @@
+import { SvtWorkplaceType } from './svt-workplace-type.interface';
+
 /**
  * Интерфейс РМ
  */
@@ -6,6 +8,16 @@ export interface SvtWorkplace {
    * Идентфикатор РМ
    */
   readonly workplace_id: number;
+
+  /**
+   * Идентификатор типа РМ
+   */
+  readonly workplace_type_id: number;
+
+  /**
+   * Тип РМ
+   */
+  readonly workplace_type: SvtWorkplaceType;
 
   /**
    * Идентификатор Ответственного

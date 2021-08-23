@@ -43,6 +43,7 @@ import { WorkersComponent } from './components/workers/workers.component';
 import { EmployeesTableComponent } from './components/employees-table/employees-table.component';
 import { EmployeeSdRequestsTableComponent } from './components/employee-sd-requests-table/employee-sd-requests-table.component';
 import { EmployeeOverviewSkeletonComponent } from './components/employee-overview-skeleton/employee-overview-skeleton.component';
+import { EmployeeSvtItemsTableComponent } from './components/employee-svt-items-table/employee-svt-items-table.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
@@ -79,6 +80,7 @@ const components: any[] = [
   EmployeesTableComponent,
   EmployeeSdRequestsTableComponent,
   EmployeeOverviewSkeletonComponent,
+  EmployeeSvtItemsTableComponent,
 ];
 
 @NgModule({

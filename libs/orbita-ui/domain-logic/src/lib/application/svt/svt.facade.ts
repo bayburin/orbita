@@ -20,6 +20,7 @@ import { SvtFilters } from './../../entities/filter.interface';
 export class SvtFacade implements SvtFacadeAbstract {
   loadingItem$ = this.store.select(SvtItemSelectors.getLoading);
   loadedItem$ = this.store.select(SvtItemSelectors.getLoaded);
+  allItems$ = this.store.select(SvtItemSelectors.getAll);
   selectedItem$ = this.store.select(SvtItemSelectors.getSelected);
   loadForFormItems$ = this.store.select(SvtItemSelectors.getNeedFormItems).pipe(
     filter((needItems) => needItems),

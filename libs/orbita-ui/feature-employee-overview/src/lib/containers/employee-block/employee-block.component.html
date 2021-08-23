@@ -113,5 +113,13 @@
         ></lib-employee-sd-requests-table>
       </div>
     </p-tabPanel>
+    <p-tabPanel header="Выч. техника">
+      <div class="card">
+        <lib-employee-svt-items-table
+          [items]="svtItems$ | async"
+          [loading]="svtItemsLoading$ | async"
+        ></lib-employee-svt-items-table>
+      </div>
+    </p-tabPanel>
   </p-tabView>
 </div>

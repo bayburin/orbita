@@ -13,6 +13,10 @@ export abstract class SvtFacadeAbstract {
    */
   loadedItem$: Observable<boolean>;
   /**
+   * Список ВТ
+   */
+  allItems$: Observable<SvtItem[]>;
+  /**
    * Выбранная ВТ
    */
   selectedItem$: Observable<SvtItem>;
