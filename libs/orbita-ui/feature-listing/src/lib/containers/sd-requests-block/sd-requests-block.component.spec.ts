@@ -1,4 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   SdRequestFacade,
@@ -18,6 +19,7 @@ describe('SdRequestsBlockComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       declarations: [SdRequestsBlockComponent],
       providers: [
         { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
