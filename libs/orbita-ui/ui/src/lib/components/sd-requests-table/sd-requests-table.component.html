@@ -229,7 +229,9 @@
   </ng-template>
   <ng-template pTemplate="body" let-req let-expanded="expanded">
     <tr [pContextMenuRow]="req" [ngClass]="{ 'expanded-row': expanded }">
-      <td>{{ req.id }}</td>
+      <td>
+        <a [routerLink]="['sd-requests', req.id]">{{ req.id }}</a>
+      </td>
       <td>{{ req.integration_id }}</td>
       <td>{{ req.application?.name }}</td>
       <td>{{ req.runtime.created_at | datetime }}</td>

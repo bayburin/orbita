@@ -215,7 +215,7 @@ describe('EmployeeReducer', () => {
   describe('loadEmployeeShortForNewFormSuccess', () => {
     it('should change attributes', () => {
       const employees = [createEmployeeShortEntity(1), createEmployeeShortEntity(2)];
-      action = EmployeeActions.loadEmployeeShortForNewFormSuccess({ employees });
+      action = EmployeeActions.loadEmployeeShortForNewFormSuccess({ employees, loadSvtItems: false });
       const result: EmployeeShortState = reducer(initialState, action).employeeShort;
 
       expect(result.ids).toEqual([1, 2]);

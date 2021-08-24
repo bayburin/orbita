@@ -32,7 +32,9 @@
   </ng-template>
   <ng-template pTemplate="body" let-req>
     <tr [pContextMenuRow]="req">
-      <td>{{ req.id }}</td>
+      <td>
+        <a [routerLink]="['/tickets', 'sd-requests', req.id]">{{ req.id }}</a>
+      </td>
       <td>{{ req.runtime.created_at | datetime }}</td>
       <td>
         <lib-ticket-status [status]="req.status"></lib-ticket-status>

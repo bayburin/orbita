@@ -97,7 +97,9 @@
   </ng-template>
   <ng-template pTemplate="body" let-emp>
     <tr [pContextMenuRow]="emp">
-      <td width="10%">{{ emp.personnelNo }}</td>
+      <td width="10%">
+        <a [routerLink]="[emp.id]">{{ emp.personnelNo }}</a>
+      </td>
       <td>{{ emp.fullName }}</td>
       <td width="7%">{{ emp.departmentForAccounting }}</td>
       <td>{{ emp.professionForAccounting }}</td>
