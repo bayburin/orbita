@@ -10,7 +10,7 @@ import * as SdRequestActions from './sd-request.actions';
 import * as SdRequestFeature from './sd-request.reducer';
 import * as SdRequestSelectors from './sd-request.selectors';
 import * as SdRequestViewModelSelectors from '../selectors/sd-request-view-model.selectors';
-import * as RouterSelector from '../selectors/router.selectors';
+import * as RouterSelectors from '../selectors/router.selectors';
 import * as MessageActions from '../message/message.actions';
 import * as WorkActions from '../work/work.actions';
 import * as HistoryActions from '../history/history.actions';
@@ -109,7 +109,7 @@ export class SdRequestEffects {
   loadSelected$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.loadSelected),
-      withLatestFrom(this.store.select(RouterSelector.selectRouteParams)),
+      withLatestFrom(this.store.select(RouterSelectors.selectRouteParams)),
       switchMap(([_action, routeParams]) =>
         this.sdRequestApi.show(routeParams.id).pipe(
           map((data) => SdRequestCacheService.normalizeSdRequest(data.sd_request)),
@@ -203,15 +203,24 @@ export class SdRequestEffects {
   initNewForm$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.initNewForm),
-      withLatestFrom(this.store.select(RouterSelector.selectQueryParams)),
+      withLatestFrom(this.store.select(RouterSelectors.selectQueryParams)),
       switchMap(([_action, queryParams]) => {
-        const result = [];
+        const callActions = [];
 
         if (queryParams.id_tn) {
-          result.push(EmployeeActions.loadEmployeeShortForNewForm({ idTn: queryParams.id_tn }));
+          callActions.push(
+            EmployeeActions.loadEmployeeShortForNewForm({
+              idTn: queryParams.id_tn,
+              loadSvtItems: !queryParams.barcode,
+            })
+          );
         }
 
-        return result;
+        if (queryParams.barcode) {
+          callActions.push(SvtItemActions.loadAllForForm({ filters: { barcode: queryParams.barcode } }));
+        }
+
+        return callActions;
       })
     )
   );

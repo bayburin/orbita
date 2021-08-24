@@ -3,7 +3,6 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import * as SvtItemActions from './svt-item.actions';
 import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
-import { SvtFilters } from './../../../entities/filter.interface';
 
 export const SVT_ITEM_FEATURE_KEY = 'svtItem';
 
@@ -12,8 +11,6 @@ export interface State extends EntityState<SvtItem> {
   loaded: boolean;
   selectedId: number;
   error?: string | null;
-  needFormItems: boolean;
-  formFilters?: SvtFilters;
 }
 
 export interface SvtItemPartialState {
@@ -29,7 +26,6 @@ export const initialState: State = svtItemAdapter.getInitialState({
   loaded: false,
   selectedId: null,
   error: null,
-  needFormItems: false,
 });
 
 const svtItemReducer = createReducer(
@@ -74,11 +70,6 @@ const svtItemReducer = createReducer(
     ...state,
     selectedId: null,
     loaded: false,
-  })),
-  on(SvtItemActions.setFormFilters, (state, { filters }) => ({
-    ...state,
-    formFilters: filters,
-    needFormItems: true,
   })),
   on(SvtItemActions.loadAllForForm, (state) => ({
     ...state,

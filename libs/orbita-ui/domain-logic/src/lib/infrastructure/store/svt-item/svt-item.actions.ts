@@ -4,7 +4,7 @@ import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
 import { SvtFilters } from './../../../entities/filter.interface';
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
 
-export const loadAll = createAction('[SvtItem/Api] Load All', props<{ filters: PrimeFilter }>());
+export const loadAll = createAction('[SvtItem/API] Load All', props<{ filters: PrimeFilter }>());
 
 export const loadAllSuccess = createAction('[SvtItem/API] Load All Success', props<{ svtItems: SvtItem[] }>());
 
@@ -22,7 +22,7 @@ export const select = createAction('[SvtItem] Select', props<{ barcode: number }
 
 export const clearSelected = createAction('[SvtItem] Clear Selected');
 
-export const loadAllForForm = createAction('[SvtItem/Api] Load All For Form');
+export const loadAllForForm = createAction('[SvtItem/API] Load All For Form', props<{ filters: SvtFilters }>());
 
 export const loadAllForFormSuccess = createAction(
   '[SvtItem/API] Load All For Form Success',
@@ -30,7 +30,5 @@ export const loadAllForFormSuccess = createAction(
 );
 
 export const loadAllForFormFailure = createAction('[SvtItem/API] Load All For Form Failure', props<{ error: any }>());
-
-export const setFormFilters = createAction('[SvtItem] Set Form Filters', props<{ filters: SvtFilters }>());
 
 export const clearAll = createAction('[SvtItem] Clear All');

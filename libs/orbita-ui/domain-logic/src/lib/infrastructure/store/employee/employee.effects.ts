@@ -105,7 +105,12 @@ export class EmployeeEffects {
         const filters = PrimeFilterFactory.createFilter(EmployeeFilters.ID_TN, action.idTn);
 
         return this.employeeApi.query(filters).pipe(
-          map((data) => EmployeeActions.loadEmployeeShortForNewFormSuccess({ employees: data.employees })),
+          map((data) =>
+            EmployeeActions.loadEmployeeShortForNewFormSuccess({
+              employees: data.employees,
+              loadSvtItems: action.loadSvtItems,
+            })
+          ),
           catchError((error) => of(EmployeeActions.loadEmployeeShortForNewFormFailure({ error })))
         );
       })
@@ -117,11 +122,14 @@ export class EmployeeEffects {
       ofType(EmployeeActions.loadEmployeeShortForNewFormSuccess),
       switchMap((action) => {
         const employee = action.employees[0];
+        const callActions = [];
 
-        return [
-          SdRequestActions.setEmployeeToNewForm({ employee }),
-          SvtItemActions.setFormFilters({ filters: { id_tn: employee.id } }),
-        ];
+        callActions.push(SdRequestActions.setEmployeeToNewForm({ employee }));
+        if (action.loadSvtItems) {
+          callActions.push(SvtItemActions.loadAllForForm({ filters: { id_tn: employee.id } }));
+        }
+
+        return callActions;
       })
     )
   );

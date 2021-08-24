@@ -8,6 +8,7 @@ import { SdRequestViewModel } from './../../../entities/view-models/sd-request-v
 import { NormalizedSdRequestEntities } from './../../../entities/models/normalized-data.interface';
 import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
 import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
+import { SvtItem } from '../../../entities/models/svt/svt-item.interface';
 
 // ========== Список заявок ==========
 
@@ -69,6 +70,8 @@ export const setEmployeeToNewForm = createAction(
   '[SdRequest] Set Employee To New Form',
   props<{ employee: EmployeeShort }>()
 );
+
+export const setSvtItemToNewForm = createAction('[SdRequest] Set SvtItem To New Form', props<{ svtItem: SvtItem }>());
 
 export const changeNewForm = createAction('[SdRequest] Change New Form', props<{ entity: NewSdRequestViewForm }>());
 

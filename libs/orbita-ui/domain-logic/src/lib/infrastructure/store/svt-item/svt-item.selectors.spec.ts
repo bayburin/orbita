@@ -16,8 +16,6 @@ describe('SvtItem Selectors', () => {
     333: arrEntities[2],
   };
   const selectedId = 111;
-  const filters = { foo: 'bar' };
-  const formFilters = { fake: 'fake-filter' };
   let state: any;
 
   beforeEach(() => {
@@ -27,10 +25,6 @@ describe('SvtItem Selectors', () => {
       error,
       loading: false,
       loaded: true,
-      filters,
-      formFilters,
-      needItems: true,
-      needFormItems: false,
     });
   });
 
@@ -44,14 +38,6 @@ describe('SvtItem Selectors', () => {
 
   it('getError() should return "error" attribute', () => {
     expect(SvtItemSelectors.getError.projector(state)).toEqual(error);
-  });
-
-  it('getFormFilters() should return "filters" attribute', () => {
-    expect(SvtItemSelectors.getFormFilters.projector(state)).toEqual(formFilters);
-  });
-
-  it('getNeedFormItems() should return "needFormItems" attribute', () => {
-    expect(SvtItemSelectors.getNeedFormItems.projector(state)).toBe(false);
   });
 
   it('getAll() should return array of entities', () => {

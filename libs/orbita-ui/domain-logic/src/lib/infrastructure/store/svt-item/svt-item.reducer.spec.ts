@@ -118,13 +118,12 @@ describe('SvtItemReducer', () => {
 
   describe('loadAllForForm', () => {
     it('should set attributes', () => {
-      action = SvtItemActions.loadAllForForm();
+      action = SvtItemActions.loadAllForForm({ filters: {} });
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
       expect(result.error).toBeNull();
-      expect(result.needFormItems).toBe(false);
     });
   });
 
@@ -151,16 +150,6 @@ describe('SvtItemReducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(false);
       expect(result.error).toBe(error);
-    });
-  });
-
-  describe('setFormFilters', () => {
-    it('should set attributes', () => {
-      const filters = { id_tn: 12345 };
-      action = SvtItemActions.setFormFilters({ filters });
-      const result: State = reducer(initialState, action);
-
-      expect(result.formFilters).toBe(filters);
     });
   });
 

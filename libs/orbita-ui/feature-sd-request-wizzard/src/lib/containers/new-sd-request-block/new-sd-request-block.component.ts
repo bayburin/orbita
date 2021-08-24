@@ -14,7 +14,7 @@ import {
   SdRequestFacade,
 } from '@orbita/orbita-ui/domain-logic';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { NewSdRequestPreviewComponent } from '../new-sd-request-preview/new-sd-request-preview.component';
 
@@ -87,7 +87,8 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
     private svtFacade: SvtFacade,
     private fb: FormBuilder,
     private dialogService: DialogService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -197,7 +198,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    * Возвращает строку, содержащую данные о выбранной ВТ
    */
   selectedSvtItemView(item: SvtItem): string {
-    return `${item.type.short_description} ${item.short_item_model} Инвентарный: ${item.invent_num} | Штрих-код: ${item.barcode_item.id}`;
+    return `${item.type.short_description} ${item.short_item_model} | Инвентарный: ${item.invent_num} | Штрих-код: ${item.barcode_item.id}`;
   }
 
   /**
@@ -291,6 +292,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
         .subscribe((formData) => {
           this.form.patchValue(formData, { emitEvent: false });
           this.employee.setValue(formData.employee);
+          this.customSvtItem.setValue(formData.svtItem);
         })
     );
 
@@ -368,5 +370,12 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
         }
       })
     );
+
+    const barcode = this.route.snapshot.queryParams.barcode;
+
+    if (barcode) {
+      this.svtItemManually.setValue(true);
+      this.svtItemFilterKey.setValue(this.svtItemFilters.find((el) => el.value === 'barcode'));
+    }
   }
 }

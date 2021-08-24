@@ -217,6 +217,16 @@ const sdRequestReducer = createReducer(
       },
     },
   })),
+  on(SdRequestActions.setSvtItemToNewForm, (state, { svtItem }) => ({
+    ...state,
+    newForm: {
+      ...state.newForm,
+      entity: {
+        ...state.newForm.entity,
+        svtItem,
+      },
+    },
+  })),
   on(SdRequestActions.changeNewForm, (state, { entity }) => ({
     ...state,
     newForm: {

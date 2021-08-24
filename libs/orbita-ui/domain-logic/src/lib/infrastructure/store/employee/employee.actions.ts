@@ -68,12 +68,12 @@ export const clearAllEmployeeShort = createAction('[Employee] Clear All Employee
 
 export const loadEmployeeShortForNewForm = createAction(
   '[Employee/Api] Load Employee Short For New Form',
-  props<{ idTn: number }>()
+  props<{ idTn: number; loadSvtItems?: boolean }>()
 );
 
 export const loadEmployeeShortForNewFormSuccess = createAction(
   '[Employee/Api] Load Employee Short For New Form Success',
-  props<{ employees: EmployeeShort[] }>()
+  props<{ employees: EmployeeShort[]; loadSvtItems: boolean }>()
 );
 
 export const loadEmployeeShortForNewFormFailure = createAction(

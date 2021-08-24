@@ -17,6 +17,7 @@ import {
 import { SdRequestViewModel } from './../../../entities/view-models/sd-request-view-model.interface';
 import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-view-form.interface';
 import { EmployeeShort } from './../../../entities/models/employee/employee-short.interface';
+import { SvtItem } from '../../../entities/models/svt/svt-item.interface';
 
 describe('SdRequestReducer', () => {
   let action: Action;
@@ -203,6 +204,16 @@ describe('SdRequestReducer', () => {
       const result: NewFormState = reducer(initialState, action).newForm;
 
       expect(result.entity.employee).toEqual(employee);
+    });
+  });
+
+  describe('setSvtItemToNewForm', () => {
+    it('should set attributes', () => {
+      const svtItem = { item_id: 123 } as SvtItem;
+      action = SdRequestActions.setSvtItemToNewForm({ svtItem });
+      const result: NewFormState = reducer(initialState, action).newForm;
+
+      expect(result.entity.svtItem).toEqual(svtItem);
     });
   });
 
