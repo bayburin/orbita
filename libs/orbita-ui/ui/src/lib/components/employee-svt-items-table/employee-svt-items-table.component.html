@@ -13,7 +13,7 @@
       <th>Штрих-код</th>
       <th>ID РМ</th>
       <th>Тип</th>
-      <th>Модель</th>
+      <th width="30%">Модель</th>
       <th>Инв. номер</th>
       <th>Расположение</th>
     </tr>
@@ -23,9 +23,12 @@
       <td>{{ item.barcode_item.id }}</td>
       <td>{{ item.workplace.workplace_id }}</td>
       <td>{{ item.type.short_description }}</td>
-      <td>{{ item.short_item_model }}</td>
+      <td width="30%">{{ item.short_item_model }}</td>
       <td>{{ item.invent_num }}</td>
-      <td>-</td>
+      <td>
+        Пл. {{ item.workplace.iss_reference_site.name }}, корп. {{ item.workplace.iss_reference_building.name }}, комн.
+        {{ item.workplace.iss_reference_room.name }}
+      </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="emptymessage">
