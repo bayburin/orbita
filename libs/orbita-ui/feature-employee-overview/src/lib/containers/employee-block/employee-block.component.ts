@@ -7,6 +7,7 @@ import {
   SdRequestFacade,
   SdRequestViewModel,
   SvtFacade,
+  SvtItem,
 } from '@orbita/orbita-ui/domain-logic';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -78,5 +79,16 @@ export class EmployeeBlockComponent implements OnInit, OnDestroy {
    */
   redirectToSdRequestPage(sdRequest: SdRequestViewModel) {
     this.router.navigate(['/tickets', 'sd-requests', sdRequest.id]);
+  }
+
+  /**
+   * Переходит на страницу создания заявки с указанной ВТ и текущим работником
+   *
+   * @param svtItem - ВТ
+   */
+  redirectToNewSdRequest(svtItem: SvtItem) {
+    this.router.navigate(['/tickets', 'new-sd-request'], {
+      queryParams: { id_tn: this.emp.id, barcode: svtItem.barcode_item.id },
+    });
   }
 }

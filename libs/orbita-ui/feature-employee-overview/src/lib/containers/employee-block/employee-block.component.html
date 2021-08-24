@@ -126,6 +126,7 @@
         <lib-employee-svt-items-table
           [items]="svtItems$ | async"
           [loading]="svtItemsLoading$ | async"
+          (createSdRequest)="redirectToNewSdRequest($event)"
         ></lib-employee-svt-items-table>
       </div>
     </p-tabPanel>

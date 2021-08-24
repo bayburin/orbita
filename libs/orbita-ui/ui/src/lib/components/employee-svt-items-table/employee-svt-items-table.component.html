@@ -1,4 +1,13 @@
-<p-table [value]="items" [scrollable]="true" scrollHeight="400px" [loading]="loading">
+<p-contextMenu #cm [model]="contextMenuItems"></p-contextMenu>
+
+<p-table
+  [value]="items"
+  [scrollable]="true"
+  scrollHeight="400px"
+  [loading]="loading"
+  [(contextMenuSelection)]="selectedItem"
+  [contextMenu]="cm"
+>
   <ng-template pTemplate="header">
     <tr>
       <th>Штрих-код</th>
@@ -10,7 +19,7 @@
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-item>
-    <tr>
+    <tr [pContextMenuRow]="item">
       <td>{{ item.barcode_item.id }}</td>
       <td>{{ item.workplace.workplace_id }}</td>
       <td>{{ item.type.short_description }}</td>
