@@ -16,10 +16,10 @@
           <h2 class="my-0">
             {{ emp.lastName | capitalize }} {{ emp.firstName | capitalize }} {{ emp.middleName | capitalize }}
           </h2>
-          <p-tag *ngIf="emp.employeePositions[0].vacation" class="ml-2" severity="info" value="В отпуске"></p-tag>
+          <p-tag *ngIf="emp.employeePositions?.[0].vacation" class="ml-2" severity="info" value="В отпуске"></p-tag>
         </div>
         <div class="font-italic text-secondary">
-          {{ emp.employeePositions[0].professionForAccounting | lowercase }}
+          {{ emp.employeePositions?.[0].professionForAccounting | lowercase }}
         </div>
       </div>
       <div class="header-spacer"></div>
@@ -60,6 +60,25 @@
               </div>
             </lib-detail-row>
           </div>
+        </div>
+
+        <div *ngIf="emp.company as company">
+          <p-divider align="center" type="dashed">Смежная организация</p-divider>
+
+          <lib-detail-row styleClassHeader="col-3" styleClassValue="col-9">
+            <div attribute>Наименование</div>
+            <div value>{{ company.name }}</div>
+          </lib-detail-row>
+
+          <lib-detail-row styleClassHeader="col-3" styleClassValue="col-9">
+            <div attribute>Табельный</div>
+            <div value>{{ emp.code }}</div>
+          </lib-detail-row>
+
+          <lib-detail-row styleClassHeader="col-3" styleClassValue="col-9">
+            <div attribute>Подразделение</div>
+            <div value>{{ company.code }}</div>
+          </lib-detail-row>
         </div>
 
         <div *ngIf="emp.employeeContact as contact">

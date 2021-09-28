@@ -3,7 +3,7 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom, catchError, filter } from 'rxjs/operators';
-import { isNumber } from '@orbita/orbita-ui/utils';
+import { getEmployeeTn, isNumber } from '@orbita/orbita-ui/utils';
 
 import { EmployeeApi } from './../../api/employee/employee.api';
 import * as EmployeeFeature from './employee.reducer';
@@ -83,7 +83,7 @@ export class EmployeeEffects {
       ofType(EmployeeActions.loadSingleEmployeeForOverviewSuccess),
       switchMap((action) => {
         const callActions = [];
-        const tn = action.employee.employeePositions[0]?.personnelNo;
+        const tn = getEmployeeTn(action.employee);
 
         callActions.push(
           SvtItemActions.loadAll({ filters: PrimeFilterFactory.createFilter('id_tn', action.employee.id) })

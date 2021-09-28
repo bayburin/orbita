@@ -28,6 +28,11 @@ export interface EmployeeBase {
    * Пол
    */
   readonly sex?: GenderTypes;
+
+  /**
+   * Табельный номер (фиктивный)
+   */
+  readonly code?: number;
 }
 
 /**
