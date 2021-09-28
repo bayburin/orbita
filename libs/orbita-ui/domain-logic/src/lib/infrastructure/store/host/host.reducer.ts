@@ -28,12 +28,28 @@ export const initialState: State = hostAdapter.getInitialState({
 
 const hostReducer = createReducer(
   initialState,
-  on(HostActions.loadSelected, (state) => ({ ...state, loading: true, loaded: false, error: null })),
+  on(HostActions.loadForEmployee, HostActions.loadSelected, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
+  on(HostActions.loadForEmployeeSuccess, (state, { hosts }) =>
+    hostAdapter.setAll(hosts, {
+      ...state,
+      loading: false,
+      loaded: true,
+    })
+  ),
   on(HostActions.loadSelectedSuccess, (state, { host }) =>
     hostAdapter.setOne(host, { ...state, loading: false, loaded: true })
   ),
   on(HostActions.loadSelectedNotFound, (state) => ({ ...state, loading: false, loaded: false })),
-  on(HostActions.loadSelectedFailure, (state, { error }) => ({ ...state, error, loading: false })),
+  on(HostActions.loadForEmployeeFailure, HostActions.loadSelectedFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  })),
   on(HostActions.select, (state, { inventNum }) => ({
     ...state,
     selectedId: inventNum ? inventNum.toLowerCase() : null,

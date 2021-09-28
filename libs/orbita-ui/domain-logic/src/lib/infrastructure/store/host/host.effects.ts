@@ -40,4 +40,16 @@ export class HostEffects {
       map(HostActions.loadSelected)
     )
   );
+
+  loadForEmployee$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HostActions.loadForEmployee),
+      switchMap((action) =>
+        this.acApi.showEmployeeHosts(action.tn).pipe(
+          map((hosts) => HostActions.loadForEmployeeSuccess({ hosts })),
+          catchError((error) => of(HostActions.loadForEmployeeFailure({ error })))
+        )
+      )
+    )
+  );
 }

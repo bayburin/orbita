@@ -44,6 +44,7 @@ import { EmployeesTableComponent } from './components/employees-table/employees-
 import { EmployeeSdRequestsTableComponent } from './components/employee-sd-requests-table/employee-sd-requests-table.component';
 import { EmployeeOverviewSkeletonComponent } from './components/employee-overview-skeleton/employee-overview-skeleton.component';
 import { EmployeeSvtItemsTableComponent } from './components/employee-svt-items-table/employee-svt-items-table.component';
+import { EmployeeHostsTableComponent } from './components/employee-hosts-table/employee-hosts-table.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
@@ -85,7 +86,7 @@ const components: any[] = [
 
 @NgModule({
   imports: [CommonModule, PrimengModule, ...modules],
-  exports: [...pipes, ...components, PrimengModule, ...modules, ...directives],
-  declarations: [...pipes, ...components, ...directives],
+  exports: [...pipes, ...components, PrimengModule, ...modules, ...directives, EmployeeHostsTableComponent],
+  declarations: [...pipes, ...components, ...directives, EmployeeHostsTableComponent],
 })
 export class OrbitaUiUiModule {}

@@ -15,4 +15,8 @@ export abstract class AuthCenterFacadeAbstract {
    * Выбранный хост
    */
   selectedHost$: Observable<Host>;
+  /**
+   * Список всех хостов
+   */
+  allHosts$: Observable<Host[]>;
 }

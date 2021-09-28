@@ -10,6 +10,8 @@ import {
   SdRequestViewModel,
   SvtFacade,
   SvtFacadeStub,
+  AuthCenterFacade,
+  AuthCenterFacadeStub,
 } from '@orbita/orbita-ui/domain-logic';
 import { Router } from '@angular/router';
 
@@ -33,6 +35,7 @@ describe('EmployeeBlockComponent', () => {
         { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
         { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
         { provide: SvtFacade, useClass: SvtFacadeStub },
+        { provide: AuthCenterFacade, useClass: AuthCenterFacadeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

@@ -7,10 +7,21 @@ import { Host } from './../../../entities/models/host.interface';
 describe('HostReducer', () => {
   let action: Action;
   const createHostEntity = (id: string, mac = '') =>
-    (({
+    ({
       id,
       mac: mac || `mac-${id}`,
-    } as unknown) as Host);
+    } as unknown as Host);
+
+  describe('loadForEmployee', () => {
+    it('should set attributes', () => {
+      action = HostActions.loadForEmployee({ tn: 123 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
 
   describe('loadSelected', () => {
     it('should set attributes', () => {
@@ -20,6 +31,19 @@ describe('HostReducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
       expect(result.error).toBeNull();
+    });
+  });
+
+  describe('loadForEmployeeSuccess', () => {
+    it('should set attributes', () => {
+      const hosts = [createHostEntity('111'), createHostEntity('222')];
+      action = HostActions.loadForEmployeeSuccess({ hosts });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(true);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBeNull();
+      expect(result.ids.length).toBe(2);
     });
   });
 
@@ -45,6 +69,18 @@ describe('HostReducer', () => {
       expect(result.loading).toBe(false);
       expect(result.error).toBeNull();
       expect(result.ids.length).toBe(0);
+    });
+  });
+
+  describe('loadForEmployeeFailure', () => {
+    it('should set attributes', () => {
+      const error = 'error message';
+      action = HostActions.loadForEmployeeFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBe(error);
     });
   });
 

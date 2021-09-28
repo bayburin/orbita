@@ -12,6 +12,7 @@ import * as EmployeeSelectors from './employee.selectors';
 import * as SdRequestActions from '../sd-request/sd-request.actions';
 import * as SvtItemActions from '../svt-item/svt-item.actions';
 import * as RouterSelectors from '../selectors/router.selectors';
+import * as HostActions from '../host/host.actions';
 import { PrimeFilterFactory } from './../../factories/prime-filter.factory';
 import { EmployeeFilters } from './../../../entities/models/employee/employee-filters.enum';
 
@@ -80,7 +81,20 @@ export class EmployeeEffects {
   loadSingleEmployeeForOverviewSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeeActions.loadSingleEmployeeForOverviewSuccess),
-      map((action) => SvtItemActions.loadAll({ filters: PrimeFilterFactory.createFilter('id_tn', action.employee.id) }))
+      switchMap((action) => {
+        const callActions = [];
+        const tn = action.employee.employeePositions[0]?.personnelNo;
+
+        callActions.push(
+          SvtItemActions.loadAll({ filters: PrimeFilterFactory.createFilter('id_tn', action.employee.id) })
+        );
+
+        if (tn) {
+          callActions.push(HostActions.loadForEmployee({ tn }));
+        }
+
+        return callActions;
+      })
     )
   );
 

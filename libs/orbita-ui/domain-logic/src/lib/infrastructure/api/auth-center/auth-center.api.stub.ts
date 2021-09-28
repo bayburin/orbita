@@ -8,4 +8,8 @@ export class AuthCenterApiStub implements AuthCenterApiAbstract {
   showHost() {
     return of(null);
   }
+
+  showEmployeeHosts() {
+    return of([]);
+  }
 }

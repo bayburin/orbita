@@ -8,6 +8,7 @@ import {
   SdRequestViewModel,
   SvtFacade,
   SvtItem,
+  AuthCenterFacade,
 } from '@orbita/orbita-ui/domain-logic';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -40,10 +41,16 @@ export class EmployeeBlockComponent implements OnInit, OnDestroy {
   svtItems$ = this.svtFacade.allItems$;
   svtItemsLoading$ = this.svtFacade.loadingItem$;
 
+  // ========== Список хостов работника ==========
+
+  hosts$ = this.acFacade.allHosts$;
+  hostsLoading$ = this.acFacade.loadingHost$;
+
   constructor(
     private employeeFacade: EmployeeFacade,
     private sdRequestFacade: SdRequestFacade,
     private svtFacade: SvtFacade,
+    private acFacade: AuthCenterFacade,
     private router: Router
   ) {}
 

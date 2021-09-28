@@ -23,4 +23,10 @@ export class AuthCenterApi implements AuthCenterApiAbstract {
 
     return this.http.get<Host>(`${this.api}/show_host`, { params });
   }
+
+  showEmployeeHosts(tn: number) {
+    const params = new HttpParams().set('tn', `${tn}`);
+
+    return this.http.get<Host[]>(`${this.api}/show_user_hosts`, { params });
+  }
 }

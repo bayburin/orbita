@@ -16,6 +16,7 @@ export class AuthCenterFacade implements AuthCenterFacadeAbstract {
   loadingHost$ = this.store.select(HostSelectors.getLoading);
   loadedHost$ = this.store.select(HostSelectors.getLoaded);
   selectedHost$ = this.store.select(HostSelectors.getSelected);
+  allHosts$ = this.store.select(HostSelectors.getAll);
 
   constructor(private store: Store<HostFeature.HostPartialState>) {}
 }

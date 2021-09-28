@@ -15,4 +15,11 @@ export abstract class AuthCenterApiAbstract {
    * @param filter - фильтры
    */
   abstract showHost(filters: HostFilter): Observable<Host | []>;
+
+  /**
+   * Возвращает список хостов, закрепленных за работником
+   *
+   * @param tn - табельный номер работника
+   */
+  abstract showEmployeeHosts(tn: number): Observable<Host[]>;
 }

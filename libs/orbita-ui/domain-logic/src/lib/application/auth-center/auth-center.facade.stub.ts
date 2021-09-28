@@ -6,4 +6,5 @@ export class AuthCenterFacadeStub implements AuthCenterFacadeAbstract {
   loadingHost$ = new BehaviorSubject(false);
   loadedHost$ = new BehaviorSubject(false);
   selectedHost$ = new BehaviorSubject(null);
+  allHosts$ = new BehaviorSubject(null);
 }

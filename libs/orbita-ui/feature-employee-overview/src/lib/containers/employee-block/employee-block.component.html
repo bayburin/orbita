@@ -130,5 +130,10 @@
         ></lib-employee-svt-items-table>
       </div>
     </p-tabPanel>
+    <p-tabPanel header="Закрепленные хосты">
+      <div class="card">
+        <lib-employee-hosts-table [hosts]="hosts$ | async" [loading]="hostsLoading$ | async"></lib-employee-hosts-table>
+      </div>
+    </p-tabPanel>
   </p-tabView>
 </div>
