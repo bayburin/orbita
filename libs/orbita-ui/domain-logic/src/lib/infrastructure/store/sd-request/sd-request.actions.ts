@@ -89,3 +89,12 @@ export const showModalAfterCreateNewForm = createAction('[SdRequest] Show Modal 
 export const closeModalAfterCreateNewForm = createAction('[SdRequest] Close Modal After Create New Form');
 
 export const clearNewForm = createAction('[SdRequest] Clear New Form');
+
+// ========== Обновление данных по заявке ==========
+
+export const receivedSdRequestFromActionCable = createAction(
+  '[SdRequest] Received SdRequest From ActionCable',
+  props<{ sdRequest: SdRequest }>()
+);
+
+export const update = createAction('[SdRequest] Update', props<{ sdRequest: SdRequest }>());

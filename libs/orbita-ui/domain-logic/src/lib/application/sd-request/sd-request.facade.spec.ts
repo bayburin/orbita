@@ -28,6 +28,8 @@ import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.i
 import { NewSdRequestViewForm } from './../../entities/forms/new-sd-request-view-form.interface';
 import * as helperFunction from '../../infrastructure/utils/process-sd-request-table-filters.function';
 import { PrimeFilterFactory } from './../../infrastructure/factories/prime-filter.factory';
+import { StreamService } from '../../infrastructure/stream/stream.service';
+import { StreamServiceStub } from './../../infrastructure/stream/stream.service.stub';
 
 interface TestSchema {
   [TICKET_SYSTEM_FEATURE_KEY]: {
@@ -61,6 +63,7 @@ describe('SdRequestFacade', () => {
           provideMockActions(() => actions$),
           provideMockStore({ initialState: state }),
           { provide: AuthHelper, useClass: AuthHelperStub },
+          { provide: StreamService, useClass: StreamServiceStub },
           MessageService,
         ],
       });

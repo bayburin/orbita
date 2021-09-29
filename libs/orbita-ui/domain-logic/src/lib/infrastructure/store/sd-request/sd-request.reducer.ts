@@ -11,9 +11,9 @@ import { NewSdRequestViewForm } from './../../../entities/forms/new-sd-request-v
 export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 
 export interface SelectedState {
-  entity: SdRequest;
   skeleton: boolean;
   editMode: boolean;
+  id?: number;
   error?: string;
 }
 
@@ -47,7 +47,6 @@ export interface SdRequestPartialState {
 }
 
 export const initSelectedState: SelectedState = {
-  entity: null,
   skeleton: false,
   editMode: false,
 };
@@ -119,14 +118,17 @@ const sdRequestReducer = createReducer(
       error: null,
     },
   })),
-  on(SdRequestActions.loadSelectedSuccess, (state, { sdRequest }) => ({
-    ...state,
-    selected: {
-      ...state.selected,
-      entity: sdRequest,
-      skeleton: false,
-    },
-  })),
+  on(SdRequestActions.loadSelectedSuccess, (state, { sdRequest }) =>
+    sdRequestAdapter.setOne(sdRequest, {
+      ...state,
+      selected: {
+        ...state.selected,
+        entity: sdRequest,
+        skeleton: false,
+        id: sdRequest.id,
+      },
+    })
+  ),
   on(SdRequestActions.loadSelectedFailure, (state, { error }) => ({
     ...state,
     selected: {
@@ -139,7 +141,7 @@ const sdRequestReducer = createReducer(
     ...state,
     selected: {
       ...state.selected,
-      entity: null,
+      id: null,
     },
   })),
   on(SdRequestActions.toggleSelectedEditMode, (state) => ({
@@ -274,7 +276,13 @@ const sdRequestReducer = createReducer(
   on(SdRequestActions.clearNewForm, (state) => ({
     ...state,
     newForm: { ...initNewFormState },
-  }))
+  })),
+
+  // ========== Обновление данных по заявке ==========
+
+  on(SdRequestActions.update, (state, { sdRequest }) =>
+    sdRequestAdapter.updateOne({ id: sdRequest.id, changes: sdRequest }, { ...state })
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {

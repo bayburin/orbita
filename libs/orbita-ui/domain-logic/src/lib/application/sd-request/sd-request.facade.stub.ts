@@ -1,4 +1,4 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { SdRequestFacadeAbstract } from './sd-request.facade.abstract';
 
@@ -69,5 +69,9 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
 
   clearCreatedForm() {
     /** */
+  }
+
+  connectToSdRequestsChannel() {
+    return new Subscription();
   }
 }

@@ -247,4 +247,27 @@ export class SdRequestEffects {
       )
     )
   );
+
+  // ========== Обновление данных по заявке ==========
+
+  receivedSdRequestFromActionCable$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.receivedSdRequestFromActionCable),
+      withLatestFrom(this.store.select(SdRequestSelectors.getEntities)),
+      switchMap(([action, entities]) => {
+        const id = action.sdRequest.id;
+
+        if (!entities[id]) {
+          return [];
+        }
+
+        const normalizeData = SdRequestCacheService.normalizeSdRequest(action.sdRequest);
+
+        return [
+          SdRequestActions.updatePartials({ entities: normalizeData.entities }),
+          SdRequestActions.update({ sdRequest: normalizeData.entities.sd_requests[id] }),
+        ];
+      })
+    )
+  );
 }

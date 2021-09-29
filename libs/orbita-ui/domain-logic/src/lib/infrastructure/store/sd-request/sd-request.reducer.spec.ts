@@ -288,6 +288,19 @@ describe('SdRequestReducer', () => {
     });
   });
 
+  describe('update', () => {
+    it('should set attributes', () => {
+      const sdRequests = [createSdRequest('PRODUCT-AAA'), createSdRequest('PRODUCT-zzz')];
+      const meta = { total_count: 12 } as Meta;
+      action = SdRequestActions.loadAllSuccess({ sdRequests, meta });
+      let result: State = reducer(initialState, action);
+      action = SdRequestActions.update({ sdRequest: { id: 'PRODUCT-zzz', name: 'foo' } as unknown as SdRequest });
+      result = reducer(result, action);
+
+      expect((result.entities['PRODUCT-zzz'] as any).name).toBe('foo');
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       action = {} as any;

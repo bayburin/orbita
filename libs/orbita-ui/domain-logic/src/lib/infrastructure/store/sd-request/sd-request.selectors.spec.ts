@@ -10,14 +10,20 @@ describe('SdRequestSelectors', () => {
       id,
       name: name || `name-${id}`,
     } as unknown as SdRequest);
-  const arrEntities = [createSdRequestEntity(111), createSdRequestEntity(222), createSdRequestEntity(333)];
+  const selectedEntity = createSdRequestEntity(444);
+  const arrEntities = [
+    createSdRequestEntity(111),
+    createSdRequestEntity(222),
+    createSdRequestEntity(333),
+    selectedEntity,
+  ];
   const entities = {
     111: arrEntities[0],
     222: arrEntities[1],
     333: arrEntities[2],
+    444: selectedEntity,
   };
   const totalCount = 3;
-  const selectedEntity = createSdRequestEntity(444);
   const formEntity = SdRequestFactory.createViewForm();
   const newFormEntity = { description: 'test' } as NewSdRequestViewForm;
   const created = createSdRequestEntity(555);
@@ -28,7 +34,7 @@ describe('SdRequestSelectors', () => {
 
   beforeEach(() => {
     selectedState = {
-      entity: selectedEntity,
+      id: 444,
       skeleton: false,
       editMode: true,
       error: 'fake-selected-error',
@@ -88,8 +94,12 @@ describe('SdRequestSelectors', () => {
     expect(SdRequestSelectors.getSelected.projector(state)).toEqual(selectedState);
   });
 
+  it('getSelectedId() should return selected entity', () => {
+    expect(SdRequestSelectors.getSelectedId.projector(selectedState)).toEqual(444);
+  });
+
   it('getSelectedEntity() should return selected entity', () => {
-    expect(SdRequestSelectors.getSelectedEntity.projector(selectedState)).toEqual(selectedEntity);
+    expect(SdRequestSelectors.getSelectedEntity.projector(entities, 444)).toEqual(selectedEntity);
   });
 
   it('getSelectedSkeleton() should return selected entity', () => {

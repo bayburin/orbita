@@ -36,7 +36,13 @@ export const getEntities = createSelector(getSdRequestState, (state: State) => s
 
 export const getSelected = createSelector(getSdRequestState, (state: State) => state.selected);
 
-export const getSelectedEntity = createSelector(getSelected, (state: SelectedState) => state.entity);
+export const getSelectedId = createSelector(getSelected, (state: SelectedState) => state.id);
+
+export const getSelectedEntity = createSelector(
+  getEntities,
+  getSelectedId,
+  (entities, selectedId) => selectedId && entities[selectedId]
+);
 
 export const getSelectedSkeleton = createSelector(getSelected, (state: SelectedState) => state.skeleton);
 

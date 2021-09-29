@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { LazyLoadEvent } from 'primeng/api';
 
 import { SdRequestViewModel } from './../../entities/view-models/sd-request-view-model.interface';
@@ -138,4 +138,9 @@ export abstract class SdRequestFacadeAbstract {
    * Очищает хранилище, содержащее данные по созданной заявке (форму, саму заявку, различные флаги...)
    */
   abstract clearCreatedForm(): void;
+
+  /**
+   * Подключается к каналу 'SdRequestsChannel
+   */
+  abstract connectToSdRequestsChannel(): Subscription;
 }

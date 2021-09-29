@@ -2,6 +2,7 @@ import { LazyLoadEvent } from 'primeng/api';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, withLatestFrom, filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 import { SdRequestFacadeAbstract } from './sd-request.facade.abstract';
 import * as SdRequestActions from '../../infrastructure/store/sd-request/sd-request.actions';
@@ -11,6 +12,7 @@ import * as SdRequestViewModelSelectors from '../../infrastructure/store/selecto
 import { SdRequestViewForm } from './../../entities/forms/sd-request-view-form.interface';
 import { NewSdRequestViewForm } from './../../entities/forms/new-sd-request-view-form.interface';
 import { processSdRequestTableFilters } from '../../infrastructure/utils/process-sd-request-table-filters.function';
+import { StreamService } from './../../infrastructure/stream/stream.service';
 
 /**
  * Фасад для работы с заявками (обращения к хранилищу SdRequest)
@@ -50,7 +52,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   newFormCreated$ = this.store.select(SdRequestViewModelSelectors.getNewFormCreatedViewModel);
   newFormShowModalAfterCreate$ = this.store.select(SdRequestSelectors.getNewFormShowModalAfterCreate);
 
-  constructor(private store: Store<SdRequestFeature.SdRequestPartialState>) {}
+  constructor(private store: Store<SdRequestFeature.SdRequestPartialState>, private streamService: StreamService) {}
 
   loadSdRequestsTable(event: LazyLoadEvent) {
     event.filters = event.filters ? processSdRequestTableFilters(JSON.parse(JSON.stringify(event.filters))) : {};
@@ -104,5 +106,13 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   clearCreatedForm() {
     this.store.dispatch(SdRequestActions.clearNewForm());
+  }
+
+  connectToSdRequestsChannel(): Subscription {
+    const channel = this.streamService.cable.channel('SdRequestsChannel');
+
+    return channel.received().subscribe((data) => {
+      this.store.dispatch(SdRequestActions.receivedSdRequestFromActionCable({ sdRequest: data.body }));
+    });
   }
 }
