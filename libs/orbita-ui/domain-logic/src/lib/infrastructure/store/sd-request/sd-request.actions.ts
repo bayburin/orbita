@@ -62,6 +62,8 @@ export const saveFormSuccess = createAction('[SdRequest/API] Save Form Success',
 
 export const saveFormFailure = createAction('[SdRequest/API] Save Form Failure', props<{ error: any }>());
 
+export const reinitUpdateForm = createAction('[SdRequest] Reinit Update Form');
+
 // ========== Форма новой заявки ==========
 
 export const initNewForm = createAction('[SdRequest] Init New Form');
@@ -97,4 +99,4 @@ export const receivedSdRequestFromActionCable = createAction(
   props<{ sdRequest: SdRequest }>()
 );
 
-export const update = createAction('[SdRequest] Update', props<{ sdRequest: SdRequest }>());
+export const update = createAction('[SdRequest] Update', props<{ sdRequest: SdRequest; needToGetNewData: boolean }>());

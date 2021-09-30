@@ -44,6 +44,7 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     map(([form, _updateView]) => form)
   );
   formLoading$ = this.store.select(SdRequestSelectors.getFormLoading);
+  formNeedToGetNewData$ = this.store.select(SdRequestSelectors.getNeedToGetNewData);
 
   // ========== Форма новой заявки ==========
 
@@ -114,5 +115,9 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     return channel.received().subscribe((data) => {
       this.store.dispatch(SdRequestActions.receivedSdRequestFromActionCable({ sdRequest: data.body }));
     });
+  }
+
+  reinitUpdateForm() {
+    this.store.dispatch(SdRequestActions.reinitUpdateForm());
   }
 }

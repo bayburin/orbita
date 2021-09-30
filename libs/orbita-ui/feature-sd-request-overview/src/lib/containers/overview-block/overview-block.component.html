@@ -18,6 +18,7 @@
           </lib-history-event-card>
         </div>
         <div class="col-6">
+          <p-messages *ngIf="editMode" [value]="messages" [enableService]="false"></p-messages>
           <p-toolbar styleClass="toolbar-sm">
             <ng-container *ngIf="editMode; else readModeActions">
               <div class="p-toolbar-group-left">
@@ -45,12 +46,14 @@
                     [disabled]="!form.valid"
                     (click)="saveForm()"
                   ></p-button>
-                  <!-- <p-splitButton
-                    label="Сохранить"
-                    icon="mdi mdi-content-save-edit-outline mdi-18px"
-                    (onClick)="saveForm()"
-                    [model]="actionItems"
-                  ></p-splitButton> -->
+                  <p-button
+                    *ngIf="formNeedToGetNewData$ | async"
+                    label="Принять изменения"
+                    icon="mdi mdi-refresh mdi-18px"
+                    class="mr-2"
+                    styleClass="p-button-outlined p-button-warning"
+                    (click)="reinitForm()"
+                  ></p-button>
                 </ng-template>
                 <!-- <p-button
                   label="Показать изменения"

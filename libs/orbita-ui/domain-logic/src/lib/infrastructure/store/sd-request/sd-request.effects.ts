@@ -198,6 +198,14 @@ export class SdRequestEffects {
     )
   );
 
+  reinitUpdateForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(SdRequestActions.reinitUpdateForm),
+      withLatestFrom(this.store.select(SdRequestViewModelSelectors.getSelectedEntityViewModel)),
+      map(([_action, sdRequestViewModel]) => SdRequestActions.initUpdateForm({ sdRequestViewModel }))
+    )
+  );
+
   // ========== Форма новой заявки ==========
 
   initNewForm$ = createEffect(() =>
@@ -253,8 +261,11 @@ export class SdRequestEffects {
   receivedSdRequestFromActionCable$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.receivedSdRequestFromActionCable),
-      withLatestFrom(this.store.select(SdRequestSelectors.getEntities)),
-      switchMap(([action, entities]) => {
+      withLatestFrom(
+        this.store.select(SdRequestSelectors.getEntities),
+        this.store.select(SdRequestSelectors.getSelectedId)
+      ),
+      switchMap(([action, entities, selectedId]) => {
         const id = action.sdRequest.id;
 
         if (!entities[id]) {
@@ -262,10 +273,12 @@ export class SdRequestEffects {
         }
 
         const normalizeData = SdRequestCacheService.normalizeSdRequest(action.sdRequest);
+        // Если обновились данные по текущей заявке, установить соответствующий флаг
+        const needToGetNewData = id === selectedId;
 
         return [
           SdRequestActions.updatePartials({ entities: normalizeData.entities }),
-          SdRequestActions.update({ sdRequest: normalizeData.entities.sd_requests[id] }),
+          SdRequestActions.update({ sdRequest: normalizeData.entities.sd_requests[id], needToGetNewData }),
         ];
       })
     )

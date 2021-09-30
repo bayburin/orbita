@@ -14,6 +14,7 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   selectedError$ = new BehaviorSubject(null);
   formEntity$ = new BehaviorSubject(null);
   formLoading$ = new BehaviorSubject(null);
+  formNeedToGetNewData$ = new BehaviorSubject(null);
   newFormEntity$ = new BehaviorSubject(null);
   newFormLoading$ = new BehaviorSubject(null);
   newFormCreated$ = new BehaviorSubject(null);
@@ -73,5 +74,9 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
 
   connectToSdRequestsChannel() {
     return new Subscription();
+  }
+
+  reinitUpdateForm() {
+    /** */
   }
 }

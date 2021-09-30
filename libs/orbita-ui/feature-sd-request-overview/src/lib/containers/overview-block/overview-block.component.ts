@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import { filter, distinctUntilChanged } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {
@@ -11,14 +11,13 @@ import {
   AuthCenterFacade,
   ParameterFacade,
   Parameter,
-  WorkViewModel,
-  WorkerViewModel,
   prioritiesViewModelArray,
   UserFacade,
   User,
   UserGroup,
   AttachmentViewForm,
 } from '@orbita/orbita-ui/domain-logic';
+import { Message } from 'primeng/api';
 
 @Component({
   selector: 'lib-overview-block',
@@ -53,6 +52,8 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   form: FormGroup;
   loadingForm$ = this.sdRequestFacade.formLoading$;
   subscriptions = new Subscription();
+  formNeedToGetNewData$ = this.sdRequestFacade.formNeedToGetNewData$;
+  messages: Message[] = [];
 
   get newAttachmentsForm(): FormArray {
     return this.form.get('newAttachments') as FormArray;
@@ -76,7 +77,23 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sdRequestFacade.loadSelectedSdRequest();
     this.buildForm();
-    this.subscriptions.add(this.editMode$.subscribe((editMode) => (this.editMode = editMode)));
+    this.subscriptions.add(
+      combineLatest([this.editMode$, this.formNeedToGetNewData$]).subscribe(([editMode, formNeedToGetNewData]) => {
+        this.editMode = editMode;
+
+        if (editMode && formNeedToGetNewData) {
+          this.messages = [
+            {
+              severity: 'warn',
+              summary: 'Внимание',
+              detail: 'Заявка была изменена кем-то другим. Примите изменения до того, как сделаете свои.',
+            },
+          ];
+        } else {
+          this.messages = [];
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -118,6 +135,13 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     if (this.form.valid) {
       this.sdRequestFacade.updateForm();
     }
+  }
+
+  /**
+   * Актуализирует данные формы
+   */
+  reinitForm(): void {
+    this.sdRequestFacade.reinitUpdateForm();
   }
 
   /**

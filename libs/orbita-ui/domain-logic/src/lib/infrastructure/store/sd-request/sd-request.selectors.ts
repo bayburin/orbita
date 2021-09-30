@@ -60,6 +60,8 @@ export const getFormLoading = createSelector(getForm, (state: FormState) => stat
 
 export const getFormUpdateView = createSelector(getForm, (state: FormState) => state.updateView);
 
+export const getNeedToGetNewData = createSelector(getForm, (state: FormState) => state.needToGetNewData);
+
 // ========== Форма новой заявки ==========
 
 export const getNewForm = createSelector(getSdRequestState, (state: State) => state.newForm);

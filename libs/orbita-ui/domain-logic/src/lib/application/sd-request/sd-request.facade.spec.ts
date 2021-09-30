@@ -212,6 +212,16 @@ describe('SdRequestFacade', () => {
         expect(spy).toHaveBeenCalledWith(SdRequestActions.clearNewForm());
       });
     });
+
+    describe('reinitUpdateForm()', () => {
+      it('should call reinitUpdateForm action', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+
+        facade.reinitUpdateForm();
+
+        expect(spy).toHaveBeenCalledWith(SdRequestActions.reinitUpdateForm());
+      });
+    });
   });
 
   // describe('used in NgModule', () => {

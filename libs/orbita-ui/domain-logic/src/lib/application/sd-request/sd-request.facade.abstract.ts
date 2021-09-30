@@ -143,4 +143,9 @@ export abstract class SdRequestFacadeAbstract {
    * Подключается к каналу 'SdRequestsChannel
    */
   abstract connectToSdRequestsChannel(): Subscription;
+
+  /**
+   * Актуализирует данные в текущей форме заявки
+   */
+  abstract reinitUpdateForm(): void;
 }

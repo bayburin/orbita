@@ -10,3 +10,10 @@
     }
   }
 }
+
+.employees {
+  .p-autocomplete-item {
+    display: flex;
+    align-items: center;
+  }
+}

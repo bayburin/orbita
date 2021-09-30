@@ -75,7 +75,7 @@ describe('SdRequestReducer', () => {
       action = SdRequestActions.loadSelected();
       const result: SelectedState = reducer(initialState, action).selected;
 
-      expect(result.entity).toBeNull();
+      expect(result.id).toBeNull();
       expect(result.skeleton).toBe(true);
       expect(result.error).toBeNull();
     });
@@ -87,7 +87,7 @@ describe('SdRequestReducer', () => {
       action = SdRequestActions.loadSelectedSuccess({ sdRequest });
       const result: SelectedState = reducer(initialState, action).selected;
 
-      expect(result.entity).toEqual(sdRequest);
+      expect(result.id).toEqual(sdRequest.id);
       expect(result.skeleton).toBe(false);
     });
   });
@@ -111,7 +111,7 @@ describe('SdRequestReducer', () => {
       action = SdRequestActions.clearSelected();
       const result: SelectedState = reducer(tmpResult, action).selected;
 
-      expect(result.entity).toBeNull();
+      expect(result.id).toBeNull();
     });
   });
 
@@ -144,6 +144,7 @@ describe('SdRequestReducer', () => {
       const result: FormState = reducer(initialState, action).form;
 
       expect(result.entity).toEqual(form);
+      expect(result.needToGetNewData).toBe(false);
     });
   });
 
@@ -182,7 +183,7 @@ describe('SdRequestReducer', () => {
 
       expect(result.form.loading).toBe(false);
       expect(result.form.updateView).toBe(true);
-      expect(result.selected.entity).toEqual(sdRequest);
+      expect(result.selected.id).toEqual(sdRequest.id);
     });
   });
 
@@ -294,10 +295,14 @@ describe('SdRequestReducer', () => {
       const meta = { total_count: 12 } as Meta;
       action = SdRequestActions.loadAllSuccess({ sdRequests, meta });
       let result: State = reducer(initialState, action);
-      action = SdRequestActions.update({ sdRequest: { id: 'PRODUCT-zzz', name: 'foo' } as unknown as SdRequest });
+      action = SdRequestActions.update({
+        sdRequest: { id: 'PRODUCT-zzz', name: 'foo' } as unknown as SdRequest,
+        needToGetNewData: true,
+      });
       result = reducer(result, action);
 
       expect((result.entities['PRODUCT-zzz'] as any).name).toBe('foo');
+      expect(result.form.needToGetNewData).toBe(true);
     });
   });
 

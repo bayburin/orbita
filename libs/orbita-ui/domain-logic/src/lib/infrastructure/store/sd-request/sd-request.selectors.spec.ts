@@ -43,6 +43,7 @@ describe('SdRequestSelectors', () => {
       entity: formEntity,
       loading: false,
       updateView: true,
+      needToGetNewData: false,
     };
     newFormState = {
       entity: newFormEntity,
@@ -130,6 +131,10 @@ describe('SdRequestSelectors', () => {
 
   it('getFormUpdateView() should return updateView attribute', () => {
     expect(SdRequestSelectors.getFormUpdateView.projector(formState)).toBe(true);
+  });
+
+  it('getNeedToGetNewData() should return updateView attribute', () => {
+    expect(SdRequestSelectors.getNeedToGetNewData.projector(formState)).toBe(false);
   });
 
   // ========== Форма новой заявки ==========

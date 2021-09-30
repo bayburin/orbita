@@ -88,6 +88,16 @@ describe('OverviewBlockComponent', () => {
     });
   });
 
+  describe('reinitForm()', () => {
+    it('should call reinitUpdateForm() method', () => {
+      const spy = jest.spyOn(sdRequestFacade, 'reinitUpdateForm');
+
+      component.reinitForm();
+
+      expect(spy).toHaveBeenCalled();
+    });
+  });
+
   describe('navigateToSdRequests()', () => {
     it('should call updateForm() method', () => {
       const router = TestBed.inject(Router);

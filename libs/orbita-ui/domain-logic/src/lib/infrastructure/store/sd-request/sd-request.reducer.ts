@@ -13,7 +13,7 @@ export const SD_REQUEST_FEATURE_KEY = 'sdRequest';
 export interface SelectedState {
   skeleton: boolean;
   editMode: boolean;
-  id?: number;
+  id: number;
   error?: string;
 }
 
@@ -22,6 +22,7 @@ export interface FormState {
   loading: boolean;
   error?: string;
   updateView: boolean;
+  needToGetNewData: boolean;
 }
 
 export interface NewFormState {
@@ -49,12 +50,14 @@ export interface SdRequestPartialState {
 export const initSelectedState: SelectedState = {
   skeleton: false,
   editMode: false,
+  id: null,
 };
 
 export const initFormState: FormState = {
   entity: null,
   loading: false,
   updateView: true,
+  needToGetNewData: false,
 };
 
 export const initNewFormState: NewFormState = {
@@ -113,9 +116,9 @@ const sdRequestReducer = createReducer(
     ...state,
     selected: {
       ...state.selected,
-      entity: null,
       skeleton: true,
       error: null,
+      id: null,
     },
   })),
   on(SdRequestActions.loadSelectedSuccess, (state, { sdRequest }) =>
@@ -123,7 +126,6 @@ const sdRequestReducer = createReducer(
       ...state,
       selected: {
         ...state.selected,
-        entity: sdRequest,
         skeleton: false,
         id: sdRequest.id,
       },
@@ -166,6 +168,7 @@ const sdRequestReducer = createReducer(
     form: {
       ...state.form,
       entity: SdRequestFactory.createViewForm(sdRequestViewModel),
+      needToGetNewData: false,
     },
   })),
   on(SdRequestActions.changeForm, (state, { entity }) => ({
@@ -195,7 +198,7 @@ const sdRequestReducer = createReducer(
     },
     selected: {
       ...state.selected,
-      entity: sdRequest,
+      id: sdRequest.id,
     },
   })),
   on(SdRequestActions.saveFormFailure, (state, { error }) => ({
@@ -280,8 +283,17 @@ const sdRequestReducer = createReducer(
 
   // ========== Обновление данных по заявке ==========
 
-  on(SdRequestActions.update, (state, { sdRequest }) =>
-    sdRequestAdapter.updateOne({ id: sdRequest.id, changes: sdRequest }, { ...state })
+  on(SdRequestActions.update, (state, { sdRequest, needToGetNewData }) =>
+    sdRequestAdapter.updateOne(
+      { id: sdRequest.id, changes: sdRequest },
+      {
+        ...state,
+        form: {
+          ...state.form,
+          needToGetNewData,
+        },
+      }
+    )
   )
 );
 
