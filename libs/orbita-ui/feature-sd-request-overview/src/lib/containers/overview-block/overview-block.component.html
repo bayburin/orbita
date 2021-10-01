@@ -279,7 +279,11 @@
                     <div *ngIf="employee$ | async as employee; else unknownData">
                       <lib-detail-row class="mb-2">
                         <div attribute>ФИО</div>
-                        <div value>{{ employee.lastName }} {{ employee.firstName }} {{ employee.middleName }}</div>
+                        <div value>
+                          <a [routerLink]="['/employees', employee.id]">
+                            {{ employee.lastName }} {{ employee.firstName }} {{ employee.middleName }}
+                          </a>
+                        </div>
                       </lib-detail-row>
 
                       <lib-detail-row class="mb-2">
