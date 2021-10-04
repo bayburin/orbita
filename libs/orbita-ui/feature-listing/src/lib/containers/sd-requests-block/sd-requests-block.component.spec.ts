@@ -1,3 +1,4 @@
+import { MessageService } from 'primeng/api';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -25,6 +26,7 @@ describe('SdRequestsBlockComponent', () => {
         { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
         { provide: UserFacade, useClass: UserFacadeStub },
         { provide: ServiceDeskFacade, useClass: ServiceDeskFacadeStub },
+        MessageService,
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -34,11 +36,16 @@ describe('SdRequestsBlockComponent', () => {
     fixture = TestBed.createComponent(SdRequestsBlockComponent);
     component = fixture.componentInstance;
     sdRequestFacade = TestBed.inject(SdRequestFacade);
+    jest.spyOn(sdRequestFacade, 'connectToSdRequestsCreateChannel');
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should subscribe to SdRequests::Create channel', () => {
+    expect(sdRequestFacade.connectToSdRequestsCreateChannel).toHaveBeenCalled();
   });
 
   describe('tableChanged', () => {

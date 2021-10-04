@@ -21,7 +21,7 @@ describe('TicketLayoutPageComponent', () => {
     fixture = TestBed.createComponent(TicketLayoutPageComponent);
     component = fixture.componentInstance;
     sdRequestFacade = TestBed.inject(SdRequestFacade);
-    jest.spyOn(sdRequestFacade, 'connectToSdRequestsChannel');
+    jest.spyOn(sdRequestFacade, 'connectToSdRequestsUpdateChannel');
     fixture.detectChanges();
   });
 
@@ -29,7 +29,7 @@ describe('TicketLayoutPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should subscribe to SdRequests channel', () => {
-    expect(sdRequestFacade.connectToSdRequestsChannel).toHaveBeenCalled();
+  it('should subscribe to SdRequests::Update channel', () => {
+    expect(sdRequestFacade.connectToSdRequestsUpdateChannel).toHaveBeenCalled();
   });
 });

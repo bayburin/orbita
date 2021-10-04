@@ -9,6 +9,7 @@ describe('ErrorHandlerService', () => {
   let service: ErrorHandlerService;
   let messageService: MessageService;
   const msgParams = {
+    key: 'global',
     severity: 'error',
     summary: 'Ошибка',
     sticky: true,
