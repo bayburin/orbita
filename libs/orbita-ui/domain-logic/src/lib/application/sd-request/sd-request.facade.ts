@@ -56,9 +56,10 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   constructor(private store: Store<SdRequestFeature.SdRequestPartialState>, private streamService: StreamService) {}
 
   loadSdRequestsTable(event: LazyLoadEvent) {
-    event.filters = event.filters ? processSdRequestTableFilters(JSON.parse(JSON.stringify(event.filters))) : {};
+    const data = JSON.parse(JSON.stringify(event));
+    data.filters = event.filters ? processSdRequestTableFilters(data.filters) : {};
 
-    this.store.dispatch(SdRequestActions.loadAll({ data: event }));
+    this.store.dispatch(SdRequestActions.loadAll({ data: data }));
   }
 
   loadFiltered(event: LazyLoadEvent) {
@@ -109,11 +110,19 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
     this.store.dispatch(SdRequestActions.clearNewForm());
   }
 
-  connectToSdRequestsChannel(): Subscription {
-    const channel = this.streamService.cable.channel('SdRequestsChannel');
+  connectToSdRequestsCreateChannel(): Subscription {
+    const channel = this.streamService.cable.channel('SdRequests::CreateChannel');
 
     return channel.received().subscribe((data) => {
-      this.store.dispatch(SdRequestActions.receivedSdRequestFromActionCable({ sdRequest: data.body }));
+      this.store.dispatch(SdRequestActions.processWebSocketOnCreate());
+    });
+  }
+
+  connectToSdRequestsUpdateChannel(): Subscription {
+    const channel = this.streamService.cable.channel('SdRequests::UpdateChannel');
+
+    return channel.received().subscribe((data) => {
+      this.store.dispatch(SdRequestActions.processWebSocketOnUpdate({ sdRequest: data.payload }));
     });
   }
 

@@ -31,6 +31,7 @@ export class ErrorHandlerService {
     }
 
     this.messageService.add({
+      key: 'global',
       severity: 'error',
       summary: 'Ошибка',
       sticky: true,

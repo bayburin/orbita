@@ -192,7 +192,7 @@ export class SdRequestEffects {
   saveFormSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(SdRequestActions.saveFormSuccess),
-      tap(() => this.messageService.add({ severity: 'success', detail: 'Заявка обновлена' })),
+      tap(() => this.messageService.add({ key: 'global', severity: 'success', detail: 'Заявка обновлена' })),
       withLatestFrom(this.store.select(SdRequestViewModelSelectors.getSelectedEntityViewModel)),
       map(([_action, sdRequestViewModel]) => SdRequestActions.initUpdateForm({ sdRequestViewModel }))
     )
@@ -258,9 +258,26 @@ export class SdRequestEffects {
 
   // ========== Обновление данных по заявке ==========
 
-  receivedSdRequestFromActionCable$ = createEffect(() =>
+  processWebSocketOnCreate$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SdRequestActions.processWebSocketOnCreate),
+        tap(() => {
+          this.messageService.clear('newSdRequestsNotify');
+          this.messageService.add({
+            key: 'newSdRequestsNotify',
+            sticky: true,
+            severity: 'info',
+            summary: 'Появились новые заявки',
+          });
+        })
+      ),
+    { dispatch: false }
+  );
+
+  processWebSocketOnUpdate$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(SdRequestActions.receivedSdRequestFromActionCable),
+      ofType(SdRequestActions.processWebSocketOnUpdate),
       withLatestFrom(
         this.store.select(SdRequestSelectors.getEntities),
         this.store.select(SdRequestSelectors.getSelectedId)

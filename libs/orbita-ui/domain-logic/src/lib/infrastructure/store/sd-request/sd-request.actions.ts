@@ -94,8 +94,10 @@ export const clearNewForm = createAction('[SdRequest] Clear New Form');
 
 // ========== Обновление данных по заявке ==========
 
-export const receivedSdRequestFromActionCable = createAction(
-  '[SdRequest] Received SdRequest From ActionCable',
+export const processWebSocketOnCreate = createAction('[SdRequest] Process Web Socket On Create');
+
+export const processWebSocketOnUpdate = createAction(
+  '[SdRequest] Process Web Socket On Update',
   props<{ sdRequest: SdRequest }>()
 );
 

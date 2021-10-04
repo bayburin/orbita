@@ -140,9 +140,14 @@ export abstract class SdRequestFacadeAbstract {
   abstract clearCreatedForm(): void;
 
   /**
-   * Подключается к каналу 'SdRequestsChannel
+   * Подключается к каналу 'SdRequests::CreateChannel'
    */
-  abstract connectToSdRequestsChannel(): Subscription;
+  abstract connectToSdRequestsCreateChannel(): Subscription;
+
+  /**
+   * Подключается к каналу 'SdRequests::UpdateChannel'
+   */
+  abstract connectToSdRequestsUpdateChannel(): Subscription;
 
   /**
    * Актуализирует данные в текущей форме заявки

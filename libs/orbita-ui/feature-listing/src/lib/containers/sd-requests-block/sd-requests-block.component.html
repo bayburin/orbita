@@ -33,3 +33,14 @@
     (viewSdRequest)="redirectToSdRequestPage($event)"
   ></lib-sd-requests-table>
 </div>
+
+<p-toast position="top-center" key="newSdRequestsNotify" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div class="flex flex-column flex-auto">
+      <div class="flex align-items-center">
+        <p>{{ message.summary }}</p>
+        <button pButton pRipple type="button" label="Получить" class="ml-2" (click)="reloadTable()"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

@@ -189,18 +189,23 @@ const sdRequestReducer = createReducer(
       loading: true,
     },
   })),
-  on(SdRequestActions.saveFormSuccess, (state, { sdRequest }) => ({
-    ...state,
-    form: {
-      ...state.form,
-      loading: false,
-      updateView: true,
-    },
-    selected: {
-      ...state.selected,
-      id: sdRequest.id,
-    },
-  })),
+  on(SdRequestActions.saveFormSuccess, (state, { sdRequest }) =>
+    sdRequestAdapter.updateOne(
+      { id: sdRequest.id, changes: sdRequest },
+      {
+        ...state,
+        form: {
+          ...state.form,
+          loading: false,
+          updateView: true,
+        },
+        selected: {
+          ...state.selected,
+          id: sdRequest.id,
+        },
+      }
+    )
+  ),
   on(SdRequestActions.saveFormFailure, (state, { error }) => ({
     ...state,
     form: {

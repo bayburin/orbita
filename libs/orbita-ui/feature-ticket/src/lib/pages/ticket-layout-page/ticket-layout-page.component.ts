@@ -13,7 +13,7 @@ export class TicketLayoutPageComponent implements OnInit, OnDestroy {
   constructor(private sdRequestFacade: SdRequestFacade) {}
 
   ngOnInit(): void {
-    this.subscriptions.add(this.sdRequestFacade.connectToSdRequestsChannel());
+    this.subscriptions.add(this.sdRequestFacade.connectToSdRequestsUpdateChannel());
   }
 
   ngOnDestroy(): void {

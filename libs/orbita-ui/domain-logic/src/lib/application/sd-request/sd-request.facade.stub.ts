@@ -72,7 +72,11 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
     /** */
   }
 
-  connectToSdRequestsChannel() {
+  connectToSdRequestsCreateChannel() {
+    return new Subscription();
+  }
+
+  connectToSdRequestsUpdateChannel() {
     return new Subscription();
   }
 
