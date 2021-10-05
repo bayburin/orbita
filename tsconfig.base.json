@@ -23,6 +23,7 @@
       "@orbita/orbita-ui/feature-listing": ["libs/orbita-ui/feature-listing/src/index.ts"],
       "@orbita/orbita-ui/feature-sd-request-overview": ["libs/orbita-ui/feature-sd-request-overview/src/index.ts"],
       "@orbita/orbita-ui/feature-sd-request-wizzard": ["libs/orbita-ui/feature-sd-request-wizzard/src/index.ts"],
+      "@orbita/orbita-ui/feature-svt-item": ["libs/orbita-ui/feature-svt-item/src/index.ts"],
       "@orbita/orbita-ui/feature-ticket": ["libs/orbita-ui/feature-ticket/src/index.ts"],
       "@orbita/orbita-ui/shell": ["libs/orbita-ui/shell/src/index.ts"],
       "@orbita/orbita-ui/ui": ["libs/orbita-ui/ui/src/index.ts"],

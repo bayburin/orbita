@@ -27,6 +27,11 @@ const routes: Routes = [
         loadChildren: () => import('@orbita/orbita-ui/feature-employee').then((m) => m.OrbitaUiFeatureEmployeeModule),
         data: { breadcrumb: 'Работники' },
       },
+      {
+        path: 'svt-items',
+        loadChildren: () => import('@orbita/orbita-ui/feature-svt-item').then((m) => m.OrbitaUiFeatureSvtItemModule),
+        data: { breadcrumb: 'Выч. техника' },
+      },
     ],
   },
 ];
