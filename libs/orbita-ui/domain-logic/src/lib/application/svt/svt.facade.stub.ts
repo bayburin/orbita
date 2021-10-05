@@ -9,6 +9,10 @@ export class SvtFacadeStub implements SvtFacadeAbstract {
   selectedItem$ = new BehaviorSubject(null);
   allForFormItems$ = new BehaviorSubject(null);
 
+  searchSvtItems() {
+    /** */
+  }
+
   loadItemsForForm() {
     /** */
   }

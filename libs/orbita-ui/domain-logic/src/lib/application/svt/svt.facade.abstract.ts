@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 
 import { SvtItem } from './../../entities/models/svt/svt-item.interface';
 import { SvtFilters } from './../../entities/filter.interface';
+import { PrimeFilter } from './../../entities/prime-filter.interface';
 
 export abstract class SvtFacadeAbstract {
   /**
@@ -24,6 +25,13 @@ export abstract class SvtFacadeAbstract {
    * Список ВТ
    */
   allForFormItems$: Observable<SvtItem[]>;
+
+  /**
+   * Поиск ВТ
+   *
+   * @param filters - атрибуты поиска
+   */
+  abstract searchSvtItems(filters: PrimeFilter): void;
 
   /**
    * Загружает список ВТ для формы создания заявки

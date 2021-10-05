@@ -1,3 +1,4 @@
+import { PrimeFilterFactory } from './../../infrastructure/factories/prime-filter.factory';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
@@ -40,6 +41,25 @@ describe('SvtFacade', () => {
 
       store = TestBed.inject(MockStore);
       facade = TestBed.inject(SvtFacade);
+    });
+
+    describe('searchSvtItems()', () => {
+      it('should call loadAllEmployeeShort action', () => {
+        const spy = jest.spyOn(store, 'dispatch');
+        const filters = PrimeFilterFactory.createFilter('fio', 'fake-value');
+
+        facade.searchSvtItems(filters);
+        expect(spy).toHaveBeenCalledWith(SvtItemActions.loadAll({ filters }));
+      });
+
+      it('should call clearEmployeeShortEntities() method if value is empty', () => {
+        const spy = jest.spyOn(facade, 'removeAllItems');
+        const filters = PrimeFilterFactory.createFilter('fio', '');
+
+        facade.searchSvtItems(filters);
+
+        expect(spy).toHaveBeenCalled();
+      });
     });
 
     describe('loadItemsForForm()', () => {

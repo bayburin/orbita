@@ -6,6 +6,8 @@ import * as SvtItemActions from '../../infrastructure/store/svt-item/svt-item.ac
 import * as SvtItemSelectors from '../../infrastructure/store/svt-item/svt-item.selectors';
 import { SvtFacadeAbstract } from './svt.facade.abstract';
 import { SvtFilters } from './../../entities/filter.interface';
+import { PrimeFilter } from './../../entities/prime-filter.interface';
+import { processSvtItemTableFilters } from '../../infrastructure/utils/process-svt-item-table-filters.function';
 
 /**
  * Фасад для работы с данными из СВТ (обращения к хранилищу SvtItem)
@@ -21,6 +23,17 @@ export class SvtFacade implements SvtFacadeAbstract {
   allForFormItems$ = this.store.select(SvtItemSelectors.getAll);
 
   constructor(private store: Store<SvtItemFeature.SvtItemPartialState>) {}
+
+  searchSvtItems(filters: PrimeFilter) {
+    const searchFlag = Object.keys(filters).some((filter) => Boolean(filters[filter].value));
+
+    if (searchFlag) {
+      filters = processSvtItemTableFilters(filters);
+      this.store.dispatch(SvtItemActions.loadAll({ filters }));
+    } else {
+      this.removeAllItems();
+    }
+  }
 
   loadItemsForForm(filters: SvtFilters) {
     this.store.dispatch(SvtItemActions.loadAllForForm({ filters }));

@@ -1,3 +1,4 @@
+import { SvtWorkplaceCount } from './svt-workplace-count.interface';
 import { SvtWorkplaceType } from './svt-workplace-type.interface';
 
 /**
@@ -28,4 +29,9 @@ export interface SvtWorkplace {
    * ФИО ответственного
    */
   readonly user_fio: string;
+
+  /**
+   * Номер отдела
+   */
+  readonly workplace_count: SvtWorkplaceCount;
 }

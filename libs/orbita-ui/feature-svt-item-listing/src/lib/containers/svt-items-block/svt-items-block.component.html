@@ -1,3 +1,9 @@
 <div class="card">
-  <p>svt-items-block works!</p>
+  <lib-svt-items-table
+    [items]="items$ | async"
+    [loading]="loading$ | async"
+    (filterChanged)="changeTable($event)"
+    (filterCleared)="clearTable()"
+    (newSdRequest)="redirectToNewSdRequestPage($event)"
+  ></lib-svt-items-table>
 </div>
