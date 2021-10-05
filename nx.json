@@ -50,6 +50,9 @@
     "orbita-ui-feature-svt-item": {
       "tags": ["scope:orbita-ui", "type:feature"]
     },
+    "orbita-ui-feature-svt-item-listing": {
+      "tags": ["scope:orbita-ui", "type:feature"]
+    },
     "orbita-ui-feature-ticket": {
       "tags": ["scope:orbita-ui", "type:feature"]
     },
