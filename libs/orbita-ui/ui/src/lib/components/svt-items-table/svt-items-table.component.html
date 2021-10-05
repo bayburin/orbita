@@ -19,13 +19,13 @@
   <ng-template pTemplate="header">
     <tr>
       <th width="20%">ФИО</th>
-      <th>Отдел</th>
+      <th width="7%">Отдел</th>
       <th>Штрих-код</th>
-      <th>ID РМ</th>
+      <th width="7%">ID РМ</th>
       <th>Тип</th>
-      <th width="30%">Модель</th>
+      <th width="25%">Модель</th>
       <th>Инв. номер</th>
-      <th>Расположение</th>
+      <th width="10%">Расположение</th>
     </tr>
     <tr>
       <th>
@@ -91,13 +91,13 @@
   <ng-template pTemplate="body" let-item>
     <tr [pContextMenuRow]="item">
       <td width="20%">{{ item.workplace.user_fio }}</td>
-      <td>{{ item.workplace.workplace_count.division }}</td>
+      <td width="7%">{{ item.workplace.workplace_count.division }}</td>
       <td>{{ item.barcode_item.id }}</td>
-      <td>{{ item.workplace.workplace_id }}</td>
+      <td width="7%">{{ item.workplace.workplace_id }}</td>
       <td>{{ item.type.short_description }}</td>
-      <td width="30%">{{ item.short_item_model }}</td>
+      <td width="25%">{{ item.short_item_model }}</td>
       <td>{{ item.invent_num }}</td>
-      <td>
+      <td width="10%">
         Пл. {{ item.workplace.iss_reference_site.name }}, корп. {{ item.workplace.iss_reference_building.name }}, комн.
         {{ item.workplace.iss_reference_room.name }}
       </td>
