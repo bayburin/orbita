@@ -1,17 +1,18 @@
-import { Message } from '../../entities/models/message.interface';
+import { Subscription } from 'rxjs';
 
 export abstract class MessageFacadeAbstract {
   /**
-   * Сохранить новый массив сообщений в хранилище
+   * Сохраняет комментарий
    *
-   * @param messages - список сообщений
+   * @param ticketId - номер тикета
+   * @param message - текст сообщения
    */
-  abstract replaceAllMessages(messages: Message[]): void;
+  abstract createComment(ticketId: number, message: string): void;
 
   /**
-   * Добавить новые или обновить существующие сообщения
+   * Подключается к каналу 'CommentsChannel'
    *
-   * @param messages - список сообщений
+   * @param ticketId - номер тикета
    */
-  abstract setMessages(messages: Message[]): void;
+  abstract connectToCommentsChannel(ticketId: number): Subscription;
 }

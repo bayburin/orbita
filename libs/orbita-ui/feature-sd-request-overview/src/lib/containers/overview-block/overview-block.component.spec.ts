@@ -16,6 +16,8 @@ import {
   ParameterFacadeStub,
   UserFacade,
   UserFacadeStub,
+  MessageFacade,
+  MessageFacadeStub,
 } from '@orbita/orbita-ui/domain-logic';
 import { DatetimePipe } from '@orbita/orbita-ui/ui';
 
@@ -43,6 +45,7 @@ describe('OverviewBlockComponent', () => {
         { provide: AuthCenterFacade, useClass: AuthCenterFacadeStub },
         { provide: ParameterFacade, useClass: ParameterFacadeStub },
         { provide: UserFacade, useClass: UserFacadeStub },
+        { provide: MessageFacade, useClass: MessageFacadeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
@@ -57,6 +60,18 @@ describe('OverviewBlockComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('createComment()', () => {
+    it('should call createComment() method', () => {
+      component.id = 123;
+      const messageFacade = TestBed.inject(MessageFacade);
+      const spy = jest.spyOn(messageFacade, 'createComment');
+
+      component.createComment('test');
+
+      expect(spy).toHaveBeenCalledWith(123, 'test');
+    });
   });
 
   describe('toggleEditMode()', () => {

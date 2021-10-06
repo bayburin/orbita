@@ -8,7 +8,8 @@ import { MessageFacade } from './message.facade';
 import * as MessageActions from '../../infrastructure/store/message/message.actions';
 import { MESSAGE_FEATURE_KEY, initialState } from '../../infrastructure/store/message/message.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY } from '../../infrastructure/store/index';
-import { Message } from '../../entities/models/message.interface';
+import { StreamService } from '../../infrastructure/stream/stream.service';
+import { StreamServiceStub } from './../../infrastructure/stream/stream.service.stub';
 
 describe('MessageFacade', () => {
   let facade: MessageFacade;
@@ -22,32 +23,25 @@ describe('MessageFacade', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MessageFacade, provideMockActions(() => actions$), provideMockStore({ initialState: state })],
+      providers: [
+        MessageFacade,
+        provideMockActions(() => actions$),
+        provideMockStore({ initialState: state }),
+        { provide: StreamService, useClass: StreamServiceStub },
+      ],
     });
 
     store = TestBed.inject(MockStore);
     facade = TestBed.inject(MessageFacade);
   });
 
-  describe('replaceAllMessages()', () => {
-    it('should call init() action', () => {
-      const messages = [{ id: 1 } as Message, { id: 2 } as Message];
-      jest.spyOn(store, 'dispatch');
+  describe('createComment()', () => {
+    it('should call createComment action', () => {
+      const spy = jest.spyOn(store, 'dispatch');
 
-      facade.replaceAllMessages(messages);
+      facade.createComment(10, 'test');
 
-      expect(store.dispatch).toHaveBeenCalledWith(MessageActions.setAll({ messages }));
-    });
-  });
-
-  describe('setMessages()', () => {
-    it('should call setMessages() action', () => {
-      const messages = [{ id: 1 } as Message, { id: 2 } as Message];
-      jest.spyOn(store, 'dispatch');
-
-      facade.setMessages(messages);
-
-      expect(store.dispatch).toHaveBeenCalledWith(MessageActions.setMessages({ messages }));
+      expect(spy).toHaveBeenCalledWith(MessageActions.createComment({ ticketId: 10, message: 'test' }));
     });
   });
 });

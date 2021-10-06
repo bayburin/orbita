@@ -11,6 +11,7 @@ import { SvtItemEffects } from './infrastructure/store/svt-item/svt-item.effects
 import { HostEffects } from './infrastructure/store/host/host.effects';
 import { ParameterEffects } from './infrastructure/store/parameter/parameter.effects';
 import { AttachmentEffects } from './infrastructure/store/attachment/attachment.effects';
+import { MessageEffects } from './infrastructure/store/message/message.effects';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { AttachmentEffects } from './infrastructure/store/attachment/attachment.
       HostEffects,
       ParameterEffects,
       AttachmentEffects,
+      MessageEffects,
     ]),
   ],
   providers: [],

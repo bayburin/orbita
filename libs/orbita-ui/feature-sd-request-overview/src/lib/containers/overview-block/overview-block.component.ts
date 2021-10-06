@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription, combineLatest } from 'rxjs';
-import { filter, distinctUntilChanged } from 'rxjs/operators';
+import { filter, distinctUntilChanged, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import {
   SdRequestFacade,
@@ -16,6 +16,7 @@ import {
   User,
   UserGroup,
   AttachmentViewForm,
+  MessageFacade,
 } from '@orbita/orbita-ui/domain-logic';
 import { Message } from 'primeng/api';
 
@@ -55,6 +56,10 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   formNeedToGetNewData$ = this.sdRequestFacade.formNeedToGetNewData$;
   messages: Message[] = [];
 
+  // ========== Другое ==========
+
+  id: number;
+
   get newAttachmentsForm(): FormArray {
     return this.form.get('newAttachments') as FormArray;
   }
@@ -71,29 +76,14 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     private parameterFacade: ParameterFacade,
     private fb: FormBuilder,
     private router: Router,
-    private userFacade: UserFacade
+    private userFacade: UserFacade,
+    private messageFacade: MessageFacade
   ) {}
 
   ngOnInit(): void {
     this.sdRequestFacade.loadSelectedSdRequest();
     this.buildForm();
-    this.subscriptions.add(
-      combineLatest([this.editMode$, this.formNeedToGetNewData$]).subscribe(([editMode, formNeedToGetNewData]) => {
-        this.editMode = editMode;
-
-        if (editMode && formNeedToGetNewData) {
-          this.messages = [
-            {
-              severity: 'warn',
-              summary: 'Внимание',
-              detail: 'Заявка была изменена кем-то другим. Примите изменения до того, как сделаете свои.',
-            },
-          ];
-        } else {
-          this.messages = [];
-        }
-      })
-    );
+    this.processingSubscribes();
   }
 
   ngOnDestroy(): void {
@@ -117,8 +107,13 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     return user.id;
   }
 
-  sendMessage(message: string): void {
-    console.log(message);
+  /**
+   * Создает комментарий
+   *
+   * @param message - текст сообщения
+   */
+  createComment(message: string): void {
+    this.messageFacade.createComment(this.id, message);
   }
 
   /**
@@ -210,5 +205,39 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     while (this.newAttachmentsForm.length !== 0) {
       this.newAttachmentsForm.removeAt(0, { emitEvent: false });
     }
+  }
+
+  /**
+   * Обработка подписок
+   */
+  private processingSubscribes() {
+    this.subscriptions.add(
+      combineLatest([this.editMode$, this.formNeedToGetNewData$]).subscribe(([editMode, formNeedToGetNewData]) => {
+        this.editMode = editMode;
+
+        if (editMode && formNeedToGetNewData) {
+          this.messages = [
+            {
+              severity: 'warn',
+              summary: 'Внимание',
+              detail: 'Заявка была изменена кем-то другим. Примите изменения до того, как сделаете свои.',
+            },
+          ];
+        } else {
+          this.messages = [];
+        }
+      })
+    );
+    this.subscriptions.add(
+      this.sdRequest$
+        .pipe(
+          filter((data) => Boolean(data)),
+          first()
+        )
+        .subscribe((sdRequest) => {
+          this.id = sdRequest.id;
+          this.messageFacade.connectToCommentsChannel(sdRequest.id);
+        })
+    );
   }
 }

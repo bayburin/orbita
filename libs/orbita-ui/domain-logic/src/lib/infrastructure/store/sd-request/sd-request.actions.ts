@@ -30,6 +30,8 @@ export const updatePartials = createAction(
 
 export const clearAll = createAction('[SdRequest] Clear All');
 
+export const addComment = createAction('[SdRequest] Add Comment', props<{ id: number; commentId: number }>());
+
 // ========== Просмотр выбранной заявки ==========
 
 export const loadSelected = createAction('[SdRequest/API] Load Selected');

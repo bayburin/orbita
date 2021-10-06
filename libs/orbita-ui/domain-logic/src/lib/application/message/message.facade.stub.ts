@@ -1,12 +1,13 @@
+import { Subscription } from 'rxjs';
+
 import { MessageFacadeAbstract } from './message.facade.abstract';
-import { Message } from '../../entities/models/message.interface';
 
 export class MessageFacadeStub implements MessageFacadeAbstract {
-  replaceAllMessages(messages: Message[]) {
+  createComment() {
     /** */
   }
 
-  setMessages(messages: Message[]) {
-    /** */
+  connectToCommentsChannel() {
+    return new Subscription();
   }
 }

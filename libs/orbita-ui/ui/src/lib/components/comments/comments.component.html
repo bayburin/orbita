@@ -1,23 +1,24 @@
 <div class="comments-card">
   <p-scrollPanel styleClass="comments-card-scroll-panel">
     <ng-container *ngIf="comments.length; else noComments">
+      <div class="mb-2"></div>
       <div *ngFor="let comment of comments; trackBy: trackByComment">
-        <lib-comment [comment]="comment"></lib-comment>
+        <lib-comment [id]="comment.id" [comment]="comment"></lib-comment>
         <p-divider></p-divider>
       </div>
     </ng-container>
   </p-scrollPanel>
   <div class="comment-form-block">
     <div class="p-inputgroup">
-      <textarea #comment placeholder="Комментарий..." rows="5" pInputTextarea></textarea>
-      <button
-        type="button"
-        pButton
-        pRipple
-        icon="pi pi-send"
-        class="p-button-lg"
-        (click)="sendMessage.emit(comment.value)"
-      ></button>
+      <textarea
+        #comment
+        placeholder="Комментарий..."
+        rows="5"
+        pInputTextarea
+        (keydown)="keydown($event)"
+        (keyup)="keyup($event)"
+      ></textarea>
+      <button type="button" pButton pRipple icon="pi pi-send" class="p-button-lg" (click)="send()"></button>
     </div>
   </div>
 </div>

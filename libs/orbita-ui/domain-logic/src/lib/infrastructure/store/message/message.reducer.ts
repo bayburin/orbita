@@ -25,6 +25,7 @@ const messageReducer = createReducer(
   initialState,
   on(MessageActions.setAll, (state, { messages }) => messageAdapter.setAll(messages, { ...state, loaded: true })),
   on(MessageActions.setMessages, (state, { messages }) => messageAdapter.upsertMany(messages, state)),
+  on(MessageActions.receiveComment, (state, { message }) => messageAdapter.addOne(message, state)),
   on(MessageActions.clearAll, (state) => messageAdapter.removeAll({ ...state, loaded: false }))
 );
 

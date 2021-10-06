@@ -60,3 +60,5 @@ export * from './lib/application/user/user.facade';
 export * from './lib/application/user/user.facade.stub';
 export * from './lib/application/attachment/attachment.facade';
 export * from './lib/application/attachment/attachment.facade.stub';
+export * from './lib/application/message/message.facade';
+export * from './lib/application/message/message.facade.stub';

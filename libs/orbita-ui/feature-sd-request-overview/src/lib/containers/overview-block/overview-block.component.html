@@ -204,7 +204,7 @@
                 </p-panel>
               </p-tabPanel>
               <p-tabPanel header="Комментарии">
-                <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>
+                <lib-comments [comments]="sdRequest.comments" (sendMessage)="createComment($event)"></lib-comments>
               </p-tabPanel>
             </p-tabView>
           </div>

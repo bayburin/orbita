@@ -12,9 +12,4 @@ export class ShowSdRequestComponent {
    * Заявка
    */
   @Input() sdRequest: SdRequestViewModel;
-
-  sendMessage(message: string): void {
-    // TODO: Отправить событие родительскому контроллеру
-    console.log(message);
-  }
 }

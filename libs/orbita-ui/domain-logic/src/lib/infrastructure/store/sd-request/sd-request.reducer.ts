@@ -109,6 +109,12 @@ const sdRequestReducer = createReducer(
       loaded: false,
     })
   ),
+  on(SdRequestActions.addComment, (state, { id, commentId }) =>
+    sdRequestAdapter.updateOne(
+      { id, changes: { ...state.entities[id], comments: state.entities[id].comments.concat([commentId]) } },
+      state
+    )
+  ),
 
   // ========== Просмотр выбранной заявки ==========
 

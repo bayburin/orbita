@@ -21,10 +21,11 @@ import { SvtItem } from '../../../entities/models/svt/svt-item.interface';
 
 describe('SdRequestReducer', () => {
   let action: Action;
-  const createSdRequest = (id: string, name = '') =>
+  const createSdRequest = (id: number, name = '') =>
     ({
       id,
       name: name || `name-${id}`,
+      comments: [1],
     } as unknown as SdRequest);
   const createSdRequestViewModel = (id: string, name = '') =>
     ({
@@ -45,10 +46,8 @@ describe('SdRequestReducer', () => {
 
   describe('loadAllSuccess', () => {
     it('should return set the list of known SdRequest', () => {
-      const sdRequests = [createSdRequest('PRODUCT-AAA'), createSdRequest('PRODUCT-zzz')];
-      const meta = {
-        total_count: 12,
-      } as Meta;
+      const sdRequests = [createSdRequest(111), createSdRequest(222)];
+      const meta = { total_count: 12 } as Meta;
       action = SdRequestActions.loadAllSuccess({ sdRequests, meta });
       const result: State = reducer(initialState, action);
 
@@ -70,6 +69,19 @@ describe('SdRequestReducer', () => {
     });
   });
 
+  describe('addComment', () => {
+    it('should add comment id', () => {
+      const sdRequests = [createSdRequest(111), createSdRequest(222)];
+      const meta = { total_count: 12 } as Meta;
+      action = SdRequestActions.loadAllSuccess({ sdRequests, meta });
+      let result: State = reducer(initialState, action);
+      action = SdRequestActions.addComment({ id: 111, commentId: 3 });
+      result = reducer(result, action);
+
+      expect(result.entities[111].comments).toEqual([1, 3]);
+    });
+  });
+
   describe('loadSelected', () => {
     it('should set attributes', () => {
       action = SdRequestActions.loadSelected();
@@ -83,7 +95,7 @@ describe('SdRequestReducer', () => {
 
   describe('loadSelectedSuccess', () => {
     it('should set attributes', () => {
-      const sdRequest = createSdRequest('AAA');
+      const sdRequest = createSdRequest(111);
       action = SdRequestActions.loadSelectedSuccess({ sdRequest });
       const result: SelectedState = reducer(initialState, action).selected;
 
@@ -105,7 +117,7 @@ describe('SdRequestReducer', () => {
 
   describe('clearSelected', () => {
     it('should set attributes', () => {
-      const sdRequest = createSdRequest('AAA');
+      const sdRequest = createSdRequest(111);
       action = SdRequestActions.loadSelectedSuccess({ sdRequest });
       const tmpResult: State = reducer(initialState, action);
       action = SdRequestActions.clearSelected();
@@ -239,7 +251,7 @@ describe('SdRequestReducer', () => {
 
   describe('saveNewFormSuccess', () => {
     it('should set attributes', () => {
-      const sdRequest = createSdRequest('AAA');
+      const sdRequest = createSdRequest(111);
       action = SdRequestActions.saveNewFormSuccess({ sdRequest });
       const result: State = reducer(initialState, action);
 
@@ -291,17 +303,17 @@ describe('SdRequestReducer', () => {
 
   describe('update', () => {
     it('should set attributes', () => {
-      const sdRequests = [createSdRequest('PRODUCT-AAA'), createSdRequest('PRODUCT-zzz')];
+      const sdRequests = [createSdRequest(111), createSdRequest(222)];
       const meta = { total_count: 12 } as Meta;
       action = SdRequestActions.loadAllSuccess({ sdRequests, meta });
       let result: State = reducer(initialState, action);
       action = SdRequestActions.update({
-        sdRequest: { id: 'PRODUCT-zzz', name: 'foo' } as unknown as SdRequest,
+        sdRequest: { id: 222, name: 'foo' } as unknown as SdRequest,
         needToGetNewData: true,
       });
       result = reducer(result, action);
 
-      expect((result.entities['PRODUCT-zzz'] as any).name).toBe('foo');
+      expect((result.entities[222] as any).name).toBe('foo');
       expect(result.form.needToGetNewData).toBe(true);
     });
   });
