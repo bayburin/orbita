@@ -5,8 +5,6 @@ import {
   Input,
   Output,
   SimpleChanges,
-  ViewChild,
-  ElementRef,
   OnChanges,
 } from '@angular/core';
 import { MessageViewModel } from '@orbita/orbita-ui/domain-logic';
@@ -19,6 +17,10 @@ import { MessageViewModel } from '@orbita/orbita-ui/domain-logic';
 })
 export class CommentsComponent implements OnChanges {
   /**
+   * Комментарий
+   */
+  comment: string;
+  /**
    * Список комментариев к заявке
    */
   @Input() comments: MessageViewModel[];
@@ -26,10 +28,6 @@ export class CommentsComponent implements OnChanges {
    * Событие отправки комментария
    */
   @Output() sendMessage = new EventEmitter<string>();
-  /**
-   * Поле ввода комментария
-   */
-  @ViewChild('comment') comment: ElementRef;
   /**
    * Содержит состояния нажатия клавиш "Alt", "Shift", "Control"
    */
@@ -58,44 +56,15 @@ export class CommentsComponent implements OnChanges {
     }
   }
 
-  keydown(event: KeyboardEvent): void {
-    if (event.altKey) {
-      this.keyState.altKey = true;
-    }
-    if (event.shiftKey) {
-      this.keyState.shiftKey = true;
-    }
-    if (event.ctrlKey) {
-      this.keyState.ctrlKey = true;
-    }
-
-    if (event.key === 'Enter' && (this.keyState.altKey || this.keyState.shiftKey || this.keyState.ctrlKey)) {
-      event.preventDefault();
-      this.comment.nativeElement.value = this.comment.nativeElement.value + '\r\n';
-    } else if (event.key === 'Enter') {
-      event.preventDefault();
-      this.send();
-    }
-  }
-
-  keyup(event: KeyboardEvent): void {
-    if (event.key === 'Alt') {
-      this.keyState.altKey = false;
-    }
-    if (event.key === 'Control') {
-      this.keyState.ctrlKey = false;
-    }
-    if (event.key === 'Shift') {
-      this.keyState.shiftKey = false;
-    }
-  }
-
+  /**
+   * Отсылает комментарий
+   */
   send(): void {
-    if (!this.comment.nativeElement.value.trim()) {
+    if (!this.comment.trim()) {
       return;
     }
 
-    this.sendMessage.emit(this.comment.nativeElement.value.trim());
-    this.comment.nativeElement.value = '';
+    this.sendMessage.emit(this.comment.trim());
+    this.comment = '';
   }
 }

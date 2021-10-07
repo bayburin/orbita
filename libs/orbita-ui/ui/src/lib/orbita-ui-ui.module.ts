@@ -14,6 +14,7 @@ import { OrbitSpinnerModule } from 'angular-epic-spinners';
 
 import { DndFilesDirective } from './directives/dnd-files/dnd-files.directive';
 import { CalcScrollWidthByWorksDirective } from './directives/calc-scroll-width-by-works/calc-scroll-width-by-works.directive';
+import { MessageByEnterDirective } from './directives/message-by-enter/message-by-enter.directive';
 
 import { SdRequestsTableComponent } from './components/sd-requests-table/sd-requests-table.component';
 import { SdRequestHistoryOverviewComponent } from './components/sd-request-history-overview/sd-request-history-overview.component';
@@ -51,7 +52,7 @@ const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
 
 const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe, SortWorkByHistoryPipe, CapitalizePipe];
 
-const directives: any[] = [DndFilesDirective, CalcScrollWidthByWorksDirective];
+const directives: any[] = [DndFilesDirective, CalcScrollWidthByWorksDirective, MessageByEnterDirective];
 
 const components: any[] = [
   SdRequestsTableComponent,

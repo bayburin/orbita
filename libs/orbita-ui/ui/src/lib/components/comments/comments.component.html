@@ -11,12 +11,12 @@
   <div class="comment-form-block">
     <div class="p-inputgroup">
       <textarea
-        #comment
+        [(ngModel)]="comment"
+        libMessageByEnter
+        (sendMessage)="send()"
         placeholder="Комментарий..."
         rows="5"
         pInputTextarea
-        (keydown)="keydown($event)"
-        (keyup)="keyup($event)"
       ></textarea>
       <button type="button" pButton pRipple icon="pi pi-send" class="p-button-lg" (click)="send()"></button>
     </div>
