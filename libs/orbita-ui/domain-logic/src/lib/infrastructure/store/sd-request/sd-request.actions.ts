@@ -49,6 +49,8 @@ export const toggleSelectedEditMode = createAction('[SdRequest] Toggle Selected 
 
 export const disableSelectedEditMode = createAction('[SdRequest] Disable Selected Edit Mode');
 
+export const close = createAction('[SdRequest] Close', props<{ id: number }>());
+
 // ========== Форма существующей заявки ==========
 
 export const initUpdateForm = createAction(

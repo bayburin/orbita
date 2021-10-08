@@ -129,4 +129,8 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
   reinitUpdateForm() {
     this.store.dispatch(SdRequestActions.reinitUpdateForm());
   }
+
+  closeSdRequest(id: number) {
+    this.store.dispatch(SdRequestActions.close({ id }));
+  }
 }

@@ -153,4 +153,11 @@ export abstract class SdRequestFacadeAbstract {
    * Актуализирует данные в текущей форме заявки
    */
   abstract reinitUpdateForm(): void;
+
+  /**
+   * Закрывает заявку
+   *
+   * @param id - номер заявки
+   */
+  abstract closeSdRequest(id: number): void;
 }

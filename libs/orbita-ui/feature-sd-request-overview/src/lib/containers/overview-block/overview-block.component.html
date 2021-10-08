@@ -81,12 +81,13 @@
                   styleClass="p-button-text p-button-plain"
                   (click)="navigateToSdRequests()"
                 ></p-button>
-                <!-- <p-button
-                  label="Выполнить заявку"
+                <p-button
+                  label="Закрыть заявку"
                   icon="mdi mdi-check mdi-18px"
                   class="mr-2"
                   styleClass="p-button-outlined p-button-success"
-                ></p-button> -->
+                  (click)="closeSdRequest(sdRequest.id)"
+                ></p-button>
               </div>
               <div class="p-toolbar-group-right">
                 <!-- <p-button
@@ -456,3 +457,14 @@
 <ng-template #emptyData>
   <lib-panel-placeholder>Пусто</lib-panel-placeholder>
 </ng-template>
+
+<p-confirmDialog
+  [style]="{ width: '40vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  rejectIcon=""
+  acceptIcon=""
+  [dismissableMask]="true"
+>
+  <ng-template pTemplate="header"></ng-template>
+</p-confirmDialog>

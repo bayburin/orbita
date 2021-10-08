@@ -20,6 +20,7 @@ import {
   MessageFacadeStub,
 } from '@orbita/orbita-ui/domain-logic';
 import { DatetimePipe } from '@orbita/orbita-ui/ui';
+import { ConfirmationService } from 'primeng/api';
 
 import { OverviewBlockComponent } from './overview-block.component';
 
@@ -46,6 +47,7 @@ describe('OverviewBlockComponent', () => {
         { provide: ParameterFacade, useClass: ParameterFacadeStub },
         { provide: UserFacade, useClass: UserFacadeStub },
         { provide: MessageFacade, useClass: MessageFacadeStub },
+        ConfirmationService,
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

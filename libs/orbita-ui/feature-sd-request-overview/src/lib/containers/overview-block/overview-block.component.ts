@@ -18,7 +18,7 @@ import {
   AttachmentViewForm,
   MessageFacade,
 } from '@orbita/orbita-ui/domain-logic';
-import { Message } from 'primeng/api';
+import { Message, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'lib-overview-block',
@@ -77,7 +77,8 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private router: Router,
     private userFacade: UserFacade,
-    private messageFacade: MessageFacade
+    private messageFacade: MessageFacade,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -144,6 +145,18 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
    */
   navigateToSdRequests(): void {
     this.router.navigate(['/tickets']);
+  }
+
+  /**
+   * Закрывает заявку
+   *
+   * @param id - номер заявки
+   */
+  closeSdRequest(id: number) {
+    this.confirmationService.confirm({
+      message: 'Вы действительно хотите закрыть заявку?',
+      accept: () => this.sdRequestFacade.closeSdRequest(id),
+    });
   }
 
   private buildForm(): void {

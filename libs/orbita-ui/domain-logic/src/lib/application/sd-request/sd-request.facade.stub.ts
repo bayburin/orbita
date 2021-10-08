@@ -83,4 +83,8 @@ export class SdRequestFacadeStub implements SdRequestFacadeAbstract {
   reinitUpdateForm() {
     /** */
   }
+
+  closeSdRequest() {
+    /** */
+  }
 }

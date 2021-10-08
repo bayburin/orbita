@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { switchMap, catchError, map, withLatestFrom, tap } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 import * as SdRequestActions from './sd-request.actions';
 import * as SdRequestFeature from './sd-request.reducer';
@@ -26,15 +27,20 @@ import { SdRequestCacheService } from './../../services/sd-request-cache.service
 import { SdRequestFactory } from './../../factories/sd-request.factory';
 import { convertPrimeFilter } from './../../utils/convert-prime-filter.function';
 import { calculatePage } from '../../utils/calculate-page.function';
+import { EventApi } from '../../api/event/event.api';
+import { EventTypeNames } from './../../../entities/models/event-type.interface';
+import { EventBuilder } from './../../builders/event.builder';
 
 @Injectable()
 export class SdRequestEffects {
   constructor(
     private actions$: Actions,
     private sdRequestApi: SdRequestApi,
+    private eventApi: EventApi,
     private store: Store<SdRequestFeature.SdRequestPartialState>,
     private messageService: MessageService,
-    private authHelper: AuthHelper
+    private authHelper: AuthHelper,
+    private router: Router
   ) {}
 
   setPartials$ = createEffect(() =>
@@ -153,6 +159,22 @@ export class SdRequestEffects {
         SdRequestActions.disableSelectedEditMode(),
       ])
     )
+  );
+
+  close$ = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(SdRequestActions.close),
+        switchMap((action) => {
+          const event = new EventBuilder().claim_id(action.id).event_type(EventTypeNames.CLOSE).build();
+
+          return this.eventApi.create(event).pipe(
+            tap(() => this.messageService.add({ key: 'global', severity: 'success', detail: 'Заявка закрыта' })),
+            map(() => this.router.navigate(['/tickets']))
+          );
+        })
+      ),
+    { dispatch: false }
   );
 
   // ========== Форма существующей заявки ==========

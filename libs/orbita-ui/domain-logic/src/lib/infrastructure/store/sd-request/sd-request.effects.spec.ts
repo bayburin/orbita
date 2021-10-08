@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 import { provideMockActions } from '@ngrx/effects/testing';
@@ -13,6 +14,8 @@ import { SdRequestApiStub } from './../../api/sd-request/sd-request.api.stub';
 import { SD_REQUEST_FEATURE_KEY, initialState, State } from './sd-request.reducer';
 import { TICKET_SYSTEM_FEATURE_KEY } from '../index';
 import { AuthHelper, AuthHelperStub } from '@iss/ng-auth-center';
+import { EventApiStub } from './../../api/event/event.api.stub';
+import { EventApi } from './../../api/event/event.api';
 
 describe('SdRequestEffects', () => {
   let actions$: Observable<Action>;
@@ -27,12 +30,14 @@ describe('SdRequestEffects', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       providers: [
         SdRequestEffects,
         provideMockActions(() => actions$),
         provideMockStore({ initialState: state }),
         { provide: SdRequestApi, useClass: SdRequestApiStub },
         { provide: AuthHelper, useClass: AuthHelperStub },
+        { provide: EventApi, useClass: EventApiStub },
         MessageService,
       ],
     });

@@ -46,13 +46,15 @@ export class CommentsComponent implements OnChanges {
 
     if (comments && comments.currentValue) {
       const current = comments.currentValue;
-      const id = current[current.length - 1].id;
+      const id = current[current.length - 1]?.id;
 
-      setTimeout(() => {
-        const el = document.getElementById(id);
+      if (id) {
+        setTimeout(() => {
+          const el = document.getElementById(id);
 
-        el.scrollIntoView({ behavior: 'auto', block: 'start' });
-      }, 100);
+          el.scrollIntoView({ behavior: 'auto', block: 'start' });
+        }, 100);
+      }
     }
   }
 
