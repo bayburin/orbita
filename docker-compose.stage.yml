@@ -10,6 +10,7 @@ services:
         YARN_VERSION: 1.22.5
         APP_ROOT: /app
         APP_HOSTNAME: orbita-test
+        STAGE: staging
       labels:
         project-name: 'orbita-ui-test'
         environment: 'staging'

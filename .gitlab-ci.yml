@@ -1,5 +1,5 @@
+image: docker-hub.iss-reshetnev.ru/registry/docker:compose
 docker-build-staging:
-  image: docker-hub.iss-reshetnev.ru/registry/docker:compose
   stage: build
   before_script:
     - mkdir -p ~/.ssh
@@ -19,3 +19,23 @@ docker-build-staging:
     - docker-compose -f docker-compose.stage.yml -p $DEPLOY_PROJECT_NAME -H "ssh://$DEPLOY_USER@$STAGING_SERVER" up -d
   only:
     - develop
+docker-build-production:
+  stage: prod
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$ID_RSA_PRODUCTION" > ~/.ssh/id_ed25519
+    - chmod -R 700 ~/.ssh
+    - ssh-keyscan $PRODUCTION_SERVER >> ~/.ssh/known_hosts
+    - ssh-keyscan $(getent hosts $PRODUCTION_SERVER | cut -d' ' -f1) >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - echo "$CI_REGISTRY_PASSWORD" | docker login -u "$CI_REGISTRY_USER" $CI_REGISTRY --password-stdin
+  script:
+    - export COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1
+    - docker-compose -f docker-compose.prod.yml -p $PRODUCTION_PROJECT_NAME pull
+    - docker-compose -f docker-compose.prod.yml -p $PRODUCTION_PROJECT_NAME build --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy --build-arg no_proxy=$no_proxy
+    - docker-compose -f docker-compose.prod.yml -p $PRODUCTION_PROJECT_NAME push
+    - docker-compose -f docker-compose.prod.yml -p $PRODUCTION_PROJECT_NAME -H "ssh://$DEPLOY_USER@$PRODUCTION_SERVER" pull
+    - docker-compose -f docker-compose.prod.yml -p $PRODUCTION_PROJECT_NAME -H "ssh://$DEPLOY_USER@$PRODUCTION_SERVER" down --remove-orphans
+    - docker-compose -f docker-compose.prod.yml -p $PRODUCTION_PROJECT_NAME -H "ssh://$DEPLOY_USER@$PRODUCTION_SERVER" up -d
+  only:
+    - master

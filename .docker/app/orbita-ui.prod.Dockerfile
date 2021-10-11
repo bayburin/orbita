@@ -4,6 +4,7 @@ FROM docker-hub.iss-reshetnev.ru/registry/languages/nodejs/node:${NODE_MAJOR}-bu
 
 ARG YARN_VERSION
 ARG APP_ROOT
+ARG STAGE
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -42,7 +43,7 @@ COPY package.json yarn.lock ./
 RUN yarn install
 
 COPY . ./
-RUN nx build orbita-ui --configuration=staging
+RUN nx build orbita-ui --configuration=STAGE
 
 # SECONDS STAGE
 FROM nginx:1.20.1-alpine

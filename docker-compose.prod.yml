@@ -1,0 +1,54 @@
+version: '3.9'
+
+x-syslog-driver: &syslog-driver
+  logging:
+    driver: syslog
+    options:
+      syslog-address: ${SYSLOG_URL}
+      tag: '{{.Name}}/{{.ID}}'
+
+x-jsonlog-driver: &jsonlog-driver
+  logging:
+    driver: 'json-file'
+
+services:
+  orbita-ui:
+    build:
+      context: .
+      dockerfile: .docker/app/orbita-ui.prod.Dockerfile
+      args:
+        NODE_MAJOR: 14
+        YARN_VERSION: 1.22.5
+        APP_ROOT: /app
+        APP_HOSTNAME: orbita
+        STAGE: production
+      labels:
+        project-name: 'orbita-ui'
+        environment: 'production'
+        maintainer: 'bayburin@iss-reshetnev.ru'
+      cache_from:
+        - ${CI_REGISTRY_IMAGE}/${PRODUCTION_PROJECT_NAME}_orbita-ui:latest
+    image: ${CI_REGISTRY_IMAGE}/${PRODUCTION_PROJECT_NAME}_orbita-ui
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    stdin_open: true
+    tty: true
+    mac_address: D0:CE:73:31:C3:17
+    networks:
+      macvlan:
+        ipv4_address: 10.0.45.36
+    deploy:
+    resources:
+      reservations:
+        cpus: 0.125
+        memory: 64mb
+      limits:
+        cpus: 0.5
+        memory: 128mb
+
+networks:
+  macvlan:
+    external:
+      name: server-network
