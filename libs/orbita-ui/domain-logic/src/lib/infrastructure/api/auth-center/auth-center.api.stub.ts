@@ -10,6 +10,6 @@ export class AuthCenterApiStub implements AuthCenterApiAbstract {
   }
 
   showEmployeeHosts() {
-    return of([]);
+    return of({ hosts: [] });
   }
 }

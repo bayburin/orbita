@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { Host } from './../../../entities/models/host.interface';
+import { HostsServerData } from './../../../entities/server-data/auth-center-server-data.interface';
 import { HostFilter } from './../../../entities/filter.interface';
 
 export abstract class AuthCenterApiAbstract {
@@ -21,5 +22,5 @@ export abstract class AuthCenterApiAbstract {
    *
    * @param tn - табельный номер работника
    */
-  abstract showEmployeeHosts(tn: number): Observable<Host[]>;
+  abstract showEmployeeHosts(tn: number): Observable<HostsServerData>;
 }

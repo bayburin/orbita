@@ -46,7 +46,7 @@ export class HostEffects {
       ofType(HostActions.loadForEmployee),
       switchMap((action) =>
         this.acApi.showEmployeeHosts(action.tn).pipe(
-          map((hosts) => HostActions.loadForEmployeeSuccess({ hosts })),
+          map((data) => HostActions.loadForEmployeeSuccess({ hosts: data.hosts })),
           catchError((error) => of(HostActions.loadForEmployeeFailure({ error })))
         )
       )

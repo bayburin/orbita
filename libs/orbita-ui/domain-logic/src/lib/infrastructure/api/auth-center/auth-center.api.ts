@@ -4,6 +4,7 @@ import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environ
 
 import { AuthCenterApiAbstract } from './auth-center.api.abstract';
 import { Host } from './../../../entities/models/host.interface';
+import { HostsServerData } from './../../../entities/server-data/auth-center-server-data.interface';
 import { HostFilter } from './../../../entities/filter.interface';
 
 /**
@@ -27,6 +28,6 @@ export class AuthCenterApi implements AuthCenterApiAbstract {
   showEmployeeHosts(tn: number) {
     const params = new HttpParams().set('tn', `${tn}`);
 
-    return this.http.get<Host[]>(`${this.api}/show_user_hosts`, { params });
+    return this.http.get<HostsServerData>(`${this.api}/show_user_hosts`, { params });
   }
 }
