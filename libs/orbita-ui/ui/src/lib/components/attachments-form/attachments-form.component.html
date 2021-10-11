@@ -1,0 +1,27 @@
+<div libDndFiles (fileDropped)="onFileDropped($event)" class="dropzone-file">
+  <div class="input-zone">
+    <input #filesRef type="file" multiple id="fileDrop" name="files" (change)="fileHandler($event)" multiple="true" />
+    <div class="flex align-items-center justify-content-center">
+      <span class="flex align-items-center text-primary cursor-pointer" (click)="filesRef.click()">
+        <i class="mdi mdi-paperclip mdi-18px"></i>
+        Выберите файл
+      </span>
+      <span class="ml-2">или переместите файлы сюда</span>
+    </div>
+    <lib-panel-placeholder>Макс размер: 50Мб</lib-panel-placeholder>
+  </div>
+</div>
+
+<div class="dropshow-file">
+  <ng-content></ng-content>
+
+  <div *ngFor="let attachment of attachmentsForm.controls; let index = index" class="file-item">
+    <div>
+      <div>{{ attachment.value.name }}</div>
+      <small class="p-error" *ngIf="attachment.hasError('maxValue')">Слишком большой размер файла</small>
+    </div>
+    <div class="ml-2">
+      <i class="mdi mdi-delete-outline mdi-18px cursor-pointer" (click)="removeAttachment(index)"></i>
+    </div>
+  </div>
+</div>

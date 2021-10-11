@@ -1,0 +1,64 @@
+// Переменные
+@import 'variables';
+
+// Цвета
+@import 'colors';
+
+// Миксины
+@import 'mixines';
+
+// Компоненты
+@import 'components/layout';
+@import 'components/navbar';
+@import 'components/sidebar';
+@import 'components/badge';
+@import 'components/sd-request-history-overview';
+@import 'components/table';
+@import 'components/toolbar';
+@import 'components/overview-ticket';
+@import 'components/card';
+@import 'components/panel';
+@import 'components/messages';
+@import 'components/drag-and-drop';
+@import 'components/dropdown';
+@import 'components/autocomplete';
+@import 'components/sd-request-preview';
+@import 'components/contextmenu';
+@import 'components/tabview';
+
+.icon-group {
+  display: flex;
+  align-items: center;
+
+  i {
+    margin-right: 0.25 * $spacer;
+  }
+}
+
+.inline-list-sm {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0.25 * $spacer;
+}
+
+@supports (gap: $spacer) {
+  .inline-list-sm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.25 * $spacer;
+  }
+}
+
+.without-icon {
+  .p-inline-message-icon {
+    display: none;
+  }
+}
+
+.header-spacer {
+  flex: 1 1 auto;
+  margin-left: 3 * $spacer;
+  border-bottom: 2px solid var(--surface-d);
+}

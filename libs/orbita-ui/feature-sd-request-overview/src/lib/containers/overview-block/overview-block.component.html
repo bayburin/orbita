@@ -1,0 +1,470 @@
+<div class="card">
+  <lib-ticket-overview-skeleton *ngIf="skeleton$ | async"></lib-ticket-overview-skeleton>
+
+  <lib-page-error *ngIf="error$ | async as error" [error]="error">
+    <p>Не удалось загрузить заявку. Попробуйте обновить страницу.</p>
+  </lib-page-error>
+
+  <div *ngIf="sdRequest$ | async as sdRequest">
+    <form [formGroup]="form">
+      <div class="grid">
+        <div class="col-3">
+          <h3>История событий</h3>
+          <lib-history-event-card
+            *ngFor="let history of sdRequest.histories.slice().reverse(); trackBy: trackByHistory; let index = index"
+            [history]="history"
+            [num]="index + 1"
+          >
+          </lib-history-event-card>
+        </div>
+        <div class="col-6">
+          <p-messages *ngIf="editMode" [value]="messages" [enableService]="false"></p-messages>
+          <p-toolbar styleClass="toolbar-sm">
+            <ng-container *ngIf="editMode; else readModeActions">
+              <div class="p-toolbar-group-left">
+                <p-button
+                  label="К заявкам"
+                  icon="mdi mdi-arrow-left-bold-outline mdi-18px"
+                  class="mr-2"
+                  styleClass="p-button-text p-button-plain"
+                  (click)="navigateToSdRequests()"
+                ></p-button>
+                <p-button
+                  *ngIf="loadingForm$ | async; else noSaving"
+                  label="Сохранение..."
+                  icon="mdi mdi-loading mdi-spin mdi-18px"
+                  class="mr-2"
+                  styleClass="p-button-outlined p-button-primary"
+                  [disabled]="true"
+                ></p-button>
+                <ng-template #noSaving>
+                  <p-button
+                    label="Сохранить"
+                    icon="mdi mdi-content-save-edit-outline mdi-18px"
+                    class="mr-2"
+                    styleClass="p-button-outlined p-button-primary"
+                    [disabled]="!form.valid"
+                    (click)="saveForm()"
+                  ></p-button>
+                  <p-button
+                    *ngIf="formNeedToGetNewData$ | async"
+                    label="Принять изменения"
+                    icon="mdi mdi-refresh mdi-18px"
+                    class="mr-2"
+                    styleClass="p-button-outlined p-button-warning"
+                    (click)="reinitForm()"
+                  ></p-button>
+                </ng-template>
+                <!-- <p-button
+                  label="Показать изменения"
+                  icon="mdi mdi-refresh mdi-18px"
+                  styleClass="p-button-outlined p-button-help"
+                  class="mr-2"
+                ></p-button> -->
+              </div>
+              <div class="p-toolbar-group-right">
+                <p-button
+                  label="Режим просмотра"
+                  icon="mdi mdi-file-eye-outline mdi-18px"
+                  class="mr-2"
+                  styleClass="p-button-text p-button-plain"
+                  (click)="toggleEditMode()"
+                ></p-button>
+              </div>
+            </ng-container>
+            <ng-template #readModeActions>
+              <div class="p-toolbar-group-left">
+                <p-button
+                  label="К заявкам"
+                  icon="mdi mdi-arrow-left-bold-outline mdi-18px"
+                  class="mr-2"
+                  styleClass="p-button-text p-button-plain"
+                  (click)="navigateToSdRequests()"
+                ></p-button>
+                <p-button
+                  label="Закрыть заявку"
+                  icon="mdi mdi-check mdi-18px"
+                  class="mr-2"
+                  styleClass="p-button-outlined p-button-success"
+                  (click)="closeSdRequest(sdRequest.id)"
+                ></p-button>
+              </div>
+              <div class="p-toolbar-group-right">
+                <!-- <p-button
+                  label="Отменить заявку"
+                  icon="mdi mdi-close mdi-18px"
+                  class="mr-2"
+                  styleClass="p-button-text p-button-plain"
+                ></p-button> -->
+                <p-button
+                  label="Режим редактирования"
+                  icon="mdi mdi-file-document-edit-outline mdi-18px"
+                  class="mr-2"
+                  styleClass="p-button-text p-button-plain"
+                  (click)="toggleEditMode()"
+                ></p-button>
+                <!-- <p-button
+                  label="Показать изменения"
+                  icon="mdi mdi-refresh mdi-18px"
+                  styleClass="p-button-text p-button-plain"
+                ></p-button> -->
+              </div>
+            </ng-template>
+          </p-toolbar>
+          <div class="m-3">
+            <div class="ticket-overview-header">
+              #{{ sdRequest.id }}
+              <span class="ml-3">{{ sdRequest.service_name }}. {{ sdRequest.ticket_name }}</span>
+            </div>
+            <div class="mt-2">
+              <span class="text-secondary">пользователь</span>
+              <span class="text-primary ml-2">{{ sdRequest.source_snapshot.fio }}</span>
+              <span class="text-secondary ml-2">от</span>
+              <span class="mx-2">{{ sdRequest.runtime.created_at | datetime }}</span> |
+              <span class="ml-2">
+                <b>
+                  выполнить до:
+                  <p-calendar
+                    *ngIf="editMode; else readModeFinishedAtPlan"
+                    formControlName="finished_at_plan"
+                    dateFormat="dd.mm.yy"
+                    appendTo="body"
+                    [showTime]="true"
+                  ></p-calendar>
+                  <ng-template #readModeFinishedAtPlan>
+                    <span class="ml-1">{{ sdRequest.runtime.finished_at_plan | datetime }}</span>
+                  </ng-template>
+                </b>
+              </span>
+            </div>
+            <p-divider type="dashed"></p-divider>
+            <div class="mt-2">
+              <div *ngIf="sdRequest.description; else noDesc"><b>Описание:</b> {{ sdRequest.description }}</div>
+              <ng-template #noDesc>
+                <lib-panel-placeholder>Описание заявки отсутствует</lib-panel-placeholder>
+              </ng-template>
+            </div>
+          </div>
+
+          <div class="mt-3">
+            <p-tabView>
+              <p-tabPanel header="Работа по заявке">
+                <div *ngIf="editMode">
+                  <textarea
+                    rows="10"
+                    formControlName="workflow"
+                    pInputTextarea
+                    placeholder="Введите описание хода работы..."
+                    class="w-full"
+                  ></textarea>
+                  <p-divider type="dashed"></p-divider>
+                </div>
+                <lib-workflows [workflows]="sdRequest.workflows"></lib-workflows>
+              </p-tabPanel>
+              <p-tabPanel header="Исполнители">
+                <p-listbox
+                  *ngIf="editMode; else readModeWorkers"
+                  [options]="userGroups$ | async"
+                  [group]="true"
+                  formControlName="workers"
+                  optionGroupChildren="users"
+                  [metaKeySelection]="false"
+                  [checkbox]="true"
+                  [filter]="true"
+                  [multiple]="true"
+                  optionLabel="fio"
+                  optionDisabled="isCurrentUser"
+                  optionValue="id"
+                >
+                  <ng-template let-group pTemplate="group">
+                    <lib-group-header [group]="group"></lib-group-header>
+                  </ng-template>
+                </p-listbox>
+
+                <ng-template #readModeWorkers>
+                  <lib-workers [works]="sdRequest.works"></lib-workers>
+                </ng-template>
+              </p-tabPanel>
+              <p-tabPanel header="Данные на момент создания">
+                <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>
+              </p-tabPanel>
+              <p-tabPanel header="Параметры">
+                <p-panel header="Параметры заявки">
+                  <div *ngIf="loadedParameters$ | async; else emptyData">
+                    <div *ngIf="parameters$ | async as parameters">
+                      <div *ngIf="parameters.length > 0; else emptyData">
+                        <div *ngFor="let parameter of parameters; trackByParameter">
+                          <lib-detail-row>
+                            <div attribute>{{ parameter.name }}</div>
+                            <div value>{{ parameter.value }}</div>
+                          </lib-detail-row>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </p-panel>
+              </p-tabPanel>
+              <p-tabPanel header="Комментарии">
+                <lib-comments [comments]="sdRequest.comments" (sendMessage)="createComment($event)"></lib-comments>
+              </p-tabPanel>
+            </p-tabView>
+          </div>
+        </div>
+        <div class="col-3">
+          <lib-detail-row class="mb-2">
+            <div attribute>Статус</div>
+            <div value>
+              <lib-ticket-status [status]="sdRequest.status"></lib-ticket-status>
+            </div>
+          </lib-detail-row>
+
+          <lib-detail-row class="mb-2">
+            <div attribute>Приоритет</div>
+            <div value>
+              <ng-container *ngIf="editMode; else readModePriority">
+                <p-dropdown
+                  formControlName="priority"
+                  [options]="priorities"
+                  optionValue="priority"
+                  optionLabel="title"
+                >
+                  <ng-template let-option pTemplate="item">
+                    <span [class]="'sd-request-badge priority-' + option.badge">{{ option.title }}</span>
+                  </ng-template>
+                </p-dropdown>
+              </ng-container>
+              <ng-template #readModePriority>
+                <lib-ticket-priority [priority]="sdRequest.priority"></lib-ticket-priority>
+              </ng-template>
+            </div>
+          </lib-detail-row>
+
+          <lib-detail-row class="mb-2">
+            <div attribute>Имя приложения</div>
+            <div value>{{ sdRequest.application?.name }}</div>
+          </lib-detail-row>
+
+          <lib-detail-row class="mb-2">
+            <div attribute>Внешний ID</div>
+            <div value>{{ sdRequest.integration_id }}</div>
+          </lib-detail-row>
+
+          <p-divider type="dashed"></p-divider>
+
+          <lib-attachments
+            [sdRequest]="sdRequest"
+            [editMode]="editMode"
+            [newAttachmentsForm]="newAttachmentsForm"
+            [attachmentsForm]="attachmentsForm"
+          ></lib-attachments>
+
+          <p-divider type="dashed"></p-divider>
+
+          <p-accordion [multiple]="true">
+            <p-accordionTab [selected]="(loadingEmployee$ | async) === false && (employee$ | async)">
+              <ng-template pTemplate="header">
+                <div class="panel-header">
+                  <span>Пользователь</span>
+                  <span *ngIf="loadingEmployee$ | async">
+                    <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
+                  </span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <ng-container
+                  *ngIf="loadingEmployee$ | async; then loadingData; else loadingEmployeeComplete"
+                ></ng-container>
+
+                <ng-template #loadingEmployeeComplete>
+                  <div *ngIf="loadedEmployee$ | async; else emptyData">
+                    <div *ngIf="employee$ | async as employee; else unknownData">
+                      <lib-detail-row class="mb-2">
+                        <div attribute>ФИО</div>
+                        <div value>
+                          <a [routerLink]="['/employees', employee.id]">
+                            {{ employee.lastName }} {{ employee.firstName }} {{ employee.middleName }}
+                          </a>
+                        </div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Телефон</div>
+                        <div value>{{ employee.employeeContact.phone[0] }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Расположение</div>
+                        <div value>{{ employee.employeeContact.position }}</div>
+                      </lib-detail-row>
+
+                      <div *ngIf="employee.employeePositions as positions">
+                        <lib-detail-row class="mb-2">
+                          <div attribute>Должность</div>
+                          <div value>{{ positions[0].professionForAccounting }}</div>
+                        </lib-detail-row>
+
+                        <lib-detail-row class="mb-2">
+                          <div attribute>Подразделение</div>
+                          <div value>
+                            <div>{{ positions[0].departmentForAccounting }} | {{ positions[0].struct }}</div>
+                            <div
+                              class="mt-1"
+                              *ngIf="positions[0].departmentForAccounting != positions[0].departmentForDocuments"
+                            >
+                              <p-tag severity="info" [value]="positions[0].departmentForDocuments"></p-tag>
+                            </div>
+                          </div>
+                        </lib-detail-row>
+
+                        <lib-detail-row class="mb-2">
+                          <div attribute>Отпуск</div>
+                          <div value>
+                            <ng-container *ngIf="positions[0].vacation; else noVacation">
+                              {{ positions[0].vacation }} с {{ positions[0].vacationFrom }} до
+                              {{ positions[0].vacationTo }}
+                            </ng-container>
+                            <ng-template #noVacation>Нет</ng-template>
+                          </div>
+                        </lib-detail-row>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-template>
+            </p-accordionTab>
+            <p-accordionTab [selected]="(loadingHost$ | async) === false && (host$ | async)">
+              <ng-template pTemplate="header">
+                <div class="panel-header">
+                  <span>Хост (поиск по инв. №)</span>
+                  <span *ngIf="loadingHost$ | async">
+                    <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
+                  </span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <ng-container *ngIf="loadingHost$ | async; then loadingData; else loadingHostComplete"></ng-container>
+                <ng-template #loadingHostComplete>
+                  <div *ngIf="loadedHost$ | async; else emptyData">
+                    <div *ngIf="host$ | async as host; else unknownData">
+                      <lib-detail-row class="mb-2">
+                        <div attribute>IP</div>
+                        <div value>{{ host.ip }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>MAC</div>
+                        <div value>{{ host.mac }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>ОС</div>
+                        <div value>{{ host.os }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Расположение</div>
+                        <div value>{{ host.room }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>ФИО владельца</div>
+                        <div value>{{ host.user }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Отдел</div>
+                        <div value>{{ host.division }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Аудит</div>
+                        <div value>
+                          <lib-cms-status [status]="host.cms"></lib-cms-status>
+                        </div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Антивирус</div>
+                        <div value>
+                          <lib-csa-status [status]="host.csa"></lib-csa-status>
+                        </div>
+                      </lib-detail-row>
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-template>
+            </p-accordionTab>
+            <p-accordionTab [selected]="(loadingSvtItem$ | async) === false && (svtItem$ | async)">
+              <ng-template pTemplate="header">
+                <div class="panel-header">
+                  <span>Техника (поиск по штрих-коду)</span>
+                  <span *ngIf="loadingSvtItem$ | async">
+                    <i class="mdi mdi-loading mdi-spin mdi-18px"></i>
+                  </span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="content">
+                <ng-container
+                  *ngIf="loadingSvtItem$ | async; then loadingData; else loadingSvtItemComplete"
+                ></ng-container>
+                <ng-template #loadingSvtItemComplete>
+                  <div *ngIf="loadedSvtItem$ | async; else emptyData">
+                    <div *ngIf="svtItem$ | async as svtItem; else unknownData">
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Тип</div>
+                        <div value>{{ svtItem.type.short_description }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Модель</div>
+                        <div value>{{ svtItem.short_item_model }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Инв. №</div>
+                        <div value>{{ svtItem.invent_num }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>Штрих-код</div>
+                        <div value>{{ svtItem.barcode_item?.id }}</div>
+                      </lib-detail-row>
+
+                      <lib-detail-row class="mb-2">
+                        <div attribute>ID РМ</div>
+                        <div value>{{ svtItem.workplace_id }}</div>
+                      </lib-detail-row>
+                    </div>
+                  </div>
+                </ng-template>
+              </ng-template>
+            </p-accordionTab>
+          </p-accordion>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<ng-template #loadingData>
+  <lib-panel-placeholder>Загрузка...</lib-panel-placeholder>
+</ng-template>
+
+<ng-template #unknownData>
+  <lib-panel-placeholder>Не удалось обработать данные</lib-panel-placeholder>
+</ng-template>
+
+<ng-template #emptyData>
+  <lib-panel-placeholder>Пусто</lib-panel-placeholder>
+</ng-template>
+
+<p-confirmDialog
+  [style]="{ width: '40vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  rejectIcon=""
+  acceptIcon=""
+  [dismissableMask]="true"
+>
+  <ng-template pTemplate="header"></ng-template>
+</p-confirmDialog>

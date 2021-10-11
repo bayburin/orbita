@@ -1,0 +1,13 @@
+<div *ngFor="let work of works; trackBy: trackByWork; let last = last">
+  <lib-group-header [group]="work.group"></lib-group-header>
+  <div *ngIf="work.workers.length; else noWorkers">
+    <div *ngFor="let worker of work.workers; trackBy: trackByWorker">
+      <div class="py-2 px-4">{{ worker.user.fio }}</div>
+    </div>
+  </div>
+  <p-divider *ngIf="!last" type="dashed"></p-divider>
+</div>
+
+<ng-template #noWorkers>
+  <lib-panel-placeholder>Исполнители не назначены</lib-panel-placeholder>
+</ng-template>

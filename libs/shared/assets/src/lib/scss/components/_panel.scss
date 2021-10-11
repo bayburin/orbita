@@ -1,0 +1,13 @@
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.panel-content-placeholder {
+  text-align: center;
+  color: var(--text-color-secondary);
+  font-style: italic;
+  font-weight: normal;
+}

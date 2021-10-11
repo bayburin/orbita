@@ -1,0 +1,9 @@
+<div class="message-wrapper">
+  <div class="sender-block">
+    <span>
+      <b>{{ workflow.sender.fio }}</b>
+    </span>
+    <small class="time">{{ workflow.created_at | datetime }}</small>
+  </div>
+  <div class="message">{{ workflow.message }}</div>
+</div>

@@ -1,0 +1,67 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: $navbar-height;
+  width: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  background-color: var(--surface-a);
+  border-bottom: 1px solid var(--surface-d);
+}
+
+.navbar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0 $spacer;
+  display: flex;
+  white-space: nowrap;
+
+  .nav-item {
+    display: flex;
+    margin: 0 0.25 * $spacer;
+  }
+}
+
+@supports (gap: $spacer) {
+  .navbar-nav {
+    gap: 0.5 * $spacer;
+
+    .nav-item {
+      display: flex;
+      margin: 0;
+    }
+  }
+}
+
+.navbar-brand {
+  width: 230px;
+  min-width: 230px;
+  text-align: center;
+
+  img {
+    max-height: 40px;
+  }
+}
+
+.navbar-menu {
+  margin-top: 5px;
+}
+
+.navbar-form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  .p-inputgroup {
+    width: 60%;
+    min-width: 300px;
+
+    .p-inputgroup-addon,
+    .p-inputtext {
+      background-color: var(--surface-c);
+      border: none;
+    }
+  }
+}

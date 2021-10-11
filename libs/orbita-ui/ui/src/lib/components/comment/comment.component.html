@@ -1,0 +1,9 @@
+<div class="message-wrapper">
+  <div class="sender-block">
+    <span>
+      <b>{{ comment.sender.fio }}</b>
+    </span>
+    <small class="time">{{ comment.created_at | datetime }}</small>
+  </div>
+  <div class="message">{{ comment.message }}</div>
+</div>

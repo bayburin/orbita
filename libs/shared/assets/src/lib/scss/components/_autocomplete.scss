@@ -1,0 +1,19 @@
+.svt-items {
+  .p-autocomplete-item {
+    padding: $spacer !important;
+    margin: 0 $spacer !important;
+  }
+
+  .p-autocomplete-items {
+    .p-autocomplete-item {
+      border-top: 1px solid var(--surface-d);
+    }
+  }
+}
+
+.employees {
+  .p-autocomplete-item {
+    display: flex;
+    align-items: center;
+  }
+}

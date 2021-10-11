@@ -1,0 +1,264 @@
+<div class="card col-12 xl:col-7">
+  <form [formGroup]="form">
+    <div class="field grid mb-5">
+      <label for="employee" class="col-2">
+        <b>Работник*</b>
+      </label>
+      <div class="col-10">
+        <p-selectButton
+          class="block mb-3"
+          [options]="employeeFilters"
+          [formControl]="employeeFilterKey"
+          optionLabel="title"
+        ></p-selectButton>
+
+        <div class="mb-2">
+          <p-autoComplete
+            #employeeAutoComplete
+            id="employee"
+            [formControl]="employee"
+            [suggestions]="employees$ | async"
+            [showEmptyMessage]="true"
+            [autofocus]="true"
+            [minLength]="3"
+            [virtualScroll]="true"
+            scrollHeight="300px"
+            [itemSize]="50"
+            field="fullName"
+            [placeholder]="employeeFilterKey.value?.inputPlaceHolder"
+            appendTo="body"
+            styleClass="w-full"
+            class="employees"
+            inputStyleClass="w-full"
+            (completeMethod)="searchEmployee($event)"
+            (onFocus)="employeeAutoComplete.show()"
+            (onClear)="clearEmployee()"
+            (onSelect)="selectEmployee($event)"
+          >
+            <ng-template let-employee pTemplate="item">
+              <p-chip [label]="employee.departmentForAccounting"></p-chip>
+              <span class="ml-3">{{ employee.fullName }}</span>
+            </ng-template>
+          </p-autoComplete>
+          <small class="p-error" *ngIf="form.get('employee').invalid && (employee.dirty || employee.touched)">
+            Необходимо выбрать работника, либо ввести данные о нем вручную
+          </small>
+        </div>
+
+        <div class="field-checkbox">
+          <p-checkbox formControlName="employeeManuallyFlag" binary="true" inputId="employeeManuallyFlag"></p-checkbox>
+          <label for="employeeManuallyFlag">Ввести данные о работнике вручную</label>
+        </div>
+
+        <div *ngIf="employeeManuallyFlag.value" formGroupName="source_snapshot">
+          <div class="formgrid grid">
+            <div class="field col">
+              <label for="tn">
+                <b>Таб. номер*</b>
+              </label>
+              <input type="text" id="tn" formControlName="tn" class="inputfield w-full" pInputText />
+              <ng-container
+                *ngIf="
+                  sourceSnapshot.get('tn').invalid &&
+                  (sourceSnapshot.get('tn').dirty || sourceSnapshot.get('tn').touched)
+                "
+              >
+                <small class="p-error" *ngIf="sourceSnapshot.get('tn').hasError('required')">
+                  Не может быть пустым
+                </small>
+              </ng-container>
+              <small class="p-error" *ngIf="sourceSnapshot.get('tn').hasError('pattern')"
+                >Должен быть числом и не может начинаться с 0</small
+              >
+            </div>
+            <div class="field col">
+              <label for="fio">
+                <b>ФИО*</b>
+              </label>
+              <input type="text" id="fio" formControlName="fio" class="inputfield w-full" pInputText />
+              <small
+                class="p-error"
+                *ngIf="
+                  sourceSnapshot.get('fio').invalid &&
+                  (sourceSnapshot.get('fio').dirty || sourceSnapshot.get('fio').touched)
+                "
+                >Не может быть пустым</small
+              >
+            </div>
+            <div class="field col">
+              <label for="dept">Отдел</label>
+              <input type="text" id="dept" formControlName="dept" class="inputfield w-full" pInputText />
+            </div>
+          </div>
+          <div class="formgrid grid" formGroupName="user_attrs">
+            <div class="field col">
+              <label for="email">Электронная почта</label>
+              <input type="text" id="email" formControlName="email" class="inputfield w-full" pInputText />
+            </div>
+            <div class="field col">
+              <label for="phone">Телефон</label>
+              <input type="text" id="phone" formControlName="phone" class="inputfield w-full" pInputText />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="field grid my-5">
+      <label for="svt_item" class="col-2">Выч. техника</label>
+      <div class="col-10">
+        <p-dropdown
+          [options]="svtItems$ | async"
+          [formControl]="employeeSvtItem"
+          placeholder="Выберите выч. технику"
+          [showClear]="true"
+          scrollHeight="300px"
+          styleClass="w-full"
+          class="svt-items mb-2"
+          (onChange)="selectSvtItem($event.value)"
+        >
+          <ng-template let-item pTemplate="selectedItem">
+            <b>{{ item.type.short_description }}</b> {{ item.short_item_model }} | <b>Инвентарный:</b>
+            {{ item.invent_num }} | <b>Штрих-код:</b> {{ item.barcode_item.id }}
+          </ng-template>
+          <ng-template let-item pTemplate="item">
+            <div>
+              <b>{{ item.type.short_description }}</b> {{ item.short_item_model }}
+            </div>
+            <div><b>Инвентарный:</b> {{ item.invent_num }} | <b>Штрих-код:</b> {{ item.barcode_item.id }}</div>
+          </ng-template>
+        </p-dropdown>
+
+        <div class="field-checkbox mb-3">
+          <p-checkbox [formControl]="svtItemManually" binary="true" inputId="svtItemManually"></p-checkbox>
+          <label for="svtItemManually">Поиск выч. техники вручную</label>
+        </div>
+
+        <div *ngIf="svtItemManually.value">
+          <p-selectButton
+            class="block mb-3"
+            [options]="svtItemFilters"
+            [formControl]="svtItemFilterKey"
+            optionLabel="title"
+          ></p-selectButton>
+
+          <p-autoComplete
+            #svtItemAutoComplete
+            id="svt_item"
+            class="block mb-2"
+            [formControl]="customSvtItem"
+            [suggestions]="svtItems$ | async"
+            [showEmptyMessage]="true"
+            [autofocus]="true"
+            [minLength]="3"
+            [virtualScroll]="true"
+            scrollHeight="400px"
+            [itemSize]="80"
+            [field]="selectedSvtItemView"
+            placeholder="Выберите выч. технику..."
+            appendTo="body"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+            panelStyleClass="svt-items"
+            type="search"
+            (completeMethod)="searchSvtItem($event)"
+            (onFocus)="svtItemAutoComplete.show()"
+            (onClear)="clearSvtItem()"
+            (onSelect)="selectSvtItem($event)"
+          >
+            <ng-template let-item pTemplate="item">
+              <div>
+                <b>{{ item.type.short_description }}</b> {{ item.short_item_model }}
+              </div>
+              <div><b>Ответственный:</b> {{ item.workplace.user_fio }}</div>
+              <div><b>Инвентарный:</b> {{ item.invent_num }} | <b>Штрих-код:</b> {{ item.barcode_item.id }}</div>
+            </ng-template>
+          </p-autoComplete>
+        </div>
+      </div>
+    </div>
+
+    <div class="field grid my-5">
+      <label for="sd_ticket" class="col-2"><b>Услуга*</b></label>
+      <div class="col-10">
+        <div class="mb-2">
+          <p-autoComplete
+            #ticketAppAutoComplete
+            id="ticket"
+            [formControl]="ticket"
+            [suggestions]="tickets"
+            [showEmptyMessage]="true"
+            [autofocus]="true"
+            [virtualScroll]="true"
+            scrollHeight="300px"
+            [itemSize]="30"
+            field="name"
+            placeholder="Выберите услугу..."
+            appendTo="body"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+            (completeMethod)="searchTicket($event)"
+            (onFocus)="ticketAppAutoComplete.show()"
+            (onClear)="clearTicket()"
+            (onSelect)="selectTicket()"
+          ></p-autoComplete>
+          <small class="p-error" *ngIf="form.get('ticket').invalid && (ticket.dirty || ticket.touched)"
+            >Необходимо выбрать услугу или поставить галочку, если услуга отсутствует в списке</small
+          >
+        </div>
+
+        <div class="field-checkbox">
+          <p-checkbox formControlName="noTicketFlag" binary="true" inputId="noTicketFlag"></p-checkbox>
+          <label for="noTicketFlag">Услуга не найдена</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field grid mb-5">
+      <label for="description" class="col-2">
+        <b>Описание*</b>
+      </label>
+      <div class="col-10">
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="10"
+          placeholder="Введите описание заявки..."
+          pInputTextarea
+          class="w-full"
+        ></textarea>
+        <small
+          class="p-error"
+          *ngIf="form.get('description').invalid && (form.get('description').dirty || form.get('description').touched)"
+          >Не может быть пустым</small
+        >
+      </div>
+    </div>
+
+    <p-message severity="info" text="* - обязательно для заполнения" class="without-icon"></p-message>
+
+    <p-divider align="center" type="dashed">Файлы</p-divider>
+    <div class="my-5">
+      <lib-attachments-form [attachmentsForm]="attachmentsForm"></lib-attachments-form>
+    </div>
+
+    <div class="flex justify-content-center">
+      <button
+        pButton
+        pRipple
+        type="button"
+        label="Предпросмотр"
+        class="p-button-outlined"
+        (click)="previewForm()"
+      ></button>
+    </div>
+  </form>
+</div>
+
+<lib-sd-request-created
+  [sdRequest]="sdRequest$ | async"
+  [openModal]="displayModal$ | async"
+  (createAnotherSdRequest)="resetForm()"
+  (backToCurrentSdRequest)="backToCurrentSdRequest($event)"
+  (backToSdRequestList)="backToSdRequestList()"
+></lib-sd-request-created>

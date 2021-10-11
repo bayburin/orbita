@@ -1,0 +1,278 @@
+<p-contextMenu #cm [model]="contextMenuItems"></p-contextMenu>
+
+<p-table
+  #table
+  [value]="sortedSdRequests"
+  [lazy]="true"
+  dataKey="id"
+  [paginator]="true"
+  paginatorPosition="both"
+  [rows]="10"
+  [rowsPerPageOptions]="[10, 25, 50]"
+  [totalRecords]="totalCount"
+  [showCurrentPageReport]="true"
+  currentPageReportTemplate="Показано {first}-{last} из {totalRecords} заявок"
+  [loading]="loading"
+  stateKey="sdRequestTable"
+  stateStorage="local"
+  styleClass="p-datatable-sm"
+  [(contextMenuSelection)]="selectedSdRequest"
+  [contextMenu]="cm"
+  (onLazyLoad)="onLazyLoad($event)"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th width="5%">№</th>
+      <th width="7%">Внешн №</th>
+      <th width="7%">Внешн имя</th>
+      <th width="7%">Дата подачи</th>
+      <!-- <th width="7%">Дедлайн</th> -->
+      <th width="8%">Статус</th>
+      <th width="9%">Вид услуги</th>
+      <th width="9%">Вид заявки</th>
+      <th>Подробности</th>
+      <th width="8%">Приоритет</th>
+      <th width="8%">Исполнители</th>
+      <!-- <th width="6%">Дата закрытия</th> -->
+      <th width="50px"></th>
+    </tr>
+    <tr>
+      <th>
+        <p-columnFilter field="id" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-filter="filterCallback">
+            <input
+              [value]="table.filters.id?.value"
+              pInputText
+              type="text"
+              (input)="filter($event.target.value); table.saveState()"
+            />
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th></th>
+      <th></th>
+      <th>
+        <p-columnFilter type="date" field="created_at" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-filter="filterCallback">
+            <p-calendar
+              [ngModel]="table.filters.created_at?.value"
+              dateFormat="dd.mm.yy"
+              appendTo="body"
+              [showButtonBar]="true"
+              (onSelect)="filter($event); table.saveState()"
+              (onClearClick)="filter(null); table.saveState()"
+            ></p-calendar>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="status" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-dropdown
+              [ngModel]="table.filters.status?.value"
+              [options]="statuses"
+              [showClear]="true"
+              placeholder="Все"
+              dataKey="status"
+              (onChange)="filter($event.value); table.saveState()"
+            >
+              <ng-template let-item pTemplate="selectedItem">{{ item.title }}</ng-template>
+              <ng-template let-option pTemplate="item">
+                <span [class]="'sd-request-badge status-' + option.badge">{{ option.title }}</span>
+              </ng-template>
+            </p-dropdown>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="service_id" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-multiSelect
+              [ngModel]="table.filters.service_id?.value"
+              [options]="sdServices"
+              [virtualScroll]="true"
+              optionValue="id"
+              optionLabel="name"
+              defaultLabel="Все"
+              scrollHeight="400px"
+              itemSize="30"
+              appendTo="body"
+              (onChange)="filter($event.value); table.saveState()"
+            >
+              <ng-template pTemplate="header">
+                <div>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="mdi mdi-filter-off-outline mdi-18px"
+                    class="p-button-text p-button-plain mr-2"
+                    pTooltip="Очистить фильтр видов услуг"
+                    tooltipPosition="top"
+                    (click)="filter(null); table.saveState()"
+                  ></button>
+                </div>
+              </ng-template>
+            </p-multiSelect>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="ticket_identity" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-multiSelect
+              [ngModel]="table.filters.ticket_identity?.value"
+              [options]="sdTickets"
+              [virtualScroll]="true"
+              optionValue="id"
+              optionLabel="name"
+              defaultLabel="Все"
+              scrollHeight="400px"
+              itemSize="30"
+              appendTo="body"
+              (onChange)="filter($event.value); table.saveState()"
+            >
+              <ng-template pTemplate="header">
+                <div>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="mdi mdi-filter-off-outline mdi-18px"
+                    class="p-button-text p-button-plain mr-2"
+                    pTooltip="Очистить фильтр видов заявок"
+                    tooltipPosition="top"
+                    (click)="filter(null); table.saveState()"
+                  ></button>
+                </div>
+              </ng-template>
+            </p-multiSelect>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter type="text" field="description" matchMode="contains" [showMenu]="false">
+          <ng-template pTemplate="filter" let-filter="filterCallback">
+            <input
+              [ngModel]="table.filters.description?.value"
+              pInputText
+              type="text"
+              (input)="filter($event.target.value); table.saveState()"
+            />
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="priority" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-dropdown
+              [ngModel]="table.filters.priority?.value"
+              [options]="priorities"
+              [showClear]="true"
+              placeholder="Все"
+              (onChange)="filter($event.value); table.saveState()"
+            >
+              <ng-template let-item pTemplate="selectedItem">{{ item.title }}</ng-template>
+              <ng-template let-option pTemplate="item">
+                <span [class]="'sd-request-badge priority-' + option.badge">{{ option.title }}</span>
+              </ng-template>
+            </p-dropdown>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="users" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-multiSelect
+              [ngModel]="table.filters.users?.value"
+              [options]="users"
+              [virtualScroll]="true"
+              optionValue="id"
+              optionLabel="fio"
+              defaultLabel="Все"
+              scrollHeight="400px"
+              itemSize="30"
+              appendTo="body"
+              (onChange)="filter($event.value); table.saveState()"
+            >
+              <ng-template pTemplate="header">
+                <div>
+                  <button
+                    pButton
+                    pRipple
+                    type="button"
+                    icon="mdi mdi-filter-off-outline mdi-18px"
+                    class="p-button-text p-button-plain mr-2"
+                    pTooltip="Очистить фильтр исполнителей"
+                    tooltipPosition="top"
+                    (click)="filter(null); table.saveState()"
+                  ></button>
+                </div>
+              </ng-template>
+            </p-multiSelect>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="mdi mdi-filter-off-outline mdi-18px"
+          class="p-button-text p-button-plain"
+          pTooltip="Очистить все фильтры"
+          tooltipPosition="left"
+          (click)="table.clear(); table.saveState()"
+        ></button>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-req let-expanded="expanded">
+    <tr [pContextMenuRow]="req" [ngClass]="{ 'expanded-row': expanded }">
+      <td>
+        <a [routerLink]="['sd-requests', req.id]">{{ req.id }}</a>
+      </td>
+      <td>{{ req.integration_id }}</td>
+      <td>{{ req.application?.name }}</td>
+      <td>{{ req.runtime.created_at | datetime }}</td>
+      <!-- <td>{{ req.runtime.finished_at_plan | datetime }}</td> -->
+      <td>
+        <lib-ticket-status [status]="req.status"></lib-ticket-status>
+      </td>
+      <td>{{ req.service_name }}</td>
+      <td>{{ req.ticket_name }}</td>
+      <td>{{ req.description }}</td>
+      <td>
+        <lib-ticket-priority [priority]="req.priority"></lib-ticket-priority>
+      </td>
+      <td>
+        <div *ngFor="let worker of workers(req); trackBy: trackByWorker">{{ worker.user?.fio | fioMiddleName }}</div>
+      </td>
+      <!-- <td>{{ req.runtime.finished_at | datetime }}</td> -->
+      <td>
+        <button
+          type="button"
+          pButton
+          pRipple
+          [pRowToggler]="req"
+          class="p-button-text p-button-rounded p-button-plain"
+          [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-left'"
+        ></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-req>
+    <tr>
+      <td colspan="11" class="pt-0">
+        <div class="p-2">
+          <lib-show-sd-request [sdRequest]="req"></lib-show-sd-request>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="11">Заявки отсутствуют</td>
+    </tr>
+  </ng-template>
+</p-table>

@@ -1,0 +1,22 @@
+<p-card class="history-card">
+  <ng-template pTemplate="header">
+    <div class="history-card-header">
+      <span>#{{ history.id }}</span>
+      <i
+        class="mdi mdi-18px"
+        [class]="eventTypeName(history.eventType.name).icon"
+        [pTooltip]="history.eventType.description"
+        tooltipPosition="top"
+      ></i>
+    </div>
+  </ng-template>
+  <div class="history-card-body">
+    <b>{{ history.user.fio | fioInitials }}:</b> {{ history.action }}
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="history-card-footer">
+      <span class="text-secondary">{{ history.created_at | datetime }}</span>
+      <span class="text-primary" *ngIf="isLast">Последнее событие</span>
+    </div>
+  </ng-template>
+</p-card>

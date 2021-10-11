@@ -1,0 +1,36 @@
+.layout-sidebar {
+  position: fixed;
+  top: $navbar-height;
+  left: 0;
+  width: $sidebar-width;
+  height: calc(100% - #{$navbar-height});
+  overflow-y: auto;
+  z-index: 100;
+  transition: all 0.2s;
+
+  .p-menu {
+    @include body-colors;
+    border: none;
+    width: 100%;
+
+    .p-menuitem-link {
+      padding: 1rem;
+      flex-direction: column;
+      font-size: .9rem;
+
+      .p-menuitem-icon {
+        margin-right: 0;
+      }
+
+      .p-menuitem-text {
+        padding-top: 0.5 * $spacer;
+        text-align: center;
+        line-height: 1.2;
+      }
+    }
+  }
+
+  .p-menuitem-link-active * {
+    color: var(--primary-color) !important;
+  }
+}

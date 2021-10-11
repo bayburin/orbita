@@ -1,0 +1,36 @@
+<div class="grid">
+  <div class="col-4">
+    <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>
+  </div>
+  <div class="col-8">
+    <div class="mb-3">
+      <p-panel header="Последнее событие">
+        <div *ngIf="lastHistory; else noHistory">
+          <div class="flex align-items-center">
+            <span>
+              <b>{{ lastHistory.user.fio }}</b>
+            </span>
+            <small class="ml-2">{{ lastHistory.created_at | datetime }}</small>
+          </div>
+          <div class="mt-2">{{ lastHistory.action }}</div>
+        </div>
+      </p-panel>
+    </div>
+    <!-- <div class="mb-3">
+      <p-panel header="Последнее действие">
+        <div *ngIf="lastWorkflow; else noWorkflow">
+          <lib-workflow [workflow]="lastWorkflow"></lib-workflow>
+        </div>
+      </p-panel>
+    </div> -->
+    <p-panel header="Последний комментарий">
+      <div *ngIf="sdRequest.comments.length; else noComments">
+        <lib-comment [comment]="sdRequest.comments[sdRequest.comments.length - 1]"></lib-comment>
+      </div>
+    </p-panel>
+  </div>
+</div>
+
+<ng-template #noComments>Комментарии отсутствуют</ng-template>
+<ng-template #noHistory>События отсутствуют</ng-template>
+<!-- <ng-template #noWorkflow>Действия отсутствуют</ng-template> -->

@@ -1,0 +1,125 @@
+<p-contextMenu #cm [model]="contextMenuItems"></p-contextMenu>
+
+<p-table
+  #table
+  [value]="employees"
+  [lazy]="true"
+  dataKey="id"
+  [scrollable]="true"
+  [rows]="100"
+  scrollHeight="800px"
+  [virtualScroll]="true"
+  [loading]="loading"
+  stateKey="employeeTable"
+  stateStorage="local"
+  [(contextMenuSelection)]="selectedEmployee"
+  [contextMenu]="cm"
+  (onLazyLoad)="onLazyLoad($event)"
+>
+  <ng-template pTemplate="header">
+    <tr>
+      <th pSortableColumn="personnelNo" width="10%">Таб. № <p-sortIcon field="personnelNo"></p-sortIcon></th>
+      <th>ФИО</th>
+      <th width="7%">Подразд.</th>
+      <th>Должность</th>
+      <th width="10%">Расположение</th>
+      <th width="7%">Телефон</th>
+      <th width="10%">Эл. почта</th>
+      <th width="7%" class="text-center">В отпуске</th>
+      <th width="50px"></th>
+    </tr>
+    <tr>
+      <th>
+        <p-columnFilter [field]="filters.TN" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-filter="filterCallback">
+            <input
+              [value]="table.filters[filters.TN]?.value"
+              pInputText
+              type="text"
+              (input)="filter($event.target.value)"
+            />
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter [field]="filters.FIO" matchMode="contains" [showMenu]="false">
+          <ng-template pTemplate="filter" let-filter="filterCallback">
+            <input
+              [value]="table.filters[filters.FIO]?.value"
+              pInputText
+              type="text"
+              (input)="filter($event.target.value)"
+            />
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter [field]="filters.DEPT" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-filter="filterCallback">
+            <input
+              [value]="table.filters[filters.DEPT]?.value"
+              pInputText
+              type="text"
+              (input)="filter($event.target.value)"
+            />
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th></th>
+      <th></th>
+      <th>
+        <p-columnFilter [field]="filters.PHONE" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-filter="filterCallback">
+            <input
+              [value]="table.filters[filters.PHONE]?.value"
+              pInputText
+              type="text"
+              (input)="filter($event.target.value)"
+            />
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th></th>
+      <th></th>
+      <th>
+        <button
+          pButton
+          pRipple
+          type="button"
+          icon="mdi mdi-filter-off-outline mdi-18px"
+          class="p-button-text p-button-plain"
+          pTooltip="Очистить все фильтры"
+          tooltipPosition="left"
+          (click)="clearTable()"
+        ></button>
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-emp>
+    <tr [pContextMenuRow]="emp">
+      <td width="10%">
+        <a [routerLink]="[emp.id]">{{ emp.personnelNo }}</a>
+      </td>
+      <td>{{ emp.fullName }}</td>
+      <td width="7%">{{ emp.departmentForAccounting }}</td>
+      <td>{{ emp.professionForAccounting }}</td>
+      <td width="10%">{{ emp.position }}</td>
+      <td width="7%">{{ emp.phoneText }}</td>
+      <td width="10%">{{ emp.emailText }}</td>
+      <td width="7%" class="text-center">
+        <i
+          *ngIf="emp.inVacation"
+          class="mdi mdi-check mdi-18px"
+          pTooltip="До {{ emp.vacationTo }}"
+          tooltipPosition="left"
+        ></i>
+      </td>
+      <td width="40px"></td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="9">Пусто</td>
+    </tr>
+  </ng-template>
+</p-table>

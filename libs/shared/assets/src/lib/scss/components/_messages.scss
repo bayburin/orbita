@@ -1,0 +1,39 @@
+.message-wrapper {
+  padding: $spacer;
+
+  .sender-block {
+    display: flex;
+    align-items: center;
+
+    .time {
+      margin-left: $spacer * 0.5;
+    }
+  }
+
+  .message {
+    margin-top: $spacer * 0.5;
+  }
+}
+
+.comments-card {
+  border: 1px solid var(--surface-d);
+  padding-top: 1rem;
+
+  .comment-form-block {
+    padding: 1rem;
+    background-color: var(--surface-b);
+
+    textarea {
+      height: 5rem;
+    }
+  }
+
+  .p-scrollpanel-content {
+    padding: 0;
+  }
+}
+
+.comments-card-scroll-panel {
+  @include primary-scroll;
+  height: calc(#{$ticket-history-content-height} - 7rem - #{$spacer});
+}

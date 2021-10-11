@@ -1,0 +1,19 @@
+.transparent-tabview {
+  .p-tabview .p-tabview-panels {
+    // background: var(--surface-b);
+    background: transparent;
+  }
+
+  .p-tabview .p-tabview-nav {
+    // background: var(--surface-b);
+    background: transparent;
+  }
+  .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    // background: var(--surface-b);
+    background: transparent;
+  }
+
+  .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+    background: transparent;
+  }
+}

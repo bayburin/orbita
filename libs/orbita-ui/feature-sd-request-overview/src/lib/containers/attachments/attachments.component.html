@@ -1,0 +1,50 @@
+<div *ngIf="editMode; else readModeAttachments">
+  <lib-attachments-form [attachments]="sdRequest.attachments" [attachmentsForm]="newAttachmentsForm">
+    <ng-container *ngTemplateOutlet="editModeAttachments"></ng-container>
+  </lib-attachments-form>
+</div>
+
+<ng-template #editModeAttachments>
+  <div
+    *ngFor="let attachment of attachmentsForm.controls"
+    class="file-item"
+    [ngClass]="{ 'file-marked-for-destruction': attachment.get('_destroy').value === true }"
+  >
+    <div [ngClass]="">{{ attachment.get('filename').value }}</div>
+    <div class="ml-2">
+      <i
+        *ngIf="attachment.get('_destroy').value; else actionToDestroy"
+        class="mdi mdi-delete-restore mdi-18px cursor-pointer"
+        (click)="demarkForDestruction(toFormGroup(attachment))"
+      ></i>
+      <ng-template #actionToDestroy>
+        <i
+          class="mdi mdi-delete-outline mdi-18px cursor-pointer"
+          (click)="markForDestruction(toFormGroup(attachment))"
+        ></i>
+      </ng-template>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #readModeAttachments>
+  <div *ngIf="sdRequest.attachments.length; else noFiles">
+    <div *ngFor="let attachment of sdRequest.attachments; trackByAttachment" class="file-item">
+      <div>
+        <div>{{ attachment.filename }}</div>
+        <lib-attachments-error [attachment]="attachment" [errorAttachments]="errorAttachments"></lib-attachments-error>
+      </div>
+      <div class="ml-2">
+        <lib-attachments-loading
+          [attachment]="attachment"
+          [loadingAttachments]="loadingAttachments"
+          (downloadAttachment)="downloadAttachment(attachment)"
+        ></lib-attachments-loading>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noFiles>
+  <lib-panel-placeholder>Файлы отсутствуют</lib-panel-placeholder>
+</ng-template>

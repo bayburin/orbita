@@ -1,0 +1,16 @@
+// .p-datatable .p-datatable-tbody > tr > td,
+// .p-datatable .p-datatable-thead > tr > th {
+//   padding: 0.5rem;
+// }
+
+.p-datatable tr.expanded-row > td {
+  border-bottom: none;
+}
+
+table {
+  .p-highlight-contextmenu {
+    td {
+      background-color: var(--surface-b);
+    }
+  }
+}

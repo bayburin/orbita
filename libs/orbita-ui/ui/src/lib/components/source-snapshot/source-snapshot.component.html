@@ -1,0 +1,65 @@
+<p-panel header="Данные на момент создания заявки">
+  <h4>Данные по пользователю</h4>
+  <lib-detail-row>
+    <div attribute>ФИО</div>
+    <div value>{{ snapshot.fio }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>Отдел</div>
+    <div value>{{ snapshot.dept }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>Табельный номер</div>
+    <div value>{{ snapshot.tn }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>Телефон</div>
+    <div value>{{ snapshot.user_attrs?.phone }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>Логин ЛК</div>
+    <div value>{{ snapshot.domain_user }}</div>
+  </lib-detail-row>
+
+  <p-divider></p-divider>
+
+  <h4>Данные по хосту</h4>
+  <lib-detail-row>
+    <div attribute>Имя</div>
+    <div value>{{ snapshot.dns }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>IP</div>
+    <div value>{{ snapshot.source_ip }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>MAC</div>
+    <div value>{{ snapshot.mac }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>Инвентарный номер</div>
+    <div value>{{ snapshot.invent_num }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>Штрих-код</div>
+    <div value>{{ snapshot.barcode }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>Расположение</div>
+    <div value>{{ snapshot.host_location }}</div>
+  </lib-detail-row>
+
+  <lib-detail-row>
+    <div attribute>Версия ОС</div>
+    <div value>{{ snapshot.os }}</div>
+  </lib-detail-row>
+</p-panel>

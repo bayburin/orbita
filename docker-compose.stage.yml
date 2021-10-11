@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  orbita-ui:
+    build:
+      context: .
+      dockerfile: .docker/app/orbita-ui.prod.Dockerfile
+      args:
+        NODE_MAJOR: 14
+        YARN_VERSION: 1.22.5
+        APP_ROOT: /app
+        APP_HOSTNAME: orbita-test
+        STAGE: staging
+      labels:
+        project-name: 'orbita-ui-test'
+        environment: 'staging'
+        maintainer: 'bayburin@iss-reshetnev.ru'
+      cache_from:
+        - ${CI_REGISTRY_IMAGE}/${DEPLOY_PROJECT_NAME}_orbita-ui:latest
+    image: ${CI_REGISTRY_IMAGE}/${DEPLOY_PROJECT_NAME}_orbita-ui
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    stdin_open: true
+    tty: true
+    mac_address: 56:a2:71:39:91:e8
+    networks:
+      macvlan:
+        ipv4_address: 10.0.9.220
+
+networks:
+  macvlan:
+    driver: macvlan
+    driver_opts:
+      parent: ens224
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/16
+          gateway: 10.0.0.1

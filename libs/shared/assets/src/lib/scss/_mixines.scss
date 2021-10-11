@@ -1,0 +1,10 @@
+@mixin primary-scroll {
+  .p-scrollpanel-bar {
+    background-color: var(--primary-color);
+  }
+}
+
+@mixin body-colors {
+  background-color: var(--surface-b);
+  color: var(--text-color);
+}

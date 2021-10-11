@@ -1,0 +1,77 @@
+<p-dialog
+  [visible]="openModal"
+  [modal]="true"
+  [style]="{ width: '60vw' }"
+  [baseZIndex]="10000"
+  [draggable]="false"
+  [resizable]="false"
+  [showHeader]="false"
+>
+  <ng-template pTemplate="header"></ng-template>
+  <ng-template pTemplate="content">
+    <h1 class="text-center">Создана заявка № {{ sdRequest.id }}</h1>
+    <h3 class="text-center">Срок выполнения {{ sdRequest.runtime.finished_at_plan | datetime }}</h3>
+    <p-divider></p-divider>
+    <div class="sd-request-preview-content">
+      <div class="grid preview-row">
+        <div class="col-2">Работник</div>
+        <div class="col-10">
+          <div class="preview-row-content">{{ sdRequest.source_snapshot.fio }}</div>
+        </div>
+      </div>
+
+      <div class="grid preview-row">
+        <div class="col-2">Приоритет</div>
+        <div class="col-10">
+          <div class="preview-row-content">
+            <lib-ticket-priority [priority]="sdRequest.priority"></lib-ticket-priority>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid preview-row">
+        <div class="col-2">Услуга</div>
+        <div class="col-10">
+          <div class="preview-row-content">{{ sdRequest.service_name }}. {{ sdRequest.ticket_name }}</div>
+        </div>
+      </div>
+
+      <div class="grid preview-row">
+        <div class="col-2">Описание</div>
+        <div class="col-10">
+          <div class="preview-row-content">{{ sdRequest.description }}</div>
+        </div>
+      </div>
+
+      <div class="grid preview-row">
+        <div class="col-2">Исполнители</div>
+        <div class="col-10">
+          <div class="preview-row-content">
+            <lib-workers [works]="sdRequest.works"></lib-workers>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <div class="flex justify-content-between">
+      <p-button
+        label="Создать новую заявку"
+        styleClass="p-button-text p-button-plain"
+        (click)="createAnotherSdRequest.emit()"
+      ></p-button>
+      <div>
+        <p-button
+          label="Перейти к заявке"
+          styleClass="p-button-outlined"
+          (click)="backToCurrentSdRequest.emit(sdRequest.id)"
+        ></p-button>
+        <p-button
+          label="Вернуться на страницу всех заявок"
+          styleClass="p-button-text p-button-plain ml-2"
+          (click)="backToSdRequestList.emit()"
+        ></p-button>
+      </div>
+    </div>
+  </ng-template>
+</p-dialog>

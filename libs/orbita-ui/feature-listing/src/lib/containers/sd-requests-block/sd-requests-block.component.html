@@ -1,0 +1,46 @@
+<div class="card">
+  <p-toolbar styleClass="toolbar-sm">
+    <div class="p-toolbar-group-left">
+      <a
+        pButton
+        pRipple
+        icon="mdi mdi-plus mdi-18px"
+        class="mr-2"
+        pTooltip="Новая заявка"
+        tooltipPosition="bottom"
+        [routerLink]="['new-sd-request']"
+      ></a>
+      <button
+        pButton
+        pRipple
+        type="button"
+        icon="mdi mdi-refresh mdi-18px"
+        class="p-button-text p-button-plain"
+        pTooltip="Обновить таблицу"
+        tooltipPosition="bottom"
+        (click)="reloadTable()"
+      ></button>
+    </div>
+  </p-toolbar>
+  <lib-sd-requests-table
+    [sdRequests]="sdRequests$ | async"
+    [loading]="loading$ | async"
+    [totalCount]="totalCount$ | async"
+    [users]="users$ | async"
+    [sdServices]="sdServices$ | async"
+    [sdTickets]="sdTickets$ | async"
+    (tableChanged)="tableChanged($event)"
+    (viewSdRequest)="redirectToSdRequestPage($event)"
+  ></lib-sd-requests-table>
+</div>
+
+<p-toast position="top-center" key="newSdRequestsNotify" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div class="flex flex-column flex-auto">
+      <div class="flex align-items-center">
+        <p>{{ message.summary }}</p>
+        <button pButton pRipple type="button" label="Получить" class="ml-2" (click)="reloadTable()"></button>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

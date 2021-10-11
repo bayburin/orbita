@@ -1,0 +1,10 @@
+<div class="card">
+  <lib-employees-table
+    [employees]="employees$ | async"
+    [loading]="loadingEmployees$ | async"
+    (filterChanged)="changeTable($event)"
+    (filterCleared)="clearTable()"
+    (viewEmployee)="redirectToEmployeePage($event)"
+    (newSdRequest)="redirectToNewSdRequestPage($event)"
+  ></lib-employees-table>
+</div>

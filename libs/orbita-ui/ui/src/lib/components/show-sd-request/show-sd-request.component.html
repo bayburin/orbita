@@ -1,0 +1,14 @@
+<p-tabView>
+  <p-tabPanel header="Детали">
+    <lib-sd-request-details [sdRequest]="sdRequest"></lib-sd-request-details>
+  </p-tabPanel>
+  <p-tabPanel header="История">
+    <lib-sd-request-history-overview
+      [works]="sdRequest.works"
+      [lastHistory]="sdRequest.histories[sdRequest.histories.length - 1]"
+    ></lib-sd-request-history-overview>
+  </p-tabPanel>
+  <!-- <p-tabPanel header="Комментарии">
+    <lib-comments [comments]="sdRequest.comments" (sendMessage)="sendMessage($event)"></lib-comments>
+  </p-tabPanel> -->
+</p-tabView>

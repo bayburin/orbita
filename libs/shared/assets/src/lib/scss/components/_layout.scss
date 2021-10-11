@@ -1,0 +1,46 @@
+html {
+  font-size: 14px;
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  @include body-colors;
+  margin: 0;
+}
+
+main {
+  margin-left: $sidebar-width;
+  margin-top: $navbar-height;
+  padding: 2 * $spacer;
+  height: calc(100vh - #{$navbar-height});
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.layout {
+  display: flex;
+
+  & > div:first-child {
+    width: 100%;
+  }
+}
+
+.app-spinner-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+*:focus {
+  box-shadow: none !important;
+}
+
+.app-error {
+  display: block;
+  text-align: center;
+}
