@@ -32,7 +32,7 @@ RUN apt-get update -qq && apt-get -yq dist-upgrade \
   && truncate -s 0 /var/log/*log
 
 # Install nx
-RUN yarn global add nx
+RUN yarn config set registry https://nexus.iss-reshetnev.ru/repository/npm/ && yarn global add nx
 
 # Create app folder
 RUN mkdir -p ${APP_ROOT}
@@ -43,7 +43,7 @@ COPY package.json yarn.lock ./
 RUN yarn install
 
 COPY . ./
-RUN nx build orbita-ui --configuration=STAGE
+RUN nx build orbita-ui --configuration=${STAGE}
 
 # SECONDS STAGE
 FROM nginx:1.20.1-alpine
