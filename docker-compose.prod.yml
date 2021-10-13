@@ -40,13 +40,11 @@ services:
       macvlan:
         ipv4_address: 10.0.45.36
     deploy:
-    resources:
-      reservations:
-        cpus: 0.125
-        memory: 64mb
-      limits:
-        cpus: 0.5
-        memory: 128mb
+      resources:
+        reservations:
+          memory: 64mb
+        limits:
+          memory: 128mb
 
 networks:
   macvlan:
