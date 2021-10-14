@@ -156,6 +156,7 @@ describe('SdRequestReducer', () => {
       const result: FormState = reducer(initialState, action).form;
 
       expect(result.entity).toEqual(form);
+      expect(result.updateView).toBe(true);
       expect(result.needToGetNewData).toBe(false);
     });
   });

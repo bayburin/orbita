@@ -173,8 +173,8 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.sdRequestFacade.formEntity$
         .pipe(
-          filter((data) => Boolean(data)),
-          distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
+          filter((data) => Boolean(data))
+          // distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
         )
         .subscribe((formData) => {
           this.clearForm();

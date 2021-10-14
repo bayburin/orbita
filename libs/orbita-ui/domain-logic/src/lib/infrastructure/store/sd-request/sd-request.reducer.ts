@@ -56,7 +56,9 @@ export const initSelectedState: SelectedState = {
 export const initFormState: FormState = {
   entity: null,
   loading: false,
+  // Флаг, определяющий, передавать ли данные формы из стора в представление
   updateView: true,
+  // Флаг, который определяет, показывать ли кнопку "Принять изменения" в режиме редактирования формы
   needToGetNewData: false,
 };
 
@@ -174,6 +176,7 @@ const sdRequestReducer = createReducer(
     form: {
       ...state.form,
       entity: SdRequestFactory.createViewForm(sdRequestViewModel),
+      updateView: true,
       needToGetNewData: false,
     },
   })),
