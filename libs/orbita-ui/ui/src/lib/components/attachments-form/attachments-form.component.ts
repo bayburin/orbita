@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormArray, FormControl } from '@angular/forms';
-import { Attachment } from '@orbita/orbita-ui/domain-logic';
 
 import { maxFileSizeValidator } from '../../validators/max-file-size.validator';
 
@@ -11,7 +10,6 @@ import { maxFileSizeValidator } from '../../validators/max-file-size.validator';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AttachmentsFormComponent {
-  @Input() attachments: Attachment[];
   @Input() attachmentsForm: FormArray;
 
   /**

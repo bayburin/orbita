@@ -105,15 +105,15 @@ describe('OverviewBlockComponent', () => {
     });
   });
 
-  describe('reinitForm()', () => {
-    it('should call reinitUpdateForm() method', () => {
-      const spy = jest.spyOn(sdRequestFacade, 'reinitUpdateForm');
+  // describe('reinitForm()', () => {
+  //   it('should call reinitUpdateForm() method', () => {
+  //     const spy = jest.spyOn(sdRequestFacade, 'reinitUpdateForm');
 
-      component.reinitForm();
+  //     component.reinitForm();
 
-      expect(spy).toHaveBeenCalled();
-    });
-  });
+  //     expect(spy).toHaveBeenCalled();
+  //   });
+  // });
 
   describe('navigateToSdRequests()', () => {
     it('should call updateForm() method', () => {
