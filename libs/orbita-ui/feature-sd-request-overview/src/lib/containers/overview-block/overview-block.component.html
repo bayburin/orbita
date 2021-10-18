@@ -118,7 +118,9 @@
             </div>
             <div class="mt-2">
               <span class="text-secondary">пользователь</span>
-              <span class="text-primary ml-2">{{ sdRequest.source_snapshot.fio }}</span>
+              <span class="ml-2">
+                <b>{{ sdRequest.source_snapshot.fio }}</b>
+              </span>
               <span class="text-secondary ml-2">от</span>
               <span class="mx-2">{{ sdRequest.runtime.created_at | datetime }}</span> |
               <span class="ml-2">
@@ -466,5 +468,4 @@
   acceptIcon=""
   [dismissableMask]="true"
 >
-  <ng-template pTemplate="header"></ng-template>
 </p-confirmDialog>

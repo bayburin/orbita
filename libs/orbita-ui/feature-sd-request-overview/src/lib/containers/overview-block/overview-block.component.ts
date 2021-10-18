@@ -137,7 +137,11 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
    * Актуализирует данные формы
    */
   reinitForm(): void {
-    this.sdRequestFacade.reinitUpdateForm();
+    this.confirmationService.confirm({
+      header: 'Внимание!',
+      message: 'После принятия изменений все данные, которые вы ввели, будут стерты. Принять изменения?',
+      accept: () => this.sdRequestFacade.reinitUpdateForm(),
+    });
   }
 
   /**
@@ -182,6 +186,7 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
           formData.attachments.forEach((attachment: AttachmentViewForm) =>
             this.attachmentsForm.push(this.buildAttachment(attachment), { emitEvent: false })
           );
+          this.form.setControl('newAttachments', this.fb.array([]));
         })
     );
 

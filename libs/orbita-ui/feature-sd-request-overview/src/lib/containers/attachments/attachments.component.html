@@ -1,5 +1,5 @@
 <div *ngIf="editMode; else readModeAttachments">
-  <lib-attachments-form [attachments]="sdRequest.attachments" [attachmentsForm]="newAttachmentsForm">
+  <lib-attachments-form [attachmentsForm]="newAttachmentsForm">
     <ng-container *ngTemplateOutlet="editModeAttachments"></ng-container>
   </lib-attachments-form>
 </div>
