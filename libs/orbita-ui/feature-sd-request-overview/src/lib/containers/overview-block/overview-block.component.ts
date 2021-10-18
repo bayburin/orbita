@@ -241,16 +241,15 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
         }
       })
     );
-    this.subscriptions.add(
-      this.sdRequest$
-        .pipe(
-          filter((data) => Boolean(data)),
-          first()
-        )
-        .subscribe((sdRequest) => {
-          this.id = sdRequest.id;
-          this.messageFacade.connectToCommentsChannel(sdRequest.id);
-        })
-    );
+
+    this.sdRequest$
+      .pipe(
+        filter((data) => Boolean(data)),
+        first()
+      )
+      .subscribe((sdRequest) => {
+        this.id = sdRequest.id;
+        this.subscriptions.add(this.messageFacade.connectToCommentsChannel(sdRequest.id));
+      });
   }
 }
