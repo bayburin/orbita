@@ -28,7 +28,7 @@ class PrioritiesViewModelFactory {
  */
 export const prioritiesViewModelMap: Record<Priorities, PrioritiesViewModel> = {
   [Priorities.DEFAULT]: PrioritiesViewModelFactory.create('Стандартный', 'default'),
-  [Priorities.LOW]: PrioritiesViewModelFactory.create('Низкий', 'low'),
+  [Priorities.MEDIUM]: PrioritiesViewModelFactory.create('Средний', 'medium'),
   [Priorities.HIGH]: PrioritiesViewModelFactory.create('Высокий', 'high'),
 };
 
