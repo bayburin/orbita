@@ -50,6 +50,7 @@ export class SdRequestFactory {
     } else {
       snapshot = {
         id_tn: viewForm.employee.id,
+        user_attrs: viewForm.source_snapshot.user_attrs,
       };
     }
 

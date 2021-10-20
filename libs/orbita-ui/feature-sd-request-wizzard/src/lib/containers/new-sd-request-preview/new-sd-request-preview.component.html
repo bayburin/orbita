@@ -30,8 +30,8 @@
             <div class="p-1"><b>ФИО:</b> {{ sdRequest.employee.fullName }}</div>
             <div class="p-1"><b>Табельный:</b> {{ sdRequest.employee.personnelNo }}</div>
             <div class="p-1"><b>Отдел:</b> {{ sdRequest.employee.departmentForAccounting }}</div>
-            <div class="p-1"><b>Почта:</b> {{ sdRequest.employee.emailText }}</div>
-            <div class="p-1"><b>Телефон:</b> {{ sdRequest.employee.phoneText }}</div>
+            <div class="p-1"><b>Почта:</b> {{ sdRequest.source_snapshot.user_attrs['email'] }}</div>
+            <div class="p-1"><b>Телефон:</b> {{ sdRequest.source_snapshot.user_attrs['phone'] }}</div>
           </div>
         </ng-template>
       </div>

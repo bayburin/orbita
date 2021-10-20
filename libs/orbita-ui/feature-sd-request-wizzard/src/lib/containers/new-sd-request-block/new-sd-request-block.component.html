@@ -50,46 +50,49 @@
           <label for="employeeManuallyFlag">Ввести данные о работнике вручную</label>
         </div>
 
-        <div *ngIf="employeeManuallyFlag.value" formGroupName="source_snapshot">
-          <div class="formgrid grid">
-            <div class="field col">
-              <label for="tn">
-                <b>Таб. номер*</b>
-              </label>
-              <input type="text" id="tn" formControlName="tn" class="inputfield w-full" pInputText />
-              <ng-container
-                *ngIf="
-                  sourceSnapshot.get('tn').invalid &&
-                  (sourceSnapshot.get('tn').dirty || sourceSnapshot.get('tn').touched)
-                "
-              >
-                <small class="p-error" *ngIf="sourceSnapshot.get('tn').hasError('required')">
-                  Не может быть пустым
-                </small>
-              </ng-container>
-              <small class="p-error" *ngIf="sourceSnapshot.get('tn').hasError('pattern')"
-                >Должен быть числом и не может начинаться с 0</small
-              >
-            </div>
-            <div class="field col">
-              <label for="fio">
-                <b>ФИО*</b>
-              </label>
-              <input type="text" id="fio" formControlName="fio" class="inputfield w-full" pInputText />
-              <small
-                class="p-error"
-                *ngIf="
-                  sourceSnapshot.get('fio').invalid &&
-                  (sourceSnapshot.get('fio').dirty || sourceSnapshot.get('fio').touched)
-                "
-                >Не может быть пустым</small
-              >
-            </div>
-            <div class="field col">
-              <label for="dept">Отдел</label>
-              <input type="text" id="dept" formControlName="dept" class="inputfield w-full" pInputText />
+        <div formGroupName="source_snapshot">
+          <div *ngIf="employeeManuallyFlag.value">
+            <div class="formgrid grid">
+              <div class="field col">
+                <label for="tn">
+                  <b>Таб. номер*</b>
+                </label>
+                <input type="text" id="tn" formControlName="tn" class="inputfield w-full" pInputText />
+                <ng-container
+                  *ngIf="
+                    sourceSnapshot.get('tn').invalid &&
+                    (sourceSnapshot.get('tn').dirty || sourceSnapshot.get('tn').touched)
+                  "
+                >
+                  <small class="p-error" *ngIf="sourceSnapshot.get('tn').hasError('required')">
+                    Не может быть пустым
+                  </small>
+                </ng-container>
+                <small class="p-error" *ngIf="sourceSnapshot.get('tn').hasError('pattern')"
+                  >Должен быть числом и не может начинаться с 0</small
+                >
+              </div>
+              <div class="field col">
+                <label for="fio">
+                  <b>ФИО*</b>
+                </label>
+                <input type="text" id="fio" formControlName="fio" class="inputfield w-full" pInputText />
+                <small
+                  class="p-error"
+                  *ngIf="
+                    sourceSnapshot.get('fio').invalid &&
+                    (sourceSnapshot.get('fio').dirty || sourceSnapshot.get('fio').touched)
+                  "
+                  >Не может быть пустым</small
+                >
+              </div>
+              <div class="field col">
+                <label for="dept">Отдел</label>
+                <input type="text" id="dept" formControlName="dept" class="inputfield w-full" pInputText />
+              </div>
             </div>
           </div>
+
           <div class="formgrid grid" formGroupName="user_attrs">
             <div class="field col">
               <label for="email">Электронная почта</label>

@@ -123,6 +123,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    */
   selectEmployee(employee: EmployeeShort): void {
     this.form.patchValue({ employee: employee });
+    this.sourceSnapshot.get('user_attrs').patchValue({ phone: employee.phoneText, email: employee.emailText });
 
     // Запустить поиск работников по id_tn, если не выбран чекбокс "Поиск выч. техники вручную"
     if (!this.svtItemManually.value) {
