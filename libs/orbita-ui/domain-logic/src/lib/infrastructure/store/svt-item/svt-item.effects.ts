@@ -44,12 +44,12 @@ export class SvtItemEffects {
     )
   );
 
-  loadAllForFormSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(SvtItemActions.loadAllForFormSuccess),
-      map((action) => SdRequestActions.setSvtItemToNewForm({ svtItem: action.svtItems[0] }))
-    )
-  );
+  // loadAllForFormSuccess$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(SvtItemActions.loadAllForFormSuccess),
+  //     map((action) => SdRequestActions.setSvtItemToNewForm({ svtItem: action.svtItems[0] }))
+  //   )
+  // );
 
   loadSelected$ = createEffect(() =>
     this.actions$.pipe(

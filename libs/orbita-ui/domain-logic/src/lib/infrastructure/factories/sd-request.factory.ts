@@ -103,6 +103,7 @@ export class SdRequestFactory {
     const dataForServer: SdRequestForm = {
       source_snapshot: snapshot,
       description: viewForm.description,
+      status: viewForm.status,
       service_id,
       service_name,
       ticket_identity,

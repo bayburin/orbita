@@ -27,13 +27,13 @@
   }
 
   &.priority-default {
-    background-color: var(--green-100);
-    color: var(--green-800);
-  }
-
-  &.priority-low {
     background-color: var(--bluegray-100);
     color: var(--bluegray-800);
+  }
+
+  &.priority-medium {
+    background-color: var(--orange-100);
+    color: var(--orange-800);
   }
 
   &.priority-high {

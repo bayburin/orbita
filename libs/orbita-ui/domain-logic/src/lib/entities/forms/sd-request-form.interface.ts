@@ -1,4 +1,4 @@
-import { Priorities } from './../models/ticket.interface';
+import { Priorities, Statuses } from './../models/ticket.interface';
 import { SourceSnapshotForm } from './source-snapshot-form.interface';
 import { AttachmentForm } from './attachment-form.interface';
 import { WorkForm } from './work-form.interface';
@@ -21,6 +21,11 @@ export interface SdRequestForm {
    * Описание
    */
   description?: string;
+
+  /**
+   * Статус
+   */
+  status?: Statuses;
 
   /**
    * Приоритет

@@ -12,6 +12,7 @@ import {
   EmployeeShort,
   SdTicketViewModel,
   SdRequestFacade,
+  Statuses,
 } from '@orbita/orbita-ui/domain-logic';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -278,6 +279,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       ticket: [null, Validators.required],
       noTicketFlag: [false],
       description: [null, Validators.required],
+      status: [Statuses.AT_WORK],
       svtItem: [],
       attachments: this.fb.array([]),
     });

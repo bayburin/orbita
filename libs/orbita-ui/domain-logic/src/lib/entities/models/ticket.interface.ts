@@ -75,7 +75,7 @@ export enum Statuses {
  */
 export enum Priorities {
   DEFAULT = 'default',
-  LOW = 'low',
+  MEDIUM = 'medium',
   HIGH = 'high',
 }
 
