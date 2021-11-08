@@ -1,8 +1,8 @@
+import { ParameterViewModel } from './parameter-view-model.interface';
 import { MessageViewModel } from './message-view-model.interface';
 import { TicketViewModel } from './ticket-view-model.interface';
 import { Application } from './../models/application.interface';
 import { HistoryViewModel } from './history-view-model.interface';
-import { Parameter } from './../models/parameter.interface';
 
 /**
  * Интерфейс заявки
@@ -49,9 +49,9 @@ export interface SdRequestViewModel extends TicketViewModel {
   readonly rating: number;
 
   /**
-   * Массив объектов Parameter
+   * Объект параметров ParameterViewModel
    */
-  // readonly parameters: Parameter[];
+  readonly parameter?: ParameterViewModel;
 
   /**
    * Событие, произошедшее последним в заявке

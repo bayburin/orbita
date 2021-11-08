@@ -10,6 +10,7 @@ import { SdRequestViewModel } from './../../../entities/view-models/sd-request-v
 import { WorkViewModel } from './../../../entities/view-models/work-view-model.interface';
 import { MessageViewModel } from './../../../entities/view-models/message-view-model.interface';
 import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
+import { ParameterSchemaViewModelFactory } from '../../factories/parameter-shema-view-model.factory';
 
 export const getAllViewModel = createSelector(
   SdRequestSelectors.getAll,
@@ -33,6 +34,7 @@ export const getAllViewModel = createSelector(
         comments,
         works,
         attachments: [],
+        parameter: null,
         histories: oFlatMap((work) => work.histories, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
         workflows: oFlatMap((work) => work.workflows, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
       };
@@ -63,6 +65,7 @@ export const getSelectedEntityViewModel = createSelector(
       (arr, attachmentId) => (attachmentEntities[attachmentId] ? arr.concat(attachmentEntities[attachmentId]) : arr),
       []
     );
+    const schemaPayload = ParameterSchemaViewModelFactory.createSchema(sdRequest.parameter);
 
     return {
       ...sdRequest,
@@ -70,6 +73,10 @@ export const getSelectedEntityViewModel = createSelector(
       comments,
       works,
       attachments,
+      parameter: {
+        ...sdRequest.parameter,
+        payload: schemaPayload,
+      },
       histories: oFlatMap((work) => work.histories, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
       workflows: oFlatMap((work) => work.workflows, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
     };
@@ -119,6 +126,7 @@ export const getNewFormCreatedViewModel = createSelector(
       comments,
       works,
       attachments,
+      parameter: null,
       histories: oFlatMap((work) => work.histories, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
       workflows: oFlatMap((work) => work.workflows, works).sort((a, b) => (a.id > b.id ? 1 : -1)) || [],
     };

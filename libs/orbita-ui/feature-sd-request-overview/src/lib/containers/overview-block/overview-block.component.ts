@@ -10,7 +10,6 @@ import {
   SvtFacade,
   AuthCenterFacade,
   ParameterFacade,
-  Parameter,
   prioritiesViewModelArray,
   UserFacade,
   User,
@@ -94,10 +93,6 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByHistory(index: number, history: HistoryViewModel): number {
     return history.id;
-  }
-
-  trackByParameter(index: number, parameter: Parameter): number {
-    return parameter.id;
   }
 
   trackByUserGroup(index: number, group: UserGroup): number {
