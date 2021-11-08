@@ -20,7 +20,11 @@ export class ParameterSchemaViewModelFactory {
       },
     };
 
-    if (parameter?.schema_version == '1') {
+    if (!parameter || !parameter.payload) {
+      return DEFAULT_SCHEMA;
+    }
+
+    if (parameter.schema_version == '1') {
       return new SchemaV1ParameterAdapter(DEFAULT_SCHEMA).adaptee(parameter.payload);
     }
 
