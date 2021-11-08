@@ -36,7 +36,6 @@ export class SchemaV1ParameterAdapter {
       }, {} as { [key: string]: string });
     });
 
-    console.log(this.result);
     return this.result;
   }
 }
