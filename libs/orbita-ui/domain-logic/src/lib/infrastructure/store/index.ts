@@ -10,7 +10,7 @@ import * as fromMessage from './message/message.reducer';
 import * as fromWork from './work/work.reducer';
 import * as fromHistory from './history/history.reducer';
 import * as fromEventType from './event-type/event-type.reducer';
-import * as fromParameter from './parameter/parameter.reducer';
+// import * as fromParameter from './parameter/parameter.reducer';
 import * as fromWorker from './worker/worker.reducer';
 import * as fromApplication from './application/application.reducer';
 import * as fromSdService from './sd-service/sd-service.reducer';
@@ -31,7 +31,7 @@ export interface OrbitaUiState
     fromWork.WorkPartialState,
     fromHistory.HistoryPartialState,
     fromEventType.EventTypePartialState,
-    fromParameter.ParameterPartialState,
+    // fromParameter.ParameterPartialState,
     fromWorker.WorkerPartialState,
     fromApplication.ApplicationPartialState,
     fromSdService.SdServicePartialState,
@@ -50,7 +50,7 @@ export const reducer: ActionReducerMap<OrbitaUiState> = {
   [fromWork.WORK_FEATURE_KEY]: fromWork.reducer,
   [fromHistory.HISTORY_FEATURE_KEY]: fromHistory.reducer,
   [fromEventType.EVENT_TYPE_FEATURE_KEY]: fromEventType.reducer,
-  [fromParameter.PARAMETER_FEATURE_KEY]: fromParameter.reducer,
+  // [fromParameter.PARAMETER_FEATURE_KEY]: fromParameter.reducer,
   [fromWorker.WORKER_FEATURE_KEY]: fromWorker.reducer,
   [fromApplication.APPLICATION_FEATURE_KEY]: fromApplication.reducer,
   [fromSdService.SD_SERVICE_FEATURE_KEY]: fromSdService.reducer,
@@ -70,7 +70,7 @@ export const initialState: OrbitaUiState = {
   [fromWork.WORK_FEATURE_KEY]: fromWork.initialState,
   [fromHistory.HISTORY_FEATURE_KEY]: fromHistory.initialState,
   [fromEventType.EVENT_TYPE_FEATURE_KEY]: fromEventType.initialState,
-  [fromParameter.PARAMETER_FEATURE_KEY]: fromParameter.initialState,
+  // [fromParameter.PARAMETER_FEATURE_KEY]: fromParameter.initialState,
   [fromWorker.WORKER_FEATURE_KEY]: fromWorker.initialState,
   [fromApplication.APPLICATION_FEATURE_KEY]: fromApplication.initialState,
   [fromSdService.SD_SERVICE_FEATURE_KEY]: fromSdService.initialState,

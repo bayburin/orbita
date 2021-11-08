@@ -29,21 +29,21 @@ describe('ParameterApi', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('query()', () => {
-    const api = `${orbitaUiEnvironmentStub.serverApiUrl}/sd_requests`;
-    const response = { parameters: [] as Parameter[] };
+  // describe('query()', () => {
+  //   const api = `${orbitaUiEnvironmentStub.serverApiUrl}/sd_requests`;
+  //   const response = { parameters: [] as Parameter[] };
 
-    it('should return requests', () => {
-      service.query(1).subscribe((result) => {
-        expect(result).toEqual(response);
-      });
+  //   it('should return requests', () => {
+  //     service.query(1).subscribe((result) => {
+  //       expect(result).toEqual(response);
+  //     });
 
-      httpMock
-        .expectOne({
-          method: 'GET',
-          url: `${api}/1/parameters`,
-        })
-        .flush(response);
-    });
-  });
+  //     httpMock
+  //       .expectOne({
+  //         method: 'GET',
+  //         url: `${api}/1/parameters`,
+  //       })
+  //       .flush(response);
+  //   });
+  // });
 });
