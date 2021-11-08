@@ -12,10 +12,18 @@ export class ParameterSchemaViewModelFactory {
    * @param parameter - объект Parameter
    */
   static createSchema(parameter: Parameter): ParameterSchemaViewModel {
-    if (parameter.schema_version == '1') {
-      return new SchemaV1ParameterAdapter(parameter.payload).adaptee();
+    const DEFAULT_SCHEMA: ParameterSchemaViewModel = {
+      common: [],
+      table: {
+        columns: [],
+        data: [],
+      },
+    };
+
+    if (parameter?.schema_version == '1') {
+      return new SchemaV1ParameterAdapter(DEFAULT_SCHEMA).adaptee(parameter.payload);
     }
 
-    return undefined;
+    return DEFAULT_SCHEMA;
   }
 }
