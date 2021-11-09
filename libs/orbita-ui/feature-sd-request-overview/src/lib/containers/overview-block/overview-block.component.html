@@ -114,7 +114,7 @@
           <div class="m-3">
             <div class="ticket-overview-header">
               #{{ sdRequest.id }}
-              <span class="ml-3">{{ sdRequest.service_name }}. {{ sdRequest.ticket_name }}</span>
+              <span class="ml-3">{{ sdRequest.ticket_name }}</span>
             </div>
             <div class="mt-2">
               <span class="text-secondary">пользователь</span>
@@ -191,20 +191,7 @@
                 <lib-source-snapshot [snapshot]="sdRequest.source_snapshot"></lib-source-snapshot>
               </p-tabPanel>
               <p-tabPanel header="Параметры">
-                <p-panel header="Параметры заявки">
-                  <div *ngIf="loadedParameters$ | async; else emptyData">
-                    <div *ngIf="parameters$ | async as parameters">
-                      <div *ngIf="parameters.length > 0; else emptyData">
-                        <div *ngFor="let parameter of parameters; trackByParameter">
-                          <lib-detail-row>
-                            <div attribute>{{ parameter.name }}</div>
-                            <div value>{{ parameter.value }}</div>
-                          </lib-detail-row>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </p-panel>
+                <lib-sd-request-parameters [parameters]="sdRequest.parameter"></lib-sd-request-parameters>
               </p-tabPanel>
               <p-tabPanel header="Комментарии">
                 <lib-comments [comments]="sdRequest.comments" (sendMessage)="createComment($event)"></lib-comments>
@@ -213,6 +200,15 @@
           </div>
         </div>
         <div class="col-3">
+          <lib-detail-row class="mb-2" *ngIf="sdRequest.service_id">
+            <div attribute>Услуга</div>
+            <div value>
+              <a [href]="'https://service-desk.iss-reshetnev.ru/services/' + sdRequest.service_id" target="_blank">
+                {{ sdRequest.service_name }}
+              </a>
+            </div>
+          </lib-detail-row>
+
           <lib-detail-row class="mb-2">
             <div attribute>Статус</div>
             <div value>

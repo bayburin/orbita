@@ -1,3 +1,6 @@
+import { SchemaV1ParameterAdapter } from './../../infrastructure/adapters/schema-v1-parameter.adapter';
+import { SchemaV1 } from '../parameter_schema/schema-v1.interface';
+
 /**
  * Интерфейс параметров заявки
  */
@@ -8,12 +11,16 @@ export interface Parameter {
   readonly id: number;
 
   /**
-   * Имя параметра
+   * Версия схемы
    */
-  readonly name: string;
+  readonly schema_version: string;
 
   /**
-   * Значение параметра
+   * Структура параметров
    */
-  readonly value: string;
+  readonly payload: schemaTypes;
 }
+
+export type schemaTypes = SchemaV1;
+
+export type schemaAdapterTypes = SchemaV1ParameterAdapter;

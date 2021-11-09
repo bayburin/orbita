@@ -16,5 +16,5 @@ export abstract class ParameterApiAbstract {
    *
    * @param claimId - номер заявки
    */
-  abstract query(claimId: number): Observable<ParameterServerData>;
+  // abstract query(claimId: number): Observable<ParameterServerData>;
 }

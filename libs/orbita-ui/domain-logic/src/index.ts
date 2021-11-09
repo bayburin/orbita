@@ -4,7 +4,6 @@ export * from './lib/entities/models/ticket.interface';
 export * from './lib/entities/models/source-snapshot.interface';
 export * from './lib/entities/models/user.interface';
 export * from './lib/entities/models/group.interface';
-export * from './lib/entities/models/parameter.interface';
 export * from './lib/entities/models/event-type.interface';
 export * from './lib/entities/models/auth/current-user.interface';
 export * from './lib/entities/models/sd/sd-service.interface';
@@ -37,6 +36,8 @@ export * from './lib/entities/view-models/csa-statuses-view-model.enum';
 export * from './lib/entities/view-models/user-group.interface';
 export * from './lib/entities/view-models/employee-filters-view-model.enum';
 export * from './lib/entities/view-models/sd-ticket-view-model.interface';
+export * from './lib/entities/view-models/parameter-view-model.interface';
+export * from './lib/entities/view-models/parameter-schema-view-model.interface';
 
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';

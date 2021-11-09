@@ -19,7 +19,7 @@ import * as WorkerActions from '../worker/worker.actions';
 import * as EmployeeActions from '../employee/employee.actions';
 import * as SvtItemActions from '../svt-item/svt-item.actions';
 import * as HostActions from '../host/host.actions';
-import * as ParameterActions from '../parameter/parameter.actions';
+// import * as ParameterActions from '../parameter/parameter.actions';
 import * as UserSelectors from '../user/user.selectors';
 import * as AttachmentActions from '../attachment/attachment.actions';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
@@ -138,7 +138,7 @@ export class SdRequestEffects {
       withLatestFrom(this.store.select(SdRequestViewModelSelectors.getSelectedEntityViewModel)),
       switchMap(([action, sdRequestViewModel]) => {
         return [
-          ParameterActions.loadAll(),
+          // ParameterActions.loadAll(),
           EmployeeActions.selectEmployee({ idTn: action.sdRequest.source_snapshot.id_tn }),
           SvtItemActions.select({ barcode: action.sdRequest.source_snapshot.barcode }),
           HostActions.select({ inventNum: action.sdRequest.source_snapshot.invent_num }),
@@ -152,7 +152,7 @@ export class SdRequestEffects {
     this.actions$.pipe(
       ofType(SdRequestActions.clearSelected),
       switchMap(() => [
-        ParameterActions.clearAll(),
+        // ParameterActions.clearAll(),
         EmployeeActions.clearSelectedEmployee(),
         SvtItemActions.clearSelected(),
         HostActions.clearSelected(),

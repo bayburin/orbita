@@ -5,7 +5,7 @@ import { ParameterApiAbstract } from './parameter.api.abstract';
 export class ParameterApiStub implements ParameterApiAbstract {
   api = '';
 
-  query() {
-    return of({ parameters: [] });
-  }
+  // query() {
+  //   return of({ parameters: [] });
+  // }
 }

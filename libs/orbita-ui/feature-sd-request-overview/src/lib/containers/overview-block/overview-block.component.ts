@@ -9,8 +9,6 @@ import {
   EmployeeFacade,
   SvtFacade,
   AuthCenterFacade,
-  ParameterFacade,
-  Parameter,
   prioritiesViewModelArray,
   UserFacade,
   User,
@@ -41,9 +39,6 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   loadingHost$ = this.acFacade.loadingHost$;
   loadedHost$ = this.acFacade.loadedHost$;
   host$ = this.acFacade.selectedHost$;
-  loadingParameters$ = this.parameterFacade.loading$;
-  loadedParameters$ = this.parameterFacade.loaded$;
-  parameters$ = this.parameterFacade.all$;
   priorities = prioritiesViewModelArray;
   userGroups$ = this.userFacade.userGroups$;
   editMode: boolean;
@@ -73,7 +68,6 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
     private employeeFacade: EmployeeFacade,
     private svtFacade: SvtFacade,
     private acFacade: AuthCenterFacade,
-    private parameterFacade: ParameterFacade,
     private fb: FormBuilder,
     private router: Router,
     private userFacade: UserFacade,
@@ -94,10 +88,6 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByHistory(index: number, history: HistoryViewModel): number {
     return history.id;
-  }
-
-  trackByParameter(index: number, parameter: Parameter): number {
-    return parameter.id;
   }
 
   trackByUserGroup(index: number, group: UserGroup): number {

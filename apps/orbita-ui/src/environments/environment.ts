@@ -8,7 +8,7 @@ export const environment: OrbitaUiEnvironment = {
   production: false,
   serverApiUrl: 'https://localhost.iss-reshetnev.ru:9443/api/v1',
   actionCableUrl: 'wss://localhost.iss-reshetnev.ru:9443/cable',
-  serviceDeskApi: 'https://inv-dev.iss-reshetnev.ru/api',
+  serviceDeskApi: 'https://sd-center.iss-reshetnev.ru/api',
   auth: {
     clientId: '83',
     redirectUrl: 'https://localhost.iss-reshetnev.ru:4200/oauth2/callback',

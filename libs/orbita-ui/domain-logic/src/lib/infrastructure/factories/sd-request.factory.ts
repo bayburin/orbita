@@ -80,24 +80,26 @@ export class SdRequestFactory {
       ticket_name = ticket.name;
       sla = ticket.sla;
 
-      ticket.responsible_users.forEach((user) => {
-        // Ищет работу для текущего пользователя цикла
-        let currentWork = works.find((work) => work.group_id === user.group_id);
+      if (viewForm.needResponsibleUsers) {
+        ticket.responsible_users.forEach((user) => {
+          // Ищет работу для текущего пользователя цикла
+          let currentWork = works.find((work) => work.group_id === user.group_id);
 
-        // Создает работу указанной группы, если она не существует
-        if (!currentWork) {
-          currentWork = WorkFactory.createNewWorkForm(user.group_id);
-          works.push(currentWork);
-        }
+          // Создает работу указанной группы, если она не существует
+          if (!currentWork) {
+            currentWork = WorkFactory.createNewWorkForm(user.group_id);
+            works.push(currentWork);
+          }
 
-        // Ищет исполнителя
-        const currentWorker = currentWork.workers.find((worker) => worker.user_id === user.id);
+          // Ищет исполнителя
+          const currentWorker = currentWork.workers.find((worker) => worker.user_id === user.id);
 
-        // Добавляет исполнителя, если он отсутствует
-        if (!currentWorker) {
-          currentWork.workers.push(WorkerFactory.createNewWorkerForm(user.id));
-        }
-      });
+          // Добавляет исполнителя, если он отсутствует
+          if (!currentWorker) {
+            currentWork.workers.push(WorkerFactory.createNewWorkerForm(user.id));
+          }
+        });
+      }
     }
 
     const formData = new FormData();

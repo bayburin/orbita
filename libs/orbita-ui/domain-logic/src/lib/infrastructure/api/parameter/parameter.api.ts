@@ -16,7 +16,7 @@ export class ParameterApi implements ParameterApiAbstract {
 
   constructor(private http: HttpClient, @Inject(ORBITA_UI_ENV_TOKEN) private env: OrbitaUiEnvironment) {}
 
-  query(claimId: number) {
-    return this.http.get<ParameterServerData>(`${this.api}/${claimId}/parameters`);
-  }
+  // query(claimId: number) {
+  //   return this.http.get<ParameterServerData>(`${this.api}/${claimId}/parameters`);
+  // }
 }

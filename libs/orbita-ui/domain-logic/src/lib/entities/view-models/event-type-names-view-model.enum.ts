@@ -32,6 +32,9 @@ export const eventTypeNamesViewModelMap: Record<EventTypeNames, EventTypeNamesVi
   [EventTypeNames.ADD_TAGS]: EventTypeNamesViewModelFactory.create('mdi-code-tags'),
   [EventTypeNames.PRIORITY]: EventTypeNamesViewModelFactory.create('mdi-priority-high'),
   [EventTypeNames.ADD_SELF]: EventTypeNamesViewModelFactory.create('mdi-account-check-outline'),
+  [EventTypeNames.TO_USER_MESSAGE]: EventTypeNamesViewModelFactory.create('mdi-account-edit-outline'),
+  [EventTypeNames.TO_USER_ACCEPT]: EventTypeNamesViewModelFactory.create('mdi-account-question-outline'),
+  [EventTypeNames.FROM_USER_ACCEPT]: EventTypeNamesViewModelFactory.create('mdi-account-check-outline'),
 };
 
 /**

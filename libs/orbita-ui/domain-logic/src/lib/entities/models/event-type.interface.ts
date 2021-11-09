@@ -39,4 +39,7 @@ export enum EventTypeNames {
   ADD_TAGS = 'add_tags',
   PRIORITY = 'priority',
   ADD_SELF = 'add_self',
+  TO_USER_MESSAGE = 'to_user_message',
+  TO_USER_ACCEPT = 'to_user_accept',
+  FROM_USER_ACCEPT = 'from_user_accept',
 }
