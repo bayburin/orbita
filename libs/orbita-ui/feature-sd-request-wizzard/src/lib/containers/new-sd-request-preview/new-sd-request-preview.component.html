@@ -72,7 +72,12 @@
     <div class="col-3">Исполнители</div>
     <div class="col-9">
       <div class="preview-row-content">
-        <div *ngIf="sdRequest.ticket?.responsible_users.length; else defaultResponsibleUsers">
+        <div
+          *ngIf="
+            !sdRequest.noTicketFlag && sdRequest.needResponsibleUsers && sdRequest.ticket?.responsible_users.length;
+            else defaultResponsibleUsers
+          "
+        >
           <div *ngFor="let user of sdRequest.ticket.responsible_users; trackBy: trackByUser" class="p-1">
             {{ user.fio }}
           </div>

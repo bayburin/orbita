@@ -279,6 +279,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       employeeManuallyFlag: [false],
       ticket: [null, Validators.required],
       noTicketFlag: [false],
+      needResponsibleUsers: [false],
       description: [null, Validators.required],
       status: [Statuses.AT_WORK],
       svtItem: [],
@@ -339,9 +340,11 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       this.form.get('noTicketFlag').valueChanges.subscribe((flag) => {
         if (flag) {
           this.ticket.disable();
+          this.form.get('needResponsibleUsers').disable();
           this.form.get('ticket').clearValidators();
         } else {
           this.ticket.enable();
+          this.form.get('needResponsibleUsers').enable();
           this.form.get('ticket').setValidators([Validators.required]);
         }
 

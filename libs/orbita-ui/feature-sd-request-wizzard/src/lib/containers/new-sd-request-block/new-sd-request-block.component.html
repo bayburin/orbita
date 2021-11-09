@@ -210,6 +210,11 @@
           >
         </div>
 
+        <div class="field-checkbox" *ngIf="form.get('ticket').value">
+          <p-checkbox formControlName="needResponsibleUsers" binary="true" inputId="needResponsibleUsers"></p-checkbox>
+          <label for="needResponsibleUsers">Автоматически добавить соответствующих исполнителей</label>
+        </div>
+
         <div class="field-checkbox">
           <p-checkbox formControlName="noTicketFlag" binary="true" inputId="noTicketFlag"></p-checkbox>
           <label for="noTicketFlag">Услуга не найдена</label>

@@ -34,6 +34,11 @@ export interface NewSdRequestViewForm {
   noTicketFlag: boolean;
 
   /**
+   * Флаг, показывающий, нужно ли подключать исполнителей по услуге/заявке
+   */
+  needResponsibleUsers: boolean;
+
+  /**
    * Описание заявки
    */
   description: string;
