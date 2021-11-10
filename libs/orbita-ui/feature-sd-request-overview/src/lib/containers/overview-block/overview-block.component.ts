@@ -149,7 +149,7 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   closeSdRequest(id: number) {
     this.confirmationService.confirm({
       header: 'Внимание!',
-      message: 'Вы действительно хотите закрыть заявку?',
+      message: `Вы действительно хотите закрыть заявку №${id}?`,
       accept: () => this.sdRequestFacade.closeSdRequest(id),
     });
   }
