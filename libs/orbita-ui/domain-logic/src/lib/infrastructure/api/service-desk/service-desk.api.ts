@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { ORBITA_UI_ENV_TOKEN, OrbitaUiEnvironment } from '@orbita/shared/environment';
 
 import { ServiceDeskApiAbstract } from './service-desk.api.abstract';
-import { SdService } from './../../../entities/models/sd/sd-service.interface';
 import { SdTicket } from './../../../entities/models/sd/sd-ticket.interface';
 
 /**
@@ -19,5 +18,9 @@ export class ServiceDeskApi implements ServiceDeskApiAbstract {
 
   getTickets() {
     return this.http.get<SdTicket[]>(`${this.api}/tickets`);
+  }
+
+  getTicket(ticketIdentity: number) {
+    return this.http.get<SdTicket>(`${this.api}/tickets/identity/${ticketIdentity}`);
   }
 }

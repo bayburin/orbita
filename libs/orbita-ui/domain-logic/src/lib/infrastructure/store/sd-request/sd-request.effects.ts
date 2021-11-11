@@ -22,6 +22,7 @@ import * as HostActions from '../host/host.actions';
 // import * as ParameterActions from '../parameter/parameter.actions';
 import * as UserSelectors from '../user/user.selectors';
 import * as AttachmentActions from '../attachment/attachment.actions';
+import * as SdTicketActions from '../sd-ticket/sd-ticket.actions';
 import { SdRequestApi } from './../../api/sd-request/sd-request.api';
 import { SdRequestCacheService } from './../../services/sd-request-cache.service';
 import { SdRequestFactory } from './../../factories/sd-request.factory';
@@ -142,6 +143,7 @@ export class SdRequestEffects {
           EmployeeActions.selectEmployee({ idTn: action.sdRequest.source_snapshot.id_tn }),
           SvtItemActions.select({ barcode: action.sdRequest.source_snapshot.barcode }),
           HostActions.select({ inventNum: action.sdRequest.source_snapshot.invent_num }),
+          SdTicketActions.selectTicketIdentity({ identity: action.sdRequest.ticket_identity }),
           SdRequestActions.initUpdateForm({ sdRequestViewModel }),
         ];
       })

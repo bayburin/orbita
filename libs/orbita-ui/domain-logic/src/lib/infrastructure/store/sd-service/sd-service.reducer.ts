@@ -6,9 +6,7 @@ import { SdService } from './../../../entities/models/sd/sd-service.interface';
 
 export const SD_SERVICE_FEATURE_KEY = 'sdService';
 
-export interface State extends EntityState<SdService> {
-  loaded: boolean;
-}
+export interface State extends EntityState<SdService> {}
 
 export interface SdServicePartialState {
   readonly [SD_SERVICE_FEATURE_KEY]: State;
@@ -16,13 +14,12 @@ export interface SdServicePartialState {
 
 export const sdServiceAdapter: EntityAdapter<SdService> = createEntityAdapter<SdService>();
 
-export const initialState: State = sdServiceAdapter.getInitialState({
-  loaded: false,
-});
+export const initialState: State = sdServiceAdapter.getInitialState({});
 
 const sdServiceReducer = createReducer(
   initialState,
-  on(SdServiceActions.setAll, (state, { services }) => sdServiceAdapter.setAll(services, { ...state, loaded: true }))
+  on(SdServiceActions.setAll, (state, { services }) => sdServiceAdapter.setAll(services, state)),
+  on(SdServiceActions.setOne, (state, { service }) => sdServiceAdapter.setOne(service, state))
 );
 
 export function reducer(state: State | undefined, action: Action) {

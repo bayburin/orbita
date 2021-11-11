@@ -9,9 +9,9 @@ import { SdRequestEffects } from './infrastructure/store/sd-request/sd-request.e
 import { EmployeeEffects } from './infrastructure/store/employee/employee.effects';
 import { SvtItemEffects } from './infrastructure/store/svt-item/svt-item.effects';
 import { HostEffects } from './infrastructure/store/host/host.effects';
-// import { ParameterEffects } from './infrastructure/store/parameter/parameter.effects';
 import { AttachmentEffects } from './infrastructure/store/attachment/attachment.effects';
 import { MessageEffects } from './infrastructure/store/message/message.effects';
+import { SdTicketEffects } from './infrastructure/store/sd-ticket/sd-ticket.effects';
 
 @NgModule({
   imports: [
@@ -26,9 +26,9 @@ import { MessageEffects } from './infrastructure/store/message/message.effects';
       EmployeeEffects,
       SvtItemEffects,
       HostEffects,
-      // ParameterEffects,
       AttachmentEffects,
       MessageEffects,
+      SdTicketEffects,
     ]),
   ],
   providers: [],

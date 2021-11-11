@@ -164,6 +164,41 @@
                 <lib-workflows [workflows]="sdRequest.workflows"></lib-workflows>
               </p-tabPanel>
               <p-tabPanel header="Исполнители">
+                <div *ngIf="loadedSdTicket$ | async">
+                  <div *ngIf="sdTicket$ | async as sdTicket" class="mb-3">
+                    <div *ngIf="sdTicket.responsible_users.length; else noResponsibleUsers">
+                      <h4 class="my-3">
+                        <div class="flex align-items-center">
+                          <i
+                            class="mdi mdi-help-circle-outline mdi-24px mr-2"
+                            pTooltip="Рекомендуемые исполнители берутся согласно списку ответственных за заявку и за услугу на портале техподдержки"
+                            tooltipPosition="top"
+                          ></i>
+                          Рекомендуемые исполнители:
+                        </div>
+                      </h4>
+                      <div class="inline-list-sm">
+                        <p-chip *ngFor="let user of sdTicket.responsible_users" [label]="user.fio"></p-chip>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <ng-template #noResponsibleUsers>
+                  <p-messages severity="context" class="flex">
+                    <ng-template pTemplate>
+                      <i
+                        class="mdi mdi-help-circle-outline mdi-24px mr-3"
+                        pTooltip="Рекомендуемые исполнители берутся согласно списку ответственных за заявку и за услугу на портале техподдержки"
+                        tooltipPosition="top"
+                      ></i>
+                      Рекомендуемые исполнители не указаны
+                    </ng-template>
+                  </p-messages>
+                </ng-template>
+
+                <p-divider type="dashed"></p-divider>
+
                 <p-listbox
                   *ngIf="editMode; else readModeWorkers"
                   [options]="userGroups$ | async"

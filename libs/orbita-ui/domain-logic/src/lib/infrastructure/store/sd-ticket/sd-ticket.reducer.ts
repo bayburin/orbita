@@ -10,6 +10,7 @@ export interface State extends EntityState<SdTicket> {
   loading: boolean;
   loaded: boolean;
   needTickets: boolean;
+  selectedIdentity?: number;
   error?: string | null;
 }
 
@@ -29,17 +30,25 @@ export const initialState: State = sdTicketAdapter.getInitialState({
 
 const sdTicketReducer = createReducer(
   initialState,
-  on(SdTicketActions.loadAll, (state) => ({
+  on(SdTicketActions.loadAll, SdTicketActions.loadTicket, (state) => ({
     ...state,
     loaded: false,
     loading: true,
-    needTickets: false,
     error: null,
   })),
   on(SdTicketActions.loadAllSuccess, (state, { tickets }) =>
-    sdTicketAdapter.setAll(tickets, { ...state, loading: false, loaded: true })
+    sdTicketAdapter.setAll(tickets, { ...state, loading: false, loaded: true, needTickets: false })
   ),
-  on(SdTicketActions.loadAllFailure, (state, { error }) => ({ ...state, loading: false, error }))
+  on(SdTicketActions.loadAllFailure, SdTicketActions.loadTicketFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+  on(SdTicketActions.selectTicketIdentity, (state, { identity }) => ({ ...state, selectedIdentity: identity })),
+  on(SdTicketActions.clearSelectedTicketIdentity, (state) => ({ ...state, selectedIdentity: null })),
+  on(SdTicketActions.loadTicketSuccess, (state, { ticket }) =>
+    sdTicketAdapter.setOne(ticket, { ...state, loaded: true })
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {

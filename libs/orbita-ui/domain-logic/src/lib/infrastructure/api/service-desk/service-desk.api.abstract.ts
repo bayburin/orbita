@@ -12,4 +12,11 @@ export abstract class ServiceDeskApiAbstract {
    * Получает с сервера техподдержки список возможных заявок.
    */
   abstract getTickets(): Observable<SdTicket[]>;
+
+  /**
+   * Получает с сервера техподдержки указанный вид заявки.
+   *
+   * @param ticketIdentity - идентификатор вида заявки
+   */
+  abstract getTicket(ticketIdentity: number): Observable<SdTicket>;
 }

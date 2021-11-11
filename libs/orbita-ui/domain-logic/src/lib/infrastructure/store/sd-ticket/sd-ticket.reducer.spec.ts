@@ -7,10 +7,10 @@ import { State, initialState, reducer } from './sd-ticket.reducer';
 describe('SdTicketReducer', () => {
   let action: Action;
   const createSdTicket = (identity: string, name = '') =>
-    (({
+    ({
       identity,
       name: name || `name-${identity}`,
-    } as unknown) as SdTicket);
+    } as unknown as SdTicket);
 
   describe('loadAll', () => {
     it('should clear "loading" and "error" attributes', () => {
@@ -19,7 +19,6 @@ describe('SdTicketReducer', () => {
 
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
-      expect(result.needTickets).toBe(false);
       expect(result.error).toBeNull();
     });
   });
@@ -33,6 +32,7 @@ describe('SdTicketReducer', () => {
       expect(result.ids.length).toBe(2);
       expect(result.loading).toEqual(false);
       expect(result.loaded).toBe(true);
+      expect(result.needTickets).toBe(false);
     });
   });
 
@@ -44,6 +44,28 @@ describe('SdTicketReducer', () => {
 
       expect(result.error).toEqual(error);
       expect(result.loading).toEqual(false);
+    });
+  });
+
+  describe('selectTicketIdentity', () => {
+    it('should set "selectedIdentity" attribute', () => {
+      const identity = 123;
+      action = SdTicketActions.selectTicketIdentity({ identity });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedIdentity).toBe(identity);
+    });
+  });
+
+  describe('clearSelectedTicketIdentity', () => {
+    it('should clear "selectedIdentity" attribute', () => {
+      const identity = 123;
+      action = SdTicketActions.selectTicketIdentity({ identity });
+      let result: State = reducer(initialState, action);
+      action = SdTicketActions.clearSelectedTicketIdentity();
+      result = reducer(result, action);
+
+      expect(result.selectedIdentity).toBeNull();
     });
   });
 

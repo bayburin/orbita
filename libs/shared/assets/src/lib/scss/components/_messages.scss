@@ -37,3 +37,9 @@
   @include primary-scroll;
   height: calc(#{$ticket-history-content-height} - 7rem - #{$spacer});
 }
+
+.p-message-context {
+  background-color: var(--surface-c);
+  border: solid var(--surface-border);
+  border-width: 0 0 0 6px;
+}

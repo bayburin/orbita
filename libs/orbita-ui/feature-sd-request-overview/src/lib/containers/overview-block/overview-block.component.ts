@@ -15,6 +15,7 @@ import {
   UserGroup,
   AttachmentViewForm,
   MessageFacade,
+  ServiceDeskFacade,
 } from '@orbita/orbita-ui/domain-logic';
 import { Message, ConfirmationService } from 'primeng/api';
 
@@ -42,6 +43,8 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   priorities = prioritiesViewModelArray;
   userGroups$ = this.userFacade.userGroups$;
   editMode: boolean;
+  sdTicket$ = this.serviceDeskFacade.sdTicket$;
+  loadedSdTicket$ = this.serviceDeskFacade.loadedSdTickets$;
 
   // ========== Раздел формы ==========
 
@@ -65,6 +68,7 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   constructor(
     private sdRequestFacade: SdRequestFacade,
+    private serviceDeskFacade: ServiceDeskFacade,
     private employeeFacade: EmployeeFacade,
     private svtFacade: SvtFacade,
     private acFacade: AuthCenterFacade,

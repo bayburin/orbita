@@ -16,3 +16,14 @@ export const getAllFreeApplicationsViewModel = createSelector(
       responsible_users: users.filter((user) => ticket.responsible_users.some((u) => u.tn === user.tn)),
     }))
 );
+
+export const getSelectedTicketViewModel = createSelector(
+  SdTicketSelectors.getSelected,
+  SdServiceSelectors.getEntities,
+  UserSelectors.getAll,
+  (ticket, serviceEntities, users): SdTicketViewModel => ({
+    ...ticket,
+    service: serviceEntities[ticket.service_id],
+    responsible_users: users.filter((user) => ticket.responsible_users.some((u) => u.tn === user.tn)),
+  })
+);
