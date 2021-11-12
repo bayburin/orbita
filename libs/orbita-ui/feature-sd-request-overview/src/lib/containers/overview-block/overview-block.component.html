@@ -82,6 +82,7 @@
                   (click)="navigateToSdRequests()"
                 ></p-button>
                 <p-button
+                  *ngIf="!isSdRequestClosed(sdRequest.status)"
                   label="Закрыть заявку"
                   icon="mdi mdi-check mdi-18px"
                   class="mr-2"

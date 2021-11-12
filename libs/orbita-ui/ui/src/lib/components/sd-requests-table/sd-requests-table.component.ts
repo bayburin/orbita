@@ -101,11 +101,11 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
         icon: 'mdi mdi-file-find-outline mdi-18px',
         command: () => this.viewSdRequest.emit(this.selectedSdRequest),
       },
-      {
-        label: 'Закрыть заявку',
-        icon: 'mdi mdi-check mdi-18px',
-        command: () => this.closeSdRequest.emit(this.selectedSdRequest.id),
-      },
+      // {
+      //   label: 'Закрыть заявку',
+      //   icon: 'mdi mdi-check mdi-18px',
+      //   command: () => this.closeSdRequest.emit(this.selectedSdRequest.id),
+      // },
     ];
   }
 

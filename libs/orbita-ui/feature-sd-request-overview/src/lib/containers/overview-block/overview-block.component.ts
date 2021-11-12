@@ -16,6 +16,7 @@ import {
   AttachmentViewForm,
   MessageFacade,
   ServiceDeskFacade,
+  Statuses,
 } from '@orbita/orbita-ui/domain-logic';
 import { Message, ConfirmationService } from 'primeng/api';
 
@@ -156,6 +157,10 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
       message: `Вы действительно хотите закрыть заявку №${id}?`,
       accept: () => this.sdRequestFacade.closeSdRequest(id),
     });
+  }
+
+  isSdRequestClosed(status: Statuses) {
+    return status == Statuses.DONE || status == Statuses.OPENED;
   }
 
   private buildForm(): void {
