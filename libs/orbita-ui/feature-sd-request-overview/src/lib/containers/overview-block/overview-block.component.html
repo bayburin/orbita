@@ -273,17 +273,20 @@
             </div>
           </lib-detail-row>
 
-          <lib-detail-row class="mb-2">
-            <div attribute>Имя приложения</div>
-            <div value>{{ sdRequest.application?.name }}</div>
-          </lib-detail-row>
+          <p-divider align="center" type="dashed">
+            <b>Связанные приложения</b>
+          </p-divider>
 
-          <lib-detail-row class="mb-2">
-            <div attribute>Внешний ID</div>
-            <div value>{{ sdRequest.integration_id }}</div>
-          </lib-detail-row>
+          <div *ngIf="sdRequest.claim_applications.length; else emptyData">
+            <div *ngFor="let clApp of sdRequest.claim_applications; trackBy: trackByClaimApplication" class="file-item">
+              <span>{{ clApp.application.name }}</span>
+              <span>#{{ clApp.integration_id }}</span>
+            </div>
+          </div>
 
-          <p-divider type="dashed"></p-divider>
+          <p-divider align="center" type="dashed">
+            <b>Файлы</b>
+          </p-divider>
 
           <lib-attachments
             [sdRequest]="sdRequest"

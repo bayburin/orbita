@@ -7,10 +7,10 @@ import { State, initialState, reducer } from './sd-service.reducer';
 describe('SdServiceReducer', () => {
   let action: Action;
   const createSdServiceEntity = (id: number, name = '') =>
-    (({
+    ({
       id,
       name: name || `name-${id}`,
-    } as unknown) as SdService);
+    } as unknown as SdService);
 
   describe('SetAll()', () => {
     it('should change "loaded" and "entities" attributes', () => {
@@ -18,7 +18,6 @@ describe('SdServiceReducer', () => {
       action = SdServiceActions.setAll({ services });
       const result: State = reducer(initialState, action);
 
-      expect(result.loaded).toBe(true);
       expect(result.ids.length).toEqual(2);
     });
   });

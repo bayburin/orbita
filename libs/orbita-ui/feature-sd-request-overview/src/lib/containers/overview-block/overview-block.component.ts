@@ -17,6 +17,7 @@ import {
   MessageFacade,
   ServiceDeskFacade,
   Statuses,
+  ClaimApplicationViewModel,
 } from '@orbita/orbita-ui/domain-logic';
 import { Message, ConfirmationService } from 'primeng/api';
 
@@ -101,6 +102,10 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByUser(index: number, user: User): number {
     return user.id;
+  }
+
+  trackByClaimApplication(index: number, clApp: ClaimApplicationViewModel) {
+    return clApp.id;
   }
 
   /**

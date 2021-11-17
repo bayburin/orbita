@@ -6,16 +6,6 @@ import { Parameter } from './parameter.interface';
  */
 export interface SdRequest extends Ticket {
   /**
-   * ID заявки во внешней системе.
-   */
-  readonly integration_id: number;
-
-  /**
-   * ID приложения, с которого пришла заявка.
-   */
-  readonly application_id: number;
-
-  /**
    * ID Услуги
    */
   readonly service_id: number;

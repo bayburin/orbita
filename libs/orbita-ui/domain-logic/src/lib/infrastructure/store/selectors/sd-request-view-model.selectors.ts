@@ -11,6 +11,7 @@ import { WorkViewModel } from './../../../entities/view-models/work-view-model.i
 import { MessageViewModel } from './../../../entities/view-models/message-view-model.interface';
 import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
 import { ParameterSchemaViewModelFactory } from '../../factories/parameter-shema-view-model.factory';
+import { ClaimApplicationViewModel } from './../../../entities/view-models/claim-application-view-model.interface';
 
 export const getAllViewModel = createSelector(
   SdRequestSelectors.getAll,
@@ -27,10 +28,17 @@ export const getAllViewModel = createSelector(
         (arr, workId) => (workEntities[workId] ? arr.concat(workEntities[workId]) : arr),
         [] as WorkViewModel[]
       );
+      const claim_applications = sdRequest.claim_applications.reduce(
+        (arr, claim_app) =>
+          applicationEntities[claim_app.application_id]
+            ? arr.concat({ ...claim_app, application: applicationEntities[claim_app.application_id] })
+            : arr,
+        [] as ClaimApplicationViewModel[]
+      );
 
       return {
         ...sdRequest,
-        application: applicationEntities[sdRequest.application_id],
+        claim_applications,
         comments,
         works,
         attachments: [],
@@ -60,16 +68,22 @@ export const getSelectedEntityViewModel = createSelector(
       (arr, workId) => (workEntities[workId] ? arr.concat(workEntities[workId]) : arr),
       [] as WorkViewModel[]
     );
-    const application = applicationEntities[sdRequest.application_id];
     const attachments = sdRequest.attachments.reduce(
       (arr, attachmentId) => (attachmentEntities[attachmentId] ? arr.concat(attachmentEntities[attachmentId]) : arr),
       []
     );
     const schemaPayload = ParameterSchemaViewModelFactory.createSchema(sdRequest.parameter);
+    const claim_applications = sdRequest.claim_applications.reduce(
+      (arr, claim_app) =>
+        applicationEntities[claim_app.application_id]
+          ? arr.concat({ ...claim_app, application: applicationEntities[claim_app.application_id] })
+          : arr,
+      [] as ClaimApplicationViewModel[]
+    );
 
     return {
       ...sdRequest,
-      application,
+      claim_applications,
       comments,
       works,
       attachments,
@@ -114,15 +128,21 @@ export const getNewFormCreatedViewModel = createSelector(
       (arr, workId) => (workEntities[workId] ? arr.concat(workEntities[workId]) : arr),
       [] as WorkViewModel[]
     );
-    const application = applicationEntities[sdRequest.application_id];
     const attachments = sdRequest.attachments.reduce(
       (arr, attachmentId) => (attachmentEntities[attachmentId] ? arr.concat(attachmentEntities[attachmentId]) : arr),
       []
     );
+    const claim_applications = sdRequest.claim_applications.reduce(
+      (arr, claim_app) =>
+        applicationEntities[claim_app.application_id]
+          ? arr.concat({ ...claim_app, application: applicationEntities[claim_app.application_id] })
+          : arr,
+      [] as ClaimApplicationViewModel[]
+    );
 
     return {
       ...sdRequest,
-      application,
+      claim_applications,
       comments,
       works,
       attachments,
