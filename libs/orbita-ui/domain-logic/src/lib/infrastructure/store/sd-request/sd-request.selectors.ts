@@ -72,6 +72,8 @@ export const getNewFormLoading = createSelector(getNewForm, (state: NewFormState
 
 export const getNewFormCreated = createSelector(getNewForm, (state: NewFormState) => state.created);
 
+export const getNewFormUpdateView = createSelector(getNewForm, (state: NewFormState) => state.updateView);
+
 export const getNewFormShowModalAfterCreate = createSelector(
   getNewForm,
   (state: NewFormState) => state.showModalAfterCreate

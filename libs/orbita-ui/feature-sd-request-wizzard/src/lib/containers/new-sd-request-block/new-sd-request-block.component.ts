@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, FormArray, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { distinctUntilChanged, tap, filter, map, first } from 'rxjs/operators';
+import { distinctUntilChanged, tap, map, first } from 'rxjs/operators';
 import { AutoComplete } from 'primeng/autocomplete';
 import {
   EmployeeFacade,
@@ -261,6 +261,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
 
     // Очищает саму форму
     this.form.reset();
+    this.form.setControl('attachments', this.fb.array([]));
     this.sdRequestFacade.clearCreatedForm();
   }
 
@@ -285,20 +286,6 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
       svtItem: [],
       attachments: this.fb.array([]),
     });
-
-    // Заполняет данные формы из хранилища
-    this.subscriptions.add(
-      this.sdRequestFacade.newFormEntity$
-        .pipe(
-          filter((data) => Boolean(data)),
-          distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
-        )
-        .subscribe((formData) => {
-          this.form.patchValue(formData, { emitEvent: false });
-          this.employee.setValue(formData.employee);
-          this.customSvtItem.setValue(formData.svtItem);
-        })
-    );
 
     // Обновляет хранилище по любому изменению формы
     this.subscriptions.add(

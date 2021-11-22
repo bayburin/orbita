@@ -48,7 +48,11 @@ export class SdRequestFacade implements SdRequestFacadeAbstract {
 
   // ========== Форма новой заявки ==========
 
-  newFormEntity$ = this.store.select(SdRequestSelectors.getNewFormEntity);
+  newFormEntity$ = this.store.select(SdRequestSelectors.getNewFormEntity).pipe(
+    withLatestFrom(this.store.select(SdRequestSelectors.getNewFormUpdateView)),
+    filter(([_form, updateView]) => updateView),
+    map(([form, _updateView]) => form)
+  );
   newFormLoading$ = this.store.select(SdRequestSelectors.getNewFormLoading);
   newFormCreated$ = this.store.select(SdRequestViewModelSelectors.getNewFormCreatedViewModel);
   newFormShowModalAfterCreate$ = this.store.select(SdRequestSelectors.getNewFormShowModalAfterCreate);

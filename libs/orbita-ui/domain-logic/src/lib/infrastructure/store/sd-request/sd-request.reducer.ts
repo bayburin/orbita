@@ -30,6 +30,7 @@ export interface NewFormState {
   loading: boolean;
   error?: string;
   created?: SdRequest;
+  updateView: boolean;
   showModalAfterCreate: boolean;
 }
 
@@ -57,7 +58,7 @@ export const initFormState: FormState = {
   entity: null,
   loading: false,
   // Флаг, определяющий, передавать ли данные формы из стора в представление
-  updateView: true,
+  updateView: false,
   // Флаг, который определяет, показывать ли кнопку "Принять изменения" в режиме редактирования формы
   needToGetNewData: false,
 };
@@ -65,6 +66,8 @@ export const initFormState: FormState = {
 export const initNewFormState: NewFormState = {
   entity: null,
   loading: false,
+  // Флаг, определяющий, передавать ли данные формы из стора в представление
+  updateView: false,
   showModalAfterCreate: false,
 };
 
@@ -226,6 +229,13 @@ const sdRequestReducer = createReducer(
 
   // ========== Форма новой заявки ==========
 
+  on(SdRequestActions.initNewForm, (state) => ({
+    ...state,
+    newForm: {
+      ...state.newForm,
+      updateView: true,
+    },
+  })),
   on(SdRequestActions.setEmployeeToNewForm, (state, { employee }) => ({
     ...state,
     newForm: {
@@ -251,6 +261,7 @@ const sdRequestReducer = createReducer(
     newForm: {
       ...state.newForm,
       entity,
+      updateView: false,
     },
   })),
   on(SdRequestActions.saveNewForm, (state) => ({
@@ -266,6 +277,7 @@ const sdRequestReducer = createReducer(
       ...state.newForm,
       loading: false,
       created: sdRequest,
+      updateView: true,
     },
   })),
   on(SdRequestActions.saveNewFormFailure, (state, { error }) => ({
