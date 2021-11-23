@@ -85,6 +85,8 @@ export interface NormalizedSdRequest {
   result: number;
 }
 
+// ================================== Услуги ==================================
+
 /**
  * Интерфейс нормализованного вида заявки
  */
@@ -100,13 +102,27 @@ export interface SdServiceEntity {
 }
 
 /**
+ * Интерфейс объектов, на которые раскладывается (нормализуется) услуга
+ */
+export interface NormalizedSdTicketsEntities {
+  tickets: SdTicketEntity;
+  services: SdServiceEntity;
+}
+
+/**
  * Интерфейс нормализованных данных, возвращаемый функцией normalize
  */
 export interface NormalizedSdTickets {
-  entities: {
-    tickets: SdTicketEntity;
-    services: SdServiceEntity;
-  };
+  entities: NormalizedSdTicketsEntities;
+  result: number[];
+}
+
+/**
+ * Интерфейс нормализованных данных, возвращаемый функцией normalize
+ */
+export interface NormalizedSdTicket {
+  entities: NormalizedSdTicketsEntities;
+  result: number;
 }
 
 // ================================== ВТ ==================================

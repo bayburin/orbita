@@ -1,7 +1,7 @@
 import { normalize } from 'normalizr';
 
 import { SdTicket } from './../../entities/models/sd/sd-ticket.interface';
-import { NormalizedSdTickets } from './../../entities/models/normalized-data.interface';
+import { NormalizedSdTickets, NormalizedSdTicket } from './../../entities/models/normalized-data.interface';
 import { sdTicketsSchema, sdTicketSchema } from './../schemas/normalizr.schema';
 
 /**
@@ -12,8 +12,7 @@ export class SdTicketCacheService {
     return normalize(sdTickets, sdTicketsSchema);
   }
 
-  // FIXME: Тут исправить, NormalizedSdTickets -> NormalizedSdTicket
-  static normalizeSdTicket(sdTicket: SdTicket): NormalizedSdTickets {
+  static normalizeSdTicket(sdTicket: SdTicket): NormalizedSdTicket {
     return normalize(sdTicket, sdTicketSchema);
   }
 }
