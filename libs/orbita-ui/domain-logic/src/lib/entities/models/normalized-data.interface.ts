@@ -1,3 +1,8 @@
+import { SvtWorkplaceCount } from './svt/svt-workplace-count.interface';
+import { SvtWorkplaceType } from './svt/svt-workplace-type.interface';
+import { SvtWorkplace } from './svt/svt-workplace.interface';
+import { SvtType } from './svt/svt-type.interface';
+import { SvtItem } from './svt/svt-item.interface';
 import { SdRequest } from './sd-request.interface';
 import { Message } from './message.interface';
 import { Work } from './work.interface';
@@ -6,6 +11,8 @@ import { Worker } from './worker.interface';
 import { SdTicket } from './sd/sd-ticket.interface';
 import { SdService } from './sd/sd-service.interface';
 import { Attachment } from './attachment.interface';
+
+// ================================== Заявки ==================================
 
 /**
  * Интерфейс нормализованного объекта заявки
@@ -101,3 +108,69 @@ export interface NormalizedSdTickets {
     services: SdServiceEntity;
   };
 }
+
+// ================================== ВТ ==================================
+
+/**
+ * Интерфейс нормализованного вида ВТ
+ */
+export interface SvtItemEntity {
+  [key: number]: SvtItem;
+}
+
+/**
+ * Интерфейс нормализованного вида типа ВТ
+ */
+export interface SvtTypeEntity {
+  [key: number]: SvtType;
+}
+
+/**
+ * Интерфейс нормализованного вида РМ
+ */
+export interface SvtWorkplaceEntity {
+  [key: number]: SvtWorkplace;
+}
+
+/**
+ * Интерфейс нормализованного вида типа РМ
+ */
+export interface SvtWorkplaceTypeEntity {
+  [key: number]: SvtWorkplaceType;
+}
+
+/**
+ * Интерфейс нормализованного отдела РМ
+ */
+export interface SvtWorkplaceCountEntity {
+  [key: number]: SvtWorkplaceCount;
+}
+
+/**
+ * Интерфейс объектов, на которые раскладывается (нормализуется) ВТ
+ */
+export interface NormalizedSvtItemsEntities {
+  items: SvtItemEntity;
+  types: SvtTypeEntity;
+  workplaces: SvtWorkplaceEntity;
+  workplace_types: SvtWorkplaceTypeEntity;
+  workplace_counts: SvtWorkplaceCountEntity;
+}
+
+/**
+ * Интерфейс нормализованных данных, возвращаемый функцией normalize
+ */
+export interface NormalizedSvtItems {
+  entities: NormalizedSvtItemsEntities;
+  result: number[];
+}
+
+/**
+ * Интерфейс нормализованных данных, возвращаемый функцией normalize
+ */
+export interface NormalizedSvtItem {
+  entities: NormalizedSvtItemsEntities;
+  result: number;
+}
+
+// ================================== *** ==================================

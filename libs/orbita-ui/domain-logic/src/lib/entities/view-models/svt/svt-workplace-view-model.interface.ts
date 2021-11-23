@@ -1,7 +1,10 @@
+import { SvtWorkplaceCount } from './../../models/svt/svt-workplace-count.interface';
+import { SvtWorkplaceType } from './../../models/svt/svt-workplace-type.interface';
+
 /**
  * РМ
  */
-export interface SvtWorkplace {
+export interface SvtWorkplaceViewModel {
   /**
    * Идентфикатор РМ
    */
@@ -18,6 +21,11 @@ export interface SvtWorkplace {
   readonly workplace_count_id: number;
 
   /**
+   * Тип РМ
+   */
+  readonly workplace_type: SvtWorkplaceType;
+
+  /**
    * Идентификатор Ответственного
    */
   readonly id_tn: number;
@@ -26,4 +34,9 @@ export interface SvtWorkplace {
    * ФИО ответственного
    */
   readonly user_fio: string;
+
+  /**
+   * Номер отдела
+   */
+  readonly workplace_count: SvtWorkplaceCount;
 }

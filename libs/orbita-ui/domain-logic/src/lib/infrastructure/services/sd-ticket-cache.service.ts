@@ -12,6 +12,7 @@ export class SdTicketCacheService {
     return normalize(sdTickets, sdTicketsSchema);
   }
 
+  // FIXME: Тут исправить, NormalizedSdTickets -> NormalizedSdTicket
   static normalizeSdTicket(sdTicket: SdTicket): NormalizedSdTickets {
     return normalize(sdTicket, sdTicketSchema);
   }

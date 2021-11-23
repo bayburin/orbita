@@ -8,7 +8,7 @@ import {
   employeeFiltersViewModelArray,
   ServiceDeskFacade,
   SvtFacade,
-  SvtItem,
+  SvtItemViewModel,
   EmployeeShort,
   SdTicketViewModel,
   SdRequestFacade,
@@ -185,7 +185,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
    *
    * @param svtItem - выбранная ВТ
    */
-  selectSvtItem(svtItem: SvtItem): void {
+  selectSvtItem(svtItem: SvtItemViewModel): void {
     this.form.patchValue({ svtItem: svtItem });
   }
 
@@ -199,7 +199,7 @@ export class NewSdRequestBlockComponent implements OnInit, OnDestroy {
   /**
    * Возвращает строку, содержащую данные о выбранной ВТ
    */
-  selectedSvtItemView(item: SvtItem): string {
+  selectedSvtItemView(item: SvtItemViewModel): string {
     return `${item.type.short_description} ${item.short_item_model} | Инвентарный: ${item.invent_num} | Штрих-код: ${item.barcode_item.id}`;
   }
 

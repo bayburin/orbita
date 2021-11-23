@@ -1,7 +1,11 @@
+import { SvtItemStatuses, SvtBarcode } from './../../models/svt/svt-item.interface';
+import { SvtWorkplace } from './../../models/svt/svt-workplace.interface';
+import { SvtType } from './../../models/svt/svt-type.interface';
+
 /**
  * ВТ
  */
-export interface SvtItem {
+export interface SvtItemViewModel {
   /**
    * Идентификатор ВТ
    */
@@ -21,6 +25,11 @@ export interface SvtItem {
    * Идентификатор РМ
    */
   readonly workplace_id: number;
+
+  /**
+   * РМ
+   */
+  readonly workplace: SvtWorkplace;
 
   /**
    * Идентификатор модели
@@ -51,26 +60,9 @@ export interface SvtItem {
    * Текстовое наименование модели
    */
   readonly short_item_model: string;
-}
 
-/**
- * Интерфейс штрих-кода ВТ
- */
-export interface SvtBarcode {
   /**
-   * Штрих-код
+   * Тип ВТ
    */
-  readonly id: number;
-}
-
-/**
- * Статусы ВТ
- */
-export enum SvtItemStatuses {
-  WAITING_TAKE = 'waiting_take',
-  WAITING_BRING = 'waiting_bring',
-  IN_STOCK = 'in_stock',
-  IN_WORKPLACE = 'in_workplace',
-  WAITING_WRITE_OFF = 'waiting_write_off',
-  WRITTEN_OFF = 'written_off',
+  readonly type: SvtType;
 }

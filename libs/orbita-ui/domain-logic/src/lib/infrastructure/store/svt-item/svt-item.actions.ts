@@ -3,6 +3,7 @@ import { createAction, props } from '@ngrx/store';
 import { SvtItem } from './../../../entities/models/svt/svt-item.interface';
 import { SvtFilters } from './../../../entities/filter.interface';
 import { PrimeFilter } from './../../../entities/prime-filter.interface';
+import { NormalizedSvtItemsEntities } from './../../../entities/models/normalized-data.interface';
 
 export const loadAll = createAction('[SvtItem/API] Load All', props<{ filters: PrimeFilter }>());
 
@@ -32,3 +33,5 @@ export const loadAllForFormSuccess = createAction(
 export const loadAllForFormFailure = createAction('[SvtItem/API] Load All For Form Failure', props<{ error: any }>());
 
 export const clearAll = createAction('[SvtItem] Clear All');
+
+export const setPartials = createAction('[SvtItem] Set Partials', props<{ entities: NormalizedSvtItemsEntities }>());

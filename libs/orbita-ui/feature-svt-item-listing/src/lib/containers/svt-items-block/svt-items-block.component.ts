@@ -1,6 +1,6 @@
 import { LazyLoadEvent } from 'primeng/api';
 import { Component, OnDestroy } from '@angular/core';
-import { SvtFacade, SvtItem } from '@orbita/orbita-ui/domain-logic';
+import { SvtFacade, SvtItemViewModel } from '@orbita/orbita-ui/domain-logic';
 import { Router } from '@angular/router';
 
 @Component({
@@ -39,7 +39,7 @@ export class SvtItemsBlockComponent implements OnDestroy {
    *
    * @param employee - выбранный работник
    */
-  redirectToNewSdRequestPage(item: SvtItem) {
+  redirectToNewSdRequestPage(item: SvtItemViewModel) {
     this.router.navigate(['/tickets', 'new-sd-request'], {
       queryParams: { id_tn: item.workplace.id_tn, barcode: item.barcode_item.id },
     });

@@ -35,3 +35,29 @@ export const sdTicketSchema = new schema.Entity('tickets', {
 });
 
 export const sdTicketsSchema = new schema.Array(sdTicketSchema);
+
+export const svtTypeSchema = new schema.Entity('types', {}, { idAttribute: 'type_id' });
+
+export const svtWorkplaceCountSchema = new schema.Entity('workplace_counts', {}, { idAttribute: 'workplace_count_id' });
+
+export const svtWorkplaceTypeSchema = new schema.Entity('workplace_types', {}, { idAttribute: 'workplace_type_id' });
+
+export const svtWorkplaceSchema = new schema.Entity(
+  'workplaces',
+  {
+    workplace_type: svtWorkplaceTypeSchema,
+    workplace_count: svtWorkplaceCountSchema,
+  },
+  { idAttribute: 'workplace_id' }
+);
+
+export const svtItemSchema = new schema.Entity(
+  'items',
+  {
+    type: svtTypeSchema,
+    workplace: svtWorkplaceSchema,
+  },
+  { idAttribute: (attr) => attr.barcode_item.id }
+);
+
+export const svtItemsSchema = new schema.Array(svtItemSchema);

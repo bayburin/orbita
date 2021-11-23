@@ -30,7 +30,7 @@ export const initialState: State = svtItemAdapter.getInitialState({
 
 const svtItemReducer = createReducer(
   initialState,
-  on(SvtItemActions.loadAll, SvtItemActions.loadSelected, (state) => ({
+  on(SvtItemActions.loadAll, SvtItemActions.loadSelected, SvtItemActions.loadAllForForm, (state) => ({
     ...state,
     loading: true,
     loaded: false,
@@ -70,13 +70,6 @@ const svtItemReducer = createReducer(
     ...state,
     selectedId: null,
     loaded: false,
-  })),
-  on(SvtItemActions.loadAllForForm, (state) => ({
-    ...state,
-    loading: true,
-    loaded: false,
-    error: null,
-    needFormItems: false,
   })),
   on(SvtItemActions.clearAll, (state) => svtItemAdapter.removeAll({ ...state }))
 );
