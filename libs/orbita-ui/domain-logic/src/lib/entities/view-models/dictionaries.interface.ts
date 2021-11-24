@@ -4,28 +4,28 @@ import { HistoryViewModel } from './history-view-model.interface';
 import { WorkerViewModel } from './worker-view-model.interface';
 
 /**
- * Интерфейс словаря представления сообщения
+ * Словарь представления сообщения
  */
 export interface MessageViewModelDict {
   [key: number]: MessageViewModel;
 }
 
 /**
- * Интерфейс словаря представления работы
+ * Словарь представления работы
  */
 export interface WorkViewModelDict {
   [key: number]: WorkViewModel;
 }
 
 /**
- * Интерфейс словаря представления истории событий
+ * Словарь представления истории событий
  */
 export interface HistoryViewModelDict {
   [key: number]: HistoryViewModel;
 }
 
 /**
- * Интерфейс словаря представления исполнителя
+ * Словарь представления исполнителя
  */
 export interface WorkerViewModelDict {
   [key: number]: WorkerViewModel;

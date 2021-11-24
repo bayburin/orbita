@@ -298,7 +298,9 @@
           <p-divider type="dashed"></p-divider>
 
           <p-accordion [multiple]="true">
-            <p-accordionTab [selected]="(loadingEmployee$ | async) === false && (employee$ | async)">
+            <p-accordionTab
+              [selected]="(loadingEmployee$ | async) === false && (loadedEmployee$ | async) && (employee$ | async)"
+            >
               <ng-template pTemplate="header">
                 <div class="panel-header">
                   <span>Пользователь</span>
@@ -369,7 +371,7 @@
                 </ng-template>
               </ng-template>
             </p-accordionTab>
-            <p-accordionTab [selected]="(loadingHost$ | async) === false && (host$ | async)">
+            <p-accordionTab [selected]="(loadingHost$ | async) === false && (loadedHost$ | async) && (host$ | async)">
               <ng-template pTemplate="header">
                 <div class="panel-header">
                   <span>Хост (поиск по инв. №)</span>
@@ -431,7 +433,9 @@
                 </ng-template>
               </ng-template>
             </p-accordionTab>
-            <p-accordionTab [selected]="(loadingSvtItem$ | async) === false && (svtItem$ | async)">
+            <p-accordionTab
+              [selected]="(loadingSvtItem$ | async) === false && (loadedSvtItem$ | async) && (svtItem$ | async)"
+            >
               <ng-template pTemplate="header">
                 <div class="panel-header">
                   <span>Техника (поиск по штрих-коду)</span>

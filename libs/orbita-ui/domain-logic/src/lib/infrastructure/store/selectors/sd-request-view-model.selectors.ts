@@ -12,6 +12,7 @@ import { MessageViewModel } from './../../../entities/view-models/message-view-m
 import { SdRequestViewForm } from './../../../entities/forms/sd-request-view-form.interface';
 import { ParameterSchemaViewModelFactory } from '../../factories/parameter-shema-view-model.factory';
 import { ClaimApplicationViewModel } from './../../../entities/view-models/claim-application-view-model.interface';
+import { Attachment } from './../../../entities/models/attachment.interface';
 
 export const getAllViewModel = createSelector(
   SdRequestSelectors.getAll,
@@ -20,21 +21,27 @@ export const getAllViewModel = createSelector(
   ApplicationSelectors.getEntities,
   (sdRequests, messageEntities, workEntities, applicationEntities): SdRequestViewModel[] =>
     sdRequests.map((sdRequest) => {
-      const comments = sdRequest.comments.reduce(
-        (arr, commentId) => (messageEntities[commentId] ? arr.concat(messageEntities[commentId]) : arr),
-        [] as MessageViewModel[]
-      );
-      const works = sdRequest.works.reduce(
-        (arr, workId) => (workEntities[workId] ? arr.concat(workEntities[workId]) : arr),
-        [] as WorkViewModel[]
-      );
-      const claim_applications = sdRequest.claim_applications.reduce(
-        (arr, claim_app) =>
-          applicationEntities[claim_app.application_id]
-            ? arr.concat({ ...claim_app, application: applicationEntities[claim_app.application_id] })
-            : arr,
-        [] as ClaimApplicationViewModel[]
-      );
+      const comments = sdRequest.comments.reduce<MessageViewModel[]>((arr, commentId) => {
+        if (messageEntities[commentId]) {
+          arr.push(messageEntities[commentId]);
+        }
+
+        return arr;
+      }, []);
+      const works = sdRequest.works.reduce<WorkViewModel[]>((arr, workId) => {
+        if (workEntities[workId]) {
+          arr.push(workEntities[workId]);
+        }
+
+        return arr;
+      }, []);
+      const claim_applications = sdRequest.claim_applications.reduce<ClaimApplicationViewModel[]>((arr, claim_app) => {
+        if (applicationEntities[claim_app.application_id]) {
+          arr.push({ ...claim_app, application: applicationEntities[claim_app.application_id] });
+        }
+
+        return arr;
+      }, []);
 
       return {
         ...sdRequest,
@@ -60,26 +67,35 @@ export const getSelectedEntityViewModel = createSelector(
       return null;
     }
 
-    const comments = sdRequest.comments.reduce(
-      (arr, commentId) => (messageEntities[commentId] ? arr.concat(messageEntities[commentId]) : arr),
-      [] as MessageViewModel[]
-    );
-    const works = sdRequest.works.reduce(
-      (arr, workId) => (workEntities[workId] ? arr.concat(workEntities[workId]) : arr),
-      [] as WorkViewModel[]
-    );
-    const attachments = sdRequest.attachments.reduce(
-      (arr, attachmentId) => (attachmentEntities[attachmentId] ? arr.concat(attachmentEntities[attachmentId]) : arr),
-      []
-    );
+    const comments = sdRequest.comments.reduce<MessageViewModel[]>((arr, commentId) => {
+      if (messageEntities[commentId]) {
+        arr.push(messageEntities[commentId]);
+      }
+
+      return arr;
+    }, []);
+    const works = sdRequest.works.reduce<WorkViewModel[]>((arr, workId) => {
+      if (workEntities[workId]) {
+        arr.push(workEntities[workId]);
+      }
+
+      return arr;
+    }, []);
+    const attachments = sdRequest.attachments.reduce<Attachment[]>((arr, attachmentId) => {
+      if (attachmentEntities[attachmentId]) {
+        arr.push(attachmentEntities[attachmentId]);
+      }
+
+      return arr;
+    }, []);
     const schemaPayload = ParameterSchemaViewModelFactory.createSchema(sdRequest.parameter);
-    const claim_applications = sdRequest.claim_applications.reduce(
-      (arr, claim_app) =>
-        applicationEntities[claim_app.application_id]
-          ? arr.concat({ ...claim_app, application: applicationEntities[claim_app.application_id] })
-          : arr,
-      [] as ClaimApplicationViewModel[]
-    );
+    const claim_applications = sdRequest.claim_applications.reduce<ClaimApplicationViewModel[]>((arr, claim_app) => {
+      if (applicationEntities[claim_app.application_id]) {
+        arr.push({ ...claim_app, application: applicationEntities[claim_app.application_id] });
+      }
+
+      return arr;
+    }, []);
 
     return {
       ...sdRequest,
@@ -120,25 +136,34 @@ export const getNewFormCreatedViewModel = createSelector(
       return null;
     }
 
-    const comments = sdRequest.comments.reduce(
-      (arr, commentId) => (messageEntities[commentId] ? arr.concat(messageEntities[commentId]) : arr),
-      [] as MessageViewModel[]
-    );
-    const works = sdRequest.works.reduce(
-      (arr, workId) => (workEntities[workId] ? arr.concat(workEntities[workId]) : arr),
-      [] as WorkViewModel[]
-    );
-    const attachments = sdRequest.attachments.reduce(
-      (arr, attachmentId) => (attachmentEntities[attachmentId] ? arr.concat(attachmentEntities[attachmentId]) : arr),
-      []
-    );
-    const claim_applications = sdRequest.claim_applications.reduce(
-      (arr, claim_app) =>
-        applicationEntities[claim_app.application_id]
-          ? arr.concat({ ...claim_app, application: applicationEntities[claim_app.application_id] })
-          : arr,
-      [] as ClaimApplicationViewModel[]
-    );
+    const comments = sdRequest.comments.reduce<MessageViewModel[]>((arr, commentId) => {
+      if (messageEntities[commentId]) {
+        arr.push(messageEntities[commentId]);
+      }
+
+      return arr;
+    }, []);
+    const works = sdRequest.works.reduce<WorkViewModel[]>((arr, workId) => {
+      if (workEntities[workId]) {
+        arr.push(workEntities[workId]);
+      }
+
+      return arr;
+    }, []);
+    const attachments = sdRequest.attachments.reduce<Attachment[]>((arr, attachmentId) => {
+      if (attachmentEntities[attachmentId]) {
+        arr.push(attachmentEntities[attachmentId]);
+      }
+
+      return arr;
+    }, []);
+    const claim_applications = sdRequest.claim_applications.reduce<ClaimApplicationViewModel[]>((arr, claim_app) => {
+      if (applicationEntities[claim_app.application_id]) {
+        arr.push({ ...claim_app, application: applicationEntities[claim_app.application_id] });
+      }
+
+      return arr;
+    }, []);
 
     return {
       ...sdRequest,

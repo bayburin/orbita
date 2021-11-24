@@ -12,6 +12,10 @@ export interface PrioritiesViewModel {
    * Тип badge
    */
   badge: string;
+  /**
+   * Ключ приоритета
+   */
+  priority?: Priorities;
 }
 
 /**
@@ -35,22 +39,25 @@ export const prioritiesViewModelMap: Record<Priorities, PrioritiesViewModel> = {
 /**
  * Массив приоритетов
  */
-export const prioritiesArray: Priorities[] = Object.values(Priorities).reduce(
-  (arr, priority) => arr.concat(priority as Priorities),
-  []
-);
+export const prioritiesArray = Object.values(Priorities).reduce<Priorities[]>((arr, priority) => {
+  arr.push(priority as Priorities);
+
+  return arr;
+}, []);
 
 /**
  * Массив приоритетов
  */
-export const prioritiesViewModelArray: PrioritiesViewModel[] = Object.keys(prioritiesViewModelMap).reduce(
-  (arr, priority) =>
-    arr.concat({
-      priority,
-      ...getViewModelPriority(priority as Priorities),
-    }),
-  []
-);
+export const prioritiesViewModelArray = (Object.keys(prioritiesViewModelMap) as Priorities[]).reduce<
+  PrioritiesViewModel[]
+>((arr, priority) => {
+  arr.push({
+    priority,
+    ...getViewModelPriority(priority),
+  });
+
+  return arr;
+}, []);
 
 /**
  * Функция возвращает значение объекта sdRequestPrioritiesMap исходя из полученного приоритета

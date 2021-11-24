@@ -16,25 +16,34 @@ export const getEntitiesViewModel = createSelector(
   HistoryViewModelSelectors.getEntitiesViewModel,
   WorkerViewModelSelectors.getEntitiesViewModel,
   MessageViewModelSelectors.getEntitiesViewModel,
-  (workEntities, groupEntities, historyEntities, workerEntities, workflowEntities): WorkViewModelDict => {
+  (workEntities, groupEntities, historyEntities, workerEntities, workflowEntities) => {
     return Object.keys(workEntities)
       .map(Number)
       .reduce<WorkViewModelDict>((acc, key) => {
         const workEntity = workEntities[key];
-        const histories = workEntity.histories.reduce(
-          (arr, historyId) => (historyEntities[historyId] ? arr.concat(historyEntities[historyId]) : arr),
-          [] as HistoryViewModel[]
-        );
-        const workers = workEntity.workers.reduce(
-          (arr, workerId) => (workerEntities[workerId] ? arr.concat(workerEntities[workerId]) : arr),
-          [] as WorkerViewModel[]
-        );
-        const workflows = workEntity.workflows
-          ? workEntity.workflows.reduce(
-              (arr, workflowId) => (workflowEntities[workflowId] ? arr.concat(workflowEntities[workflowId]) : arr),
-              [] as MessageViewModel[]
-            )
-          : [];
+        const histories = workEntity.histories.reduce<HistoryViewModel[]>((arr, historyId) => {
+          if (historyEntities[historyId]) {
+            arr.push(historyEntities[historyId]);
+          }
+
+          return arr;
+        }, []);
+        const workers = workEntity.workers.reduce<WorkerViewModel[]>((arr, workerId) => {
+          if (workerEntities[workerId]) {
+            arr.push(workerEntities[workerId]);
+          }
+
+          return arr;
+        }, []);
+
+        const workflows =
+          workEntity.workflows?.reduce<MessageViewModel[]>((arr, workflowId) => {
+            if (workflowEntities[workflowId]) {
+              arr.push(workflowEntities[workflowId]);
+            }
+
+            return arr;
+          }, []) || [];
 
         acc[key] = {
           ...workEntity,

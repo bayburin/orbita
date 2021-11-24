@@ -7,8 +7,8 @@ import { WorkerViewModelDict } from './../../../entities/view-models/dictionarie
 export const getEntitiesViewModel = createSelector(
   WorkerSelectors.getEntities,
   UserSelectors.getEntities,
-  (workerEntities, userEntities): WorkerViewModelDict => {
-    return Object.keys(workerEntities)
+  (workerEntities, userEntities) =>
+    Object.keys(workerEntities)
       .map(Number)
       .reduce<WorkerViewModelDict>((acc, key) => {
         const entity = workerEntities[key];
@@ -19,6 +19,5 @@ export const getEntitiesViewModel = createSelector(
         };
 
         return acc;
-      }, {});
-  }
+      }, {})
 );
