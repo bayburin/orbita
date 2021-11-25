@@ -15,6 +15,7 @@ import * as RouterSelectors from '../selectors/router.selectors';
 import * as HostActions from '../host/host.actions';
 import { PrimeFilterFactory } from './../../factories/prime-filter.factory';
 import { EmployeeFilters } from './../../../entities/models/employee/employee-filters.enum';
+import { escapePrimeFilterValues } from '../../utils/escape-prime-filter-values.function';
 
 @Injectable()
 export class EmployeeEffects {
@@ -104,9 +105,9 @@ export class EmployeeEffects {
     this.actions$.pipe(
       ofType(EmployeeActions.loadAllEmployeeShort),
       switchMap((action) =>
-        this.employeeApi.query(action.filters).pipe(
+        this.employeeApi.query(escapePrimeFilterValues(action.filters)).pipe(
           map((data) => EmployeeActions.loadAllEmployeeShortSuccess({ employees: data.employees })),
-          catchError((error) => of(EmployeeActions.loadSingleEmployeeFailure({ error })))
+          catchError((error) => of(EmployeeActions.loadAllEmployeeShortFailure({ error })))
         )
       )
     )
@@ -118,7 +119,7 @@ export class EmployeeEffects {
       switchMap((action) => {
         const filters = PrimeFilterFactory.createFilter(EmployeeFilters.ID_TN, action.idTn);
 
-        return this.employeeApi.query(filters).pipe(
+        return this.employeeApi.query(escapePrimeFilterValues(filters)).pipe(
           map((data) =>
             EmployeeActions.loadEmployeeShortForNewFormSuccess({
               employees: data.employees,
