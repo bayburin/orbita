@@ -526,6 +526,122 @@
       },
       "tags": ["scope:orbita-ui", "type:util"]
     },
+    "service-desk-ui": {
+      "projectType": "application",
+      "root": "apps/service-desk-ui",
+      "sourceRoot": "apps/service-desk-ui/src",
+      "prefix": "orbita",
+      "targets": {
+        "build": {
+          "executor": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/service-desk-ui",
+            "index": "apps/service-desk-ui/src/index.html",
+            "main": "apps/service-desk-ui/src/main.ts",
+            "polyfills": "apps/service-desk-ui/src/polyfills.ts",
+            "tsConfig": "apps/service-desk-ui/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/service-desk-ui/src/favicon.ico", "apps/service-desk-ui/src/assets"],
+            "styles": ["apps/service-desk-ui/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/service-desk-ui/src/environments/environment.ts",
+                  "with": "apps/service-desk-ui/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "service-desk-ui:build:production"
+            },
+            "development": {
+              "browserTarget": "service-desk-ui:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "service-desk-ui:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/service-desk-ui/src/**/*.ts", "apps/service-desk-ui/src/**/*.html"]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/service-desk-ui"],
+          "options": {
+            "jestConfig": "apps/service-desk-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": ["type:app"]
+    },
+    "service-desk-ui-e2e": {
+      "root": "apps/service-desk-ui-e2e",
+      "sourceRoot": "apps/service-desk-ui-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/service-desk-ui-e2e/cypress.json",
+            "tsConfig": "apps/service-desk-ui-e2e/tsconfig.e2e.json",
+            "devServerTarget": "service-desk-ui:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "service-desk-ui:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/service-desk-ui-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["service-desk-ui"]
+    },
     "shared-assets": {
       "root": "libs/shared/assets",
       "sourceRoot": "libs/shared/assets/src",

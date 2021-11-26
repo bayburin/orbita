@@ -1,6 +1,7 @@
 module.exports = {
   projects: [
     '<rootDir>/apps/orbita-ui',
+    '<rootDir>/apps/service-desk-ui',
     '<rootDir>/libs/orbita-ui/domain-logic',
     '<rootDir>/libs/orbita-ui/ui',
     '<rootDir>/libs/orbita-ui/feature-listing',

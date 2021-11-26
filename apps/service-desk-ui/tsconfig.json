@@ -1,0 +1,36 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    },
+    {
+      "path": "./tsconfig.editor.json"
+    }
+  ],
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@animations/*": ["app/core/animations/*"],
+      "@interfaces/*": ["app/core/interfaces/*"],
+      "@auth/*": ["app/core/auth/*"],
+      "@guards/*": ["app/core/guards/*"],
+      "@config/*": ["app/config/*"],
+      "@modules/*": ["app/modules/*"],
+      "@shared/*": ["app/shared/*"]
+    }
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

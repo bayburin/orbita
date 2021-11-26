@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 x-ui: &app
   build:
@@ -20,7 +20,7 @@ x-frontend: &frontend
   tty: true
 
 services:
-  orbita-ui-runner:
+  runner:
     <<: *frontend
     command: /bin/bash
 
@@ -28,8 +28,15 @@ services:
     <<: *frontend
     restart: unless-stopped
     ports:
-      - "4200:4200"
+      - '4200:4200'
     command: nx serve orbita-ui --host 0.0.0.0 --disable-host-check --ssl=true --ssl-cert=/app/.docker/tls/iss_reshetnev_ru.crt --ssl-key=/app/.docker/tls/iss-reshetnev.ru.key
+
+  service-desk:
+    <<: *frontend
+    restart: unless-stopped
+    ports:
+      - '4200:4200'
+    command: nx serve service-desk-ui --host 0.0.0.0 --disable-host-check --ssl=true --ssl-cert=/app/.docker/tls/iss_reshetnev_ru.crt --ssl-key=/app/.docker/tls/iss-reshetnev.ru.key
 
 volumes:
   node_modules:
