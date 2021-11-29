@@ -23,10 +23,10 @@ import { ResponsibleUserDetailsI } from '@interfaces/responsible_user_details.in
 import { TicketTypes } from '@modules/ticket/models/ticket/ticket.model';
 
 // @Directive({
-//   selector: '[appAuthorize]'
+//   selector: '[libAuthorize]'
 // })
 // class StubAuthorizeDirective extends AuthorizeDirective {
-//   @Input() set appAuthorize(policyData: [any, string]) {}
+//   @Input() set libAuthorize(policyData: [any, string]) {}
 // }
 
 // @Component({
@@ -133,8 +133,8 @@ describe('ServicesDetailPageComponent', () => {
     });
   });
 
-  it('should render app-service-detail component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-service-detail')).toBeTruthy();
+  it('should render service-desk-ui-service-detail component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-service-detail')).toBeTruthy();
   });
 
   describe('ngOnDestroy', () => {

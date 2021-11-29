@@ -78,8 +78,8 @@
                     [resultTemplate]="rt"
                     [inputFormatter]="formatter"
                     [editable]="false"
-                    (click)="onService.next($event.target.value)"
-                    (focus)="onService.next($event.target.value)"
+                    (click)="onService.next($any($event).target.value)"
+                    (focus)="onService.next($any($event).target.value)"
                     #instance="ngbTypeahead"
                     [ngClass]="{
                       'is-invalid': (form.service.touched || submitted) && form.service.errors,
@@ -221,7 +221,7 @@
     <div class="form-row align-items-center justify-content-center sd-mb-7">
       <button type="submit" [disabled]="loading.form || loading.params" class="btn btn-primary">
         <span class="d-flex justify-content-center">
-          <app-loading [loading]="loading.form" class="mr-1 text-body"></app-loading>Отправить
+          <service-desk-ui-loading [loading]="loading.form" class="mr-1 text-body"></service-desk-ui-loading>Отправить
         </span>
       </button>
       <button (click)="onCancel($event)" class="btn btn-gray-white ml-3">Отменить</button>

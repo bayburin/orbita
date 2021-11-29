@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
-import { CategoryService } from '@shared/services/category/category.service';
-import { Category } from '@modules/ticket/models/category/category.model';
+import { CategoryService } from '../../../../shared/services/category/category.service';
+import { Category } from '../../models/category/category.model';
 
 @Component({
-  selector: 'app-categories-overview-page',
+  selector: 'service-desk-ui-categories-overview-page',
   templateUrl: './categories-overview.page.html',
   styleUrls: ['./categories-overview.page.scss'],
 })

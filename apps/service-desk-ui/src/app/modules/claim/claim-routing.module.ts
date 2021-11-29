@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FreeClaimPageComponent } from './pages/free-claim/free-claim.page';
-import { AuthGuard } from '@guards/auth/auth.guard';
+import { AuthGuard } from '../../core/guards/auth/auth.guard';
 import { ClaimsPageComponent } from './pages/claims/claims.page';
 
 const routes: Routes = [

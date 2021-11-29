@@ -4,15 +4,15 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { of, iif } from 'rxjs';
 import { finalize, tap, switchMap } from 'rxjs/operators';
 
-import { QuestionService } from '@shared/services/question/question.service';
-import { ServiceService } from '@shared/services/service/service.service';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { Question } from '@modules/ticket/models/question/question.model';
-import { NotificationService } from '@shared/services/notification/notification.service';
-import { ResponsibleUserService } from '@shared/services/responsible_user/responsible-user.service';
+import { QuestionService } from '../../../../../shared/services/question/question.service';
+import { ServiceService } from '../../../../../shared/services/service/service.service';
+import { Service } from '../../../models/service/service.model';
+import { Question } from '../../../models/question/question.model';
+import { NotificationService } from '../../../../../shared/services/notification/notification.service';
+import { ResponsibleUserService } from '../../../../../shared/services/responsible_user/responsible-user.service';
 
 @Component({
-  selector: 'app-edit-question-page',
+  selector: 'service-desk-ui-edit-question-page',
   templateUrl: './edit-question.page.html',
   styleUrls: ['./edit-question.page.sass'],
 })

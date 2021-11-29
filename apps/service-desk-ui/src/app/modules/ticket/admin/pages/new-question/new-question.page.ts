@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs/operators';
 
-import { QuestionService } from '@shared/services/question/question.service';
-import { ServiceService } from '@shared/services/service/service.service';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { NotificationService } from '@shared/services/notification/notification.service';
+import { QuestionService } from '../../../../../shared/services/question/question.service';
+import { ServiceService } from '../../../../../shared/services/service/service.service';
+import { Service } from '../../../models/service/service.model';
+import { NotificationService } from '../../../../../shared/services/notification/notification.service';
 
 @Component({
-  selector: 'app-new-question-page',
+  selector: 'service-desk-ui-new-question-page',
   templateUrl: './new-question.page.html',
   styleUrls: ['./new-question.page.sass'],
 })

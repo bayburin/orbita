@@ -110,7 +110,7 @@ describe('Service', () => {
 
     describe('#pageComponent', () => {
       it('should return name of component', () => {
-        expect(service.pageComponent()).toEqual('app-service-page-content');
+        expect(service.pageComponent()).toEqual('service-desk-ui-service-page-content');
       });
     });
   });

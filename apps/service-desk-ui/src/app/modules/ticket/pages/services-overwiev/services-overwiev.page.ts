@@ -2,11 +2,11 @@ import { finalize } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { ServiceService } from '@shared/services/service/service.service';
-import { Service } from '@modules/ticket/models/service/service.model';
+import { ServiceService } from '../../../../shared/services/service/service.service';
+import { Service } from '../../models/service/service.model';
 
 @Component({
-  selector: 'app-services-overwiev-page',
+  selector: 'service-desk-ui-services-overwiev-page',
   templateUrl: './services-overwiev.page.html',
   styleUrls: ['./services-overwiev.page.scss'],
 })
@@ -21,7 +21,7 @@ export class ServicesOverwievPageComponent implements OnInit {
     this.services = this.serviceService.loadServices().pipe(finalize(() => (this.loading = false)));
   }
 
-  trackByService(index, service: Service) {
+  trackByService(index: number, service: Service) {
     return service.id;
   }
 }

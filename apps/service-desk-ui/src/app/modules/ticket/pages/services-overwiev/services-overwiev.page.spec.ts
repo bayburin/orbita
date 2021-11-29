@@ -42,11 +42,11 @@ describe('ServicesOverwievPageComponent', () => {
     expect(service.loadServices).toHaveBeenCalled();
   });
 
-  it('should show app-section-header component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-section-header')).toBeTruthy();
+  it('should show service-desk-ui-section-header component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-section-header')).toBeTruthy();
   });
 
-  it('should show app-service-detail component', () => {
-    expect(fixture.debugElement.nativeElement.querySelectorAll('app-service-detail').length).toEqual(2);
+  it('should show service-desk-ui-service-detail component', () => {
+    expect(fixture.debugElement.nativeElement.querySelectorAll('service-desk-ui-service-detail').length).toEqual(2);
   });
 });

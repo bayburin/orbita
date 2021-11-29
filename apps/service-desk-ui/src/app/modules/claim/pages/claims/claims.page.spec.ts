@@ -26,7 +26,7 @@ describe('ClaimsPageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render app-claims-page-content component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-claims-page-content')).toBeTruthy();
+  it('should render service-desk-ui-claims-page-content component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-claims-page-content')).toBeTruthy();
   });
 });

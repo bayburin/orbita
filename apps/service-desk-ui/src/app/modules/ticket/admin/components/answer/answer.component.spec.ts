@@ -14,7 +14,7 @@ import { AnswerFactory } from '@modules/ticket/factories/answer.factory';
 import { By } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-attachment',
+  selector: 'service-desk-ui-attachment',
   template: '',
   providers: [
     {
@@ -161,8 +161,8 @@ describe('AnswerComponent', () => {
     expect(fixture.debugElement.query(By.css('markdown'))).toBeTruthy();
   });
 
-  it('should create form with app-attachment component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('form > app-attachment')).toBeTruthy();
+  it('should create form with service-desk-ui-attachment component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('form > service-desk-ui-attachment')).toBeTruthy();
   });
 
   it('should show all attachments', () => {

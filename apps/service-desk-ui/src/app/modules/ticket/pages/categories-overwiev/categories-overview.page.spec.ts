@@ -42,11 +42,11 @@ describe('CategoriesOverwievComponent', () => {
     expect(component.categories).toEqual(categories);
   });
 
-  it('should show app-section-header component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-section-header')).toBeTruthy();
+  it('should show service-desk-ui-section-header component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-section-header')).toBeTruthy();
   });
 
-  it('should show app-category-list component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-category-list')).toBeTruthy();
+  it('should show service-desk-ui-category-list component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-category-list')).toBeTruthy();
   });
 });

@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-free-claim-page',
+  selector: 'service-desk-ui-free-claim-page',
   templateUrl: './free-claim.page.html',
   styleUrls: ['./free-claim.page.scss'],
 })
-export class FreeClaimPageComponent implements OnInit {
+export class FreeClaimPageComponent {
   constructor(private router: Router) {}
-
-  ngOnInit() {}
 
   onSave() {
     this.router.navigate(['/claims']);

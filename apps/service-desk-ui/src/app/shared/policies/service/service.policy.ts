@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ApplicationPolicy } from '@shared/policies/application/application.policy';
+import { ApplicationPolicy } from '../../../shared/policies/application/application.policy';
 
 @Injectable({
   providedIn: 'root',

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize, map } from 'rxjs/operators';
 
-import { DashboardI } from '@interfaces/dashboard.interface';
-import { DashboardService } from '@modules/ticket/services/dashboard/dashboard.service';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { Ticket } from '@modules/ticket/models/ticket/ticket.model';
-import { toggleQuestionList } from '@modules/ticket/animations/toggle-question-list.animation';
-import { contentBlockAnimation } from '@animations/content.animation';
-import { UserRecommendationI } from '@interfaces/user-recommendation.interface';
+import { DashboardI } from '../../../../core/interfaces/dashboard.interface';
+import { DashboardService } from '../../services/dashboard/dashboard.service';
+import { Service } from '../../models/service/service.model';
+import { Ticket } from '../../models/ticket/ticket.model';
+import { toggleQuestionList } from '../../animations/toggle-question-list.animation';
+import { contentBlockAnimation } from '../../../../core/animations/content.animation';
+import { UserRecommendationI } from '../../../../core/interfaces/user-recommendation.interface';
 
 @Component({
-  selector: 'app-dashboard-page',
+  selector: 'service-desk-ui-dashboard-page',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
   animations: [toggleQuestionList, contentBlockAnimation],
@@ -62,15 +62,15 @@ export class DashboardPageComponent implements OnInit {
     return service.questionLimit < service.questions.length;
   }
 
-  trackByService(index, service: Service) {
+  trackByService(index: number, service: Service) {
     return service.id;
   }
 
-  trackByTicket(index, ticket: Ticket) {
+  trackByTicket(index: number, ticket: Ticket) {
     return ticket.id;
   }
 
-  trackByRecommendation(index, recommendation: UserRecommendationI) {
+  trackByRecommendation(index: number, recommendation: UserRecommendationI) {
     return recommendation.id;
   }
 }

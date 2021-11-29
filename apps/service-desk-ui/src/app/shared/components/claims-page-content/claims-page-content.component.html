@@ -1,6 +1,6 @@
 <section>
-  <app-section-header header="Мои заявки"></app-section-header>
-  <app-loading [loading]="loading.initialization" size="48px"></app-loading>
+  <service-desk-ui-section-header header="Мои заявки"></service-desk-ui-section-header>
+  <service-desk-ui-loading [loading]="loading.initialization" size="48px"></service-desk-ui-loading>
 
   <div
     *ngIf="!loading.initialization && !isAnyClaimsExists()"
@@ -13,12 +13,12 @@
 
   <div *ngIf="!loading.initialization && isAnyClaimsExists()">
     <a id="newClaim" routerLink="/claims/new" class="btn btn-primary mb-3">Создать заявку в свободной форме</a>
-    <app-filters [data]="statuses" (changeFilter)="filterChanged($event)"></app-filters>
-    <app-claim-card-list
+    <service-desk-ui-filters [data]="statuses" (changeFilter)="filterChanged($event)"></service-desk-ui-filters>
+    <service-desk-ui-claim-card-list
       [claims]="claims"
       [loading]="loading.table"
       (removeClaim)="claimRevoked()"
-    ></app-claim-card-list>
-    <!-- <app-paginator></app-paginator> -->
+    ></service-desk-ui-claim-card-list>
+    <!-- <service-desk-ui-paginator></service-desk-ui-paginator> -->
   </div>
 </section>

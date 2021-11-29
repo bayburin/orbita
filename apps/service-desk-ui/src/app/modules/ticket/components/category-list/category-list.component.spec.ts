@@ -37,12 +37,12 @@ describe('CategoryListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show app-category-header component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-category-header')).toBeTruthy();
+  it('should show service-desk-ui-category-header component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-category-header')).toBeTruthy();
   });
 
   it('should show all categories', () => {
-    expect(fixture.debugElement.nativeElement.querySelectorAll('app-category-header').length).toEqual(1);
+    expect(fixture.debugElement.nativeElement.querySelectorAll('service-desk-ui-category-header').length).toEqual(1);
   });
 
   it('should show all services for each category', () => {

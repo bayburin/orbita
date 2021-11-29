@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '@shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 import { ClaimRoutingModule } from './claim-routing.module';
 import { FreeClaimPageComponent } from './pages/free-claim/free-claim.page';

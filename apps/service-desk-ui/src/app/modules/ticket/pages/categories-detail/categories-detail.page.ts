@@ -3,14 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 
-import { Category } from '@modules/ticket/models/category/category.model';
-import { CategoryService } from '@shared/services/category/category.service';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { Ticket } from '@modules/ticket/models/ticket/ticket.model';
-import { contentBlockAnimation } from '@animations/content.animation';
+import { Category } from '../../models/category/category.model';
+import { CategoryService } from '../../../../shared/services/category/category.service';
+import { Service } from '../../models/service/service.model';
+import { Ticket } from '../../models/ticket/ticket.model';
+import { contentBlockAnimation } from '../../../../core/animations/content.animation';
 
 @Component({
-  selector: 'app-categories-detail-page',
+  selector: 'service-desk-ui-categories-detail-page',
   templateUrl: './categories-detail.page.html',
   styleUrls: ['./categories-detail.page.scss'],
   animations: [contentBlockAnimation],
@@ -36,11 +36,11 @@ export class CategoriesDetailPageComponent implements OnInit, OnDestroy {
     this.category$.next(null);
   }
 
-  trackByService(index, service: Service) {
+  trackByService(index: number, service: Service) {
     return service.id;
   }
 
-  trackByTicket(index, ticket: Ticket) {
+  trackByTicket(index: number, ticket: Ticket) {
     return ticket.id;
   }
 }

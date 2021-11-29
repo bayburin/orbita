@@ -9,6 +9,6 @@ export class FilterByClassPipe implements PipeTransform {
       return resultArr;
     }
 
-    return resultArr.filter((val) => val instanceof klass);
+    return resultArr.filter((val: any) => val instanceof klass);
   }
 }

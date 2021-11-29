@@ -16,15 +16,15 @@ import { finalize, takeWhile, map, filter } from 'rxjs/operators';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute } from '@angular/router';
 
-import { UserService } from '@shared/services/user/user.service';
-import { ItemI } from '@interfaces/item.interface';
-import { ClaimService } from '@modules/claim/services/claim/claim.service';
-import { ClaimI } from '@interfaces/claim.interface';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { User } from '@shared/models/user/user.model';
+import { UserService } from '../../../../shared/services/user/user.service';
+import { ItemI } from '../../../../core/interfaces/item.interface';
+import { ClaimService } from '../../../../modules/claim/services/claim/claim.service';
+import { ClaimI } from '../../../../core/interfaces/claim.interface';
+import { Service } from '../../../ticket/models/service/service.model';
+import { User } from '../../../../shared/models/user/user.model';
 
 @Component({
-  selector: 'app-free-claim-form',
+  selector: 'service-desk-ui-free-claim-form',
   templateUrl: './free-claim-form.component.html',
   styleUrls: ['./free-claim-form.component.scss'],
 })
@@ -130,7 +130,7 @@ export class FreeClaimFormComponent implements OnInit, OnDestroy {
    * @param fileInput - событие выбора файла.
    */
   convertToBase64(fileInput: any) {
-    const filenames = [];
+    const filenames: string[] = [];
 
     for (const file of fileInput.target.files) {
       const reader = new FileReader();
@@ -162,7 +162,6 @@ export class FreeClaimFormComponent implements OnInit, OnDestroy {
         .create(this.getRawValue())
         .pipe(finalize(() => (this.loading.form = false)))
         .subscribe(() => this.claimSaved.emit());
-    } else {
     }
   }
 
@@ -176,7 +175,7 @@ export class FreeClaimFormComponent implements OnInit, OnDestroy {
     this.location.back();
   }
 
-  trackByItem(index, item: ItemI) {
+  trackByItem(index: number, item: ItemI) {
     return item.item_id;
   }
 

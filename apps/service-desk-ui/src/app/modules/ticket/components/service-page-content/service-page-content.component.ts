@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { Service } from '@modules/ticket/models/service/service.model';
-import { ServicePolicy } from '@shared/policies/service/service.policy';
+import { Service } from '../../models/service/service.model';
+import { ServicePolicy } from '../../../../shared/policies/service/service.policy';
 
 @Component({
-  selector: 'app-service-page-content',
+  selector: 'service-desk-ui-service-page-content',
   templateUrl: './service-page-content.component.html',
   styleUrls: ['./service-page-content.component.scss'],
 })

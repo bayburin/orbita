@@ -1,18 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { toggleAnswer } from '@modules/ticket/animations/toggle-answer.animation';
-import { Question } from '@modules/ticket/models/question/question.model';
-import { Answer } from '@modules/ticket/models/answer/answer.model';
-import { ServiceService } from '@shared/services/service/service.service';
-import { QuestionService } from '@shared/services/question/question.service';
-import { NotificationService } from '@shared/services/notification/notification.service';
-import { TagI } from '@interfaces/tag.interface';
-import { ResponsibleUserService } from '@shared/services/responsible_user/responsible-user.service';
+import { toggleAnswer } from '../../../animations/toggle-answer.animation';
+import { Question } from '../../../models/question/question.model';
+import { Answer } from '../../../models/answer/answer.model';
+import { ServiceService } from '../../../../../shared/services/service/service.service';
+import { QuestionService } from '../../../../../shared/services/question/question.service';
+import { NotificationService } from '../../../../../shared/services/notification/notification.service';
+import { TagI } from '../../../../../core/interfaces/tag.interface';
+import { ResponsibleUserService } from '../../../../../shared/services/responsible_user/responsible-user.service';
 import { tap, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-question',
+  selector: 'service-desk-ui-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.sass'],
   animations: [toggleAnswer],
@@ -43,11 +43,11 @@ export class QuestionComponent implements OnInit {
     this.question.open = !this.question.open;
   }
 
-  trackByTag(index, tag: TagI) {
+  trackByTag(index: number, tag: TagI) {
     return tag.id;
   }
 
-  trackByAnswer(index, answer: Answer) {
+  trackByAnswer(index: number, answer: Answer) {
     return answer.id;
   }
 
@@ -106,7 +106,16 @@ export class QuestionComponent implements OnInit {
           this.notifyService.setMessage('Вопрос опубликован');
         }),
         switchMap((tickets: Question[]) => {
-          const tns = tickets.flatMap((ticket) => ticket.getResponsibleUsersTn());
+          // FIXME: Было
+          // const tns = tickets.flatMap((ticket) => ticket.getResponsibleUsersTn());
+          // FIXME: Стало
+          const tns = tickets
+            .map((ticket) => ticket.getResponsibleUsersTn())
+            .reduce((acc, el) => {
+              acc.push(...el);
+
+              return acc;
+            }, []);
 
           return this.responsibleUserService
             .loadDetails(tns)

@@ -26,18 +26,18 @@
       </div>
     </div>
     <div class="user-dashboard-menu-wrapper" *ngIf="userDashboard" @userDashboardAnimation>
-      <app-user-dashboard-menu
+      <service-desk-ui-user-dashboard-menu
         (clickedOutside)="userDashboard = false"
         (notificationReaded)="clearNotificationCount()"
         [calledElement]="parentDashboardElement"
-      ></app-user-dashboard-menu>
+      ></service-desk-ui-user-dashboard-menu>
     </div>
   </div>
 </div>
 
 <nav class="navbar navbar-expand-md">
   <div class="container">
-    <app-logo class="navbar-brand"></app-logo>
+    <service-desk-ui-logo class="navbar-brand"></service-desk-ui-logo>
     <!-- <span class="call-phone"><i class="mdi mdi-phone"></i>06</span> -->
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav ml-auto d-flex align-items-center">

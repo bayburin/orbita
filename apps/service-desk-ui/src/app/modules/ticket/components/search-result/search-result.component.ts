@@ -1,15 +1,16 @@
+import { FilterI } from './../../../../core/interfaces/filter.interface';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { takeWhile, tap } from 'rxjs/operators';
 
-import { Category } from '@modules/ticket/models/category/category.model';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { Ticket } from '@modules/ticket/models/ticket/ticket.model';
-import { FilterByClassPipe } from '@shared/pipes/filter-by-class/filter-by-class.pipe';
-import { contentBlockAnimation } from '@animations/content.animation';
+import { Category } from '../../models/category/category.model';
+import { Service } from '../../models/service/service.model';
+import { Ticket } from '../../models/ticket/ticket.model';
+import { FilterByClassPipe } from '../../../../shared/pipes/filter-by-class/filter-by-class.pipe';
+import { contentBlockAnimation } from '../../../../core/animations/content.animation';
 
 @Component({
-  selector: 'app-search-result',
+  selector: 'service-desk-ui-search-result',
   templateUrl: './search-result.component.html',
   styleUrls: ['./search-result.component.scss'],
   animations: [contentBlockAnimation],
@@ -17,7 +18,7 @@ import { contentBlockAnimation } from '@animations/content.animation';
 export class SearchResultComponent implements OnInit, OnDestroy {
   result: (Category | Service | Ticket)[] = [];
   searched = false;
-  types = [
+  types: FilterI[] = [
     {
       name: 'Все',
       id: null,

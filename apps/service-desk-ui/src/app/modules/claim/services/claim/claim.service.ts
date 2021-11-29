@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { environment } from 'environments/environment';
-import { ClaimI } from '@interfaces/claim.interface';
-import { FilterI } from '@interfaces/filter.interface';
+import { environment } from '../../../../../environments/environment';
+import { ClaimI } from '../../../../core/interfaces/claim.interface';
+import { FilterI } from '../../../../core/interfaces/filter.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,7 @@ export class ClaimService {
    *
    * @param id - номер заявки
    */
-  revoke(id: number): Observable<Object> {
+  revoke(id: number): Observable<any> {
     const uri = `${this.claimsUri}/${id}`;
 
     return this.http.delete(uri);

@@ -2,18 +2,19 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { first, switchMap, finalize } from 'rxjs/operators';
 
-import { QuestionService } from '@shared/services/question/question.service';
-import { Ticket } from '@modules/ticket/models/ticket/ticket.model';
-import { AnswerI } from '@interfaces/answer.interface';
-import { AnswerAttachmentI } from '@interfaces/answer-attachment.interface';
-import { toggleAnswer } from '@modules/ticket/animations/toggle-answer.animation';
-import { AttachmentService } from '@shared/services/attachment/attachment.service';
-import { QuestionPolicy } from '@shared/policies/question/question.policy';
-import { showFlagRight } from '@modules/ticket/animations/show-flag-right.animation';
-import { Question } from '@modules/ticket/models/question/question.model';
+import { QuestionService } from '../../../../shared/services/question/question.service';
+import { Ticket } from '../../models/ticket/ticket.model';
+import { AnswerAttachmentI } from '../../../../core/interfaces/answer-attachment.interface';
+import { toggleAnswer } from '../../animations/toggle-answer.animation';
+import { AttachmentService } from '../../../../shared/services/attachment/attachment.service';
+import { QuestionPolicy } from '../../../../shared/policies/question/question.policy';
+import { showFlagRight } from '../../animations/show-flag-right.animation';
+import { Question } from '../../models/question/question.model';
+import * as fileSaver from 'file-saver';
+import { Answer } from '../../models/answer/answer.model';
 
 @Component({
-  selector: 'app-question-page-content',
+  selector: 'service-desk-ui-question-page-content',
   templateUrl: './question-page-content.component.html',
   styleUrls: ['./question-page-content.component.scss'],
   animations: [toggleAnswer, showFlagRight],
@@ -70,18 +71,18 @@ export class QuestionPageContentComponent implements OnInit {
 
           window.open(url, '_blank');
         } else {
-          const FileSaver = require('file-saver');
+          // const FileSaver = require('file-saver');
 
-          FileSaver.saveAs(fileData, attachment.filename);
+          fileSaver.saveAs(fileData, attachment.filename);
         }
       });
   }
 
-  trackByAnswer(index, answer: AnswerI) {
+  trackByAnswer(index: number, answer: Answer) {
     return answer.id;
   }
 
-  trackByAttachment(index, attachment: AnswerAttachmentI) {
+  trackByAttachment(index: number, attachment: AnswerAttachmentI) {
     return attachment.id;
   }
 }

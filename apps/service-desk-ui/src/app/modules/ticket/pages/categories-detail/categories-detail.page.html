@@ -1,8 +1,8 @@
-<app-loading [loading]="loading" size="48px"></app-loading>
+<service-desk-ui-loading [loading]="loading" size="48px"></service-desk-ui-loading>
 <div *ngIf="category$ | async as category" @contentBlockAnimation>
   <div class="container">
     <section>
-      <app-section-header [header]="category.name"></app-section-header>
+      <service-desk-ui-section-header [header]="category.name"></service-desk-ui-section-header>
       <div class="sd-category-list">
         <ul class="sd-list-masonry sd-list-masonry-sm-6 sd-list-masonry-md-4 list-unstyled">
           <li *ngFor="let service of category.services; trackBy: trackByService">
@@ -14,20 +14,20 @@
   </div>
   <div class="jumbotron bg-render-unmasked border-top sd-p-3 mb-0">
     <div class="container">
-      <app-claims-page-content [services]="category.services"></app-claims-page-content>
+      <service-desk-ui-claims-page-content [services]="category.services"></service-desk-ui-claims-page-content>
     </div>
   </div>
   <div class="jumbotron bg-render-unmasked border-top sd-p-3 mb-0">
     <div class="container">
       <section>
-        <app-section-header header="Часто задаваемые вопросы"></app-section-header>
+        <service-desk-ui-section-header header="Часто задаваемые вопросы"></service-desk-ui-section-header>
         <div class="sd-dlist-divider-b">
-          <app-question-page-content
+          <service-desk-ui-question-page-content
             *ngFor="let ticket of category.tickets; trackBy: trackByTicket"
             [data]="ticket"
             [showFlags]="false"
           >
-          </app-question-page-content>
+          </service-desk-ui-question-page-content>
         </div>
       </section>
     </div>

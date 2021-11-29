@@ -1,6 +1,9 @@
 <div class="sd-target">
   <div *ngIf="isUserSignedIn | async">
-    <app-notify class="fixed-top on-top notification-block" (click)="$event.stopPropagation()"></app-notify>
+    <service-desk-ui-notify
+      class="fixed-top on-top notification-block"
+      (click)="$event.stopPropagation()"
+    ></service-desk-ui-notify>
     <header>
       <app-header></app-header>
     </header>

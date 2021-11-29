@@ -1,7 +1,7 @@
 <div class="row align-items-center">
   <div class="col-sm-9 col-md-10">
     <div class="row-flex-content">
-      <app-visible-flag [data]="answer"></app-visible-flag>
+      <service-desk-ui-visible-flag [data]="answer"></service-desk-ui-visible-flag>
       <span class="answer-content">
         <markdown [data]="answer.answer" ngPreserveWhitespaces></markdown>
       </span>
@@ -14,12 +14,12 @@
         <div ngbDropdownMenu class="dropdown-admin-answer">
           <div class="dropdown-item">
             <form [formGroup]="uploadForm">
-              <app-attachment
+              <service-desk-ui-attachment
                 [answer]="answer"
                 formControlName="document"
                 [progress]="progress"
                 [loading]="loading"
-              ></app-attachment>
+              ></service-desk-ui-attachment>
               <div *ngIf="form.document.errors" class="invalid-feedback d-block">
                 <span *ngIf="form.document.errors.fileNameLength"
                   >Слишком длинное имя файла (не более 120 символов)</span
@@ -43,7 +43,7 @@
               >
                 <i class="mdi mdi-download mdi-24px"></i>
               </div>
-              <app-loading [loading]="attachment.loadingDownload" size="24px"></app-loading>
+              <service-desk-ui-loading [loading]="attachment.loadingDownload" size="24px"></service-desk-ui-loading>
               <div
                 *ngIf="!attachment.loadingRemove"
                 class="pointer"
@@ -52,7 +52,7 @@
               >
                 <i class="mdi mdi-delete mdi-24px"></i>
               </div>
-              <app-loading [loading]="attachment.loadingRemove" size="24px"></app-loading>
+              <service-desk-ui-loading [loading]="attachment.loadingRemove" size="24px"></service-desk-ui-loading>
             </div>
           </div>
         </div>

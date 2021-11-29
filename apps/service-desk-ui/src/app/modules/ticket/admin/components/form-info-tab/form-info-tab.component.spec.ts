@@ -27,9 +27,9 @@ describe('FormInfoTabComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show app-common-ticket-information component', () => {
+  it('should show service-desk-ui-form-common-ticket-information component', () => {
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('app-common-ticket-information'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('service-desk-ui-form-common-ticket-information'))).toBeTruthy();
   });
 });

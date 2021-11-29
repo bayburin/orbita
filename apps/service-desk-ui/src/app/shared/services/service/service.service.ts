@@ -3,13 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, tap, shareReplay } from 'rxjs/operators';
 
-import { environment } from 'environments/environment';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { ServiceI } from '@interfaces/service.interface';
-import { ServiceFactory } from '@modules/ticket/factories/service.factory';
-import { BreadcrumbServiceI } from '@interfaces/breadcrumb-service.interface';
-import { SearchSortingPipe } from '@shared/pipes/search-sorting/search-sorting.pipe';
-import { Question } from '@modules/ticket/models/question/question.model';
+import { environment } from '../../../../environments/environment';
+import { Service } from '../../../modules/ticket/models/service/service.model';
+import { ServiceI } from '../../../core/interfaces/service.interface';
+import { ServiceFactory } from '../../../modules/ticket/factories/service.factory';
+import { BreadcrumbServiceI } from '../../../core/interfaces/breadcrumb-service.interface';
+import { SearchSortingPipe } from '../../../shared/pipes/search-sorting/search-sorting.pipe';
+import { Question } from '../../../modules/ticket/models/question/question.model';
 import { TicketDataI } from '../ticket/ticket.service';
 
 @Injectable({
@@ -17,7 +17,7 @@ import { TicketDataI } from '../ticket/ticket.service';
 })
 export class ServiceService implements BreadcrumbServiceI {
   service: Service;
-  service$ = new BehaviorSubject<Service>(this.service);
+  service$ = new BehaviorSubject<Service>(null);
   private loadServicesUri: string;
   private loadServiceUri: string;
   private returnCached: boolean;
@@ -33,7 +33,7 @@ export class ServiceService implements BreadcrumbServiceI {
     this.loadServicesUri = `${environment.serverUrl}/api/v1/services`;
 
     return this.http
-      .get(this.loadServicesUri)
+      .get<ServiceI[]>(this.loadServicesUri)
       .pipe(map((services: ServiceI[]) => services.map((service) => ServiceFactory.create(service))));
   }
 
@@ -134,7 +134,7 @@ export class ServiceService implements BreadcrumbServiceI {
   private getServiceObservable(): Observable<Service> {
     this.service$.next(null);
 
-    return this.http.get(this.loadServiceUri).pipe(
+    return this.http.get<ServiceI>(this.loadServiceUri).pipe(
       map((data: ServiceI) => {
         const service = ServiceFactory.create(data);
 

@@ -1,9 +1,9 @@
 import { Directive, HostListener } from '@angular/core';
 
-import { QuestionPageContentComponent } from '@modules/ticket/components/question-page-content/question-page-content.component';
+import { QuestionPageContentComponent } from '../../../modules/ticket/components/question-page-content/question-page-content.component';
 
 @Directive({
-  selector: '[appShowQuestionLink]',
+  selector: '[libShowQuestionLink]',
 })
 export class ShowQuestionLinkDirective {
   constructor(private component: QuestionPageContentComponent) {}

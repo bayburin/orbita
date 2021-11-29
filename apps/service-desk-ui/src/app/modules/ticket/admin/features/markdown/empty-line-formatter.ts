@@ -31,7 +31,7 @@ export class EmptyLineFormatter extends ComplexFormatter {
       selectRightOffset = -rightPart.length;
       view = textToInsert;
     } else if (ch.length !== 0 && ch !== '\n') {
-      return;
+      return '';
     }
 
     const endPosition =

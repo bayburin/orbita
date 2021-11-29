@@ -3,17 +3,17 @@ import { finalize, tap, switchMap, filter, delay, map, takeWhile, first } from '
 import { Router, NavigationStart, ActivatedRoute } from '@angular/router';
 import { Subscription, Subject, zip } from 'rxjs';
 
-import { QuestionService } from '@shared/services/question/question.service';
-import { ServiceService } from '@shared/services/service/service.service';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { contentBlockAnimation } from '@animations/content.animation';
-import { ResponsibleUserService } from '@shared/services/responsible_user/responsible-user.service';
-import { ServiceDetailComponent } from '@modules/ticket/admin/components/service-detail/service-detail.component';
+import { QuestionService } from '../../../../../shared/services/question/question.service';
+import { ServiceService } from '../../../../../shared/services/service/service.service';
+import { Service } from '../../../models/service/service.model';
+import { contentBlockAnimation } from '../../../../../core/animations/content.animation';
+import { ResponsibleUserService } from '../../../../../shared/services/responsible_user/responsible-user.service';
+import { ServiceDetailComponent } from '../../../admin/components/service-detail/service-detail.component';
 import { QuestionComponent } from '../../components/question/question.component';
-import { TicketService, TicketDataI } from '@shared/services/ticket/ticket.service';
+import { TicketService, TicketDataI } from '../../../../../shared/services/ticket/ticket.service';
 
 @Component({
-  selector: 'app-tickets-detail-page',
+  selector: 'service-desk-ui-tickets-detail-page',
   templateUrl: './tickets-detail.page.html',
   styleUrls: ['./tickets-detail.page.sass'],
   animations: [contentBlockAnimation],
@@ -23,9 +23,9 @@ export class TicketsDetailPageComponent implements OnInit, OnDestroy, AfterViewC
   service: Service;
   @ViewChild(ServiceDetailComponent) private serviceDetailComponent: ServiceDetailComponent;
   private routeSub: Subscription;
-  private questionStream = new Subject();
-  private loadedDraft = new Subject();
-  private openedQuestion = new Subject();
+  private questionStream = new Subject<QuestionComponent[]>();
+  private loadedDraft = new Subject<boolean>();
+  private openedQuestion = new Subject<QuestionComponent>();
   private ticketId: number;
   private questionClosed = true;
 
@@ -80,9 +80,18 @@ export class TicketsDetailPageComponent implements OnInit, OnDestroy, AfterViewC
           this.loadedDraft.next(true);
         }),
         switchMap((data) => {
-          const questionTns = data.questions.flatMap((question) => question.getResponsibleUsersTn());
+          // FIXME: Было
+          // const questionTns = data.questions.flatMap((question) => question.getResponsibleUsersTn());
+          // FIXME: Стало
+          const questionTns = data.questions
+            .map((question) => question.getResponsibleUsersTn())
+            .reduce((acc, el) => {
+              acc.push(...el);
+
+              return acc;
+            }, []);
           // const caseTns = data.claimForms.flatMap(app => app.getResponsibleUsersTn());
-          const caseTns = [];
+          const caseTns: any[] = [];
           const tns = [...questionTns, ...caseTns];
 
           return this.responsibleUserService.loadDetails(tns).pipe(
@@ -119,7 +128,7 @@ export class TicketsDetailPageComponent implements OnInit, OnDestroy, AfterViewC
   private openQuestionStream(): void {
     this.questionStream
       .pipe(
-        filter((componentArr: []) => componentArr.length !== 0),
+        filter((componentArr) => componentArr.length !== 0),
         delay(300),
         takeWhile(() => this.questionClosed),
         map((componentArr) => this.openSelectedQuestion(componentArr))

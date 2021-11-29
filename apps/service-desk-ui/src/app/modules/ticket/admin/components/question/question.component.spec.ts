@@ -98,8 +98,8 @@ describe('QuestionComponent', () => {
     expect(component.question).toEqual(question.correction);
   });
 
-  it('should show app-question-flags component', () => {
-    expect(fixture.debugElement.query(By.css('app-question-flags'))).toBeTruthy();
+  it('should show service-desk-ui-question-flags component', () => {
+    expect(fixture.debugElement.query(By.css('service-desk-ui-question-flags'))).toBeTruthy();
   });
 
   describe('#toggleQuestion', () => {
@@ -277,19 +277,21 @@ describe('QuestionComponent', () => {
       });
     });
 
-    it('should show app-answer-component on each answer', () => {
+    it('should show service-desk-ui-answer-component on each answer', () => {
       question.open = true;
       fixture.detectChanges();
 
-      expect(fixture.debugElement.nativeElement.querySelectorAll('app-answer').length).toEqual(question.answers.length);
+      expect(fixture.debugElement.nativeElement.querySelectorAll('service-desk-ui-answer').length).toEqual(
+        question.answers.length
+      );
     });
   });
 
-  it('should show app-responsible-user-details component', () => {
+  it('should show service-desk-ui-responsible-user-details component', () => {
     component.question = question;
     component.toggleQuestion();
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('app-responsible-user-details'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('service-desk-ui-responsible-user-details'))).toBeTruthy();
   });
 });

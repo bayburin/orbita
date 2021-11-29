@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { DashboardI } from '@interfaces/dashboard.interface';
-import { environment } from 'environments/environment';
-import { CategoryFactory } from '@modules/ticket/factories/category.factory';
-import { ServiceFactory } from '@modules/ticket/factories/service.factory';
+import { DashboardI } from '../../../../core/interfaces/dashboard.interface';
+import { environment } from '../../../../../environments/environment';
+import { CategoryFactory } from '../../../../modules/ticket/factories/category.factory';
+import { ServiceFactory } from '../../../../modules/ticket/factories/service.factory';
 
 @Injectable({
   providedIn: 'root',

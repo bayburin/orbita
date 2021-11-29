@@ -1,4 +1,4 @@
-import { TicketTypes } from '@modules/ticket/models/ticket/ticket.model';
+import { TicketTypes } from '../../models/ticket/ticket.model';
 import { Ticket } from '../ticket/ticket.model';
 
 export class ClaimForm extends Ticket {
@@ -14,6 +14,6 @@ export class ClaimForm extends Ticket {
   }
 
   pageComponent(): string {
-    return 'app-claim-form-page-content';
+    return 'service-desk-ui-claim-form-page-content';
   }
 }

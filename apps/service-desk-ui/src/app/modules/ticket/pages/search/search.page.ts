@@ -3,20 +3,23 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { mergeMap, finalize, filter, tap, share, switchMap, takeWhile, map } from 'rxjs/operators';
 
-import { ServiceTemplateI } from '@interfaces/service-template.interface';
-import { SearchService } from '@modules/ticket/services/search/search.service';
-import { ResponsibleUserService } from '@shared/services/responsible_user/responsible-user.service';
-import { ResponsibleUserI } from '@interfaces/responsible-user.interface';
-import { UserPolicy } from '@shared/policies/user/user.policy';
+import { ServiceTemplateI } from '../../../../core/interfaces/service-template.interface';
+import { SearchService } from '../../services/search/search.service';
+import { ResponsibleUserService } from '../../../../shared/services/responsible_user/responsible-user.service';
+import { ResponsibleUserI } from '../../../../core/interfaces/responsible-user.interface';
+import { UserPolicy } from '../../../../shared/policies/user/user.policy';
 
 @Component({
-  selector: 'app-search-page',
+  selector: 'service-desk-ui-search-page',
   templateUrl: './search.page.html',
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPageComponent implements OnInit, OnDestroy {
   searchTerm: string;
-  searchResult: Observable<ServiceTemplateI[]>;
+  // Было
+  // searchResult: Observable<ServiceTemplateI[]>;
+  // Стало
+  searchResult: Observable<any[]>;
   loading = false;
   alive = true;
   data: any[];
@@ -62,8 +65,16 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   private getIds(data: any[]): number[] {
-    return data.flatMap((template) => {
-      return template.responsibleUsers ? template.responsibleUsers.map((user: ResponsibleUserI) => user.tn) : [];
-    });
+    // return data.flatMap((template) => {
+    //   return template.responsibleUsers ? template.responsibleUsers.map((user: ResponsibleUserI) => user.tn) : [];
+    // });
+
+    return data
+      .map((el) => (el.responsibleUsers ? el.responsibleUsers.map((user: ResponsibleUserI) => user.tn) : []))
+      .reduce((acc, el) => {
+        acc.push(...el);
+
+        return acc;
+      }, []);
   }
 }

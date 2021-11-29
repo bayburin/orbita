@@ -3,12 +3,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 
-import { APP_CONFIG } from '@config/app.config';
-import { AppConfigI } from '@interfaces/app-config.interface';
-import { NotificationI } from '@interfaces/notification.interface';
-import { environment } from 'environments/environment';
-import { Notify } from '@shared/models/notify/notify.model';
-import { NotifyFactory } from '@shared/factories/notify.factory';
+import { APP_CONFIG } from '../../../config/app.config';
+import { AppConfigI } from '../../../core/interfaces/app-config.interface';
+import { NotificationI } from '../../../core/interfaces/notification.interface';
+import { environment } from '../../../../environments/environment';
+import { Notify } from '../../../shared/models/notify/notify.model';
+import { NotifyFactory } from '../../../shared/factories/notify.factory';
 
 @Injectable({
   providedIn: 'root',
@@ -62,7 +62,7 @@ export class NotificationService {
     const httpParams = new HttpParams().append('limit', `${this.notificationLimit}`);
 
     return this.http
-      .get(notificationsUrl, { params: httpParams })
+      .get<NotificationI[]>(notificationsUrl, { params: httpParams })
       .pipe(map((notifications: NotificationI[]) => notifications.map((notify) => NotifyFactory.create(notify))));
   }
 
@@ -73,7 +73,7 @@ export class NotificationService {
     const notificationsUrl = `${environment.serverUrl}/api/v1/users/new_notifications`;
     const httpParams = new HttpParams().append('limit', `${this.notificationLimit}`);
 
-    return this.http.get(notificationsUrl, { params: httpParams }).pipe(
+    return this.http.get<NotificationI[]>(notificationsUrl, { params: httpParams }).pipe(
       tap(() => (this.notificationCount.value = 0)),
       map((notifications: NotificationI[]) => notifications.map((notify) => NotifyFactory.create(notify)))
     );

@@ -1,16 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { Category } from '@modules/ticket/models/category/category.model';
+import { Category } from '../../models/category/category.model';
 
 @Component({
-  selector: 'app-category-header',
+  selector: 'service-desk-ui-category-header',
   templateUrl: './category-header.component.html',
   styleUrls: ['./category-header.component.scss'],
 })
-export class CategoryHeaderComponent implements OnInit {
+export class CategoryHeaderComponent {
   @Input() category: Category;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

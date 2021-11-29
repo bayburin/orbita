@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
-import { AppConfigI } from '@interfaces/app-config.interface';
+import { AppConfigI } from '../core/interfaces/app-config.interface';
 
-export let APP_CONFIG = new InjectionToken<AppConfigI>('config of app');
+export const APP_CONFIG = new InjectionToken<AppConfigI>('config of app');
 
 export const AppConfig: AppConfigI = {
   currentUserStorage: 'currentUser',

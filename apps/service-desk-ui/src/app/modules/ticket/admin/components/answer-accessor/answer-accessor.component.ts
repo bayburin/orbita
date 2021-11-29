@@ -1,13 +1,13 @@
 import { Component, forwardRef, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { MarkdownText } from '@modules/ticket/admin/features/markdown/markdown-text';
-import { ComplexTemplateFormatter } from '@modules/ticket/admin/features/markdown/complex-template-formatter';
-import { SimpleTextFormatter } from '@modules/ticket/admin/features/markdown/simple-text-formatter';
-import { SimpleTemplateFormatter } from '@modules/ticket/admin/features/markdown/simple-template-formatter';
+import { MarkdownText } from '../../../admin/features/markdown/markdown-text';
+import { ComplexTemplateFormatter } from '../../../admin/features/markdown/complex-template-formatter';
+import { SimpleTextFormatter } from '../../../admin/features/markdown/simple-text-formatter';
+import { SimpleTemplateFormatter } from '../../../admin/features/markdown/simple-template-formatter';
 
 @Component({
-  selector: 'app-answer-accessor',
+  selector: 'service-desk-ui-answer-accessor',
   templateUrl: './answer-accessor.component.html',
   styleUrls: ['./answer-accessor.component.sass'],
   providers: [

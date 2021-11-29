@@ -1,13 +1,13 @@
 import { PublishedState } from './states/published.state';
 import { DraftState } from './states/draft.state';
-import { User } from '@shared/models/user/user.model';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { CommonServiceI } from '@interfaces/common-service.interface';
-import { ServiceFactory } from '@modules/ticket/factories/service.factory';
-import { ResponsibleUserI } from '@interfaces/responsible-user.interface';
-import { TagI } from '@interfaces/tag.interface';
+import { User } from '../../../../shared/models/user/user.model';
+import { Service } from '../../models/service/service.model';
+import { CommonServiceI } from '../../../../core/interfaces/common-service.interface';
+import { ServiceFactory } from '../../factories/service.factory';
+import { ResponsibleUserI } from '../../../../core/interfaces/responsible-user.interface';
+import { TagI } from '../../../../core/interfaces/tag.interface';
 import { AbstractState } from './states/abstract.state';
-import { ResponsibleUserDetailsI } from '@interfaces/responsible_user_details.interface';
+import { ResponsibleUserDetailsI } from '../../../../core/interfaces/responsible_user_details.interface';
 
 export const enum TicketTypes {
   QUESTION = 'Question',

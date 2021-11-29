@@ -32,7 +32,7 @@ describe('UnauthorizeContentComponent', () => {
 });
 
 @Component({
-  template: '<app-unauthorize-content><span>testing</span></app-unauthorize-content>',
+  template: '<service-desk-ui-unauthorize-content><span>testing</span></service-desk-ui-unauthorize-content>',
 })
 export class ContentProjectionTesterComponent {}
 

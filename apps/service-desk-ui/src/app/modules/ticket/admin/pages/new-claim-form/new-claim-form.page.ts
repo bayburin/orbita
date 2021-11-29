@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { ServiceService } from '@shared/services/service/service.service';
-import { Service } from '@modules/ticket/models/service/service.model';
+import { ServiceService } from '../../../../../shared/services/service/service.service';
+import { Service } from '../../../models/service/service.model';
 
 @Component({
-  selector: 'app-new-claim-form-page',
+  selector: 'service-desk-ui-new-claim-form-page',
   templateUrl: './new-claim-form.page.html',
   styleUrls: ['./new-claim-form.page.sass'],
 })

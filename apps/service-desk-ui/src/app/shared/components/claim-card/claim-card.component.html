@@ -26,7 +26,7 @@
         *ngIf="claim.status_id == 3"
         [(rate)]="claim.rating"
         [readonly]="!isAllowedToVote()"
-        max="5"
+        [max]="5"
         (rateChange)="vote()"
       >
         <ng-template let-fill="fill" let-index="index">

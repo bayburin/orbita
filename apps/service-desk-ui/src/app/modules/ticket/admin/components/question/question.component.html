@@ -5,10 +5,10 @@
         class="mdi mdi-24px"
         [ngClass]="question.open ? 'mdi-arrow-up-drop-circle-outline' : 'mdi-arrow-down-drop-circle-outline'"
       ></i>
-      <app-visible-flag [data]="question"></app-visible-flag>
+      <service-desk-ui-visible-flag [data]="question"></service-desk-ui-visible-flag>
       <div class="question-block">
         <div class="question-block-content">
-          <app-question-flags [question]="question"></app-question-flags>
+          <service-desk-ui-question-flags [question]="question"></service-desk-ui-question-flags>
           <span [innerHtml]="question.name" class="flex-grow-1"></span>
         </div>
         <div class="mt-1" *ngIf="question.tags.length">
@@ -37,13 +37,13 @@
             </button>
             <button
               ngbDropdownItem
-              *appAuthorize="[question, 'publish']"
+              *libAuthorize="[question, 'publish']"
               (click)="publishQuestion()"
               class="align-button-content"
             >
               <i class="mdi mdi-checkbox-marked-circle-outline mdi-18px"></i>Опубликовать
             </button>
-            <div *appAuthorize="[question, 'destroy']">
+            <div *libAuthorize="[question, 'destroy']">
               <button
                 ngbDropdownItem
                 class="align-button-content"
@@ -53,7 +53,7 @@
                 <i class="mdi mdi-delete mdi-18px"></i>Удалить вопрос
               </button>
             </div>
-            <div *appAuthorize="[question, 'destroy']">
+            <div *libAuthorize="[question, 'destroy']">
               <button
                 ngbDropdownItem
                 class="align-button-content"
@@ -70,14 +70,14 @@
   </div>
 
   <div *ngIf="question.open" class="sd-list-answer" @ToggleAnswer>
-    <app-responsible-user-details
+    <service-desk-ui-responsible-user-details
       class="responsibles-block"
       [users]="question.responsibleUsers"
       *ngIf="question.responsibleUsers.length"
     >
-    </app-responsible-user-details>
+    </service-desk-ui-responsible-user-details>
     <div *ngFor="let answer of question.answers; trackBy: trackByAnswer" class="answer-block">
-      <app-answer [answer]="answer"></app-answer>
+      <service-desk-ui-answer [answer]="answer"></service-desk-ui-answer>
     </div>
   </div>
 </div>

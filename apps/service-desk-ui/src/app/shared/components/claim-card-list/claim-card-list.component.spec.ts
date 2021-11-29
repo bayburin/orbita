@@ -74,7 +74,9 @@ describe('ClaimCardListComponent', () => {
       component.ngOnChanges();
       fixture.detectChanges();
 
-      expect(fixture.debugElement.nativeElement.querySelectorAll('app-claim-card').length).toEqual(claims.length);
+      expect(fixture.debugElement.nativeElement.querySelectorAll('service-desk-ui-claim-card').length).toEqual(
+        claims.length
+      );
     });
   });
 });

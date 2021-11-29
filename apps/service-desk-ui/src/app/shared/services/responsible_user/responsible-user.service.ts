@@ -3,10 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { environment } from 'environments/environment';
-import { ResponsibleUserDetailsI } from '@interfaces/responsible_user_details.interface';
-import { Ticket } from '@modules/ticket/models/ticket/ticket.model';
-import { Service } from '@modules/ticket/models/service/service.model';
+import { environment } from '../../../../environments/environment';
+import { ResponsibleUserDetailsI } from '../../../core/interfaces/responsible_user_details.interface';
 
 @Injectable({
   providedIn: 'root',

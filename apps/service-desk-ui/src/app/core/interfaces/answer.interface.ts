@@ -1,4 +1,4 @@
-import { AnswerAttachmentI } from '@interfaces/answer-attachment.interface';
+import { AnswerAttachmentI } from './answer-attachment.interface';
 import { QuestionI } from './question.interface';
 
 export interface AnswerI {

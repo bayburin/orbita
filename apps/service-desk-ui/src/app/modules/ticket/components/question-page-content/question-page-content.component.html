@@ -1,4 +1,4 @@
-<div class="sd-list-item" [ngClass]="{ 'active-item': data.open }" [id]="data.identity" appShowQuestionLink>
+<div class="sd-list-item" [ngClass]="{ 'active-item': data.open }" [id]="data.identity" libShowQuestionLink>
   <div class="sd-list-question">
     <div class="sd-list-question-group" (click)="toggleQuestion()">
       <i
@@ -8,7 +8,7 @@
       ></i>
       <div class="question-block">
         <div class="row-flex-content">
-          <app-visible-flag [data]="data" *ngIf="showFlags"></app-visible-flag>
+          <service-desk-ui-visible-flag [data]="data" *ngIf="showFlags"></service-desk-ui-visible-flag>
           <span [innerHtml]="data.name"></span>
           <span class="badge bg-yellow-200" *ngIf="standaloneLink">
             <span class="additional-text">{{ data.service.name }}</span>
@@ -21,22 +21,22 @@
         ngbTooltip="Скопировать ссылку на вопрос"
         [@ShowFlagRight]="linkAnimation"
         container="body"
-        appGetQuestionLink
+        libGetQuestionLink
       ></i>
     </div>
   </div>
   <div *ngIf="data.open" class="sd-list-answer" @ToggleAnswer>
-    <app-responsible-user-details
+    <service-desk-ui-responsible-user-details
       class="responsibles-block"
       [users]="data.responsibleUsers"
       *ngIf="data.responsibleUsers.length"
     >
-    </app-responsible-user-details>
+    </service-desk-ui-responsible-user-details>
     <div *ngFor="let answer of data.answers; trackBy: trackByAnswer" class="answer-block">
       <div class="row align-items-center">
         <div class="col-sm-9 col-md-10">
           <div class="row-flex-content">
-            <app-visible-flag [data]="answer" *ngIf="showFlags"></app-visible-flag>
+            <service-desk-ui-visible-flag [data]="answer" *ngIf="showFlags"></service-desk-ui-visible-flag>
             <span class="answer-content">
               <markdown [data]="answer.answer" ngPreserveWhitespaces></markdown>
             </span>
@@ -62,7 +62,10 @@
                       >
                         <i class="mdi mdi-download mdi-24px"></i>
                       </div>
-                      <app-loading [loading]="attachment.loadingDownload" size="24px"></app-loading>
+                      <service-desk-ui-loading
+                        [loading]="attachment.loadingDownload"
+                        size="24px"
+                      ></service-desk-ui-loading>
                     </div>
                   </div>
                 </div>
@@ -72,11 +75,15 @@
             <div *ngIf="answer.attachments.length <= 3" class="row-flex-content">
               <div *ngFor="let attachment of answer.attachments; trackBy: trackByAttachment">
                 <ng-template #filename>{{ attachment.filename }}</ng-template>
-                <app-loading [loading]="attachment.loadingDownload" size="24px" class="text-secondary"></app-loading>
+                <service-desk-ui-loading
+                  [loading]="attachment.loadingDownload"
+                  size="24px"
+                  class="text-secondary"
+                ></service-desk-ui-loading>
                 <div id="attachmentFile" *ngIf="!attachment.loadingDownload" [ngbTooltip]="filename" container="body">
                   <i
                     class="mdi mdi-24px pointer"
-                    [appFileIconChange]="attachment.filename"
+                    [libFileIconChange]="attachment.filename"
                     (click)="downloadAttachment(attachment)"
                   ></i>
                 </div>

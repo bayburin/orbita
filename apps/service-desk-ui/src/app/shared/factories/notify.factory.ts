@@ -1,4 +1,4 @@
-import { Notify, NotifyTypes } from '@shared/models/notify/notify.model';
+import { Notify, NotifyTypes } from '../../shared/models/notify/notify.model';
 
 export class NotifyFactory {
   static create(params = {}): Notify {

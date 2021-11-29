@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from '@guards/auth/auth.guard';
-import { ResponsibleGuard } from '@guards/responsible/responsible.guard';
+import { AuthGuard } from '../../core/guards/auth/auth.guard';
+import { ResponsibleGuard } from '../../core/guards/responsible/responsible.guard';
 import { DashboardPageComponent } from './pages/dashboard/dashboard.page';
 import { CategoriesPageComponent } from './pages/categories/categories.page';
 import { CategoriesOverviewPageComponent } from './pages/categories-overwiev/categories-overview.page';
 import { SearchPageComponent } from './pages/search/search.page';
 import { CategoriesDetailPageComponent } from './pages/categories-detail/categories-detail.page';
-import { CategoryService } from '@shared/services/category/category.service';
+import { CategoryService } from '../../shared/services/category/category.service';
 import { ServicesDetailPageComponent } from './pages/services-detail/services-detail.page';
-import { ServiceService } from '@shared/services/service/service.service';
+import { ServiceService } from '../../shared/services/service/service.service';
 import { MarkdownHelpPageComponent } from './pages/markdown-help/markdown-help.page';
 import { ServiceRedirectionComponent } from './components/service-redirection/service-redirection.component';
 

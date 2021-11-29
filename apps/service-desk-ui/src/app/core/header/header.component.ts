@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Channel } from 'angular2-actioncable';
 
-import { UserService } from '@shared/services/user/user.service';
-import { StreamService } from '@shared/services/stream/stream.service';
-import { NotificationService } from '@shared/services/notification/notification.service';
-import { userDashboardAnimation } from '@animations/user-dashboard.animation';
-import { User } from '@shared/models/user/user.model';
+import { UserService } from '../../shared/services/user/user.service';
+import { StreamService } from '../../shared/services/stream/stream.service';
+import { NotificationService } from '../../shared/services/notification/notification.service';
+import { userDashboardAnimation } from '../animations/user-dashboard.animation';
+import { User } from '../../shared/models/user/user.model';
 
 @Component({
   selector: 'app-header',

@@ -1,7 +1,7 @@
-import { Category } from '@modules/ticket/models/category/category.model';
+import { Category } from '../models/category/category.model';
 
 export class CategoryFactory {
-  static create(params) {
+  static create(params: any) {
     return new Category(params);
   }
 }

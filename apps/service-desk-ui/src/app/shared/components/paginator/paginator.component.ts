@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-paginator',
+  selector: 'service-desk-ui-paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
 })
-export class PaginatorComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class PaginatorComponent {}

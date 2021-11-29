@@ -1,27 +1,23 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { Category } from '@modules/ticket/models/category/category.model';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { contentListAnimation } from '@animations/content.animation';
+import { Category } from '../../models/category/category.model';
+import { Service } from '../../models/service/service.model';
+import { contentListAnimation } from '../../../../core/animations/content.animation';
 
 @Component({
-  selector: 'app-category-list',
+  selector: 'service-desk-ui-category-list',
   templateUrl: './category-list.component.html',
   styleUrls: ['./category-list.component.scss'],
   animations: [contentListAnimation],
 })
-export class CategoryListComponent implements OnInit {
+export class CategoryListComponent {
   @Input() categories: Category[] = [];
 
-  constructor() {}
-
-  ngOnInit() {}
-
-  trackByCategory(index, category: Category) {
+  trackByCategory(index: number, category: Category) {
     return category.id;
   }
 
-  trackByService(index, service: Service) {
+  trackByService(index: number, service: Service) {
     return service.id;
   }
 }

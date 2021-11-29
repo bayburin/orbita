@@ -3,13 +3,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { TicketTypes } from '@modules/ticket/models/ticket/ticket.model';
-import { environment } from 'environments/environment';
-import { TicketFactory } from '@modules/ticket/factories/tickets/ticket.factory';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { ResponsibleUserI } from '@interfaces/responsible-user.interface';
-import { QuestionI } from '@interfaces/question.interface';
-import { Question } from '@modules/ticket/models/question/question.model';
+import { TicketTypes } from '../../../modules/ticket/models/ticket/ticket.model';
+import { environment } from '../../../../environments/environment';
+import { TicketFactory } from '../../../modules/ticket/factories/tickets/ticket.factory';
+import { Service } from '../../../modules/ticket/models/service/service.model';
+import { ResponsibleUserI } from '../../../core/interfaces/responsible-user.interface';
+import { QuestionI } from '../../../core/interfaces/question.interface';
+import { Question } from '../../../modules/ticket/models/question/question.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,7 +27,7 @@ export class QuestionService {
   loadDraftQuestionsFor(service: Service): Observable<Question[]> {
     const questionsUri = this.apiBaseUri(service.id);
 
-    return this.http.get(questionsUri).pipe(
+    return this.http.get<QuestionI[]>(questionsUri).pipe(
       map((questions: QuestionI[]) =>
         questions.map((question) => TicketFactory.create(TicketTypes.QUESTION, question))
       ),
@@ -64,7 +64,7 @@ export class QuestionService {
     const questionUri = this.apiBaseUri(questionI.ticket.service_id);
 
     return this.http
-      .post(questionUri, { question: questionI })
+      .post<QuestionI>(questionUri, { question: questionI })
       .pipe(map((question: QuestionI) => TicketFactory.create(TicketTypes.QUESTION, question)));
   }
 
@@ -78,7 +78,7 @@ export class QuestionService {
     const questionUri = `${this.apiBaseUri(serviceId)}/${questionId}`;
 
     return this.http
-      .get(questionUri)
+      .get<QuestionI>(questionUri)
       .pipe(map((question: QuestionI) => TicketFactory.create(TicketTypes.QUESTION, question)));
   }
 
@@ -99,7 +99,7 @@ export class QuestionService {
     });
 
     return this.http
-      .put(questionUri, { question: data })
+      .put<QuestionI>(questionUri, { question: data })
       .pipe(map((questionI: QuestionI) => TicketFactory.create(TicketTypes.QUESTION, questionI)));
   }
 
@@ -113,7 +113,7 @@ export class QuestionService {
     const httpParams = new HttpParams().append('ids', `${[questionIds]}`);
 
     return this.http
-      .post(questionUri, {}, { params: httpParams })
+      .post<QuestionI[]>(questionUri, {}, { params: httpParams })
       .pipe(
         map((questionsI: QuestionI[]) =>
           questionsI.map((question) => TicketFactory.create(TicketTypes.QUESTION, question))

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActionCableService, Cable } from 'angular2-actioncable';
 
-import { environment } from 'environments/environment';
-import { AuthService } from '@auth/auth.service';
+import { environment } from '../../../../environments/environment';
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',

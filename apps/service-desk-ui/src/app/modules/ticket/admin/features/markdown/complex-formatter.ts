@@ -18,6 +18,6 @@ export class ComplexFormatter extends ComplexFormatterT {
   setFormat(nativeElement: any, template: string, attributes?: MarkdownFormatAttributesI): string {
     console.log('Not implemented');
 
-    return;
+    return '';
   }
 }

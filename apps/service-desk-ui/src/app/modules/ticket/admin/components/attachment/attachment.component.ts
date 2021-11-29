@@ -11,10 +11,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl, FormControl } from '@angular/forms';
 
-import { Answer } from '@modules/ticket/models/answer/answer.model';
+import { Answer } from '../../../models/answer/answer.model';
 
 @Component({
-  selector: 'app-attachment',
+  selector: 'service-desk-ui-attachment',
   templateUrl: './attachment.component.html',
   styleUrls: ['./attachment.component.sass'],
   providers: [
@@ -42,7 +42,7 @@ export class AttachmentComponent implements ControlValueAccessor, AfterViewInit,
   /**
    * Событие выбора файла
    */
-  onChangeAttachment(event): void {
+  onChangeAttachment(event: any): void {
     if (event.target.files.length > 0) {
       this.file = event.target.files[0];
       this.onChange(this.file);

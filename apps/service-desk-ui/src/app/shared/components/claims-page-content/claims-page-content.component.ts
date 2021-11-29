@@ -1,14 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 
-import { ClaimService } from '@modules/claim/services/claim/claim.service';
-import { ClaimI } from '@interfaces/claim.interface';
-import { FilterI } from '@interfaces/filter.interface';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { contentBlockAnimation } from '@animations/content.animation';
+import { ClaimService } from '../../../modules/claim/services/claim/claim.service';
+import { ClaimI } from '../../../core/interfaces/claim.interface';
+import { FilterI } from '../../../core/interfaces/filter.interface';
+import { Service } from '../../../modules/ticket/models/service/service.model';
+import { contentBlockAnimation } from '../../../core/animations/content.animation';
 
 @Component({
-  selector: 'app-claims-page-content',
+  selector: 'service-desk-ui-claims-page-content',
   templateUrl: './claims-page-content.component.html',
   styleUrls: ['./claims-page-content.component.scss'],
   animations: [contentBlockAnimation],

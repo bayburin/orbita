@@ -81,16 +81,16 @@ describe('SearchResultComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should show app-section-header', () => {
-      expect(fixture.debugElement.nativeElement.querySelector('app-section-header')).toBeTruthy();
+    it('should show service-desk-ui-section-header', () => {
+      expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-section-header')).toBeTruthy();
     });
 
-    it('should show app-filters component', () => {
-      expect(fixture.debugElement.nativeElement.querySelector('app-filters')).toBeTruthy();
+    it('should show service-desk-ui-filters component', () => {
+      expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-filters')).toBeTruthy();
     });
 
-    it('should show app-dynamic-template-content component', () => {
-      expect(fixture.debugElement.nativeElement.querySelector('app-dynamic-template-content')).toBeTruthy();
+    it('should show service-desk-ui-dynamic-template-content component', () => {
+      expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-dynamic-template-content')).toBeTruthy();
     });
   });
 });

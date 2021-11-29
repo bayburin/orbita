@@ -31,20 +31,20 @@ describe('FreeClaimPageComponent', () => {
   });
 
   it('should show header', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-section-header')).toBeTruthy();
-    expect(fixture.debugElement.query(By.css('app-section-header')).nativeElement.getAttribute('header')).toEqual(
-      'Запрос в техподдержку'
-    );
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-section-header')).toBeTruthy();
+    expect(
+      fixture.debugElement.query(By.css('service-desk-ui-section-header')).nativeElement.getAttribute('header')
+    ).toEqual('Запрос в техподдержку');
   });
 
-  it('should show app-free-claim-form component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-free-claim-form')).toBeTruthy();
+  it('should show service-desk-ui-free-claim-form component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-free-claim-form')).toBeTruthy();
   });
 
   it('should set "new" value to the formType property', () => {
-    expect(fixture.debugElement.query(By.css('app-free-claim-form')).nativeElement.getAttribute('formType')).toEqual(
-      'new'
-    );
+    expect(
+      fixture.debugElement.query(By.css('service-desk-ui-free-claim-form')).nativeElement.getAttribute('formType')
+    ).toEqual('new');
   });
 
   it('should redirect to claims page', inject([Router], (router: Router) => {

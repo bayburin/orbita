@@ -10,7 +10,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "orbita",
+            "prefix": "lib",
             "style": "camelCase"
           }
         ],
@@ -18,7 +18,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "orbita",
+            "prefix": ["lib", "service-desk-ui"],
             "style": "kebab-case"
           }
         ]

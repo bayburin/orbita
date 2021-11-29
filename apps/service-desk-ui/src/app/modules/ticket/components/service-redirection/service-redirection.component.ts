@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { finalize, filter, first, map, delay, tap, switchMap, catchError } from 'rxjs/operators';
 
-import { ServiceService } from '@shared/services/service/service.service';
+import { ServiceService } from '../../../../shared/services/service/service.service';
 
 @Component({
-  selector: 'app-service-redirection',
+  selector: 'service-desk-ui-service-redirection',
   templateUrl: './service-redirection.component.html',
   styleUrls: ['./service-redirection.component.sass'],
 })

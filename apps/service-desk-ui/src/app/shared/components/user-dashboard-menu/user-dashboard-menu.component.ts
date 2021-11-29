@@ -11,16 +11,16 @@ import {
 } from '@angular/core';
 import { finalize, tap } from 'rxjs/operators';
 
-import { AppConfigI } from '@interfaces/app-config.interface';
-import { APP_CONFIG } from '@config/app.config';
-import { NotificationService } from '@shared/services/notification/notification.service';
-import { contentBlockAnimation } from '@animations/content.animation';
-import { notifyAnimation } from '@animations/notify.animation';
-import { colorAnimation } from '@animations/color.animation';
-import { Notify } from '@shared/models/notify/notify.model';
+import { AppConfigI } from '../../../core/interfaces/app-config.interface';
+import { APP_CONFIG } from '../../../config/app.config';
+import { NotificationService } from '../../services/notification/notification.service';
+import { contentBlockAnimation } from '../../../core/animations/content.animation';
+import { notifyAnimation } from '../../../core/animations/notify.animation';
+import { colorAnimation } from '../../../core/animations/color.animation';
+import { Notify } from '../../models/notify/notify.model';
 
 @Component({
-  selector: 'app-user-dashboard-menu',
+  selector: 'service-desk-ui-user-dashboard-menu',
   templateUrl: './user-dashboard-menu.component.html',
   styleUrls: ['./user-dashboard-menu.component.sass'],
   animations: [notifyAnimation, contentBlockAnimation, colorAnimation],
@@ -49,13 +49,13 @@ export class UserDashboardMenuComponent implements OnInit, OnDestroy {
     this.notificationCount = this.notifyService.notificationCount;
   }
 
-  @HostListener('document:click', ['$event.target']) onClickOutside(target) {
+  @HostListener('document:click', ['$event.target']) onClickOutside(target: any) {
     if (!this.elementRef.nativeElement.contains(target) && !this.calledElement.contains(target)) {
       this.clickedOutside.next(true);
     }
   }
 
-  trackByNotification(index, notification: Notify) {
+  trackByNotification(index: number, notification: Notify) {
     return notification.id;
   }
 

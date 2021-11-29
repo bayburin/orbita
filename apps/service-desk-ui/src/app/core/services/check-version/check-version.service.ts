@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { first } from 'rxjs/operators';
 
-import { NotificationService } from '@shared/services/notification/notification.service';
+import { NotificationService } from '../../../shared/services/notification/notification.service';
 
 @Injectable({
   providedIn: 'root',

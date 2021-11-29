@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { StateGuard } from '@guards/state/state.guard';
+import { StateGuard } from '../../core/guards/state/state.guard';
 import { AuthorizePageComponent } from './pages/authorize/authorize.page';
 import { LogoutPageComponent } from './pages/logout/logout.page';
 import { AuthorizeForbiddenPageComponent } from './pages/authorize-forbidden/authorize-forbidden.page';

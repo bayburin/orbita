@@ -3,9 +3,9 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs';
 import { map, switchMap, filter } from 'rxjs/operators';
 
-import { AuthService } from '@auth/auth.service';
-import { UserService } from '@shared/services/user/user.service';
-import { NotificationService } from '@shared/services/notification/notification.service';
+import { AuthService } from '../../auth/auth.service';
+import { UserService } from '../../../shared/services/user/user.service';
+import { NotificationService } from '../../../shared/services/notification/notification.service';
 
 @Injectable({
   providedIn: 'root',

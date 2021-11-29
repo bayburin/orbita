@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AuthService } from '@auth/auth.service';
+import { AuthService } from '../../../../core/auth/auth.service';
 
 @Component({
-  selector: 'app-logout-page',
+  selector: 'service-desk-ui-logout-page',
   templateUrl: './logout.page.html',
   styleUrls: ['./logout.page.scss'],
 })

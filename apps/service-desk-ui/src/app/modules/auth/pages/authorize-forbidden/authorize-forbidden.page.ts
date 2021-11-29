@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-authorize-forbidden-page',
+  selector: 'service-desk-ui-authorize-forbidden-page',
   templateUrl: './authorize-forbidden.page.html',
   styleUrls: ['./authorize-forbidden.page.scss'],
 })
-export class AuthorizeForbiddenPageComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class AuthorizeForbiddenPageComponent {}

@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common
 import { ActionCableService } from 'angular2-actioncable';
 import { MarkdownModule } from 'ngx-markdown';
 
-import { SharedModule } from '@shared/shared.module';
+import { SharedModule } from './shared/shared.module';
 
 import { APP_CONFIG, AppConfig } from './config/app.config';
 import { AppRoutingModule } from './app-routing.module';
@@ -26,7 +26,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { BreadcrumbComponent } from './core/breadcrumb/breadcrumb.component';
-import { StreamService } from '@shared/services/stream/stream.service';
+import { StreamService } from './shared/services/stream/stream.service';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent, BreadcrumbComponent],

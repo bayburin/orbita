@@ -1,36 +1,25 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewChildren,
-  QueryList,
-  OnChanges,
-  SimpleChanges,
-  SimpleChange,
-} from '@angular/core';
+import { Component, Input, ViewChildren, QueryList, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
 
-import { Service } from '@modules/ticket/models/service/service.model';
+import { Service } from '../../models/service/service.model';
 // import { DynamicTemplateContentComponent } from '@modules/ticket/components/dynamic-template-content/dynamic-template-content.component';
-import { contentBlockAnimation } from '@animations/content.animation';
-import { ServicePolicy } from '@shared/policies/service/service.policy';
-import { Question } from '@modules/ticket/models/question/question.model';
+import { contentBlockAnimation } from '../../../../core/animations/content.animation';
+import { ServicePolicy } from '../../../../shared/policies/service/service.policy';
+import { Question } from '../../models/question/question.model';
 import { QuestionPageContentComponent } from '../question-page-content/question-page-content.component';
 
 @Component({
-  selector: 'app-service-detail',
+  selector: 'service-desk-ui-service-detail',
   templateUrl: './service-detail.component.html',
   styleUrls: ['./service-detail.component.scss'],
   animations: [contentBlockAnimation],
 })
-export class ServiceDetailComponent implements OnInit, OnChanges {
+export class ServiceDetailComponent implements OnChanges {
   @Input() service: Service;
   // @ViewChildren(DynamicTemplateContentComponent) dynamicTemplateComponent: QueryList<DynamicTemplateContentComponent>;
   @ViewChildren(QuestionPageContentComponent) questionComponent: QueryList<QuestionPageContentComponent>;
   showTicketFlags: boolean;
 
   constructor(private policy: ServicePolicy) {}
-
-  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
     const service: SimpleChange = changes.service;
@@ -40,7 +29,7 @@ export class ServiceDetailComponent implements OnInit, OnChanges {
     }
   }
 
-  trackByTicket(index, question: Question) {
+  trackByTicket(index: number, question: Question) {
     return question.id;
   }
 }

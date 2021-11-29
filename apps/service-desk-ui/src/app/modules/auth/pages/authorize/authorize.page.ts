@@ -2,13 +2,13 @@ import { Component, OnInit, Inject, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
-import { AppConfigI } from '@interfaces/app-config.interface';
-import { APP_CONFIG } from '@config/app.config';
-import { AuthService } from '@auth/auth.service';
-import { UserService } from '@shared/services/user/user.service';
+import { AppConfigI } from '../../../../core/interfaces/app-config.interface';
+import { APP_CONFIG } from '../../../../config/app.config';
+import { AuthService } from '../../../../core/auth/auth.service';
+import { UserService } from '../../../../shared/services/user/user.service';
 
 @Component({
-  selector: 'app-authorize-page',
+  selector: 'service-desk-ui-authorize-page',
   templateUrl: './authorize.page.html',
   styleUrls: ['./authorize.page.scss'],
 })
@@ -16,7 +16,7 @@ export class AuthorizePageComponent implements OnInit, OnDestroy {
   progressValue = 0;
   errors = false;
   success = false;
-  private interval;
+  private interval: any;
 
   constructor(
     private authService: AuthService,

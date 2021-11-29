@@ -3,16 +3,16 @@ import { ActivatedRoute } from '@angular/router';
 import { Subject } from 'rxjs';
 import { finalize, filter, first, map, delay, tap, switchMap } from 'rxjs/operators';
 
-import { ServiceService } from '@shared/services/service/service.service';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { ServiceDetailComponent } from '@modules/ticket/components/service-detail/service-detail.component';
+import { ServiceService } from '../../../../shared/services/service/service.service';
+import { Service } from '../../models/service/service.model';
+import { ServiceDetailComponent } from '../../components/service-detail/service-detail.component';
 // import { DynamicTemplateContentComponent } from '@modules/ticket/components/dynamic-template-content/dynamic-template-content.component';
-import { ResponsibleUserService } from '@shared/services/responsible_user/responsible-user.service';
-import { UserPolicy } from '@shared/policies/user/user.policy';
-import { QuestionPageContentComponent } from '@modules/ticket/components/question-page-content/question-page-content.component';
+import { ResponsibleUserService } from '../../../../shared/services/responsible_user/responsible-user.service';
+import { UserPolicy } from '../../../../shared/policies/user/user.policy';
+import { QuestionPageContentComponent } from '../../components/question-page-content/question-page-content.component';
 
 @Component({
-  selector: 'app-services-detail-page',
+  selector: 'service-desk-ui-services-detail-page',
   templateUrl: './services-detail.page.html',
   styleUrls: ['./services-detail.page.scss'],
 })
@@ -20,7 +20,7 @@ export class ServicesDetailPageComponent implements OnInit, AfterViewChecked, On
   loading = false;
   service: Service;
   @ViewChild(ServiceDetailComponent) private serviceDetailComponent: ServiceDetailComponent;
-  private questionStream = new Subject();
+  private questionStream = new Subject<any>();
   private identity: number;
 
   constructor(
@@ -76,7 +76,7 @@ export class ServicesDetailPageComponent implements OnInit, AfterViewChecked, On
   private openQuestionStream(): void {
     this.questionStream
       .pipe(
-        filter((componentArr: []) => componentArr.length !== 0),
+        filter((componentArr: any[]) => componentArr.length !== 0),
         first(),
         delay(300),
         map((componentArr) => this.openSelectedQuestion(componentArr))

@@ -3,17 +3,17 @@ import { FormGroup } from '@angular/forms';
 import { Observable, Subject, concat, of } from 'rxjs';
 import { finalize, filter, debounceTime, tap, switchMap, map } from 'rxjs/operators';
 
-import { TagI } from '@interfaces/tag.interface';
-import { ResponsibleUserI } from '@interfaces/responsible-user.interface';
-import { ServiceService } from '@shared/services/service/service.service';
-import { TagService } from '@shared/services/tag/tag.service';
-import { ResponsibleUserService } from '@shared/services/responsible_user/responsible-user.service';
-import { ResponsibleUserFactory } from '@modules/ticket/factories/responsible-user.factory';
-import { contentBlockAnimation } from '@animations/content.animation';
-import { Ticket } from '@modules/ticket/models/ticket/ticket.model';
+import { TagI } from '../../../../../core/interfaces/tag.interface';
+import { ResponsibleUserI } from '../../../../../core/interfaces/responsible-user.interface';
+import { ServiceService } from '../../../../../shared/services/service/service.service';
+import { TagService } from '../../../../../shared/services/tag/tag.service';
+import { ResponsibleUserService } from '../../../../../shared/services/responsible_user/responsible-user.service';
+import { ResponsibleUserFactory } from '../../../factories/responsible-user.factory';
+import { contentBlockAnimation } from '../../../../../core/animations/content.animation';
+import { Ticket } from '../../../models/ticket/ticket.model';
 
 @Component({
-  selector: 'app-common-ticket-information',
+  selector: 'service-desk-ui-form-common-ticket-information',
   templateUrl: './common-ticket-information.component.html',
   styleUrls: ['./common-ticket-information.component.sass'],
   animations: [contentBlockAnimation],
@@ -117,7 +117,7 @@ export class CommonTicketInformationComponent implements OnInit {
     }
   }
 
-  trackByServiceTag(index, serviceTag: any) {
+  trackByServiceTag(index: number, serviceTag: any) {
     return serviceTag.data.id;
   }
 

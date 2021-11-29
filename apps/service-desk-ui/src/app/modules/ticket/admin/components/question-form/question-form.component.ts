@@ -1,18 +1,18 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
-import { contentBlockAnimation } from '@animations/content.animation';
-import { Question } from '@modules/ticket/models/question/question.model';
-import { Answer } from '@modules/ticket/models/answer/answer.model';
+import { contentBlockAnimation } from '../../../../../core/animations/content.animation';
+import { Question } from '../../../models/question/question.model';
+import { Answer } from '../../../models/answer/answer.model';
 
 @Component({
-  selector: 'app-question-form',
+  selector: 'service-desk-ui-question-form',
   templateUrl: './question-form.component.html',
   styleUrls: ['./question-form.component.sass'],
   animations: [contentBlockAnimation],
 })
 export class QuestionFormComponent implements OnInit {
-  preview = [];
+  preview: any[] = [];
   @Input() questionForm: FormGroup;
   @Input() question: Question;
   @Input() submitted: boolean;
@@ -42,10 +42,10 @@ export class QuestionFormComponent implements OnInit {
    *
    * @param object - изменяемый объект
    */
-  toggleHidden(object: FormGroup): void {
-    const currentValue = object.controls.is_hidden.value;
+  toggleHidden(object: AbstractControl): void {
+    const currentValue = (object as FormGroup).controls.is_hidden.value;
 
-    object.controls.is_hidden.setValue(!currentValue);
+    (object as FormGroup).controls.is_hidden.setValue(!currentValue);
   }
 
   /**
@@ -60,9 +60,9 @@ export class QuestionFormComponent implements OnInit {
    *
    * @param answer - ответ
    */
-  deleteAnswer(answer: FormGroup): void {
+  deleteAnswer(answer: AbstractControl): void {
     if (answer.value.id) {
-      answer.controls._destroy.setValue(true);
+      (answer as FormGroup).controls._destroy.setValue(true);
 
       return;
     }

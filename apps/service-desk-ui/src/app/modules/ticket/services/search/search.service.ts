@@ -3,10 +3,10 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { environment } from 'environments/environment';
-import { ServiceTemplateCreator } from '@modules/ticket/core/service-template-creator/service-template-creator';
-import { SearchSortingPipe } from '@shared/pipes/search-sorting/search-sorting.pipe';
-import { ServiceTemplateI } from '@interfaces/service-template.interface';
+import { environment } from '../../../../../environments/environment';
+import { ServiceTemplateCreator } from '../../core/service-template-creator/service-template-creator';
+import { SearchSortingPipe } from '../../../../shared/pipes/search-sorting/search-sorting.pipe';
+import { ServiceTemplateI } from '../../../../core/interfaces/service-template.interface';
 
 @Injectable({
   providedIn: 'root',

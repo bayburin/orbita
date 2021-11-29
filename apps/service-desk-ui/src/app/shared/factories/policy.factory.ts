@@ -1,9 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 
-import { Ticket } from '@modules/ticket/models/ticket/ticket.model';
-import { QuestionPolicy } from '@shared/policies/question/question.policy';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { ServicePolicy } from '@shared/policies/service/service.policy';
+import { Ticket } from '../../modules/ticket/models/ticket/ticket.model';
+import { QuestionPolicy } from '../policies/question/question.policy';
+import { Service } from '../../modules/ticket/models/service/service.model';
+import { ServicePolicy } from '../policies/service/service.policy';
 
 @Injectable({
   providedIn: 'root',

@@ -1,28 +1,24 @@
-import { Component, OnInit, Input, ViewChildren, QueryList } from '@angular/core';
+import { Component, Input, ViewChildren, QueryList } from '@angular/core';
 
-import { toggleAnswer } from '@modules/ticket/animations/toggle-answer.animation';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { contentBlockAnimation } from '@animations/content.animation';
+import { toggleAnswer } from '../../../animations/toggle-answer.animation';
+import { Service } from '../../../models/service/service.model';
+import { contentBlockAnimation } from '../../../../../core/animations/content.animation';
 import { QuestionComponent } from '../question/question.component';
-import { Question } from '@modules/ticket/models/question/question.model';
+import { Question } from '../../../models/question/question.model';
 
 @Component({
-  selector: 'app-service-detail',
+  selector: 'service-desk-ui-service-detail',
   templateUrl: './service-detail.component.html',
   styleUrls: ['./service-detail.component.sass'],
   animations: [contentBlockAnimation, toggleAnswer],
 })
-export class ServiceDetailComponent implements OnInit {
+export class ServiceDetailComponent {
   toggleFilters = false;
   showOnlyMyQuestions = localStorage.getItem('showOnlyMyQuestions') === 'true';
   @Input() service: Service;
   @ViewChildren(QuestionComponent) questionTemplateComponent: QueryList<QuestionComponent>;
 
-  constructor() {}
-
-  ngOnInit() {}
-
-  trackByQuestion(index, question: Question) {
+  trackByQuestion(index: number, question: Question) {
     return question.correction ? question.correction : question;
   }
 

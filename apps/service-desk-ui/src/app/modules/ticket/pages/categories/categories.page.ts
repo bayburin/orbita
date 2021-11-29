@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
-import { routeAnimation } from '@animations/route.animation';
+import { routeAnimation } from '../../../../core/animations/route.animation';
 
 @Component({
-  selector: 'app-categories-page',
+  selector: 'service-desk-ui-categories-page',
   templateUrl: './categories.page.html',
   styleUrls: ['./categories.page.scss'],
   animations: [routeAnimation],
 })
-export class CategoriesPageComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class CategoriesPageComponent {}

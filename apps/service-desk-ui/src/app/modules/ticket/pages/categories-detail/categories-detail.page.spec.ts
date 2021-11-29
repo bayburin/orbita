@@ -106,8 +106,8 @@ describe('CategoriesDetailPageComponent', () => {
 
     // Shallow tests ===========================================================================================================================
 
-    it('should show app-section-header component', () => {
-      expect(fixture.debugElement.nativeElement.querySelector('app-section-header')).toBeTruthy();
+    it('should show service-desk-ui-section-header component', () => {
+      expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-section-header')).toBeTruthy();
     });
 
     it('should show link to each service', () => {
@@ -116,14 +116,14 @@ describe('CategoriesDetailPageComponent', () => {
       });
     });
 
-    it('should show app-claims-page-content component', () => {
-      expect(fixture.debugElement.nativeElement.querySelector('app-claims-page-content')).toBeTruthy();
+    it('should show service-desk-ui-claims-page-content component', () => {
+      expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-claims-page-content')).toBeTruthy();
     });
 
-    it('should render app-question-page-content components', () => {
-      expect(fixture.debugElement.nativeElement.querySelectorAll('app-question-page-content').length).toEqual(
-        tickets.length
-      );
+    it('should render service-desk-ui-question-page-content components', () => {
+      expect(
+        fixture.debugElement.nativeElement.querySelectorAll('service-desk-ui-question-page-content').length
+      ).toEqual(tickets.length);
     });
   });
 });

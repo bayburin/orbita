@@ -1,11 +1,11 @@
 <section class="sd-pb-6" *ngIf="service" @contentBlockAnimation>
   <div class="container">
     <div class="d-flex flex-row align-items-start">
-      <app-section-header
+      <service-desk-ui-section-header
         [header]="service.name + ' - администрирование'"
         [addClass]="'text-danger'"
         class="mr-auto"
-      ></app-section-header>
+      ></service-desk-ui-section-header>
       <!-- <a id="newCase" routerLink="claim_form/new" class="btn btn-gray-white">Новая заявка</a> -->
       <a id="newQuestion" routerLink="new" class="btn btn-gray-white ml-2">Новый вопрос</a>
       <a id="userMode" [routerLink]="['../../../../../../../']" class="btn btn-gray-white ml-2">Режим пользователя</a>
@@ -28,10 +28,10 @@
         <span (click)="toggleshowOnlyMyQuestions()">Показать только "свои" вопросы</span>
       </div>
     </div>
-    <app-responsible-user-details
+    <service-desk-ui-responsible-user-details
       [users]="service.responsibleUsers"
       label="Ответственные за услугу"
-    ></app-responsible-user-details>
+    ></service-desk-ui-responsible-user-details>
     <section class="sd-dlist-divider-b">
       <!-- <h2>Вопросы</h2> -->
       <div class="mt-2">
@@ -46,17 +46,17 @@
         >
           Вопросов, закрепленных за Вами, нет. Чтобы увидеть все вопросы, переключите в фильтрах соответствующий флаг.
         </p>
-        <app-question
+        <service-desk-ui-question
           *ngFor="let question of service.questions | showOnlyMyTickets: showOnlyMyQuestions; trackBy: trackByQuestion"
           [question]="question"
-        ></app-question>
+        ></service-desk-ui-question>
       </div>
     </section>
     <!-- <section class="sd-dlist-divider-b">
       <h2>Заявки</h2>
       <div class="mt-2">
         <p *ngIf="!service.claimForms.length" class="search-title">Список заявок пуст</p>
-        <app-claim-form-page-content *ngFor="let case of service.claimForms; trackBy: trackByTicket" [data]="case"></app-claim-form-page-content>
+        <service-desk-ui-claim-form-page-content *ngFor="let case of service.claimForms; trackBy: trackByTicket" [data]="case"></service-desk-ui-claim-form-page-content>
       </div>
     </section> -->
   </div>

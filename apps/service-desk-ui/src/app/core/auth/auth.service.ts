@@ -3,11 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { APP_CONFIG } from '@config/app.config';
-import { AppConfigI } from '@interfaces/app-config.interface';
-import { TokenI } from '@interfaces/token.interface';
-import { UserService } from '@shared/services/user/user.service';
-import { environment } from 'environments/environment';
+import { APP_CONFIG } from '../../config/app.config';
+import { AppConfigI } from '../interfaces/app-config.interface';
+import { TokenI } from '../interfaces/token.interface';
+import { UserService } from '../../shared/services/user/user.service';
+import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
@@ -49,7 +49,7 @@ export class AuthService {
       state: params.state,
     };
 
-    return this.http.post(this.accessTokenUri, body).pipe(
+    return this.http.post<any>(this.accessTokenUri, body).pipe(
       map((token: TokenI) => {
         this.removeState();
 
@@ -114,7 +114,7 @@ export class AuthService {
     localStorage.removeItem(this.config.currentTokenStorage);
   }
 
-  private generateState(length): string {
+  private generateState(length: number): string {
     let result = '';
     const dictionary = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 

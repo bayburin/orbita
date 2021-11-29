@@ -3,9 +3,9 @@ import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import { of, Observable, combineLatest } from 'rxjs';
 import { filter, first, concatAll, startWith } from 'rxjs/operators';
 
-import { BreadcrumbServiceI } from '@interfaces/breadcrumb-service.interface';
-import { BreadcrumbI } from '@interfaces/breadcrumb.interface';
-import { breadcrumbAnimation } from '@animations/breadcrumb.animation';
+import { BreadcrumbServiceI } from '../interfaces/breadcrumb-service.interface';
+import { BreadcrumbI } from '../interfaces/breadcrumb.interface';
+import { breadcrumbAnimation } from '../animations/breadcrumb.animation';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -25,7 +25,7 @@ export class BreadcrumbComponent implements OnInit {
     this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => this.placeBreadcrumb());
   }
 
-  trackByBreadcrumb(index, breadcrumb: BreadcrumbI) {
+  trackByBreadcrumb(index: number, breadcrumb: BreadcrumbI) {
     return breadcrumb.url;
   }
 
@@ -96,7 +96,7 @@ export class BreadcrumbComponent implements OnInit {
    *
    * @param breadcrumbs - список сервисов.
    */
-  private getBreadcrumbFromArray(breadcrumbs: BreadcrumbServiceI[]) {
+  private getBreadcrumbFromArray(breadcrumbs: BreadcrumbServiceI[]): Observable<any> {
     return combineLatest(
       this.getBreadcrumbFromService(breadcrumbs[0]).pipe(startWith('')),
       this.getBreadcrumbFromService(breadcrumbs[1], true).pipe(startWith(''))
@@ -110,7 +110,7 @@ export class BreadcrumbComponent implements OnInit {
    * @param parentNodeflag - флаг, определяющий, какой вызывать метод: который возвращает label текущего элемента, либо который
    * возвращает label родительского элемента.
    */
-  private getBreadcrumbFromService(injectionService, parentNodeflag?: boolean): Observable<string> {
+  private getBreadcrumbFromService(injectionService: any, parentNodeflag?: boolean): Observable<string> {
     const service = this.injector.get<BreadcrumbServiceI>(injectionService);
 
     return parentNodeflag ? service.getParentNodeName() : service.getNodeName();

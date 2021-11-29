@@ -54,12 +54,12 @@ describe('ServiceDetailComponent', () => {
     expect(component.showOnlyMyQuestions).toEqual(true);
   });
 
-  it('should show app-section-header component', () => {
-    expect(fixture.debugElement.nativeElement.innerHTML).toContain('app-section-header');
+  it('should show service-desk-ui-section-header component', () => {
+    expect(fixture.debugElement.nativeElement.innerHTML).toContain('service-desk-ui-section-header');
   });
 
-  it('should show app-question components', () => {
-    expect(fixture.debugElement.nativeElement.querySelectorAll('app-question').length).toEqual(
+  it('should show service-desk-ui-question components', () => {
+    expect(fixture.debugElement.nativeElement.querySelectorAll('service-desk-ui-question').length).toEqual(
       service.questions.length
     );
   });
@@ -68,10 +68,10 @@ describe('ServiceDetailComponent', () => {
     expect(fixture.debugElement.nativeElement.querySelector('#userMode')).toBeTruthy();
   });
 
-  it('should show app-responsible-user-details component', () => {
+  it('should show service-desk-ui-responsible-user-details component', () => {
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('app-responsible-user-details'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('service-desk-ui-responsible-user-details'))).toBeTruthy();
   });
 
   describe('#toggleshowOnlyMyQuestions', () => {

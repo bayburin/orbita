@@ -1,23 +1,19 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 
-import { ClaimI } from '@interfaces/claim.interface';
-import { contentListAnimation } from '@animations/content.animation';
+import { ClaimI } from '../../../core/interfaces/claim.interface';
+import { contentListAnimation } from '../../../core/animations/content.animation';
 
 @Component({
-  selector: 'app-claim-card-list',
+  selector: 'service-desk-ui-claim-card-list',
   templateUrl: './claim-card-list.component.html',
   styleUrls: ['./claim-card-list.component.scss'],
   animations: [contentListAnimation],
 })
-export class ClaimCardListComponent implements OnInit, OnChanges {
+export class ClaimCardListComponent implements OnChanges {
   @Input() claims: ClaimI[] = [];
   @Input() loading = false;
   @Output() removeClaim = new EventEmitter<any>();
-  data = [];
-
-  constructor() {}
-
-  ngOnInit() {}
+  data: any[] = [];
 
   ngOnChanges() {
     this.data = [];
@@ -33,7 +29,7 @@ export class ClaimCardListComponent implements OnInit, OnChanges {
     this.removeClaim.emit(true);
   }
 
-  trackByClaim(index, claim: ClaimI) {
+  trackByClaim(index: number, claim: ClaimI) {
     return claim.case_id;
   }
 }

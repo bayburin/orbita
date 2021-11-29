@@ -3,11 +3,11 @@ import { CanLoad, CanActivate, ActivatedRouteSnapshot, Router } from '@angular/r
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import { UserService } from '@shared/services/user/user.service';
-import { User } from '@shared/models/user/user.model';
-import { ServicePolicy } from '@shared/policies/service/service.policy';
-import { QuestionPolicy } from '@shared/policies/question/question.policy';
-import { ServiceService } from '@shared/services/service/service.service';
+import { UserService } from '../../../shared/services/user/user.service';
+import { User } from '../../../shared/models/user/user.model';
+import { ServicePolicy } from '../../../shared/policies/service/service.policy';
+import { QuestionPolicy } from '../../../shared/policies/question/question.policy';
+import { ServiceService } from '../../../shared/services/service/service.service';
 
 @Injectable({
   providedIn: 'root',
@@ -59,7 +59,7 @@ export class ResponsibleGuard implements CanLoad, CanActivate {
     }
   }
 
-  private serviceIdInParentRoute(route: ActivatedRouteSnapshot) {
+  private serviceIdInParentRoute(route: ActivatedRouteSnapshot): number {
     if (route.routeConfig.path === 'services/:id') {
       return route.params.id;
     } else {
@@ -67,7 +67,7 @@ export class ResponsibleGuard implements CanLoad, CanActivate {
     }
   }
 
-  private categoryIdInParentRoute(route: ActivatedRouteSnapshot) {
+  private categoryIdInParentRoute(route: ActivatedRouteSnapshot): number {
     if (route.routeConfig.path === 'categories/:id') {
       return route.params.id;
     } else {

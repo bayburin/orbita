@@ -151,6 +151,6 @@ describe('NewQuestionPageComponent', () => {
   it('should render markdown helper', () => {
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('app-markdown-help'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('service-desk-ui-markdown-help'))).toBeTruthy();
   });
 });

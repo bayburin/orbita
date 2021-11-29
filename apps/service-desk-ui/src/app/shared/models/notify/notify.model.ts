@@ -3,7 +3,7 @@ import { ErrorState } from './notify_states/error.state';
 import { ClaimState } from './notify_states/claim.state';
 import { BroadcastState } from './notify_states/broadcast.state';
 import { AbstractNotifyState } from './notify_states/abstract-notify.state';
-import { NotificationBodyI } from '@interfaces/notification.interface';
+import { NotificationBodyI } from '../../../core/interfaces/notification.interface';
 
 export const enum NotifyTypes {
   BROADCAST = 'broadcast',

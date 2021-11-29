@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-unauthorize-content',
+  selector: 'service-desk-ui-unauthorize-content',
   templateUrl: './unauthorize-content.component.html',
   styleUrls: ['./unauthorize-content.component.scss'],
 })
-export class UnauthorizeContentComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class UnauthorizeContentComponent {}

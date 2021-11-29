@@ -1,7 +1,7 @@
 <section class="sd-pb-6">
   <div *ngIf="route.children.length === 0">
-    <app-loading [loading]="loading" size="48px"></app-loading>
-    <app-service-detail [service]="service"></app-service-detail>
+    <service-desk-ui-loading [loading]="loading" size="48px"></service-desk-ui-loading>
+    <service-desk-ui-service-detail [service]="service"></service-desk-ui-service-detail>
   </div>
   <router-outlet></router-outlet>
 </section>

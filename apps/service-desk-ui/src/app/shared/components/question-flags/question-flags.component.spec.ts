@@ -48,7 +48,7 @@ describe('QuestionFlagsComponent', () => {
   //   expect(fixture.debugElement.query(By.css('.mdi-file-settings-variant-outline'))).toBeTruthy();
   // });
 
-  it('should show app-visible-flag component if question has draft state', () => {
+  it('should show service-desk-ui-visible-flag component if question has draft state', () => {
     question.state = TicketStates.DRAFT;
     fixture.detectChanges();
 

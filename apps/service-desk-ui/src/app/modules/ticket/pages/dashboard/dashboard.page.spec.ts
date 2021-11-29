@@ -112,8 +112,8 @@ describe('DashboardComponent', () => {
 
   // Shallow tests ===========================================================================================================================
 
-  it('should show app-global-search component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-global-search')).toBeTruthy();
+  it('should show service-desk-ui-global-search component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-global-search')).toBeTruthy();
   });
 
   it('should show user recommendations', () => {
@@ -122,8 +122,8 @@ describe('DashboardComponent', () => {
     });
   });
 
-  it('should show app-category-list component', () => {
-    expect(fixture.debugElement.nativeElement.querySelector('app-category-list')).toBeTruthy();
+  it('should show service-desk-ui-category-list component', () => {
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-category-list')).toBeTruthy();
   });
 
   it('should redirect to all categories', inject([Router], (router: Router) => {

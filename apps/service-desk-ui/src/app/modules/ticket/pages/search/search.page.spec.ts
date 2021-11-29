@@ -116,15 +116,15 @@ describe('SearchComponent', () => {
     expect(component.searchTerm).toEqual(term);
   });
 
-  it('should show app-global-search component', () => {
+  it('should show service-desk-ui-global-search component', () => {
     fixture.detectChanges();
 
-    expect(fixture.debugElement.nativeElement.querySelector('app-global-search')).toBeTruthy();
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-global-search')).toBeTruthy();
   });
 
-  it('should show app-search-result component', () => {
+  it('should show service-desk-ui-search-result component', () => {
     fixture.detectChanges();
 
-    expect(fixture.debugElement.nativeElement.querySelector('app-search-result')).toBeTruthy();
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-search-result')).toBeTruthy();
   });
 });

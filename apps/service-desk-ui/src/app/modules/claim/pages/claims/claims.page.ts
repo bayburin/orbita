@@ -1,12 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-claims-page',
+  selector: 'service-desk-ui-claims-page',
   templateUrl: './claims.page.html',
   styleUrls: ['./claims.page.scss'],
 })
-export class ClaimsPageComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class ClaimsPageComponent {}

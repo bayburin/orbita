@@ -101,11 +101,11 @@ describe('ClaimsPageContentComponent', () => {
       });
 
       it('should show FilterComponent', () => {
-        expect(fixture.debugElement.nativeElement.querySelector('app-filters')).not.toBeTruthy();
+        expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-filters')).not.toBeTruthy();
       });
 
       it('should show ClaimCardListComponent', () => {
-        expect(fixture.debugElement.nativeElement.querySelector('app-claim-card-list')).not.toBeTruthy();
+        expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-claim-card-list')).not.toBeTruthy();
       });
     });
 
@@ -120,11 +120,11 @@ describe('ClaimsPageContentComponent', () => {
       });
 
       it('should show FilterComponent', () => {
-        expect(fixture.debugElement.nativeElement.querySelector('app-filters')).toBeTruthy();
+        expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-filters')).toBeTruthy();
       });
 
       it('should show ClaimCardListComponent', () => {
-        expect(fixture.debugElement.nativeElement.querySelector('app-claim-card-list')).toBeTruthy();
+        expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-claim-card-list')).toBeTruthy();
       });
 
       it('should trigger navigation to "/claims/new"', () => {

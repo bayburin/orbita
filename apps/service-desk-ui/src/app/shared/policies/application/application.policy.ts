@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { User } from '@shared/models/user/user.model';
-import { UserService } from '@shared/services/user/user.service';
+import { User } from '../../../shared/models/user/user.model';
+import { UserService } from '../../../shared/services/user/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +14,9 @@ export class ApplicationPolicy {
     this.userService.user.subscribe((user) => (this.user = user));
   }
 
-  authorize(object: any, method: any): boolean {
+  authorize(object: any, method: string): boolean {
     this.object = object;
 
-    return this[method]();
+    return (this as any)[method]();
   }
 }

@@ -1,10 +1,10 @@
 <div [formGroup]="questionForm">
   <section>
-    <app-common-ticket-information
+    <service-desk-ui-form-common-ticket-information
       [ticketForm]="ticketForm"
       [ticket]="question"
       [submitted]="submitted"
-    ></app-common-ticket-information>
+    ></service-desk-ui-form-common-ticket-information>
   </section>
   <section>
     <button class="btn btn-outline-primary mb-3" (click)="addAnswer()">Новый ответ</button>
@@ -51,17 +51,17 @@
                   <span (click)="toggleHidden(answer)" class="pointer">Ответ должен быть виден пользователю</span>
                 </div>
                 <div class="form-group row">
-                  <app-answer-accessor
+                  <service-desk-ui-answer-accessor
                     name="answer"
                     class="form-control"
                     formControlName="answer"
                     [ngClass]="{
-                      'is-invalid': (answer.controls.answer.touched || submitted) && answer.controls.answer.errors,
-                      'is-valid': answer.controls.answer.touched && answer.controls.answer.valid
+                      'is-invalid': (answer.get('answer').touched || submitted) && answer.get('answer').errors,
+                      'is-valid': answer.get('answer').touched && answer.get('answer').valid
                     }"
-                  ></app-answer-accessor>
+                  ></service-desk-ui-answer-accessor>
                   <div class="invalid-feedback">
-                    <span *ngIf="answer.controls.answer.errors?.required">Не может быть пустым</span>
+                    <span *ngIf="answer.get('answer').errors?.required">Не может быть пустым</span>
                   </div>
                 </div>
                 <div class="row d-block">

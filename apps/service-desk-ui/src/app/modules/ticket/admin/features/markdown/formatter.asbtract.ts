@@ -7,7 +7,7 @@ export abstract class FormatterT {
 
   abstract format(nativeElement: any, template: string, attributes?: MarkdownFormatAttributesI): string;
 
-  setSelection(nativeElement, start: number, end: number): void {
+  setSelection(nativeElement: any, start: number, end: number): void {
     setTimeout(() => {
       nativeElement.focus();
       nativeElement.setSelectionRange(start, end);

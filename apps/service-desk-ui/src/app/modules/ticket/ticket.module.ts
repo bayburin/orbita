@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '@shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { TicketRoutingModule } from './ticket-routing.module';

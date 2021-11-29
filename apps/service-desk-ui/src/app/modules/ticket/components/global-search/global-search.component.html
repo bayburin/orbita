@@ -12,17 +12,21 @@
       (keyup.enter)="onSearch()"
       [focusFirst]="false"
       placeholder="Введите название услуги или проблемный вопрос"
-      appAutoFocus
+      libAutoFocus
     />
     <div class="input-group-append">
       <button type="button" (click)="onSearch()" class="btn btn-gray-white sd-btn-icon-24 border border-white">
         <i *ngIf="!loading" class="mdi mdi-magnify mdi-24px"></i>
-        <app-loading [loading]="loading" size="24px"></app-loading>
+        <service-desk-ui-loading [loading]="loading" size="24px"></service-desk-ui-loading>
       </button>
     </div>
   </div>
 </div>
 
 <ng-template #rt let-r="result">
-  <app-dynamic-template-content class="search-result" [data]="r" [standaloneLink]="true"></app-dynamic-template-content>
+  <service-desk-ui-dynamic-template-content
+    class="search-result"
+    [data]="r"
+    [standaloneLink]="true"
+  ></service-desk-ui-dynamic-template-content>
 </ng-template>

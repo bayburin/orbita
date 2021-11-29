@@ -2,9 +2,9 @@ import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 
-import { Notify } from '@shared/models/notify/notify.model';
-import { AuthService } from '@auth/auth.service';
-import { NotificationService } from '@shared/services/notification/notification.service';
+import { Notify } from '../../../shared/models/notify/notify.model';
+import { AuthService } from '../../../core/auth/auth.service';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable({
   providedIn: 'root',

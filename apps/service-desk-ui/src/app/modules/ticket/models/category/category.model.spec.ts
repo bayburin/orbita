@@ -89,7 +89,7 @@ describe('Category', () => {
 
     describe('#pageComponent', () => {
       it('should return name of component', () => {
-        expect(category.pageComponent()).toEqual('app-category-page-content');
+        expect(category.pageComponent()).toEqual('service-desk-ui-category-page-content');
       });
     });
   });

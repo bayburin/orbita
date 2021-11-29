@@ -1,6 +1,6 @@
-import { TicketTypes } from '@modules/ticket/models/ticket/ticket.model';
-import { TicketFactory } from '@modules/ticket/factories/tickets/ticket.factory';
-import { AnswerAttachmentI } from '@interfaces/answer-attachment.interface';
+import { TicketTypes } from '../../models/ticket/ticket.model';
+import { TicketFactory } from '../../factories/tickets/ticket.factory';
+import { AnswerAttachmentI } from '../../../../core/interfaces/answer-attachment.interface';
 import { Question } from '../question/question.model';
 
 export class Answer {

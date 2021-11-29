@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { CategoryI } from '@interfaces/category.interface';
-import { CategoryFactory } from '@modules/ticket/factories/category.factory';
-import { Category } from '@modules/ticket/models/category/category.model';
-import { environment } from 'environments/environment';
-import { BreadcrumbServiceI } from '@interfaces/breadcrumb-service.interface';
+import { CategoryI } from '../../../core/interfaces/category.interface';
+import { CategoryFactory } from '../../../modules/ticket/factories/category.factory';
+import { Category } from '../../../modules/ticket/models/category/category.model';
+import { environment } from '../../../../environments/environment';
+import { BreadcrumbServiceI } from '../../../core/interfaces/breadcrumb-service.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -24,7 +24,7 @@ export class CategoryService implements BreadcrumbServiceI {
    */
   loadCategories(): Observable<Category[]> {
     return this.http
-      .get(this.loadCategoriesUri)
+      .get<CategoryI[]>(this.loadCategoriesUri)
       .pipe(map((categories: CategoryI[]) => categories.map((category) => CategoryFactory.create(category))));
   }
 
@@ -35,7 +35,7 @@ export class CategoryService implements BreadcrumbServiceI {
     this.loadCategoryUri = `${this.loadCategoriesUri}/${categoryId}`;
     this.category$.next(null);
 
-    return this.http.get(this.loadCategoryUri).pipe(
+    return this.http.get<CategoryI>(this.loadCategoryUri).pipe(
       map((data: CategoryI) => CategoryFactory.create(data)),
       tap((category) => this.category$.next(category))
     );

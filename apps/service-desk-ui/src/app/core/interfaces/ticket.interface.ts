@@ -1,7 +1,7 @@
-import { ServiceI } from '@interfaces/service.interface';
+import { ServiceI } from './service.interface';
 import { ResponsibleUserI } from './responsible-user.interface';
 import { TagI } from './tag.interface';
-import { TicketTypes } from '@modules/ticket/models/ticket/ticket.model';
+import { TicketTypes } from '../../modules/ticket/models/ticket/ticket.model';
 
 export interface TicketI {
   id: number;

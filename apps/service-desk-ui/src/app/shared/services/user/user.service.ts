@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
-import { APP_CONFIG } from '@config/app.config';
-import { UserI } from '@interfaces/user.interface';
-import { AppConfigI } from '@interfaces/app-config.interface';
-import { environment } from 'environments/environment';
-import { UserOwnsI } from '@interfaces/user-owns.interface';
-import { ServiceFactory } from '@modules/ticket/factories/service.factory';
-import { User } from '@shared/models/user/user.model';
-import { UserFactory } from '@shared/factories/user.factory';
+import { APP_CONFIG } from '../../../config/app.config';
+import { UserI } from '../../../core/interfaces/user.interface';
+import { AppConfigI } from '../../../core/interfaces/app-config.interface';
+import { environment } from '../../../../environments/environment';
+import { UserOwnsI } from '../../../core/interfaces/user-owns.interface';
+import { ServiceFactory } from '../../../modules/ticket/factories/service.factory';
+import { User } from '../../models/user/user.model';
+import { UserFactory } from '../../factories/user.factory';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +29,7 @@ export class UserService {
    * Получить данные о пользователе.
    */
   loadUserInfo(): Observable<User> {
-    return this.http.get(this.loadUserInfoUri).pipe(
+    return this.http.get<UserI>(this.loadUserInfoUri).pipe(
       map((data: UserI) => UserFactory.create(data)),
       tap((user: User) => this.setUser(user))
     );

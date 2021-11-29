@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 import { FileIconChangeDirective } from './file-icon-change.directive';
 
 @Component({
-  template: `<div [appFileIconChange]="filename">Тестовый компонент</div>`,
+  template: `<div [libFileIconChange]="filename">Тестовый компонент</div>`,
 })
 class TestContainerComponent {
   filename: string;

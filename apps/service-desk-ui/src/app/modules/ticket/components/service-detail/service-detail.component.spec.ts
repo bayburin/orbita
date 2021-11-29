@@ -56,33 +56,33 @@ describe('ServiceDetailComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show app-section-header component', () => {
+  it('should show service-desk-ui-section-header component', () => {
     fixture.detectChanges();
 
-    expect(fixture.debugElement.nativeElement.querySelector('app-section-header')).toBeTruthy();
+    expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-section-header')).toBeTruthy();
   });
 
-  // it('should show app-dynamic-template-content component', () => {
+  // it('should show service-desk-ui-dynamic-template-content component', () => {
   //   fixture.detectChanges();
 
-  //   expect(fixture.debugElement.nativeElement.querySelectorAll('app-dynamic-template-content').length).toEqual(tickets.length);
+  //   expect(fixture.debugElement.nativeElement.querySelectorAll('service-desk-ui-dynamic-template-content').length).toEqual(tickets.length);
   // });
 
-  it('should show app-question-page-content component', () => {
+  it('should show service-desk-ui-question-page-content component', () => {
     fixture.detectChanges();
 
-    expect(fixture.debugElement.nativeElement.querySelectorAll('app-question-page-content').length).toEqual(
+    expect(fixture.debugElement.nativeElement.querySelectorAll('service-desk-ui-question-page-content').length).toEqual(
       questions.length
     );
   });
 
-  it('should show app-responsible-user-details component', () => {
+  it('should show service-desk-ui-responsible-user-details component', () => {
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('app-responsible-user-details'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('service-desk-ui-responsible-user-details'))).toBeTruthy();
   });
 
-  describe('when appAuthorize directive returns true', () => {
+  describe('when libAuthorize directive returns true', () => {
     beforeEach(() => {
       user.role.name = 'content_manager';
       const servicePolicy = TestBed.get(ServicePolicy);

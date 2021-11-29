@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from '@shared/shared.module';
+import { SharedModule } from '../../../shared/shared.module';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { MarkdownModule } from 'ngx-markdown';
 

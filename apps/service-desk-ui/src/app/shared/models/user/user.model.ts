@@ -1,4 +1,4 @@
-import { RoleI } from '@interfaces/role.interface';
+import { RoleI } from '../../../core/interfaces/role.interface';
 
 export class User {
   tn: number;

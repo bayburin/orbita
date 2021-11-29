@@ -1,21 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-import { ResponsibleUserI } from '@interfaces/responsible-user.interface';
-import { contentBlockAnimation } from '@animations/content.animation';
+import { ResponsibleUserI } from '../../../core/interfaces/responsible-user.interface';
+import { contentBlockAnimation } from '../../../core/animations/content.animation';
 
 @Component({
-  selector: 'app-responsible-user-details',
+  selector: 'service-desk-ui-responsible-user-details',
   templateUrl: './responsible-user-details.component.html',
   styleUrls: ['./responsible-user-details.component.sass'],
   animations: [contentBlockAnimation],
 })
-export class ResponsibleUserDetailsComponent implements OnInit {
+export class ResponsibleUserDetailsComponent {
   @Input() label: string;
   @Input() users: ResponsibleUserI[];
-
-  constructor() {}
-
-  ngOnInit() {}
 
   /**
    * Возвращает true, если в массиве users имеется хотя бы один ответственный с объектом details.

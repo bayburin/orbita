@@ -1,14 +1,14 @@
-import { Category } from '@modules/ticket/models/category/category.model';
-import { Ticket, TicketTypes } from '@modules/ticket/models/ticket/ticket.model';
-import { CommonServiceI } from '@interfaces/common-service.interface';
-import { CategoryFactory } from '@modules/ticket/factories/category.factory';
-import { TicketFactory } from '@modules/ticket/factories/tickets/ticket.factory';
-import { ResponsibleUserI } from '@interfaces/responsible-user.interface';
-import { User } from '@shared/models/user/user.model';
-import { ResponsibleUserDetailsI } from '@interfaces/responsible_user_details.interface';
+import { Category } from '../../models/category/category.model';
+import { Ticket, TicketTypes } from '../../models/ticket/ticket.model';
+import { CommonServiceI } from '../../../../core/interfaces/common-service.interface';
+import { CategoryFactory } from '../../factories/category.factory';
+import { TicketFactory } from '../../factories/tickets/ticket.factory';
+import { ResponsibleUserI } from '../../../../core/interfaces/responsible-user.interface';
+import { User } from '../../../../shared/models/user/user.model';
+import { ResponsibleUserDetailsI } from '../../../../core/interfaces/responsible_user_details.interface';
 import { Question } from '../question/question.model';
 import { ClaimForm } from '../claim-form/claim-form.model';
-import { QuestionI } from '@interfaces/question.interface';
+import { QuestionI } from '../../../../core/interfaces/question.interface';
 
 export class Service implements CommonServiceI {
   id: number;
@@ -52,7 +52,7 @@ export class Service implements CommonServiceI {
   }
 
   pageComponent(): string {
-    return 'app-service-page-content';
+    return 'service-desk-ui-service-page-content';
   }
 
   /**

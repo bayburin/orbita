@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { environment } from 'environments/environment';
-import { AnswerAttachmentI } from '@interfaces/answer-attachment.interface';
+import { environment } from '../../../../environments/environment';
+import { AnswerAttachmentI } from '../../../core/interfaces/answer-attachment.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +22,7 @@ export class AttachmentService {
     const uploadAttachmentUrl = `${environment.serverUrl}/api/v1/answers/${attachment.answer_id}/answer_attachments`;
 
     formData.append('answer_id', `${attachment.answer_id}`);
-    formData.append('document', attachment.document);
+    formData.append('document', `${attachment.document}`);
     return this.http.post(uploadAttachmentUrl, formData, {
       reportProgress: true,
       observe: 'events',

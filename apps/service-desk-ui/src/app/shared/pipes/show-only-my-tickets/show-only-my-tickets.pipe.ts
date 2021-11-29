@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { UserService } from '@shared/services/user/user.service';
-import { User } from '@shared/models/user/user.model';
-import { Question } from '@modules/ticket/models/question/question.model';
+import { UserService } from '../../../shared/services/user/user.service';
+import { User } from '../../../shared/models/user/user.model';
+import { Question } from '../../../modules/ticket/models/question/question.model';
 
 @Pipe({
   name: 'showOnlyMyTickets',

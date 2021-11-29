@@ -12,7 +12,7 @@ import { StubQuestionPolicy } from '@shared/policies/question/question.policy.st
 import { StubServicePolicy } from '@shared/policies/service/service.policy.stub';
 
 @Component({
-  template: `<div *appAuthorize="[service, 'newService']">Тестовый компонент</div>`,
+  template: `<div *libAuthorize="[service, 'newService']">Тестовый компонент</div>`,
 })
 class TestContainerComponent {
   service = ServiceFactory.create({ id: 1, name: 'Тестовый сервис', user_responsibles: [{ tn: 17_664 }] });

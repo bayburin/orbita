@@ -1,9 +1,9 @@
 import { Directive, TemplateRef, ViewContainerRef, Input } from '@angular/core';
 
-import { PolicyFactory } from '@shared/factories/policy.factory';
+import { PolicyFactory } from '../../factories/policy.factory';
 
 @Directive({
-  selector: '[appAuthorize]',
+  selector: '[libAuthorize]',
 })
 export class AuthorizeDirective {
   constructor(
@@ -15,7 +15,7 @@ export class AuthorizeDirective {
   /**
    * @param policyData - кортеж ['объект, к которому проверяется доступ', 'имя метода, проверяющего доступ']
    */
-  @Input() set appAuthorize(policyData: [any, string]) {
+  @Input() set libAuthorize(policyData: [any, string]) {
     const policy = this.policyFactory.getPolicyBy(policyData[0]);
 
     this.viewContainerRef.clear();

@@ -1,11 +1,11 @@
-import { Component, OnInit, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
+import { Component, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
 
 @Component({
-  selector: 'app-markdown-help-page',
+  selector: 'service-desk-ui-markdown-help-page',
   templateUrl: './markdown-help.page.html',
   styleUrls: ['./markdown-help.page.sass'],
 })
-export class MarkdownHelpPageComponent implements OnInit {
+export class MarkdownHelpPageComponent {
   selectedOption: string;
   @ViewChild('markdownScrollParent', { static: true }) markdownScrollParent: ElementRef;
   @HostListener('window:scroll') onScroll() {
@@ -23,8 +23,6 @@ export class MarkdownHelpPageComponent implements OnInit {
   }
 
   constructor(private renderer: Renderer2) {}
-
-  ngOnInit() {}
 
   /**
    * Перемещает экран к указанному id.

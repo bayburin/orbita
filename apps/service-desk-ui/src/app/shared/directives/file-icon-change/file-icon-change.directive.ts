@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[appFileIconChange]',
+  selector: '[libFileIconChange]',
 })
 export class FileIconChangeDirective {
   constructor(private elementRef: ElementRef, private renderer: Renderer2) {}
@@ -9,7 +9,7 @@ export class FileIconChangeDirective {
   /**
    * @param filename - имя файла, на основании которого выбирается иконка
    */
-  @Input() set appFileIconChange(filename: string) {
+  @Input() set libFileIconChange(filename: string) {
     const fileType = filename.match(/\.(\w+)$/);
     let icon: string;
 

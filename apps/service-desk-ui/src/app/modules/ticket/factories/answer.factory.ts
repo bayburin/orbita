@@ -1,7 +1,7 @@
-import { Answer } from '@modules/ticket/models/answer/answer.model';
+import { Answer } from '../models/answer/answer.model';
 
 export class AnswerFactory {
-  static create(params) {
+  static create(params: any) {
     return new Answer(params);
   }
 }

@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ResponsibleGuard } from '@guards/responsible/responsible.guard';
+import { ResponsibleGuard } from '../../../core/guards/responsible/responsible.guard';
 import { NewQuestionPageComponent } from './pages/new-question/new-question.page';
-import { ServicePolicy } from '@shared/policies/service/service.policy';
+import { ServicePolicy } from '../../../shared/policies/service/service.policy';
 import { TicketsPageComponent } from './pages/tickets/tickets.page';
 import { EditQuestionPageComponent } from './pages/edit-question/edit-question.page';
 import { TicketResolver } from './resolvers/resolvers/ticket.resolver';

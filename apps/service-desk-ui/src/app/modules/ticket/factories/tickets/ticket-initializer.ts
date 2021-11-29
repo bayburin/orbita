@@ -1,7 +1,7 @@
 import { ClaimFormFactory } from './claim-form.factory';
 import { TicketFactoryT } from './ticket.factory.abstract';
 import { QuestionFactory } from './question.factory';
-import { TicketTypes } from '@modules/ticket/models/ticket/ticket.model';
+import { TicketTypes } from '../../models/ticket/ticket.model';
 
 export class TicketInitializer {
   static for(type: TicketTypes): TicketFactoryT {

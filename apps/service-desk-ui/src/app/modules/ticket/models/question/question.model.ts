@@ -1,11 +1,11 @@
-import { TicketTypes } from '@modules/ticket/models/ticket/ticket.model';
+import { TicketTypes } from '../../models/ticket/ticket.model';
 import { Ticket } from '../ticket/ticket.model';
 import { Answer } from '../answer/answer.model';
-import { AnswerI } from '@interfaces/answer.interface';
-import { AnswerFactory } from '@modules/ticket/factories/answer.factory';
-import { ResponsibleUserDetailsI } from '@interfaces/responsible_user_details.interface';
-import { TicketI } from '@interfaces/ticket.interface';
-import { TicketFactory } from '@modules/ticket/factories/tickets/ticket.factory';
+import { AnswerI } from '../../../../core/interfaces/answer.interface';
+import { AnswerFactory } from '../../factories/answer.factory';
+import { ResponsibleUserDetailsI } from '../../../../core/interfaces/responsible_user_details.interface';
+import { TicketI } from '../../../../core/interfaces/ticket.interface';
+import { TicketFactory } from '../../factories/tickets/ticket.factory';
 
 export class Question extends Ticket {
   originalId: number;
@@ -31,7 +31,7 @@ export class Question extends Ticket {
   }
 
   pageComponent(): string {
-    return 'app-question-page-content';
+    return 'service-desk-ui-question-page-content';
   }
 
   /**

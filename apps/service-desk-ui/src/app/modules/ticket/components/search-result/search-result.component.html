@@ -9,14 +9,14 @@
   </div>
 
   <div *ngIf="result.length" @contentBlockAnimation>
-    <app-section-header header="Результаты поиска"></app-section-header>
-    <app-filters [data]="types" (changeFilter)="filterChanged($event)"></app-filters>
+    <service-desk-ui-section-header header="Результаты поиска"></service-desk-ui-section-header>
+    <service-desk-ui-filters [data]="types" (changeFilter)="filterChanged($event)"></service-desk-ui-filters>
     <div class="tab-content">
       <div class="sd-dlist-divider-b">
-        <app-dynamic-template-content
+        <service-desk-ui-dynamic-template-content
           *ngFor="let template of result | filterByClass: selectedType"
           [data]="template"
-        ></app-dynamic-template-content>
+        ></service-desk-ui-dynamic-template-content>
       </div>
     </div>
   </div>

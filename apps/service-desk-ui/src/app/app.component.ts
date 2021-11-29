@@ -3,11 +3,11 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { AuthService } from '@auth/auth.service';
-import { routeAnimation } from '@animations/route.animation';
+import { AuthService } from './core/auth/auth.service';
+import { routeAnimation } from './core/animations/route.animation';
 import { NotificationService } from './shared/services/notification/notification.service';
 import { CheckVersionService } from './core/services/check-version/check-version.service';
-import { environment } from 'environments/environment';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
     this.detectAdblock();
     this.checkVersion.initCheckVersion(environment.versionCheckURL, 1000 * 60 * 10);
     this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
+      .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => (this.location = event.urlAfterRedirects.split('?')[0]));
     this.isUserSignedIn = this.authService.isUserSignedIn;
     // this.initSnowflakes();
@@ -69,18 +69,18 @@ export class AppComponent implements OnInit, AfterViewChecked {
     }, 1000);
   }
 
-  private initSnowflakes() {
-    const Snowflakes = require('magic-snowflakes');
-    const sf = new Snowflakes({
-      container: document.querySelector('body'), // Default: document.body
-      count: 10, // 100 snowflakes. Default: 50
-      minOpacity: 0.1, // From 0 to 1. Default: 0.6
-      maxOpacity: 0.95, // From 0 to 1. Default: 1
-      minSize: 10, // Default: 8
-      maxSize: 30, // Default: 18
-      rotation: true, // Default: true
-      speed: 1, // The property affects the speed of falling. Default: 1
-      wind: false, // Without wind. Default: true
-    });
-  }
+  // private initSnowflakes() {
+  //   const Snowflakes = require('magic-snowflakes');
+  //   const sf = new Snowflakes({
+  //     container: document.querySelector('body'), // Default: document.body
+  //     count: 10, // 100 snowflakes. Default: 50
+  //     minOpacity: 0.1, // From 0 to 1. Default: 0.6
+  //     maxOpacity: 0.95, // From 0 to 1. Default: 1
+  //     minSize: 10, // Default: 8
+  //     maxSize: 30, // Default: 18
+  //     rotation: true, // Default: true
+  //     speed: 1, // The property affects the speed of falling. Default: 1
+  //     wind: false, // Without wind. Default: true
+  //   });
+  // }
 }

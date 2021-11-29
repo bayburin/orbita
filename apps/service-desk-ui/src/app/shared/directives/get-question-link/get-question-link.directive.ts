@@ -1,10 +1,10 @@
 import { Directive, HostListener } from '@angular/core';
 
-import { QuestionPageContentComponent } from '@modules/ticket/components/question-page-content/question-page-content.component';
-import { NotificationService } from '@shared/services/notification/notification.service';
+import { QuestionPageContentComponent } from '../../../modules/ticket/components/question-page-content/question-page-content.component';
+import { NotificationService } from '../../services/notification/notification.service';
 
 @Directive({
-  selector: '[appGetQuestionLink]',
+  selector: '[libGetQuestionLink]',
 })
 export class GetQuestionLinkDirective {
   constructor(private component: QuestionPageContentComponent, private notifyService: NotificationService) {}

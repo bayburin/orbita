@@ -1,10 +1,10 @@
 <div>
   <section class="jumbotron sd-pt-3">
     <div class="container">
-      <app-global-search></app-global-search>
+      <service-desk-ui-global-search></service-desk-ui-global-search>
       <div class="sd-favorite-questions">
         <h2>Рекомендуем для пользователя</h2>
-        <app-loading [loading]="loading" size="48px" class="d-block mb-3"></app-loading>
+        <service-desk-ui-loading [loading]="loading" size="48px" class="d-block mb-3"></service-desk-ui-loading>
         <ul
           class="sd-list-masonry sd-list-masonry-sm-6 sd-list-masonry-md-3 list-unstyled mb-0"
           *ngIf="data"
@@ -29,9 +29,9 @@
 
   <section class="sd-pb-6">
     <div class="container">
-      <app-section-header header="Услуги портала"></app-section-header>
-      <app-loading [loading]="loading" size="48px" class="d-block mb-3"></app-loading>
-      <app-category-list [categories]="data?.categories"></app-category-list>
+      <service-desk-ui-section-header header="Услуги портала"></service-desk-ui-section-header>
+      <service-desk-ui-loading [loading]="loading" size="48px" class="d-block mb-3"></service-desk-ui-loading>
+      <service-desk-ui-category-list [categories]="data?.categories"></service-desk-ui-category-list>
       <div class="text-center">
         <a id="allCategories" routerLink="/categories" class="btn btn-gray-white">Все услуги</a>
       </div>
@@ -40,8 +40,8 @@
 
   <section class="jumbotron mb-0">
     <div class="container">
-      <app-section-header header="Часто задаваемые вопросы"></app-section-header>
-      <app-loading [loading]="loading" size="48px" class="d-block mb-3"></app-loading>
+      <service-desk-ui-section-header header="Часто задаваемые вопросы"></service-desk-ui-section-header>
+      <service-desk-ui-loading [loading]="loading" size="48px" class="d-block mb-3"></service-desk-ui-loading>
       <div
         class="sd-list-masonry sd-list-masonry-sm-6 sd-list-masonry-md-4 sd-child-mb-7"
         *ngIf="data"

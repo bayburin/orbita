@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2, ViewChild, HostListener, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'app-markdown-help',
+  selector: 'service-desk-ui-markdown-help',
   templateUrl: './markdown-help.component.html',
   styleUrls: ['./markdown-help.component.sass'],
 })

@@ -145,7 +145,7 @@ describe('HeaderComponent', () => {
       fixture.debugElement.nativeElement.querySelector('#parentDashboardElement').click();
       fixture.detectChanges();
 
-      expect(fixture.debugElement.nativeElement.querySelector('app-user-dashboard-menu')).toBeTruthy();
+      expect(fixture.debugElement.nativeElement.querySelector('service-desk-ui-user-dashboard-menu')).toBeTruthy();
     });
   });
 });

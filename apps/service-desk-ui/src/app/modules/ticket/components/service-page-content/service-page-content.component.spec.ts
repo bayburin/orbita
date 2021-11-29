@@ -49,11 +49,11 @@ describe('ServicePageContentComponent', () => {
     expect(fixture.debugElement.nativeElement.querySelector('a[href="/categories/2/services/1"]')).toBeTruthy();
   });
 
-  it('should show app-visible-flag component if "showFlags" attribute is equal true', () => {
-    expect(fixture.debugElement.query(By.css('app-visible-flag'))).toBeFalsy();
+  it('should show service-desk-ui-visible-flag component if "showFlags" attribute is equal true', () => {
+    expect(fixture.debugElement.query(By.css('service-desk-ui-visible-flag'))).toBeFalsy();
     component.showFlags = true;
     fixture.detectChanges();
 
-    expect(fixture.debugElement.query(By.css('app-visible-flag'))).toBeTruthy();
+    expect(fixture.debugElement.query(By.css('service-desk-ui-visible-flag'))).toBeTruthy();
   });
 });

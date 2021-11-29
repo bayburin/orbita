@@ -4,13 +4,13 @@ import { HttpEventType, HttpErrorResponse, HttpResponse } from '@angular/common/
 import { Subscription, of } from 'rxjs';
 import { catchError, tap, takeWhile, switchMap, finalize, filter } from 'rxjs/operators';
 
-import { Answer } from '@modules/ticket/models/answer/answer.model';
-import { AttachmentService } from '@shared/services/attachment/attachment.service';
-import { AnswerAttachmentI } from '@interfaces/answer-attachment.interface';
-import { fileNameLength } from '@shared/validators/file-name-length.validator';
+import { Answer } from '../../../models/answer/answer.model';
+import { AttachmentService } from '../../../../../shared/services/attachment/attachment.service';
+import { AnswerAttachmentI } from '../../../../../core/interfaces/answer-attachment.interface';
+import { fileNameLength } from '../../../../../shared/validators/file-name-length.validator';
 
 @Component({
-  selector: 'app-answer',
+  selector: 'service-desk-ui-answer',
   templateUrl: './answer.component.html',
   styleUrls: ['./answer.component.sass'],
 })
@@ -102,7 +102,7 @@ export class AnswerComponent implements OnInit, OnDestroy {
       .subscribe(() => this.answer.removeAttachment(attachment));
   }
 
-  trackByAttachment(index, attachment: AnswerAttachmentI) {
+  trackByAttachment(index: number, attachment: AnswerAttachmentI) {
     return attachment.id;
   }
 

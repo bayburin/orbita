@@ -5,15 +5,15 @@ import { Observable, of } from 'rxjs';
 import { debounceTime, finalize, takeWhile, catchError, mergeMap } from 'rxjs/operators';
 
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
-import { APP_CONFIG } from '@config/app.config';
-import { AppConfigI } from '@interfaces/app-config.interface';
-import { SearchService } from '@modules/ticket/services/search/search.service';
-import { Category } from '@modules/ticket/models/category/category.model';
-import { Service } from '@modules/ticket/models/service/service.model';
-import { Ticket } from '@modules/ticket/models/ticket/ticket.model';
+import { APP_CONFIG } from '../../../../config/app.config';
+import { AppConfigI } from '../../../../core/interfaces/app-config.interface';
+import { SearchService } from '../../services/search/search.service';
+import { Category } from '../../models/category/category.model';
+import { Service } from '../../models/service/service.model';
+import { Ticket } from '../../models/ticket/ticket.model';
 
 @Component({
-  selector: 'app-global-search',
+  selector: 'service-desk-ui-global-search',
   templateUrl: './global-search.component.html',
   styleUrls: ['./global-search.component.scss'],
 })

@@ -2,15 +2,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Channel } from 'angular2-actioncable';
 import { map } from 'rxjs/operators';
 
-import { NotificationService } from '@shared/services/notification/notification.service';
-import { NotificationI } from '@interfaces/notification.interface';
-import { notifyAnimation } from '@animations/notify.animation';
-import { StreamService } from '@shared/services/stream/stream.service';
-import { Notify } from '@shared/models/notify/notify.model';
-import { NotifyFactory } from '@shared/factories/notify.factory';
+import { NotificationService } from '../../services/notification/notification.service';
+import { NotificationI } from '../../../core/interfaces/notification.interface';
+import { notifyAnimation } from '../../../core/animations/notify.animation';
+import { StreamService } from '../..//services/stream/stream.service';
+import { Notify } from '../../models/notify/notify.model';
+import { NotifyFactory } from '../../factories/notify.factory';
 
 @Component({
-  selector: 'app-notify',
+  selector: 'service-desk-ui-notify',
   templateUrl: './notify.component.html',
   styleUrls: ['./notify.component.sass'],
   animations: [notifyAnimation],
@@ -27,7 +27,7 @@ export class NotifyComponent implements OnInit, OnDestroy {
     this.connectToClaimNotifications();
   }
 
-  trackByNotification(index, notification: Notify) {
+  trackByNotification(index: number, notification: Notify) {
     return notification.id || notification.mockId;
   }
 

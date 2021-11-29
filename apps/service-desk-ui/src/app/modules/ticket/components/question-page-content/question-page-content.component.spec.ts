@@ -162,22 +162,22 @@ describe('QuestionPageContentComponent', () => {
       );
     });
 
-    it('should show app-visible-flag component if showFlags is equal true', () => {
-      expect(fixture.debugElement.query(By.css('app-visible-flag'))).toBeFalsy();
+    it('should show service-desk-ui-visible-flag component if showFlags is equal true', () => {
+      expect(fixture.debugElement.query(By.css('service-desk-ui-visible-flag'))).toBeFalsy();
       component.showFlags = true;
       fixture.detectChanges();
 
-      expect(fixture.debugElement.query(By.css('app-visible-flag'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('service-desk-ui-visible-flag'))).toBeTruthy();
     });
 
-    it('should show app-responsible-user-details component', () => {
+    it('should show service-desk-ui-responsible-user-details component', () => {
       question.responsibleUsers = [
         { tn: 17664, details: { full_name: 'ФИО' } as ResponsibleUserDetailsI } as ResponsibleUserI,
       ];
       fixture.debugElement.nativeElement.querySelector('.sd-list-question > .sd-list-question-group').click();
       fixture.detectChanges();
 
-      expect(fixture.debugElement.query(By.css('app-responsible-user-details'))).toBeTruthy();
+      expect(fixture.debugElement.query(By.css('service-desk-ui-responsible-user-details'))).toBeTruthy();
     });
   });
 });

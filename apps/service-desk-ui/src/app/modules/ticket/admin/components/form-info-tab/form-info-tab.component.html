@@ -1,6 +1,8 @@
 <div [formGroup]="ticketForm">
   <section>
-    <app-common-ticket-information [ticketForm]="ticketForm"></app-common-ticket-information>
+    <service-desk-ui-form-common-ticket-information
+      [ticketForm]="ticketForm"
+    ></service-desk-ui-form-common-ticket-information>
   </section>
   <section>
     <div formGroupName="form">
