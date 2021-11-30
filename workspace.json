@@ -627,6 +627,32 @@
       },
       "tags": ["type:app"]
     },
+    "service-desk-ui-domain-logic": {
+      "projectType": "library",
+      "root": "libs/service-desk-ui/domain-logic",
+      "sourceRoot": "libs/service-desk-ui/domain-logic/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-desk-ui/domain-logic"],
+          "options": {
+            "jestConfig": "libs/service-desk-ui/domain-logic/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/service-desk-ui/domain-logic/src/**/*.ts",
+              "libs/service-desk-ui/domain-logic/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["scope:service-desk-ui", "type:domain-logic"]
+    },
     "service-desk-ui-e2e": {
       "root": "apps/service-desk-ui-e2e",
       "sourceRoot": "apps/service-desk-ui-e2e/src",
@@ -654,6 +680,29 @@
       },
       "tags": [],
       "implicitDependencies": ["service-desk-ui"]
+    },
+    "service-desk-ui-ui": {
+      "projectType": "library",
+      "root": "libs/service-desk-ui/ui",
+      "sourceRoot": "libs/service-desk-ui/ui/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-desk-ui/ui"],
+          "options": {
+            "jestConfig": "libs/service-desk-ui/ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/service-desk-ui/ui/src/**/*.ts", "libs/service-desk-ui/ui/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["scope:service-desk-ui", "type:ui"]
     },
     "shared-assets": {
       "root": "libs/shared/assets",
