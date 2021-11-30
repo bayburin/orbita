@@ -1,4 +1,4 @@
-import { ComponentFactory } from '@angular/core';
+import { ComponentFactory, Type } from '@angular/core';
 import {
   Component,
   OnInit,
@@ -12,6 +12,10 @@ import {
 import { Category } from '../../models/category/category.model';
 import { Service } from '../../models/service/service.model';
 import { Ticket } from '../../models/ticket/ticket.model';
+import { CategoryPageContentComponent } from './../category-page-content/category-page-content.component';
+import { ServicePageContentComponent } from './../service-page-content/service-page-content.component';
+import { QuestionPageContentComponent } from './../question-page-content/question-page-content.component';
+import { ClaimFormPageContentComponent } from './../claim-form-page-content/claim-form-page-content.component';
 
 @Component({
   selector: 'service-desk-ui-dynamic-template-content',
@@ -24,16 +28,29 @@ export class DynamicTemplateContentComponent implements OnInit, OnDestroy {
   @Input() showFlags: boolean;
   @ViewChild('templateContainer', { read: ViewContainerRef, static: true }) entry: ViewContainerRef;
   componentRef: any;
+  selectorMapper: any = {
+    Category: CategoryPageContentComponent,
+    Service: ServicePageContentComponent,
+    Question: QuestionPageContentComponent,
+    ClaimForm: ClaimFormPageContentComponent,
+  };
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {}
 
   ngOnInit() {
     // const factories = Array.from(this.componentFactoryResolver['_factories'].keys());
     // const factoryClass = factories.find((factory: any) => factory.name === this.data.pageComponent()) as Type<any>;
-    const factories = Array.from((this.componentFactoryResolver as any)['_factories'].values());
-    const componentFactory = factories.find(
-      (factory: any) => factory.selector === this.data.pageComponent()
-    ) as ComponentFactory<any>;
+
+    // Было до 9 версии ангуляра
+    // const factories = Array.from((this.componentFactoryResolver as any)['_factories'].values());
+    // const componentFactory = factories.find(
+    //   (factory: any) => factory.selector === this.data.pageComponent()
+    // ) as ComponentFactory<any>;
+
+    this.data.pageComponent as any;
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      this.selectorMapper[this.data.constructor.name]
+    );
 
     this.entry.clear();
     // const componentFactory = this.componentFactoryResolver.resolveComponentFactory(factoryClass);

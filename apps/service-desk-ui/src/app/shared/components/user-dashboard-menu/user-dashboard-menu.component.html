@@ -17,8 +17,8 @@
       </div>
     </div>
     <div class="card-body">
-      <ul ngbNav #nav="ngbNav" class="nav-tabs">
-        <li>
+      <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
+        <li [ngbNavItem]="1">
           <a ngbNavLink>Уведомления</a>
           <ng-template ngbNavContent>
             <service-desk-ui-loading [loading]="loading.allNotifications" size="48px"></service-desk-ui-loading>
@@ -70,6 +70,8 @@
           </ng-template>
         </li>
       </ul>
+
+      <div [ngbNavOutlet]="nav"></div>
     </div>
   </div>
 </div>

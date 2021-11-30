@@ -9,7 +9,7 @@ import { UnauthorizedPageComponent } from './pages/unauthorized/unauthorized.pag
 
 const routes: Routes = [
   {
-    path: 'authorize',
+    path: 'oauth2/callback',
     component: AuthorizePageComponent,
     canActivate: [StateGuard],
   },

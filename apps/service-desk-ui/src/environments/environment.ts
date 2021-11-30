@@ -4,11 +4,12 @@
 
 export const environment = {
   production: false,
-  serverUrl: 'https://localhost.iss-reshetnev.ru',
-  authorizeUri: 'https://localhost.iss-reshetnev.ru:4200/authorize',
-  clientId: 42,
-  actionCableUrl: 'wss://localhost.iss-reshetnev.ru/cable',
-  versionCheckURL: 'https://localhost.iss-reshetnev.ru:4200/version.json',
+  serverUrl: 'https://inv-dev.iss-reshetnev.ru',
+  authorizeUri: 'https://localhost.iss-reshetnev.ru:4200/oauth2/callback',
+  // clientId: 42,
+  clientId: 83,
+  actionCableUrl: 'wss://inv-dev.iss-reshetnev.ru/cable',
+  versionCheckURL: 'https:/localhost.iss-reshetnev.ru:4200/version.json',
 };
 
 /*

@@ -34,6 +34,7 @@ export class UserDashboardMenuComponent implements OnInit, OnDestroy {
   notificationCount: { value: number };
   notificationLimit = this.config.defaultUserDashboardListCount;
   arrowUp = false;
+  activeTab = 1;
   @Input() calledElement: HTMLElement;
   @Output() clickedOutside = new EventEmitter<boolean>();
   @Output() notificationReaded = new EventEmitter<boolean>();

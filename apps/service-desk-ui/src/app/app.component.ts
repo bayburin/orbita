@@ -10,7 +10,7 @@ import { CheckVersionService } from './core/services/check-version/check-version
 import { environment } from '../environments/environment';
 
 @Component({
-  selector: 'app-root',
+  selector: 'orbita-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [routeAnimation],
