@@ -681,6 +681,29 @@
       "tags": [],
       "implicitDependencies": ["service-desk-ui"]
     },
+    "service-desk-ui-shell": {
+      "projectType": "library",
+      "root": "libs/service-desk-ui/shell",
+      "sourceRoot": "libs/service-desk-ui/shell/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-desk-ui/shell"],
+          "options": {
+            "jestConfig": "libs/service-desk-ui/shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["libs/service-desk-ui/shell/src/**/*.ts", "libs/service-desk-ui/shell/src/**/*.html"]
+          }
+        }
+      },
+      "tags": ["scope:service-desk-ui", "type:shell"]
+    },
     "service-desk-ui-ui": {
       "projectType": "library",
       "root": "libs/service-desk-ui/ui",

@@ -21,5 +21,6 @@ module.exports = {
     '<rootDir>/libs/orbita-ui/feature-svt-item-listing',
     '<rootDir>/libs/service-desk-ui/domain-logic',
     '<rootDir>/libs/service-desk-ui/ui',
+    '<rootDir>/libs/service-desk-ui/shell',
   ],
 };
