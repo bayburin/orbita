@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TicketModule } from './modules/ticket/ticket.module';
 import { ClaimModule } from './modules/claim/claim.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { CoreModule } from './core/core.module';
 import { MarkedOptions } from 'ngx-markdown';
 
 // import { loadDataFactory } from './core/initializer/load-data.factory';
@@ -38,6 +39,7 @@ import { StreamService } from './shared/services/stream/stream.service';
     TicketModule,
     ClaimModule,
     AuthModule,
+    CoreModule,
     AppRoutingModule,
     MarkdownModule.forRoot({
       loader: HttpClient,
