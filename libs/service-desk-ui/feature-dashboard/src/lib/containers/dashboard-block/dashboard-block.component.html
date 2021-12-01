@@ -1,0 +1,67 @@
+<div>
+  <section class="jumbotron sd-pt-3">
+    <div class="container">
+      <div class="sd-favorite-questions">
+        <h2>Рекомендуем для пользователя</h2>
+        <lib-loading [loading]="recommendationsLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
+        <lib-user-recommendations
+          [userRecommendations]="recommendations$ | async"
+          *ngIf="recommendationsLoaded$ | async"
+        ></lib-user-recommendations>
+      </div>
+    </div>
+  </section>
+
+  <!-- <section class="sd-pb-6">
+    <div class="container">
+      <app-section-header header="Услуги портала"></app-section-header>
+      <app-loading [loading]="loading" size="48px" class="d-block mb-3"></app-loading>
+      <app-category-list [categories]="data?.categories"></app-category-list>
+      <div class="text-center">
+        <a id="allCategories" routerLink="/categories" class="btn btn-gray-white">Все услуги</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="jumbotron mb-0">
+    <div class="container">
+      <app-section-header header="Часто задаваемые вопросы"></app-section-header>
+      <app-loading [loading]="loading" size="48px" class="d-block mb-3"></app-loading>
+      <div
+        class="sd-list-masonry sd-list-masonry-sm-6 sd-list-masonry-md-4 sd-child-mb-7"
+        *ngIf="data"
+        @contentBlockAnimation
+      >
+        <div *ngFor="let service of data.services.slice(0, limits.services); trackBy: trackByService">
+          <h4 [innerHtml]="service.name"></h4>
+          <ul
+            class="list-unstyled sd-child-mb-3 sd-mb-5"
+            [@ToggleQuestionList]="service.questions.slice(0, service.questionLimit).length"
+          >
+            <li *ngFor="let ticket of service.questions.slice(0, service.questionLimit); trackBy: trackByTicket">
+              <a
+                [routerLink]="['/categories', service.categoryId, 'services', service.id]"
+                [queryParams]="{ identity: ticket.identity }"
+                [innerHtml]="ticket.name"
+              ></a>
+            </li>
+          </ul>
+          <span
+            *ngIf="service.questions.length > limits.questions"
+            (click)="toggleQuestionLimit(service)"
+            class="sd-icon-group sd-link text-dark"
+          >
+            <i
+              class="mdi mdi-24px"
+              [ngClass]="
+                isNeedToDropDown(service) ? 'mdi-arrow-down-drop-circle-outline' : 'mdi-arrow-up-drop-circle-outline'
+              "
+            ></i>
+            Смотреть все вопросы
+          </span>
+        </div>
+      </div>
+      <div class="text-center"><a id="allQuestions" routerLink="/services" class="btn btn-primary">Все вопросы</a></div>
+    </div>
+  </section> -->
+</div>

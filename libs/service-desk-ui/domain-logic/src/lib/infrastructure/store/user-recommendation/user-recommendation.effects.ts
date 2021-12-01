@@ -18,7 +18,7 @@ export class UserRecommendationEffects {
         run: (action) => {
           return this.userRecommendationApi
             .query()
-            .pipe(map((recommendations) => UserRecommendationActions.loadAllSuccess({ recommendations: [] })));
+            .pipe(map((recommendations) => UserRecommendationActions.loadAllSuccess({ recommendations })));
         },
         onError: (action, error) => {
           console.error('Error', error);

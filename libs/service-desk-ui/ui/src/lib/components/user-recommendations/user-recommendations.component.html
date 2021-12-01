@@ -1,0 +1,8 @@
+<ul class="sd-list-masonry sd-list-masonry-sm-6 sd-list-masonry-md-3 list-unstyled mb-0" @contentBlockAnimation>
+  <li *ngFor="let recommendation of userRecommendations; trackBy: trackByRecommendation">
+    <a *ngIf="!recommendation.external" [routerLink]="recommendation.link" [queryParams]="recommendation.query_params">
+      {{ recommendation.title }}
+    </a>
+    <a *ngIf="recommendation.external" [href]="recommendation.link" target="_blank">{{ recommendation.title }}</a>
+  </li>
+</ul>

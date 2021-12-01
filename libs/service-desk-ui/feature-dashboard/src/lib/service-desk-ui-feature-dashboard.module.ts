@@ -5,6 +5,7 @@ import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { DashboardBlockComponent } from './containers/dashboard-block/dashboard-block.component';
 
 export const routes: Routes = [
   {
@@ -16,7 +17,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [DashboardPageComponent],
+  declarations: [DashboardPageComponent, DashboardBlockComponent],
   exports: [DashboardPageComponent],
 })
 export class ServiceDeskUiFeatureDashboardModule {}
