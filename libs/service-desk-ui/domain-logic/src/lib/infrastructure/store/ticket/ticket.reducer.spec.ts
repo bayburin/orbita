@@ -13,7 +13,7 @@ describe('TicketReducer', () => {
     } as Ticket);
 
   describe('setAll', () => {
-    it('should set attributes', () => {
+    it('should change attributes', () => {
       const tickets = [createTicket(111), createTicket(222)];
       action = TicketActions.setAll({ tickets });
       const result: State = reducer(initialState, action);

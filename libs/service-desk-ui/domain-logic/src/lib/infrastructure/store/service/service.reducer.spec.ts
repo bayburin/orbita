@@ -13,7 +13,7 @@ describe('Service Reducer', () => {
     } as Service);
 
   describe('setAll', () => {
-    it('should set attributes', () => {
+    it('should change attributes', () => {
       const services = [createService(111), createService(222)];
       action = ServiceActions.setAll({ services });
       const result: State = reducer(initialState, action);
@@ -23,7 +23,7 @@ describe('Service Reducer', () => {
   });
 
   describe('loadSelected', () => {
-    it('should set attributes', () => {
+    it('should change attributes', () => {
       action = ServiceActions.loadSelected();
       const result: State = reducer(initialState, action);
 
@@ -34,7 +34,7 @@ describe('Service Reducer', () => {
   });
 
   describe('loadSelectedSuccess', () => {
-    it('should set attributes', () => {
+    it('should change attributes', () => {
       const service = createService(111);
       initialState.loading = true;
       action = ServiceActions.loadSelectedSuccess({ service });
@@ -48,7 +48,7 @@ describe('Service Reducer', () => {
   });
 
   describe('loadSelectedFailure', () => {
-    it('should set attributes', () => {
+    it('should change attributes', () => {
       const error = 'fake-error';
       initialState.loading = true;
       action = ServiceActions.loadSelectedFailure({ error });

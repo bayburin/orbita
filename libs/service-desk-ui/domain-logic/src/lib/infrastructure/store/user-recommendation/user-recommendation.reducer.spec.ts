@@ -13,7 +13,7 @@ describe('UserRecommendationReducer', () => {
     } as UserRecommendation);
 
   describe('loadAll', () => {
-    it('should clear "loading" and "error" attributes', () => {
+    it('should change attributes', () => {
       action = UserRecommendationActions.loadAll();
       const result: State = reducer(initialState, action);
 
@@ -24,7 +24,7 @@ describe('UserRecommendationReducer', () => {
   });
 
   describe('loadAllSuccess', () => {
-    it('should return set the list of known SdRequest', () => {
+    it('should change attributes', () => {
       const recommendations = [createUserRecommendation(111), createUserRecommendation(222)];
       initialState.loading = true;
       action = UserRecommendationActions.loadAllSuccess({ recommendations });
@@ -37,7 +37,7 @@ describe('UserRecommendationReducer', () => {
   });
 
   describe('loadAllFailure', () => {
-    it('should set attributes', () => {
+    it('should change attributes', () => {
       const error = { message: 'error' };
       action = UserRecommendationActions.loadAllFailure({ error });
       const result: State = reducer(initialState, action);

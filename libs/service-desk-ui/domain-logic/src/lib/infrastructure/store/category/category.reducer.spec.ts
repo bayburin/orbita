@@ -13,7 +13,7 @@ describe('CategoryReducer', () => {
     } as Category);
 
   describe('loadAll', () => {
-    it('should clear "loading" and "error" attributes', () => {
+    it('should change attributes', () => {
       action = CategoryActions.loadAll();
       const result: State = reducer(initialState, action);
 
@@ -24,7 +24,7 @@ describe('CategoryReducer', () => {
   });
 
   describe('loadAllSuccess', () => {
-    it('should return set the list of known SdRequest', () => {
+    it('should change attributes', () => {
       const categories = [createCategory(111), createCategory(222)];
       initialState.loading = true;
       action = CategoryActions.loadAllSuccess({ categories });
@@ -37,7 +37,7 @@ describe('CategoryReducer', () => {
   });
 
   describe('loadAllFailure', () => {
-    it('should set attributes', () => {
+    it('should change attributes', () => {
       const error = { message: 'error' };
       action = CategoryActions.loadAllFailure({ error });
       const result: State = reducer(initialState, action);
