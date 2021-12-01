@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromServiceDeskUi from './infrastructure/store/index';
 import { CategoryEffects } from './infrastructure/store/category/category.effects';
 import { ServiceEffects } from './infrastructure/store/service/service.effects';
+import { UserRecommendationEffects } from './infrastructure/store/user-recommendation/user-recommendation.effects';
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import { ServiceEffects } from './infrastructure/store/service/service.effects';
     StoreModule.forFeature(fromServiceDeskUi.SERVICE_DESK_SYSTEM_FEATURE_KEY, fromServiceDeskUi.reducer, {
       initialState: fromServiceDeskUi.initialState,
     }),
-    EffectsModule.forFeature([CategoryEffects, ServiceEffects]),
+    EffectsModule.forFeature([CategoryEffects, ServiceEffects, UserRecommendationEffects]),
   ],
 })
 export class ServiceDeskUiDomainLogicModule {}

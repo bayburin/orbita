@@ -2,13 +2,13 @@ import { Category } from '../../../entities/model/category.interface';
 import { categoryAdapter, CategoryPartialState, initialState } from './category.reducer';
 import * as CategorySelectors from './category.selectors';
 
-describe('Category Selectors', () => {
+describe('CategorySelectors', () => {
   const error = { message: 'error message' };
   const createCategoryEntity = (id: number, name = ''): Category =>
     ({
       id,
       name: name || `name-${id}`,
-    } as unknown as Category);
+    } as Category);
   const arrEntities = [createCategoryEntity(1), createCategoryEntity(2), createCategoryEntity(3)];
   const entities = {
     1: arrEntities[0],
