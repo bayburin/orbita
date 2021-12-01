@@ -22,5 +22,6 @@ module.exports = {
     '<rootDir>/libs/service-desk-ui/domain-logic',
     '<rootDir>/libs/service-desk-ui/ui',
     '<rootDir>/libs/service-desk-ui/shell',
+    '<rootDir>/libs/service-desk-ui/feature-dashboard',
   ],
 };
