@@ -7,7 +7,7 @@ import * as UserRecommendationSelectors from '../../infrastructure/store/user-re
 import * as UserRecommendationActions from '../../infrastructure/store/user-recommendation/user-recommendation.actions';
 
 /**
- * Фасад для работы с заявками (обращения к хранилищу SdRequest)
+ * Фасад для работы с рекомендациями
  */
 @Injectable({
   providedIn: 'root',

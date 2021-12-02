@@ -1,7 +1,7 @@
-import { contentBlockAnimation } from '../../animations/content.animation';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { UserRecommendation } from '@orbita/service-desk-ui/domain-logic';
+import { contentBlockAnimation } from '../../animations/content.animation';
 
 @Component({
   selector: 'lib-user-recommendations',

@@ -1,7 +1,12 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserRecommendationFacade, UserRecommendationFacadeStub } from '@orbita/service-desk-ui/domain-logic';
+import {
+  UserRecommendationFacade,
+  UserRecommendationFacadeStub,
+  CategoryFacade,
+  CategoryFacadeStub,
+} from '@orbita/service-desk-ui/domain-logic';
 import { DashboardBlockComponent } from './dashboard-block.component';
 
 describe('DashboardBlockComponent', () => {
@@ -11,7 +16,10 @@ describe('DashboardBlockComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardBlockComponent],
-      providers: [{ provide: UserRecommendationFacade, useClass: UserRecommendationFacadeStub }],
+      providers: [
+        { provide: UserRecommendationFacade, useClass: UserRecommendationFacadeStub },
+        { provide: CategoryFacade, useClass: CategoryFacadeStub },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });

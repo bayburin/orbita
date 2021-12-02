@@ -12,18 +12,18 @@
     </div>
   </section>
 
-  <!-- <section class="sd-pb-6">
+  <section class="sd-pb-6">
     <div class="container">
-      <app-section-header header="Услуги портала"></app-section-header>
-      <app-loading [loading]="loading" size="48px" class="d-block mb-3"></app-loading>
-      <app-category-list [categories]="data?.categories"></app-category-list>
+      <lib-section-header header="Услуги портала"></lib-section-header>
+      <lib-loading [loading]="categoriesLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
+      <lib-category-list [categories]="categories$ | async"></lib-category-list>
       <div class="text-center">
-        <a id="allCategories" routerLink="/categories" class="btn btn-gray-white">Все услуги</a>
+        <a id="allCategories" routerLink="categories" class="btn btn-gray-white">Все услуги</a>
       </div>
     </div>
   </section>
 
-  <section class="jumbotron mb-0">
+  <!-- <section class="jumbotron mb-0">
     <div class="container">
       <app-section-header header="Часто задаваемые вопросы"></app-section-header>
       <app-loading [loading]="loading" size="48px" class="d-block mb-3"></app-loading>
