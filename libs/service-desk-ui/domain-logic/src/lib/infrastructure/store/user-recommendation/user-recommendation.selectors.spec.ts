@@ -32,7 +32,7 @@ describe('UserRecommendationSelectors', () => {
   });
 
   it('getLoading() should return "loading" attribute', () => {
-    expect(UserRecommendationSelectors.getLoaded.projector(state)).toEqual(true);
+    expect(UserRecommendationSelectors.getLoading.projector(state)).toEqual(true);
   });
 
   it('getError() should return "error" attribute', () => {

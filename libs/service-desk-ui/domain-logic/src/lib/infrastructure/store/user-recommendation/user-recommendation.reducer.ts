@@ -25,6 +25,9 @@ export const initialState: State = userRecommendationAdapter.getInitialState({
 
 const userRecommendationReducer = createReducer(
   initialState,
+  on(UserRecommendationActions.setAll, (state, { recommendations }) =>
+    userRecommendationAdapter.setAll(recommendations, state)
+  ),
   on(UserRecommendationActions.loadAll, (state) => ({ ...state, loaded: false, loading: true, error: null })),
   on(UserRecommendationActions.loadAllSuccess, (state, { recommendations }) =>
     userRecommendationAdapter.setAll(recommendations, { ...state, loaded: true, loading: false })

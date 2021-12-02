@@ -33,7 +33,7 @@ describe('CategorySelectors', () => {
   });
 
   it('getLoading() should return "loading" attribute', () => {
-    expect(CategorySelectors.getLoaded.projector(state)).toEqual(true);
+    expect(CategorySelectors.getLoading.projector(state)).toEqual(true);
   });
 
   it('getError() should return "error" attribute', () => {

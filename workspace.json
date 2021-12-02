@@ -705,7 +705,7 @@
           }
         }
       },
-      "tags": ["scope:orbita-ui", "type:feature"]
+      "tags": ["scope:service-desk-ui", "type:feature"]
     },
     "service-desk-ui-shell": {
       "projectType": "library",

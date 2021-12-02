@@ -27,7 +27,7 @@ export const getAllCategoriesVM = createSelector(
   getServiceEntitiesVM,
   (categories, serviceEntities): CategoryVM[] =>
     categories.map((category) => {
-      const services = category.services.map((id) => serviceEntities[id]);
+      const services = category.services ? category.services.map((id) => serviceEntities[id]) : [];
 
       return {
         ...category,

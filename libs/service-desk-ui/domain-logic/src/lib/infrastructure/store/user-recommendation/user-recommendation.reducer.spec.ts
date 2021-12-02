@@ -12,6 +12,16 @@ describe('UserRecommendationReducer', () => {
       link: name || `name-${id}`,
     } as UserRecommendation);
 
+  describe('setAll', () => {
+    it('should change attributes', () => {
+      const recommendations = [createUserRecommendation(111), createUserRecommendation(222)];
+      action = UserRecommendationActions.setAll({ recommendations });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(2);
+    });
+  });
+
   describe('loadAll', () => {
     it('should change attributes', () => {
       action = UserRecommendationActions.loadAll();

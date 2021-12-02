@@ -6,6 +6,8 @@ import {
   UserRecommendationFacadeStub,
   CategoryFacade,
   CategoryFacadeStub,
+  DashboardFacade,
+  DashboardFacadeStub,
 } from '@orbita/service-desk-ui/domain-logic';
 import { DashboardBlockComponent } from './dashboard-block.component';
 
@@ -17,6 +19,7 @@ describe('DashboardBlockComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardBlockComponent],
       providers: [
+        { provide: DashboardFacade, useClass: DashboardFacadeStub },
         { provide: UserRecommendationFacade, useClass: UserRecommendationFacadeStub },
         { provide: CategoryFacade, useClass: CategoryFacadeStub },
       ],

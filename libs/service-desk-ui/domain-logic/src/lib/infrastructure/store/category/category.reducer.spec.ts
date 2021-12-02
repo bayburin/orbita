@@ -12,6 +12,16 @@ describe('CategoryReducer', () => {
       name: name || `name-${id}`,
     } as Category);
 
+  describe('setAll', () => {
+    it('should change attributes', () => {
+      const categories = [createCategory(111), createCategory(222)];
+      action = CategoryActions.setAll({ categories });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(2);
+    });
+  });
+
   describe('loadAll', () => {
     it('should change attributes', () => {
       action = CategoryActions.loadAll();

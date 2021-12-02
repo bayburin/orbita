@@ -33,7 +33,7 @@ describe('ServiceSelectors', () => {
   });
 
   it('getLoading() should return "loading" attribute', () => {
-    expect(ServiceSelectors.getLoaded.projector(state)).toEqual(true);
+    expect(ServiceSelectors.getLoading.projector(state)).toEqual(true);
   });
 
   it('getError() should return "error" attribute', () => {

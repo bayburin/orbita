@@ -26,6 +26,7 @@ export const initialState: State = categoryAdapter.getInitialState({
 
 const categoryReducer = createReducer(
   initialState,
+  on(CategoryActions.setAll, (state, { categories }) => categoryAdapter.setAll(categories, state)),
   on(CategoryActions.loadAll, (state) => ({ ...state, loaded: false, loading: true, error: null })),
   on(CategoryActions.loadAllSuccess, (state, { entities, ids }) => ({
     ...state,

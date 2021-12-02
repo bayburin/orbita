@@ -3,10 +3,10 @@
     <div class="container">
       <div class="sd-favorite-questions">
         <h2>Рекомендуем для пользователя</h2>
-        <lib-loading [loading]="recommendationsLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
+        <lib-loading [loading]="dashboardLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
         <lib-user-recommendations
+          *ngIf="dashboardLoaded$ | async"
           [userRecommendations]="recommendations$ | async"
-          *ngIf="recommendationsLoaded$ | async"
         ></lib-user-recommendations>
       </div>
     </div>
@@ -15,8 +15,8 @@
   <section class="sd-pb-6">
     <div class="container">
       <lib-section-header header="Услуги портала"></lib-section-header>
-      <lib-loading [loading]="categoriesLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
-      <lib-category-list [categories]="categories$ | async"></lib-category-list>
+      <lib-loading [loading]="dashboardLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
+      <lib-category-list *ngIf="dashboardLoaded$ | async" [categories]="categories$ | async"></lib-category-list>
       <div class="text-center">
         <a id="allCategories" routerLink="categories" class="btn btn-gray-white">Все услуги</a>
       </div>
