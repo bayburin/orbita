@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
-import { Category } from '@orbita/service-desk-ui/domain-logic';
+import { CategoryVM } from '@orbita/service-desk-ui/domain-logic';
 import { CategoryHeaderComponent } from './category-header.component';
 
 describe('CategoryHeaderComponent', () => {
@@ -18,7 +18,7 @@ describe('CategoryHeaderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryHeaderComponent);
     component = fixture.componentInstance;
-    component.category = { id: 123 } as Category;
+    component.category = { id: 123 } as CategoryVM;
     fixture.detectChanges();
   });
 

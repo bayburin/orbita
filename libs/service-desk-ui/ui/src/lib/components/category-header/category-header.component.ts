@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { Category } from '@orbita/service-desk-ui/domain-logic';
+import { CategoryVM } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'lib-category-header',
@@ -12,5 +12,5 @@ export class CategoryHeaderComponent {
   /**
    * Категория
    */
-  @Input() category: Category;
+  @Input() category: CategoryVM;
 }

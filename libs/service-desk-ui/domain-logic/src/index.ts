@@ -4,6 +4,9 @@ export * from './lib/entities/model/user-recommendation.interface';
 export * from './lib/entities/model/category.interface';
 export * from './lib/entities/model/service.interface';
 
+export * from './lib/entities/view-models/category-vm.interface';
+export * from './lib/entities/view-models/service-vm.interface';
+
 export * from './lib/application/user-recommendation/user-recommendation.facade';
 export * from './lib/application/user-recommendation/user-recommendation.facade.stub';
 export * from './lib/application/category/category.facade';

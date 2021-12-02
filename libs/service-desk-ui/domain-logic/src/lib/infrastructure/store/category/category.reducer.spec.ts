@@ -25,9 +25,9 @@ describe('CategoryReducer', () => {
 
   describe('loadAllSuccess', () => {
     it('should change attributes', () => {
-      const categories = [createCategory(111), createCategory(222)];
+      const categories = { 111: createCategory(111), 222: createCategory(222) };
       initialState.loading = true;
-      action = CategoryActions.loadAllSuccess({ categories });
+      action = CategoryActions.loadAllSuccess({ entities: categories, ids: Object.keys(categories).map(Number) });
       const result: State = reducer(initialState, action);
 
       expect(result.ids.length).toBe(2);

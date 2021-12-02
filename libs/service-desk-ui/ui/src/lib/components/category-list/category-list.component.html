@@ -5,9 +5,11 @@
   <li *ngFor="let category of categories; trackBy: trackByCategory">
     <lib-category-header [category]="category"></lib-category-header>
     <ul *ngIf="category.services" class="sd-category-list-item list-unstyled sd-child-mb-3 collapse show">
-      <!-- <li *ngFor="let service of category.services; trackBy: trackByService">
-        <a [routerLink]="[category.id, 'services', service.id]" [innerHtml]="service.name"></a>
-      </li> -->
+      <div *ngIf="showServices">
+        <li *ngFor="let service of category.services; trackBy: trackByService">
+          <a [routerLink]="[category.id, 'services', service.id]" [innerHtml]="service.name"></a>
+        </li>
+      </div>
     </ul>
   </li>
 </ul>

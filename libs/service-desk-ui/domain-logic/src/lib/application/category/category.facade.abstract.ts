@@ -1,12 +1,12 @@
 import { Observable } from 'rxjs';
 
-import { Category } from './../../entities/model/category.interface';
+import { CategoryVM } from './../../entities/view-models/category-vm.interface';
 
 export abstract class CategoryFacadeAbstract {
   /**
    * Общее число категорий
    */
-  all$: Observable<Category[]>;
+  all$: Observable<CategoryVM[]>;
   /**
    * Индикатор, идет ли загрузка в данный момент
    */

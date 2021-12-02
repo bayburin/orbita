@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
-import { Category, Service } from '@orbita/service-desk-ui/domain-logic';
+import { CategoryVM, ServiceVM } from '@orbita/service-desk-ui/domain-logic';
 import { contentListAnimation } from './../../animations/content.animation';
 
 @Component({
@@ -14,13 +14,17 @@ export class CategoryListComponent {
   /**
    * Список категорий
    */
-  @Input() categories: Category[];
+  @Input() categories: CategoryVM[];
+  /**
+   * Флаг, определяющий, нужно ли показывать услуги, привязанные к категориям
+   */
+  @Input() showServices: boolean = false;
 
-  trackByCategory(index: number, category: Category) {
+  trackByCategory(index: number, category: CategoryVM) {
     return category.id;
   }
 
-  trackByService(index: number, service: Service) {
+  trackByService(index: number, service: ServiceVM) {
     return service.id;
   }
 }

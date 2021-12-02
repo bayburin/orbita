@@ -1,7 +1,10 @@
+import { Ticket } from '../model/ticket.interface';
+import { ResponsibleUser } from '../model/responsible-user.interface';
+
 /**
- * Услуга
+ * Представление услуги
  */
-export interface Service {
+export interface ServiceVM {
   /**
    * Идентификатор
    */
@@ -45,10 +48,10 @@ export interface Service {
   /**
    * Тикеты
    */
-  readonly tickets?: number[];
+  readonly tickets?: Ticket[];
 
   /**
    * Ответственные
    */
-  readonly responsible_users?: number[];
+  readonly responsible_users?: ResponsibleUser[];
 }
