@@ -1,3 +1,4 @@
+import { contentBlockAnimation } from '../../animations/content.animation';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { UserRecommendation } from '@orbita/service-desk-ui/domain-logic';
@@ -6,6 +7,7 @@ import { UserRecommendation } from '@orbita/service-desk-ui/domain-logic';
   selector: 'lib-user-recommendations',
   templateUrl: './user-recommendations.component.html',
   styleUrls: ['./user-recommendations.component.scss'],
+  animations: [contentBlockAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserRecommendationsComponent {
