@@ -1,8 +1,9 @@
 import { createAction, props } from '@ngrx/store';
+import { Dictionary } from '@ngrx/entity';
 
 import { Service } from '../../../entities/model/service.interface';
 
-export const setAll = createAction('[Service] Set All', props<{ services: Service[] }>());
+export const setEntities = createAction('[Service] Set Entities', props<{ entities: Dictionary<Service> }>());
 
 export const loadSelected = createAction('[Service/API] Load Selected');
 

@@ -8,6 +8,8 @@ import {
   CategoryFacadeStub,
   DashboardFacade,
   DashboardFacadeStub,
+  ServiceFacade,
+  ServiceFacadeStub,
 } from '@orbita/service-desk-ui/domain-logic';
 import { DashboardBlockComponent } from './dashboard-block.component';
 
@@ -22,6 +24,7 @@ describe('DashboardBlockComponent', () => {
         { provide: DashboardFacade, useClass: DashboardFacadeStub },
         { provide: UserRecommendationFacade, useClass: UserRecommendationFacadeStub },
         { provide: CategoryFacade, useClass: CategoryFacadeStub },
+        { provide: ServiceFacade, useClass: ServiceFacadeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

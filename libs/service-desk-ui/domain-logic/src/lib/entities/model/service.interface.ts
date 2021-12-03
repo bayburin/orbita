@@ -43,9 +43,9 @@ export interface Service {
   readonly popularity: number;
 
   /**
-   * Тикеты
+   * Вопросы
    */
-  readonly tickets?: number[];
+  readonly questions?: number[];
 
   /**
    * Ответственные

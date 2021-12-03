@@ -1,0 +1,14 @@
+<div class="sd-list-masonry sd-list-masonry-sm-6 sd-list-masonry-md-4 sd-child-mb-7" @contentBlockAnimation>
+  <div *ngFor="let service of services.slice(0, limits.services); trackBy: trackByService">
+    <h4 [innerHtml]="service.name"></h4>
+    <ul class="list-unstyled sd-child-mb-3 sd-mb-5">
+      <li *ngFor="let question of service.questions.slice(0, limits.questions); trackBy: trackByQuestion">
+        <a
+          [routerLink]="['/categories', service.category_id, 'services', service.id]"
+          [queryParams]="{ identity: question.ticket.identity }"
+          [innerHtml]="question.ticket.name"
+        ></a>
+      </li>
+    </ul>
+  </div>
+</div>

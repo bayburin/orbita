@@ -4,7 +4,7 @@ import { CategoryVM } from './../../entities/view-models/category-vm.interface';
 
 export abstract class CategoryFacadeAbstract {
   /**
-   * Общее число категорий
+   * Список всех категорий
    */
   all$: Observable<CategoryVM[]>;
   /**

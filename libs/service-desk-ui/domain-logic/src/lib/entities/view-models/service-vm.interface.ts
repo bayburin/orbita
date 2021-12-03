@@ -1,4 +1,4 @@
-import { Ticket } from '../model/ticket.interface';
+import { Question } from '../model/question.interface';
 import { ResponsibleUser } from '../model/responsible-user.interface';
 
 /**
@@ -46,9 +46,9 @@ export interface ServiceVM {
   readonly popularity: number;
 
   /**
-   * Тикеты
+   * Вопросы
    */
-  readonly tickets?: Ticket[];
+  readonly questions?: Question[];
 
   /**
    * Ответственные

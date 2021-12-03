@@ -23,7 +23,7 @@ export class CategoryEffects {
               const data = CategoryCacheService.normalizeategories(categories);
 
               return [
-                ServiceActions.setAll({ services: Object.values(data.entities.services || []) }),
+                ServiceActions.setEntities({ entities: data.entities.services }),
                 CategoryActions.loadAllSuccess({ entities: data.entities.categories, ids: data.result as number[] }),
               ];
             })

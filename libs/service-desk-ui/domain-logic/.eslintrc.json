@@ -21,7 +21,8 @@
             "prefix": "orbita",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "@typescript-eslint/no-empty-interface": "off"
       }
     },
     {

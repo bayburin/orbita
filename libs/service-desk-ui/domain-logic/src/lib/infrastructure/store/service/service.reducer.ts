@@ -26,7 +26,11 @@ export const initialState: State = serviceAdapter.getInitialState({
 
 const serviceReducer = createReducer(
   initialState,
-  on(ServiceActions.setAll, (state, { services }) => serviceAdapter.setAll(services, state)),
+  on(ServiceActions.setEntities, (state, { entities }) => ({
+    ...state,
+    entities: entities,
+    ids: Object.keys(entities).map(Number),
+  })),
   on(ServiceActions.loadSelected, (state) => ({ ...state, loaded: false, loading: true, error: null })),
   on(ServiceActions.loadSelectedSuccess, (state, { service }) =>
     serviceAdapter.setOne(service, { ...state, selectedId: service.id, loaded: true, loading: false })

@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 
 import * as DashboardActions from './dashboard.actions';
 import { DashboardEffects } from './dashboard.effects';
+import { DashboardApi } from '../../api/dashboard/dashboard.api';
+import { DashboardApiStub } from './../../api/dashboard/dashboard.api.stub';
 
 describe('DashboardEffects', () => {
   let actions: Observable<Action>;
@@ -16,7 +18,12 @@ describe('DashboardEffects', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NxModule.forRoot()],
-      providers: [DashboardEffects, provideMockActions(() => actions), provideMockStore()],
+      providers: [
+        DashboardEffects,
+        provideMockActions(() => actions),
+        provideMockStore(),
+        { provide: DashboardApi, useClass: DashboardApiStub },
+      ],
     });
 
     effects = TestBed.inject(DashboardEffects);

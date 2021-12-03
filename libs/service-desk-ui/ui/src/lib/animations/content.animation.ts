@@ -6,7 +6,7 @@ export const contentListAnimation = trigger('contentListAnimation', [
       ':enter',
       [
         style({ transform: 'translateY(10%)', opacity: 0 }),
-        stagger(75, [animate('300ms ease-in-out', style({ transform: 'translateY(0%)', opacity: 1 }))]),
+        stagger(75, [animate('200ms ease-in-out', style({ transform: 'translateY(0%)', opacity: 1 }))]),
       ],
       { optional: true }
     ),

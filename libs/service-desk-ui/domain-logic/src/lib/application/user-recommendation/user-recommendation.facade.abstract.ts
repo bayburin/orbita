@@ -4,7 +4,7 @@ import { UserRecommendation } from './../../entities/model/user-recommendation.i
 
 export abstract class UserRecommendationFacadeAbstract {
   /**
-   * Общее число рекомендаций
+   * Список всех рекомендаций
    */
   all$: Observable<UserRecommendation[]>;
   /**

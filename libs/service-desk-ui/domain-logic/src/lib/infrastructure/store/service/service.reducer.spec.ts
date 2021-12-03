@@ -12,10 +12,10 @@ describe('Service Reducer', () => {
       name: name || `name-${id}`,
     } as Service);
 
-  describe('setAll', () => {
+  describe('setEntities', () => {
     it('should change attributes', () => {
-      const services = [createService(111), createService(222)];
-      action = ServiceActions.setAll({ services });
+      const entities = { 111: createService(111), 222: createService(222) };
+      action = ServiceActions.setEntities({ entities });
       const result: State = reducer(initialState, action);
 
       expect(result.ids.length).toBe(2);

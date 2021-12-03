@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DashboardFacade, UserRecommendationFacade, CategoryFacade } from '@orbita/service-desk-ui/domain-logic';
+import {
+  DashboardFacade,
+  UserRecommendationFacade,
+  CategoryFacade,
+  ServiceFacade,
+} from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'lib-dashboard-block',
@@ -12,11 +17,13 @@ export class DashboardBlockComponent implements OnInit {
   dashboardLoaded$ = this.dashboardFacade.loadedDashboard$;
   recommendations$ = this.userRecommendationFacade.all$;
   categories$ = this.categoryFacade.all$;
+  services$ = this.serviceFacade.all$;
 
   constructor(
     private dashboardFacade: DashboardFacade,
     private userRecommendationFacade: UserRecommendationFacade,
-    private categoryFacade: CategoryFacade
+    private categoryFacade: CategoryFacade,
+    private serviceFacade: ServiceFacade
   ) {}
 
   ngOnInit(): void {

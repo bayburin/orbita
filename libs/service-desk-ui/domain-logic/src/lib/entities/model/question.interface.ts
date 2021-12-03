@@ -1,3 +1,5 @@
+import { Ticket } from './ticket.interface';
+
 /**
  * Вопрос
  */
@@ -15,7 +17,7 @@ export interface Question {
   /**
    * Тикет
    */
-  readonly ticket: number;
+  readonly ticket: Ticket;
 
   /**
    * Черновой вариант вопроса
