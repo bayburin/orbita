@@ -4,6 +4,7 @@ import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { ActionCableService } from 'angular2-actioncable';
 import { MarkdownModule } from 'ngx-markdown';
+import { AuthCenterModule } from '@iss/ng-auth-center';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -11,12 +12,13 @@ import { APP_CONFIG, AppConfig } from './config/app.config';
 import { AppRoutingModule } from './app-routing.module';
 import { TicketModule } from './modules/ticket/ticket.module';
 import { ClaimModule } from './modules/claim/claim.module';
-import { AuthModule } from './modules/auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { MarkedOptions } from 'ngx-markdown';
 
 // import { loadDataFactory } from './core/initializer/load-data.factory';
 // import { AppLoadService } from './core/initializer/app-load.service';
+
+import { environment } from '../environments/environment';
 
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { ErrorInterceptor } from './core/interceptors/error.interceptor';
@@ -38,8 +40,8 @@ import { StreamService } from './shared/services/stream/stream.service';
     HttpClientModule,
     TicketModule,
     ClaimModule,
-    AuthModule,
     CoreModule,
+    AuthCenterModule.forRoot(environment.auth),
     AppRoutingModule,
     MarkdownModule.forRoot({
       loader: HttpClient,

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from '../../core/guards/auth/auth.guard';
 import { ResponsibleGuard } from '../../core/guards/responsible/responsible.guard';
 import { DashboardPageComponent } from './pages/dashboard/dashboard.page';
 import { CategoriesPageComponent } from './pages/categories/categories.page';
@@ -18,12 +17,10 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardPageComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'categories',
     component: CategoriesPageComponent,
-    canActivate: [AuthGuard],
     data: { breadcrumb: 'Услуги' },
     children: [
       {
@@ -40,12 +37,10 @@ const routes: Routes = [
   {
     path: 'services/:id',
     component: ServiceRedirectionComponent,
-    canActivate: [AuthGuard],
   },
   {
     path: 'categories/:id',
     component: CategoriesPageComponent,
-    canActivate: [AuthGuard],
     data: { breadcrumb: [CategoryService, ServiceService] },
     children: [
       {
@@ -71,13 +66,11 @@ const routes: Routes = [
   {
     path: 'search',
     component: SearchPageComponent,
-    canActivate: [AuthGuard],
     data: { breadcrumb: 'Поиск' },
   },
   {
     path: 'markdown-help',
     component: MarkdownHelpPageComponent,
-    canActivate: [AuthGuard],
     data: { breadcrumb: 'Справка по форматированию' },
   },
 ];
