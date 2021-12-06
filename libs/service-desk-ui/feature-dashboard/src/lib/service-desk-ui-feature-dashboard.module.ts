@@ -6,6 +6,7 @@ import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-l
 
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { DashboardBlockComponent } from './containers/dashboard-block/dashboard-block.component';
+import { GlobalSearchComponent } from './containers/global-search/global-search.component';
 
 export const routes: Routes = [
   {
@@ -17,7 +18,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [DashboardPageComponent, DashboardBlockComponent],
+  declarations: [DashboardPageComponent, DashboardBlockComponent, GlobalSearchComponent],
   exports: [DashboardPageComponent],
 })
 export class ServiceDeskUiFeatureDashboardModule {}
