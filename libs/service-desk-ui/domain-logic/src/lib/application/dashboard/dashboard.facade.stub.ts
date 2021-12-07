@@ -3,8 +3,10 @@ import { BehaviorSubject } from 'rxjs';
 import { DashboardFacadeAbstract } from './dashboard.facade.abstract';
 
 export class DashboardFacadeStub implements DashboardFacadeAbstract {
-  loadingDashboard$ = new BehaviorSubject(false);
-  loadedDashboard$ = new BehaviorSubject(false);
+  loading$ = new BehaviorSubject(false);
+  loaded$ = new BehaviorSubject(false);
+  categories$ = new BehaviorSubject([]);
+  services$ = new BehaviorSubject([]);
 
   loadDashboard() {
     /** */

@@ -5,8 +5,10 @@ import * as DashboardActions from './dashboard.actions';
 export const DASHBOARD_FEATURE_KEY = 'dashboard';
 
 export interface State {
-  loadingDashboard: boolean;
-  loadedDashboard: boolean;
+  loading: boolean;
+  loaded: boolean;
+  categoryIds: number[];
+  serviceIds: number[];
   error?: string | null;
 }
 
@@ -15,20 +17,28 @@ export interface DashboardPartialState {
 }
 
 export const initialState: State = {
-  loadingDashboard: false,
-  loadedDashboard: false,
+  loading: false,
+  loaded: false,
+  categoryIds: [],
+  serviceIds: [],
 };
 
 const dashboardReducer = createReducer(
   initialState,
   on(DashboardActions.loadDashboard, (state) => ({
     ...state,
-    loadingDashboard: true,
-    loadedDashboard: false,
+    loading: true,
+    loaded: false,
     error: null,
   })),
-  on(DashboardActions.loadDashboardSuccess, (state) => ({ ...state, loadingDashboard: false, loadedDashboard: true })),
-  on(DashboardActions.loadDashboardFailure, (state, { error }) => ({ ...state, loadingDashboard: false, error }))
+  on(DashboardActions.loadDashboardSuccess, (state, { categoryIds, serviceIds }) => ({
+    ...state,
+    loading: false,
+    loaded: true,
+    categoryIds,
+    serviceIds,
+  })),
+  on(DashboardActions.loadDashboardFailure, (state, { error }) => ({ ...state, loading: false, error }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

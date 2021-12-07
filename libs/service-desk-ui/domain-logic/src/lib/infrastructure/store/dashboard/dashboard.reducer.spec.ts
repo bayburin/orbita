@@ -11,20 +11,22 @@ describe('Dashboard Reducer', () => {
       action = DashboardActions.loadDashboard();
       const result: State = reducer(initialState, action);
 
-      expect(result.loadedDashboard).toBe(false);
-      expect(result.loadingDashboard).toBe(true);
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
       expect(result.error).toBeNull();
     });
   });
 
   describe('loadAllSuccess', () => {
     it('should change attributes', () => {
-      initialState.loadingDashboard = true;
-      action = DashboardActions.loadDashboardSuccess();
+      initialState.loading = true;
+      action = DashboardActions.loadDashboardSuccess({ categoryIds: [1, 2], serviceIds: [3, 4] });
       const result: State = reducer(initialState, action);
 
-      expect(result.loadingDashboard).toEqual(false);
-      expect(result.loadedDashboard).toBe(true);
+      expect(result.loading).toEqual(false);
+      expect(result.loaded).toBe(true);
+      expect(result.categoryIds).toEqual([1, 2]);
+      expect(result.serviceIds).toEqual([3, 4]);
     });
   });
 
@@ -35,7 +37,7 @@ describe('Dashboard Reducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.error).toEqual(error);
-      expect(result.loadingDashboard).toEqual(false);
+      expect(result.loading).toEqual(false);
     });
   });
 

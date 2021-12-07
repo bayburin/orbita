@@ -24,13 +24,15 @@ export class DashboardEffects {
           return this.dashboardApi.loadDashboardData().pipe(
             switchMap((dashboard) => {
               const normalizedServices = ServiceCacheService.normalizeServices(dashboard.services).entities;
+              const categoryIds = dashboard.categories.map((category) => category.id);
+              const serviceIds = dashboard.services.map((service) => service.id);
 
               return [
                 CategoryActions.setAll({ categories: dashboard.categories || [] }),
                 UserRecommendationActions.setAll({ recommendations: dashboard.user_recommendations || [] }),
                 QuestionActions.setEntities({ entities: normalizedServices.questions }),
                 ServiceActions.setEntities({ entities: normalizedServices.services }),
-                DashboardActions.loadDashboardSuccess(),
+                DashboardActions.loadDashboardSuccess({ categoryIds, serviceIds }),
               ];
             })
           );

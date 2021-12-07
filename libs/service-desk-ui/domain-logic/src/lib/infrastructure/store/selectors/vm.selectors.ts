@@ -6,6 +6,7 @@ import { CategoryVM } from '../../../entities/view-models/category-vm.interface'
 import * as QuestionSelectors from '../question/question.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 import * as CategorySelectors from '../category/category.selectors';
+import * as DashboardSelectors from '../dashboard/dashboard.selectors';
 
 export const getServiceEntitiesVM = createSelector(
   ServiceSelectors.getEntities,
@@ -43,6 +44,35 @@ export const getAllCategoriesVM = createSelector(
 
 export const getAllServicesVM = createSelector(
   ServiceSelectors.getAll,
+  QuestionSelectors.getEntities,
+  (services, questionEntities): ServiceVM[] =>
+    services.map((service) => {
+      const questions = service.questions ? service.questions.map((id) => questionEntities[id]) : [];
+
+      return {
+        ...service,
+        questions,
+        responsible_users: [],
+      };
+    })
+);
+
+export const getDashboardCategoriesVM = createSelector(
+  DashboardSelectors.getCategories,
+  getServiceEntitiesVM,
+  (categories, serviceEntities): CategoryVM[] =>
+    categories.map((category) => {
+      const services = category.services ? category.services.map((id) => serviceEntities[id]) : [];
+
+      return {
+        ...category,
+        services,
+      };
+    })
+);
+
+export const getDashboardServicesVM = createSelector(
+  DashboardSelectors.getServices,
   QuestionSelectors.getEntities,
   (services, questionEntities): ServiceVM[] =>
     services.map((service) => {
