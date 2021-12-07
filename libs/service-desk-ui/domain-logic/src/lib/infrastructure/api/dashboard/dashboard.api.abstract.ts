@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { Dashboard } from './../../../entities/server-data/dashboard.interface';
+import { SearchResult } from '../../../entities/server-data/search-result.interface';
 
 export abstract class DashboardApiAbstract {
   /**
@@ -9,7 +10,14 @@ export abstract class DashboardApiAbstract {
   readonly api: string;
 
   /**
-   * Получает с сервера данные для дашбоарда
+   * Отправляет запрос для получения данных для дашбоарда
    */
   abstract loadDashboardData(): Observable<Dashboard>;
+
+  /**
+   * Отправляет запрос для поиска данных
+   *
+   * @param searchValue - поисковая строка
+   */
+  abstract search(searchValue: string): Observable<SearchResult>;
 }

@@ -1,7 +1,9 @@
+import { AnswerAttachment } from './../model/answer-attachment.interface';
+
 /**
- * Вопрос
+ * Представление вопроса
  */
-export interface Answer {
+export interface AnswerVM {
   /**
    * Идентификатор ответа
    */
@@ -20,7 +22,7 @@ export interface Answer {
   /**
    * Список идентификаторов прикрепленных файлов
    */
-  readonly attachments: number[];
+  readonly attachments: AnswerAttachment[];
 
   /**
    * Ссылка

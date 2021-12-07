@@ -1,8 +1,15 @@
-import { normalize } from 'normalizr';
+import { schema, normalize } from 'normalizr';
 
 import { Category } from './../../entities/model/category.interface';
-import { categoriesSchema, categorySchema } from './../schemas/normalizr.schema';
 import { NormalizedCategories } from './../../entities/normalized-data.interface';
+
+export const serviceSchema = new schema.Entity('services');
+
+export const categorySchema = new schema.Entity('categories', {
+  services: [serviceSchema],
+});
+
+export const categoriesSchema = new schema.Array(categorySchema);
 
 /**
  * Сервис для нормализации данных по категориям

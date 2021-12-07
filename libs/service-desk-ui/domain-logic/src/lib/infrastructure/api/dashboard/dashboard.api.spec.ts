@@ -46,4 +46,22 @@ describe('DashboardApi', () => {
         .flush(data);
     });
   });
+
+  describe('search()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/dashboard/search`;
+    const data = {} as Dashboard;
+
+    it('should return requests', () => {
+      service.search('term').subscribe((result) => {
+        expect(result).toEqual(data);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: `${api}?search=term`,
+        })
+        .flush(data);
+    });
+  });
 });

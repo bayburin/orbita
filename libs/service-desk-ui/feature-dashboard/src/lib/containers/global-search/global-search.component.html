@@ -11,18 +11,22 @@
       autocomplete="off"
       (keyup.enter)="onSearch()"
       [focusFirst]="false"
-      placeholder="Введите название услуги или проблемный вопрос"
+      placeholder="Введите название услуги или интересующий вопрос"
       appAutoFocus
     />
     <div class="input-group-append">
       <button type="button" (click)="onSearch()" class="btn btn-gray-white sd-btn-icon-24 border border-white">
-        <i *ngIf="!loading" class="mdi mdi-magnify mdi-24px"></i>
-        <lib-loading [loading]="loading" size="24px"></lib-loading>
+        <lib-loading *ngIf="loading$ | async as loading; else searchIcon" [loading]="loading" size="24px"></lib-loading>
       </button>
     </div>
   </div>
 </div>
 
 <ng-template #rt let-r="result">
+  <div>{{ r.name || r.ticket.name }}</div>
   <!-- <app-dynamic-template-content class="search-result" [data]="r" [standaloneLink]="true"></app-dynamic-template-content> -->
+</ng-template>
+
+<ng-template #searchIcon>
+  <i class="mdi mdi-magnify mdi-24px"></i>
 </ng-template>

@@ -16,3 +16,5 @@ export * from './lib/application/category/category.facade';
 export * from './lib/application/category/category.facade.stub';
 export * from './lib/application/service/service.facade';
 export * from './lib/application/service/service.facade.stub';
+export * from './lib/application/search/search.facade';
+export * from './lib/application/search/search.facade.stub';
