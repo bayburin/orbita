@@ -11,6 +11,10 @@ import { SectionHeaderComponent } from './components/section-header/section-head
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { CategoryHeaderComponent } from './components/category-header/category-header.component';
 import { DashboardQuestionFaqComponent } from './components/dashboard-question-faq/dashboard-question-faq.component';
+import { CategoryComponent } from './components/category/category.component';
+import { ServiceComponent } from './components/service/service.component';
+import { QuestionComponent } from './components/question/question.component';
+import { SearchResultTemplateComponent } from './components/search-result-template/search-result-template.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
 
@@ -21,11 +25,15 @@ const components: any[] = [
   CategoryListComponent,
   CategoryHeaderComponent,
   DashboardQuestionFaqComponent,
+  CategoryComponent,
+  ServiceComponent,
+  QuestionComponent,
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule, modules],
-  declarations: [components],
-  exports: [components, modules],
+  declarations: [components, SearchResultTemplateComponent],
+  entryComponents: [CategoryComponent, ServiceComponent, QuestionComponent],
+  exports: [components, modules, SearchResultTemplateComponent],
 })
 export class ServiceDeskUiUiModule {}

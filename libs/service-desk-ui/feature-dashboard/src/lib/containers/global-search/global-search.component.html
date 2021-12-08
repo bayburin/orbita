@@ -23,8 +23,7 @@
 </div>
 
 <ng-template #rt let-r="result">
-  <div>{{ r.name || r.ticket.name }}</div>
-  <!-- <app-dynamic-template-content class="search-result" [data]="r" [standaloneLink]="true"></app-dynamic-template-content> -->
+  <lib-search-result-template class="search-result" [searchResult]="r"></lib-search-result-template>
 </ng-template>
 
 <ng-template #searchIcon>
