@@ -37,6 +37,10 @@
                 "onlyDependOnLibsWithTags": ["scope:orbita-ui", "scope:shared"]
               },
               {
+                "sourceTag": "scope:service-desk-ui",
+                "onlyDependOnLibsWithTags": ["scope:service-desk-ui", "scope:shared"]
+              },
+              {
                 "sourceTag": "scope:shared",
                 "onlyDependOnLibsWithTags": ["scope:shared"]
               }

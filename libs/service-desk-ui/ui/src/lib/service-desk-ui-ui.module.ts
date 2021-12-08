@@ -15,6 +15,9 @@ import { CategoryComponent } from './components/category/category.component';
 import { ServiceComponent } from './components/service/service.component';
 import { QuestionComponent } from './components/question/question.component';
 import { SearchResultTemplateComponent } from './components/search-result-template/search-result-template.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { LogoComponent } from './components/logo/logo.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
 
@@ -28,6 +31,9 @@ const components: any[] = [
   CategoryComponent,
   ServiceComponent,
   QuestionComponent,
+  NavbarComponent,
+  FooterComponent,
+  LogoComponent,
 ];
 
 @NgModule({

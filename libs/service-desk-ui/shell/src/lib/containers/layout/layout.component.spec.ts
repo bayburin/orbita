@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AuthHelper, AuthHelperStub } from '@iss/ng-auth-center';
 
 import { LayoutComponent } from './layout.component';
 
@@ -8,9 +9,9 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LayoutComponent ]
-    })
-    .compileComponents();
+      declarations: [LayoutComponent],
+      providers: [{ provide: AuthHelper, useClass: AuthHelperStub }],
+    }).compileComponents();
   });
 
   beforeEach(() => {
