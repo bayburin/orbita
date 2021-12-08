@@ -1,1 +1,15 @@
-<p>categories-block works!</p>
+<section class="sd-pb-6">
+  <div class="container">
+    <section>
+      <div class="sd-category-list">
+        <lib-section-header header="Все услуги на портале"></lib-section-header>
+        <lib-loading [loading]="loading$ | async" size="48px"></lib-loading>
+        <lib-category-list
+          *ngIf="loaded$ | async"
+          [categories]="all$ | async"
+          [showServices]="true"
+        ></lib-category-list>
+      </div>
+    </section>
+  </div>
+</section>

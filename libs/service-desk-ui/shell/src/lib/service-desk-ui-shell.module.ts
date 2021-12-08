@@ -14,6 +14,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('@orbita/service-desk-ui/feature-dashboard').then((m) => m.ServiceDeskUiFeatureDashboardModule),
       },
+      {
+        path: 'categories',
+        loadChildren: () =>
+          import('@orbita/service-desk-ui/feature-category-listing').then(
+            (m) => m.ServiceDeskUiFeatureCategoryListingModule
+          ),
+      },
     ],
   },
 ];
