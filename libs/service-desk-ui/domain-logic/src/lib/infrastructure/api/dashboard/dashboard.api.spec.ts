@@ -33,7 +33,7 @@ describe('DashboardApi', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/dashboard`;
     const data = {} as Dashboard;
 
-    it('should return requests', () => {
+    it('should return dashboard data', () => {
       service.loadDashboardData().subscribe((result) => {
         expect(result).toEqual(data);
       });
@@ -51,7 +51,7 @@ describe('DashboardApi', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/dashboard/search`;
     const data = {} as Dashboard;
 
-    it('should return requests', () => {
+    it('should return finded categories, services and questions', () => {
       service.search('term').subscribe((result) => {
         expect(result).toEqual(data);
       });

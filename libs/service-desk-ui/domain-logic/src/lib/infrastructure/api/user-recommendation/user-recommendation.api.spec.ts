@@ -32,7 +32,7 @@ describe('CategoryApi', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations`;
     const categories = [{ id: 1 }, { id: 2 }];
 
-    it('should return requests', () => {
+    it('should return user recommendations', () => {
       service.query().subscribe((result) => {
         expect(result).toEqual(categories);
       });

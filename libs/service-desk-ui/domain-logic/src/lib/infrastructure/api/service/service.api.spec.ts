@@ -32,7 +32,7 @@ describe('ServiceApi', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/services/1`;
     const category = { id: 1 };
 
-    it('should return request', () => {
+    it('should return service', () => {
       service.show(1).subscribe((result) => {
         expect(result).toEqual(category);
       });

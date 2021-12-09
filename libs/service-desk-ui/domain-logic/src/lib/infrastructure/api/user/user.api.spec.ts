@@ -2,17 +2,17 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SERVICE_DESK_UI_ENV_TOKEN, serviceDeskUiEnvironmentStub } from '@orbita/shared/environment';
 
-import { CategoryApi } from './category.api';
+import { UserApi } from './user.api';
 
-describe('CategoryApi', () => {
-  let service: CategoryApi;
+describe('UserApi', () => {
+  let service: UserApi;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        CategoryApi,
+        UserApi,
         {
           provide: SERVICE_DESK_UI_ENV_TOKEN,
           useValue: serviceDeskUiEnvironmentStub,
@@ -20,7 +20,7 @@ describe('CategoryApi', () => {
       ],
     });
 
-    service = TestBed.inject(CategoryApi);
+    service = TestBed.inject(UserApi);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
@@ -28,13 +28,13 @@ describe('CategoryApi', () => {
     expect(service).toBeTruthy();
   });
 
-  describe('query()', () => {
-    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/categories`;
-    const categories = [{ id: 1 }, { id: 2 }];
+  describe('loadNotifications()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/users/notifications`;
+    const notifications = [{ id: 1 }, { id: 2 }];
 
-    it('should return categories', () => {
-      service.query().subscribe((result) => {
-        expect(result).toEqual(categories);
+    it('should return notifications', () => {
+      service.loadNotifications().subscribe((result) => {
+        expect(result).toEqual(notifications);
       });
 
       httpMock
@@ -42,17 +42,17 @@ describe('CategoryApi', () => {
           method: 'GET',
           url: api,
         })
-        .flush(categories);
+        .flush(notifications);
     });
   });
 
-  describe('show()', () => {
-    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/categories/1`;
-    const category = { id: 1 };
+  describe('loadNewNotifications()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/users/new_notifications`;
+    const notifications = [{ id: 1 }];
 
-    it('should return category', () => {
-      service.show(1).subscribe((result) => {
-        expect(result).toEqual(category);
+    it('should return new notifications', () => {
+      service.loadNewNotifications().subscribe((result) => {
+        expect(result).toEqual(notifications);
       });
 
       httpMock
@@ -60,7 +60,7 @@ describe('CategoryApi', () => {
           method: 'GET',
           url: api,
         })
-        .flush(category);
+        .flush(notifications);
     });
   });
 });

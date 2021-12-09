@@ -6,6 +6,7 @@ export * from './lib/entities/model/service.interface';
 export * from './lib/entities/model/question.interface';
 export * from './lib/entities/model/search-result.types';
 export * from './lib/entities/model/user.interface';
+export * from './lib/entities/model/notification.interface';
 
 export * from './lib/entities/view-models/category-vm.interface';
 export * from './lib/entities/view-models/service-vm.interface';
@@ -21,3 +22,5 @@ export * from './lib/application/service/service.facade';
 export * from './lib/application/service/service.facade.stub';
 export * from './lib/application/search/search.facade';
 export * from './lib/application/search/search.facade.stub';
+export * from './lib/application/user/user.facade';
+export * from './lib/application/user/user.facade.stub';

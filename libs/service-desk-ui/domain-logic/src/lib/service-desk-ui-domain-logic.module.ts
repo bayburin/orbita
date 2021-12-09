@@ -9,6 +9,7 @@ import { CategoryEffects } from './infrastructure/store/category/category.effect
 import { ServiceEffects } from './infrastructure/store/service/service.effects';
 import { UserRecommendationEffects } from './infrastructure/store/user-recommendation/user-recommendation.effects';
 import { SearchEffects } from './infrastructure/store/search/search.effects';
+import { NotificationEffects } from './infrastructure/store/notification/notification.effects';
 
 @NgModule({
   imports: [
@@ -22,6 +23,7 @@ import { SearchEffects } from './infrastructure/store/search/search.effects';
       ServiceEffects,
       UserRecommendationEffects,
       SearchEffects,
+      NotificationEffects,
     ]),
   ],
 })
