@@ -10,3 +10,5 @@ export const loadAllSuccess = createAction(
 );
 
 export const loadAllFailure = createAction('[Notification/API] Load All Failure', props<{ error: any }>());
+
+export const toggleVisibleLimit = createAction('[Notification] Toggle Visible Limit');

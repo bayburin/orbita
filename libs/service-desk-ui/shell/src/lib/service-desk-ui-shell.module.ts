@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { LayoutComponent } from './containers/layout/layout.component';
+import { NavbarComponent } from './containers/navbar/navbar.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,6 @@ const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule],
   exports: [RouterModule],
-  declarations: [LayoutComponent],
+  declarations: [LayoutComponent, NavbarComponent],
 })
 export class ServiceDeskUiShellModule {}

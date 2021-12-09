@@ -22,6 +22,7 @@ describe('NotificationSelectors', () => {
       ...initialState,
       loaded: true,
       loading: true,
+      visibleLimit: 25,
       error,
     });
   });
@@ -44,5 +45,9 @@ describe('NotificationSelectors', () => {
 
   it('getEntities() should return entities', () => {
     expect(NotificationSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+
+  it('getVisibleLimit() should return "visibleLimit" attribute', () => {
+    expect(NotificationSelectors.getVisibleLimit.projector(state)).toBe(25);
   });
 });

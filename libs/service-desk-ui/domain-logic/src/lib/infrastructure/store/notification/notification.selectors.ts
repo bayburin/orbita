@@ -19,3 +19,5 @@ export const getError = createSelector(getNotificationState, (state: State) => s
 export const getAll = createSelector(getNotificationState, (state: State) => selectAll(state));
 
 export const getEntities = createSelector(getNotificationState, (state: State) => selectEntities(state));
+
+export const getVisibleLimit = createSelector(getNotificationState, (state: State) => state.visibleLimit);

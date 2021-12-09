@@ -9,6 +9,7 @@ export const NOTIFICATION_FEATURE_KEY = 'notification';
 export interface State extends EntityState<Notification> {
   loading: boolean;
   loaded: boolean;
+  visibleLimit: number;
   error?: string | null;
 }
 
@@ -21,6 +22,7 @@ export const notificationAdapter: EntityAdapter<Notification> = createEntityAdap
 export const initialState: State = notificationAdapter.getInitialState({
   loading: false,
   loaded: false,
+  visibleLimit: 5,
 });
 
 const notificationReducer = createReducer(
@@ -29,7 +31,8 @@ const notificationReducer = createReducer(
   on(NotificationActions.loadAllSuccess, (state, { notifications }) =>
     notificationAdapter.setAll(notifications, { ...state, loaded: true, loading: false })
   ),
-  on(NotificationActions.loadAllFailure, (state, { error }) => ({ ...state, loading: false, error }))
+  on(NotificationActions.loadAllFailure, (state, { error }) => ({ ...state, loading: false, error })),
+  on(NotificationActions.toggleVisibleLimit, (state) => ({ ...state, visibleLimit: state.visibleLimit === 5 ? 25 : 5 }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

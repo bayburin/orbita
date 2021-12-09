@@ -9,12 +9,16 @@ export abstract class UserApiAbstract {
   readonly api: string;
 
   /**
-   * Получает с сервера все уведомления пользователя
+   * Получает с сервера уведомления пользователя
+   *
+   * @param limit - запрашиваемое число уведомлений
    */
-  abstract loadNotifications(): Observable<Notification[]>;
+  abstract loadNotifications(limit: number): Observable<Notification[]>;
 
   /**
-   * Получает с сервера все новые уведомления пользователя
+   * Получает с сервера новые уведомления пользователя
+   *
+   * @param limit - запрашиваемое число уведомлений
    */
-  abstract loadNewNotifications(): Observable<Notification[]>;
+  abstract loadNewNotifications(limit: number): Observable<Notification[]>;
 }

@@ -1,0 +1,61 @@
+<div class="user-dashboard-menu-component shadow">
+  <div class="card">
+    <div class="card-header">
+      <div class="d-flex align-items-center justify-content-end navbar-expand">
+        <ul class="navbar-nav flex-row">
+          <li class="nav-item">
+            <a href="https://lk.iss-reshetnev.ru" target="_blank" class="nav-link sd-icon-group"
+              ><i class="mdi mdi-account-key mdi-24px"></i>Личный кабинет</a
+            >
+          </li>
+          <li class="nav-item">
+            <a routerLink="/logout" id="logout" class="nav-link sd-icon-group sd-icon-group-append"
+              >Выход<i class="mdi mdi-logout mdi-24px"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card-body">
+      <ul ngbNav #nav="ngbNav" [(activeId)]="activeTab" class="nav-tabs">
+        <li [ngbNavItem]="1">
+          <a ngbNavLink>Уведомления</a>
+          <ng-template ngbNavContent>
+            <lib-loading [loading]="loadingAllNotifications" size="48px"></lib-loading>
+            <div *ngIf="notifications">
+              <!-- <div class="text-center" *ngIf="notificationCount.value" @notifyAnimation>
+                <button
+                  id="loadNewNotifications"
+                  class="btn btn-sm btn-primary"
+                  [disabled]="loadingNewNotifications"
+                  (click)="loadNewNotification.emit()"
+                >
+                  <span class="d-flex justify-content-center">
+                    <lib-loading [loading]="loadingNewNotifications" class="mr-1 text-body"></lib-loading>
+                    Получить новые уведомления
+                  </span>
+                </button>
+              </div> -->
+              <lib-notification-list [notifications]="notifications"></lib-notification-list>
+              <div class="d-flex justify-content-center mt-3" *ngIf="notifications.length >= 5">
+                <span
+                  id="toggleNotificationLimit"
+                  (click)="toggleNotificationLimit.emit(); arrowUp = !arrowUp"
+                  class="sd-icon-group sd-link text-dark"
+                >
+                  <i
+                    class="mdi mdi-24px"
+                    [ngClass]="arrowUp ? 'mdi-arrow-up-drop-circle-outline' : 'mdi-arrow-down-drop-circle-outline'"
+                  ></i>
+                  Смотреть остальные уведомления (не более 100 последних)
+                </span>
+              </div>
+            </div>
+          </ng-template>
+        </li>
+      </ul>
+
+      <div [ngbNavOutlet]="nav"></div>
+    </div>
+  </div>
+</div>

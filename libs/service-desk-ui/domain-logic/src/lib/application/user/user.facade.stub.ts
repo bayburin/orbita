@@ -10,4 +10,8 @@ export class UserFacadeStub implements UserFacadeAbstract {
   loadAllNotifications() {
     /** */
   }
+
+  toggleNotificationVisibleLimit() {
+    /** */
+  }
 }

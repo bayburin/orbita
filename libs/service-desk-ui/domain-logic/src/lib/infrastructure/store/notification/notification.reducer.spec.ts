@@ -47,6 +47,17 @@ describe('NotificationReducer', () => {
     });
   });
 
+  describe('setVisibleLimit', () => {
+    it('should change attributes', () => {
+      action = NotificationActions.toggleVisibleLimit();
+      let result: State = reducer(initialState, action);
+      expect(result.visibleLimit).toBe(25);
+      action = NotificationActions.toggleVisibleLimit();
+      result = reducer(result, action);
+      expect(result.visibleLimit).toBe(5);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as Action;

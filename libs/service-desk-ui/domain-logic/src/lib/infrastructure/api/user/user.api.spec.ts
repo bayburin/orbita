@@ -33,14 +33,14 @@ describe('UserApi', () => {
     const notifications = [{ id: 1 }, { id: 2 }];
 
     it('should return notifications', () => {
-      service.loadNotifications().subscribe((result) => {
+      service.loadNotifications(5).subscribe((result) => {
         expect(result).toEqual(notifications);
       });
 
       httpMock
         .expectOne({
           method: 'GET',
-          url: api,
+          url: `${api}?limit=5`,
         })
         .flush(notifications);
     });
@@ -51,14 +51,14 @@ describe('UserApi', () => {
     const notifications = [{ id: 1 }];
 
     it('should return new notifications', () => {
-      service.loadNewNotifications().subscribe((result) => {
+      service.loadNewNotifications(5).subscribe((result) => {
         expect(result).toEqual(notifications);
       });
 
       httpMock
         .expectOne({
           method: 'GET',
-          url: api,
+          url: `${api}?limit=5`,
         })
         .flush(notifications);
     });

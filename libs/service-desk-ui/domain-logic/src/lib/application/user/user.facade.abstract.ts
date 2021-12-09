@@ -20,4 +20,9 @@ export abstract class UserFacadeAbstract {
    * Загружает список всех уведомлений
    */
   abstract loadAllNotifications(): void;
+
+  /**
+   * Изменить максимальное число выводимых уведомлений
+   */
+  abstract toggleNotificationVisibleLimit(): void;
 }

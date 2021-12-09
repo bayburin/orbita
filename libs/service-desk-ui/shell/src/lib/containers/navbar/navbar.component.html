@@ -25,13 +25,18 @@
         </ul>
       </div>
     </div>
-    <!-- <div class="user-dashboard-menu-wrapper" *ngIf="userDashboard" @userDashboardAnimation>
-      <app-user-dashboard-menu
+    <div class="user-dashboard-menu-wrapper" *ngIf="userDashboard" @userDashboardAnimation>
+      <!-- <app-user-dashboard-menu
         (clickedOutside)="userDashboard = false"
         (notificationReaded)="clearNotificationCount()"
         [calledElement]="parentDashboardElement"
-      ></app-user-dashboard-menu>
-    </div> -->
+      ></app-user-dashboard-menu> -->
+      <lib-user-profile
+        [notifications]="notifications$ | async"
+        [loadingAllNotifications]="notificationsLoading$ | async"
+        (toggleNotificationLimit)="toggleNotificationLimit()"
+      ></lib-user-profile>
+    </div>
   </div>
 </div>
 

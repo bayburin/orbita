@@ -22,4 +22,8 @@ export class UserFacade implements UserFacadeAbstract {
   loadAllNotifications() {
     this.notificationStore.dispatch(NotificationActions.loadAll());
   }
+
+  toggleNotificationVisibleLimit() {
+    this.notificationStore.dispatch(NotificationActions.toggleVisibleLimit());
+  }
 }

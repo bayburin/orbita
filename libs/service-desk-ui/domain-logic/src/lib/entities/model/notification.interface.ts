@@ -52,6 +52,7 @@ export interface Notification {
  * Типы уведомлений
  */
 export enum EventTypes {
-  APP = 'app',
   BROADCAST = 'broadcast',
+  APP = 'app',
+  ERROR = 'error',
 }
