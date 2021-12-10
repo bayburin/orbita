@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+  ElementRef,
+} from '@angular/core';
 
 import { Notification } from '@orbita/service-desk-ui/domain-logic';
 import { notifyAnimation } from './../../animations/notify.animation';
@@ -24,6 +32,14 @@ export class UserProfileComponent {
    */
   @Input() loadingNewNotifications: boolean;
   /**
+   * HTML элемент, вызвавший текущий компонент
+   */
+  @Input() calledElement: HTMLElement;
+  /**
+   * Событие "клика" вне текущего элемента для закрытия окна
+   */
+  @Output() clickedOutside = new EventEmitter<void>();
+  /**
    * Событие загрузки всех уведомлений
    */
   @Output() loadNewNotification = new EventEmitter<void>();
@@ -33,4 +49,12 @@ export class UserProfileComponent {
   @Output() toggleNotificationLimit = new EventEmitter<void>();
   activeTab = 1;
   arrowUp = false;
+
+  constructor(private elementRef: ElementRef) {}
+
+  @HostListener('document:click', ['$event.target']) onClickOutside(target: HTMLElement) {
+    if (!this.elementRef.nativeElement.contains(target) && !this.calledElement.contains(target)) {
+      this.clickedOutside.emit();
+    }
+  }
 }

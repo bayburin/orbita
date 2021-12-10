@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   notifications$ = this.notificationFacade.notifications$;
   notificationsLoading$ = this.notificationFacade.notificationsLoading$;
   notificationsLoaded$ = this.notificationFacade.notificationsLoaded$;
-  userDashboard = false;
+  userProfile = false;
 
   constructor(private authHelper: AuthHelper, private notificationFacade: NotificationFacade) {}
 
