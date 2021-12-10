@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 
-import { Dashboard } from './../../../entities/server-data/dashboard.interface';
+import { Home } from '../../../entities/server-data/home.interface';
 import { SearchResult } from '../../../entities/server-data/search-result.interface';
 
-export abstract class DashboardApiAbstract {
+export abstract class HomeApiAbstract {
   /**
    * Адрес сервера
    */
@@ -12,7 +12,7 @@ export abstract class DashboardApiAbstract {
   /**
    * Отправляет запрос для получения данных для дашбоарда
    */
-  abstract loadDashboardData(): Observable<Dashboard>;
+  abstract loadHomeData(): Observable<Home>;
 
   /**
    * Отправляет запрос для поиска данных

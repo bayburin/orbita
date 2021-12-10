@@ -4,7 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import * as fromServiceDeskUi from './infrastructure/store/index';
-import { DashboardEffects } from './infrastructure/store/dashboard/dashboard.effects';
+import { HomeEffects } from './infrastructure/store/home/home.effects';
 import { CategoryEffects } from './infrastructure/store/category/category.effects';
 import { ServiceEffects } from './infrastructure/store/service/service.effects';
 import { UserRecommendationEffects } from './infrastructure/store/user-recommendation/user-recommendation.effects';
@@ -18,7 +18,7 @@ import { NotificationEffects } from './infrastructure/store/notification/notific
       initialState: fromServiceDeskUi.initialState,
     }),
     EffectsModule.forFeature([
-      DashboardEffects,
+      HomeEffects,
       CategoryEffects,
       ServiceEffects,
       UserRecommendationEffects,

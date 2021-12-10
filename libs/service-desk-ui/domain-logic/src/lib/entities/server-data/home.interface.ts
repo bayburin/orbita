@@ -3,9 +3,9 @@ import { UserRecommendation } from '../model/user-recommendation.interface';
 import { Service } from '../model/service.interface';
 
 /**
- * Данные для дашбоарда
+ * Данные для домашней директории
  */
-export interface Dashboard {
+export interface Home {
   /**
    * Категории
    */

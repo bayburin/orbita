@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 
-import { CategoryVM } from './../../entities/view-models/category-vm.interface';
-import { ServiceVM } from './../../entities/view-models/service-vm.interface';
+import { CategoryVM } from '../../entities/view-models/category-vm.interface';
+import { ServiceVM } from '../../entities/view-models/service-vm.interface';
 
-export abstract class DashboardFacadeAbstract {
+export abstract class HomeFacadeAbstract {
   /**
    * Индикатор, идет ли загрузка данных для дашбоарда в данный момент
    */
@@ -24,5 +24,5 @@ export abstract class DashboardFacadeAbstract {
   /**
    * Загружает данные для дашбоарда
    */
-  abstract loadDashboard(): void;
+  abstract loadHome(): void;
 }

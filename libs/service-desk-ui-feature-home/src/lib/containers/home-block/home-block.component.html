@@ -4,9 +4,9 @@
       <lib-global-search></lib-global-search>
       <div class="sd-favorite-questions">
         <h2>Рекомендуем для пользователя</h2>
-        <lib-loading [loading]="dashboardLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
+        <lib-loading [loading]="homeLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
         <lib-user-recommendations
-          *ngIf="dashboardLoaded$ | async"
+          *ngIf="homeLoaded$ | async"
           [userRecommendations]="recommendations$ | async"
         ></lib-user-recommendations>
       </div>
@@ -16,8 +16,8 @@
   <section class="sd-pb-6">
     <div class="container">
       <lib-section-header header="Услуги портала"></lib-section-header>
-      <lib-loading [loading]="dashboardLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
-      <lib-category-list *ngIf="dashboardLoaded$ | async" [categories]="categories$ | async"></lib-category-list>
+      <lib-loading [loading]="homeLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
+      <lib-category-list *ngIf="homeLoaded$ | async" [categories]="categories$ | async"></lib-category-list>
       <div class="text-center">
         <a id="allCategories" routerLink="categories" class="btn btn-gray-white">Все услуги</a>
       </div>
@@ -27,11 +27,8 @@
   <section class="jumbotron mb-0">
     <div class="container">
       <lib-section-header header="Часто задаваемые вопросы"></lib-section-header>
-      <lib-loading [loading]="dashboardLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
-      <lib-dashboard-question-faq
-        *ngIf="dashboardLoaded$ | async"
-        [services]="services$ | async"
-      ></lib-dashboard-question-faq>
+      <lib-loading [loading]="homeLoading$ | async" size="48px" class="d-block mb-3"></lib-loading>
+      <lib-home-question-faq *ngIf="homeLoaded$ | async" [services]="services$ | async"></lib-home-question-faq>
     </div>
   </section>
 </div>

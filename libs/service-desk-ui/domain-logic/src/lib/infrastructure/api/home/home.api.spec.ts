@@ -2,18 +2,18 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SERVICE_DESK_UI_ENV_TOKEN, serviceDeskUiEnvironmentStub } from '@orbita/shared/environment';
 
-import { Dashboard } from './../../../entities/server-data/dashboard.interface';
-import { DashboardApi } from './dashboard.api';
+import { Home } from '../../../entities/server-data/home.interface';
+import { HomeApi } from './home.api';
 
-describe('DashboardApi', () => {
-  let service: DashboardApi;
+describe('HomeApi', () => {
+  let service: HomeApi;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        DashboardApi,
+        HomeApi,
         {
           provide: SERVICE_DESK_UI_ENV_TOKEN,
           useValue: serviceDeskUiEnvironmentStub,
@@ -21,7 +21,7 @@ describe('DashboardApi', () => {
       ],
     });
 
-    service = TestBed.inject(DashboardApi);
+    service = TestBed.inject(HomeApi);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
@@ -31,10 +31,10 @@ describe('DashboardApi', () => {
 
   describe('query()', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/dashboard`;
-    const data = {} as Dashboard;
+    const data = {} as Home;
 
-    it('should return dashboard data', () => {
-      service.loadDashboardData().subscribe((result) => {
+    it('should return home data', () => {
+      service.loadHomeData().subscribe((result) => {
         expect(result).toEqual(data);
       });
 
@@ -49,7 +49,7 @@ describe('DashboardApi', () => {
 
   describe('search()', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/dashboard/search`;
-    const data = {} as Dashboard;
+    const data = {} as Home;
 
     it('should return finded categories, services and questions', () => {
       service.search('term').subscribe((result) => {

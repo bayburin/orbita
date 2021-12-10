@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 
 import * as SearchActions from './search.actions';
 import { SearchEffects } from './search.effects';
-import { DashboardApi } from '../../api/dashboard/dashboard.api';
-import { DashboardApiStub } from './../../api/dashboard/dashboard.api.stub';
+import { HomeApi } from '../../api/home/home.api';
+import { HomeApiStub } from './../../api/home/home.api.stub';
 
 describe('SearchEffects', () => {
   let actions: Observable<Action>;
@@ -22,7 +22,7 @@ describe('SearchEffects', () => {
         SearchEffects,
         provideMockActions(() => actions),
         provideMockStore(),
-        { provide: DashboardApi, useClass: DashboardApiStub },
+        { provide: HomeApi, useClass: HomeApiStub },
       ],
     });
 

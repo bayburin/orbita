@@ -13,8 +13,8 @@ export * from './lib/entities/view-models/service-vm.interface';
 export * from './lib/entities/view-models/question-overview-vm.interface';
 export * from './lib/entities/view-models/event-types.vm.enum';
 
-export * from './lib/application/dashboard/dashboard.facade';
-export * from './lib/application/dashboard/dashboard.facade.stub';
+export * from './lib/application/home/home.facade';
+export * from './lib/application/home/home.facade.stub';
 export * from './lib/application/user-recommendation/user-recommendation.facade';
 export * from './lib/application/user-recommendation/user-recommendation.facade.stub';
 export * from './lib/application/category/category.facade';

@@ -4,8 +4,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   UserRecommendationFacade,
   UserRecommendationFacadeStub,
-  DashboardFacade,
-  DashboardFacadeStub,
+  HomeFacade,
+  HomeFacadeStub,
 } from '@orbita/service-desk-ui/domain-logic';
 import { HomeBlockComponent } from './home-block.component';
 
@@ -17,7 +17,7 @@ describe('HomeBlockComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [HomeBlockComponent],
       providers: [
-        { provide: DashboardFacade, useClass: DashboardFacadeStub },
+        { provide: HomeFacade, useClass: HomeFacadeStub },
         { provide: UserRecommendationFacade, useClass: UserRecommendationFacadeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],

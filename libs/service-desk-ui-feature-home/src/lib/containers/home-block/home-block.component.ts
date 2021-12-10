@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DashboardFacade, UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
+import { HomeFacade, UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'lib-home-block',
@@ -8,15 +8,15 @@ import { DashboardFacade, UserRecommendationFacade } from '@orbita/service-desk-
   styleUrls: ['./home-block.component.scss'],
 })
 export class HomeBlockComponent implements OnInit {
-  dashboardLoading$ = this.dashboardFacade.loading$;
-  dashboardLoaded$ = this.dashboardFacade.loaded$;
+  homeLoading$ = this.homeFacade.loading$;
+  homeLoaded$ = this.homeFacade.loaded$;
   recommendations$ = this.userRecommendationFacade.all$;
-  categories$ = this.dashboardFacade.categories$;
-  services$ = this.dashboardFacade.services$;
+  categories$ = this.homeFacade.categories$;
+  services$ = this.homeFacade.services$;
 
-  constructor(private dashboardFacade: DashboardFacade, private userRecommendationFacade: UserRecommendationFacade) {}
+  constructor(private homeFacade: HomeFacade, private userRecommendationFacade: UserRecommendationFacade) {}
 
   ngOnInit(): void {
-    this.dashboardFacade.loadDashboard();
+    this.homeFacade.loadHome();
   }
 }

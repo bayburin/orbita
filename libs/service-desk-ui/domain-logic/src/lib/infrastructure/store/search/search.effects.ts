@@ -5,12 +5,12 @@ import { of, concat } from 'rxjs';
 
 import * as SearchActions from './search.actions';
 import * as SearchFeature from './search.reducer';
-import { DashboardApi } from '../../api/dashboard/dashboard.api';
+import { HomeApi } from '../../api/home/home.api';
 import { QuestionCacheService } from '../../services/question-cache.service';
 
 @Injectable()
 export class SearchEffects {
-  constructor(private readonly actions$: Actions, private dashboardApi: DashboardApi) {}
+  constructor(private readonly actions$: Actions, private homeApi: HomeApi) {}
 
   search$ = createEffect(() =>
     this.actions$.pipe(
@@ -18,7 +18,7 @@ export class SearchEffects {
       concatMap((action) =>
         concat(
           of(SearchActions.removeAll()),
-          this.dashboardApi.search(action.term).pipe(
+          this.homeApi.search(action.term).pipe(
             switchMap((data) => {
               const normalizeData = QuestionCacheService.normalizeQuestions(data.questions);
               const result = {

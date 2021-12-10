@@ -6,7 +6,7 @@ import { CategoryVM } from '../../../entities/view-models/category-vm.interface'
 import * as QuestionSelectors from '../question/question.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 import * as CategorySelectors from '../category/category.selectors';
-import * as DashboardSelectors from '../dashboard/dashboard.selectors';
+import * as HomeSelectors from '../home/home.selectors';
 
 export const getServiceEntitiesVM = createSelector(
   ServiceSelectors.getEntities,
@@ -57,8 +57,8 @@ export const getAllServicesVM = createSelector(
     })
 );
 
-export const getDashboardCategoriesVM = createSelector(
-  DashboardSelectors.getCategories,
+export const getHomeCategoriesVM = createSelector(
+  HomeSelectors.getCategories,
   getServiceEntitiesVM,
   (categories, serviceEntities): CategoryVM[] =>
     categories.map((category) => {
@@ -71,8 +71,8 @@ export const getDashboardCategoriesVM = createSelector(
     })
 );
 
-export const getDashboardServicesVM = createSelector(
-  DashboardSelectors.getServices,
+export const getHomeServicesVM = createSelector(
+  HomeSelectors.getServices,
   QuestionSelectors.getEntities,
   (services, questionEntities): ServiceVM[] =>
     services.map((service) => {

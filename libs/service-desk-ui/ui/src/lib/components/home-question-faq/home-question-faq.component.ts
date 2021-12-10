@@ -1,16 +1,16 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { ServiceVM, Question } from '@orbita/service-desk-ui/domain-logic';
-import { contentBlockAnimation } from './../../animations/content.animation';
+import { contentBlockAnimation } from '../../animations/content.animation';
 
 @Component({
-  selector: 'lib-dashboard-question-faq',
-  templateUrl: './dashboard-question-faq.component.html',
-  styleUrls: ['./dashboard-question-faq.component.scss'],
+  selector: 'lib-home-question-faq',
+  templateUrl: './home-question-faq.component.html',
+  styleUrls: ['./home-question-faq.component.scss'],
   animations: [contentBlockAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardQuestionFaqComponent {
+export class HomeQuestionFaqComponent {
   @Input() services: ServiceVM[];
   limits = {
     services: 6,

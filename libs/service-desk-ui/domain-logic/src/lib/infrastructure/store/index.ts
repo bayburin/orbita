@@ -1,6 +1,6 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
-import * as fromDashboard from './dashboard/dashboard.reducer';
+import * as fromHome from './home/home.reducer';
 import * as fromCategory from './category/category.reducer';
 import * as fromService from './service/service.reducer';
 import * as fromTicket from './ticket/ticket.reducer';
@@ -10,7 +10,7 @@ import * as fromSearch from './search/search.reducer';
 import * as fromNotification from './notification/notification.reducer';
 
 export interface ServiceDeskUiState
-  extends fromDashboard.DashboardPartialState,
+  extends fromHome.HomePartialState,
     fromCategory.CategoryPartialState,
     fromService.ServicePartialState,
     fromTicket.TicketPartialState,
@@ -22,7 +22,7 @@ export interface ServiceDeskUiState
 export const SERVICE_DESK_SYSTEM_FEATURE_KEY = 'serviceDeskUi';
 
 export const reducer: ActionReducerMap<ServiceDeskUiState> = {
-  [fromDashboard.DASHBOARD_FEATURE_KEY]: fromDashboard.reducer,
+  [fromHome.HOME_FEATURE_KEY]: fromHome.reducer,
   [fromCategory.CATEGORY_FEATURE_KEY]: fromCategory.reducer,
   [fromService.SERVICE_FEATURE_KEY]: fromService.reducer,
   [fromTicket.TICKET_FEATURE_KEY]: fromTicket.reducer,
@@ -33,7 +33,7 @@ export const reducer: ActionReducerMap<ServiceDeskUiState> = {
 };
 
 export const initialState: ServiceDeskUiState = {
-  [fromDashboard.DASHBOARD_FEATURE_KEY]: fromDashboard.initialState,
+  [fromHome.HOME_FEATURE_KEY]: fromHome.initialState,
   [fromCategory.CATEGORY_FEATURE_KEY]: fromCategory.initialState,
   [fromService.SERVICE_FEATURE_KEY]: fromService.initialState,
   [fromTicket.TICKET_FEATURE_KEY]: fromTicket.initialState,

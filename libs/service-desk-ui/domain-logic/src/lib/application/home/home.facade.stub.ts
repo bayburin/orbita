@@ -1,14 +1,14 @@
 import { BehaviorSubject } from 'rxjs';
 
-import { DashboardFacadeAbstract } from './dashboard.facade.abstract';
+import { HomeFacadeAbstract } from './home.facade.abstract';
 
-export class DashboardFacadeStub implements DashboardFacadeAbstract {
+export class HomeFacadeStub implements HomeFacadeAbstract {
   loading$ = new BehaviorSubject(false);
   loaded$ = new BehaviorSubject(false);
   categories$ = new BehaviorSubject([]);
   services$ = new BehaviorSubject([]);
 
-  loadDashboard() {
+  loadHome() {
     /** */
   }
 }

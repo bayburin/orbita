@@ -6,33 +6,33 @@ import { NxModule } from '@nrwl/angular';
 import { hot } from 'jasmine-marbles';
 import { Observable } from 'rxjs';
 
-import * as DashboardActions from './dashboard.actions';
-import { DashboardEffects } from './dashboard.effects';
-import { DashboardApi } from '../../api/dashboard/dashboard.api';
-import { DashboardApiStub } from './../../api/dashboard/dashboard.api.stub';
+import * as HomeActions from './home.actions';
+import { HomeEffects } from './home.effects';
+import { HomeApi } from '../../api/home/home.api';
+import { HomeApiStub } from '../../api/home/home.api.stub';
 
-describe('DashboardEffects', () => {
+describe('HomeEffects', () => {
   let actions: Observable<Action>;
-  let effects: DashboardEffects;
+  let effects: HomeEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NxModule.forRoot()],
       providers: [
-        DashboardEffects,
+        HomeEffects,
         provideMockActions(() => actions),
         provideMockStore(),
-        { provide: DashboardApi, useClass: DashboardApiStub },
+        { provide: HomeApi, useClass: HomeApiStub },
       ],
     });
 
-    effects = TestBed.inject(DashboardEffects);
+    effects = TestBed.inject(HomeEffects);
   });
 
   describe('init$', () => {
     it('should work', () => {
-      // actions = hot('-a-|', { a: DashboardActions.init() });
-      // const expected = hot('-a-|', { a: DashboardActions.loadDashboardSuccess({ dashboard: [] }) });
+      // actions = hot('-a-|', { a: HomeActions.init() });
+      // const expected = hot('-a-|', { a: HomeActions.loadHomeSuccess({ dashboard: [] }) });
       // expect(effects.init$).toBeObservable(expected);
     });
   });
