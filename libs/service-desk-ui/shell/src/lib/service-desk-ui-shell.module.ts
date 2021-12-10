@@ -15,7 +15,7 @@ const routes: Routes = [
         path: '',
         pathMatch: 'full',
         loadChildren: () =>
-          import('@orbita/service-desk-ui/feature-dashboard').then((m) => m.ServiceDeskUiFeatureDashboardModule),
+          import('@orbita/service-desk-ui-feature-home').then((m) => m.ServiceDeskUiFeatureHomeModule),
       },
       {
         path: 'categories',

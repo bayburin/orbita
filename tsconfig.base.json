@@ -29,11 +29,11 @@
       "@orbita/orbita-ui/shell": ["libs/orbita-ui/shell/src/index.ts"],
       "@orbita/orbita-ui/ui": ["libs/orbita-ui/ui/src/index.ts"],
       "@orbita/orbita-ui/utils": ["libs/orbita-ui/utils/src/index.ts"],
+      "@orbita/service-desk-ui-feature-home": ["libs/service-desk-ui-feature-home/src/index.ts"],
       "@orbita/service-desk-ui/domain-logic": ["libs/service-desk-ui/domain-logic/src/index.ts"],
       "@orbita/service-desk-ui/feature-category-listing": [
         "libs/service-desk-ui/feature-category-listing/src/index.ts"
       ],
-      "@orbita/service-desk-ui/feature-dashboard": ["libs/service-desk-ui/feature-dashboard/src/index.ts"],
       "@orbita/service-desk-ui/shell": ["libs/service-desk-ui/shell/src/index.ts"],
       "@orbita/service-desk-ui/ui": ["libs/service-desk-ui/ui/src/index.ts"],
       "@orbita/shared/assets": ["libs/shared/assets/src/index.ts"],

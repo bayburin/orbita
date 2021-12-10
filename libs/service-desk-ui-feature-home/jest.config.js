@@ -1,6 +1,6 @@
 module.exports = {
-  displayName: 'service-desk-ui-feature-dashboard',
-  preset: '../../../jest.preset.js',
+  displayName: 'service-desk-ui-feature-home',
+  preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
     'ts-jest': {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/service-desk-ui/feature-dashboard',
+  coverageDirectory: '../../coverage/libs/service-desk-ui-feature-home',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

@@ -21,4 +21,4 @@ export const routes: Routes = [
   declarations: [DashboardPageComponent, DashboardBlockComponent, GlobalSearchComponent],
   exports: [DashboardPageComponent],
 })
-export class ServiceDeskUiFeatureDashboardModule {}
+export class ServiceDeskUiFeatureHomeModule {}
