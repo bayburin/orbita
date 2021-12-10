@@ -49,6 +49,20 @@ export interface Notification {
 }
 
 /**
+ * Всплывающее уведомление
+ */
+export interface TmpNotification {
+  /**
+   * Тип уведомления
+   */
+  readonly event_type: EventTypes;
+  /**
+   * Сообщение
+   */
+  readonly message: string;
+}
+
+/**
  * Типы уведомлений
  */
 export enum EventTypes {

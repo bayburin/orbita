@@ -21,3 +21,10 @@ export const getAll = createSelector(getNotificationState, (state: State) => sel
 export const getEntities = createSelector(getNotificationState, (state: State) => selectEntities(state));
 
 export const getVisibleLimit = createSelector(getNotificationState, (state: State) => state.visibleLimit);
+
+export const getUnreadNotificationCount = createSelector(
+  getNotificationState,
+  (state: State) => state.unreadNotificationCount
+);
+
+export const getTmpNotifications = createSelector(getNotificationState, (state: State) => state.tmpNotifications);

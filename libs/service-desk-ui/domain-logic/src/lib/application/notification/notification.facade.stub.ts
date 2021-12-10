@@ -1,17 +1,22 @@
 import { BehaviorSubject } from 'rxjs';
 
-import { UserFacadeAbstract } from './user.facade.abstract';
+import { NotificationFacadeAbstract } from './notification.facade.abstract';
 
-export class UserFacadeStub implements UserFacadeAbstract {
+export class NotificationFacadeStub implements NotificationFacadeAbstract {
   notifications$ = new BehaviorSubject([]);
   notificationsLoading$ = new BehaviorSubject(false);
   notificationsLoaded$ = new BehaviorSubject(false);
+  tmpNotifications$ = new BehaviorSubject([]);
 
   loadAllNotifications() {
     /** */
   }
 
   toggleNotificationVisibleLimit() {
+    /** */
+  }
+
+  removeTmpNotification() {
     /** */
   }
 }

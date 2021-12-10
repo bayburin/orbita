@@ -15,6 +15,7 @@ describe('NotificationSelectors', () => {
     2: arrEntities[1],
     3: arrEntities[2],
   };
+  const tmpNotifications = [{ message: 'fake-1' }, { message: 'fake-2' }];
   let state: any;
 
   beforeEach(() => {
@@ -23,6 +24,8 @@ describe('NotificationSelectors', () => {
       loaded: true,
       loading: true,
       visibleLimit: 25,
+      unreadNotificationCount: 17,
+      tmpNotifications,
       error,
     });
   });
@@ -49,5 +52,13 @@ describe('NotificationSelectors', () => {
 
   it('getVisibleLimit() should return "visibleLimit" attribute', () => {
     expect(NotificationSelectors.getVisibleLimit.projector(state)).toBe(25);
+  });
+
+  it('getUnreadNotificationCount() should return "unreadNotificationCount" attribute', () => {
+    expect(NotificationSelectors.getUnreadNotificationCount.projector(state)).toBe(17);
+  });
+
+  it('getTmpNotifications() should return "tmpNotifications" attribute', () => {
+    expect(NotificationSelectors.getTmpNotifications.projector(state)).toEqual(tmpNotifications);
   });
 });

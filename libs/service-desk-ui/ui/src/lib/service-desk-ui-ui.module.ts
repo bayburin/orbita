@@ -19,6 +19,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
+import { NotificationAlertListComponent } from './components/notification-alert-list/notification-alert-list.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
 
@@ -36,6 +37,7 @@ const components: any[] = [
   LogoComponent,
   UserProfileComponent,
   NotificationListComponent,
+  NotificationAlertListComponent,
 ];
 
 @NgModule({

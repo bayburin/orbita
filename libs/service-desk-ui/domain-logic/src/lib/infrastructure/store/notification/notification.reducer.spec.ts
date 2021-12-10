@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Notification } from '../../../entities/model/notification.interface';
+import { Notification, TmpNotification } from '../../../entities/model/notification.interface';
 import * as NotificationActions from './notification.actions';
 import { State, initialState, reducer } from './notification.reducer';
 
@@ -55,6 +55,29 @@ describe('NotificationReducer', () => {
       action = NotificationActions.toggleVisibleLimit();
       result = reducer(result, action);
       expect(result.visibleLimit).toBe(5);
+    });
+  });
+
+  describe('addTmpNotification', () => {
+    it('should change attributes', () => {
+      const notification = { message: 'fake' } as TmpNotification;
+      action = NotificationActions.addTmpNotification({ notification });
+      const result: State = reducer(initialState, action);
+
+      expect(result.tmpNotifications).toEqual([notification]);
+    });
+  });
+
+  describe('removeTmpNotification', () => {
+    it('should change attributes', () => {
+      const notification1 = { message: 'fake-1' } as TmpNotification;
+      const notification2 = { message: 'fake-2' } as TmpNotification;
+      const notifications = [notification1, notification2];
+      initialState.tmpNotifications = notifications;
+      action = NotificationActions.removeTmpNotification({ notification: notification1 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.tmpNotifications).toEqual([notification2]);
     });
   });
 

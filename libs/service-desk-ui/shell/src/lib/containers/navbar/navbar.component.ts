@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthHelper } from '@iss/ng-auth-center';
 
 import { userDashboardAnimation } from '@orbita/service-desk-ui/ui';
-import { User, UserFacade } from '@orbita/service-desk-ui/domain-logic';
+import { User, NotificationFacade } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'lib-navbar',
@@ -12,18 +12,18 @@ import { User, UserFacade } from '@orbita/service-desk-ui/domain-logic';
 })
 export class NavbarComponent implements OnInit {
   user: User = this.authHelper.getJwtPayload();
-  notifications$ = this.userFacade.notifications$;
-  notificationsLoading$ = this.userFacade.notificationsLoading$;
-  notificationsLoaded$ = this.userFacade.notificationsLoaded$;
+  notifications$ = this.notificationFacade.notifications$;
+  notificationsLoading$ = this.notificationFacade.notificationsLoading$;
+  notificationsLoaded$ = this.notificationFacade.notificationsLoaded$;
   userDashboard = false;
 
-  constructor(private authHelper: AuthHelper, private userFacade: UserFacade) {}
+  constructor(private authHelper: AuthHelper, private notificationFacade: NotificationFacade) {}
 
   ngOnInit(): void {
-    this.userFacade.loadAllNotifications();
+    this.notificationFacade.loadAllNotifications();
   }
 
   toggleNotificationLimit() {
-    this.userFacade.toggleNotificationVisibleLimit();
+    this.notificationFacade.toggleNotificationVisibleLimit();
   }
 }

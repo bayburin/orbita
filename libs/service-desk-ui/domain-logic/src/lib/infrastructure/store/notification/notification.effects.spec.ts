@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import * as NotificationActions from './notification.actions';
 import { NotificationEffects } from './notification.effects';
 import { UserApi } from '../../api/user/user.api';
-import { UserApiStub } from './../../api/user/user.api.stub';
+import { UserApiStub } from '../../api/user/user.api.stub';
 
 describe('NotificationEffects', () => {
   let actions: Observable<Action>;

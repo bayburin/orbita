@@ -23,5 +23,5 @@ export * from './lib/application/service/service.facade';
 export * from './lib/application/service/service.facade.stub';
 export * from './lib/application/search/search.facade';
 export * from './lib/application/search/search.facade.stub';
-export * from './lib/application/user/user.facade';
-export * from './lib/application/user/user.facade.stub';
+export * from './lib/application/notification/notification.facade';
+export * from './lib/application/notification/notification.facade.stub';
