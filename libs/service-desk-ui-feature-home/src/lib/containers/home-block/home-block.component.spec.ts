@@ -7,15 +7,15 @@ import {
   DashboardFacade,
   DashboardFacadeStub,
 } from '@orbita/service-desk-ui/domain-logic';
-import { DashboardBlockComponent } from './dashboard-block.component';
+import { HomeBlockComponent } from './home-block.component';
 
-describe('DashboardBlockComponent', () => {
-  let component: DashboardBlockComponent;
-  let fixture: ComponentFixture<DashboardBlockComponent>;
+describe('HomeBlockComponent', () => {
+  let component: HomeBlockComponent;
+  let fixture: ComponentFixture<HomeBlockComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DashboardBlockComponent],
+      declarations: [HomeBlockComponent],
       providers: [
         { provide: DashboardFacade, useClass: DashboardFacadeStub },
         { provide: UserRecommendationFacade, useClass: UserRecommendationFacadeStub },
@@ -25,7 +25,7 @@ describe('DashboardBlockComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardBlockComponent);
+    fixture = TestBed.createComponent(HomeBlockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

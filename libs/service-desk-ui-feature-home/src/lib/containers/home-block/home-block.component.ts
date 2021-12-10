@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardFacade, UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
-  selector: 'lib-dashboard-block',
-  templateUrl: './dashboard-block.component.html',
-  styleUrls: ['./dashboard-block.component.scss'],
+  selector: 'lib-home-block',
+  templateUrl: './home-block.component.html',
+  styleUrls: ['./home-block.component.scss'],
 })
-export class DashboardBlockComponent implements OnInit {
+export class HomeBlockComponent implements OnInit {
   dashboardLoading$ = this.dashboardFacade.loading$;
   dashboardLoaded$ = this.dashboardFacade.loaded$;
   recommendations$ = this.userRecommendationFacade.all$;

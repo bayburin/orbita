@@ -4,21 +4,21 @@ import { RouterModule, Routes } from '@angular/router';
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 
-import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
-import { DashboardBlockComponent } from './containers/dashboard-block/dashboard-block.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { HomeBlockComponent } from './containers/home-block/home-block.component';
 import { GlobalSearchComponent } from './containers/global-search/global-search.component';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: DashboardPageComponent,
+    component: HomePageComponent,
   },
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [DashboardPageComponent, DashboardBlockComponent, GlobalSearchComponent],
-  exports: [DashboardPageComponent],
+  declarations: [HomePageComponent, HomeBlockComponent, GlobalSearchComponent],
+  exports: [HomePageComponent],
 })
 export class ServiceDeskUiFeatureHomeModule {}
