@@ -1,4 +1,4 @@
-import { Notification } from '../../../entities/model/notification.interface';
+import { LimitTypes, Notification } from '../../../entities/model/notification.interface';
 import { notificationAdapter, initialState } from './notification.reducer';
 import * as NotificationSelectors from './notification.selectors';
 
@@ -9,11 +9,11 @@ describe('NotificationSelectors', () => {
       id,
       body: { message: message || `message-${id}` },
     } as Notification);
-  const arrEntities = [createNotificationEntity(1), createNotificationEntity(2), createNotificationEntity(3)];
+  const arrEntities = [createNotificationEntity(3), createNotificationEntity(2), createNotificationEntity(1)];
   const entities = {
-    1: arrEntities[0],
+    3: arrEntities[0],
     2: arrEntities[1],
-    3: arrEntities[2],
+    1: arrEntities[2],
   };
   const tmpNotifications = [{ message: 'fake-1' }, { message: 'fake-2' }];
   let state: any;
@@ -23,7 +23,8 @@ describe('NotificationSelectors', () => {
       ...initialState,
       loaded: true,
       loading: true,
-      visibleLimit: 25,
+      loadingNew: true,
+      limitType: LimitTypes.FULL,
       unreadNotificationCount: 17,
       tmpNotifications,
       error,
@@ -38,6 +39,10 @@ describe('NotificationSelectors', () => {
     expect(NotificationSelectors.getLoading.projector(state)).toEqual(true);
   });
 
+  it('getLoadingNew() should return "loadingNew" attribute', () => {
+    expect(NotificationSelectors.getLoadingNew.projector(state)).toEqual(true);
+  });
+
   it('getError() should return "error" attribute', () => {
     expect(NotificationSelectors.getError.projector(state)).toEqual(error);
   });
@@ -50,8 +55,8 @@ describe('NotificationSelectors', () => {
     expect(NotificationSelectors.getEntities.projector(state)).toEqual(entities);
   });
 
-  it('getVisibleLimit() should return "visibleLimit" attribute', () => {
-    expect(NotificationSelectors.getVisibleLimit.projector(state)).toBe(25);
+  it('getLimitType() should return "limitType" attribute', () => {
+    expect(NotificationSelectors.getLimitType.projector(state)).toBe(LimitTypes.FULL);
   });
 
   it('getUnreadNotificationCount() should return "unreadNotificationCount" attribute', () => {

@@ -70,3 +70,11 @@ export enum EventTypes {
   APP = 'app',
   ERROR = 'error',
 }
+
+/**
+ * Способы ограничения списка уведомлений
+ */
+export enum LimitTypes {
+  LIMITED = 'limited',
+  FULL = 'full',
+}

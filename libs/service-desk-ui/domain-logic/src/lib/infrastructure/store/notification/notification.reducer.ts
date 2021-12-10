@@ -3,31 +3,38 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import * as NotificationActions from './notification.actions';
 import { Notification, TmpNotification } from '../../../entities/model/notification.interface';
+import { LimitTypes } from './../../../entities/model/notification.interface';
 
 export const NOTIFICATION_FEATURE_KEY = 'notification';
 
 export interface State extends EntityState<Notification> {
   loading: boolean;
   loaded: boolean;
-  // Лимит уведомлений в истории уведомлений
-  visibleLimit: number;
+  // Индикатор загрузки непрочитанных уведомлений
+  loadingNew: boolean;
+  // Ограничение списка уведомлений
+  limitType: LimitTypes;
   // Число непрочитанных сообщений
   unreadNotificationCount: number;
   // Массив временных сообщений
   tmpNotifications: TmpNotification[];
   error?: string | null;
+  errorNew?: string | null;
 }
 
 export interface NotificationPartialState {
   readonly [NOTIFICATION_FEATURE_KEY]: State;
 }
 
-export const notificationAdapter: EntityAdapter<Notification> = createEntityAdapter<Notification>();
+export const notificationAdapter: EntityAdapter<Notification> = createEntityAdapter<Notification>({
+  sortComparer: (a: Notification, b: Notification) => (a.id > b.id ? -1 : 1),
+});
 
 export const initialState: State = notificationAdapter.getInitialState({
   loading: false,
   loaded: false,
-  visibleLimit: 5,
+  loadingNew: false,
+  limitType: LimitTypes.LIMITED,
   unreadNotificationCount: 0,
   tmpNotifications: [],
 });
@@ -39,9 +46,14 @@ const notificationReducer = createReducer(
     notificationAdapter.setAll(notifications, { ...state, loaded: true, loading: false })
   ),
   on(NotificationActions.loadAllFailure, (state, { error }) => ({ ...state, loading: false, error })),
-  on(NotificationActions.toggleVisibleLimit, (state) => ({
+  on(NotificationActions.loadNew, (state) => ({ ...state, loadingNew: true, errorNew: null })),
+  on(NotificationActions.loadNewSuccess, (state, { notifications }) =>
+    notificationAdapter.addMany(notifications, { ...state, loadingNew: false })
+  ),
+  on(NotificationActions.loadNewFailure, (state, { error }) => ({ ...state, loadingNew: false, errorNew: error })),
+  on(NotificationActions.toggleLimitType, (state) => ({
     ...state,
-    visibleLimit: state.visibleLimit === 5 ? 25 : 5,
+    limitType: state.limitType === LimitTypes.LIMITED ? LimitTypes.FULL : LimitTypes.LIMITED,
   })),
   on(NotificationActions.addTmpNotification, (state, { notification }) => ({
     ...state,
@@ -50,6 +62,18 @@ const notificationReducer = createReducer(
   on(NotificationActions.removeTmpNotification, (state, { notification }) => ({
     ...state,
     tmpNotifications: state.tmpNotifications.filter((el) => el !== notification),
+  })),
+  on(NotificationActions.setUnreadNotificationCount, (state, { count }) => ({
+    ...state,
+    unreadNotificationCount: count,
+  })),
+  on(NotificationActions.increaseUnreadNotificationCount, (state) => ({
+    ...state,
+    unreadNotificationCount: state.unreadNotificationCount + 1,
+  })),
+  on(NotificationActions.clearUnreadNotificationCount, (state) => ({
+    ...state,
+    unreadNotificationCount: 0,
   }))
 );
 

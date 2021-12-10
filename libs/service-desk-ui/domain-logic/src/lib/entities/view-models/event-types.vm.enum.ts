@@ -24,7 +24,7 @@ class EventTypesVMFactory {
   }
 }
 
-export const EventTypesVMMap: Record<EventTypes, EventTypesVM> = {
+const EventTypesVMMap: Record<EventTypes, EventTypesVM> = {
   [EventTypes.BROADCAST]: EventTypesVMFactory.create('mdi-information-outline'),
   [EventTypes.APP]: EventTypesVMFactory.create('mdi-card-text-outline', 'bg-info'),
   [EventTypes.ERROR]: EventTypesVMFactory.create('mdi-alert', 'bg-danger text-light', false),
@@ -35,6 +35,6 @@ export const EventTypesVMMap: Record<EventTypes, EventTypesVM> = {
  *
  * @param eventType - вид события
  */
-export function getViewModelEventTypeName(eventType: EventTypes): EventTypesVM {
+export function getViewModelEventType(eventType: EventTypes): EventTypesVM {
   return EventTypesVMMap[eventType];
 }

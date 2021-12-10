@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { Notification, TmpNotification } from '../../../entities/model/notification.interface';
+import { LimitTypes, Notification, TmpNotification } from '../../../entities/model/notification.interface';
 import * as NotificationActions from './notification.actions';
 import { State, initialState, reducer } from './notification.reducer';
 
@@ -49,12 +49,12 @@ describe('NotificationReducer', () => {
 
   describe('setVisibleLimit', () => {
     it('should change attributes', () => {
-      action = NotificationActions.toggleVisibleLimit();
+      action = NotificationActions.toggleLimitType();
       let result: State = reducer(initialState, action);
-      expect(result.visibleLimit).toBe(25);
-      action = NotificationActions.toggleVisibleLimit();
+      expect(result.limitType).toBe(LimitTypes.FULL);
+      action = NotificationActions.toggleLimitType();
       result = reducer(result, action);
-      expect(result.visibleLimit).toBe(5);
+      expect(result.limitType).toBe(LimitTypes.LIMITED);
     });
   });
 
@@ -78,6 +78,34 @@ describe('NotificationReducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.tmpNotifications).toEqual([notification2]);
+    });
+  });
+
+  describe('setUnreadNotificationCount', () => {
+    it('should change attributes', () => {
+      action = NotificationActions.setUnreadNotificationCount({ count: 25 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.unreadNotificationCount).toBe(25);
+    });
+  });
+
+  describe('increaseUnreadNotificationCount', () => {
+    it('should change attributes', () => {
+      action = NotificationActions.increaseUnreadNotificationCount();
+      const result: State = reducer(initialState, action);
+
+      expect(result.unreadNotificationCount).toBe(1);
+    });
+  });
+
+  describe('clearUnreadNotificationCount', () => {
+    it('should change attributes', () => {
+      initialState.unreadNotificationCount = 10;
+      action = NotificationActions.clearUnreadNotificationCount();
+      const result: State = reducer(initialState, action);
+
+      expect(result.unreadNotificationCount).toBe(0);
     });
   });
 

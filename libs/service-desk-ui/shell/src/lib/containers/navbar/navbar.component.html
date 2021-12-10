@@ -11,9 +11,9 @@
               <i class="mdi mdi-account mdi-24px"></i>
               {{ user.fio }}
               &#160;
-              <!-- <span class="badge badge-pill badge-danger" [hidden]="!notificationCount.value"
-                >+{{ notificationCount.value }}</span
-              > -->
+              <span class="badge badge-pill badge-danger" *ngIf="unreadNotificationCount$ | async as count">
+                +{{ count }}
+              </span>
               <i class="mdi mdi-chevron-down mdi-18px"></i>
             </span>
           </li>
@@ -21,17 +21,17 @@
       </div>
     </div>
     <div class="user-dashboard-menu-wrapper" *ngIf="userProfile" @userDashboardAnimation>
-      <!-- <app-user-dashboard-menu
-        (clickedOutside)="userDashboard = false"
-        (notificationReaded)="clearNotificationCount()"
-        [calledElement]="parentDashboardElement"
-      ></app-user-dashboard-menu> -->
       <lib-user-profile
         [notifications]="notifications$ | async"
         [loadingAllNotifications]="notificationsLoading$ | async"
+        [loadingNewNotifications]="notificationsLoadingNew$ | async"
+        [loadedAllNotifications]="notificationsLoaded$ | async"
+        [unreadNotificationCount]="unreadNotificationCount$ | async"
+        [limitType]="notificationLimitType$ | async"
         [calledElement]="calledUserProfileElement"
         (toggleNotificationLimit)="toggleNotificationLimit()"
         (clickedOutside)="userProfile = false"
+        (loadNewNotification)="loadNewNotification()"
       ></lib-user-profile>
     </div>
   </div>

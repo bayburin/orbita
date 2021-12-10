@@ -8,7 +8,7 @@ import {
   ElementRef,
 } from '@angular/core';
 
-import { Notification } from '@orbita/service-desk-ui/domain-logic';
+import { getLimitTypesVM, LimitTypes, LimitTypesVM, Notification } from '@orbita/service-desk-ui/domain-logic';
 import { notifyAnimation } from './../../animations/notify.animation';
 
 @Component({
@@ -28,6 +28,10 @@ export class UserProfileComponent {
    */
   @Input() loadingAllNotifications: boolean;
   /**
+   * Индикатор, загружены ли все уведомления
+   */
+  @Input() loadedAllNotifications: boolean;
+  /**
    * Индикатор загрузки новых уведомлений
    */
   @Input() loadingNewNotifications: boolean;
@@ -35,6 +39,14 @@ export class UserProfileComponent {
    * HTML элемент, вызвавший текущий компонент
    */
   @Input() calledElement: HTMLElement;
+  /**
+   * Число непрочитанных уведомлений
+   */
+  @Input() unreadNotificationCount: number;
+  /**
+   * Тип ограничения списка уведомлений
+   */
+  @Input() limitType: LimitTypes;
   /**
    * Событие "клика" вне текущего элемента для закрытия окна
    */
@@ -48,13 +60,17 @@ export class UserProfileComponent {
    */
   @Output() toggleNotificationLimit = new EventEmitter<void>();
   activeTab = 1;
-  arrowUp = false;
 
   constructor(private elementRef: ElementRef) {}
 
-  @HostListener('document:click', ['$event.target']) onClickOutside(target: HTMLElement) {
-    if (!this.elementRef.nativeElement.contains(target) && !this.calledElement.contains(target)) {
-      this.clickedOutside.emit();
-    }
+  @HostListener('document:click', ['$event.target']) onClickOutside(target: any) {
+    // FIXME: Не работает с кнопкой "Смотреть остальные уведомления"
+    // if (!this.elementRef.nativeElement.contains(target) && !this.calledElement.contains(target)) {
+    //   this.clickedOutside.emit();
+    // }
+  }
+
+  eventTypeVM(limitType: LimitTypes): LimitTypesVM {
+    return getLimitTypesVM(limitType);
   }
 }

@@ -1,24 +1,37 @@
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
+import { LimitTypes } from './../../entities/model/notification.interface';
 import { Notification, TmpNotification } from '../../entities/model/notification.interface';
 
 export abstract class NotificationFacadeAbstract {
   /**
-   * Список всех категорий
+   * Список всех уведомлений
    */
   notifications$: Observable<Notification[]>;
   /**
    * Индикатор, идет ли загрузка уведомлений в данный момент
    */
-  notificationsLoading$: Observable<boolean>;
+  loading$: Observable<boolean>;
+  /**
+   * Индикатор, идет ли загрузка непрочитанных уведомлений в данный момент
+   */
+  loadingNew$: Observable<boolean>;
   /**
    * Индикатор, загружены ли уведомления
    */
-  notificationsLoaded$: Observable<boolean>;
+  loaded$: Observable<boolean>;
   /**
    * Список всплывающих сообщений
    */
   tmpNotifications$: Observable<TmpNotification[]>;
+  /**
+   * Список непрочитанных сообщений
+   */
+  unreadNotificationCount$: Observable<number>;
+  /**
+   * Тип ограничения списка уведомлений
+   */
+  limitType$: Observable<LimitTypes>;
 
   /**
    * Загружает список всех уведомлений
@@ -26,12 +39,27 @@ export abstract class NotificationFacadeAbstract {
   abstract loadAllNotifications(): void;
 
   /**
+   * Загружает список новых уведомлений
+   */
+  abstract loadNewNotifications(): void;
+
+  /**
    * Изменить максимальное число выводимых уведомлений
    */
-  abstract toggleNotificationVisibleLimit(): void;
+  abstract toggleNotificationLimitType(): void;
 
   /**
    * Удалить уведомление
    */
   abstract removeTmpNotification(notification: TmpNotification): void;
+
+  /**
+   * Подключается к каналу 'UserNotificationCountChannel'
+   */
+  abstract connectToNotificationCountChannel(): Subscription;
+
+  /**
+   * Подключается к каналу 'UserNotifyChannel'
+   */
+  abstract connectToUserNotifications(): Subscription;
 }

@@ -22,10 +22,9 @@
           <a ngbNavLink>Уведомления</a>
           <ng-template ngbNavContent>
             <lib-loading [loading]="loadingAllNotifications" size="48px"></lib-loading>
-            <div *ngIf="notifications">
-              <!-- <div class="text-center" *ngIf="notificationCount.value" @notifyAnimation>
+            <div *ngIf="loadedAllNotifications">
+              <div class="text-center" *ngIf="unreadNotificationCount" @notifyAnimation>
                 <button
-                  id="loadNewNotifications"
                   class="btn btn-sm btn-primary"
                   [disabled]="loadingNewNotifications"
                   (click)="loadNewNotification.emit()"
@@ -35,18 +34,15 @@
                     Получить новые уведомления
                   </span>
                 </button>
-              </div> -->
+              </div>
               <lib-notification-list [notifications]="notifications"></lib-notification-list>
               <div class="d-flex justify-content-center mt-3" *ngIf="notifications.length >= 5">
                 <span
                   id="toggleNotificationLimit"
-                  (click)="toggleNotificationLimit.emit(); arrowUp = !arrowUp"
+                  (click)="toggleNotificationLimit.emit()"
                   class="sd-icon-group sd-link text-dark"
                 >
-                  <i
-                    class="mdi mdi-24px"
-                    [ngClass]="arrowUp ? 'mdi-arrow-up-drop-circle-outline' : 'mdi-arrow-down-drop-circle-outline'"
-                  ></i>
+                  <i class="mdi mdi-24px" [ngClass]="eventTypeVM(limitType).icon"></i>
                   Смотреть остальные уведомления (не более 100 последних)
                 </span>
               </div>

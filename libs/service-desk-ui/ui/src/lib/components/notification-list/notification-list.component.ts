@@ -1,11 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import {
-  EventTypes,
-  EventTypesVM,
-  getViewModelEventTypeName,
-  Notification,
-} from '@orbita/service-desk-ui/domain-logic';
+import { EventTypes, EventTypesVM, getViewModelEventType, Notification } from '@orbita/service-desk-ui/domain-logic';
 import { contentBlockAnimation } from './../../animations/content.animation';
 import { colorAnimation } from './../../animations/color.animation';
 
@@ -24,6 +19,6 @@ export class NotificationListComponent {
   }
 
   eventTypeVM(eventType: EventTypes): EventTypesVM {
-    return getViewModelEventTypeName(eventType);
+    return getViewModelEventType(eventType);
   }
 }
