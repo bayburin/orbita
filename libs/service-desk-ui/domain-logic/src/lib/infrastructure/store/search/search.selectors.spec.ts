@@ -1,4 +1,3 @@
-import { SearchResultTypes } from './../../../entities/model/search-result.types';
 import {
   initialState,
   searchCategoryAdapter,
@@ -163,13 +162,6 @@ describe('Search Selectors', () => {
 
   it('getResponsibleUserEntities() should return responsibleUser entities', () => {
     expect(SearchSelectors.getResponsibleUserEntities.projector(state)).toEqual(responsibleUserEntities);
-  });
-
-  it('getSearchResponsibleUsers() should return array of responsibleUsers', () => {
-    expect(SearchSelectors.getSearchResponsibleUsers.projector([10, 11], responsibleUserEntities)).toEqual([
-      responsibleUserEntities[10],
-      responsibleUserEntities[11],
-    ]);
   });
 
   // ========== View Model Selectors ==========

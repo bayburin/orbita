@@ -4,7 +4,7 @@ import { AuthCenterGuard } from '@iss/ng-auth-center';
 
 const routes: Routes = [
   {
-    path: 'new',
+    path: '',
     loadChildren: () => import('@orbita/service-desk-ui/shell').then((m) => m.ServiceDeskUiShellModule),
     canActivate: [AuthCenterGuard],
   },

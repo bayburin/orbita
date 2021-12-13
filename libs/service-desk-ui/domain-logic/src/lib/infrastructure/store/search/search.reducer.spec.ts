@@ -41,7 +41,6 @@ describe('SearchReducer', () => {
       expect(result.categoryIds).toEqual([]);
       expect(result.serviceIds).toEqual([]);
       expect(result.questionIds).toEqual([]);
-      expect(result.responsibleUserIds).toEqual([]);
     });
   });
 
@@ -52,7 +51,6 @@ describe('SearchReducer', () => {
         categoryIds: [1, 2],
         serviceIds: [3, 4],
         questionIds: [5, 6],
-        responsibleUserIds: [7, 8],
       });
       const result = reducer(initialState, action);
 
@@ -62,7 +60,6 @@ describe('SearchReducer', () => {
       expect(result.categoryIds).toEqual([1, 2]);
       expect(result.serviceIds).toEqual([3, 4]);
       expect(result.questionIds).toEqual([5, 6]);
-      expect(result.responsibleUserIds).toEqual([7, 8]);
     });
   });
 

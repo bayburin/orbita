@@ -39,8 +39,6 @@ export const getServiceIds = createSelector(getSearchState, (state: State) => st
 
 export const getQuestionIds = createSelector(getSearchState, (state: State) => state.questionIds);
 
-export const getResponsibleUserIds = createSelector(getSearchState, (state: State) => state.responsibleUserIds);
-
 // ========== Подтип хранилища Category ==========
 
 export const getAllCategories = createSelector(getSearchState, (state: State) => selectAllCategories(state.category));
@@ -85,12 +83,6 @@ export const getAllResponsibleUsers = createSelector(getSearchState, (state: Sta
 
 export const getResponsibleUserEntities = createSelector(getSearchState, (state: State) =>
   selectResponsibleUserEntities(state.responsibleUser)
-);
-
-export const getSearchResponsibleUsers = createSelector(
-  getResponsibleUserIds,
-  getResponsibleUserEntities,
-  (ids, entities) => ids.map((id) => entities[id])
 );
 
 // ========== View Model Selectors ==========

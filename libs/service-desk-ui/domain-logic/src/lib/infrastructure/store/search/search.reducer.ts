@@ -22,7 +22,6 @@ export interface State {
   categoryIds: number[];
   serviceIds: number[];
   questionIds: number[];
-  responsibleUserIds: number[];
   loading: boolean;
   loaded: boolean;
   error?: string | null;
@@ -45,7 +44,6 @@ export const initialState: State = {
   categoryIds: [],
   serviceIds: [],
   questionIds: [],
-  responsibleUserIds: [],
   loading: false,
   loaded: false,
 };
@@ -60,16 +58,14 @@ const searchReducer = createReducer(
     categoryIds: [],
     serviceIds: [],
     questionIds: [],
-    responsibleUserIds: [],
   })),
-  on(SearchActions.searchSuccess, (state, { categoryIds, serviceIds, questionIds, responsibleUserIds }) => ({
+  on(SearchActions.searchSuccess, (state, { categoryIds, serviceIds, questionIds }) => ({
     ...state,
     loading: false,
     loaded: true,
     categoryIds,
     serviceIds,
     questionIds,
-    responsibleUserIds,
   })),
   on(SearchActions.searchFailure, (state, { error }) => ({ ...state, loading: false, error })),
   on(SearchActions.setAll, (state, { categories, services, questions, responsibleUsers }) => ({

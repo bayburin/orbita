@@ -14,65 +14,65 @@ import { MarkdownHelpPageComponent } from './pages/markdown-help/markdown-help.p
 import { ServiceRedirectionComponent } from './components/service-redirection/service-redirection.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: DashboardPageComponent,
-  },
-  {
-    path: 'categories',
-    component: CategoriesPageComponent,
-    data: { breadcrumb: 'Услуги' },
-    children: [
-      {
-        path: '',
-        component: CategoriesOverviewPageComponent,
-      },
-      {
-        path: ':id',
-        component: CategoriesDetailPageComponent,
-        data: { breadcrumb: CategoryService },
-      },
-    ],
-  },
-  {
-    path: 'services/:id',
-    component: ServiceRedirectionComponent,
-  },
-  {
-    path: 'categories/:id',
-    component: CategoriesPageComponent,
-    data: { breadcrumb: [CategoryService, ServiceService] },
-    children: [
-      {
-        path: 'services/:id',
-        component: ServicesDetailPageComponent,
-        data: { breadcrumb: ServiceService },
-        children: [
-          {
-            path: 'admin',
-            loadChildren: () => import('./admin/admin-ticket.module').then((m) => m.AdminTicketModule),
-            canLoad: [ResponsibleGuard],
-          },
-        ],
-      },
-    ],
-  },
   // {
-  //   path: 'services',
-  //   component: ServicesOverwievPageComponent,
-  //   canActivate: [AuthGuard],
-  //   data: { breadcrumb: 'Все вопросы' }
+  //   path: '',
+  //   component: DashboardPageComponent,
   // },
-  {
-    path: 'search',
-    component: SearchPageComponent,
-    data: { breadcrumb: 'Поиск' },
-  },
-  {
-    path: 'markdown-help',
-    component: MarkdownHelpPageComponent,
-    data: { breadcrumb: 'Справка по форматированию' },
-  },
+  // {
+  //   path: 'categories',
+  //   component: CategoriesPageComponent,
+  //   data: { breadcrumb: 'Услуги' },
+  //   children: [
+  //     {
+  //       path: '',
+  //       component: CategoriesOverviewPageComponent,
+  //     },
+  //     {
+  //       path: ':id',
+  //       component: CategoriesDetailPageComponent,
+  //       data: { breadcrumb: CategoryService },
+  //     },
+  //   ],
+  // },
+  // {
+  //   path: 'services/:id',
+  //   component: ServiceRedirectionComponent,
+  // },
+  // {
+  //   path: 'categories/:id',
+  //   component: CategoriesPageComponent,
+  //   data: { breadcrumb: [CategoryService, ServiceService] },
+  //   children: [
+  //     {
+  //       path: 'services/:id',
+  //       component: ServicesDetailPageComponent,
+  //       data: { breadcrumb: ServiceService },
+  //       children: [
+  //         {
+  //           path: 'admin',
+  //           loadChildren: () => import('./admin/admin-ticket.module').then((m) => m.AdminTicketModule),
+  //           canLoad: [ResponsibleGuard],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+  // // {
+  // //   path: 'services',
+  // //   component: ServicesOverwievPageComponent,
+  // //   canActivate: [AuthGuard],
+  // //   data: { breadcrumb: 'Все вопросы' }
+  // // },
+  // {
+  //   path: 'search',
+  //   component: SearchPageComponent,
+  //   data: { breadcrumb: 'Поиск' },
+  // },
+  // {
+  //   path: 'markdown-help',
+  //   component: MarkdownHelpPageComponent,
+  //   data: { breadcrumb: 'Справка по форматированию' },
+  // },
 ];
 
 @NgModule({

@@ -8,6 +8,8 @@ import * as ServiceSelectors from '../service/service.selectors';
 import * as CategorySelectors from '../category/category.selectors';
 import * as HomeSelectors from '../home/home.selectors';
 
+// ========== Services ==========
+
 export const getServiceEntitiesVM = createSelector(
   ServiceSelectors.getEntities,
   QuestionSelectors.getEntities,
@@ -28,20 +30,6 @@ export const getServiceEntitiesVM = createSelector(
       }, {})
 );
 
-export const getAllCategoriesVM = createSelector(
-  CategorySelectors.getAll,
-  getServiceEntitiesVM,
-  (categories, serviceEntities): CategoryVM[] =>
-    categories.map((category) => {
-      const services = category.services ? category.services.map((id) => serviceEntities[id]) : [];
-
-      return {
-        ...category,
-        services,
-      };
-    })
-);
-
 export const getAllServicesVM = createSelector(
   ServiceSelectors.getAll,
   QuestionSelectors.getEntities,
@@ -56,6 +44,24 @@ export const getAllServicesVM = createSelector(
       };
     })
 );
+
+// ========== Categories ==========
+
+export const getAllCategoriesVM = createSelector(
+  CategorySelectors.getAll,
+  getServiceEntitiesVM,
+  (categories, serviceEntities): CategoryVM[] =>
+    categories.map((category) => {
+      const services = category.services ? category.services.map((id) => serviceEntities[id]) : [];
+
+      return {
+        ...category,
+        services,
+      };
+    })
+);
+
+// ========== Home ==========
 
 export const getHomeCategoriesVM = createSelector(
   HomeSelectors.getCategories,
