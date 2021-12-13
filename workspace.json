@@ -542,7 +542,7 @@
             "polyfills": "apps/service-desk-ui/src/polyfills.ts",
             "tsConfig": "apps/service-desk-ui/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["apps/service-desk-ui/src/favicon.ico", "apps/service-desk-ui/src/assets"],
+            "assets": ["apps/service-desk-ui/src/favicon.png", "apps/service-desk-ui/src/assets"],
             "styles": [
               "node_modules/@iss/ng-auth-center/assets/styles.scss",
               "apps/service-desk-ui/src/assets/scss/bootstrap-theme-sd.scss",
