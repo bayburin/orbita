@@ -1,11 +1,9 @@
-import { Question } from './../model/question.interface';
-import { QuestionVM } from './question-vm.interface';
 import { ResponsibleUser } from '../model/responsible-user.interface';
 
 /**
  * Представление услуги
  */
-export interface ServiceVM {
+export interface TicketOverviewServiceVM {
   /**
    * Идентификатор
    */
@@ -47,12 +45,7 @@ export interface ServiceVM {
   readonly popularity: number;
 
   /**
-   * Вопросы
-   */
-  readonly questions?: Question[];
-
-  /**
    * Ответственные
    */
-  readonly responsible_users?: ResponsibleUser[];
+  readonly responsible_users: ResponsibleUser[];
 }

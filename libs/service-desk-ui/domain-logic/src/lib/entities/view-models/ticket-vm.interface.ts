@@ -1,12 +1,10 @@
-import { Service } from './../model/service.interface';
 import { ResponsibleUser } from '../model/responsible-user.interface';
 import { TicketStates, TicketTypes } from '../model/ticket.interface';
-import { TicketOverviewServiceVM } from './ticket-overview-service-vm.interface';
 
 /**
- * Полное представление тикета
+ * Представление тикета
  */
-export interface TicketOverviewVM {
+export interface TicketVM {
   /**
    * Идентификатор
    */
@@ -21,12 +19,6 @@ export interface TicketOverviewVM {
    * Идентификатор услуги
    */
   readonly service_id: number;
-
-  /**
-   * Услуга
-   */
-  // readonly service: TicketOverviewServiceVM;
-  readonly service: Service;
 
   /**
    * Наименование

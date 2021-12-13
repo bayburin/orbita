@@ -1,3 +1,4 @@
+import { Service } from './../model/service.interface';
 import { ServiceVM } from './service-vm.interface';
 
 /**
