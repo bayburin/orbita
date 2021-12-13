@@ -19,10 +19,22 @@ const routes: Routes = [
       },
       {
         path: 'categories',
-        loadChildren: () =>
-          import('@orbita/service-desk-ui/feature-category-listing').then(
-            (m) => m.ServiceDeskUiFeatureCategoryListingModule
-          ),
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('@orbita/service-desk-ui/feature-category-listing').then(
+                (m) => m.ServiceDeskUiFeatureCategoryListingModule
+              ),
+          },
+          {
+            path: ':id',
+            loadChildren: () =>
+              import('@orbita/service-desk-ui/feature-category-overview').then(
+                (m) => m.ServiceDeskUiFeatureCategoryOverviewModule
+              ),
+          },
+        ],
       },
     ],
   },

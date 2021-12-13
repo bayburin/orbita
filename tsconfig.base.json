@@ -33,6 +33,9 @@
       "@orbita/service-desk-ui/feature-category-listing": [
         "libs/service-desk-ui/feature-category-listing/src/index.ts"
       ],
+      "@orbita/service-desk-ui/feature-category-overview": [
+        "libs/service-desk-ui/feature-category-overview/src/index.ts"
+      ],
       "@orbita/service-desk-ui/feature-home": ["libs/service-desk-ui/feature-home/src/index.ts"],
       "@orbita/service-desk-ui/shell": ["libs/service-desk-ui/shell/src/index.ts"],
       "@orbita/service-desk-ui/ui": ["libs/service-desk-ui/ui/src/index.ts"],
