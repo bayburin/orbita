@@ -8,6 +8,7 @@ import * as fromQuestion from './question/question.reducer';
 import * as fromUserRecommendation from './user-recommendation/user-recommendation.reducer';
 import * as fromSearch from './search/search.reducer';
 import * as fromNotification from './notification/notification.reducer';
+import * as fromResponsibleUser from './responsible-user/responsible-user.reducer';
 
 export interface ServiceDeskUiState
   extends fromHome.HomePartialState,
@@ -17,7 +18,8 @@ export interface ServiceDeskUiState
     fromQuestion.QuestionPartialState,
     fromUserRecommendation.UserRecommendationPartialState,
     fromSearch.SearchPartialState,
-    fromNotification.NotificationPartialState {}
+    fromNotification.NotificationPartialState,
+    fromResponsibleUser.ResponsibleUserPartialState {}
 
 export const SERVICE_DESK_SYSTEM_FEATURE_KEY = 'serviceDeskUi';
 
@@ -30,6 +32,7 @@ export const reducer: ActionReducerMap<ServiceDeskUiState> = {
   [fromUserRecommendation.USER_RECOMMENDATION_FEATURE_KEY]: fromUserRecommendation.reducer,
   [fromSearch.SEARCH_FEATURE_KEY]: fromSearch.reducer,
   [fromNotification.NOTIFICATION_FEATURE_KEY]: fromNotification.reducer,
+  [fromResponsibleUser.RESPONSIBLE_USER_FEATURE_KEY]: fromResponsibleUser.reducer,
 };
 
 export const initialState: ServiceDeskUiState = {
@@ -41,6 +44,7 @@ export const initialState: ServiceDeskUiState = {
   [fromUserRecommendation.USER_RECOMMENDATION_FEATURE_KEY]: fromUserRecommendation.initialState,
   [fromSearch.SEARCH_FEATURE_KEY]: fromSearch.initialState,
   [fromNotification.NOTIFICATION_FEATURE_KEY]: fromNotification.initialState,
+  [fromResponsibleUser.RESPONSIBLE_USER_FEATURE_KEY]: fromResponsibleUser.initialState,
 };
 
 export const getServiceDeskUiState = createFeatureSelector<ServiceDeskUiState>(SERVICE_DESK_SYSTEM_FEATURE_KEY);

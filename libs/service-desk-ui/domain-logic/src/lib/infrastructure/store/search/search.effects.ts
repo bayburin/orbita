@@ -25,14 +25,21 @@ export class SearchEffects {
                 categories: data.categories,
                 services: [...data.services, ...Object.values(normalizeData.entities.services)],
                 questions: Object.values(normalizeData.entities.questions),
+                responsibleUsers: Object.values(normalizeData.entities.responsible_users),
               };
               const categoryIds = data.categories.map((category) => category.id);
               const serviceIds = data.services.map((service) => service.id);
               const questionIds = data.questions.map((question) => question.id);
+              const responsibleUserIds = Object.keys(result.responsibleUsers).map(Number);
 
               return [
-                SearchActions.setAll({ result }),
-                SearchActions.searchSuccess({ categoryIds, serviceIds, questionIds }),
+                SearchActions.setAll({
+                  categories: result.categories,
+                  services: result.services,
+                  questions: result.questions,
+                  responsibleUsers: result.responsibleUsers,
+                }),
+                SearchActions.searchSuccess({ categoryIds, serviceIds, questionIds, responsibleUserIds }),
               ];
             })
           )

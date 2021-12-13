@@ -25,8 +25,7 @@ export interface TicketOverviewVM {
   /**
    * Услуга
    */
-  // readonly service: TicketOverviewServiceVM;
-  readonly service: Service;
+  readonly service: TicketOverviewServiceVM;
 
   /**
    * Наименование

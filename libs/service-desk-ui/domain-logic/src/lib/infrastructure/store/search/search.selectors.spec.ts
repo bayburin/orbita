@@ -1,9 +1,16 @@
 import { SearchResultTypes } from './../../../entities/model/search-result.types';
-import { initialState, searchCategoryAdapter, searchServiceAdapter, searchQuestionAdapter } from './search.reducer';
+import {
+  initialState,
+  searchCategoryAdapter,
+  searchServiceAdapter,
+  searchQuestionAdapter,
+  searchResponsibleUserAdapter,
+} from './search.reducer';
 import * as SearchSelectors from './search.selectors';
 import { Category } from './../../../entities/model/category.interface';
 import { Service } from './../../../entities/model/service.interface';
 import { Question } from './../../../entities/model/question.interface';
+import { ResponsibleUser } from '../../../entities/model/responsible-user.interface';
 
 describe('Search Selectors', () => {
   const error = { message: 'error message' };
@@ -22,9 +29,19 @@ describe('Search Selectors', () => {
       id,
       ticket: { name: name || `name-${id}`, service_id },
     } as Question);
+  const createResponsibleUser = (id: number, tn = 0): ResponsibleUser =>
+    ({
+      id,
+      tn,
+    } as ResponsibleUser);
   const arrCategories = [createCategory(1), createCategory(2), createCategory(3)];
   const arrServices = [createService(4), createService(5), createService(6)];
   const arrQuestions = [createQuestion(7, 5), createQuestion(8), createQuestion(9)];
+  const arrResponsibleUsers = [
+    createResponsibleUser(10, 1000),
+    createResponsibleUser(11, 1001),
+    createResponsibleUser(12, 1002),
+  ];
   const categoryEntities = {
     1: arrCategories[0],
     2: arrCategories[1],
@@ -40,6 +57,11 @@ describe('Search Selectors', () => {
     8: arrQuestions[1],
     9: arrQuestions[2],
   };
+  const responsibleUserEntities = {
+    10: arrResponsibleUsers[0],
+    11: arrResponsibleUsers[1],
+    12: arrResponsibleUsers[2],
+  };
   let state: any;
 
   beforeEach(() => {
@@ -48,6 +70,7 @@ describe('Search Selectors', () => {
       category: searchCategoryAdapter.setAll(arrCategories, { ...initialState.category }),
       service: searchServiceAdapter.setAll(arrServices, { ...initialState.service }),
       question: searchQuestionAdapter.setAll(arrQuestions, { ...initialState.question }),
+      responsibleUser: searchResponsibleUserAdapter.setAll(arrResponsibleUsers, { ...initialState.responsibleUser }),
       categoryIds: [1, 2],
       serviceIds: [3, 4],
       questionIds: [5, 6],
@@ -132,31 +155,48 @@ describe('Search Selectors', () => {
     ]);
   });
 
-  // ========== View Model Selectors ==========
+  // ========== Подтип хранилища ResponsibleUser ==========
 
-  it('getSearchResult() should return question entities', () => {
-    const categories = [arrCategories[0]];
-    const services = [arrServices[0]];
-    const questions = [arrQuestions[0]];
+  it('getAllResponsibleUsers() should return array of responsibleUsers', () => {
+    expect(SearchSelectors.getAllResponsibleUsers.projector(state)).toEqual(arrResponsibleUsers);
+  });
 
-    const questionResult: SearchResultTypes = {
-      ...arrQuestions[0],
-      answers: [],
-      correction: null,
-      ticket: {
-        ...arrQuestions[0].ticket,
-        service: arrServices[1],
-        responsible_users: [],
-      },
-    };
+  it('getResponsibleUserEntities() should return responsibleUser entities', () => {
+    expect(SearchSelectors.getResponsibleUserEntities.projector(state)).toEqual(responsibleUserEntities);
+  });
 
-    expect(SearchSelectors.getSearchResult.projector(categories, services, questions, serviceEntities).length).toEqual(
-      3
-    );
-    expect(SearchSelectors.getSearchResult.projector(categories, services, questions, serviceEntities)).toEqual([
-      ...categories,
-      ...services,
-      questionResult,
+  it('getSearchResponsibleUsers() should return array of responsibleUsers', () => {
+    expect(SearchSelectors.getSearchResponsibleUsers.projector([10, 11], responsibleUserEntities)).toEqual([
+      responsibleUserEntities[10],
+      responsibleUserEntities[11],
     ]);
   });
+
+  // ========== View Model Selectors ==========
+
+  // it('getSearchResult() should return question entities', () => {
+  //   const categories = [arrCategories[0]];
+  //   const services = [arrServices[0]];
+  //   const questions = [arrQuestions[0]];
+
+  //   const questionResult: SearchResultTypes = {
+  //     ...arrQuestions[0],
+  //     answers: [],
+  //     correction: null,
+  //     ticket: {
+  //       ...arrQuestions[0].ticket,
+  //       service: arrServices[1],
+  //       responsible_users: [],
+  //     },
+  //   };
+
+  //   expect(SearchSelectors.getSearchResult.projector(categories, services, questions, serviceEntities).length).toEqual(
+  //     3
+  //   );
+  //   expect(SearchSelectors.getSearchResult.projector(categories, services, questions, serviceEntities)).toEqual([
+  //     ...categories,
+  //     ...services,
+  //     questionResult,
+  //   ]);
+  // });
 });
