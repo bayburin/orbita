@@ -1,4 +1,4 @@
-import { AnswerAttachment } from './../model/answer-attachment.interface';
+import { AnswerAttachment } from '../model/answer-attachment.interface';
 
 /**
  * Представление вопроса

@@ -1,4 +1,4 @@
-import { AnswerVM } from './answer-view-model.interface';
+import { AnswerVM } from './answer-vm.interface';
 import { TicketOverviewVM } from './ticket-overview-vm.interface';
 
 /**
