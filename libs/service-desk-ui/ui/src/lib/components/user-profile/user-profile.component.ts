@@ -60,14 +60,19 @@ export class UserProfileComponent {
    */
   @Output() toggleNotificationLimit = new EventEmitter<void>();
   activeTab = 1;
+  private clickInside = false;
 
   constructor(private elementRef: ElementRef) {}
 
+  @HostListener('click', ['$event.target']) onClickInside() {
+    this.clickInside = true;
+  }
+
   @HostListener('document:click', ['$event.target']) onClickOutside(target: any) {
-    // FIXME: Не работает с кнопкой "Смотреть остальные уведомления"
-    // if (!this.elementRef.nativeElement.contains(target) && !this.calledElement.contains(target)) {
-    //   this.clickedOutside.emit();
-    // }
+    if (!this.clickInside && !this.calledElement.contains(target)) {
+      this.clickedOutside.emit();
+    }
+    this.clickInside = false;
   }
 
   eventTypeVM(limitType: LimitTypes): LimitTypesVM {
