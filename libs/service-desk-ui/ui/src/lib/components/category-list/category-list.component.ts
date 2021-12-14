@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { CategoryVM, ServiceVM } from '@orbita/service-desk-ui/domain-logic';
+import { CategoryVM } from '@orbita/service-desk-ui/domain-logic';
 import { contentListAnimation } from './../../animations/content.animation';
 
 @Component({
@@ -22,9 +22,5 @@ export class CategoryListComponent {
 
   trackByCategory(index: number, category: CategoryVM) {
     return category.id;
-  }
-
-  trackByService(index: number, service: ServiceVM) {
-    return service.id;
   }
 }

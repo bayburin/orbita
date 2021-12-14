@@ -20,6 +20,9 @@ import { LogoComponent } from './components/logo/logo.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { NotificationListComponent } from './components/notification-list/notification-list.component';
 import { NotificationAlertListComponent } from './components/notification-alert-list/notification-alert-list.component';
+import { ServiceListComponent } from './components/service-list/service-list.component';
+import { ServiceLinkComponent } from './components/service-link/service-link.component';
+import { QuestionListComponent } from './components/question-list/question-list.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
 
@@ -38,12 +41,16 @@ const components: any[] = [
   UserProfileComponent,
   NotificationListComponent,
   NotificationAlertListComponent,
+  SearchResultTemplateComponent,
+  ServiceListComponent,
+  ServiceLinkComponent,
+  QuestionListComponent
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule, modules],
-  declarations: [components, SearchResultTemplateComponent],
+  declarations: [components],
   entryComponents: [CategoryComponent, ServiceComponent, QuestionComponent],
-  exports: [components, modules, SearchResultTemplateComponent],
+  exports: [components, modules],
 })
 export class ServiceDeskUiUiModule {}

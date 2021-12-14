@@ -1,0 +1,5 @@
+<ul [ngClass]="styleClass">
+  <li *ngFor="let service of category.services; trackBy: trackByService">
+    <lib-service-link [categoryId]="category.id" [serviceId]="service.id">{{ service.name }}</lib-service-link>
+  </li>
+</ul>

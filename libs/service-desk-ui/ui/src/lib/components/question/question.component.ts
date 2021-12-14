@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { QuestionOverviewVM } from '@orbita/service-desk-ui/domain-logic';
+import { QuestionOverviewVM, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'lib-question',
@@ -10,7 +10,27 @@ import { QuestionOverviewVM } from '@orbita/service-desk-ui/domain-logic';
 })
 export class QuestionComponent {
   /**
-   * Вопрос
+   * Режим, при котором ответ на вопрос не выдается, только вопрос с наименованием услуги и ссылка на него
    */
-  @Input() data: QuestionOverviewVM;
+  @Input() standaloneLink = false;
+  /**
+   * Определяет, показывать ли системные флаги
+   */
+  @Input() showFlags: boolean;
+  /**
+   * Вопрос общего типа
+   */
+  @Input() data: QuestionOverviewVM | QuestionVM;
+  /**
+   * Вопрос с типом QuestionOverviewVM
+   */
+  get questionOverview(): QuestionOverviewVM {
+    return this.data as QuestionOverviewVM;
+  }
+  /**
+   * Вопрос с типом OverviewVM
+   */
+  get question(): QuestionVM {
+    return this.data as QuestionVM;
+  }
 }

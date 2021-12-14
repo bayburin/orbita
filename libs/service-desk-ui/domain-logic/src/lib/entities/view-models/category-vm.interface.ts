@@ -1,4 +1,4 @@
-import { Service } from './../model/service.interface';
+import { QuestionVM } from './question-vm.interface';
 import { ServiceVM } from './service-vm.interface';
 
 /**
@@ -38,5 +38,5 @@ export interface CategoryVM {
   /**
    * Список часто-задаваемых вопросов
    */
-  // readonly faq: TicketVM[];
+  // readonly faq?: QuestionVM[];
 }

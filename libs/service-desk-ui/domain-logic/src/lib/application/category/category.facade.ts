@@ -15,6 +15,7 @@ import * as VMSelectors from '../../infrastructure/store/selectors/vm.selectors'
 })
 export class CategoryFacade implements CategoryFacadeAbstract {
   all$ = this.store.select(VMSelectors.getAllCategoriesVM);
+  selected$ = this.store.select(VMSelectors.getSelectedCategoryVM);
   loading$ = this.store.select(CategorySelectors.getLoading);
   loaded$ = this.store.select(CategorySelectors.getLoaded);
 

@@ -3,9 +3,9 @@
     <div class="sd-list-question-group">
       <div class="question-block">
         <div class="row-flex-content">
-          <span [innerHtml]="data.ticket.name"></span>
-          <span class="badge bg-yellow-200">
-            <span class="additional-text">{{ data.ticket.service.name }}</span>
+          <span>{{ questionOverview.ticket.name }}</span>
+          <span class="badge bg-yellow-200" *ngIf="standaloneLink">
+            <span class="additional-text">{{ questionOverview.ticket.service.name }}</span>
           </span>
         </div>
       </div>

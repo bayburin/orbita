@@ -61,6 +61,19 @@ export const getAllCategoriesVM = createSelector(
     })
 );
 
+export const getSelectedCategoryVM = createSelector(
+  CategorySelectors.getSelected,
+  getServiceEntitiesVM,
+  (category, serviceEntities): CategoryVM => {
+    const services = category.services ? category.services.map((id) => serviceEntities[id]) : [];
+
+    return {
+      ...category,
+      services,
+    };
+  }
+);
+
 // ========== Home ==========
 
 export const getHomeCategoriesVM = createSelector(

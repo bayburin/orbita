@@ -8,6 +8,10 @@ export abstract class CategoryFacadeAbstract {
    */
   all$: Observable<CategoryVM[]>;
   /**
+   * Выбранная категория
+   */
+  selected$: Observable<CategoryVM>;
+  /**
    * Индикатор, идет ли загрузка в данный момент
    */
   loading$: Observable<boolean>;

@@ -1,31 +1,37 @@
-<!-- <app-loading [loading]="loading" size="48px"></app-loading>
-<div *ngIf="category$ | async as category" @contentBlockAnimation>
-  <div class="container">
-    <section>
-      <app-section-header [header]="category.name"></app-section-header>
-      <div class="sd-category-list">
-        <ul class="sd-list-masonry sd-list-masonry-sm-6 sd-list-masonry-md-4 list-unstyled">
-          <li *ngFor="let service of category.services; trackBy: trackByService">
-            <a [routerLink]="['services', service.id]" [innerHtml]="service.name"></a>
-          </li>
-        </ul>
-      </div>
-    </section>
-  </div>
-  <div class="jumbotron bg-render-unmasked border-top sd-p-3 mb-0">
-    <div class="container">
-      <app-claims-page-content [services]="category.services"></app-claims-page-content>
-    </div>
-  </div>
-  <div class="jumbotron bg-render-unmasked border-top sd-p-3 mb-0">
+<lib-loading [loading]="loading$ | async" size="48px"></lib-loading>
+<div *ngIf="loaded$ | async" @contentBlockAnimation>
+  <ng-container *ngIf="category$ | async as category">
     <div class="container">
       <section>
-        <app-section-header header="Часто задаваемые вопросы"></app-section-header>
-        <div class="sd-dlist-divider-b">
-          <app-question-page-content *ngFor="let ticket of category.tickets; trackBy: trackByTicket" [data]="ticket" [showFlags]="false">
-          </app-question-page-content>
+        <lib-section-header [header]="category.name"></lib-section-header>
+        <div class="sd-category-list">
+          <lib-service-list
+            [category]="category"
+            styleClass="sd-list-masonry sd-list-masonry-sm-6 sd-list-masonry-md-4 list-unstyled"
+          ></lib-service-list>
         </div>
       </section>
     </div>
-  </div>
-</div> -->
+    <div class="jumbotron bg-render-unmasked border-top sd-p-3 mb-0">
+      <div class="container">
+        <!-- <app-claims-page-content [services]="category.services"></app-claims-page-content> -->
+      </div>
+    </div>
+    <div class="jumbotron bg-render-unmasked border-top sd-p-3 mb-0">
+      <div class="container">
+        <section>
+          <lib-section-header header="Часто задаваемые вопросы"></lib-section-header>
+          <div class="sd-dlist-divider-b">
+            <!-- <app-question-page-content
+              *ngFor="let ticket of category.tickets; trackBy: trackByTicket"
+              [data]="ticket"
+              [showFlags]="false"
+            >
+            </app-question-page-content> -->
+            <!-- <lib-question-list questions="category."></lib-question-list> -->
+          </div>
+        </section>
+      </div>
+    </div>
+  </ng-container>
+</div>
