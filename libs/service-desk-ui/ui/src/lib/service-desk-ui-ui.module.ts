@@ -2,6 +2,7 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { NgBootstrapModule } from './ng-bootstrap.module';
 
@@ -48,11 +49,11 @@ const components: any[] = [
   ServiceLinkComponent,
   QuestionListComponent,
   AbstractSearchResultComponent,
-  VisibleIconComponent
+  VisibleIconComponent,
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, modules],
+  imports: [CommonModule, RouterModule, MarkdownModule.forChild(), modules],
   declarations: [components],
   entryComponents: [CategoryComponent, ServiceComponent, QuestionComponent],
   exports: [components, modules],
