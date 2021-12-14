@@ -9,10 +9,10 @@ import { Answer } from './model/answer.interface';
  * Нормализованные данные категории
  */
 export interface NormalizedCategoriesEntities {
-  categories: Dictionary<Category>;
-  services: Dictionary<Service>;
-  questions: Dictionary<Question>;
-  answers: Dictionary<Answer>;
+  categories?: Dictionary<Category>;
+  services?: Dictionary<Service>;
+  questions?: Dictionary<Question>;
+  answers?: Dictionary<Answer>;
 }
 
 /**
@@ -27,8 +27,8 @@ export interface NormalizedCategories {
  * Нормализованные данные услуг
  */
 export interface NormalizedServicesEntities {
-  services: Dictionary<Service>;
-  questions: Dictionary<Question>;
+  services?: Dictionary<Service>;
+  questions?: Dictionary<Question>;
 }
 
 /**
@@ -43,10 +43,10 @@ export interface NormalizedServices {
  * Нормализованные данные вопросов
  */
 export interface NormalizedQuestionsEntities {
-  services: Dictionary<Service>;
-  questions: Dictionary<Question>;
-  responsible_users: Dictionary<ResponsibleUser>;
-  answers: Dictionary<Answer>;
+  services?: Dictionary<Service>;
+  questions?: Dictionary<Question>;
+  responsible_users?: Dictionary<ResponsibleUser>;
+  answers?: Dictionary<Answer>;
 }
 
 /**

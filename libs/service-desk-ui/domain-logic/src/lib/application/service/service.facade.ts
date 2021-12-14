@@ -14,7 +14,5 @@ import * as VMSelectors from '../../infrastructure/store/selectors/vm.selectors'
   providedIn: 'root',
 })
 export class ServiceFacade implements ServiceFacadeAbstract {
-  all$ = this.store.select(VMSelectors.getAllServicesVM);
-
   constructor(private store: Store<ServiceFeature.ServicePartialState>) {}
 }

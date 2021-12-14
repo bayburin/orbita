@@ -1,7 +1,8 @@
-import { schema, normalize } from 'normalizr';
+import { schema, normalize, denormalize } from 'normalizr';
 
+import { ServiceVM } from './../../entities/view-models/service-vm.interface';
 import { Service } from './../../entities/model/service.interface';
-import { NormalizedServices } from './../../entities/normalized-data.interface';
+import { NormalizedServices, NormalizedServicesEntities } from './../../entities/normalized-data.interface';
 
 export const responsibleUserSchema = new schema.Entity('responsible_users');
 
@@ -29,5 +30,9 @@ export const servicesSchema = new schema.Array(serviceSchema);
 export class ServiceCacheService {
   static normalizeServices(services: Service | Service[]): NormalizedServices {
     return Array.isArray(services) ? normalize(services, servicesSchema) : normalize(services, serviceSchema);
+  }
+
+  static denormalizeServices(serviceIds: number[], entities: NormalizedServicesEntities): ServiceVM[] {
+    return denormalize(serviceIds, servicesSchema, entities);
   }
 }

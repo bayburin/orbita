@@ -1,109 +1,22 @@
 import { createSelector } from '@ngrx/store';
-import { Dictionary } from '@ngrx/entity';
 
-import { NormalizedCategoriesEntities } from './../../../entities/normalized-data.interface';
 import { CategoryCacheService } from './../../services/category-cache.service';
-import { TicketVM } from './../../../entities/view-models/ticket-vm.interface';
-import { QuestionVM } from '../../../entities/view-models/question-vm.interface';
 import { ServiceVM } from './../../../entities/view-models/service-vm.interface';
 import { CategoryVM } from '../../../entities/view-models/category-vm.interface';
 import * as AnswerSelectors from '../answer/answer.selectors';
 import * as QuestionSelectors from '../question/question.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 import * as CategorySelectors from '../category/category.selectors';
-import * as ResponsibleUserSelectors from '../responsible-user/responsible-user.selectors';
 import * as HomeSelectors from '../home/home.selectors';
-
-// ========== Questions ==========
-
-export const getQuestionEntitiesVM = createSelector(
-  QuestionSelectors.getEntities,
-  ResponsibleUserSelectors.getEntities,
-  (questionEntities, responsibleUserEntities) =>
-    Object.keys(questionEntities)
-      .map(Number)
-      .reduce<Dictionary<QuestionVM>>((acc, key) => {
-        const entity = questionEntities[key];
-        const ticket: TicketVM = {
-          ...entity.ticket,
-          responsible_users: entity.ticket.responsible_users
-            ? entity.ticket.responsible_users.map((id) => responsibleUserEntities[id])
-            : [],
-        };
-        const correction = questionEntities[key];
-        const correctionVM: QuestionVM = {
-          ...correction,
-          correction: null,
-          ticket: {
-            ...correction.ticket,
-            responsible_users: correction.ticket.responsible_users
-              ? correction.ticket.responsible_users.map((id) => responsibleUserEntities[id])
-              : [],
-          },
-        };
-
-        acc[key] = {
-          ...entity,
-          ticket,
-          correction: entity.correction ? correctionVM : null,
-        };
-
-        return acc;
-      }, {})
-);
-
-// ========== Services ==========
-
-export const getServiceEntitiesVM = createSelector(
-  ServiceSelectors.getEntities,
-  QuestionSelectors.getEntities,
-  (serviceEntities, questionEntities) =>
-    Object.keys(serviceEntities)
-      .map(Number)
-      .reduce<Dictionary<ServiceVM>>((acc, key) => {
-        const entity = serviceEntities[key];
-        const questions = entity.questions ? entity.questions.map((id) => questionEntities[id]) : [];
-
-        acc[key] = {
-          ...entity,
-          questions,
-          responsible_users: [],
-        };
-
-        return acc;
-      }, {})
-);
-
-export const getAllServicesVM = createSelector(
-  ServiceSelectors.getAll,
-  QuestionSelectors.getEntities,
-  (services, questionEntities): ServiceVM[] =>
-    services.map((service) => {
-      const questions = service.questions ? service.questions.map((id) => questionEntities[id]) : [];
-
-      return {
-        ...service,
-        questions,
-        responsible_users: [],
-      };
-    })
-);
+import { ServiceCacheService } from '../../services/service-cache.service';
 
 // ========== Categories ==========
 
 export const getAllCategoriesVM = createSelector(
-  CategorySelectors.getAll,
-  getServiceEntitiesVM,
-  (categories, serviceEntities): CategoryVM[] =>
-    categories.map((category) => {
-      const services = category.services ? category.services.map((id) => serviceEntities[id]) : [];
-
-      return {
-        ...category,
-        services,
-        faq: null,
-      };
-    })
+  CategorySelectors.getIds,
+  CategorySelectors.getEntities,
+  ServiceSelectors.getEntities,
+  (ids, categories, services): CategoryVM[] => CategoryCacheService.denormalizeCategories(ids, { categories, services })
 );
 
 export const getSelectedCategoryVM = createSelector(
@@ -111,46 +24,24 @@ export const getSelectedCategoryVM = createSelector(
   ServiceSelectors.getEntities,
   QuestionSelectors.getEntities,
   AnswerSelectors.getEntities,
-  (category, serviceEntities, questionEntities, answerEntities): CategoryVM => {
-    const entities: NormalizedCategoriesEntities = {
-      categories: {},
-      services: serviceEntities,
-      questions: questionEntities,
-      answers: answerEntities,
-    };
-
-    return CategoryCacheService.denormalizeCategory(category, entities);
-  }
+  (category, services, questions, answers): CategoryVM =>
+    CategoryCacheService.denormalizeCategory(category, { services, questions, answers })
 );
 
 // ========== Home ==========
 
 export const getHomeCategoriesVM = createSelector(
-  HomeSelectors.getCategories,
-  getServiceEntitiesVM,
-  (categories, serviceEntities): CategoryVM[] =>
-    categories.map((category) => {
-      const services = category.services ? category.services.map((id) => serviceEntities[id]) : [];
-
-      return {
-        ...category,
-        services,
-        faq: null,
-      };
-    })
+  HomeSelectors.getCategoryIds,
+  CategorySelectors.getEntities,
+  ServiceSelectors.getEntities,
+  QuestionSelectors.getEntities,
+  (ids, categories, services, questions): CategoryVM[] =>
+    CategoryCacheService.denormalizeCategories(ids, { categories, services, questions })
 );
 
 export const getHomeServicesVM = createSelector(
-  HomeSelectors.getServices,
+  HomeSelectors.getServiceIds,
+  ServiceSelectors.getEntities,
   QuestionSelectors.getEntities,
-  (services, questionEntities): ServiceVM[] =>
-    services.map((service) => {
-      const questions = service.questions ? service.questions.map((id) => questionEntities[id]) : [];
-
-      return {
-        ...service,
-        questions,
-        responsible_users: [],
-      };
-    })
+  (ids, services, questions): ServiceVM[] => ServiceCacheService.denormalizeServices(ids, { services, questions })
 );

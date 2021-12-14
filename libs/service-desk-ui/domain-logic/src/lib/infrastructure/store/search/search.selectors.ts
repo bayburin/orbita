@@ -11,8 +11,7 @@ import {
   searchResponsibleUserAdapter,
 } from './search.reducer';
 import { SearchResultTypes } from './../../../entities/model/search-result.types';
-import { QuestionOverviewVM } from './../../../entities/view-models/question-overview-vm.interface';
-import { TicketOverviewServiceVM } from '../../../entities/view-models/ticket-overview-service-vm.interface';
+import { QuestionCacheService } from '../../services/question-cache.service';
 
 export const getSearchState = createSelector(
   getServiceDeskUiState,
@@ -90,34 +89,17 @@ export const getResponsibleUserEntities = createSelector(getSearchState, (state:
 export const getSearchResult = createSelector(
   getSearchCategories,
   getSearchServices,
-  getSearchQuestions,
+  getQuestionIds,
+  getQuestionEntities,
   getServiceEntities,
   getResponsibleUserEntities,
-  (categories, services, questions, serviceEntities, responsibleUserEntities): SearchResultTypes[] => {
-    const questionsVM: QuestionOverviewVM[] = questions.map((question) => {
-      const ticket = question.ticket;
-      const service = serviceEntities[question.ticket.service_id];
-      const ticketOverviewServiceVM: TicketOverviewServiceVM = {
-        ...service,
-        responsible_users: service.responsible_users
-          ? service.responsible_users.map((u) => responsibleUserEntities[u])
-          : [],
-      };
-
-      return {
-        ...question,
-        answers: [],
-        correction: null,
-        ticket: {
-          ...ticket,
-          service: ticketOverviewServiceVM,
-          responsible_users: ticket.responsible_users
-            ? ticket.responsible_users.map((u) => responsibleUserEntities[u])
-            : [],
-        },
-      };
+  (categoriesArr, servicesArr, questionIds, questions, services, responsible_users): SearchResultTypes[] => {
+    const questionsVM = QuestionCacheService.denormalizeQuestions(questionIds, {
+      questions,
+      services,
+      responsible_users,
     });
 
-    return [...categories, ...services, ...questionsVM];
+    return [...categoriesArr, ...servicesArr, ...questionsVM];
   }
 );

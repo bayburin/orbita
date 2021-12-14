@@ -1,7 +1,8 @@
-import { schema, normalize } from 'normalizr';
+import { schema, normalize, denormalize } from 'normalizr';
 
-import { NormalizedQuestions } from './../../entities/normalized-data.interface';
+import { NormalizedQuestions, NormalizedQuestionsEntities } from './../../entities/normalized-data.interface';
 import { Question } from './../../entities/model/question.interface';
+import { QuestionOverviewVM } from '../../entities/view-models/question-overview-vm.interface';
 
 export const responsibleUserSchema = new schema.Entity('responsible_users');
 
@@ -29,5 +30,9 @@ export const questionsSchema = new schema.Array(questionSchema);
 export class QuestionCacheService {
   static normalizeQuestions(questions: Question | Question[]): NormalizedQuestions {
     return Array.isArray(questions) ? normalize(questions, questionsSchema) : normalize(questions, questionSchema);
+  }
+
+  static denormalizeQuestions(questionIds: number[], entities: NormalizedQuestionsEntities): QuestionOverviewVM[] {
+    return denormalize(questionIds, questionsSchema, entities);
   }
 }

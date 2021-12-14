@@ -10,6 +10,8 @@ export const getCategoryState = createSelector(
 
 const { selectAll, selectEntities } = categoryAdapter.getSelectors();
 
+export const getIds = createSelector(getCategoryState, (state: State): number[] => state.ids as number[]);
+
 export const getLoaded = createSelector(getCategoryState, (state: State) => state.loaded);
 
 export const getLoading = createSelector(getCategoryState, (state: State) => state.loading);

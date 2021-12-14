@@ -35,4 +35,8 @@ export class CategoryCacheService {
   static denormalizeCategory(category: Category, entities: NormalizedCategoriesEntities): CategoryVM {
     return denormalize(category, categorySchema, entities);
   }
+
+  static denormalizeCategories(categoryIds: number[], entities: NormalizedCategoriesEntities): CategoryVM[] {
+    return denormalize(categoryIds, categoriesSchema, entities);
+  }
 }

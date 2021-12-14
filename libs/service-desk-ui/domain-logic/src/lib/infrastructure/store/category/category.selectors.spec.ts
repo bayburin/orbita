@@ -1,5 +1,5 @@
 import { Category } from '../../../entities/model/category.interface';
-import { categoryAdapter, CategoryPartialState, initialState } from './category.reducer';
+import { categoryAdapter, initialState } from './category.reducer';
 import * as CategorySelectors from './category.selectors';
 
 describe('CategorySelectors', () => {
@@ -26,6 +26,10 @@ describe('CategorySelectors', () => {
       selectedId,
       error,
     });
+  });
+
+  it('getIds() should return "ids" attribute', () => {
+    expect(CategorySelectors.getIds.projector(state)).toEqual([1, 2, 3]);
   });
 
   it('getLoaded() should return "loaded" attribute', () => {
