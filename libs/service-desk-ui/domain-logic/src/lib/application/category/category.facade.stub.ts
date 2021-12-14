@@ -10,4 +10,8 @@ export class CategoryFacadeStub implements CategoryFacadeAbstract {
   loadAll() {
     /** */
   }
+
+  loadSelected() {
+    /** */
+  }
 }

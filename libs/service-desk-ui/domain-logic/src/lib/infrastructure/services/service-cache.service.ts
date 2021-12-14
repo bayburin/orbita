@@ -7,10 +7,10 @@ export const responsibleUserSchema = new schema.Entity('responsible_users');
 
 export const answerAttachmentSchema = new schema.Entity('answer_attachments');
 
-export const answerSchema = new schema.Entity('answers');
+// export const answerSchema = new schema.Entity('answers');
 
 export const questionSchema = new schema.Entity('questions', {
-  answers: [answerSchema],
+  // answers: [answerSchema],
   responsible_users: [responsibleUserSchema],
 });
 

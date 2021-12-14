@@ -7,7 +7,7 @@ export const responsibleUserSchema = new schema.Entity('responsible_users');
 
 export const answerAttachmentSchema = new schema.Entity('answer_attachments');
 
-export const answerSchema = new schema.Entity('answers');
+// export const answerSchema = new schema.Entity('answers');
 
 export const serviceSchema = new schema.Entity('services', {
   responsible_users: [responsibleUserSchema],
@@ -18,7 +18,7 @@ export const questionSchema = new schema.Entity('questions', {
     service: serviceSchema,
     responsible_users: [responsibleUserSchema],
   },
-  answers: [answerSchema],
+  // answers: [answerSchema],
 });
 
 export const questionsSchema = new schema.Array(questionSchema);

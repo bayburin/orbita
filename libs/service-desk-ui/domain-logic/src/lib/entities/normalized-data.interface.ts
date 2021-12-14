@@ -11,6 +11,7 @@ import { Answer } from './model/answer.interface';
 export interface NormalizedCategoriesEntities {
   categories: Dictionary<Category>;
   services: Dictionary<Service>;
+  questions: Dictionary<Question>;
 }
 
 /**

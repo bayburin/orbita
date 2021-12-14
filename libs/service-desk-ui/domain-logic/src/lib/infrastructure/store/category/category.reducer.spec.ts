@@ -57,6 +57,41 @@ describe('CategoryReducer', () => {
     });
   });
 
+  describe('loadSelected', () => {
+    it('should change attributes', () => {
+      action = CategoryActions.loadSelected();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('loadSelectedSuccess', () => {
+    it('should change attributes', () => {
+      const category = createCategory(111);
+      initialState.loading = true;
+      action = CategoryActions.loadSelectedSuccess({ category });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toEqual(category.id);
+      expect(result.loading).toEqual(false);
+      expect(result.loaded).toBe(true);
+    });
+  });
+
+  describe('loadSelectedFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      action = CategoryActions.loadSelectedFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.error).toEqual(error);
+      expect(result.loading).toEqual(false);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as Action;

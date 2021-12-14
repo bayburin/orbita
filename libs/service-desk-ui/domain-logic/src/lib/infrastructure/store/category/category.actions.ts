@@ -13,3 +13,12 @@ export const loadAllSuccess = createAction(
 );
 
 export const loadAllFailure = createAction('[Category/API] Load All Failure', props<{ error: any }>());
+
+export const loadSelected = createAction('[Category/API] Load Selected');
+
+export const loadSelectedSuccess = createAction(
+  '[Category/API] Load Selected Success',
+  props<{ category: Category }>()
+);
+
+export const loadSelectedFailure = createAction('[Category/API] Load Selected Failure', props<{ error: any }>());

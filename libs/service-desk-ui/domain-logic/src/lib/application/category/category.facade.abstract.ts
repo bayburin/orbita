@@ -20,4 +20,9 @@ export abstract class CategoryFacadeAbstract {
    * Загружает список категорий
    */
   abstract loadAll(): void;
+
+  /**
+   * загружает выбранную категорию
+   */
+  abstract loadSelected(): void;
 }

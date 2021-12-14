@@ -23,4 +23,8 @@ export class CategoryFacade implements CategoryFacadeAbstract {
   loadAll() {
     this.store.dispatch(CategoryActions.loadAll());
   }
+
+  loadSelected() {
+    this.store.dispatch(CategoryActions.loadSelected());
+  }
 }
