@@ -38,5 +38,5 @@ export interface CategoryVM {
   /**
    * Список часто-задаваемых вопросов
    */
-  // readonly faq?: QuestionVM[];
+  readonly faq?: QuestionVM[];
 }

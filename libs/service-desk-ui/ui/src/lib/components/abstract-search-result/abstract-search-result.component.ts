@@ -13,7 +13,7 @@ export class AbstractSearchResultComponent<T> {
   /**
    * Определяет, показывать ли системные флаги
    */
-  @Input() showFlags: boolean;
+  @Input() showFlags = false;
   /**
    * Объект данных
    */

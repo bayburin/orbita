@@ -1,0 +1,9 @@
+<span *ngIf="hideable.is_hidden; else visible" ngbTooltip="Скрыт от пользователя" container="body">
+  <i class="mdi mdi-eye-off-outline mdi-18px"></i>
+</span>
+
+<ng-template #visible>
+  <span ngbTooltip="Виден пользователю" container="body">
+    <i class="mdi mdi-eye-outline mdi-18px text-success"></i>
+  </span>
+</ng-template>

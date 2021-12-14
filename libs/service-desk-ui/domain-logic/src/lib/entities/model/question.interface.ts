@@ -1,3 +1,4 @@
+import { Answer } from './answer.interface';
 import { Ticket } from './ticket.interface';
 
 /**
@@ -27,5 +28,5 @@ export interface Question {
   /**
    * Список ответов
    */
-  readonly answers: number[];
+  readonly answers: Answer[];
 }

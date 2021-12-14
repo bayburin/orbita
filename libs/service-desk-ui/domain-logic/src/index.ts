@@ -7,6 +7,7 @@ export * from './lib/entities/model/question.interface';
 export * from './lib/entities/model/search-result.types';
 export * from './lib/entities/model/user.interface';
 export * from './lib/entities/model/notification.interface';
+export * from './lib/entities/model/hideable.interface';
 
 export * from './lib/entities/view-models/category-vm.interface';
 export * from './lib/entities/view-models/service-vm.interface';

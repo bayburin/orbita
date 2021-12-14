@@ -1,7 +1,9 @@
+import { Hideable } from './hideable.interface';
+
 /**
  * Услуга
  */
-export interface Service {
+export interface Service extends Hideable {
   /**
    * Идентификатор
    */
@@ -26,11 +28,6 @@ export interface Service {
    * Способ получения услуги
    */
   readonly install: string;
-
-  /**
-   * Флаг, показывающий, скрытый ли вопрос
-   */
-  readonly is_hidden: boolean;
 
   /**
    * Флаг, показывающий, имеет ли вопрос "свободный" вопрос

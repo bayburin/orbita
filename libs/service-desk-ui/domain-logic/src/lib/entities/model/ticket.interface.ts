@@ -1,7 +1,9 @@
+import { Hideable } from './hideable.interface';
+
 /**
  * Тикет
  */
-export interface Ticket {
+export interface Ticket extends Hideable {
   /**
    * Идентификатор
    */
@@ -36,11 +38,6 @@ export interface Ticket {
    * Состояния
    */
   readonly state: TicketStates;
-
-  /**
-   * Флаг, показывающий, скрытый ли тикет
-   */
-  readonly is_hidden: boolean;
 
   /**
    * SLA

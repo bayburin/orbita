@@ -1,12 +1,53 @@
 import { createSelector } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 
+import { TicketVM } from './../../../entities/view-models/ticket-vm.interface';
+import { QuestionVM } from '../../../entities/view-models/question-vm.interface';
 import { ServiceVM } from './../../../entities/view-models/service-vm.interface';
 import { CategoryVM } from '../../../entities/view-models/category-vm.interface';
 import * as QuestionSelectors from '../question/question.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 import * as CategorySelectors from '../category/category.selectors';
+import * as ResponsibleUserSelectors from '../responsible-user/responsible-user.selectors';
 import * as HomeSelectors from '../home/home.selectors';
+
+// ========== Questions ==========
+
+export const getQuestionEntitiesVM = createSelector(
+  QuestionSelectors.getEntities,
+  ResponsibleUserSelectors.getEntities,
+  (questionEntities, responsibleUserEntities) =>
+    Object.keys(questionEntities)
+      .map(Number)
+      .reduce<Dictionary<QuestionVM>>((acc, key) => {
+        const entity = questionEntities[key];
+        const ticket: TicketVM = {
+          ...entity.ticket,
+          responsible_users: entity.ticket.responsible_users
+            ? entity.ticket.responsible_users.map((id) => responsibleUserEntities[id])
+            : [],
+        };
+        const correction = questionEntities[key];
+        const correctionVM: QuestionVM = {
+          ...correction,
+          correction: null,
+          ticket: {
+            ...correction.ticket,
+            responsible_users: correction.ticket.responsible_users
+              ? correction.ticket.responsible_users.map((id) => responsibleUserEntities[id])
+              : [],
+          },
+        };
+
+        acc[key] = {
+          ...entity,
+          ticket,
+          correction: entity.correction ? correctionVM : null,
+        };
+
+        return acc;
+      }, {})
+);
 
 // ========== Services ==========
 
@@ -57,6 +98,7 @@ export const getAllCategoriesVM = createSelector(
       return {
         ...category,
         services,
+        faq: null,
       };
     })
 );
@@ -64,12 +106,15 @@ export const getAllCategoriesVM = createSelector(
 export const getSelectedCategoryVM = createSelector(
   CategorySelectors.getSelected,
   getServiceEntitiesVM,
-  (category, serviceEntities): CategoryVM => {
+  getQuestionEntitiesVM,
+  (category, serviceEntities, questionEntities): CategoryVM => {
     const services = category.services ? category.services.map((id) => serviceEntities[id]) : [];
+    const faq = category.faq ? category.faq.map((id) => questionEntities[id]) : [];
 
     return {
       ...category,
       services,
+      faq,
     };
   }
 );
@@ -86,6 +131,7 @@ export const getHomeCategoriesVM = createSelector(
       return {
         ...category,
         services,
+        faq: null,
       };
     })
 );

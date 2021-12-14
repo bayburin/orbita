@@ -1,7 +1,9 @@
+import { Hideable } from './hideable.interface';
+
 /**
  * Вопрос
  */
-export interface Answer {
+export interface Answer extends Hideable {
   /**
    * Идентификатор ответа
    */
@@ -26,9 +28,4 @@ export interface Answer {
    * Ссылка
    */
   readonly link: string;
-
-  /**
-   * Флаг, показывающий, скрыт ли вопрос
-   */
-  readonly is_hidden: boolean;
 }

@@ -24,6 +24,7 @@ import { ServiceListComponent } from './components/service-list/service-list.com
 import { ServiceLinkComponent } from './components/service-link/service-link.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { AbstractSearchResultComponent } from './components/abstract-search-result/abstract-search-result.component';
+import { VisibleIconComponent } from './components/visible-icon/visible-icon.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
 
@@ -46,7 +47,8 @@ const components: any[] = [
   ServiceListComponent,
   ServiceLinkComponent,
   QuestionListComponent,
-  AbstractSearchResultComponent
+  AbstractSearchResultComponent,
+  VisibleIconComponent
 ];
 
 @NgModule({
