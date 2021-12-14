@@ -23,6 +23,7 @@ import { NotificationAlertListComponent } from './components/notification-alert-
 import { ServiceListComponent } from './components/service-list/service-list.component';
 import { ServiceLinkComponent } from './components/service-link/service-link.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
+import { AbstractSearchResultComponent } from './components/abstract-search-result/abstract-search-result.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
 
@@ -44,7 +45,8 @@ const components: any[] = [
   SearchResultTemplateComponent,
   ServiceListComponent,
   ServiceLinkComponent,
-  QuestionListComponent
+  QuestionListComponent,
+  AbstractSearchResultComponent
 ];
 
 @NgModule({

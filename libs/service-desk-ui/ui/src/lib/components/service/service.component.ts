@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { Service } from '@orbita/service-desk-ui/domain-logic';
+import { AbstractSearchResultComponent } from './../abstract-search-result/abstract-search-result.component';
 
 @Component({
   selector: 'lib-service',
@@ -8,9 +9,4 @@ import { Service } from '@orbita/service-desk-ui/domain-logic';
   styleUrls: ['./service.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ServiceComponent {
-  /**
-   * Услуга
-   */
-  @Input() data: Service;
-}
+export class ServiceComponent extends AbstractSearchResultComponent<Service> {}

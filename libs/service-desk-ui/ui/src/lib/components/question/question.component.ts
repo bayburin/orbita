@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 import { QuestionOverviewVM, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
+import { AbstractSearchResultComponent } from './../abstract-search-result/abstract-search-result.component';
 
 @Component({
   selector: 'lib-question',
@@ -8,19 +9,7 @@ import { QuestionOverviewVM, QuestionVM } from '@orbita/service-desk-ui/domain-l
   styleUrls: ['./question.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuestionComponent {
-  /**
-   * Режим, при котором ответ на вопрос не выдается, только вопрос с наименованием услуги и ссылка на него
-   */
-  @Input() standaloneLink = false;
-  /**
-   * Определяет, показывать ли системные флаги
-   */
-  @Input() showFlags: boolean;
-  /**
-   * Вопрос общего типа
-   */
-  @Input() data: QuestionOverviewVM | QuestionVM;
+export class QuestionComponent extends AbstractSearchResultComponent<QuestionOverviewVM | QuestionVM> {
   /**
    * Вопрос с типом QuestionOverviewVM
    */

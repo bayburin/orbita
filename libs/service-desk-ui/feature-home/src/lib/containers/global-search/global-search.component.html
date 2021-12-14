@@ -23,7 +23,11 @@
 </div>
 
 <ng-template #rt let-r="result">
-  <lib-search-result-template class="search-result" [searchResult]="r"></lib-search-result-template>
+  <lib-search-result-template
+    class="search-result"
+    [searchResult]="r"
+    [standaloneLink]="true"
+  ></lib-search-result-template>
 </ng-template>
 
 <ng-template #searchIcon>
