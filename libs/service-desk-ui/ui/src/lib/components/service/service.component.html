@@ -1,6 +1,6 @@
 <div class="sd-list-item">
   <div class="row-flex-content">
-    <!-- <app-visible-flag *ngIf="showFlags" [data]="data"></app-visible-flag> -->
+    <lib-visible-icon [hideable]="data" *ngIf="showFlags"></lib-visible-icon>
     <lib-service-link [categoryId]="data.category_id" [serviceId]="data.id">{{ data.name }}</lib-service-link>
   </div>
 </div>

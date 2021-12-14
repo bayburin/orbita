@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { ServiceVM, Question } from '@orbita/service-desk-ui/domain-logic';
+import { ServiceVM, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
 import { contentBlockAnimation } from '../../animations/content.animation';
 
 @Component({
@@ -21,7 +21,7 @@ export class HomeQuestionFaqComponent {
     return service.id;
   }
 
-  trackByQuestion(index: number, question: Question) {
+  trackByQuestion(index: number, question: QuestionVM) {
     return question.ticket.identity;
   }
 }

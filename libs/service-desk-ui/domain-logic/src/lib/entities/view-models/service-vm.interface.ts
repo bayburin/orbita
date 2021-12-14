@@ -45,7 +45,7 @@ export interface ServiceVM extends Hideable {
   /**
    * Вопросы
    */
-  readonly questions?: Question[];
+  readonly questions?: QuestionVM[];
 
   /**
    * Ответственные

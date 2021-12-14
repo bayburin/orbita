@@ -1,4 +1,9 @@
 export class StubUserPolicy {
-  authorize() {}
-  responsibleUserAccess() {}
+  authorize() {
+    /** */
+  }
+
+  responsibleUserAccess() {
+    /** */
+  }
 }

@@ -30,10 +30,6 @@ export class SearchResultTemplateComponent implements AfterViewInit, OnDestroy {
    * Режим, при котором ответ на вопрос не выдается, только вопрос с наименованием услуги и ссылка на него
    */
   @Input() standaloneLink: boolean;
-  /**
-   * Определяет, показывать ли системные флаги
-   */
-  @Input() showFlags: boolean;
   @ViewChild('templateContainer', { read: ViewContainerRef }) entry: ViewContainerRef;
   componentRef: ComponentRef<componentTypes>;
 
@@ -52,7 +48,6 @@ export class SearchResultTemplateComponent implements AfterViewInit, OnDestroy {
 
     const componentInstance = this.componentRef.instance;
     componentInstance.data = this.searchResult;
-    componentInstance.showFlags = this.showFlags;
     componentInstance.standaloneLink = this.standaloneLink;
 
     this.cdr.detectChanges();

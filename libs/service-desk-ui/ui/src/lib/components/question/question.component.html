@@ -1,4 +1,4 @@
-<div class="sd-list-item" [ngClass]="{ 'active-item': open }" [id]="data.ticket.identity" appShowQuestionLink>
+<div class="sd-list-item" [ngClass]="{ 'active-item': open }" [id]="data.ticket.identity" libShowQuestionLink>
   <div class="sd-list-question">
     <div class="sd-list-question-group" (click)="toggleQuestion()">
       <i
@@ -8,6 +8,7 @@
       ></i>
       <div class="question-block">
         <div class="row-flex-content">
+          <lib-visible-icon [hideable]="questionOverview.ticket" *ngIf="showFlags"></lib-visible-icon>
           <span>{{ questionOverview.ticket.name }}</span>
           <span class="badge bg-yellow-200" *ngIf="standaloneLink">
             <span class="additional-text">{{ questionOverview.ticket.service.name }}</span>
