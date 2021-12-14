@@ -1,10 +1,11 @@
+import { Hideable } from '../model/hideable.interface';
 import { ResponsibleUser } from '../model/responsible-user.interface';
 import { TicketStates, TicketTypes } from '../model/ticket.interface';
 
 /**
  * Представление тикета
  */
-export interface TicketVM {
+export interface TicketVM extends Hideable {
   /**
    * Идентификатор
    */
@@ -39,11 +40,6 @@ export interface TicketVM {
    * Состояния
    */
   readonly state: TicketStates;
-
-  /**
-   * Флаг, показывающий, скрытый ли тикет
-   */
-  readonly is_hidden: boolean;
 
   /**
    * SLA

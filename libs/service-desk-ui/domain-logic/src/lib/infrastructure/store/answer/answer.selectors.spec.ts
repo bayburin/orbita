@@ -3,7 +3,6 @@ import { answerAdapter, initialState } from './answer.reducer';
 import * as AnswerSelectors from './answer.selectors';
 
 describe('AnswerSelectors', () => {
-  const error = { message: 'error message' };
   const createAnswerEntity = (id: number, answer = ''): Answer =>
     ({
       id,
@@ -20,22 +19,7 @@ describe('AnswerSelectors', () => {
   beforeEach(() => {
     state = answerAdapter.setAll(arrEntities, {
       ...initialState,
-      loaded: true,
-      loading: true,
-      error,
     });
-  });
-
-  it('getLoaded() should return "loaded" attribute', () => {
-    expect(AnswerSelectors.getLoaded.projector(state)).toEqual(true);
-  });
-
-  it('getLoading() should return "loading" attribute', () => {
-    expect(AnswerSelectors.getLoading.projector(state)).toEqual(true);
-  });
-
-  it('getError() should return "error" attribute', () => {
-    expect(AnswerSelectors.getError.projector(state)).toEqual(error);
   });
 
   it('getAll() should return array of entities', () => {

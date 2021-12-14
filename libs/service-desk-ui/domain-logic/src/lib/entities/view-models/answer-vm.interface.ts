@@ -1,9 +1,10 @@
 import { AnswerAttachment } from '../model/answer-attachment.interface';
+import { Hideable } from '../model/hideable.interface';
 
 /**
  * Представление вопроса
  */
-export interface AnswerVM {
+export interface AnswerVM extends Hideable {
   /**
    * Идентификатор ответа
    */
@@ -28,9 +29,4 @@ export interface AnswerVM {
    * Ссылка
    */
   readonly link: string;
-
-  /**
-   * Флаг, показывающий, скрыт ли вопрос
-   */
-  readonly is_hidden: boolean;
 }

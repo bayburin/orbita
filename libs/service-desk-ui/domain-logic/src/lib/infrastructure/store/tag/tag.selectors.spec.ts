@@ -20,22 +20,8 @@ describe('Tag Selectors', () => {
   beforeEach(() => {
     state = tagAdapter.setAll(arrEntities, {
       ...initialState,
-      loaded: true,
-      loading: true,
       error,
     });
-  });
-
-  it('getLoaded() should return "loaded" attribute', () => {
-    expect(TagSelectors.getLoaded.projector(state)).toEqual(true);
-  });
-
-  it('getLoading() should return "loading" attribute', () => {
-    expect(TagSelectors.getLoading.projector(state)).toEqual(true);
-  });
-
-  it('getError() should return "error" attribute', () => {
-    expect(TagSelectors.getError.projector(state)).toEqual(error);
   });
 
   it('getAll() should return array of entities', () => {

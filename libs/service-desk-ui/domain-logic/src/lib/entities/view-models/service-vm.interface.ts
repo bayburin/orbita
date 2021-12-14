@@ -1,11 +1,12 @@
 import { Question } from './../model/question.interface';
 import { QuestionVM } from './question-vm.interface';
 import { ResponsibleUser } from '../model/responsible-user.interface';
+import { Hideable } from '../model/hideable.interface';
 
 /**
  * Представление услуги
  */
-export interface ServiceVM {
+export interface ServiceVM extends Hideable {
   /**
    * Идентификатор
    */
@@ -30,11 +31,6 @@ export interface ServiceVM {
    * Способ получения услуги
    */
   readonly install: string;
-
-  /**
-   * Флаг, показывающий, скрытый ли вопрос
-   */
-  readonly is_hidden: boolean;
 
   /**
    * Флаг, показывающий, имеет ли вопрос "свободный" вопрос

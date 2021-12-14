@@ -12,6 +12,7 @@ export interface NormalizedCategoriesEntities {
   categories: Dictionary<Category>;
   services: Dictionary<Service>;
   questions: Dictionary<Question>;
+  answers: Dictionary<Answer>;
 }
 
 /**

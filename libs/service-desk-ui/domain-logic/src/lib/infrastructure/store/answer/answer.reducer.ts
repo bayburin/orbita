@@ -6,11 +6,7 @@ import * as AnswerActions from './answer.actions';
 
 export const ANSWER_FEATURE_KEY = 'answer';
 
-export interface State extends EntityState<Answer> {
-  loading: boolean;
-  loaded: boolean;
-  error?: string | null;
-}
+export interface State extends EntityState<Answer> {}
 
 export interface AnswerPartialState {
   readonly [ANSWER_FEATURE_KEY]: State;
@@ -18,10 +14,7 @@ export interface AnswerPartialState {
 
 export const answerAdapter: EntityAdapter<Answer> = createEntityAdapter<Answer>();
 
-export const initialState: State = answerAdapter.getInitialState({
-  loading: false,
-  loaded: false,
-});
+export const initialState: State = answerAdapter.getInitialState({});
 
 const answerReducer = createReducer(
   initialState,

@@ -11,6 +11,7 @@ import * as CategoryActions from './category.actions';
 import * as CategoryFeature from './category.reducer';
 import * as ServiceActions from '../service/service.actions';
 import * as QuestionActions from '../question/question.actions';
+import * as AnswerActions from '../answer/answer.actions';
 import * as RouterSelectors from '../selectors/router.selectors';
 
 @Injectable()
@@ -28,7 +29,7 @@ export class CategoryEffects {
         run: (_action) => {
           return this.categoryApi.query().pipe(
             switchMap((categories) => {
-              const data = CategoryCacheService.normalizeategories(categories);
+              const data = CategoryCacheService.normalizeCategories(categories);
 
               return [
                 ServiceActions.setEntities({ entities: data.entities.services }),
@@ -52,9 +53,10 @@ export class CategoryEffects {
       switchMap(([_action, params]) =>
         this.categoryApi.show(params.id).pipe(
           switchMap((category) => {
-            const data = CategoryCacheService.normalizeategories(category);
+            const data = CategoryCacheService.normalizeCategories(category);
 
             return [
+              AnswerActions.setEntities({ entities: data.entities.answers }),
               QuestionActions.setEntities({ entities: data.entities.questions }),
               ServiceActions.setEntities({ entities: data.entities.services }),
               CategoryActions.loadSelectedSuccess({ category: data.entities.categories[params.id] }),

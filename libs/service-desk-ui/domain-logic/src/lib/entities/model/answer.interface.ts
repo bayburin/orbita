@@ -1,3 +1,4 @@
+import { AnswerAttachment } from './answer-attachment.interface';
 import { Hideable } from './hideable.interface';
 
 /**
@@ -22,7 +23,7 @@ export interface Answer extends Hideable {
   /**
    * Список идентификаторов прикрепленных файлов
    */
-  readonly attachments: number[];
+  readonly attachments: AnswerAttachment[];
 
   /**
    * Ссылка

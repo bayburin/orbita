@@ -2,11 +2,12 @@ import { Service } from './../model/service.interface';
 import { ResponsibleUser } from '../model/responsible-user.interface';
 import { TicketStates, TicketTypes } from '../model/ticket.interface';
 import { TicketOverviewServiceVM } from './ticket-overview-service-vm.interface';
+import { Hideable } from '../model/hideable.interface';
 
 /**
  * Полное представление тикета
  */
-export interface TicketOverviewVM {
+export interface TicketOverviewVM extends Hideable {
   /**
    * Идентификатор
    */
@@ -46,11 +47,6 @@ export interface TicketOverviewVM {
    * Состояния
    */
   readonly state: TicketStates;
-
-  /**
-   * Флаг, показывающий, скрытый ли тикет
-   */
-  readonly is_hidden: boolean;
 
   /**
    * SLA

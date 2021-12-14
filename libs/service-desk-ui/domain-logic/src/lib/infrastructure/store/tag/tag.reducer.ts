@@ -6,11 +6,7 @@ import * as TagActions from './tag.actions';
 
 export const TAG_FEATURE_KEY = 'tag';
 
-export interface State extends EntityState<Tag> {
-  loading: boolean;
-  loaded: boolean;
-  error?: string | null;
-}
+export interface State extends EntityState<Tag> {}
 
 export interface TagPartialState {
   readonly [TAG_FEATURE_KEY]: State;
@@ -18,10 +14,7 @@ export interface TagPartialState {
 
 export const tagAdapter: EntityAdapter<Tag> = createEntityAdapter<Tag>();
 
-export const initialState: State = tagAdapter.getInitialState({
-  loading: false,
-  loaded: false,
-});
+export const initialState: State = tagAdapter.getInitialState({});
 
 const tagReducer = createReducer(
   initialState,

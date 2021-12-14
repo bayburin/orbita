@@ -1,10 +1,13 @@
 import { createSelector } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 
+import { NormalizedCategoriesEntities } from './../../../entities/normalized-data.interface';
+import { CategoryCacheService } from './../../services/category-cache.service';
 import { TicketVM } from './../../../entities/view-models/ticket-vm.interface';
 import { QuestionVM } from '../../../entities/view-models/question-vm.interface';
 import { ServiceVM } from './../../../entities/view-models/service-vm.interface';
 import { CategoryVM } from '../../../entities/view-models/category-vm.interface';
+import * as AnswerSelectors from '../answer/answer.selectors';
 import * as QuestionSelectors from '../question/question.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 import * as CategorySelectors from '../category/category.selectors';
@@ -105,17 +108,18 @@ export const getAllCategoriesVM = createSelector(
 
 export const getSelectedCategoryVM = createSelector(
   CategorySelectors.getSelected,
-  getServiceEntitiesVM,
-  getQuestionEntitiesVM,
-  (category, serviceEntities, questionEntities): CategoryVM => {
-    const services = category.services ? category.services.map((id) => serviceEntities[id]) : [];
-    const faq = category.faq ? category.faq.map((id) => questionEntities[id]) : [];
-
-    return {
-      ...category,
-      services,
-      faq,
+  ServiceSelectors.getEntities,
+  QuestionSelectors.getEntities,
+  AnswerSelectors.getEntities,
+  (category, serviceEntities, questionEntities, answerEntities): CategoryVM => {
+    const entities: NormalizedCategoriesEntities = {
+      categories: {},
+      services: serviceEntities,
+      questions: questionEntities,
+      answers: answerEntities,
     };
+
+    return CategoryCacheService.denormalizeCategory(category, entities);
   }
 );
 
