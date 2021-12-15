@@ -8,7 +8,13 @@
       ></i>
       <div class="question-block">
         <div class="row-flex-content">
-          <lib-visible-icon [hideable]="questionOverview.ticket" *ngIf="showFlags"></lib-visible-icon>
+          <!-- TODO: Разобраться с showFlags -->
+          <!-- <ng-container *ngIf="showFlags"> -->
+          <lib-visible-icon
+            [hideable]="questionOverview.ticket"
+            *libQuestionCheckAccess="permission.VIEW_MANAGE_INFO; object: questionOverview"
+          ></lib-visible-icon>
+          <!-- </ng-container> -->
           <span>{{ questionOverview.ticket.name }}</span>
           <span class="badge bg-yellow-200" *ngIf="standaloneLink">
             <span class="additional-text">{{ questionOverview.ticket.service.name }}</span>
@@ -32,7 +38,10 @@
       <div class="row align-items-center">
         <div class="col-sm-9 col-md-10">
           <div class="row-flex-content">
-            <lib-visible-icon [hideable]="answer" *ngIf="showFlags"></lib-visible-icon>
+            <lib-visible-icon
+              [hideable]="answer"
+              *libQuestionCheckAccess="permission.VIEW_MANAGE_INFO; object: question"
+            ></lib-visible-icon>
             <span class="answer-content">
               <markdown [data]="answer.answer" ngPreserveWhitespaces></markdown>
             </span>

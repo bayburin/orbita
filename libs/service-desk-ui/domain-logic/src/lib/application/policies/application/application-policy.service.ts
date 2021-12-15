@@ -6,13 +6,12 @@ import {
   QuestionPermission,
   ServicePermission,
   ResponsibleUserPermission,
-} from './../../../entities/policies.interface';
+  policyPermissionTypes,
+  policyObjectTypes,
+} from '../../../entities/policies.interface';
 import { QuestionVM } from '../../../entities/view-models/question-vm.interface';
 import { QuestionOverviewVM } from '../../../entities/view-models/question-overview-vm.interface';
-import { ServiceVM } from './../../../entities/view-models/service-vm.interface';
-
-type objectTypes = QuestionOverviewVM | QuestionVM | ServiceVM;
-type permissionTypes = QuestionPermission | ServicePermission | ResponsibleUserPermission;
+import { ServiceVM } from '../../../entities/view-models/service-vm.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +38,7 @@ export class ApplicationPolicyService {
   checkAccess(method: QuestionPermission, object: QuestionVM | QuestionOverviewVM): boolean;
   checkAccess(method: ServicePermission, object: ServiceVM): boolean;
   checkAccess(method: ResponsibleUserPermission): boolean;
-  checkAccess(method: permissionTypes, object?: objectTypes): boolean {
+  checkAccess(method: policyPermissionTypes, object?: policyObjectTypes): boolean {
     if (!object) {
       this._object = object;
     }

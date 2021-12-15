@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { Service } from '@orbita/service-desk-ui/domain-logic';
+import { ServicePermission, ServiceVM } from '@orbita/service-desk-ui/domain-logic';
 import { AbstractSearchResultComponent } from './../abstract-search-result/abstract-search-result.component';
 
 @Component({
@@ -9,4 +9,6 @@ import { AbstractSearchResultComponent } from './../abstract-search-result/abstr
   styleUrls: ['./service.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ServiceComponent extends AbstractSearchResultComponent<Service> {}
+export class ServiceComponent extends AbstractSearchResultComponent<ServiceVM> {
+  permission = ServicePermission;
+}

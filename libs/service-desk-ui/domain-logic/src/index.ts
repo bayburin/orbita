@@ -30,3 +30,8 @@ export * from './lib/application/search/search.facade';
 export * from './lib/application/search/search.facade.stub';
 export * from './lib/application/notification/notification.facade';
 export * from './lib/application/notification/notification.facade.stub';
+
+export * from './lib/application/policies/question/question-policy.service';
+export * from './lib/application/policies/question/question-policy.service.stub';
+export * from './lib/application/policies/service/service-policy.service';
+export * from './lib/application/policies/service/service-policy.service.stub';

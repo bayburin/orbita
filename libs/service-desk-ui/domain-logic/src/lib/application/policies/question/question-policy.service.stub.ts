@@ -1,5 +1,5 @@
-export class StubQuestionPolicy {
-  authorize() {
+export class QuestionPolicyServiceStub {
+  checkAccess() {
     /** */
   }
 

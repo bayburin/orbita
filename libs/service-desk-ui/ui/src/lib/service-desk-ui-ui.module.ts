@@ -27,7 +27,12 @@ import { QuestionListComponent } from './components/question-list/question-list.
 import { AbstractSearchResultComponent } from './components/abstract-search-result/abstract-search-result.component';
 import { VisibleIconComponent } from './components/visible-icon/visible-icon.component';
 
+import { QuestionCheckAccessDirective } from './directives/question-check-access/question-check-access.directive';
+import { ServiceCheckAccessDirective } from './directives/service-check-access/service-check-access.directive';
+
 const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
+
+const directives: any[] = [QuestionCheckAccessDirective, ServiceCheckAccessDirective];
 
 const components: any[] = [
   UserRecommendationsComponent,
@@ -53,9 +58,9 @@ const components: any[] = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule, MarkdownModule.forChild(), modules],
-  declarations: [components],
+  imports: [CommonModule, RouterModule, MarkdownModule.forChild(), ...modules],
+  declarations: [...components, ...directives],
   entryComponents: [CategoryComponent, ServiceComponent, QuestionComponent],
-  exports: [components, modules],
+  exports: [...components, ...modules, ...directives],
 })
 export class ServiceDeskUiUiModule {}

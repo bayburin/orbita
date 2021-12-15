@@ -1,6 +1,9 @@
 <div class="sd-list-item">
   <div class="row-flex-content">
-    <lib-visible-icon [hideable]="data" *ngIf="showFlags"></lib-visible-icon>
+    <lib-visible-icon
+      [hideable]="data"
+      *libServiceCheckAccess="permission.VIEW_MANAGE_INFO; object: data"
+    ></lib-visible-icon>
     <lib-service-link [categoryId]="data.category_id" [serviceId]="data.id">{{ data.name }}</lib-service-link>
   </div>
 </div>

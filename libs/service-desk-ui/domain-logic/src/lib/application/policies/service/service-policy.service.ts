@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 
-import { ServiceVM } from './../../../entities/view-models/service-vm.interface';
-import { isUserHasRole } from '../../utils/is-user-has-role.function';
-import { isServiceBelongsByTicketToUser, isServiceBelongsToUser } from '../../utils/service.functions';
-import { ApplicationPolicyService } from './../application/application-policy.service';
+import { ServiceVM } from '../../../entities/view-models/service-vm.interface';
+import { isUserHasRole } from '../../../infrastructure/utils/is-user-has-role.function';
+import {
+  isServiceBelongsByTicketToUser,
+  isServiceBelongsToUser,
+} from '../../../infrastructure/utils/service.functions';
+import { ApplicationPolicyService } from '../application/application-policy.service';
 
 @Injectable({
   providedIn: 'root',

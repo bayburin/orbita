@@ -63,7 +63,7 @@ export interface Ticket extends Hideable {
 /**
  * Типы тикетов
  */
-export const enum TicketTypes {
+export enum TicketTypes {
   QUESTION = 'Question',
   CLAIM_FORM = 'AppForm',
   COMMON_CLAIM = 'CommonCaseTicket',
@@ -72,7 +72,7 @@ export const enum TicketTypes {
 /**
  * Состояния тикетов
  */
-export const enum TicketStates {
+export enum TicketStates {
   DRAFT = 'draft',
   PUBLISHED = 'published',
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { isUserHasRole } from '../../utils/is-user-has-role.function';
+import { isUserHasRole } from '../../../infrastructure/utils/is-user-has-role.function';
 import { ApplicationPolicyService } from '../application/application-policy.service';
 
 @Injectable({

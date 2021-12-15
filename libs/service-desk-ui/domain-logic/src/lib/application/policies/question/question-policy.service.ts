@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { ApplicationPolicyService } from '../application/application-policy.service';
-import { isUserHasRole } from '../../utils/is-user-has-role.function';
-import { isQuestionBelongsByServiceToUser, isQuestionBelongsToUser } from '../../utils/question.functions';
+import { isUserHasRole } from '../../../infrastructure/utils/is-user-has-role.function';
+import {
+  isQuestionBelongsByServiceToUser,
+  isQuestionBelongsToUser,
+} from '../../../infrastructure/utils/question.functions';
 import { QuestionVM } from '../../../entities/view-models/question-vm.interface';
 import { QuestionOverviewVM } from '../../../entities/view-models/question-overview-vm.interface';
 

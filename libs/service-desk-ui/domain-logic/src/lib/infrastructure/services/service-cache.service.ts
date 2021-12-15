@@ -20,6 +20,7 @@ export const categorySchema = new schema.Entity('categories');
 export const serviceSchema = new schema.Entity('services', {
   category: categorySchema,
   questions: [questionSchema],
+  responsible_users: [responsibleUserSchema],
 });
 
 export const servicesSchema = new schema.Array(serviceSchema);

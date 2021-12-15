@@ -12,6 +12,7 @@ import {
 } from './search.reducer';
 import { SearchResultTypes } from './../../../entities/model/search-result.types';
 import { QuestionCacheService } from '../../services/question-cache.service';
+import { ServiceCacheService } from '../../services/service-cache.service';
 
 export const getSearchState = createSelector(
   getServiceDeskUiState,
@@ -88,18 +89,19 @@ export const getResponsibleUserEntities = createSelector(getSearchState, (state:
 
 export const getSearchResult = createSelector(
   getSearchCategories,
-  getSearchServices,
+  getServiceIds,
   getQuestionIds,
-  getQuestionEntities,
   getServiceEntities,
+  getQuestionEntities,
   getResponsibleUserEntities,
-  (categoriesArr, servicesArr, questionIds, questions, services, responsible_users): SearchResultTypes[] => {
+  (categoriesArr, serviceIds, questionIds, services, questions, responsible_users): SearchResultTypes[] => {
+    const servicesVM = ServiceCacheService.denormalizeServices(serviceIds, { services, questions });
     const questionsVM = QuestionCacheService.denormalizeQuestions(questionIds, {
       questions,
       services,
       responsible_users,
     });
 
-    return [...categoriesArr, ...servicesArr, ...questionsVM];
+    return [...categoriesArr, ...servicesVM, ...questionsVM];
   }
 );

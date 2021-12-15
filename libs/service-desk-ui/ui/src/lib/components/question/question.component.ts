@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 
-import { QuestionOverviewVM, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
+import { QuestionOverviewVM, QuestionPermission, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
 import { AbstractSearchResultComponent } from './../abstract-search-result/abstract-search-result.component';
 import { toggleAnswer } from './../../animations/toggle-answer.animation';
 import { showFlagRight } from './../../animations/show-flag-right.animation';
@@ -13,6 +13,7 @@ import { showFlagRight } from './../../animations/show-flag-right.animation';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionComponent extends AbstractSearchResultComponent<QuestionOverviewVM | QuestionVM> {
+  permission = QuestionPermission;
   open = false;
   /**
    * Вопрос с типом QuestionOverviewVM
