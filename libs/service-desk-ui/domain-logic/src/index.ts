@@ -1,5 +1,7 @@
 export * from './lib/service-desk-ui-domain-logic.module';
 
+export * from './lib/entities/policies.interface';
+
 export * from './lib/entities/model/user-recommendation.interface';
 export * from './lib/entities/model/category.interface';
 export * from './lib/entities/model/service.interface';

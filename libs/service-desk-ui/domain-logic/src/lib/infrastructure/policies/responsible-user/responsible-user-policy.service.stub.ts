@@ -1,4 +1,4 @@
-export class StubUserPolicy {
+export class UserPolicyServiceStub {
   authorize() {
     /** */
   }
