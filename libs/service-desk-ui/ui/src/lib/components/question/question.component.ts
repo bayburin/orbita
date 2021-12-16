@@ -36,10 +36,6 @@ export class QuestionComponent extends AbstractSearchResultComponent<QuestionOve
    * Показывает ответ вопрос и отправляет отправляет соответсвующее событие для обновлений рейтинга
    */
   toggleQuestion(): void {
-    if (this.standaloneLink) {
-      return;
-    }
-
     this.open = !this.open;
     this.upRating.emit();
   }

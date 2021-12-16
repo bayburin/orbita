@@ -13,8 +13,9 @@ import { SearchResultTypes } from '@orbita/service-desk-ui/domain-logic';
 import { CategoryComponent } from '../category/category.component';
 import { ServiceComponent } from './../service/service.component';
 import { QuestionComponent } from '../question/question.component';
+import { SearchResultQuestionComponent } from './../search-result-question/search-result-question.component';
 
-type componentTypes = CategoryComponent | ServiceComponent | QuestionComponent;
+type componentTypes = CategoryComponent | ServiceComponent | QuestionComponent | SearchResultQuestionComponent;
 
 @Component({
   selector: 'lib-search-result-template',
@@ -41,14 +42,15 @@ export class SearchResultTemplateComponent implements AfterViewInit, OnDestroy {
     if ('category_id' in this.searchResult) {
       this.componentRef = this.entry.createComponent(ServiceComponent);
     } else if ('ticket' in this.searchResult) {
-      this.componentRef = this.entry.createComponent(QuestionComponent);
+      this.componentRef = this.standaloneLink
+        ? this.entry.createComponent(SearchResultQuestionComponent)
+        : this.entry.createComponent(QuestionComponent);
     } else {
       this.componentRef = this.entry.createComponent(CategoryComponent);
     }
 
     const componentInstance = this.componentRef.instance;
     componentInstance.data = this.searchResult;
-    componentInstance.standaloneLink = this.standaloneLink;
 
     this.cdr.detectChanges();
   }

@@ -29,6 +29,7 @@ import { VisibleIconComponent } from './components/visible-icon/visible-icon.com
 
 import { QuestionCheckAccessDirective } from './directives/question-check-access/question-check-access.directive';
 import { ServiceCheckAccessDirective } from './directives/service-check-access/service-check-access.directive';
+import { SearchResultQuestionComponent } from './components/search-result-question/search-result-question.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
 
@@ -55,6 +56,7 @@ const components: any[] = [
   QuestionListComponent,
   AbstractSearchResultComponent,
   VisibleIconComponent,
+  SearchResultQuestionComponent,
 ];
 
 @NgModule({

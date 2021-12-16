@@ -1,0 +1,12 @@
+<div class="sd-list-item">
+  <div class="row-flex-content">
+    <lib-visible-icon
+      [hideable]="data.ticket"
+      *libQuestionCheckAccess="permission.VIEW_MANAGE_INFO; object: data"
+    ></lib-visible-icon>
+    <span>{{ data.ticket.name }}</span>
+    <span class="badge bg-yellow-200">
+      <span class="additional-text">{{ data.ticket.service.name }}</span>
+    </span>
+  </div>
+</div>

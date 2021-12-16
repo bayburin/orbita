@@ -2,7 +2,6 @@
   <div class="sd-list-question">
     <div class="sd-list-question-group" (click)="toggleQuestion()">
       <i
-        *ngIf="!standaloneLink"
         class="mdi mdi-24px"
         [ngClass]="open ? 'mdi-arrow-up-drop-circle-outline' : 'mdi-arrow-down-drop-circle-outline'"
       ></i>
@@ -16,13 +15,9 @@
           ></lib-visible-icon>
           <!-- </ng-container> -->
           <span>{{ questionOverview.ticket.name }}</span>
-          <span class="badge bg-yellow-200" *ngIf="standaloneLink">
-            <span class="additional-text">{{ questionOverview.ticket.service.name }}</span>
-          </span>
         </div>
       </div>
       <i
-        *ngIf="!standaloneLink"
         class="mdi mdi-link-variant mdi-24px"
         ngbTooltip="Скопировать ссылку на вопрос"
         [@ShowFlagRight]="'hide'"
