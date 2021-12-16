@@ -15,6 +15,7 @@ import { showFlagRight } from './../../animations/show-flag-right.animation';
 export class QuestionComponent extends AbstractSearchResultComponent<QuestionOverviewVM | QuestionVM> {
   permission = QuestionPermission;
   open = false;
+  linkAnimation = 'hide';
   /**
    * Вопрос с типом QuestionOverviewVM
    */
