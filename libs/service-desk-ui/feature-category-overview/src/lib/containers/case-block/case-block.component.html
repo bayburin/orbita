@@ -1,1 +1,39 @@
-<p>case-block works!</p>
+<section>
+  <lib-section-header header="Мои заявки"></lib-section-header>
+  <lib-loading
+    *ngIf="initLoading$ | async as initLoading; else initComplete"
+    [loading]="initLoading"
+    size="48px"
+  ></lib-loading>
+</section>
+
+<ng-template #initComplete>
+  <ng-container *ngIf="all$ | async as cases">
+    <div
+      *ngIf="cases.length === 0; else claimsData"
+      @contentBlockAnimation
+      class="d-flex justify-content-start align-items-center"
+    >
+      <span>Заявки отсутствуют</span>
+      <a routerLink="/claims/new" class="btn btn-primary ml-4">Создать заявку в свободной форме</a>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #claimsData>
+  <a routerLink="/claims/new" class="btn btn-primary mb-3">Создать заявку в свободной форме</a>
+  <!-- <app-filters [data]="statuses" (changeFilter)="filterChanged($event)"></app-filters>
+  <app-claim-card-list
+    [claims]="claims"
+    [loading]="loading.table"
+    (removeClaim)="claimRevoked()"
+  ></app-claim-card-list> -->
+  <!-- TODO: Проверить, нормально ли отображается загрузка при смене статусов; отработать события голосования и удаления заявки -->
+  <div class="tab-content">
+    <lib-loading [loading]="loading$ | async" size="48px"></lib-loading>
+    <ng-container *ngIf="loaded$ | async">
+      <lib-kase-list [kases]="all$ | async"></lib-kase-list>
+    </ng-container>
+  </div>
+  <!-- <app-paginator></app-paginator> -->
+</ng-template>

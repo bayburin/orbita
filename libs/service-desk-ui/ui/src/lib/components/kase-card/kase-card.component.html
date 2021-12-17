@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row align-items-center">
+      <div class="col-8">
+        <h3 class="mb-0 text-primary">{{ kase.ticket?.name || 'Обращение в техподдержку' }}</h3>
+      </div>
+      <div class="col-4">
+        <div class="d-flex flex-column align-items-end">
+          <b>Заявка № {{ kase.case_id }}</b>
+          <!-- TODO: Нужен пайп datetime -->
+          <small class="d-flex justify-content-end">{{ kase.runtime.starttime }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{ kase.desc }}</p>
+    <p class="card-text">
+      <b>{{ kase.status }}</b>
+    </p>
+    <!-- TODO: Нужен пайп datetime -->
+    <small *ngIf="isClosed(); else kaseDeadline">Дата закрытия: {{ kase.runtime.endtime }}</small>
+  </div>
+  <div class="card-footer">
+    <div class="d-flex">
+      <!-- TODO: Вернуть параметры -->
+      <!-- *ngIf="kase.status_id === 3" -->
+      <!-- [readonly]="!isAllowedToVote()" -->
+      <ngb-rating [rate]="kase.rating" [max]="5" (rateChange)="vote.emit($event)">
+        <ng-template let-fill="fill" let-index="index">
+          <span class="star" [class.filled]="fill === 100">&#9733;</span>
+        </ng-template>
+      </ngb-rating>
+      <div class="sd-link ml-auto" ngbTooltip="Отменить заявку">
+        <i id="revoke" class="mdi mdi-delete mdi-24px" (click)="revoke.emit()"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #kaseDeadline>
+  <small>Срок выполнения: {{ kase.runtime.to_s }}</small>
+</ng-template>

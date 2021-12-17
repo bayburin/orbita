@@ -1,3 +1,6 @@
+import { Service } from './service.interface';
+import { Ticket } from './ticket.interface';
+
 /**
  * Заявка системы Astraea
  */
@@ -15,7 +18,7 @@ export interface Kase {
   /**
    * Услуга
    */
-  readonly service: number;
+  readonly service: Service;
 
   /**
    * Идентификатор тикета
@@ -25,7 +28,7 @@ export interface Kase {
   /**
    * Тикет
    */
-  readonly ticket: number;
+  readonly ticket: Ticket;
 
   /**
    * Табельный пользователя
@@ -73,9 +76,14 @@ export interface Kase {
   readonly mobile: string;
 
   /**
-   * Статус
+   * Идентификатор
    */
   readonly status_id: number;
+
+  /**
+   * Статус
+   */
+  readonly status: string;
 
   /**
    * Временные отметки заявки
@@ -106,4 +114,9 @@ interface Runtime {
    * Дата контроля
    */
   readonly time: string;
+
+  /**
+   * Полная дата начала и окончания жизни заявки в виде строки
+   */
+  readonly to_s: string;
 }

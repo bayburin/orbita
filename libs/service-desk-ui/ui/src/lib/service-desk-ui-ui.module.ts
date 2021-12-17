@@ -32,6 +32,8 @@ import { ServiceCheckAccessDirective } from './directives/service-check-access/s
 import { SearchResultQuestionComponent } from './components/search-result-question/search-result-question.component';
 import { ShowQuestionLinkDirective } from './directives/show-question-link/show-question-link.directive';
 import { GetQuestionLinkDirective } from './directives/get-question-link/get-question-link.directive';
+import { KaseListComponent } from './components/kase-list/kase-list.component';
+import { KaseCardComponent } from './components/kase-card/kase-card.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
 
@@ -64,6 +66,8 @@ const components: any[] = [
   AbstractSearchResultComponent,
   VisibleIconComponent,
   SearchResultQuestionComponent,
+  KaseListComponent,
+  KaseCardComponent,
 ];
 
 @NgModule({

@@ -1,8 +1,22 @@
 import { NgModule } from '@angular/core';
 
-import { NgbNavModule, NgbToastModule, NgbTooltipModule, NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+  NgbDropdownModule,
+  NgbNavModule,
+  NgbRatingModule,
+  NgbToastModule,
+  NgbTooltipModule,
+  NgbTypeaheadModule,
+} from '@ng-bootstrap/ng-bootstrap';
 
-const modules: any[] = [NgbTypeaheadModule, NgbNavModule, NgbToastModule, NgbTooltipModule];
+const modules: any[] = [
+  NgbTypeaheadModule,
+  NgbNavModule,
+  NgbToastModule,
+  NgbTooltipModule,
+  NgbRatingModule,
+  NgbDropdownModule,
+];
 
 @NgModule({
   imports: [modules],
