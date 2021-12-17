@@ -11,6 +11,7 @@ import * as fromNotification from './notification/notification.reducer';
 import * as fromResponsibleUser from './responsible-user/responsible-user.reducer';
 import * as fromAnswer from './answer/answer.reducer';
 import * as fromTag from './tag/tag.reducer';
+import * as fromKase from './kase/kase.reducer';
 
 export interface ServiceDeskUiState
   extends fromHome.HomePartialState,
@@ -23,7 +24,8 @@ export interface ServiceDeskUiState
     fromAnswer.AnswerPartialState,
     fromNotification.NotificationPartialState,
     fromResponsibleUser.ResponsibleUserPartialState,
-    fromTag.TagPartialState {}
+    fromTag.TagPartialState,
+    fromKase.KasePartialState {}
 
 export const SERVICE_DESK_SYSTEM_FEATURE_KEY = 'serviceDeskUi';
 
@@ -39,6 +41,7 @@ export const reducer: ActionReducerMap<ServiceDeskUiState> = {
   [fromNotification.NOTIFICATION_FEATURE_KEY]: fromNotification.reducer,
   [fromResponsibleUser.RESPONSIBLE_USER_FEATURE_KEY]: fromResponsibleUser.reducer,
   [fromTag.TAG_FEATURE_KEY]: fromTag.reducer,
+  [fromKase.KASE_FEATURE_KEY]: fromKase.reducer,
 };
 
 export const initialState: ServiceDeskUiState = {
@@ -53,6 +56,7 @@ export const initialState: ServiceDeskUiState = {
   [fromNotification.NOTIFICATION_FEATURE_KEY]: fromNotification.initialState,
   [fromResponsibleUser.RESPONSIBLE_USER_FEATURE_KEY]: fromResponsibleUser.initialState,
   [fromTag.TAG_FEATURE_KEY]: fromTag.initialState,
+  [fromKase.KASE_FEATURE_KEY]: fromKase.initialState,
 };
 
 export const getServiceDeskUiState = createFeatureSelector<ServiceDeskUiState>(SERVICE_DESK_SYSTEM_FEATURE_KEY);

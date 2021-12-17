@@ -13,6 +13,7 @@ import * as ServiceActions from '../service/service.actions';
 import * as QuestionActions from '../question/question.actions';
 import * as AnswerActions from '../answer/answer.actions';
 import * as RouterSelectors from '../selectors/router.selectors';
+import * as KaseActions from '../kase/kase.actions';
 
 @Injectable()
 export class CategoryEffects {
@@ -53,13 +54,14 @@ export class CategoryEffects {
       switchMap(([_action, params]) =>
         this.categoryApi.show(params.id).pipe(
           switchMap((category) => {
-            const data = CategoryCacheService.normalizeCategories(category);
+            const data = CategoryCacheService.normalizeCategories(category).entities;
 
             return [
-              AnswerActions.setEntities({ entities: data.entities.answers }),
-              QuestionActions.setEntities({ entities: data.entities.questions }),
-              ServiceActions.setEntities({ entities: data.entities.services }),
-              CategoryActions.loadSelectedSuccess({ category: data.entities.categories[params.id] }),
+              AnswerActions.setEntities({ entities: data.answers }),
+              QuestionActions.setEntities({ entities: data.questions }),
+              ServiceActions.setEntities({ entities: data.services }),
+              KaseActions.setServiceIds({ serviceIds: Object.keys(data.services || []).map(Number) }),
+              CategoryActions.loadSelectedSuccess({ category: data.categories[params.id] }),
             ];
           }),
           catchError((error) => of(CategoryActions.loadSelectedFailure({ error })))

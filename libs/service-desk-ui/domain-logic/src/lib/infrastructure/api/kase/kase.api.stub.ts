@@ -1,0 +1,11 @@
+import { of } from 'rxjs';
+
+import { KaseApiAbstract } from './kase.api.abstract';
+
+export class KaseApiStub implements KaseApiAbstract {
+  api = '';
+
+  query() {
+    return of({ apps: [], statuses: [] });
+  }
+}

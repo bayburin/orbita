@@ -2,6 +2,9 @@ import { Question } from './../model/question.interface';
 import { Service } from './../model/service.interface';
 import { Category } from './../model/category.interface';
 
+/**
+ * Результаты поиска
+ */
 export interface SearchResult {
   /**
    * Список категорий
