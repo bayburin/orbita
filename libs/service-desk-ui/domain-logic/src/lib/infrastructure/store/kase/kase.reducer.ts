@@ -3,7 +3,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import * as KaseActions from './kase.actions';
 import { Kase } from './../../../entities/model/kase.interface';
-import { KaseStatus } from '../../../entities/model/kase-status.interface';
+import { Filter } from '../../../entities/filter.interface';
 
 export const KASE_FEATURE_KEY = 'kase';
 
@@ -15,7 +15,7 @@ export interface State extends EntityState<Kase> {
   serviceIds: number[];
   // Id выбранного статуса
   selectedStatusId: number;
-  statuses?: KaseStatus[];
+  statuses?: Filter[];
   error?: string | null;
 }
 

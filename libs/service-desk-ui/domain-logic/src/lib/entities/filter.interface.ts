@@ -1,7 +1,7 @@
 /**
  * Фильтр заявок Astraea по статусам
  */
-export interface KaseStatus {
+export interface Filter {
   /**
    * Идентификатор
    */

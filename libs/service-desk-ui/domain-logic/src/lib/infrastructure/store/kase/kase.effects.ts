@@ -35,10 +35,13 @@ export class KaseEffects {
       switchMap(([_action, serviceIds, selectedStatusId]) =>
         this.kaseApi.query({ limit: 15, offset: 0, status_id: selectedStatusId, service_ids: serviceIds }).pipe(
           switchMap((result) => {
-            return [
-              KaseActions.setStatuses({ statuses: result.statuses }),
-              KaseActions.loadAllSuccess({ kases: result.apps }),
-            ];
+            const statuses = result.statuses.map((status) => ({
+              ...status,
+              id: status.id === null ? status.id : +status.id,
+              count: +status.count,
+            }));
+
+            return [KaseActions.setStatuses({ statuses }), KaseActions.loadAllSuccess({ kases: result.apps })];
           }),
           catchError((error) => of(KaseActions.loadAllFailure({ error })))
         )
@@ -80,6 +83,13 @@ export class KaseEffects {
   revokeSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(KaseActions.revokeSuccess, KaseActions.voteSuccess),
+      map(() => KaseActions.loadAll())
+    )
+  );
+
+  setSelectedStatusId$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(KaseActions.setSelectedStatusId),
       map(() => KaseActions.loadAll())
     )
   );

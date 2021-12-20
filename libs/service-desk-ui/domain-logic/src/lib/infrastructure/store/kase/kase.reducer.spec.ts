@@ -3,7 +3,7 @@ import { Action } from '@ngrx/store';
 import * as KaseActions from './kase.actions';
 import { Kase } from './../../../entities/model/kase.interface';
 import { State, initialState, reducer } from './kase.reducer';
-import { KaseStatus } from '../../../entities/model/kase-status.interface';
+import { Filter } from '../../../entities/filter.interface';
 
 describe('KaseReducer', () => {
   let action: Action;
@@ -64,7 +64,7 @@ describe('KaseReducer', () => {
 
   describe('setStatuses', () => {
     it('should change attributes', () => {
-      const statuses = [{ id: 1 }, { id: 2 }] as KaseStatus[];
+      const statuses = [{ id: 1 }, { id: 2 }] as Filter[];
       action = KaseActions.setStatuses({ statuses });
       const result: State = reducer(initialState, action);
 

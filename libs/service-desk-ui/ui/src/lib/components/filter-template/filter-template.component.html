@@ -1,0 +1,15 @@
+<div class="sd-nav-pills">
+  <nav>
+    <div class="nav nav-pills">
+      <span
+        *ngFor="let filter of filters; trackBy: trackByFilter"
+        (click)="selectFilter.emit(filter.id)"
+        class="nav-item nav-link"
+        [ngClass]="{ active: selectedId === filter.id }"
+      >
+        {{ filter.name }}
+        <span class="badge">({{ filter.count || 0 }})</span>
+      </span>
+    </div>
+  </nav>
+</div>

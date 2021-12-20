@@ -8,12 +8,10 @@ export class KaseFacadeStub implements KaseFacadeAbstract {
   loading$ = new BehaviorSubject(false);
   loaded$ = new BehaviorSubject(false);
   statuses$ = new BehaviorSubject([]);
+  selectedStatusId$ = new BehaviorSubject(null);
+  isAnyKase$ = new BehaviorSubject(false);
 
   init() {
-    /** */
-  }
-
-  loadAll() {
     /** */
   }
 
@@ -22,6 +20,10 @@ export class KaseFacadeStub implements KaseFacadeAbstract {
   }
 
   vote() {
+    /** */
+  }
+
+  setSelectedStatusId() {
     /** */
   }
 }

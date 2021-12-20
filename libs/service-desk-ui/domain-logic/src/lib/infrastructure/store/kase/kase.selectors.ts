@@ -24,3 +24,5 @@ export const getStatuses = createSelector(getKaseState, (state: State) => state.
 export const getServiceIds = createSelector(getKaseState, (state: State) => state.serviceIds);
 
 export const getSelectedStatusId = createSelector(getKaseState, (state: State) => state.selectedStatusId);
+
+export const getIsAnyKase = createSelector(getStatuses, (statuses) => statuses.some((status) => status.count > 0));

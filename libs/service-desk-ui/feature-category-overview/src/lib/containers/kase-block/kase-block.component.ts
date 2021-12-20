@@ -14,7 +14,9 @@ export class KaseBlockComponent implements OnInit {
   initLoading$ = this.kaseFacade.initLoading$;
   loading$ = this.kaseFacade.loading$;
   loaded$ = this.kaseFacade.loaded$;
-  statusId: number = null;
+  statuses$ = this.kaseFacade.statuses$;
+  selectedStatusId$ = this.kaseFacade.selectedStatusId$;
+  isAnyKase$ = this.kaseFacade.isAnyKase$;
 
   constructor(private kaseFacade: KaseFacade) {}
 
@@ -49,5 +51,14 @@ export class KaseBlockComponent implements OnInit {
    */
   vote(event: { kase: Kase; rating: number }): void {
     this.kaseFacade.vote(event.kase.case_id, event.rating);
+  }
+
+  /**
+   * Установить новый статус и загрузить соответствующие данные
+   *
+   * @param selectedStatusId - id выбранного статуса
+   */
+  selectFilter(selectedStatusId: number): void {
+    this.kaseFacade.setSelectedStatusId(selectedStatusId);
   }
 }

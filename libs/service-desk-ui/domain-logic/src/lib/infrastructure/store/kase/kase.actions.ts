@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { KaseStatus } from '../../../entities/model/kase-status.interface';
+import { Filter } from '../../../entities/filter.interface';
 import { Kase } from './../../../entities/model/kase.interface';
 
 export const init = createAction('[Kase] Init');
@@ -11,7 +11,7 @@ export const loadAllSuccess = createAction('[Kase/API] Load All Success', props<
 
 export const loadAllFailure = createAction('[Kase/API] Load All Failure', props<{ error: any }>());
 
-export const setStatuses = createAction('[Kase] Set Statuses', props<{ statuses: KaseStatus[] }>());
+export const setStatuses = createAction('[Kase] Set Statuses', props<{ statuses: Filter[] }>());
 
 export const setServiceIds = createAction('[Kase] Set Service Ids', props<{ serviceIds: number[] }>());
 

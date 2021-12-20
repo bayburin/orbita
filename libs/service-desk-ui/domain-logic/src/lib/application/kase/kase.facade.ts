@@ -19,15 +19,13 @@ export class KaseFacade implements KaseFacadeAbstract {
   loading$ = this.store.select(KaseSelectors.getLoading);
   loaded$ = this.store.select(KaseSelectors.getLoaded);
   statuses$ = this.store.select(KaseSelectors.getStatuses);
+  selectedStatusId$ = this.store.select(KaseSelectors.getSelectedStatusId);
+  isAnyKase$ = this.store.select(KaseSelectors.getIsAnyKase);
 
   constructor(private store: Store<KaseFeature.KasePartialState>) {}
 
   init() {
     this.store.dispatch(KaseActions.init());
-  }
-
-  loadAll() {
-    this.store.dispatch(KaseActions.loadAll());
   }
 
   revoke(caseId: number) {
@@ -36,5 +34,9 @@ export class KaseFacade implements KaseFacadeAbstract {
 
   vote(caseId: number, rating: number) {
     this.store.dispatch(KaseActions.vote({ caseId, rating }));
+  }
+
+  setSelectedStatusId(selectedStatusId: number) {
+    this.store.dispatch(KaseActions.setSelectedStatusId({ selectedStatusId }));
   }
 }

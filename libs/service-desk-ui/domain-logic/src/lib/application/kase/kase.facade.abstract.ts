@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { KaseStatus } from '../../entities/model/kase-status.interface';
+import { Filter } from '../../entities/filter.interface';
 
 import { Kase } from './../../entities/model/kase.interface';
 
@@ -23,17 +23,20 @@ export abstract class KaseFacadeAbstract {
   /**
    * Статусы заявок
    */
-  statuses$: Observable<KaseStatus[]>;
+  statuses$: Observable<Filter[]>;
+  /**
+   * Id выбранного статуса
+   */
+  selectedStatusId$: Observable<number>;
+  /**
+   * Показывает, имеется ли у пользователя хотя бы одна заявка
+   */
+  isAnyKase$: Observable<boolean>;
 
   /**
    * Инициализирует начальную загрузку заявок и других данных
    */
   abstract init(): void;
-
-  /**
-   * Загружает заявки
-   */
-  abstract loadAll(): void;
 
   /**
    * Отменяет заявку
@@ -49,4 +52,11 @@ export abstract class KaseFacadeAbstract {
    * @param rating - выбранная оценка качества обслуживания
    */
   abstract vote(caseId: number, rating: number): void;
+
+  /**
+   * Установить новый статус и загрузить соответствующие данные
+   *
+   * @param selectedStatusId - id выбранного статуса
+   */
+  abstract setSelectedStatusId(selectedStatusId: number): void;
 }

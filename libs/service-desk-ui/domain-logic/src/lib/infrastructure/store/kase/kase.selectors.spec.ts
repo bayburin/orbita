@@ -1,4 +1,4 @@
-import { KaseStatus } from '../../../entities/model/kase-status.interface';
+import { Filter } from '../../../entities/filter.interface';
 import { Kase } from './../../../entities/model/kase.interface';
 import { kaseAdapter, KasePartialState, initialState } from './kase.reducer';
 import * as KaseSelectors from './kase.selectors';
@@ -18,7 +18,10 @@ describe('KaseSelectors', () => {
     3: arrEntities[2],
   };
   const selectedId = 2;
-  const statuses = [{ id: 1 }, { id: 2 }] as KaseStatus[];
+  const statuses = [
+    { id: 1, count: 0 },
+    { id: 2, count: 1 },
+  ] as Filter[];
   const serviceIds = [1, 2, 3];
   const selectedStatusId = 12345;
   let state: any;
@@ -71,5 +74,9 @@ describe('KaseSelectors', () => {
 
   it('getSelectedStatusId() should return entities', () => {
     expect(KaseSelectors.getSelectedStatusId.projector(state)).toEqual(selectedStatusId);
+  });
+
+  it('getIsAnyKase() should return entities', () => {
+    expect(KaseSelectors.getIsAnyKase.projector(statuses)).toBe(true);
   });
 });

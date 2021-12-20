@@ -7,6 +7,12 @@ import { MarkdownModule } from 'ngx-markdown';
 import { NgBootstrapModule } from './ng-bootstrap.module';
 import { SharedUiModule } from '@orbita/shared/ui';
 
+import { QuestionCheckAccessDirective } from './directives/question-check-access/question-check-access.directive';
+import { ServiceCheckAccessDirective } from './directives/service-check-access/service-check-access.directive';
+import { SearchResultQuestionComponent } from './components/search-result-question/search-result-question.component';
+import { ShowQuestionLinkDirective } from './directives/show-question-link/show-question-link.directive';
+import { GetQuestionLinkDirective } from './directives/get-question-link/get-question-link.directive';
+
 import { UserRecommendationsComponent } from './components/user-recommendations/user-recommendations.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { SectionHeaderComponent } from './components/section-header/section-header.component';
@@ -27,14 +33,9 @@ import { ServiceLinkComponent } from './components/service-link/service-link.com
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { AbstractSearchResultComponent } from './components/abstract-search-result/abstract-search-result.component';
 import { VisibleIconComponent } from './components/visible-icon/visible-icon.component';
-
-import { QuestionCheckAccessDirective } from './directives/question-check-access/question-check-access.directive';
-import { ServiceCheckAccessDirective } from './directives/service-check-access/service-check-access.directive';
-import { SearchResultQuestionComponent } from './components/search-result-question/search-result-question.component';
-import { ShowQuestionLinkDirective } from './directives/show-question-link/show-question-link.directive';
-import { GetQuestionLinkDirective } from './directives/get-question-link/get-question-link.directive';
 import { KaseListComponent } from './components/kase-list/kase-list.component';
 import { KaseCardComponent } from './components/kase-card/kase-card.component';
+import { FilterTemplateComponent } from './components/filter-template/filter-template.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBootstrapModule];
 
@@ -69,6 +70,7 @@ const components: any[] = [
   SearchResultQuestionComponent,
   KaseListComponent,
   KaseCardComponent,
+  FilterTemplateComponent,
 ];
 
 @NgModule({
