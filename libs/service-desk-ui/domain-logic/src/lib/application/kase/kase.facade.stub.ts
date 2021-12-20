@@ -16,4 +16,8 @@ export class KaseFacadeStub implements KaseFacadeAbstract {
   loadAll() {
     /** */
   }
+
+  revoke() {
+    /** */
+  }
 }

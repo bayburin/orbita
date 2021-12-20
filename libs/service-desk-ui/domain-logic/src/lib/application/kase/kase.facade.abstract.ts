@@ -33,5 +33,12 @@ export abstract class KaseFacadeAbstract {
   /**
    * Загружает заявки
    */
-  abstract loadAll(statusId: number): void;
+  abstract loadAll(): void;
+
+  /**
+   * Отменяет заявку
+   *
+   * @param caseId - номер заявки
+   */
+  abstract revoke(caseId: number): void;
 }

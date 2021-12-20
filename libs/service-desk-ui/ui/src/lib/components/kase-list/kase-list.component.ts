@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 
 import { Kase } from '@orbita/service-desk-ui/domain-logic';
 import { contentListAnimation } from './../../animations/content.animation';
@@ -15,6 +15,10 @@ export class KaseListComponent implements OnChanges {
    * Список заявок
    */
   @Input() kases: Kase[];
+  /**
+   * Событие отмены заявки
+   */
+  @Output() revoke = new EventEmitter<Kase>();
   rowGroupedKases: Kase[][];
 
   ngOnChanges(): void {
@@ -37,14 +41,5 @@ export class KaseListComponent implements OnChanges {
   vote(kase: Kase, rating: number): void {
     console.log('vote: ', kase);
     console.log('new rating: ', rating);
-  }
-
-  /**
-   * Отменить заявку
-   *
-   * @param kase - заявка
-   */
-  revoke(kase: Kase): void {
-    console.log('revoke: ', kase);
   }
 }

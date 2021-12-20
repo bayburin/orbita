@@ -15,4 +15,11 @@ export abstract class KaseApiAbstract {
    * @param id - ID категории
    */
   abstract query(filters: KaseFilter): Observable<KaseQueryResult>;
+
+  /**
+   * Отправляет запрос на отмену заявки
+   *
+   * @param caseId - номер заявки
+   */
+  abstract revoke(caseId: number): Observable<void>;
 }

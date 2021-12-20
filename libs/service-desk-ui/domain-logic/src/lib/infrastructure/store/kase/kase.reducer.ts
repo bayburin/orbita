@@ -11,7 +11,10 @@ export interface State extends EntityState<Kase> {
   initLoading: boolean;
   loading: boolean;
   loaded: boolean;
+  // Список id услуг, для которых необходимо загрузить заявки
   serviceIds: number[];
+  // Id выбранного статуса
+  selectedStatusId: number;
   statuses?: KaseStatus[];
   error?: string | null;
 }
@@ -29,6 +32,7 @@ export const initialState: State = kaseAdapter.getInitialState({
   loading: false,
   loaded: false,
   serviceIds: [],
+  selectedStatusId: null,
 });
 
 const kaseReducer = createReducer(
@@ -40,7 +44,11 @@ const kaseReducer = createReducer(
   ),
   on(KaseActions.loadAllFailure, (state, { error }) => ({ ...state, loading: false, initLoading: false, error })),
   on(KaseActions.setStatuses, (state, { statuses }) => ({ ...state, statuses })),
-  on(KaseActions.setServiceIds, (state, { serviceIds }) => ({ ...state, serviceIds }))
+  on(KaseActions.setServiceIds, (state, { serviceIds }) => ({ ...state, serviceIds })),
+  on(KaseActions.revoke, (state) => ({ ...state, loading: true })),
+  on(KaseActions.revokeSuccess, (state) => ({ ...state, loading: false })),
+  on(KaseActions.revokeFailure, (state, { error }) => ({ ...state, loading: false, error })),
+  on(KaseActions.setSelectedStatusId, (state, { selectedStatusId }) => ({ ...state, selectedStatusId }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

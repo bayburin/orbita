@@ -20,6 +20,7 @@ describe('KaseSelectors', () => {
   const selectedId = 2;
   const statuses = [{ id: 1 }, { id: 2 }] as KaseStatus[];
   const serviceIds = [1, 2, 3];
+  const selectedStatusId = 12345;
   let state: any;
 
   beforeEach(() => {
@@ -32,6 +33,7 @@ describe('KaseSelectors', () => {
       error,
       statuses,
       serviceIds,
+      selectedStatusId,
     });
   });
 
@@ -65,5 +67,9 @@ describe('KaseSelectors', () => {
 
   it('getStatuses() should return entities', () => {
     expect(KaseSelectors.getServiceIds.projector(state)).toEqual(serviceIds);
+  });
+
+  it('getSelectedStatusId() should return entities', () => {
+    expect(KaseSelectors.getSelectedStatusId.projector(state)).toEqual(selectedStatusId);
   });
 });

@@ -38,7 +38,7 @@ describe('KaseApi', () => {
       statuses: [],
     };
 
-    it('should return service', () => {
+    it('should return kases', () => {
       service.query(filters).subscribe((result) => {
         expect(result).toEqual(result);
       });
@@ -49,6 +49,22 @@ describe('KaseApi', () => {
           url: `${api}?filters=%7B%7D`,
         })
         .flush(result);
+    });
+  });
+
+  describe('revoke()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/apps`;
+    const id = 123;
+
+    it('should revoke kase', () => {
+      service.revoke(id).subscribe((result) => {
+        expect(result).toEqual(result);
+      });
+
+      httpMock.expectOne({
+        method: 'DELETE',
+        url: `${api}/${id}`,
+      });
     });
   });
 });

@@ -82,6 +82,46 @@ describe('KaseReducer', () => {
     });
   });
 
+  describe('revoke', () => {
+    it('should change attributes', () => {
+      action = KaseActions.revoke({ caseId: 123 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(true);
+    });
+  });
+
+  describe('revokeSuccess', () => {
+    it('should change attributes', () => {
+      initialState.loading = true;
+      action = KaseActions.revokeSuccess();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(false);
+    });
+  });
+
+  describe('revokeFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      initialState.loading = true;
+      action = KaseActions.revokeFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.error).toEqual(error);
+      expect(result.loading).toEqual(false);
+    });
+  });
+
+  describe('setStatusId', () => {
+    it('should change attributes', () => {
+      action = KaseActions.setSelectedStatusId({ selectedStatusId: 12345 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedStatusId).toBe(12345);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as Action;

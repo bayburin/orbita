@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { KaseFacade } from '@orbita/service-desk-ui/domain-logic';
+import { KaseFacade, Kase } from '@orbita/service-desk-ui/domain-logic';
 import { contentBlockAnimation } from '@orbita/service-desk-ui/ui';
 
 @Component({
@@ -20,5 +20,25 @@ export class CaseBlockComponent implements OnInit {
 
   ngOnInit(): void {
     this.kaseFacade.init();
+  }
+
+  /**
+   * Отменить заявку
+   *
+   * @param kase - заявка
+   */
+  revoke(kase: Kase): void {
+    if (kase.status_id !== 1) {
+      alert(
+        'Отменить можно только заявку, имеющую статус "Не обработано". Если вы действительно хотите отменить текущую заявку, обратитесь по тел. 06.'
+      );
+      return;
+    }
+
+    if (!confirm('Вы действительно хотите отменить заявку №' + kase.case_id + '?')) {
+      return;
+    }
+
+    this.kaseFacade.revoke(kase.case_id);
   }
 }

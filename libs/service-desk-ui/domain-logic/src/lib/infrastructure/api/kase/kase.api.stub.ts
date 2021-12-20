@@ -8,4 +8,8 @@ export class KaseApiStub implements KaseApiAbstract {
   query() {
     return of({ apps: [], statuses: [] });
   }
+
+  revoke() {
+    return of(null);
+  }
 }

@@ -22,4 +22,8 @@ export class KaseApi implements KaseApiAbstract {
 
     return this.http.get<KaseQueryResult>(this.api, { params });
   }
+
+  revoke(caseId: number) {
+    return this.http.delete<void>(`${this.api}/${caseId}`);
+  }
 }

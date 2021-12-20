@@ -22,3 +22,5 @@ export const getEntities = createSelector(getKaseState, (state: State) => select
 export const getStatuses = createSelector(getKaseState, (state: State) => state.statuses);
 
 export const getServiceIds = createSelector(getKaseState, (state: State) => state.serviceIds);
+
+export const getSelectedStatusId = createSelector(getKaseState, (state: State) => state.selectedStatusId);

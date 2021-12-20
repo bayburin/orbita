@@ -26,7 +26,11 @@ export class KaseFacade implements KaseFacadeAbstract {
     this.store.dispatch(KaseActions.init());
   }
 
-  loadAll(statusId: number) {
-    this.store.dispatch(KaseActions.loadAll({ statusId }));
+  loadAll() {
+    this.store.dispatch(KaseActions.loadAll());
+  }
+
+  revoke(caseId: number) {
+    this.store.dispatch(KaseActions.revoke({ caseId }));
   }
 }
