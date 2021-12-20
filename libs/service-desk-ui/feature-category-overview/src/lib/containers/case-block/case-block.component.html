@@ -32,7 +32,7 @@
   <div class="tab-content">
     <lib-loading [loading]="loading$ | async" size="48px"></lib-loading>
     <ng-container *ngIf="loaded$ | async">
-      <lib-kase-list [kases]="all$ | async" (revoke)="revoke($event)"></lib-kase-list>
+      <lib-kase-list [kases]="all$ | async" (revoke)="revoke($event)" (vote)="vote($event)"></lib-kase-list>
     </ng-container>
   </div>
   <!-- <app-paginator></app-paginator> -->

@@ -20,4 +20,8 @@ export class KaseFacadeStub implements KaseFacadeAbstract {
   revoke() {
     /** */
   }
+
+  vote() {
+    /** */
+  }
 }

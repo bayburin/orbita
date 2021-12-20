@@ -5,6 +5,7 @@ import { SERVICE_DESK_UI_ENV_TOKEN, ServiceDeskUiEnvironment } from '@orbita/sha
 import { KaseQueryResult } from './../../../entities/server-data/kase-query-result.interface';
 import { KaseApiAbstract } from './kase.api.abstract';
 import { KaseFilter } from '../../../entities/view-models/kase-filters.interface';
+import { KaseForm } from './../../../entities/model/kase-form.interface';
 
 /**
  * Содержит API заявок
@@ -25,5 +26,9 @@ export class KaseApi implements KaseApiAbstract {
 
   revoke(caseId: number) {
     return this.http.delete<void>(`${this.api}/${caseId}`);
+  }
+
+  update(caseId: number, data: KaseForm) {
+    return this.http.put<void>(`${this.api}/${caseId}`, { app: data });
   }
 }

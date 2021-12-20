@@ -57,12 +57,25 @@ describe('KaseApi', () => {
     const id = 123;
 
     it('should revoke kase', () => {
-      service.revoke(id).subscribe((result) => {
-        expect(result).toEqual(result);
-      });
+      service.revoke(id).subscribe();
 
       httpMock.expectOne({
         method: 'DELETE',
+        url: `${api}/${id}`,
+      });
+    });
+  });
+
+  describe('update()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/apps`;
+    const id = 123;
+    const body = { rating: 2 };
+
+    it('should revoke kase', () => {
+      service.update(id, body).subscribe();
+
+      httpMock.expectOne({
+        method: 'PUT',
         url: `${api}/${id}`,
       });
     });

@@ -41,4 +41,13 @@ export class CaseBlockComponent implements OnInit {
 
     this.kaseFacade.revoke(kase.case_id);
   }
+
+  /**
+   * Оценить качество обслуживания
+   *
+   * @param event - событие, содержащее параметры: { kase - заявка, rating - выбранная оценка качества обслуживания }
+   */
+  vote(event: { kase: Kase; rating: number }): void {
+    this.kaseFacade.vote(event.kase.case_id, event.rating);
+  }
 }

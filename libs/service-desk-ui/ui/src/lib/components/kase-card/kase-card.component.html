@@ -21,10 +21,13 @@
   </div>
   <div class="card-footer">
     <div class="d-flex">
-      <!-- TODO: Вернуть параметры -->
-      <!-- *ngIf="kase.status_id === 3" -->
-      <!-- [readonly]="!isAllowedToVote()" -->
-      <ngb-rating [rate]="kase.rating" [max]="5" (rateChange)="vote.emit($event)">
+      <ngb-rating
+        *ngIf="kase.status_id === 3"
+        [rate]="kase.rating"
+        [max]="5"
+        [readonly]="!isAllowedToVote()"
+        (rateChange)="vote.emit($event)"
+      >
         <ng-template let-fill="fill" let-index="index">
           <span class="star" [class.filled]="fill === 100">&#9733;</span>
         </ng-template>

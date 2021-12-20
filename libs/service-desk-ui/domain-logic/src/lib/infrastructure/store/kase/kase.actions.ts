@@ -22,3 +22,9 @@ export const revokeSuccess = createAction('[Kase/API] Revoke Kase Success');
 export const revokeFailure = createAction('[Kase/API] Revoke Kase Failure', props<{ error: any }>());
 
 export const setSelectedStatusId = createAction('[Kase] Set SelectedStatusId', props<{ selectedStatusId: number }>());
+
+export const vote = createAction('[Kase/API] Vote Kase Rating', props<{ caseId: number; rating: number }>());
+
+export const voteSuccess = createAction('[Kase/API] Vote Kase Success');
+
+export const voteFailure = createAction('[Kase/API] Vote Kase Rating Failure', props<{ error: any }>());

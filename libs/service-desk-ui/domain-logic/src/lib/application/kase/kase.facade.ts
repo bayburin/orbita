@@ -33,4 +33,8 @@ export class KaseFacade implements KaseFacadeAbstract {
   revoke(caseId: number) {
     this.store.dispatch(KaseActions.revoke({ caseId }));
   }
+
+  vote(caseId: number, rating: number) {
+    this.store.dispatch(KaseActions.vote({ caseId, rating }));
+  }
 }

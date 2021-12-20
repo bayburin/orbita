@@ -41,4 +41,12 @@ export abstract class KaseFacadeAbstract {
    * @param caseId - номер заявки
    */
   abstract revoke(caseId: number): void;
+
+  /**
+   * Оценивает качество обслуживания
+   *
+   * @param caseId - номер заявки
+   * @param rating - выбранная оценка качества обслуживания
+   */
+  abstract vote(caseId: number, rating: number): void;
 }

@@ -25,7 +25,7 @@ describe('KaseReducer', () => {
 
   describe('loadAll', () => {
     it('should change attributes', () => {
-      action = KaseActions.loadAll({ statusId: null });
+      action = KaseActions.loadAll();
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(false);
@@ -119,6 +119,37 @@ describe('KaseReducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.selectedStatusId).toBe(12345);
+    });
+  });
+
+  describe('vote', () => {
+    it('should change attributes', () => {
+      action = KaseActions.vote({ caseId: 123, rating: 456 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(true);
+    });
+  });
+
+  describe('voteSuccess', () => {
+    it('should change attributes', () => {
+      initialState.loading = true;
+      action = KaseActions.voteSuccess();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(false);
+    });
+  });
+
+  describe('voteFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      initialState.loading = true;
+      action = KaseActions.voteFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.error).toEqual(error);
+      expect(result.loading).toEqual(false);
     });
   });
 

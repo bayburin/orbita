@@ -19,6 +19,10 @@ export class KaseListComponent implements OnChanges {
    * Событие отмены заявки
    */
   @Output() revoke = new EventEmitter<Kase>();
+  /**
+   * Событие выбора оценки качества обслуживания
+   */
+  @Output() vote = new EventEmitter<{ kase: Kase; rating: number }>();
   rowGroupedKases: Kase[][];
 
   ngOnChanges(): void {
@@ -30,16 +34,5 @@ export class KaseListComponent implements OnChanges {
 
   trackByKase(index: number, kase: Kase) {
     return kase.case_id;
-  }
-
-  /**
-   * Оценить качество обслуживания
-   *
-   * @param kase - заявка
-   * @param rating - оценка
-   */
-  vote(kase: Kase, rating: number): void {
-    console.log('vote: ', kase);
-    console.log('new rating: ', rating);
   }
 }

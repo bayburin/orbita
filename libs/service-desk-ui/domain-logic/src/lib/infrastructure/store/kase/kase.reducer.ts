@@ -45,9 +45,9 @@ const kaseReducer = createReducer(
   on(KaseActions.loadAllFailure, (state, { error }) => ({ ...state, loading: false, initLoading: false, error })),
   on(KaseActions.setStatuses, (state, { statuses }) => ({ ...state, statuses })),
   on(KaseActions.setServiceIds, (state, { serviceIds }) => ({ ...state, serviceIds })),
-  on(KaseActions.revoke, (state) => ({ ...state, loading: true })),
-  on(KaseActions.revokeSuccess, (state) => ({ ...state, loading: false })),
-  on(KaseActions.revokeFailure, (state, { error }) => ({ ...state, loading: false, error })),
+  on(KaseActions.revoke, KaseActions.vote, (state) => ({ ...state, loading: true })),
+  on(KaseActions.revokeSuccess, KaseActions.voteSuccess, (state) => ({ ...state, loading: false })),
+  on(KaseActions.revokeFailure, KaseActions.voteFailure, (state, { error }) => ({ ...state, loading: false, error })),
   on(KaseActions.setSelectedStatusId, (state, { selectedStatusId }) => ({ ...state, selectedStatusId }))
 );
 

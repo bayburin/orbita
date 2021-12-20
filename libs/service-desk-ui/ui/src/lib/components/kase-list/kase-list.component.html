@@ -1,7 +1,11 @@
 <div [@contentListAnimation]="rowGroupedKases">
   <div class="row mb-4" *ngFor="let rowKases of rowGroupedKases">
     <div class="col-md-6" *ngFor="let kase of rowKases; trackBy: trackByKase">
-      <lib-kase-card [kase]="kase" (vote)="vote(kase, $event)" (revoke)="revoke.emit(kase)"></lib-kase-card>
+      <lib-kase-card
+        [kase]="kase"
+        (revoke)="revoke.emit(kase)"
+        (vote)="vote.emit({ kase, rating: $event })"
+      ></lib-kase-card>
     </div>
   </div>
 </div>

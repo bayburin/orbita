@@ -12,4 +12,8 @@ export class KaseApiStub implements KaseApiAbstract {
   revoke() {
     return of(null);
   }
+
+  update() {
+    return of(null);
+  }
 }

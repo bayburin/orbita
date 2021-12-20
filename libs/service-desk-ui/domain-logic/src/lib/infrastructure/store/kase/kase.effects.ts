@@ -59,9 +59,27 @@ export class KaseEffects {
     )
   );
 
+  vote$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(KaseActions.vote),
+      withLatestFrom(this.store.select(KaseSelectors.getEntities)),
+      switchMap(([action, entities]) => {
+        const payload = {
+          ...entities[action.caseId],
+          rating: action.rating,
+        };
+
+        return this.kaseApi.update(action.caseId, payload).pipe(
+          map(() => KaseActions.voteSuccess()),
+          catchError((error) => of(KaseActions.voteFailure({ error })))
+        );
+      })
+    )
+  );
+
   revokeSuccess$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(KaseActions.revokeSuccess),
+      ofType(KaseActions.revokeSuccess, KaseActions.voteSuccess),
       map(() => KaseActions.loadAll())
     )
   );
