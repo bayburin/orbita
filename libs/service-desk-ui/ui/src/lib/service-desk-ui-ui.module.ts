@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { NgBootstrapModule } from './ng-bootstrap.module';
+import { SharedUiModule } from '@orbita/shared/ui';
 
 import { UserRecommendationsComponent } from './components/user-recommendations/user-recommendations.component';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -35,7 +36,7 @@ import { GetQuestionLinkDirective } from './directives/get-question-link/get-que
 import { KaseListComponent } from './components/kase-list/kase-list.component';
 import { KaseCardComponent } from './components/kase-card/kase-card.component';
 
-const modules: any[] = [FormsModule, ReactiveFormsModule, NgBootstrapModule];
+const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBootstrapModule];
 
 const directives: any[] = [
   QuestionCheckAccessDirective,

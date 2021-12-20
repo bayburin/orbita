@@ -7,8 +7,7 @@
       <div class="col-4">
         <div class="d-flex flex-column align-items-end">
           <b>Заявка № {{ kase.case_id }}</b>
-          <!-- TODO: Нужен пайп datetime -->
-          <small class="d-flex justify-content-end">{{ kase.runtime.starttime }}</small>
+          <small class="d-flex justify-content-end">{{ kase.runtime.starttime | datetime }}</small>
         </div>
       </div>
     </div>
@@ -18,8 +17,7 @@
     <p class="card-text">
       <b>{{ kase.status }}</b>
     </p>
-    <!-- TODO: Нужен пайп datetime -->
-    <small *ngIf="isClosed(); else kaseDeadline">Дата закрытия: {{ kase.runtime.endtime }}</small>
+    <small *ngIf="isClosed(); else kaseDeadline">Дата закрытия: {{ kase.runtime.endtime | datetime }}</small>
   </div>
   <div class="card-footer">
     <div class="d-flex">

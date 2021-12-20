@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { PrimengModule } from './primeng.module';
+import { SharedUiModule } from '@orbita/shared/ui';
 
-import { DatetimePipe } from './pipes/datetime/datetime.pipe';
 import { FioInitialsPipe } from './pipes/fio-initials/fio-initials.pipe';
 import { FioMiddleNamePipe } from './pipes/fio-middle-name/fio-middle-name.pipe';
 import { SortWorkByHistoryPipe } from './pipes/sort-work-by-history/sort-work-by-history.pipe';
@@ -49,9 +49,9 @@ import { EmployeeHostsTableComponent } from './components/employee-hosts-table/e
 import { SvtItemsTableComponent } from './components/svt-items-table/svt-items-table.component';
 import { SdRequestParametersComponent } from './components/sd-request-parameters/sd-request-parameters.component';
 
-const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule];
+const modules: any[] = [FormsModule, ReactiveFormsModule, OrbitSpinnerModule, SharedUiModule];
 
-const pipes: any[] = [DatetimePipe, FioInitialsPipe, FioMiddleNamePipe, SortWorkByHistoryPipe, CapitalizePipe];
+const pipes: any[] = [FioInitialsPipe, FioMiddleNamePipe, SortWorkByHistoryPipe, CapitalizePipe];
 
 const directives: any[] = [DndFilesDirective, CalcScrollWidthByWorksDirective, MessageByEnterDirective];
 

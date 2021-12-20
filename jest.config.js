@@ -25,5 +25,6 @@ module.exports = {
     '<rootDir>/libs/service-desk-ui/feature-home',
     '<rootDir>/libs/service-desk-ui/feature-category-listing',
     '<rootDir>/libs/service-desk-ui/feature-category-overview',
+    '<rootDir>/libs/shared/ui',
   ],
 };
