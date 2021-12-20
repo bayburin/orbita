@@ -4,12 +4,12 @@ import { KaseFacade, Kase } from '@orbita/service-desk-ui/domain-logic';
 import { contentBlockAnimation } from '@orbita/service-desk-ui/ui';
 
 @Component({
-  selector: 'lib-case-block',
-  templateUrl: './case-block.component.html',
-  styleUrls: ['./case-block.component.scss'],
+  selector: 'lib-kase-block',
+  templateUrl: './kase-block.component.html',
+  styleUrls: ['./kase-block.component.scss'],
   animations: [contentBlockAnimation],
 })
-export class CaseBlockComponent implements OnInit {
+export class KaseBlockComponent implements OnInit {
   all$ = this.kaseFacade.all$;
   initLoading$ = this.kaseFacade.initLoading$;
   loading$ = this.kaseFacade.loading$;

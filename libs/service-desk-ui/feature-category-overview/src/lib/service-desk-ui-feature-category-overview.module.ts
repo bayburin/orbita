@@ -6,7 +6,7 @@ import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-l
 
 import { OverviewPageComponent } from './pages/overview-page/overview-page.component';
 import { CategoryBlockComponent } from './containers/category-block/category-block.component';
-import { CaseBlockComponent } from './containers/case-block/case-block.component';
+import { KaseBlockComponent } from './containers/kase-block/kase-block.component';
 
 export const routes: Routes = [
   {
@@ -18,7 +18,7 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [OverviewPageComponent, CategoryBlockComponent, CaseBlockComponent],
+  declarations: [OverviewPageComponent, CategoryBlockComponent, KaseBlockComponent],
   exports: [OverviewPageComponent],
 })
 export class ServiceDeskUiFeatureCategoryOverviewModule {}
