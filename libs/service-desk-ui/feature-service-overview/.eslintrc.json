@@ -18,7 +18,7 @@
           "error",
           {
             "type": "element",
-            "prefix": ["lib", "service-desk-ui-kase-listing"],
+            "prefix": ["lib", "service-desk-ui-service-overview"],
             "style": "kebab-case"
           }
         ]

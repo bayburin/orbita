@@ -37,6 +37,18 @@ const routes: Routes = [
         ],
       },
       {
+        path: 'categories/:id',
+        children: [
+          {
+            path: 'services/:id',
+            loadChildren: () =>
+              import('@orbita/service-desk-ui/feature-service-overview').then(
+                (m) => m.ServiceDeskUiFeatureServiceOverviewModule
+              ),
+          },
+        ],
+      },
+      {
         path: 'claims',
         children: [
           {
