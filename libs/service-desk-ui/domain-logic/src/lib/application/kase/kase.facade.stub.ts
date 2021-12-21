@@ -26,4 +26,8 @@ export class KaseFacadeStub implements KaseFacadeAbstract {
   setSelectedStatusId() {
     /** */
   }
+
+  clearSelectedServices() {
+    /** */
+  }
 }

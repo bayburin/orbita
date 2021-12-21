@@ -59,4 +59,9 @@ export abstract class KaseFacadeAbstract {
    * @param selectedStatusId - id выбранного статуса
    */
   abstract setSelectedStatusId(selectedStatusId: number): void;
+
+  /**
+   * Очищает список услуг, по которым фильтруются заявки
+   */
+  abstract clearSelectedServices(): void;
 }

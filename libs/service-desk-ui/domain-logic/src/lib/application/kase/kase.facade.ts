@@ -39,4 +39,8 @@ export class KaseFacade implements KaseFacadeAbstract {
   setSelectedStatusId(selectedStatusId: number) {
     this.store.dispatch(KaseActions.setSelectedStatusId({ selectedStatusId }));
   }
+
+  clearSelectedServices() {
+    this.store.dispatch(KaseActions.setServiceIds({ serviceIds: [] }));
+  }
 }
