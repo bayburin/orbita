@@ -6,18 +6,18 @@ import { AuthGuard } from '../../core/guards/auth/auth.guard';
 import { ClaimsPageComponent } from './pages/claims/claims.page';
 
 const routes: Routes = [
-  {
-    path: 'claims/new',
-    component: FreeClaimPageComponent,
-    canActivate: [AuthGuard],
-    data: { breadcrumb: 'Поддержка' },
-  },
-  {
-    path: 'claims',
-    component: ClaimsPageComponent,
-    canActivate: [AuthGuard],
-    data: { breadcrumb: 'Заявки' },
-  },
+  // {
+  //   path: 'claims/new',
+  //   component: FreeClaimPageComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { breadcrumb: 'Поддержка' },
+  // },
+  // {
+  //   path: 'claims',
+  //   component: ClaimsPageComponent,
+  //   canActivate: [AuthGuard],
+  //   data: { breadcrumb: 'Заявки' },
+  // },
 ];
 
 @NgModule({

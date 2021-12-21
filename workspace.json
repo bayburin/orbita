@@ -760,6 +760,32 @@
       },
       "tags": ["scope:service-desk-ui", "type:feature"]
     },
+    "service-desk-ui-feature-kase-listing": {
+      "projectType": "library",
+      "root": "libs/service-desk-ui/feature-kase-listing",
+      "sourceRoot": "libs/service-desk-ui/feature-kase-listing/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-desk-ui/feature-kase-listing"],
+          "options": {
+            "jestConfig": "libs/service-desk-ui/feature-kase-listing/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/service-desk-ui/feature-kase-listing/src/**/*.ts",
+              "libs/service-desk-ui/feature-kase-listing/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["scope:service-desk-ui", "type:feature"]
+    },
     "service-desk-ui-shell": {
       "projectType": "library",
       "root": "libs/service-desk-ui/shell",

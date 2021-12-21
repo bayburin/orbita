@@ -36,6 +36,18 @@ const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'claims',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('@orbita/service-desk-ui/feature-kase-listing').then(
+                (m) => m.ServiceDeskUiFeatureKaseListingModule
+              ),
+          },
+        ],
+      },
     ],
   },
 ];
