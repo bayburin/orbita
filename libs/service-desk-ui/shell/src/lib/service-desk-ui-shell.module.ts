@@ -60,6 +60,11 @@ const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'markdown-help',
+        loadChildren: () =>
+          import('@orbita/service-desk-ui/feature-markdown-help').then((m) => m.ServiceDeskUiFeatureMarkdownHelpModule),
+      },
     ],
   },
 ];

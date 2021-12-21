@@ -28,5 +28,6 @@ module.exports = {
     '<rootDir>/libs/shared/ui',
     '<rootDir>/libs/service-desk-ui/feature-kase-listing',
     '<rootDir>/libs/service-desk-ui/feature-service-overview',
+    '<rootDir>/libs/service-desk-ui/feature-markdown-help',
   ],
 };

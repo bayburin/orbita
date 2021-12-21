@@ -786,6 +786,32 @@
       },
       "tags": ["scope:service-desk-ui", "type:feature"]
     },
+    "service-desk-ui-feature-markdown-help": {
+      "projectType": "library",
+      "root": "libs/service-desk-ui/feature-markdown-help",
+      "sourceRoot": "libs/service-desk-ui/feature-markdown-help/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-desk-ui/feature-markdown-help"],
+          "options": {
+            "jestConfig": "libs/service-desk-ui/feature-markdown-help/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/service-desk-ui/feature-markdown-help/src/**/*.ts",
+              "libs/service-desk-ui/feature-markdown-help/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["scope:service-desk-ui", "type:feature"]
+    },
     "service-desk-ui-feature-service-overview": {
       "projectType": "library",
       "root": "libs/service-desk-ui/feature-service-overview",
