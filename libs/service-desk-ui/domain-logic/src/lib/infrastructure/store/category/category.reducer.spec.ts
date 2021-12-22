@@ -92,6 +92,25 @@ describe('CategoryReducer', () => {
     });
   });
 
+  describe('setEntities', () => {
+    it('should change attributes', () => {
+      const entities = { 111: createCategory(111), 222: createCategory(222) };
+      action = CategoryActions.setEntities({ entities });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(2);
+    });
+  });
+
+  describe('setSelectedId', () => {
+    it('should change attributes', () => {
+      action = CategoryActions.setSelectedId({ selectedId: 123 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toBe(123);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as Action;

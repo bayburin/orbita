@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
 
 import { QuestionOverviewVM, QuestionPermission, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
 import { AbstractSearchResultComponent } from './../abstract-search-result/abstract-search-result.component';
@@ -14,8 +14,8 @@ import { showFlagRight } from './../../animations/show-flag-right.animation';
 })
 export class QuestionComponent extends AbstractSearchResultComponent<QuestionOverviewVM | QuestionVM> {
   permission = QuestionPermission;
-  open = false;
   linkAnimation = 'hide';
+  open = false;
   /**
    * Вопрос с типом QuestionOverviewVM
    */
@@ -33,11 +33,16 @@ export class QuestionComponent extends AbstractSearchResultComponent<QuestionOve
    */
   @Output() upRating = new EventEmitter<void>();
 
+  constructor(private cdr: ChangeDetectorRef) {
+    super();
+  }
+
   /**
    * Показывает ответ вопрос и отправляет отправляет соответсвующее событие для обновлений рейтинга
    */
   toggleQuestion(): void {
     this.open = !this.open;
+    this.cdr.detectChanges();
     this.upRating.emit();
   }
 }

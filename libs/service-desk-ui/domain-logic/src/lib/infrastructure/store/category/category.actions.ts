@@ -22,3 +22,7 @@ export const loadSelectedSuccess = createAction(
 );
 
 export const loadSelectedFailure = createAction('[Category/API] Load Selected Failure', props<{ error: any }>());
+
+export const setEntities = createAction('[Category] Set Entities', props<{ entities: Dictionary<Category> }>());
+
+export const setSelectedId = createAction('[Category] Set Selected Id', props<{ selectedId: number }>());

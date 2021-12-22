@@ -8,11 +8,19 @@ import * as ServiceActions from '../../infrastructure/store/service/service.acti
 import * as VMSelectors from '../../infrastructure/store/selectors/vm.selectors';
 
 /**
- * Фасад для работы с категориями
+ * Фасад для работы с услугами
  */
 @Injectable({
   providedIn: 'root',
 })
 export class ServiceFacade implements ServiceFacadeAbstract {
+  selected$ = this.store.select(VMSelectors.getSelectedServiceVM);
+  loading$ = this.store.select(ServiceSelectors.getLoading);
+  loaded$ = this.store.select(ServiceSelectors.getLoaded);
+
   constructor(private store: Store<ServiceFeature.ServicePartialState>) {}
+
+  loadSelected() {
+    this.store.dispatch(ServiceActions.loadSelected());
+  }
 }

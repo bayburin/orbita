@@ -8,7 +8,19 @@ import * as QuestionSelectors from '../question/question.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 import * as CategorySelectors from '../category/category.selectors';
 import * as HomeSelectors from '../home/home.selectors';
+import * as ResponsibleUserSelectors from '../responsible-user/responsible-user.selectors';
 import { ServiceCacheService } from '../../services/service-cache.service';
+
+// ========== Services ==========
+
+export const getSelectedServiceVM = createSelector(
+  ServiceSelectors.getSelected,
+  QuestionSelectors.getEntities,
+  AnswerSelectors.getEntities,
+  ResponsibleUserSelectors.getEntities,
+  (service, questions, answers, responsible_users): ServiceVM =>
+    ServiceCacheService.denormalizeService(service, { questions, answers, responsible_users })
+);
 
 // ========== Categories ==========
 

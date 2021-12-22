@@ -1,1 +1,39 @@
-<p>service-overview works!</p>
+<section class="sd-pb-6">
+  <lib-loading [loading]="loading$ | async" size="48px"></lib-loading>
+
+  <section class="sd-pb-6" *ngIf="loaded$ | async" @contentBlockAnimation>
+    <ng-container *ngIf="service$ | async as service">
+      <div class="container">
+        <div class="d-flex flex-row align-items-start">
+          <lib-section-header [header]="service.name" class="mr-auto"></lib-section-header>
+          <a
+            *libServiceCheckAccess="permission.MANAGE; object: service"
+            routerLink="admin/tickets"
+            class="btn btn-danger"
+            >Режим администратора</a
+          >
+        </div>
+        <!-- <app-responsible-user-details
+          class="responsibles-block"
+          [users]="service.responsibleUsers"
+          label="Ответственные за услугу"
+        >
+        </app-responsible-user-details> -->
+        <section class="sd-dlist-divider-b">
+          <div class="mt-2">
+            <lib-question-list
+              *ngIf="service.questions.length; else noQuestions"
+              [questions]="service.questions"
+            ></lib-question-list>
+          </div>
+        </section>
+      </div>
+    </ng-container>
+  </section>
+
+  <router-outlet></router-outlet>
+</section>
+
+<ng-template #noQuestions>
+  <p class="search-title">Список вопросов пуст</p>
+</ng-template>

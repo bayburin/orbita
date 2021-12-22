@@ -52,7 +52,13 @@ const categoryReducer = createReducer(
       loaded: true,
       loading: false,
     })
-  )
+  ),
+  on(CategoryActions.setEntities, (state, { entities }) => ({
+    ...state,
+    entities: entities,
+    ids: Object.keys(entities).map(Number),
+  })),
+  on(CategoryActions.setSelectedId, (state, { selectedId }) => ({ ...state, selectedId }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

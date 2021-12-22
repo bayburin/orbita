@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewChildren, QueryList } from '@angular/core';
 
+import { QuestionComponent } from '@orbita/service-desk-ui/ui';
 import { QuestionVM } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
@@ -9,7 +10,11 @@ import { QuestionVM } from '@orbita/service-desk-ui/domain-logic';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuestionListComponent {
+  /**
+   * Список вопросов
+   */
   @Input() questions: QuestionVM[];
+  @ViewChildren(QuestionComponent) questionComponents: QueryList<QuestionComponent>;
 
   trackByQuestion(index: number, question: QuestionVM) {
     return question.id;

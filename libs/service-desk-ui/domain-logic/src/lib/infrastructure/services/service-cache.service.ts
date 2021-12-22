@@ -33,6 +33,10 @@ export class ServiceCacheService {
     return Array.isArray(services) ? normalize(services, servicesSchema) : normalize(services, serviceSchema);
   }
 
+  static denormalizeService(service: Service, entities: NormalizedServicesEntities): ServiceVM {
+    return denormalize(service, serviceSchema, entities);
+  }
+
   static denormalizeServices(serviceIds: number[], entities: NormalizedServicesEntities): ServiceVM[] {
     return denormalize(serviceIds, servicesSchema, entities);
   }

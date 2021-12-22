@@ -27,8 +27,11 @@ export interface NormalizedCategories {
  * Нормализованные данные услуг
  */
 export interface NormalizedServicesEntities {
+  categories?: Dictionary<Category>;
   services?: Dictionary<Service>;
   questions?: Dictionary<Question>;
+  answers?: Dictionary<Answer>;
+  responsible_users?: Dictionary<ResponsibleUser>;
 }
 
 /**

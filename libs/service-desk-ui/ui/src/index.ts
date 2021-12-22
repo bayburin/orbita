@@ -9,3 +9,6 @@ export * from './lib/animations/content.animation';
 export * from './lib/animations/notify.animation';
 export * from './lib/animations/route.animation';
 export * from './lib/animations/user-dashboard.animation';
+
+export * from './lib/components/question/question.component';
+export * from './lib/components/question-list/question-list.component';
