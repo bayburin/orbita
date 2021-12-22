@@ -37,6 +37,8 @@ export * from './lib/application/kase/kase.facade';
 export * from './lib/application/kase/kase.facade.stub';
 export * from './lib/application/router/router.facade';
 export * from './lib/application/router/router.facade.stub';
+export * from './lib/application/question/question.facade';
+export * from './lib/application/question/question.facade.stub';
 
 export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';

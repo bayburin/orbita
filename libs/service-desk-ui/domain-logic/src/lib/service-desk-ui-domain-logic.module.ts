@@ -11,6 +11,7 @@ import { UserRecommendationEffects } from './infrastructure/store/user-recommend
 import { SearchEffects } from './infrastructure/store/search/search.effects';
 import { NotificationEffects } from './infrastructure/store/notification/notification.effects';
 import { KaseEffects } from './infrastructure/store/kase/kase.effects';
+import { QuestionEffects } from './infrastructure/store/question/question.effects';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { KaseEffects } from './infrastructure/store/kase/kase.effects';
       SearchEffects,
       NotificationEffects,
       KaseEffects,
+      QuestionEffects,
     ]),
   ],
 })

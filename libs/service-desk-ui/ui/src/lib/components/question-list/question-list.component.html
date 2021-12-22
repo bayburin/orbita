@@ -1,1 +1,5 @@
-<lib-question *ngFor="let question of questions; trackBy: trackByQuestion" [data]="question"></lib-question>
+<lib-question
+  *ngFor="let question of questions; trackBy: trackByQuestion"
+  [data]="question"
+  (upRating)="upRating.emit(question)"
+></lib-question>

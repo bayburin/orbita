@@ -16,6 +16,7 @@ export class QuestionComponent extends AbstractSearchResultComponent<QuestionOve
   permission = QuestionPermission;
   linkAnimation = 'hide';
   open = false;
+  private wasOpened = false;
   /**
    * Вопрос с типом QuestionOverviewVM
    */
@@ -43,6 +44,9 @@ export class QuestionComponent extends AbstractSearchResultComponent<QuestionOve
   toggleQuestion(): void {
     this.open = !this.open;
     this.cdr.detectChanges();
-    this.upRating.emit();
+    if (!this.wasOpened) {
+      this.upRating.emit();
+    }
+    this.wasOpened = true;
   }
 }

@@ -24,6 +24,7 @@
             <lib-question-list
               *ngIf="service.questions.length; else noQuestions"
               [questions]="service.questions"
+              (upRating)="upRating($event)"
             ></lib-question-list>
           </div>
         </section>
@@ -31,6 +32,7 @@
     </ng-container>
   </section>
 
+  <!-- TODO: Это нужно? -->
   <router-outlet></router-outlet>
 </section>
 

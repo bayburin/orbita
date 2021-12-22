@@ -1,6 +1,12 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import {
+  QuestionFacade,
+  QuestionFacadeStub,
+  ServiceFacade,
+  ServiceFacadeStub,
+} from '@orbita/service-desk-ui/domain-logic';
 import { ServiceOverviewComponent } from './service-overview.component';
 
 describe('ServiceOverviewComponent', () => {
@@ -10,6 +16,10 @@ describe('ServiceOverviewComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ServiceOverviewComponent],
+      providers: [
+        { provide: ServiceFacade, useClass: ServiceFacadeStub },
+        { provide: QuestionFacade, useClass: QuestionFacadeStub },
+      ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });

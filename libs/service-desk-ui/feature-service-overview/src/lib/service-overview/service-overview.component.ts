@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { contentBlockAnimation, QuestionComponent, QuestionListComponent } from '@orbita/service-desk-ui/ui';
-import { ServiceFacade, ServicePermission } from '@orbita/service-desk-ui/domain-logic';
+import { QuestionVM, ServiceFacade, ServicePermission, QuestionFacade } from '@orbita/service-desk-ui/domain-logic';
 @Component({
   selector: 'lib-service-overview',
   templateUrl: './service-overview.component.html',
@@ -22,7 +22,11 @@ export class ServiceOverviewComponent implements OnInit, AfterViewChecked {
   timeout: number;
   @ViewChild(QuestionListComponent) private questionList: QuestionListComponent;
 
-  constructor(private serviceFacade: ServiceFacade, public route: ActivatedRoute) {}
+  constructor(
+    private serviceFacade: ServiceFacade,
+    private questionFacade: QuestionFacade,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.identity = this.route.snapshot.queryParams.identity;
@@ -36,6 +40,15 @@ export class ServiceOverviewComponent implements OnInit, AfterViewChecked {
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => this.openSelectedQuestion(questionComponentArr), 300);
     }
+  }
+
+  /**
+   * Увеличивает рейтинг популярности вопроса
+   *
+   * @param question - вопрос
+   */
+  upRating(question: QuestionVM) {
+    this.questionFacade.upRating(question);
   }
 
   /**
