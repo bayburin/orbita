@@ -2,6 +2,7 @@ export * from './lib/service-desk-ui-domain-logic.module';
 
 export * from './lib/entities/policies.interface';
 export * from './lib/entities/filter.interface';
+export * from './lib/entities/breadcrumb-route.interface';
 
 export * from './lib/entities/model/user-recommendation.interface';
 export * from './lib/entities/model/category.interface';
@@ -34,6 +35,8 @@ export * from './lib/application/notification/notification.facade';
 export * from './lib/application/notification/notification.facade.stub';
 export * from './lib/application/kase/kase.facade';
 export * from './lib/application/kase/kase.facade.stub';
+export * from './lib/application/router/router.facade';
+export * from './lib/application/router/router.facade.stub';
 
 export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';

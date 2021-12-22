@@ -36,6 +36,7 @@ import { VisibleIconComponent } from './components/visible-icon/visible-icon.com
 import { KaseListComponent } from './components/kase-list/kase-list.component';
 import { KaseCardComponent } from './components/kase-card/kase-card.component';
 import { FilterTemplateComponent } from './components/filter-template/filter-template.component';
+import { BreadcrumbListComponent } from './components/breadcrumb-list/breadcrumb-list.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBootstrapModule];
 
@@ -71,6 +72,7 @@ const components: any[] = [
   KaseListComponent,
   KaseCardComponent,
   FilterTemplateComponent,
+  BreadcrumbListComponent,
 ];
 
 @NgModule({

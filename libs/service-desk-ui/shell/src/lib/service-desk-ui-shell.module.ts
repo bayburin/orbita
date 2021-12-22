@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
+import { BreadcrumbValueTypes } from '@orbita/service-desk-ui/domain-logic';
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { LayoutComponent } from './containers/layout/layout.component';
 import { NavbarComponent } from './containers/navbar/navbar.component';
+import { BreadcrumbComponent } from './containers/breadcrumb/breadcrumb.component';
 
 const routes: Routes = [
   {
@@ -16,9 +18,11 @@ const routes: Routes = [
         pathMatch: 'full',
         loadChildren: () =>
           import('@orbita/service-desk-ui/feature-home').then((m) => m.ServiceDeskUiFeatureHomeModule),
+        data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Главная' } },
       },
       {
         path: 'categories',
+        data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Услуги' } },
         children: [
           {
             path: '',
@@ -33,11 +37,13 @@ const routes: Routes = [
               import('@orbita/service-desk-ui/feature-category-overview').then(
                 (m) => m.ServiceDeskUiFeatureCategoryOverviewModule
               ),
+            data: { breadcrumb: { type: BreadcrumbValueTypes.CATEGORY_ID } },
           },
         ],
       },
       {
         path: 'categories/:id',
+        data: { breadcrumb: { type: BreadcrumbValueTypes.CATEGORY_ID } },
         children: [
           {
             path: 'services/:id',
@@ -45,11 +51,13 @@ const routes: Routes = [
               import('@orbita/service-desk-ui/feature-service-overview').then(
                 (m) => m.ServiceDeskUiFeatureServiceOverviewModule
               ),
+            data: { breadcrumb: { type: BreadcrumbValueTypes.SERVICE_ID } },
           },
         ],
       },
       {
         path: 'claims',
+        data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Заявки' } },
         children: [
           {
             path: '',
@@ -64,6 +72,7 @@ const routes: Routes = [
         path: 'markdown-help',
         loadChildren: () =>
           import('@orbita/service-desk-ui/feature-markdown-help').then((m) => m.ServiceDeskUiFeatureMarkdownHelpModule),
+        data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Справка по форматированию' } },
       },
     ],
   },
@@ -72,6 +81,6 @@ const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule],
   exports: [RouterModule],
-  declarations: [LayoutComponent, NavbarComponent],
+  declarations: [LayoutComponent, NavbarComponent, BreadcrumbComponent],
 })
 export class ServiceDeskUiShellModule {}
