@@ -1,7 +1,7 @@
 /**
  * Прикрепленные к вопросу файлы
  */
-export interface AnswerAttachment {
+export interface Attachment {
   /**
    * Идентификатор файла
    */

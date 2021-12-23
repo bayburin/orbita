@@ -55,7 +55,7 @@ const categoryReducer = createReducer(
   ),
   on(CategoryActions.setEntities, (state, { entities }) => ({
     ...state,
-    entities: entities,
+    entities,
     ids: Object.keys(entities).map(Number),
   })),
   on(CategoryActions.setSelectedId, (state, { selectedId }) => ({ ...state, selectedId }))

@@ -1,4 +1,4 @@
-import { AnswerAttachment } from '../model/answer-attachment.interface';
+import { Attachment } from '../model/attachment.interface';
 import { Hideable } from '../model/hideable.interface';
 
 /**
@@ -23,7 +23,7 @@ export interface AnswerVM extends Hideable {
   /**
    * Список идентификаторов прикрепленных файлов
    */
-  readonly attachments: AnswerAttachment[];
+  readonly attachments: Attachment[];
 
   /**
    * Ссылка

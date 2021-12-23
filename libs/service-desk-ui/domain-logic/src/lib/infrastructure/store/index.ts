@@ -10,6 +10,7 @@ import * as fromSearch from './search/search.reducer';
 import * as fromNotification from './notification/notification.reducer';
 import * as fromResponsibleUser from './responsible-user/responsible-user.reducer';
 import * as fromAnswer from './answer/answer.reducer';
+import * as fromAttachment from './attachment/attachment.reducer';
 import * as fromTag from './tag/tag.reducer';
 import * as fromKase from './kase/kase.reducer';
 
@@ -22,6 +23,7 @@ export interface ServiceDeskUiState
     fromTicket.TicketPartialState,
     fromQuestion.QuestionPartialState,
     fromAnswer.AnswerPartialState,
+    fromAttachment.AttachmentPartialState,
     fromNotification.NotificationPartialState,
     fromResponsibleUser.ResponsibleUserPartialState,
     fromTag.TagPartialState,
@@ -38,6 +40,7 @@ export const reducer: ActionReducerMap<ServiceDeskUiState> = {
   [fromTicket.TICKET_FEATURE_KEY]: fromTicket.reducer,
   [fromQuestion.QUESTION_FEATURE_KEY]: fromQuestion.reducer,
   [fromAnswer.ANSWER_FEATURE_KEY]: fromAnswer.reducer,
+  [fromAttachment.ATTACHMENT_FEATURE_KEY]: fromAttachment.reducer,
   [fromNotification.NOTIFICATION_FEATURE_KEY]: fromNotification.reducer,
   [fromResponsibleUser.RESPONSIBLE_USER_FEATURE_KEY]: fromResponsibleUser.reducer,
   [fromTag.TAG_FEATURE_KEY]: fromTag.reducer,
@@ -53,6 +56,7 @@ export const initialState: ServiceDeskUiState = {
   [fromTicket.TICKET_FEATURE_KEY]: fromTicket.initialState,
   [fromQuestion.QUESTION_FEATURE_KEY]: fromQuestion.initialState,
   [fromAnswer.ANSWER_FEATURE_KEY]: fromAnswer.initialState,
+  [fromAttachment.ATTACHMENT_FEATURE_KEY]: fromAttachment.initialState,
   [fromNotification.NOTIFICATION_FEATURE_KEY]: fromNotification.initialState,
   [fromResponsibleUser.RESPONSIBLE_USER_FEATURE_KEY]: fromResponsibleUser.initialState,
   [fromTag.TAG_FEATURE_KEY]: fromTag.initialState,
