@@ -1,7 +1,7 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import { ResponsibleUser } from '../../../entities/model/responsible-user.interface';
+import { ResponsibleUser } from '../../../entities/models/responsible-user.interface';
 import * as ResponsibleUserActions from './responsible-user.actions';
 
 export const RESPONSIBLE_USER_FEATURE_KEY = 'responsibleUser';

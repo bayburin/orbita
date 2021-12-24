@@ -1,5 +1,5 @@
 import { QuestionOverviewVM } from './../../entities/view-models/question-overview-vm.interface';
-import { User } from './../../entities/model/user.interface';
+import { User } from '../../entities/models/user.interface';
 
 /**
  * Определяет, является ли пользователь ответственным за вопрос

@@ -9,7 +9,7 @@ import { UserApi } from '../../api/user/user.api';
 import * as NotificationActions from './notification.actions';
 import * as NotificationFeature from './notification.reducer';
 import * as NotificationSelectors from './notification.selectors';
-import { getLimitTypesValue } from '../../../entities/model/limit-types-value-model.enum';
+import { getLimitTypesValue } from '../../../entities/models/limit-types-value-model.enum';
 
 @Injectable()
 export class NotificationEffects {

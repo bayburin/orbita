@@ -1,4 +1,4 @@
-import { Kase } from './../model/kase.interface';
+import { Kase } from '../models/kase.interface';
 import { Filter } from '../filter.interface';
 
 /**

@@ -1,7 +1,7 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import { Answer } from '../../../entities/model/answer.interface';
+import { Answer } from '../../../entities/models/answer.interface';
 import * as AnswerActions from './answer.actions';
 
 export const ANSWER_FEATURE_KEY = 'answer';

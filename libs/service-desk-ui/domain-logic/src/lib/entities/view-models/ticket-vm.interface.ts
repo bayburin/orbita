@@ -1,6 +1,6 @@
-import { Hideable } from '../model/hideable.interface';
-import { ResponsibleUser } from '../model/responsible-user.interface';
-import { TicketStates, TicketTypes } from '../model/ticket.interface';
+import { Hideable } from '../models/hideable.interface';
+import { ResponsibleUser } from '../models/responsible-user.interface';
+import { TicketStates, TicketTypes } from '../models/ticket.interface';
 
 /**
  * Представление тикета

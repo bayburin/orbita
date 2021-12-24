@@ -2,8 +2,8 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as NotificationActions from './notification.actions';
-import { Notification, TmpNotification } from '../../../entities/model/notification.interface';
-import { LimitTypes } from './../../../entities/model/notification.interface';
+import { Notification, TmpNotification } from '../../../entities/models/notification.interface';
+import { LimitTypes } from '../../../entities/models/notification.interface';
 
 export const NOTIFICATION_FEATURE_KEY = 'notification';
 

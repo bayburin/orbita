@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as UserRecommendationActions from './user-recommendation.actions';
-import { UserRecommendation } from '../../../entities/model/user-recommendation.interface';
+import { UserRecommendation } from '../../../entities/models/user-recommendation.interface';
 
 export const USER_RECOMMENDATION_FEATURE_KEY = 'userRecommendation';
 

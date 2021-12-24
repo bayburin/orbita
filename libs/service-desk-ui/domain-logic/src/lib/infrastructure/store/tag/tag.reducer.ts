@@ -1,7 +1,7 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import { Tag } from './../../../entities/model/tag.interface';
+import { Tag } from '../../../entities/models/tag.interface';
 import * as TagActions from './tag.actions';
 
 export const TAG_FEATURE_KEY = 'tag';

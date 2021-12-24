@@ -1,9 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Category } from './../../../entities/model/category.interface';
-import { ResponsibleUser } from '../../../entities/model/responsible-user.interface';
-import { Question } from './../../../entities/model/question.interface';
-import { Service } from './../../../entities/model/service.interface';
+import { Category } from '../../../entities/models/category.interface';
+import { ResponsibleUser } from '../../../entities/models/responsible-user.interface';
+import { Question } from '../../../entities/models/question.interface';
+import { Service } from '../../../entities/models/service.interface';
 
 export const search = createAction('[Search/API] Search', props<{ term: string }>());
 

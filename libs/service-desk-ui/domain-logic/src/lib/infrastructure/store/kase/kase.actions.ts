@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 
 import { Filter } from '../../../entities/filter.interface';
-import { Kase } from './../../../entities/model/kase.interface';
+import { Kase } from '../../../entities/models/kase.interface';
 
 export const init = createAction('[Kase] Init');
 

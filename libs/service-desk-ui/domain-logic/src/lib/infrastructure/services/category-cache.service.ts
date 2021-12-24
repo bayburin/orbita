@@ -1,6 +1,6 @@
 import { schema, normalize, denormalize } from 'normalizr';
 
-import { Category } from './../../entities/model/category.interface';
+import { Category } from '../../entities/models/category.interface';
 import { CategoryVM } from './../../entities/view-models/category-vm.interface';
 import { NormalizedCategories, NormalizedCategoriesEntities } from './../../entities/normalized-data.interface';
 

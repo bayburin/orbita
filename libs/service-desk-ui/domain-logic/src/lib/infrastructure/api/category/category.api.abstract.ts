@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Category } from '../../../entities/model/category.interface';
+import { Category } from '../../../entities/models/category.interface';
 
 export abstract class CategoryApiAbstract {
   /**

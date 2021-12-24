@@ -4,8 +4,8 @@ import { getSelectors, RouterReducerState } from '@ngrx/router-store';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 import { BreadcrumbRoute, BreadcrumbValueTypes } from './../../../entities/breadcrumb-route.interface';
-import { Service } from './../../../entities/model/service.interface';
-import { Category } from './../../../entities/model/category.interface';
+import { Service } from '../../../entities/models/service.interface';
+import { Category } from '../../../entities/models/category.interface';
 import * as CategorySelectors from '../category/category.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 

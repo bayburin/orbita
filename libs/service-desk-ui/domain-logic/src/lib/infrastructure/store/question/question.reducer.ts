@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as QuestionActions from './question.actions';
-import { Question } from '../../../entities/model/question.interface';
+import { Question } from '../../../entities/models/question.interface';
 
 export const QUESTION_FEATURE_KEY = 'question';
 

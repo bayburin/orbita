@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { Attachment } from '../../entities/model/attachment.interface';
+import { Attachment } from '../../entities/models/attachment.interface';
 
 export abstract class AttachmentFacadeAbstract {
   /**

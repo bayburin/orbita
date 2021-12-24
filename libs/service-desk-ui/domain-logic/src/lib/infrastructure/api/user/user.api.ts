@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { SERVICE_DESK_UI_ENV_TOKEN, ServiceDeskUiEnvironment } from '@orbita/shared/environment';
 
-import { Notification } from '../../../entities/model/notification.interface';
+import { Notification } from '../../../entities/models/notification.interface';
 import { UserApiAbstract } from './user.api.abstract';
 
 /**

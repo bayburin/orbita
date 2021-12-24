@@ -1,4 +1,4 @@
-import { LimitTypes } from './../model/notification.interface';
+import { LimitTypes } from '../models/notification.interface';
 
 export interface LimitTypesVM {
   /**

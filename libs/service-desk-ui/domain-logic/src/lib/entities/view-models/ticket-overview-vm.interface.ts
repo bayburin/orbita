@@ -1,8 +1,8 @@
-import { Service } from './../model/service.interface';
-import { ResponsibleUser } from '../model/responsible-user.interface';
-import { TicketStates, TicketTypes } from '../model/ticket.interface';
+import { Service } from '../models/service.interface';
+import { ResponsibleUser } from '../models/responsible-user.interface';
+import { TicketStates, TicketTypes } from '../models/ticket.interface';
 import { TicketOverviewServiceVM } from './ticket-overview-service-vm.interface';
-import { Hideable } from '../model/hideable.interface';
+import { Hideable } from '../models/hideable.interface';
 
 /**
  * Полное представление тикета

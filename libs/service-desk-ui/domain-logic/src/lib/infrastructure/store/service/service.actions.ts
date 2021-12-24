@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 
-import { Service } from '../../../entities/model/service.interface';
+import { Service } from '../../../entities/models/service.interface';
 
 export const setEntities = createAction('[Service] Set Entities', props<{ entities: Dictionary<Service> }>());
 

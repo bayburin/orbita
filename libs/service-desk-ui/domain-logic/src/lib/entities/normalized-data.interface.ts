@@ -1,10 +1,10 @@
 import { Dictionary } from '@ngrx/entity';
-import { Category } from './model/category.interface';
-import { Service } from './model/service.interface';
-import { Question } from './model/question.interface';
-import { ResponsibleUser } from './model/responsible-user.interface';
-import { Answer } from './model/answer.interface';
-import { Attachment } from './model/attachment.interface';
+import { Category } from './models/category.interface';
+import { Service } from './models/service.interface';
+import { Question } from './models/question.interface';
+import { ResponsibleUser } from './models/responsible-user.interface';
+import { Answer } from './models/answer.interface';
+import { Attachment } from './models/attachment.interface';
 
 /**
  * Нормализованные данные категории

@@ -1,4 +1,4 @@
-import { User } from './../../entities/model/user.interface';
+import { User } from '../../entities/models/user.interface';
 
 /**
  * Определяет, имеется ли у пользователя указанная роль (или одна из ролей)

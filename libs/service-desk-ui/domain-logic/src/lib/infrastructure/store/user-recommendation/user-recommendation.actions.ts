@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { UserRecommendation } from '../../../entities/model/user-recommendation.interface';
+import { UserRecommendation } from '../../../entities/models/user-recommendation.interface';
 
 export const setAll = createAction('[UserRecommendation] Set All', props<{ recommendations: UserRecommendation[] }>());
 

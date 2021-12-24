@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 
 import { NOTIFICATION_FEATURE_KEY, State, notificationAdapter, NotificationPartialState } from './notification.reducer';
 import { getServiceDeskUiState } from './../index';
-import { getLimitTypesValue } from '../../../entities/model/limit-types-value-model.enum';
+import { getLimitTypesValue } from '../../../entities/models/limit-types-value-model.enum';
 
 export const getNotificationState = createSelector(
   getServiceDeskUiState,

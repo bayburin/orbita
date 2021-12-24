@@ -1,4 +1,4 @@
-import { Notification, TmpNotification } from './../../entities/model/notification.interface';
+import { Notification, TmpNotification } from '../../entities/models/notification.interface';
 
 /**
  * Фабрика по созданию сообщений

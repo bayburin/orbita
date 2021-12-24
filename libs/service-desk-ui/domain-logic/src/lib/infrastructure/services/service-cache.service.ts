@@ -1,7 +1,7 @@
 import { schema, normalize, denormalize } from 'normalizr';
 
 import { ServiceVM } from './../../entities/view-models/service-vm.interface';
-import { Service } from './../../entities/model/service.interface';
+import { Service } from '../../entities/models/service.interface';
 import { NormalizedServices, NormalizedServicesEntities } from './../../entities/normalized-data.interface';
 
 export const responsibleUserSchema = new schema.Entity('responsible_users');

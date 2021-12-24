@@ -1,6 +1,6 @@
 import { QuestionVM } from './question-vm.interface';
-import { ResponsibleUser } from '../model/responsible-user.interface';
-import { Hideable } from '../model/hideable.interface';
+import { ResponsibleUser } from '../models/responsible-user.interface';
+import { Hideable } from '../models/hideable.interface';
 
 /**
  * Представление услуги

@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { SearchResultTypes } from './../../entities/model/search-result.types';
+import { SearchResultTypes } from '../../entities/models/search-result.types';
 
 export abstract class SearchFacadeAbstract {
   /**

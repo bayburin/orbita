@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-import { Notification, TmpNotification } from '../../../entities/model/notification.interface';
+import { Notification, TmpNotification } from '../../../entities/models/notification.interface';
 
 export const loadAll = createAction('[Notification/API] Load All');
 

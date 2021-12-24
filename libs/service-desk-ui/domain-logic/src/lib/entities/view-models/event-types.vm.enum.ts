@@ -1,4 +1,4 @@
-import { EventTypes } from './../model/notification.interface';
+import { EventTypes } from '../models/notification.interface';
 
 export interface EventTypesVM {
   /**

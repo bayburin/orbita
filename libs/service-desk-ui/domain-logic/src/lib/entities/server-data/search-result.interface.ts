@@ -1,6 +1,6 @@
-import { Question } from './../model/question.interface';
-import { Service } from './../model/service.interface';
-import { Category } from './../model/category.interface';
+import { Question } from '../models/question.interface';
+import { Service } from '../models/service.interface';
+import { Category } from '../models/category.interface';
 
 /**
  * Результаты поиска

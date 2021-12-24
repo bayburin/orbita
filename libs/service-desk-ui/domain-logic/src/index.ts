@@ -4,16 +4,16 @@ export * from './lib/entities/policies.interface';
 export * from './lib/entities/filter.interface';
 export * from './lib/entities/breadcrumb-route.interface';
 
-export * from './lib/entities/model/user-recommendation.interface';
-export * from './lib/entities/model/category.interface';
-export * from './lib/entities/model/service.interface';
-export * from './lib/entities/model/question.interface';
-export * from './lib/entities/model/search-result.types';
-export * from './lib/entities/model/user.interface';
-export * from './lib/entities/model/notification.interface';
-export * from './lib/entities/model/hideable.interface';
-export * from './lib/entities/model/kase.interface';
-export * from './lib/entities/model/attachment.interface';
+export * from './lib/entities/models/user-recommendation.interface';
+export * from './lib/entities/models/category.interface';
+export * from './lib/entities/models/service.interface';
+export * from './lib/entities/models/question.interface';
+export * from './lib/entities/models/search-result.types';
+export * from './lib/entities/models/user.interface';
+export * from './lib/entities/models/notification.interface';
+export * from './lib/entities/models/hideable.interface';
+export * from './lib/entities/models/kase.interface';
+export * from './lib/entities/models/attachment.interface';
 
 export * from './lib/entities/view-models/category-vm.interface';
 export * from './lib/entities/view-models/service-vm.interface';

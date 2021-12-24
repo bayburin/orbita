@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as AttachmentActions from './attachment.actions';
-import { Attachment } from '../../../entities/model/attachment.interface';
+import { Attachment } from '../../../entities/models/attachment.interface';
 
 export const ATTACHMENT_FEATURE_KEY = 'attachment';
 

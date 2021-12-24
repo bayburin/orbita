@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthHelper } from '@iss/ng-auth-center';
 
-import { User } from '../../../entities/model/user.interface';
+import { User } from '../../../entities/models/user.interface';
 import {
   QuestionPermission,
   ServicePermission,

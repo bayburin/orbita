@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as CategoryActions from './category.actions';
-import { Category } from '../../../entities/model/category.interface';
+import { Category } from '../../../entities/models/category.interface';
 
 export const CATEGORY_FEATURE_KEY = 'category';
 

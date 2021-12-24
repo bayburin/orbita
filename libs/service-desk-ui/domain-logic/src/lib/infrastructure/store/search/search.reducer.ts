@@ -1,10 +1,10 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import { Category } from './../../../entities/model/category.interface';
-import { Service } from './../../../entities/model/service.interface';
-import { Question } from './../../../entities/model/question.interface';
-import { ResponsibleUser } from '../../../entities/model/responsible-user.interface';
+import { Category } from '../../../entities/models/category.interface';
+import { Service } from '../../../entities/models/service.interface';
+import { Question } from '../../../entities/models/question.interface';
+import { ResponsibleUser } from '../../../entities/models/responsible-user.interface';
 import * as SearchActions from './search.actions';
 
 export const SEARCH_FEATURE_KEY = 'search';

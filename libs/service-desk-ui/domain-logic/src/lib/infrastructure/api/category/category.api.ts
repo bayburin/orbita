@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { SERVICE_DESK_UI_ENV_TOKEN, ServiceDeskUiEnvironment } from '@orbita/shared/environment';
 
 import { CategoryApiAbstract } from './category.api.abstract';
-import { Category } from '../../../entities/model/category.interface';
+import { Category } from '../../../entities/models/category.interface';
 
 /**
  * Содержит API категорий

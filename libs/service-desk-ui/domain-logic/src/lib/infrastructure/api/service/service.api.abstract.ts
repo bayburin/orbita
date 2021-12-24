@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Service } from '../../../entities/model/service.interface';
+import { Service } from '../../../entities/models/service.interface';
 
 export abstract class ServiceApiAbstract {
   /**

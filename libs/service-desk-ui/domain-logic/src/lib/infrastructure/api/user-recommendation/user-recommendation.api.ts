@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { SERVICE_DESK_UI_ENV_TOKEN, ServiceDeskUiEnvironment } from '@orbita/shared/environment';
 
 import { UserRecommendationApiAbstract } from './user-recommendation.api.abstract';
-import { UserRecommendation } from '../../../entities/model/user-recommendation.interface';
+import { UserRecommendation } from '../../../entities/models/user-recommendation.interface';
 
 /**
  * Содержит API категорий

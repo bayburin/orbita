@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import * as AttachmentFeature from '../../infrastructure/store/attachment/attachment.reducer';
 import * as AttachmentActions from '../../infrastructure/store/attachment/attachment.actions';
 import * as AttachmentSelectors from '../../infrastructure/store/attachment/attachment.selectors';
-import { Attachment } from '../../entities/model/attachment.interface';
+import { Attachment } from '../../entities/models/attachment.interface';
 import { AttachmentFacadeAbstract } from './attachment.facade.abstract';
 
 /**

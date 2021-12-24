@@ -1,7 +1,7 @@
 import { Observable, Subscription } from 'rxjs';
 
-import { LimitTypes } from './../../entities/model/notification.interface';
-import { Notification, TmpNotification } from '../../entities/model/notification.interface';
+import { LimitTypes } from '../../entities/models/notification.interface';
+import { Notification, TmpNotification } from '../../entities/models/notification.interface';
 
 export abstract class NotificationFacadeAbstract {
   /**

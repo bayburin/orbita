@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Filter } from '../../entities/filter.interface';
 
-import { Kase } from './../../entities/model/kase.interface';
+import { Kase } from '../../entities/models/kase.interface';
 
 export abstract class KaseFacadeAbstract {
   /**

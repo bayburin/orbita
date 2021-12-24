@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 import { KaseQueryResult } from './../../../entities/server-data/kase-query-result.interface';
 import { KaseFilter } from '../../../entities/view-models/kase-filters.interface';
-import { KaseForm } from './../../../entities/model/kase-form.interface';
+import { KaseForm } from '../../../entities/models/kase-form.interface';
 
 export abstract class KaseApiAbstract {
   /**

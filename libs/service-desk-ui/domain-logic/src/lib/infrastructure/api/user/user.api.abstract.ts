@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Notification } from '../../../entities/model/notification.interface';
+import { Notification } from '../../../entities/models/notification.interface';
 
 export abstract class UserApiAbstract {
   /**

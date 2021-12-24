@@ -1,4 +1,4 @@
-import { ResponsibleUser } from '../model/responsible-user.interface';
+import { ResponsibleUser } from '../models/responsible-user.interface';
 
 /**
  * Представление услуги

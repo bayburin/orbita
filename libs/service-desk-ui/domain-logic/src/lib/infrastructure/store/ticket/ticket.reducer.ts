@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as TicketActions from './ticket.actions';
-import { Ticket } from '../../../entities/model/ticket.interface';
+import { Ticket } from '../../../entities/models/ticket.interface';
 
 export const TICKET_FEATURE_KEY = 'ticket';
 

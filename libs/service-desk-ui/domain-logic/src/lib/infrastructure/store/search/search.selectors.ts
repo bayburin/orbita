@@ -10,7 +10,7 @@ import {
   searchQuestionAdapter,
   searchResponsibleUserAdapter,
 } from './search.reducer';
-import { SearchResultTypes } from './../../../entities/model/search-result.types';
+import { SearchResultTypes } from '../../../entities/models/search-result.types';
 import { QuestionCacheService } from '../../services/question-cache.service';
 import { ServiceCacheService } from '../../services/service-cache.service';
 

@@ -1,7 +1,7 @@
 import { schema, normalize, denormalize } from 'normalizr';
 
 import { NormalizedQuestions, NormalizedQuestionsEntities } from './../../entities/normalized-data.interface';
-import { Question } from './../../entities/model/question.interface';
+import { Question } from '../../entities/models/question.interface';
 import { QuestionOverviewVM } from '../../entities/view-models/question-overview-vm.interface';
 
 export const responsibleUserSchema = new schema.Entity('responsible_users');

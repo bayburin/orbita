@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 
-import { Category } from '../../../entities/model/category.interface';
+import { Category } from '../../../entities/models/category.interface';
 
 export const setAll = createAction('[Category] Set All', props<{ categories: Category[] }>());
 

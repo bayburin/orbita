@@ -2,7 +2,7 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as KaseActions from './kase.actions';
-import { Kase } from './../../../entities/model/kase.interface';
+import { Kase } from '../../../entities/models/kase.interface';
 import { Filter } from '../../../entities/filter.interface';
 
 export const KASE_FEATURE_KEY = 'kase';

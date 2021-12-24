@@ -1,5 +1,5 @@
-import { Attachment } from '../model/attachment.interface';
-import { Hideable } from '../model/hideable.interface';
+import { Attachment } from '../models/attachment.interface';
+import { Hideable } from '../models/hideable.interface';
 
 /**
  * Представление вопроса

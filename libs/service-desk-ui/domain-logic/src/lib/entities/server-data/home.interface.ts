@@ -1,6 +1,6 @@
-import { Category } from '../model/category.interface';
-import { UserRecommendation } from '../model/user-recommendation.interface';
-import { Service } from '../model/service.interface';
+import { Category } from '../models/category.interface';
+import { UserRecommendation } from '../models/user-recommendation.interface';
+import { Service } from '../models/service.interface';
 
 /**
  * Данные для домашней директории
