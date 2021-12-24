@@ -17,5 +17,6 @@ const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
   declarations: [KaseListingComponent],
+  exports: [KaseListingComponent],
 })
 export class ServiceDeskUiFeatureKaseListingModule {}
