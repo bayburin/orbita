@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
-import { ServiceVM, CategoryVM } from '@orbita/service-desk-ui/domain-logic';
+import { ServiceVM } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'lib-service-list',
@@ -10,9 +10,9 @@ import { ServiceVM, CategoryVM } from '@orbita/service-desk-ui/domain-logic';
 })
 export class ServiceListComponent {
   /**
-   * Категория, содержащая список услуг
+   * Список услуг
    */
-  @Input() category: CategoryVM;
+  @Input() services: ServiceVM[];
   /**
    * Стили, которые необходимо применить к списку
    */
