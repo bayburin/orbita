@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
+import { Component, ElementRef, ViewChild, HostListener, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'lib-markdown-help',

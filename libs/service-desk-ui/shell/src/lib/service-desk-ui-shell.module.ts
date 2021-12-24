@@ -69,6 +69,17 @@ const routes: Routes = [
         ],
       },
       {
+        path: 'search',
+        data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Поиск' } },
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('@orbita/service-desk-ui/feature-search').then((m) => m.ServiceDeskUiFeatureSearchModule),
+          },
+        ],
+      },
+      {
         path: 'markdown-help',
         loadChildren: () =>
           import('@orbita/service-desk-ui/feature-markdown-help').then((m) => m.ServiceDeskUiFeatureMarkdownHelpModule),
