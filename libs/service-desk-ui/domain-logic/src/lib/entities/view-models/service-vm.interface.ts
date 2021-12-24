@@ -1,4 +1,3 @@
-import { Question } from './../model/question.interface';
 import { QuestionVM } from './question-vm.interface';
 import { ResponsibleUser } from '../model/responsible-user.interface';
 import { Hideable } from '../model/hideable.interface';

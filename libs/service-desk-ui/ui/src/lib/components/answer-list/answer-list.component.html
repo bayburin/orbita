@@ -1,0 +1,27 @@
+<div *ngFor="let answer of question.answers; trackBy: trackByAnswer" class="answer-block">
+  <div class="row align-items-center">
+    <div class="col-sm-9 col-md-10">
+      <div class="row-flex-content">
+        <lib-visible-icon
+          [hideable]="answer"
+          *libQuestionCheckAccess="permission.VIEW_MANAGE_INFO; object: question"
+        ></lib-visible-icon>
+        <span class="answer-content">
+          <markdown [data]="answer.answer" ngPreserveWhitespaces></markdown>
+        </span>
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-2">
+      <div class="justify-content-center flex-row flex-wrap row-flex-content">
+        <lib-attachment-list
+          [attachments]="answer.attachments"
+          [attachmentLoadingIds]="attachmentLoadingIds"
+          (download)="downloadAttachment.emit($event)"
+        ></lib-attachment-list>
+        <div *ngIf="answer.link" ngbTooltip="Перейти по ссылке" container="body">
+          <a [href]="answer.link" target="_blank"><i class="mdi mdi-open-in-new mdi-24px"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

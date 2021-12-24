@@ -57,7 +57,7 @@ import { StreamService } from './shared/services/stream/stream.service';
     { provide: APP_CONFIG, useValue: AppConfig },
     ActionCableService,
     StreamService,
-    // { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true }
+    // { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
     // AppLoadService
     // { provide: APP_INITIALIZER, useFactory: loadDataFactory, deps: [AppLoadService], multi: true }
   ],

@@ -6,9 +6,11 @@ import { NormalizedCategories, NormalizedCategoriesEntities } from './../../enti
 
 export const responsibleUserSchema = new schema.Entity('responsible_users');
 
-export const answerAttachmentSchema = new schema.Entity('answer_attachments');
+export const attachmentSchema = new schema.Entity('attachments');
 
-export const answerSchema = new schema.Entity('answers');
+export const answerSchema = new schema.Entity('answers', {
+  attachments: [attachmentSchema],
+});
 
 export const serviceSchema = new schema.Entity('services');
 

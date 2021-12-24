@@ -8,8 +8,8 @@ import {
   EventEmitter,
 } from '@angular/core';
 
-import { QuestionComponent } from '@orbita/service-desk-ui/ui';
-import { QuestionVM } from '@orbita/service-desk-ui/domain-logic';
+import { Attachment, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
+import { QuestionComponent } from '../question/question.component';
 
 @Component({
   selector: 'lib-question-list',
@@ -22,6 +22,14 @@ export class QuestionListComponent {
    * Список вопросов
    */
   @Input() questions: QuestionVM[];
+  /**
+   * Список id файлов, которые загружаются в данный момент
+   */
+  @Input() attachmentLoadingIds: number[];
+  /**
+   * Событие загрузки файла
+   */
+  @Output() downloadAttachment = new EventEmitter<Attachment>();
   /**
    * Событие обновления рейтинга
    */

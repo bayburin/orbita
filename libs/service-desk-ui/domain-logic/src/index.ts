@@ -13,6 +13,7 @@ export * from './lib/entities/model/user.interface';
 export * from './lib/entities/model/notification.interface';
 export * from './lib/entities/model/hideable.interface';
 export * from './lib/entities/model/kase.interface';
+export * from './lib/entities/model/attachment.interface';
 
 export * from './lib/entities/view-models/category-vm.interface';
 export * from './lib/entities/view-models/service-vm.interface';
@@ -20,6 +21,7 @@ export * from './lib/entities/view-models/question-vm.interface';
 export * from './lib/entities/view-models/question-overview-vm.interface';
 export * from './lib/entities/view-models/event-types.vm.enum';
 export * from './lib/entities/view-models/limit-types-vm.enum';
+export * from './lib/entities/view-models/answer-vm.interface';
 
 export * from './lib/application/home/home.facade';
 export * from './lib/application/home/home.facade.stub';
@@ -39,6 +41,8 @@ export * from './lib/application/router/router.facade';
 export * from './lib/application/router/router.facade.stub';
 export * from './lib/application/question/question.facade';
 export * from './lib/application/question/question.facade.stub';
+export * from './lib/application/attachment/attachment.facade';
+export * from './lib/application/attachment/attachment.facade.stub';
 
 export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';

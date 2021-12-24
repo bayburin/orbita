@@ -3,13 +3,14 @@ import { createSelector } from '@ngrx/store';
 import { CategoryCacheService } from './../../services/category-cache.service';
 import { ServiceVM } from './../../../entities/view-models/service-vm.interface';
 import { CategoryVM } from '../../../entities/view-models/category-vm.interface';
+import { ServiceCacheService } from '../../services/service-cache.service';
 import * as AnswerSelectors from '../answer/answer.selectors';
 import * as QuestionSelectors from '../question/question.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 import * as CategorySelectors from '../category/category.selectors';
 import * as HomeSelectors from '../home/home.selectors';
 import * as ResponsibleUserSelectors from '../responsible-user/responsible-user.selectors';
-import { ServiceCacheService } from '../../services/service-cache.service';
+import * as AttachmentSelectors from '../attachment/attachment.selectors';
 
 // ========== Services ==========
 
@@ -18,8 +19,9 @@ export const getSelectedServiceVM = createSelector(
   QuestionSelectors.getEntities,
   AnswerSelectors.getEntities,
   ResponsibleUserSelectors.getEntities,
-  (service, questions, answers, responsible_users): ServiceVM =>
-    ServiceCacheService.denormalizeService(service, { questions, answers, responsible_users })
+  AttachmentSelectors.getEntities,
+  (service, questions, answers, responsible_users, attachments): ServiceVM =>
+    ServiceCacheService.denormalizeService(service, { questions, answers, responsible_users, attachments })
 );
 
 // ========== Categories ==========
@@ -36,8 +38,9 @@ export const getSelectedCategoryVM = createSelector(
   ServiceSelectors.getEntities,
   QuestionSelectors.getEntities,
   AnswerSelectors.getEntities,
-  (category, services, questions, answers): CategoryVM =>
-    CategoryCacheService.denormalizeCategory(category, { services, questions, answers })
+  AttachmentSelectors.getEntities,
+  (category, services, questions, answers, attachments): CategoryVM =>
+    CategoryCacheService.denormalizeCategory(category, { services, questions, answers, attachments })
 );
 
 // ========== Home ==========

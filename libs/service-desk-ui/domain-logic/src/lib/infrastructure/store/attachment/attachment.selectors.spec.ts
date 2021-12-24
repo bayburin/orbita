@@ -3,7 +3,6 @@ import { attachmentAdapter, initialState } from './attachment.reducer';
 import * as AttachmentSelectors from './attachment.selectors';
 
 describe('AttachmentSelectors', () => {
-  const error = { message: 'error message' };
   const createAttachmentEntity = (id: number, filename = ''): Attachment =>
     ({
       id,
@@ -15,29 +14,19 @@ describe('AttachmentSelectors', () => {
     2: arrEntities[1],
     3: arrEntities[2],
   };
-  const selectedId = 2;
   let state: any;
 
   beforeEach(() => {
     state = attachmentAdapter.setAll(arrEntities, {
       ...initialState,
       loaded: true,
-      loading: true,
-      selectedId,
-      error,
+      loadingIds: [1, 2, 3],
+      errorIds: [4, 5],
     });
   });
 
   it('getLoaded() should return "loaded" attribute', () => {
     expect(AttachmentSelectors.getLoaded.projector(state)).toEqual(true);
-  });
-
-  it('getLoading() should return "loading" attribute', () => {
-    expect(AttachmentSelectors.getLoading.projector(state)).toEqual(true);
-  });
-
-  it('getError() should return "error" attribute', () => {
-    expect(AttachmentSelectors.getError.projector(state)).toEqual(error);
   });
 
   it('getAll() should return array of entities', () => {
@@ -46,5 +35,13 @@ describe('AttachmentSelectors', () => {
 
   it('getEntities() should return entities', () => {
     expect(AttachmentSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+
+  it('getLoadingIds() should return entities', () => {
+    expect(AttachmentSelectors.getLoadingIds.projector(state)).toEqual([1, 2, 3]);
+  });
+
+  it('getErrorIds() should return entities', () => {
+    expect(AttachmentSelectors.getErrorIds.projector(state)).toEqual([4, 5]);
   });
 });

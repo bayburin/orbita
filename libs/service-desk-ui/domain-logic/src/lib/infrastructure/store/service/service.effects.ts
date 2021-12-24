@@ -5,6 +5,7 @@ import { of } from 'rxjs';
 import { switchMap, withLatestFrom, catchError } from 'rxjs/operators';
 
 import { ServiceApi } from '../../api/service/service.api';
+import { ServiceCacheService } from '../../services/service-cache.service';
 import * as ServiceActions from './service.actions';
 import * as ServiceFeature from './service.reducer';
 import * as RouterSelectors from '../selectors/router.selectors';
@@ -12,7 +13,7 @@ import * as CategoryActions from '../category/category.actions';
 import * as QuestionActions from '../question/question.actions';
 import * as AnswerActions from '../answer/answer.actions';
 import * as ResponsibleUserActions from '../responsible-user/responsible-user.actions';
-import { ServiceCacheService } from '../../services/service-cache.service';
+import * as AttachmentActions from '../attachment/attachment.actions';
 
 @Injectable()
 export class ServiceEffects {
@@ -32,10 +33,11 @@ export class ServiceEffects {
             const data = ServiceCacheService.normalizeServices(service).entities;
 
             return [
-              AnswerActions.setEntities({ entities: data.answers }),
-              QuestionActions.setEntities({ entities: data.questions }),
-              ResponsibleUserActions.setEntities({ entities: data.responsible_users }),
-              CategoryActions.setEntities({ entities: data.categories }),
+              AttachmentActions.setEntities({ entities: data.attachments || {} }),
+              AnswerActions.setEntities({ entities: data.answers || {} }),
+              QuestionActions.setEntities({ entities: data.questions || {} }),
+              ResponsibleUserActions.setEntities({ entities: data.responsible_users || {} }),
+              CategoryActions.setEntities({ entities: data.categories || {} }),
               CategoryActions.setSelectedId({ selectedId: service.category_id }),
               ServiceActions.loadSelectedSuccess({ service: data.services[params.id] }),
             ];

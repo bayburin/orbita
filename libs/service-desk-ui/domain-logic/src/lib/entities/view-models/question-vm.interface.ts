@@ -1,4 +1,3 @@
-import { Answer } from '../model/answer.interface';
 import { AnswerVM } from './answer-vm.interface';
 import { TicketVM } from './ticket-vm.interface';
 
@@ -29,5 +28,5 @@ export interface QuestionVM {
   /**
    * Список ответов
    */
-  readonly answers?: Answer[];
+  readonly answers?: AnswerVM[];
 }

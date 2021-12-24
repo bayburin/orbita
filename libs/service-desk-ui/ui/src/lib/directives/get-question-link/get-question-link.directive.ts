@@ -11,13 +11,14 @@ export class GetQuestionLinkDirective {
   @HostListener('click', ['$event']) onClick(event: Event) {
     event.stopPropagation();
     const selBox = document.createElement('textarea');
-    const question = this.component.questionOverview;
+    const question = this.component.data;
 
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
     selBox.style.top = '0';
     selBox.style.opacity = '0';
-    selBox.value = `${location.origin}/categories/${question.ticket.service.category_id}/services/${question.ticket.service_id}?identity=${question.ticket.identity}`;
+    // TODO: Установить value
+    // selBox.value = `${location.origin}/categories/${question.ticket.service.category_id}/services/${question.ticket.service_id}?identity=${question.ticket.identity}`;
     document.body.appendChild(selBox);
     selBox.focus();
     selBox.select();

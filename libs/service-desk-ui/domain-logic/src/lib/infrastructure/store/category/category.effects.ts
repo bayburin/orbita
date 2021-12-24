@@ -14,6 +14,7 @@ import * as QuestionActions from '../question/question.actions';
 import * as AnswerActions from '../answer/answer.actions';
 import * as RouterSelectors from '../selectors/router.selectors';
 import * as KaseActions from '../kase/kase.actions';
+import * as AttachmentActions from '../attachment/attachment.actions';
 
 @Injectable()
 export class CategoryEffects {
@@ -57,9 +58,10 @@ export class CategoryEffects {
             const data = CategoryCacheService.normalizeCategories(category).entities;
 
             return [
-              AnswerActions.setEntities({ entities: data.answers }),
-              QuestionActions.setEntities({ entities: data.questions }),
-              ServiceActions.setEntities({ entities: data.services }),
+              AttachmentActions.setEntities({ entities: data.attachments || {} }),
+              AnswerActions.setEntities({ entities: data.answers || {} }),
+              QuestionActions.setEntities({ entities: data.questions || {} }),
+              ServiceActions.setEntities({ entities: data.services || {} }),
               KaseActions.setServiceIds({ serviceIds: Object.keys(data.services || []).map(Number) }),
               CategoryActions.loadSelectedSuccess({ category: data.categories[params.id] }),
             ];

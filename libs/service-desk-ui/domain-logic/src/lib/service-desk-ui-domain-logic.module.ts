@@ -12,6 +12,7 @@ import { SearchEffects } from './infrastructure/store/search/search.effects';
 import { NotificationEffects } from './infrastructure/store/notification/notification.effects';
 import { KaseEffects } from './infrastructure/store/kase/kase.effects';
 import { QuestionEffects } from './infrastructure/store/question/question.effects';
+import { AttachmentEffects } from './infrastructure/store/attachment/attachment.effects';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { QuestionEffects } from './infrastructure/store/question/question.effect
       NotificationEffects,
       KaseEffects,
       QuestionEffects,
+      AttachmentEffects,
     ]),
   ],
 })

@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output, ChangeDetectorRef, Input } from '@angular/core';
 
-import { QuestionOverviewVM, QuestionPermission, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
+import { Attachment, QuestionPermission, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
 import { AbstractSearchResultComponent } from './../abstract-search-result/abstract-search-result.component';
 import { toggleAnswer } from './../../animations/toggle-answer.animation';
 import { showFlagRight } from './../../animations/show-flag-right.animation';
@@ -12,27 +12,24 @@ import { showFlagRight } from './../../animations/show-flag-right.animation';
   animations: [toggleAnswer, showFlagRight],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class QuestionComponent extends AbstractSearchResultComponent<QuestionOverviewVM | QuestionVM> {
+export class QuestionComponent extends AbstractSearchResultComponent<QuestionVM> {
   permission = QuestionPermission;
   linkAnimation = 'hide';
   open = false;
   private wasOpened = false;
+
   /**
-   * Вопрос с типом QuestionOverviewVM
+   * Список id файлов, которые загружаются в данный момент
    */
-  get questionOverview(): QuestionOverviewVM {
-    return this.data as QuestionOverviewVM;
-  }
-  /**
-   * Вопрос с типом OverviewVM
-   */
-  get question(): QuestionVM {
-    return this.data as QuestionVM;
-  }
+  @Input() attachmentLoadingIds: number[];
   /**
    * Событие обновления рейтинга
    */
   @Output() upRating = new EventEmitter<void>();
+  /**
+   * Событие загрузки файла
+   */
+  @Output() downloadAttachment = new EventEmitter<Attachment>();
 
   constructor(private cdr: ChangeDetectorRef) {
     super();

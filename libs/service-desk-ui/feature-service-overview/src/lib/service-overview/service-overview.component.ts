@@ -2,7 +2,14 @@ import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { contentBlockAnimation, QuestionComponent, QuestionListComponent } from '@orbita/service-desk-ui/ui';
-import { QuestionVM, ServiceFacade, ServicePermission, QuestionFacade } from '@orbita/service-desk-ui/domain-logic';
+import {
+  QuestionVM,
+  ServiceFacade,
+  ServicePermission,
+  QuestionFacade,
+  Attachment,
+  AttachmentFacade,
+} from '@orbita/service-desk-ui/domain-logic';
 @Component({
   selector: 'lib-service-overview',
   templateUrl: './service-overview.component.html',
@@ -14,6 +21,7 @@ export class ServiceOverviewComponent implements OnInit, AfterViewChecked {
   service$ = this.serviceFacade.selected$;
   loading$ = this.serviceFacade.loading$;
   loaded$ = this.serviceFacade.loaded$;
+  attachmentLoadingIds$ = this.attachmentFacade.loadingIds$;
   identity = this.route.snapshot.queryParams.identity;
   /**
    * Показывает, открыт ли автоматически выбранный вопрос
@@ -25,6 +33,7 @@ export class ServiceOverviewComponent implements OnInit, AfterViewChecked {
   constructor(
     private serviceFacade: ServiceFacade,
     private questionFacade: QuestionFacade,
+    private attachmentFacade: AttachmentFacade,
     private route: ActivatedRoute
   ) {}
 
@@ -49,6 +58,15 @@ export class ServiceOverviewComponent implements OnInit, AfterViewChecked {
    */
   upRating(question: QuestionVM) {
     this.questionFacade.upRating(question);
+  }
+
+  /**
+   * Скачивает файл
+   *
+   * @param attachment - файл
+   */
+  downloadAttachment(attachment: Attachment): void {
+    this.attachmentFacade.download(attachment);
   }
 
   /**

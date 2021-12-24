@@ -12,6 +12,7 @@ import { ServiceCheckAccessDirective } from './directives/service-check-access/s
 import { SearchResultQuestionComponent } from './components/search-result-question/search-result-question.component';
 import { ShowQuestionLinkDirective } from './directives/show-question-link/show-question-link.directive';
 import { GetQuestionLinkDirective } from './directives/get-question-link/get-question-link.directive';
+import { FileIconDirective } from './directives/file-icon/file-icon.directive';
 
 import { UserRecommendationsComponent } from './components/user-recommendations/user-recommendations.component';
 import { LoadingComponent } from './components/loading/loading.component';
@@ -37,6 +38,9 @@ import { KaseListComponent } from './components/kase-list/kase-list.component';
 import { KaseCardComponent } from './components/kase-card/kase-card.component';
 import { FilterTemplateComponent } from './components/filter-template/filter-template.component';
 import { BreadcrumbListComponent } from './components/breadcrumb-list/breadcrumb-list.component';
+import { AnswerListComponent } from './components/answer-list/answer-list.component';
+import { AttachmentListComponent } from './components/attachment-list/attachment-list.component';
+import { LoadingIndicatorDirective } from './directives/loading-indicator/loading-indicator.directive';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBootstrapModule];
 
@@ -45,6 +49,8 @@ const directives: any[] = [
   ServiceCheckAccessDirective,
   ShowQuestionLinkDirective,
   GetQuestionLinkDirective,
+  FileIconDirective,
+  LoadingIndicatorDirective,
 ];
 
 const components: any[] = [
@@ -73,6 +79,8 @@ const components: any[] = [
   KaseCardComponent,
   FilterTemplateComponent,
   BreadcrumbListComponent,
+  AnswerListComponent,
+  AttachmentListComponent,
 ];
 
 @NgModule({

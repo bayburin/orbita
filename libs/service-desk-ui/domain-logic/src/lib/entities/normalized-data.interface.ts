@@ -4,6 +4,7 @@ import { Service } from './model/service.interface';
 import { Question } from './model/question.interface';
 import { ResponsibleUser } from './model/responsible-user.interface';
 import { Answer } from './model/answer.interface';
+import { Attachment } from './model/attachment.interface';
 
 /**
  * Нормализованные данные категории
@@ -13,6 +14,7 @@ export interface NormalizedCategoriesEntities {
   services?: Dictionary<Service>;
   questions?: Dictionary<Question>;
   answers?: Dictionary<Answer>;
+  attachments?: Dictionary<Attachment>;
 }
 
 /**
@@ -32,6 +34,7 @@ export interface NormalizedServicesEntities {
   questions?: Dictionary<Question>;
   answers?: Dictionary<Answer>;
   responsible_users?: Dictionary<ResponsibleUser>;
+  attachments?: Dictionary<Attachment>;
 }
 
 /**
@@ -50,6 +53,7 @@ export interface NormalizedQuestionsEntities {
   questions?: Dictionary<Question>;
   responsible_users?: Dictionary<ResponsibleUser>;
   answers?: Dictionary<Answer>;
+  attachments?: Dictionary<Attachment>;
 }
 
 /**

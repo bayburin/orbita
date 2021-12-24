@@ -1,5 +1,7 @@
 <lib-question
   *ngFor="let question of questions; trackBy: trackByQuestion"
   [data]="question"
+  [attachmentLoadingIds]="attachmentLoadingIds"
   (upRating)="upRating.emit(question)"
+  (downloadAttachment)="downloadAttachment.emit($event)"
 ></lib-question>

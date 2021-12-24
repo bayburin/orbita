@@ -29,5 +29,5 @@ export interface QuestionOverviewVM {
   /**
    * Список ответов
    */
-  readonly answers?: Answer[];
+  readonly answers?: AnswerVM[];
 }

@@ -7,9 +7,9 @@ import { Attachment } from '../../../entities/model/attachment.interface';
 export const ATTACHMENT_FEATURE_KEY = 'attachment';
 
 export interface State extends EntityState<Attachment> {
-  loading: boolean;
   loaded: boolean;
-  error?: string | null;
+  loadingIds: number[];
+  errorIds: number[];
 }
 
 export interface AttachmentPartialState {
@@ -19,8 +19,9 @@ export interface AttachmentPartialState {
 export const attachmentAdapter: EntityAdapter<Attachment> = createEntityAdapter<Attachment>();
 
 export const initialState: State = attachmentAdapter.getInitialState({
-  loading: false,
   loaded: false,
+  loadingIds: [],
+  errorIds: [],
 });
 
 const attachmentReducer = createReducer(
@@ -29,6 +30,20 @@ const attachmentReducer = createReducer(
     ...state,
     entities,
     ids: Object.keys(entities).map(Number),
+  })),
+  on(AttachmentActions.download, (state, { attachment }) => ({
+    ...state,
+    loadingIds: [...state.loadingIds, attachment.id],
+    errorIds: state.errorIds.filter((loadingId) => loadingId !== attachment.id),
+  })),
+  on(AttachmentActions.downloadSuccess, (state, { id }) => ({
+    ...state,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+  })),
+  on(AttachmentActions.downloadFailure, (state, { id }) => ({
+    ...state,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+    errorIds: [...state.errorIds, id],
   }))
 );
 

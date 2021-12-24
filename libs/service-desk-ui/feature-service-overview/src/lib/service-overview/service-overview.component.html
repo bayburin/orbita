@@ -24,7 +24,9 @@
             <lib-question-list
               *ngIf="service.questions.length; else noQuestions"
               [questions]="service.questions"
+              [attachmentLoadingIds]="attachmentLoadingIds$ | async"
               (upRating)="upRating($event)"
+              (downloadAttachment)="downloadAttachment($event)"
             ></lib-question-list>
           </div>
         </section>
