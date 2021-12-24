@@ -9,7 +9,7 @@ import * as QuestionActions from '../../infrastructure/store/question/question.a
 import * as VMSelectors from '../../infrastructure/store/selectors/vm.selectors';
 
 /**
- * Фасад для работы с категориями
+ * Фасад для работы с вопросами
  */
 @Injectable({
   providedIn: 'root',

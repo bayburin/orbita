@@ -12,4 +12,8 @@ export class HomeApiStub implements HomeApiAbstract {
   search() {
     return of(null);
   }
+
+  deepSearch() {
+    return of(null);
+  }
 }

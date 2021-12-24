@@ -5,10 +5,9 @@ import { KaseFacadeAbstract } from './kase.facade.abstract';
 import * as KaseFeature from '../../infrastructure/store/kase/kase.reducer';
 import * as KaseSelectors from '../../infrastructure/store/kase/kase.selectors';
 import * as KaseActions from '../../infrastructure/store/kase/kase.actions';
-import * as VMSelectors from '../../infrastructure/store/selectors/vm.selectors';
 
 /**
- * Фасад для работы с категориями
+ * Фасад для работы с заявками
  */
 @Injectable({
   providedIn: 'root',

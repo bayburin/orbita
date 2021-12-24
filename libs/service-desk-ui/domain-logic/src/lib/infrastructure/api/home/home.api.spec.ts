@@ -64,4 +64,22 @@ describe('HomeApi', () => {
         .flush(data);
     });
   });
+
+  describe('deepSearch()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/dashboard/deep_search`;
+    const data = {} as Home;
+
+    it('should return finded categories, services and questions', () => {
+      service.deepSearch('term').subscribe((result) => {
+        expect(result).toEqual(data);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: `${api}?search=term`,
+        })
+        .flush(data);
+    });
+  });
 });

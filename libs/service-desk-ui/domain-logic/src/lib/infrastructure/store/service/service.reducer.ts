@@ -35,7 +35,8 @@ const serviceReducer = createReducer(
   on(ServiceActions.loadSelectedSuccess, (state, { service }) =>
     serviceAdapter.setOne(service, { ...state, selectedId: service.id, loaded: true, loading: false })
   ),
-  on(ServiceActions.loadSelectedFailure, (state, { error }) => ({ ...state, error, loading: false }))
+  on(ServiceActions.loadSelectedFailure, (state, { error }) => ({ ...state, error, loading: false })),
+  on(ServiceActions.setAll, (state, { services }) => serviceAdapter.setAll(services, state))
 );
 
 export function reducer(state: State | undefined, action: Action) {

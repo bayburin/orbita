@@ -11,7 +11,7 @@ import { StreamService } from '../../infrastructure/stream/stream.service';
 import { TmpNotificationFactory } from '../../infrastructure/factories/tmp-notification.factory';
 
 /**
- * Фасад для работы с категориями
+ * Фасад для работы с уведомлениями
  */
 @Injectable({
   providedIn: 'root',

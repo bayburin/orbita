@@ -43,6 +43,8 @@ export * from './lib/application/question/question.facade';
 export * from './lib/application/question/question.facade.stub';
 export * from './lib/application/attachment/attachment.facade';
 export * from './lib/application/attachment/attachment.facade.stub';
+export * from './lib/application/deep-search/deep-search.facade';
+export * from './lib/application/deep-search/deep-search.facade.stub';
 
 export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';

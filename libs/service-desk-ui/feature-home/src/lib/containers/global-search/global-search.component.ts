@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
-import { SearchFacade, QuestionOverviewVM } from '@orbita/service-desk-ui/domain-logic';
+import { SearchFacade, QuestionOverviewVM, SearchResultTypes } from '@orbita/service-desk-ui/domain-logic';
 import { Observable, of } from 'rxjs';
 import { debounceTime, takeWhile, switchMap } from 'rxjs/operators';
 
@@ -23,6 +23,16 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchCtrl = new FormControl({ name: this.searchTerm });
+    this.searchCtrl.valueChanges.pipe(takeWhile(() => this.alive)).subscribe((res: string | SearchResultTypes) => {
+      if (typeof res === 'string') {
+        this.searchTerm = res;
+        return;
+      }
+
+      // this.searchTerm = res.name;
+      // TODO: Тут редирект на категорию/услугу/вопрос
+      // this.router.navigateByUrl(res.getShowLink());
+    });
   }
 
   /**
@@ -53,6 +63,7 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
     if (!this.searchTerm || this.minLengthSearch < 3) {
       return;
     }
+
     this.router.navigate(['search'], { queryParams: { search: this.searchTerm.trim() } });
   }
 

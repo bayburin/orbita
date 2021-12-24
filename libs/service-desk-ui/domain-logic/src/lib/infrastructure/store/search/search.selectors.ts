@@ -95,6 +95,7 @@ export const getSearchResult = createSelector(
   getQuestionEntities,
   getResponsibleUserEntities,
   (categoriesArr, serviceIds, questionIds, services, questions, responsible_users): SearchResultTypes[] => {
+    // TODO: это надо?
     const servicesVM = ServiceCacheService.denormalizeServices(serviceIds, { services, questions });
     const questionsVM = QuestionCacheService.denormalizeQuestions(questionIds, {
       questions,

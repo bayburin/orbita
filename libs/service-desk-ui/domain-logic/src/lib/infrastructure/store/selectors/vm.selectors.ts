@@ -4,11 +4,13 @@ import { CategoryCacheService } from './../../services/category-cache.service';
 import { ServiceVM } from './../../../entities/view-models/service-vm.interface';
 import { CategoryVM } from '../../../entities/view-models/category-vm.interface';
 import { ServiceCacheService } from '../../services/service-cache.service';
+import { QuestionCacheService } from '../../services/question-cache.service';
 import * as AnswerSelectors from '../answer/answer.selectors';
 import * as QuestionSelectors from '../question/question.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 import * as CategorySelectors from '../category/category.selectors';
 import * as HomeSelectors from '../home/home.selectors';
+import * as DeepSearchSelectors from '../deep-search/deep-search.selectors';
 import * as ResponsibleUserSelectors from '../responsible-user/responsible-user.selectors';
 import * as AttachmentSelectors from '../attachment/attachment.selectors';
 
@@ -59,4 +61,22 @@ export const getHomeServicesVM = createSelector(
   ServiceSelectors.getEntities,
   QuestionSelectors.getEntities,
   (ids, services, questions): ServiceVM[] => ServiceCacheService.denormalizeServices(ids, { services, questions })
+);
+
+// ========== Deep Search ==========
+
+export const getDeepSearchResult = createSelector(
+  DeepSearchSelectors.getCategories,
+  DeepSearchSelectors.getServices,
+  DeepSearchSelectors.getQuestionIds,
+  QuestionSelectors.getEntities,
+  ResponsibleUserSelectors.getEntities,
+  (categoriesArr, servicesArr, questionIds, questions, responsible_users) => {
+    const questionsVM = QuestionCacheService.denormalizeQuestions(questionIds, {
+      questions,
+      responsible_users,
+    });
+
+    return [...categoriesArr, ...servicesArr, ...questionsVM];
+  }
 );

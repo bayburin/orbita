@@ -7,7 +7,7 @@ import * as SearchSelectors from '../../infrastructure/store/search/search.selec
 import * as SearchActions from '../../infrastructure/store/search/search.actions';
 
 /**
- * Фасад для работы с дашбоардом
+ * Фасад для работы с поисковой строкой
  */
 @Injectable({
   providedIn: 'root',

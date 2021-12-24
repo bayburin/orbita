@@ -20,4 +20,11 @@ export abstract class HomeApiAbstract {
    * @param searchValue - поисковая строка
    */
   abstract search(searchValue: string): Observable<SearchResult>;
+
+  /**
+   * Отправляет запрос для поиска более полных данных
+   *
+   * @param searchValue - поисковая строка
+   */
+  abstract deepSearch(searchValue: string): Observable<SearchResult>;
 }

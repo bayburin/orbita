@@ -26,4 +26,10 @@ export class HomeApi implements HomeApiAbstract {
 
     return this.http.get<SearchResult>(`${this.api}/search`, { params });
   }
+
+  deepSearch(searchValue: string) {
+    const params = new HttpParams().set('search', searchValue);
+
+    return this.http.get<SearchResult>(`${this.api}/deep_search`, { params });
+  }
 }

@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import * as ServiceActions from './service.actions';
-import { Service } from '../../../entities/model/service.interface';
+import { Service } from '../../../entities/models/service.interface';
 import { State, initialState, reducer } from './service.reducer';
 
 describe('Service Reducer', () => {
@@ -57,6 +57,16 @@ describe('Service Reducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(false);
       expect(result.error).toBe(error);
+    });
+  });
+
+  describe('setAll', () => {
+    it('should change attributes', () => {
+      const services = [createService(111), createService(222)];
+      action = ServiceActions.setAll({ services });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(2);
     });
   });
 

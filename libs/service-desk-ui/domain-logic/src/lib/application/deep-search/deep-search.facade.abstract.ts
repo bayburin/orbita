@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
-import { SearchResultTypes } from '../../entities/models/search-result.types';
+import { DeepSearchResultTypes } from '../../entities/models/search-result.types';
 
-export abstract class SearchFacadeAbstract {
+export abstract class DeepSearchFacadeAbstract {
   /**
    * Индикатор, идет ли поиск в данный момент
    */
@@ -14,12 +14,10 @@ export abstract class SearchFacadeAbstract {
   /**
    * Результаты поиска
    */
-  result$: Observable<SearchResultTypes[]>;
+  result$: Observable<DeepSearchResultTypes[]>;
 
   /**
    * Производит поиск по всем категориям, услугам и тикетам
-   *
-   * @param term - поисковая строка
    */
-  abstract search(term: string): void;
+  abstract search(): void;
 }
