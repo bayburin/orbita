@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
+import { ServiceDeskUiFeatureSearchModule } from '@orbita/service-desk-ui/feature-search';
 
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { HomeBlockComponent } from './containers/home-block/home-block.component';
-import { GlobalSearchComponent } from './containers/global-search/global-search.component';
 
 export const routes: Routes = [
   {
@@ -17,8 +17,14 @@ export const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [HomePageComponent, HomeBlockComponent, GlobalSearchComponent],
-  exports: [HomePageComponent, GlobalSearchComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ServiceDeskUiUiModule,
+    ServiceDeskUiDomainLogicModule,
+    ServiceDeskUiFeatureSearchModule,
+  ],
+  declarations: [HomePageComponent, HomeBlockComponent],
+  exports: [HomePageComponent],
 })
 export class ServiceDeskUiFeatureHomeModule {}

@@ -7,11 +7,11 @@ import { Observable, of } from 'rxjs';
 import { debounceTime, takeWhile, switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'lib-global-search',
-  templateUrl: './global-search.component.html',
-  styleUrls: ['./global-search.component.scss'],
+  selector: 'service-desk-ui-search-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.scss'],
 })
-export class GlobalSearchComponent implements OnInit, OnDestroy {
+export class SearchComponent implements OnInit, OnDestroy {
   searchCtrl: FormControl;
   searchTerm: string;
   loading$ = this.searchFacade.loading$;

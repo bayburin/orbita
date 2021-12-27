@@ -1,6 +1,6 @@
 <section class="sd-pb-6">
   <div class="container">
-    <lib-global-search></lib-global-search>
+    <service-desk-ui-search-search></service-desk-ui-search-search>
     <lib-loading [loading]="loading$ | async" size="48px"></lib-loading>
     <section *ngIf="loaded$ | async">
       <div *ngIf="isAnyResult$ | async; else noResult" @contentBlockAnimation>

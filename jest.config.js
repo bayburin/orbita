@@ -30,5 +30,6 @@ module.exports = {
     '<rootDir>/libs/service-desk-ui/feature-service-overview',
     '<rootDir>/libs/service-desk-ui/feature-markdown-help',
     '<rootDir>/libs/service-desk-ui/feature-search-result',
+    '<rootDir>/libs/service-desk-ui/feature-search',
   ],
 };

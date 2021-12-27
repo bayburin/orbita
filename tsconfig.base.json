@@ -29,7 +29,6 @@
       "@orbita/orbita-ui/shell": ["libs/orbita-ui/shell/src/index.ts"],
       "@orbita/orbita-ui/ui": ["libs/orbita-ui/ui/src/index.ts"],
       "@orbita/orbita-ui/utils": ["libs/orbita-ui/utils/src/index.ts"],
-      "@orbita/service-desk-ui/feature-search-result": ["libs/service-desk-ui/feature-search-result/src/index.ts"],
       "@orbita/service-desk-ui/domain-logic": ["libs/service-desk-ui/domain-logic/src/index.ts"],
       "@orbita/service-desk-ui/feature-category-listing": [
         "libs/service-desk-ui/feature-category-listing/src/index.ts"
@@ -40,6 +39,8 @@
       "@orbita/service-desk-ui/feature-home": ["libs/service-desk-ui/feature-home/src/index.ts"],
       "@orbita/service-desk-ui/feature-kase-listing": ["libs/service-desk-ui/feature-kase-listing/src/index.ts"],
       "@orbita/service-desk-ui/feature-markdown-help": ["libs/service-desk-ui/feature-markdown-help/src/index.ts"],
+      "@orbita/service-desk-ui/feature-search": ["libs/service-desk-ui/feature-search/src/index.ts"],
+      "@orbita/service-desk-ui/feature-search-result": ["libs/service-desk-ui/feature-search-result/src/index.ts"],
       "@orbita/service-desk-ui/feature-service-overview": [
         "libs/service-desk-ui/feature-service-overview/src/index.ts"
       ],

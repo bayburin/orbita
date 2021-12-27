@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
+import { ServiceDeskUiFeatureSearchModule } from '@orbita/service-desk-ui/feature-search';
 
 import { SearchResultComponent } from './search-result/search-result.component';
 
@@ -15,7 +16,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ServiceDeskUiUiModule,
+    ServiceDeskUiDomainLogicModule,
+    ServiceDeskUiFeatureSearchModule,
+  ],
   declarations: [SearchResultComponent],
   exports: [SearchResultComponent],
 })
