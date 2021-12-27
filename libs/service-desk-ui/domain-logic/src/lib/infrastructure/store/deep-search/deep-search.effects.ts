@@ -1,7 +1,7 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { switchMap, withLatestFrom } from 'rxjs/operators';
+import { filter, switchMap, withLatestFrom, map } from 'rxjs/operators';
 
 import * as DeepSearchActions from './deep-search.actions';
 import * as DeepSearchFeature from './deep-search.reducer';
@@ -25,8 +25,16 @@ export class DeepSearchEffects {
     this.actions$.pipe(
       ofType(DeepSearchActions.search),
       withLatestFrom(this.store.select(RouterSelectors.selectQueryParams)),
-      switchMap(([_action, params]) => {
-        return this.homeApi.deepSearch(params.search).pipe(
+      filter(([_action, params]) => !!params.search),
+      map(([_action, params]) => DeepSearchActions.searchStart({ term: params.search }))
+    )
+  );
+
+  searchStart$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(DeepSearchActions.searchStart),
+      switchMap((action) => {
+        return this.homeApi.deepSearch(action.term).pipe(
           switchMap((data) => {
             const normalizeData = QuestionCacheService.normalizeQuestions(data.questions);
             const services = [...data.services, ...Object.values(normalizeData.entities.services || [])];

@@ -7,9 +7,9 @@ import { State, initialState, reducer } from './deep-search.reducer';
 describe('DeepSearch Reducer', () => {
   let action: Action;
 
-  describe('search', () => {
+  describe('searchStart', () => {
     it('should change attributes', () => {
-      action = DeepSearchActions.search();
+      action = DeepSearchActions.searchStart({ term: 'fake' });
       const result = reducer(initialState, action);
 
       expect(result.loaded).toBe(false);

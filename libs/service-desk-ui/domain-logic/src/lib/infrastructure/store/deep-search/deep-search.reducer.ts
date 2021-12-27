@@ -30,7 +30,7 @@ export const initialState: State = {
 
 const deepSearchReducer = createReducer(
   initialState,
-  on(DeepSearchActions.search, (state) => ({
+  on(DeepSearchActions.searchStart, (state) => ({
     ...state,
     loading: true,
     loaded: false,
