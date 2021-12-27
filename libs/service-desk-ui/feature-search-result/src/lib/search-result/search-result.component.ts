@@ -4,12 +4,12 @@ import { DeepSearchFacade, DeepSearchFilterTypes } from '@orbita/service-desk-ui
 import { contentBlockAnimation } from '@orbita/service-desk-ui/ui';
 
 @Component({
-  selector: 'lib-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  selector: 'lib-search-result',
+  templateUrl: './search-result.component.html',
+  styleUrls: ['./search-result.component.scss'],
   animations: [contentBlockAnimation],
 })
-export class SearchComponent implements OnInit {
+export class SearchResultComponent implements OnInit {
   loading$ = this.deepSearchFacade.loading$;
   loaded$ = this.deepSearchFacade.loaded$;
   result$ = this.deepSearchFacade.result$;

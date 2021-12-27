@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'service-desk-ui-feature-search',
+  displayName: 'service-desk-ui-feature-search-result',
   preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   globals: {
@@ -8,7 +8,7 @@ module.exports = {
       stringifyContentPathRegex: '\\.(html|svg)$',
     },
   },
-  coverageDirectory: '../../../coverage/libs/service-desk-ui/feature-search',
+  coverageDirectory: '../../../coverage/libs/service-desk-ui/feature-search-result',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },

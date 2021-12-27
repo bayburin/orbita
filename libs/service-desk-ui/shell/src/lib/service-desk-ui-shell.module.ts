@@ -69,13 +69,15 @@ const routes: Routes = [
         ],
       },
       {
-        path: 'search',
+        path: 'search-result',
         data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Поиск' } },
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('@orbita/service-desk-ui/feature-search').then((m) => m.ServiceDeskUiFeatureSearchModule),
+              import('@orbita/service-desk-ui/feature-search-result').then(
+                (m) => m.ServiceDeskUiFeatureSearchResultModule
+              ),
           },
         ],
       },

@@ -4,20 +4,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 
-import { SearchComponent } from './search/search.component';
-import { GlobalSearchComponent } from './global-search/global-search.component';
+import { SearchResultComponent } from './search-result/search-result.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: SearchComponent,
+    component: SearchResultComponent,
   },
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [SearchComponent, GlobalSearchComponent],
-  exports: [SearchComponent],
+  declarations: [SearchResultComponent],
+  exports: [SearchResultComponent],
 })
-export class ServiceDeskUiFeatureSearchModule {}
+export class ServiceDeskUiFeatureSearchResultModule {}

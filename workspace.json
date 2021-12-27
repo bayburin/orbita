@@ -812,17 +812,17 @@
       },
       "tags": ["scope:service-desk-ui", "type:feature"]
     },
-    "service-desk-ui-feature-search": {
+    "service-desk-ui-feature-search-result": {
       "projectType": "library",
-      "root": "libs/service-desk-ui/feature-search",
-      "sourceRoot": "libs/service-desk-ui/feature-search/src",
+      "root": "libs/service-desk-ui/feature-search-result",
+      "sourceRoot": "libs/service-desk-ui/feature-search-result/src",
       "prefix": "orbita",
       "targets": {
         "test": {
           "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/service-desk-ui/feature-search"],
+          "outputs": ["coverage/libs/service-desk-ui/feature-search-result"],
           "options": {
-            "jestConfig": "libs/service-desk-ui/feature-search/jest.config.js",
+            "jestConfig": "libs/service-desk-ui/feature-search-result/jest.config.js",
             "passWithNoTests": true
           }
         },
@@ -830,8 +830,8 @@
           "executor": "@nrwl/linter:eslint",
           "options": {
             "lintFilePatterns": [
-              "libs/service-desk-ui/feature-search/src/**/*.ts",
-              "libs/service-desk-ui/feature-search/src/**/*.html"
+              "libs/service-desk-ui/feature-search-result/src/**/*.ts",
+              "libs/service-desk-ui/feature-search-result/src/**/*.html"
             ]
           }
         }

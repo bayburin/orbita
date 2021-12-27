@@ -64,7 +64,7 @@ export class GlobalSearchComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.router.navigate(['search'], { queryParams: { search: this.searchTerm.trim() } });
+    this.router.navigate(['search-result'], { queryParams: { search: this.searchTerm.trim() } });
   }
 
   /**
