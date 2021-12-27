@@ -58,7 +58,7 @@ export class KaseListingComponent implements OnInit {
    *
    * @param selectedStatusId - id выбранного статуса
    */
-  selectFilter(selectedStatusId: number): void {
-    this.kaseFacade.setSelectedStatusId(selectedStatusId);
+  selectFilter(selectedStatusId: string | number): void {
+    this.kaseFacade.setSelectedStatusId(selectedStatusId as number);
   }
 }

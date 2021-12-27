@@ -1,3 +1,4 @@
+import { DeepSearchFilterTypes } from './../../../entities/filter.interface';
 import { Category } from '../../../entities/models/category.interface';
 import { Question } from '../../../entities/models/question.interface';
 import { Service } from '../../../entities/models/service.interface';
@@ -17,6 +18,7 @@ describe('DeepSearch Selectors', () => {
       loaded: false,
       loading: true,
       error,
+      selectedResultTypeId: DeepSearchFilterTypes.ALL,
     };
   });
 
@@ -75,5 +77,21 @@ describe('DeepSearch Selectors', () => {
     const entities = { 5: createQuestion(5), 6: createQuestion(6) };
 
     expect(DeepSearchSelectors.getQuestions.projector(state.questionIds, entities)).toEqual(Object.values(entities));
+  });
+
+  it('getResultTypes() should return "selectedResultTypeId" attribute', () => {
+    state.categoryIds = [1, 2, 3];
+    state.serviceIds = [4, 5];
+    state.questionIds = [6];
+    const result = DeepSearchSelectors.getResultTypes.projector(state.categoryIds, state.serviceIds, state.questionIds);
+
+    expect(result.find((filter) => filter.id === DeepSearchFilterTypes.ALL).count).toBe(6);
+    expect(result.find((filter) => filter.id === DeepSearchFilterTypes.CATEGORY).count).toBe(3);
+    expect(result.find((filter) => filter.id === DeepSearchFilterTypes.SERVICE).count).toBe(2);
+    expect(result.find((filter) => filter.id === DeepSearchFilterTypes.QUESTION).count).toBe(1);
+  });
+
+  it('getSelectedResultTypeId() should return "selectedResultTypeId" attribute', () => {
+    expect(DeepSearchSelectors.getSelectedResultTypeId.projector(state)).toEqual(DeepSearchFilterTypes.ALL);
   });
 });

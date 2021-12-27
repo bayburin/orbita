@@ -2,6 +2,8 @@ import { createSelector } from '@ngrx/store';
 
 import { getServiceDeskUiState } from './../index';
 import { DEEP_SEARCH_FEATURE_KEY, State, DeepSearchPartialState } from './deep-search.reducer';
+import { Filter } from '../../../entities/filter.interface';
+import { DeepSearchFilterTypes } from './../../../entities/filter.interface';
 import * as CategorySelectors from '../category/category.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
 import * as QuestionSelectors from '../question/question.selectors';
@@ -34,3 +36,33 @@ export const getServices = createSelector(getServiceIds, ServiceSelectors.getEnt
 export const getQuestions = createSelector(getQuestionIds, QuestionSelectors.getEntities, (ids, questionEntities) =>
   ids.map((id) => questionEntities[id])
 );
+
+export const getResultTypes = createSelector(
+  getCategoryIds,
+  getServiceIds,
+  getQuestionIds,
+  (categoryIds, serviceIds, questionIds): Filter[] => [
+    {
+      name: 'Все',
+      id: DeepSearchFilterTypes.ALL,
+      count: categoryIds.length + serviceIds.length + questionIds.length,
+    },
+    {
+      name: 'Категории',
+      id: DeepSearchFilterTypes.CATEGORY,
+      count: categoryIds.length,
+    },
+    {
+      name: 'Услуги',
+      id: DeepSearchFilterTypes.SERVICE,
+      count: serviceIds.length,
+    },
+    {
+      name: 'Вопросы',
+      id: DeepSearchFilterTypes.QUESTION,
+      count: questionIds.length,
+    },
+  ]
+);
+
+export const getSelectedResultTypeId = createSelector(getDeepSearchState, (state: State) => state.selectedResultTypeId);

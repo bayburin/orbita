@@ -16,11 +16,11 @@ export class FilterTemplateComponent {
   /**
    * Id выбранного фильтра
    */
-  @Input() selectedId: number;
+  @Input() selectedId: string | number = null;
   /**
    * Событие выбора фильтра
    */
-  @Output() selectFilter = new EventEmitter<number>();
+  @Output() selectFilter = new EventEmitter<string | number>();
 
   trackByFilter(index: number, filter: Filter) {
     return filter.id;

@@ -5,7 +5,7 @@ export interface Filter {
   /**
    * Идентификатор
    */
-  id: number;
+  id: string | number;
 
   /**
    * Имя
@@ -16,4 +16,14 @@ export interface Filter {
    * Число заявок с указанным статусом
    */
   count: number;
+}
+
+/**
+ * Виды фильтров для результатов поиска
+ */
+export enum DeepSearchFilterTypes {
+  ALL = 'all',
+  CATEGORY = 'Category',
+  SERVICE = 'Service',
+  QUESTION = 'Question',
 }

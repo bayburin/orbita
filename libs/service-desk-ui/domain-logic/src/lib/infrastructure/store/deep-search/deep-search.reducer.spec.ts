@@ -1,3 +1,4 @@
+import { DeepSearchFilterTypes } from './../../../entities/filter.interface';
 import { Action } from '@ngrx/store';
 
 import * as DeepSearchActions from './deep-search.actions';
@@ -49,6 +50,15 @@ describe('DeepSearch Reducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(false);
       expect(result.error).toBe(error);
+    });
+  });
+
+  describe('setSelectedResultTypeId', () => {
+    it('should change attributes', () => {
+      action = DeepSearchActions.setSelectedResultTypeId({ selectedResultTypeId: DeepSearchFilterTypes.CATEGORY });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedResultTypeId).toBe(DeepSearchFilterTypes.CATEGORY);
     });
   });
 

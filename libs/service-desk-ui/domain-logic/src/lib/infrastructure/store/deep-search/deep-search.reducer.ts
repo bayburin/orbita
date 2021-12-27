@@ -1,6 +1,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as DeepSearchActions from './deep-search.actions';
+import { DeepSearchFilterTypes } from './../../../entities/filter.interface';
 
 export const DEEP_SEARCH_FEATURE_KEY = 'deepSearch';
 
@@ -10,6 +11,7 @@ export interface State {
   questionIds: number[];
   loading: boolean;
   loaded: boolean;
+  selectedResultTypeId: string;
   error?: string | null;
 }
 
@@ -23,6 +25,7 @@ export const initialState: State = {
   questionIds: [],
   loading: false,
   loaded: false,
+  selectedResultTypeId: DeepSearchFilterTypes.ALL,
 };
 
 const deepSearchReducer = createReducer(
@@ -44,7 +47,11 @@ const deepSearchReducer = createReducer(
     serviceIds,
     questionIds,
   })),
-  on(DeepSearchActions.searchFailure, (state, { error }) => ({ ...state, loading: false, error }))
+  on(DeepSearchActions.searchFailure, (state, { error }) => ({ ...state, loading: false, error })),
+  on(DeepSearchActions.setSelectedResultTypeId, (state, { selectedResultTypeId }) => ({
+    ...state,
+    selectedResultTypeId,
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

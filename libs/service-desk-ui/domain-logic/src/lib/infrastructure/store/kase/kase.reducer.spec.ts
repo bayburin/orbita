@@ -113,7 +113,7 @@ describe('KaseReducer', () => {
     });
   });
 
-  describe('setStatusId', () => {
+  describe('setSelectedStatusId', () => {
     it('should change attributes', () => {
       action = KaseActions.setSelectedStatusId({ selectedStatusId: 12345 });
       const result: State = reducer(initialState, action);

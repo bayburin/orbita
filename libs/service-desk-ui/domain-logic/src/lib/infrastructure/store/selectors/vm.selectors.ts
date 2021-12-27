@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 
+import { SearchResultTypes } from './../../../entities/models/search-result.types';
 import { CategoryCacheService } from './../../services/category-cache.service';
 import { ServiceVM } from './../../../entities/view-models/service-vm.interface';
 import { CategoryVM } from '../../../entities/view-models/category-vm.interface';
@@ -13,6 +14,7 @@ import * as HomeSelectors from '../home/home.selectors';
 import * as DeepSearchSelectors from '../deep-search/deep-search.selectors';
 import * as ResponsibleUserSelectors from '../responsible-user/responsible-user.selectors';
 import * as AttachmentSelectors from '../attachment/attachment.selectors';
+import { DeepSearchFilterTypes } from '../../../entities/filter.interface';
 
 // ========== Services ==========
 
@@ -66,17 +68,39 @@ export const getHomeServicesVM = createSelector(
 // ========== Deep Search ==========
 
 export const getDeepSearchResult = createSelector(
+  DeepSearchSelectors.getSelectedResultTypeId,
   DeepSearchSelectors.getCategories,
-  DeepSearchSelectors.getServices,
+  DeepSearchSelectors.getServiceIds,
   DeepSearchSelectors.getQuestionIds,
+  ServiceSelectors.getEntities,
   QuestionSelectors.getEntities,
   ResponsibleUserSelectors.getEntities,
-  (categoriesArr, servicesArr, questionIds, questions, responsible_users) => {
-    const questionsVM = QuestionCacheService.denormalizeQuestions(questionIds, {
-      questions,
-      responsible_users,
-    });
+  (selectedId, categoriesArr, serviceIds, questionIds, services, questions, responsible_users): SearchResultTypes[] => {
+    let servicesVM;
+    let questionsVM;
 
-    return [...categoriesArr, ...servicesArr, ...questionsVM];
+    switch (selectedId) {
+      case DeepSearchFilterTypes.CATEGORY:
+        return categoriesArr;
+      case DeepSearchFilterTypes.SERVICE:
+        servicesVM = ServiceCacheService.denormalizeServices(serviceIds, { services, questions });
+
+        return servicesVM;
+      case DeepSearchFilterTypes.QUESTION:
+        questionsVM = QuestionCacheService.denormalizeQuestions(questionIds, {
+          questions,
+          responsible_users,
+        });
+
+        return questionsVM;
+      default:
+        servicesVM = ServiceCacheService.denormalizeServices(serviceIds, { services, questions });
+        questionsVM = QuestionCacheService.denormalizeQuestions(questionIds, {
+          questions,
+          responsible_users,
+        });
+
+        return [...categoriesArr, ...servicesVM, ...questionsVM];
+    }
   }
 );

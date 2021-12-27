@@ -6,8 +6,14 @@ export class DeepSearchFacadeStub implements DeepSearchFacadeAbstract {
   loading$ = new BehaviorSubject(false);
   loaded$ = new BehaviorSubject(false);
   result$ = new BehaviorSubject([]);
+  resultTypes$ = new BehaviorSubject([]);
+  selectedResultTypeId$ = new BehaviorSubject('');
 
   search() {
+    /** */
+  }
+
+  setSelectedResultTypeId() {
     /** */
   }
 }
