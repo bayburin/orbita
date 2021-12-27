@@ -15,6 +15,7 @@ export class SearchComponent implements OnInit {
   result$ = this.deepSearchFacade.result$;
   resultTypes$ = this.deepSearchFacade.resultTypes$;
   selectedResultTypeId$ = this.deepSearchFacade.selectedResultTypeId$;
+  isAnyResult$ = this.deepSearchFacade.isAnyResult$;
 
   constructor(private deepSearchFacade: DeepSearchFacade) {}
 

@@ -5,6 +5,7 @@ import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 
 import { SearchComponent } from './search/search.component';
+import { GlobalSearchComponent } from './global-search/global-search.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [SearchComponent],
+  declarations: [SearchComponent, GlobalSearchComponent],
   exports: [SearchComponent],
 })
 export class ServiceDeskUiFeatureSearchModule {}

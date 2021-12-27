@@ -25,6 +25,10 @@ export abstract class DeepSearchFacadeAbstract {
    * ID выбранного типа результата поиска
    */
   selectedResultTypeId$: Observable<string>;
+  /**
+   * Показывает, имеется ли хотя бы один результат поиска
+   */
+  isAnyResult$: Observable<boolean>;
 
   /**
    * Производит поиск по всем категориям, услугам и тикетам

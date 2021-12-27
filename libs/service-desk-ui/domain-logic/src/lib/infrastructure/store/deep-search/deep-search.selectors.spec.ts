@@ -94,4 +94,14 @@ describe('DeepSearch Selectors', () => {
   it('getSelectedResultTypeId() should return "selectedResultTypeId" attribute', () => {
     expect(DeepSearchSelectors.getSelectedResultTypeId.projector(state)).toEqual(DeepSearchFilterTypes.ALL);
   });
+
+  describe('getIsAnyResult()', () => {
+    it('should return false if no result found', () => {
+      expect(DeepSearchSelectors.getIsAnyResult.projector([], [], [])).toBe(false);
+    });
+
+    it('should return true if any result found', () => {
+      expect(DeepSearchSelectors.getIsAnyResult.projector([], [2], [])).toBe(true);
+    });
+  });
 });

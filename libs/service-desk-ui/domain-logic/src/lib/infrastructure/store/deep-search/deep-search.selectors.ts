@@ -66,3 +66,12 @@ export const getResultTypes = createSelector(
 );
 
 export const getSelectedResultTypeId = createSelector(getDeepSearchState, (state: State) => state.selectedResultTypeId);
+
+export const getIsAnyResult = createSelector(
+  getCategoryIds,
+  getServiceIds,
+  getQuestionIds,
+  (categoryIds, serviceIds, questionIds) => {
+    return categoryIds.length > 0 || serviceIds.length > 0 || questionIds.length > 0;
+  }
+);

@@ -19,6 +19,6 @@ export const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
   declarations: [HomePageComponent, HomeBlockComponent, GlobalSearchComponent],
-  exports: [HomePageComponent],
+  exports: [HomePageComponent, GlobalSearchComponent],
 })
 export class ServiceDeskUiFeatureHomeModule {}

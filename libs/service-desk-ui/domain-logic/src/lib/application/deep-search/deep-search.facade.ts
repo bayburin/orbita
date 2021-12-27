@@ -20,6 +20,7 @@ export class DeepSearchFacade implements DeepSearchFacadeAbstract {
   result$ = this.store.select(VMSelectors.getDeepSearchResult);
   resultTypes$ = this.store.select(DeepSearchSelectors.getResultTypes);
   selectedResultTypeId$ = this.store.select(DeepSearchSelectors.getSelectedResultTypeId);
+  isAnyResult$ = this.store.select(DeepSearchSelectors.getIsAnyResult);
 
   constructor(private store: Store<DeepSearchFeature.DeepSearchPartialState>) {}
 
