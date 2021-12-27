@@ -24,6 +24,5 @@ const routes: Routes = [
     ServiceDeskUiFeatureSearchModule,
   ],
   declarations: [SearchResultComponent],
-  exports: [SearchResultComponent],
 })
 export class ServiceDeskUiFeatureSearchResultModule {}

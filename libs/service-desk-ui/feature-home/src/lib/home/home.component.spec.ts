@@ -7,15 +7,15 @@ import {
   HomeFacade,
   HomeFacadeStub,
 } from '@orbita/service-desk-ui/domain-logic';
-import { HomeBlockComponent } from './home-block.component';
+import { HomeComponent } from './home.component';
 
-describe('HomeBlockComponent', () => {
-  let component: HomeBlockComponent;
-  let fixture: ComponentFixture<HomeBlockComponent>;
+describe('HomeComponent', () => {
+  let component: HomeComponent;
+  let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeBlockComponent],
+      declarations: [HomeComponent],
       providers: [
         { provide: HomeFacade, useClass: HomeFacadeStub },
         { provide: UserRecommendationFacade, useClass: UserRecommendationFacadeStub },
@@ -25,7 +25,7 @@ describe('HomeBlockComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeBlockComponent);
+    fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

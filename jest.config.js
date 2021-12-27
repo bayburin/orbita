@@ -31,5 +31,6 @@ module.exports = {
     '<rootDir>/libs/service-desk-ui/feature-markdown-help',
     '<rootDir>/libs/service-desk-ui/feature-search-result',
     '<rootDir>/libs/service-desk-ui/feature-search',
+    '<rootDir>/libs/service-desk-ui/feature-all-kases',
   ],
 };

@@ -4,12 +4,12 @@ import { CategoryFacade, KaseFacade } from '@orbita/service-desk-ui/domain-logic
 import { contentBlockAnimation } from '@orbita/service-desk-ui/ui';
 
 @Component({
-  selector: 'lib-category-block',
-  templateUrl: './category-block.component.html',
-  styleUrls: ['./category-block.component.scss'],
+  selector: 'lib-category-overview',
+  templateUrl: './category-overview.component.html',
+  styleUrls: ['./category-overview.component.scss'],
   animations: [contentBlockAnimation],
 })
-export class CategoryBlockComponent implements OnInit, OnDestroy {
+export class CategoryOverviewComponent implements OnInit, OnDestroy {
   category$ = this.categoryFacade.selected$;
   loading$ = this.categoryFacade.loading$;
   loaded$ = this.categoryFacade.loaded$;

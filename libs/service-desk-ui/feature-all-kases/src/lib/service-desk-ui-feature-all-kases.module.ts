@@ -5,13 +5,13 @@ import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 import { ServiceDeskUiFeatureKaseListingModule } from '@orbita/service-desk-ui/feature-kase-listing';
 
-import { CategoryOverviewComponent } from './category-overview/category-overview.component';
+import { AllKasesComponent } from './all-kases/all-kases.component';
 
-export const routes: Routes = [
+const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: CategoryOverviewComponent,
+    component: AllKasesComponent,
   },
 ];
 
@@ -23,6 +23,6 @@ export const routes: Routes = [
     ServiceDeskUiDomainLogicModule,
     ServiceDeskUiFeatureKaseListingModule,
   ],
-  declarations: [CategoryOverviewComponent],
+  declarations: [AllKasesComponent],
 })
-export class ServiceDeskUiFeatureCategoryOverviewModule {}
+export class ServiceDeskUiFeatureAllKasesModule {}

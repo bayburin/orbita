@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KaseBlockComponent } from './kase-block.component';
+import { CategoryOverviewComponent } from './category-overview.component';
 
-describe('KaseBlockComponent', () => {
-  let component: KaseBlockComponent;
-  let fixture: ComponentFixture<KaseBlockComponent>;
+describe('CategoryOverviewComponent', () => {
+  let component: CategoryOverviewComponent;
+  let fixture: ComponentFixture<CategoryOverviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [KaseBlockComponent],
+      declarations: [CategoryOverviewComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KaseBlockComponent);
+    fixture = TestBed.createComponent(CategoryOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

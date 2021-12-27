@@ -4,7 +4,7 @@ import { KaseFacade, Kase } from '@orbita/service-desk-ui/domain-logic';
 import { contentBlockAnimation } from '@orbita/service-desk-ui/ui';
 
 @Component({
-  selector: 'lib-kase-listing',
+  selector: 'service-desk-ui-kase-listing-kase-listing',
   templateUrl: './kase-listing.component.html',
   styleUrls: ['./kase-listing.component.scss'],
   animations: [contentBlockAnimation],

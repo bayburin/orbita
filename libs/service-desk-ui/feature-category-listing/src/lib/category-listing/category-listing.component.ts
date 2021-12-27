@@ -3,11 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { CategoryFacade } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
-  selector: 'lib-categories-block',
-  templateUrl: './categories-block.component.html',
-  styleUrls: ['./categories-block.component.scss'],
+  selector: 'lib-category-listing',
+  templateUrl: './category-listing.component.html',
+  styleUrls: ['./category-listing.component.scss'],
 })
-export class CategoriesBlockComponent implements OnInit {
+export class CategoryListingComponent implements OnInit {
   all$ = this.categoryFacade.all$;
   loading$ = this.categoryFacade.loading$;
   loaded$ = this.categoryFacade.loaded$;

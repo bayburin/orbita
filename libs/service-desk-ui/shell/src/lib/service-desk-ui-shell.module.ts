@@ -62,9 +62,7 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: () =>
-              import('@orbita/service-desk-ui/feature-kase-listing').then(
-                (m) => m.ServiceDeskUiFeatureKaseListingModule
-              ),
+              import('@orbita/service-desk-ui/feature-all-kases').then((m) => m.ServiceDeskUiFeatureAllKasesModule),
           },
         ],
       },

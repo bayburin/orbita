@@ -4,20 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 
-import { CategoriesPageComponent } from './pages/categories-page/categories-page.component';
-import { CategoriesBlockComponent } from './containers/categories-block/categories-block.component';
+import { CategoryListingComponent } from './category-listing/category-listing.component';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: CategoriesPageComponent,
+    component: CategoryListingComponent,
   },
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [CategoriesPageComponent, CategoriesBlockComponent],
-  exports: [CategoriesPageComponent],
+  declarations: [CategoryListingComponent],
 })
 export class ServiceDeskUiFeatureCategoryListingModule {}

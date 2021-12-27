@@ -5,14 +5,13 @@ import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 import { ServiceDeskUiFeatureSearchModule } from '@orbita/service-desk-ui/feature-search';
 
-import { HomePageComponent } from './pages/home-page/home-page.component';
-import { HomeBlockComponent } from './containers/home-block/home-block.component';
+import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: HomePageComponent,
+    component: HomeComponent,
   },
 ];
 
@@ -24,7 +23,6 @@ export const routes: Routes = [
     ServiceDeskUiDomainLogicModule,
     ServiceDeskUiFeatureSearchModule,
   ],
-  declarations: [HomePageComponent, HomeBlockComponent],
-  exports: [HomePageComponent],
+  declarations: [HomeComponent],
 })
 export class ServiceDeskUiFeatureHomeModule {}

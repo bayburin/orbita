@@ -682,6 +682,32 @@
       "tags": [],
       "implicitDependencies": ["service-desk-ui"]
     },
+    "service-desk-ui-feature-all-kases": {
+      "projectType": "library",
+      "root": "libs/service-desk-ui/feature-all-kases",
+      "sourceRoot": "libs/service-desk-ui/feature-all-kases/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-desk-ui/feature-all-kases"],
+          "options": {
+            "jestConfig": "libs/service-desk-ui/feature-all-kases/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/service-desk-ui/feature-all-kases/src/**/*.ts",
+              "libs/service-desk-ui/feature-all-kases/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["scope:service-desk-ui", "type:feature"]
+    },
     "service-desk-ui-feature-category-listing": {
       "projectType": "library",
       "root": "libs/service-desk-ui/feature-category-listing",

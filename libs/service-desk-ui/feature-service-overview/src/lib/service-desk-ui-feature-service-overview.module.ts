@@ -17,6 +17,5 @@ const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
   declarations: [ServiceOverviewComponent],
-  exports: [ServiceOverviewComponent],
 })
 export class ServiceDeskUiFeatureServiceOverviewModule {}
