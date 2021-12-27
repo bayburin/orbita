@@ -31,6 +31,8 @@ export const breadcrumbDataSelector = createSelector(
   }
 );
 
+export const getNeedShowBreadcrumb = createSelector(selectUrl, (url) => url.split('?')[0] !== '/');
+
 /**
  * Создает массив объектов MenuItem для их вывода в breadcrumb
  *

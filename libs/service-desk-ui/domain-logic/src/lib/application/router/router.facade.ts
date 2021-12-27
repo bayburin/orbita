@@ -12,6 +12,7 @@ import * as RouterSelectors from '../../infrastructure/store/selectors/router.se
 })
 export class RouterFacade implements RouterFacadeAbstract {
   breadcrumbMenu$ = this.store.select(RouterSelectors.breadcrumbDataSelector);
+  needShowBreadcrumb$ = this.store.select(RouterSelectors.getNeedShowBreadcrumb);
 
   constructor(private store: Store) {}
 }
