@@ -8,6 +8,7 @@ import * as DeepSearchFeature from './deep-search.reducer';
 import * as CategoryActions from '../category/category.actions';
 import * as ServiceActions from '../service/service.actions';
 import * as QuestionActions from '../question/question.actions';
+import * as AnswerActions from '../answer/answer.actions';
 import * as ResponsibleUserActions from '../responsible-user/responsible-user.actions';
 import * as RouterSelectors from '../selectors/router.selectors';
 import { HomeApi } from '../../api/home/home.api';
@@ -46,6 +47,7 @@ export class DeepSearchEffects {
               CategoryActions.setAll({ categories: data.categories || [] }),
               ServiceActions.setAll({ services }),
               ResponsibleUserActions.setEntities({ entities: normalizeData.entities.responsible_users || {} }),
+              AnswerActions.setEntities({ entities: normalizeData.entities.answers || {} }),
               QuestionActions.setEntities({ entities: normalizeData.entities.questions || {} }),
               DeepSearchActions.searchSuccess({ categoryIds, serviceIds, questionIds }),
             ];

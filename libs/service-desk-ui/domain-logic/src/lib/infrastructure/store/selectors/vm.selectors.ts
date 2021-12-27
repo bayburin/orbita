@@ -75,32 +75,34 @@ export const getDeepSearchResult = createSelector(
   ServiceSelectors.getEntities,
   QuestionSelectors.getEntities,
   ResponsibleUserSelectors.getEntities,
-  (selectedId, categoriesArr, serviceIds, questionIds, services, questions, responsible_users): SearchResultTypes[] => {
-    let servicesVM;
-    let questionsVM;
+  AnswerSelectors.getEntities,
+  (
+    selectedId,
+    categoriesArr,
+    serviceIds,
+    questionIds,
+    services,
+    questions,
+    responsible_users,
+    answers
+  ): SearchResultTypes[] => {
+    const getServices = () => ServiceCacheService.denormalizeServices(serviceIds, { services, questions });
+    const getQuestions = () =>
+      QuestionCacheService.denormalizeQuestions(questionIds, {
+        questions,
+        responsible_users,
+        answers,
+      });
 
     switch (selectedId) {
       case DeepSearchFilterTypes.CATEGORY:
         return categoriesArr;
       case DeepSearchFilterTypes.SERVICE:
-        servicesVM = ServiceCacheService.denormalizeServices(serviceIds, { services, questions });
-
-        return servicesVM;
+        return getServices();
       case DeepSearchFilterTypes.QUESTION:
-        questionsVM = QuestionCacheService.denormalizeQuestions(questionIds, {
-          questions,
-          responsible_users,
-        });
-
-        return questionsVM;
+        return getQuestions();
       default:
-        servicesVM = ServiceCacheService.denormalizeServices(serviceIds, { services, questions });
-        questionsVM = QuestionCacheService.denormalizeQuestions(questionIds, {
-          questions,
-          responsible_users,
-        });
-
-        return [...categoriesArr, ...servicesVM, ...questionsVM];
+        return [...categoriesArr, ...getServices(), ...getQuestions()];
     }
   }
 );
