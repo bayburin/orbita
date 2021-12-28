@@ -5,6 +5,7 @@ import { Question } from './models/question.interface';
 import { ResponsibleUser } from './models/responsible-user.interface';
 import { Answer } from './models/answer.interface';
 import { Attachment } from './models/attachment.interface';
+import { Ticket } from './models/ticket.interface';
 
 /**
  * Нормализованные данные категории
@@ -58,9 +59,26 @@ export interface NormalizedQuestionsEntities {
 }
 
 /**
- * Нормализованные данные списка услуг, возвращаемый функцией normalize
+ * Нормализованные данные списка вопросов, возвращаемый функцией normalize
  */
 export interface NormalizedQuestions {
   entities: NormalizedQuestionsEntities;
+  result: number[] | number;
+}
+
+/**
+ * Нормализованные данные тикетов
+ */
+export interface NormalizedTicketsEntities {
+  tickets?: Dictionary<Ticket>;
+  services?: Dictionary<Service>;
+  responsible_users?: Dictionary<ResponsibleUser>;
+}
+
+/**
+ * Нормализованные данные списка тикетов, возвращаемый функцией normalize
+ */
+export interface NormalizedTickets {
+  entities: NormalizedTicketsEntities;
   result: number[] | number;
 }

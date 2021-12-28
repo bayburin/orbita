@@ -8,6 +8,7 @@ import { LayoutComponent } from './containers/layout/layout.component';
 import { NavbarComponent } from './containers/navbar/navbar.component';
 import { BreadcrumbComponent } from './containers/breadcrumb/breadcrumb.component';
 import { ServiceRedirectionResolver } from './resolvers/service-redirection.resolver';
+import { TicketRedirectionResolver } from './resolvers/ticket-redirection.resolver';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
       {
         path: 'services/:id',
         resolve: { service: ServiceRedirectionResolver },
+      },
+      {
+        path: 'tickets/:identity',
+        resolve: { ticket: TicketRedirectionResolver },
       },
       {
         path: 'categories',

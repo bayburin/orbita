@@ -1,5 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
+import { TicketCacheService } from './../../services/ticket-cache.service';
+import { TicketOverviewVM } from './../../../entities/view-models/ticket-overview-vm.interface';
 import { SearchResultTypes } from './../../../entities/models/search-result.types';
 import { CategoryCacheService } from './../../services/category-cache.service';
 import { ServiceVM } from './../../../entities/view-models/service-vm.interface';
@@ -14,7 +16,18 @@ import * as HomeSelectors from '../home/home.selectors';
 import * as DeepSearchSelectors from '../deep-search/deep-search.selectors';
 import * as ResponsibleUserSelectors from '../responsible-user/responsible-user.selectors';
 import * as AttachmentSelectors from '../attachment/attachment.selectors';
+import * as TicketSelectors from '../ticket/ticket.selectors';
 import { DeepSearchFilterTypes } from '../../../entities/filter.interface';
+
+// ========== Tickets ==========
+
+export const getSelectedTicketOverviewVM = createSelector(
+  TicketSelectors.getSelected,
+  ServiceSelectors.getEntities,
+  ResponsibleUserSelectors.getEntities,
+  (ticket, services, responsible_users): TicketOverviewVM =>
+    TicketCacheService.denormalizeTicket(ticket, { services, responsible_users })
+);
 
 // ========== Services ==========
 

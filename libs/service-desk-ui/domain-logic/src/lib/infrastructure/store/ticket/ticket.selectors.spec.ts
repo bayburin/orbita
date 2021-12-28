@@ -1,5 +1,5 @@
-import { Ticket } from '../../../entities/model/ticket.interface';
-import { ticketAdapter, TicketPartialState, initialState } from './ticket.reducer';
+import { Ticket } from '../../../entities/models/ticket.interface';
+import { ticketAdapter, initialState } from './ticket.reducer';
 import * as TicketSelectors from './ticket.selectors';
 
 describe('TicketSelectors', () => {
@@ -21,17 +21,28 @@ describe('TicketSelectors', () => {
   beforeEach(() => {
     state = ticketAdapter.setAll(arrEntities, {
       ...initialState,
-      loading: true,
+      loaded: true,
       selectedId,
       error,
     });
   });
 
+  it('getLoaded() should return "loaded" attribute', () => {
+    expect(TicketSelectors.getLoaded.projector(state)).toEqual(true);
+  });
   it('getAll() should return array of entities', () => {
     expect(TicketSelectors.getAll.projector(state)).toEqual(arrEntities);
   });
 
   it('getEntities() should return entities', () => {
     expect(TicketSelectors.getEntities.projector(state)).toEqual(entities);
+  });
+
+  it('getSelectedId() should return selected entity', () => {
+    expect(TicketSelectors.getSelectedId.projector(state)).toEqual(selectedId);
+  });
+
+  it('getSelected() should return svtItem state', () => {
+    expect(TicketSelectors.getSelected.projector(entities, selectedId)).toEqual(entities[selectedId]);
   });
 });

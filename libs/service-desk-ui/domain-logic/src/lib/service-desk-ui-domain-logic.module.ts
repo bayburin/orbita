@@ -14,6 +14,7 @@ import { KaseEffects } from './infrastructure/store/kase/kase.effects';
 import { QuestionEffects } from './infrastructure/store/question/question.effects';
 import { AttachmentEffects } from './infrastructure/store/attachment/attachment.effects';
 import { DeepSearchEffects } from './infrastructure/store/deep-search/deep-search.effects';
+import { TicketEffects } from './infrastructure/store/ticket/ticket.effects';
 
 @NgModule({
   imports: [
@@ -32,6 +33,7 @@ import { DeepSearchEffects } from './infrastructure/store/deep-search/deep-searc
       QuestionEffects,
       AttachmentEffects,
       DeepSearchEffects,
+      TicketEffects,
     ]),
   ],
 })
