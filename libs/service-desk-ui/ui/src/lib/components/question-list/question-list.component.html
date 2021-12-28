@@ -1,7 +1,8 @@
 <lib-question
-  *ngFor="let question of questions; trackBy: trackByQuestion"
+  *ngFor="let question of questions; trackBy: trackByQuestion; let first = first"
   [data]="question"
   [attachmentLoadingIds]="attachmentLoadingIds"
+  [ngClass]="{ 'first-dynamic-item': first }"
   (upRating)="upRating.emit(question)"
   (downloadAttachment)="downloadAttachment.emit($event)"
 ></lib-question>

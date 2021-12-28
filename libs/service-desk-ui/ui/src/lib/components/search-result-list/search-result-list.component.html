@@ -1,8 +1,9 @@
 <div class="tab-content">
   <div class="sd-dlist-divider-b">
     <lib-search-result-template
-      *ngFor="let resultItem of result"
+      *ngFor="let resultItem of result; let first = first"
       [searchResult]="resultItem"
+      [ngClass]="{ 'first-dynamic-item': first }"
     ></lib-search-result-template>
   </div>
 </div>
