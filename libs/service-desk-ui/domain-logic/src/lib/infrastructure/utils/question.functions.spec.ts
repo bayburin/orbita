@@ -1,7 +1,7 @@
 import { QuestionOverviewVM } from './../../entities/view-models/question-overview-vm.interface';
 import { isQuestionBelongsByServiceToUser, isQuestionBelongsToUser } from './question.functions';
-import { User } from './../../entities/model/user.interface';
-import { ResponsibleUser } from './../../entities/model/responsible-user.interface';
+import { User } from './../../entities/models/user.interface';
+import { ResponsibleUser } from './../../entities/models/responsible-user.interface';
 
 describe('isQuestionBelongsToUser', () => {
   let user: User;

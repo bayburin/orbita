@@ -22,4 +22,11 @@ export abstract class SearchFacadeAbstract {
    * @param term - поисковая строка
    */
   abstract search(term: string): void;
+
+  /**
+   * Возвращает ссылку на результат поиска
+   *
+   * @param result - результат поиска
+   */
+  abstract getLink(result: SearchResultTypes): string;
 }

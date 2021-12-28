@@ -10,4 +10,8 @@ export class SearchFacadeStub implements SearchFacadeAbstract {
   search() {
     /** */
   }
+
+  getLink() {
+    return ';';
+  }
 }

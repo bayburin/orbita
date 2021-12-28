@@ -1,7 +1,7 @@
 import { ServiceVM } from './../../entities/view-models/service-vm.interface';
 import { isServiceBelongsToUser } from './service.functions';
-import { User } from './../../entities/model/user.interface';
-import { ResponsibleUser } from './../../entities/model/responsible-user.interface';
+import { User } from './../../entities/models/user.interface';
+import { ResponsibleUser } from './../../entities/models/responsible-user.interface';
 
 describe('isServiceBelongsToUser', () => {
   let user: User;

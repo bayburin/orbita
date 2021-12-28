@@ -29,9 +29,7 @@ export class SearchComponent implements OnInit, OnDestroy {
         return;
       }
 
-      // this.searchTerm = res.name;
-      // TODO: Тут редирект на категорию/услугу/вопрос
-      // this.router.navigateByUrl(res.getShowLink());
+      this.router.navigateByUrl(this.searchFacade.getLink(res));
     });
   }
 
