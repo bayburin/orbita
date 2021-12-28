@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-
-import { BreadcrumbValueTypes } from '@orbita/service-desk-ui/domain-logic';
+import { BreadcrumbValueTypes, ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
+
 import { LayoutComponent } from './containers/layout/layout.component';
 import { NavbarComponent } from './containers/navbar/navbar.component';
 import { BreadcrumbComponent } from './containers/breadcrumb/breadcrumb.component';
+import { ServiceRedirectionResolver } from './resolvers/service-redirection.resolver';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
         loadChildren: () =>
           import('@orbita/service-desk-ui/feature-home').then((m) => m.ServiceDeskUiFeatureHomeModule),
         data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Главная' } },
+      },
+      {
+        path: 'services/:id',
+        resolve: { service: ServiceRedirectionResolver },
       },
       {
         path: 'categories',
@@ -90,7 +95,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule],
+  imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiDomainLogicModule, ServiceDeskUiUiModule],
   exports: [RouterModule],
   declarations: [LayoutComponent, NavbarComponent, BreadcrumbComponent],
 })

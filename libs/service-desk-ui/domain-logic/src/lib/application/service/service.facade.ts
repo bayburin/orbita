@@ -14,6 +14,7 @@ import * as VMSelectors from '../../infrastructure/store/selectors/vm.selectors'
   providedIn: 'root',
 })
 export class ServiceFacade implements ServiceFacadeAbstract {
+  entity$ = this.store.select(ServiceSelectors.getSelected);
   selected$ = this.store.select(VMSelectors.getSelectedServiceVM);
   loading$ = this.store.select(ServiceSelectors.getLoading);
   loaded$ = this.store.select(ServiceSelectors.getLoaded);

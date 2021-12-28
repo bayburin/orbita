@@ -1,10 +1,15 @@
 import { Observable } from 'rxjs';
 
+import { Service } from '../../entities/models/service.interface';
 import { ServiceVM } from '../../entities/view-models/service-vm.interface';
 
 export abstract class ServiceFacadeAbstract {
   /**
-   * Выбранная категория
+   * Выбранная модель услуги
+   */
+  entity$: Observable<Service>;
+  /**
+   * Выбранная услуга
    */
   selected$: Observable<ServiceVM>;
   /**
