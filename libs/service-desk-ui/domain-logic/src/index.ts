@@ -19,7 +19,7 @@ export * from './lib/entities/view-models/category-vm.interface';
 export * from './lib/entities/view-models/service-vm.interface';
 export * from './lib/entities/view-models/question-vm.interface';
 export * from './lib/entities/view-models/question-overview-vm.interface';
-export * from './lib/entities/view-models/event-types.vm.enum';
+export * from './lib/entities/view-models/notification-types.vm.enum';
 export * from './lib/entities/view-models/limit-types-vm.enum';
 export * from './lib/entities/view-models/answer-vm.interface';
 export * from './lib/entities/view-models/ticket-overview-vm.interface';

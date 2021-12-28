@@ -65,4 +65,10 @@ export class NotificationFacade implements NotificationFacadeAbstract {
       this.store.dispatch(NotificationActions.addTmpNotification({ notification: tmpNotification }));
     });
   }
+
+  showMessage(message: string) {
+    const notification = TmpNotificationFactory.createFromMessage(message);
+
+    this.store.dispatch(NotificationActions.addTmpNotification({ notification }));
+  }
 }

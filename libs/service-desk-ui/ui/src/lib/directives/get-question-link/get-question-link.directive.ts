@@ -1,4 +1,5 @@
 import { Directive, HostListener } from '@angular/core';
+import { NotificationFacade } from '@orbita/service-desk-ui/domain-logic';
 
 import { QuestionComponent } from './../../components/question/question.component';
 
@@ -6,7 +7,7 @@ import { QuestionComponent } from './../../components/question/question.componen
   selector: '[libGetQuestionLink]',
 })
 export class GetQuestionLinkDirective {
-  constructor(private component: QuestionComponent) {}
+  constructor(private component: QuestionComponent, private notificationFacade: NotificationFacade) {}
 
   @HostListener('click', ['$event']) onClick(event: Event) {
     event.stopPropagation();
@@ -23,7 +24,6 @@ export class GetQuestionLinkDirective {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
-    // TODO: Уведомить о том, что ссылка скопирована
-    // this.notifyService.setMessage('Ссылка на вопрос добавлена в буфер обмена');
+    this.notificationFacade.showMessage('Ссылка на вопрос добавлена в буфер обмена');
   }
 }

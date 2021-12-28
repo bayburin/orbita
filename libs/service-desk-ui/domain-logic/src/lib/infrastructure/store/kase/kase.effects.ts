@@ -3,18 +3,20 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
-import { map, switchMap, withLatestFrom, catchError } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom, catchError, tap } from 'rxjs/operators';
 
+import { KaseApi } from './../../api/kase/kase.api';
+import { NotificationFacade } from '../../../application/notification/notification.facade';
 import * as KaseActions from './kase.actions';
 import * as KaseFeature from './kase.reducer';
 import * as KaseSelectors from './kase.selectors';
-import { KaseApi } from './../../api/kase/kase.api';
 
 @Injectable()
 export class KaseEffects {
   constructor(
     private readonly actions$: Actions,
     private kaseApi: KaseApi,
+    private notificationFacade: NotificationFacade,
     private store: Store<KaseFeature.KasePartialState>
   ) {}
 
@@ -53,7 +55,11 @@ export class KaseEffects {
     this.actions$.pipe(
       ofType(KaseActions.revoke),
       fetch({
-        run: (action) => this.kaseApi.revoke(action.caseId).pipe(map(() => KaseActions.revokeSuccess())),
+        run: (action) =>
+          this.kaseApi.revoke(action.caseId).pipe(
+            tap(() => this.notificationFacade.showMessage(`Заявка №${action.caseId} отменена`)),
+            map(() => KaseActions.revokeSuccess())
+          ),
         onError: (action, error) => {
           console.error('Error', error);
           return KaseActions.revokeFailure({ error });
@@ -73,6 +79,7 @@ export class KaseEffects {
         };
 
         return this.kaseApi.update(action.caseId, payload).pipe(
+          tap(() => this.notificationFacade.showMessage(`Спасибо за оценку!`)),
           map(() => KaseActions.voteSuccess()),
           catchError((error) => of(KaseActions.voteFailure({ error })))
         );

@@ -1,4 +1,4 @@
-import { Notification, TmpNotification } from '../../entities/models/notification.interface';
+import { Notification, NotificationTypes, TmpNotification } from '../../entities/models/notification.interface';
 
 /**
  * Фабрика по созданию сообщений
@@ -13,6 +13,18 @@ export class TmpNotificationFactory {
     return {
       event_type: notification.event_type,
       message: notification.body.message,
+    };
+  }
+
+  /**
+   * Создает временное уведомление из текстового сообщения
+   *
+   * @param message - текст сообщения
+   */
+  static createFromMessage(message: string): TmpNotification {
+    return {
+      event_type: NotificationTypes.INFO,
+      message,
     };
   }
 }

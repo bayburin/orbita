@@ -62,4 +62,11 @@ export abstract class NotificationFacadeAbstract {
    * Подключается к каналу 'UserNotifyChannel'
    */
   abstract connectToUserNotifications(): Subscription;
+
+  /**
+   * Выводит указанное сообщение
+   *
+   * @param message - сообщение
+   */
+  abstract showMessage(message: string): void;
 }

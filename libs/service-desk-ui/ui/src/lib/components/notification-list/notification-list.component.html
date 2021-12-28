@@ -6,7 +6,7 @@
 >
   <div class="row align-items-center">
     <div class="col-md-1 text-center">
-      <i class="mdi mdi-24px" [ngClass]="eventTypeVM(notification.event_type)?.icon"></i>
+      <i class="mdi mdi-24px" [ngClass]="notificationTypeVM(notification.event_type)?.icon"></i>
     </div>
     <div class="col-md-9" [innerHtml]="notification.body.message"></div>
     <div class="col-md-2 text-center">{{ notification.date }}</div>

@@ -30,7 +30,7 @@ export interface Notification {
   /**
    * Тип уведомления
    */
-  readonly event_type: EventTypes;
+  readonly event_type: NotificationTypes;
 
   /**
    * Табельный номер пользователя, которому предназначается уведомление (???)
@@ -55,7 +55,7 @@ export interface TmpNotification {
   /**
    * Тип уведомления
    */
-  readonly event_type: EventTypes;
+  readonly event_type: NotificationTypes;
   /**
    * Сообщение
    */
@@ -65,10 +65,11 @@ export interface TmpNotification {
 /**
  * Типы уведомлений
  */
-export enum EventTypes {
+export enum NotificationTypes {
   BROADCAST = 'broadcast',
   APP = 'app',
   ERROR = 'error',
+  INFO = 'info',
 }
 
 /**

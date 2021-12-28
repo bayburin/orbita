@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { EventTypes, EventTypesVM, getViewModelEventType, TmpNotification } from '@orbita/service-desk-ui/domain-logic';
+import {
+  NotificationTypes,
+  NotificationTypesVM,
+  getViewModelNotificationType,
+  TmpNotification,
+} from '@orbita/service-desk-ui/domain-logic';
 import { notifyAnimation } from './../../animations/notify.animation';
 
 @Component({
@@ -20,7 +25,7 @@ export class NotificationAlertListComponent {
    */
   @Output() closeNotification = new EventEmitter<TmpNotification>();
 
-  eventTypeVM(eventType: EventTypes): EventTypesVM {
-    return getViewModelEventType(eventType);
+  notificationTypeVM(notificationType: NotificationTypes): NotificationTypesVM {
+    return getViewModelNotificationType(notificationType);
   }
 }

@@ -34,4 +34,8 @@ export class NotificationFacadeStub implements NotificationFacadeAbstract {
   connectToUserNotifications() {
     return new Subscription();
   }
+
+  showMessage() {
+    /** */
+  }
 }
