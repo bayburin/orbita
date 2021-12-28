@@ -14,6 +14,7 @@ export interface NormalizedCategoriesEntities {
   services?: Dictionary<Service>;
   questions?: Dictionary<Question>;
   answers?: Dictionary<Answer>;
+  responsible_users?: Dictionary<ResponsibleUser>;
   attachments?: Dictionary<Attachment>;
 }
 

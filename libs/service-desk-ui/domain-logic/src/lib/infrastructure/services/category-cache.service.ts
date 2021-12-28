@@ -12,7 +12,9 @@ export const answerSchema = new schema.Entity('answers', {
   attachments: [attachmentSchema],
 });
 
-export const serviceSchema = new schema.Entity('services');
+export const serviceSchema = new schema.Entity('services', {
+  responsible_users: [responsibleUserSchema],
+});
 
 export const questionSchema = new schema.Entity('questions', {
   answers: [answerSchema],
