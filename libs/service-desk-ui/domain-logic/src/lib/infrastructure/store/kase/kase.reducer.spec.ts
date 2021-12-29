@@ -1,9 +1,11 @@
 import { Action } from '@ngrx/store';
 
 import * as KaseActions from './kase.actions';
-import { Kase } from './../../../entities/model/kase.interface';
+import { Kase } from './../../../entities/models/kase.interface';
 import { State, initialState, reducer } from './kase.reducer';
 import { Filter } from '../../../entities/filter.interface';
+import { KaseViewForm } from '../../../entities/form/kase-view-form.interface';
+import { SvtItem } from '../../../entities/models/svt/svt-item.interface';
 
 describe('KaseReducer', () => {
   let action: Action;
@@ -12,6 +14,8 @@ describe('KaseReducer', () => {
       case_id,
       desc: desc || `desc-${case_id}`,
     } as Kase);
+
+  // ========== Список заявок ==========
 
   describe('init', () => {
     it('should change attributes', () => {
@@ -150,6 +154,60 @@ describe('KaseReducer', () => {
 
       expect(result.error).toEqual(error);
       expect(result.loading).toEqual(false);
+    });
+  });
+
+  describe('loadParamsForNewForm', () => {
+    it('should change attributes', () => {
+      action = KaseActions.loadParamsForNewForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(true);
+      expect(result.form.loaded).toBe(false);
+    });
+  });
+
+  describe('loadParamsForNewFormSuccess', () => {
+    it('should change attributes', () => {
+      initialState.loading = true;
+      action = KaseActions.loadParamsForNewFormSuccess();
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(false);
+      expect(result.form.loaded).toBe(true);
+    });
+  });
+
+  describe('loadParamsForNewFormFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      initialState.loading = true;
+      action = KaseActions.loadParamsForNewFormFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(false);
+      expect(result.form.loaded).toBe(false);
+      expect(result.form.error).toEqual(error);
+    });
+  });
+
+  describe('setInitialDataToNewForm', () => {
+    it('should change attributes', () => {
+      const formData = { user_tn: 123 } as KaseViewForm;
+      action = KaseActions.setInitialDataToNewForm({ formData });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.entity).toEqual(formData);
+    });
+  });
+
+  describe('setSvtItems', () => {
+    it('should change attributes', () => {
+      const svtItems = [{ item_id: 1 }, { item_id: 2 }] as SvtItem[];
+      action = KaseActions.setSvtItems({ svtItems });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.svtItems).toEqual(svtItems);
     });
   });
 

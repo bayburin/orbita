@@ -22,6 +22,11 @@ export abstract class ServiceFacadeAbstract {
   loaded$: Observable<boolean>;
 
   /**
+   * Список моделей
+   */
+  entities$: Observable<Service[]>;
+
+  /**
    * загружает выбранную услугу
    */
   abstract loadSelected(): void;

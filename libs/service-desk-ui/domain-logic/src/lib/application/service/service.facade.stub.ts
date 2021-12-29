@@ -7,6 +7,7 @@ export class ServiceFacadeStub implements ServiceFacadeAbstract {
   selected$ = new BehaviorSubject(null);
   loading$ = new BehaviorSubject(false);
   loaded$ = new BehaviorSubject(false);
+  entities$ = new BehaviorSubject([]);
 
   loadSelected() {
     /** */

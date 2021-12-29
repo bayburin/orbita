@@ -1,11 +1,13 @@
 import { createSelector } from '@ngrx/store';
 
 import { getServiceDeskUiState } from './../index';
-import { KASE_FEATURE_KEY, State, kaseAdapter, KasePartialState } from './kase.reducer';
+import { KASE_FEATURE_KEY, State, kaseAdapter, KasePartialState, FormState } from './kase.reducer';
 
 export const getKaseState = createSelector(getServiceDeskUiState, (state: KasePartialState) => state[KASE_FEATURE_KEY]);
 
 const { selectAll, selectEntities } = kaseAdapter.getSelectors();
+
+// ========== Список заявок ==========
 
 export const getLoaded = createSelector(getKaseState, (state: State) => state.loaded);
 
@@ -26,3 +28,17 @@ export const getServiceIds = createSelector(getKaseState, (state: State) => stat
 export const getSelectedStatusId = createSelector(getKaseState, (state: State) => state.selectedStatusId);
 
 export const getIsAnyKase = createSelector(getStatuses, (statuses) => statuses.some((status) => status.count > 0));
+
+// ========== Форма новой заявки ==========
+
+export const getForm = createSelector(getKaseState, (state: State) => state.form);
+
+export const getFormEntity = createSelector(getForm, (state: FormState) => state.entity);
+
+export const getFormLoading = createSelector(getForm, (state: FormState) => state.loading);
+
+export const getFormLoaded = createSelector(getForm, (state: FormState) => state.loaded);
+
+export const getFormError = createSelector(getForm, (state: FormState) => state.error);
+
+export const getFormSvtItems = createSelector(getForm, (state: FormState) => state.svtItems);

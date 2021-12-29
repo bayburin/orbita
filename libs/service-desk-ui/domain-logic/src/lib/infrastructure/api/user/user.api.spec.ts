@@ -63,4 +63,22 @@ describe('UserApi', () => {
         .flush(notifications);
     });
   });
+
+  describe('loadUserOwns()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/users/owns`;
+    const owns = [{ id: 1 }];
+
+    it('should return new notifications', () => {
+      service.loadUserOwns().subscribe((result) => {
+        expect(result).toEqual(owns);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: api,
+        })
+        .flush(owns);
+    });
+  });
 });

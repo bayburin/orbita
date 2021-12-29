@@ -2,6 +2,10 @@ import { createAction, props } from '@ngrx/store';
 
 import { Filter } from '../../../entities/filter.interface';
 import { Kase } from '../../../entities/models/kase.interface';
+import { SvtItem } from '../../../entities/models/svt/svt-item.interface';
+import { KaseViewForm } from './../../../entities/form/kase-view-form.interface';
+
+// ========== Список заявок ==========
 
 export const init = createAction('[Kase] Init');
 
@@ -28,3 +32,23 @@ export const vote = createAction('[Kase/API] Vote Kase Rating', props<{ caseId: 
 export const voteSuccess = createAction('[Kase/API] Vote Kase Success');
 
 export const voteFailure = createAction('[Kase/API] Vote Kase Rating Failure', props<{ error: any }>());
+
+// ========== Форма новой заявки ==========
+
+export const initNewForm = createAction('[Kase] Init New Form');
+
+export const loadParamsForNewForm = createAction('[Kase/API] Load Data For New Form');
+
+export const loadParamsForNewFormSuccess = createAction('[Kase/API] Load Params For New Form Success');
+
+export const loadParamsForNewFormFailure = createAction(
+  '[Kase/API] Load Params For New Form Failure',
+  props<{ error: any }>()
+);
+
+export const setInitialDataToNewForm = createAction(
+  '[Kase] Set Initial Data To New Form',
+  props<{ formData: KaseViewForm }>()
+);
+
+export const setSvtItems = createAction('[Kase] Set SvtItems', props<{ svtItems: SvtItem[] }>());

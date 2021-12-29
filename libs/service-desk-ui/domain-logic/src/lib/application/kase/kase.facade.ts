@@ -13,6 +13,8 @@ import * as KaseActions from '../../infrastructure/store/kase/kase.actions';
   providedIn: 'root',
 })
 export class KaseFacade implements KaseFacadeAbstract {
+  // ========== Список заявок ==========
+
   all$ = this.store.select(KaseSelectors.getAll);
   initLoading$ = this.store.select(KaseSelectors.getInitLoading);
   loading$ = this.store.select(KaseSelectors.getLoading);
@@ -20,6 +22,13 @@ export class KaseFacade implements KaseFacadeAbstract {
   statuses$ = this.store.select(KaseSelectors.getStatuses);
   selectedStatusId$ = this.store.select(KaseSelectors.getSelectedStatusId);
   isAnyKase$ = this.store.select(KaseSelectors.getIsAnyKase);
+
+  // ========== Форма новой заявки ==========
+
+  formEntity$ = this.store.select(KaseSelectors.getFormEntity);
+  formSvtItems$ = this.store.select(KaseSelectors.getFormSvtItems);
+  formLoadingParams$ = this.store.select(KaseSelectors.getFormLoading);
+  formErrorParams$ = this.store.select(KaseSelectors.getFormError);
 
   constructor(private store: Store<KaseFeature.KasePartialState>) {}
 
@@ -41,5 +50,9 @@ export class KaseFacade implements KaseFacadeAbstract {
 
   clearSelectedServices() {
     this.store.dispatch(KaseActions.setServiceIds({ serviceIds: [] }));
+  }
+
+  initNewForm() {
+    this.store.dispatch(KaseActions.initNewForm());
   }
 }

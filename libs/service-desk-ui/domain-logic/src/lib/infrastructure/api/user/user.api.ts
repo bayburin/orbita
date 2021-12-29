@@ -4,6 +4,7 @@ import { SERVICE_DESK_UI_ENV_TOKEN, ServiceDeskUiEnvironment } from '@orbita/sha
 
 import { Notification } from '../../../entities/models/notification.interface';
 import { UserApiAbstract } from './user.api.abstract';
+import { UserOwns } from '../../../entities/server-data/user-owns.interface';
 
 /**
  * Содержит API пользователя
@@ -26,5 +27,9 @@ export class UserApi implements UserApiAbstract {
     const params = new HttpParams().set('limit', `${limit}`);
 
     return this.http.get<Notification[]>(`${this.api}/new_notifications`, { params });
+  }
+
+  loadUserOwns() {
+    return this.http.get<UserOwns>(`${this.api}/owns`);
   }
 }

@@ -1,10 +1,13 @@
 import { Filter } from '../../../entities/filter.interface';
-import { Kase } from './../../../entities/model/kase.interface';
-import { kaseAdapter, KasePartialState, initialState } from './kase.reducer';
+import { KaseViewForm } from '../../../entities/form/kase-view-form.interface';
+import { SvtItem } from '../../../entities/models/svt/svt-item.interface';
+import { Kase } from './../../../entities/models/kase.interface';
+import { kaseAdapter, initialState } from './kase.reducer';
 import * as KaseSelectors from './kase.selectors';
 
 describe('KaseSelectors', () => {
   const error = { message: 'error message' };
+  const formError = { message: 'form error message' };
   const createKaseEntity = (case_id: number, desc = ''): Kase =>
     ({
       case_id,
@@ -24,9 +27,19 @@ describe('KaseSelectors', () => {
   ] as Filter[];
   const serviceIds = [1, 2, 3];
   const selectedStatusId = 12345;
+  const formEntity = { desc: 'test' } as KaseViewForm;
+  const svtItems = [{ item_id: 1 }, { item_id: 2 }] as SvtItem[];
+  let formState: any;
   let state: any;
 
   beforeEach(() => {
+    formState = {
+      entity: formEntity,
+      loading: false,
+      loaded: true,
+      svtItems,
+      error: formError,
+    };
     state = kaseAdapter.setAll(arrEntities, {
       ...initialState,
       initLoading: false,
@@ -37,8 +50,11 @@ describe('KaseSelectors', () => {
       statuses,
       serviceIds,
       selectedStatusId,
+      form: formState,
     });
   });
+
+  // ========== Список заявок ==========
 
   it('getLoaded() should return "loaded" attribute', () => {
     expect(KaseSelectors.getLoaded.projector(state)).toEqual(true);
@@ -78,5 +94,31 @@ describe('KaseSelectors', () => {
 
   it('getIsAnyKase() should return entities', () => {
     expect(KaseSelectors.getIsAnyKase.projector(statuses)).toBe(true);
+  });
+
+  // ========== Форма новой заявки ==========
+
+  it('getForm() should return newForm state', () => {
+    expect(KaseSelectors.getForm.projector(state)).toEqual(formState);
+  });
+
+  it('getFormEntity() should return form entity', () => {
+    expect(KaseSelectors.getFormEntity.projector(formState)).toEqual(formEntity);
+  });
+
+  it('getFormLoading() should return loading attribute', () => {
+    expect(KaseSelectors.getFormLoading.projector(formState)).toBe(false);
+  });
+
+  it('getFormLoaded() should return loaded attribute', () => {
+    expect(KaseSelectors.getFormLoaded.projector(formState)).toBe(true);
+  });
+
+  it('getFormError() should return "formError" attribute', () => {
+    expect(KaseSelectors.getFormError.projector(state)).toEqual(formError);
+  });
+
+  it('getFormSvtItems() should return svtItems attribute', () => {
+    expect(KaseSelectors.getFormSvtItems.projector(formState)).toEqual(svtItems);
   });
 });

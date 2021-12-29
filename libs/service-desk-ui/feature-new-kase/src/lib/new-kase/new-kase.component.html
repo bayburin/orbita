@@ -1,1 +1,240 @@
-<p>new-kase works!</p>
+<section>
+  <div class="container">
+    <lib-section-header header="Запрос в техподдержку"></lib-section-header>
+  </div>
+  <!-- <app-free-claim-form formType="new" (claimSaved)="onSave()"></app-free-claim-form> -->
+
+  <form [formGroup]="form" (ngSubmit)="submitForm()" class="animate-element">
+    <div class="jumbotron bg-render-unmasked border-top border-bottom sd-p-3">
+      <div class="container">
+        <section>
+          <table class="table table-sm table-borderless">
+            <thead>
+              <tr>
+                <th class="col-4">Табельный номер</th>
+                <th class="col-4">Пользователь</th>
+                <th class="col-4">Подразделение</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ form.get('user_tn').value }}</td>
+                <td>{{ form.get('fio').value }}</td>
+                <td>{{ form.get('dept').value }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <div class="row">
+            <div class="form-group col-md-3">
+              <label for="email">Электронная почта</label>
+              <input
+                type="text"
+                id="email"
+                name="email"
+                formControlName="email"
+                class="form-control"
+                placeholder="Электронная почта"
+              />
+              <div class="sd-form-control-message small">* @iss-reshetnev.ru</div>
+            </div>
+            <div class="form-group col-md-3 offset-md-1">
+              <label for="email">Рабочий телефон</label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                formControlName="phone"
+                class="form-control"
+                placeholder="Рабочий телефон"
+              />
+            </div>
+            <div class="form-group col-md-3 offset-md-1">
+              <label for="email">Сотовый телефон</label>
+              <input
+                type="text"
+                id="mobile"
+                name="mobile"
+                formControlName="mobile"
+                class="form-control"
+                placeholder="Сотовый телефон"
+              />
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <div class="form-group row">
+            <label for="service" class="col-md-2 col-form-label text-primary col-form-label">Выбор услуги</label>
+            <div class="col-md">
+              <div class="col-md-6 pl-0">
+                <div class="form-group position-relative">
+                  <div class="sd-spinner-wrap">
+                    <input
+                      id="service"
+                      name="service"
+                      type="text"
+                      class="form-control"
+                      formControlName="service"
+                      [ngbTypeahead]="searchService"
+                      [resultTemplate]="rt"
+                      [inputFormatter]="formatter"
+                      [editable]="false"
+                      #serviceTypeahead="ngbTypeahead"
+                      [ngClass]="{
+                        'is-invalid': (formService.touched || submitted) && formService.errors,
+                        'is-valid': formService.touched && formService.valid
+                      }"
+                      autocomplete="off"
+                      placeholder="Выберите услугу"
+                      (click)="onService.next($any($event).target.value)"
+                      (focus)="onService.next($any($event).target.value)"
+                    />
+                    <div class="invalid-feedback">
+                      <span *ngIf="formService.errors?.required">
+                        Необходимо выбрать услугу или поставить галочку, если услуга отсутствует в списке
+                      </span>
+                    </div>
+                    <small *ngIf="errorParams$ | async">Не удалось загрузить список услуг</small>
+                    <div *ngIf="loadingParams$ | async" class="sd-spinner-border show" role="status">
+                      <span>Загрузка...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    id="without_service"
+                    name="without_service"
+                    formControlName="without_service"
+                    (change)="toggleFormControl(formService)"
+                    class="custom-control-input"
+                  />
+                  <label for="without_service" class="custom-control-label">
+                    Обращение не связано ни с одним из перечисленных видов услуг
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="desc" class="col-md-2 col-form-label text-primary col-form-label">Описание проблемы</label>
+            <div class="col-md">
+              <div class="col-md-6 pl-0">
+                <textarea
+                  id="desc"
+                  name="desc"
+                  rows="5"
+                  formControlName="desc"
+                  class="form-control"
+                  placeholder="Введите описание"
+                  [ngClass]="{
+                    'is-invalid': (formDesc.touched || submitted) && formDesc.errors,
+                    'is-valid': formDesc.touched && formDesc.valid
+                  }"
+                ></textarea>
+                <div class="invalid-feedback">
+                  <span *ngIf="formDesc.errors?.required">Не может быть пустым</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="item" class="col-md-2 col-form-label text-primary col-form-label">Выбор устройства</label>
+            <div class="col-md">
+              <div class="col-md-6 pl-0">
+                <div class="form-group">
+                  <div class="sd-spinner-wrap">
+                    <div class="sd-custom-select-control">
+                      <select
+                        id="item"
+                        name="item"
+                        formControlName="item"
+                        class="custom-select"
+                        [ngClass]="{
+                          'is-invalid': (formItem.touched || submitted) && formItem.errors,
+                          'is-valid': formItem.touched && formItem.valid
+                        }"
+                      >
+                        <option [value]="null">Выберите устройство</option>
+                        <option *ngFor="let item of svtItems$ | async; trackBy: trackByItem" [ngValue]="item">
+                          <span>{{ item.type.short_description }}</span>
+                          <span *ngIf="item.short_item_model">{{ ' ' + item.short_item_model + ';' }}</span>
+                          <span *ngIf="item.invent_num">{{ ' инв. № ' + item.invent_num }}</span>
+                        </option>
+                      </select>
+                      <div class="invalid-feedback">
+                        <span *ngIf="formItem.errors?.required">
+                          Необходимо выбрать технику или поставить галочку, если обращение не связано с техникой
+                        </span>
+                      </div>
+                      <small *ngIf="errorParams$ | async">Не удалось загрузить список вычислительной техники</small>
+                    </div>
+                    <div *ngIf="loadingParams$ | async" class="sd-spinner-border show" role="status">
+                      <span>Загрузка...</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    id="without_item"
+                    name="without_item"
+                    formControlName="without_item"
+                    (change)="toggleFormControl(formItem)"
+                    class="custom-control-input"
+                  />
+                  <label for="without_item" class="custom-control-label">
+                    Обращение не связано ни с одним из перечисленных устройств
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label for="files" class="col-md-2 col-form-label text-primary col-form-label">Файлы</label>
+            <div class="col-md">
+              <div class="col-md-6 pl-0">
+                <div class="form-group">
+                  <div class="sd-file-wrap">
+                    <input
+                      type="file"
+                      id="files"
+                      name="files"
+                      class="form-control"
+                      (change)="convertToBase64($event)"
+                      multiple="true"
+                    />
+                    <input #fileView type="text" class="form-control" placeholder="Выберите файлы" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="form-row align-items-center justify-content-center sd-mb-7">
+        <button type="submit" [disabled]="(loading$ | async) || (loadingParams$ | async)" class="btn btn-primary">
+          <span class="d-flex justify-content-center">
+            <lib-loading [loading]="loading$ | async" class="mr-1 text-body"></lib-loading>Отправить
+          </span>
+        </button>
+        <button (click)="cancelForm($event)" class="btn btn-gray-white ml-3">Отменить</button>
+      </div>
+    </div>
+  </form>
+</section>
+
+<ng-template #rt let-r="result">{{ r.name }}</ng-template>

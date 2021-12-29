@@ -18,6 +18,7 @@ export class ServiceFacade implements ServiceFacadeAbstract {
   selected$ = this.store.select(VMSelectors.getSelectedServiceVM);
   loading$ = this.store.select(ServiceSelectors.getLoading);
   loaded$ = this.store.select(ServiceSelectors.getLoaded);
+  entities$ = this.store.select(ServiceSelectors.getAll);
 
   constructor(private store: Store<ServiceFeature.ServicePartialState>) {}
 

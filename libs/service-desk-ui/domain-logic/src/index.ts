@@ -14,6 +14,7 @@ export * from './lib/entities/models/notification.interface';
 export * from './lib/entities/models/hideable.interface';
 export * from './lib/entities/models/kase.interface';
 export * from './lib/entities/models/attachment.interface';
+export * from './lib/entities/models/svt/svt-item.interface';
 
 export * from './lib/entities/view-models/category-vm.interface';
 export * from './lib/entities/view-models/service-vm.interface';

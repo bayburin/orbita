@@ -4,12 +4,18 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom, catchError, tap } from 'rxjs/operators';
+import { AuthHelper } from '@iss/ng-auth-center';
 
+import { KaseFactory } from './../../factories/kase.factory';
 import { KaseApi } from './../../api/kase/kase.api';
 import { NotificationFacade } from '../../../application/notification/notification.facade';
+import { UserApi } from '../../api/user/user.api';
 import * as KaseActions from './kase.actions';
 import * as KaseFeature from './kase.reducer';
 import * as KaseSelectors from './kase.selectors';
+import * as RouterSelectors from '../selectors/router.selectors';
+import * as ServiceActions from '../service/service.actions';
+import * as ServiceSelectors from '../service/service.selectors';
 
 @Injectable()
 export class KaseEffects {
@@ -17,8 +23,12 @@ export class KaseEffects {
     private readonly actions$: Actions,
     private kaseApi: KaseApi,
     private notificationFacade: NotificationFacade,
-    private store: Store<KaseFeature.KasePartialState>
+    private store: Store<KaseFeature.KasePartialState>,
+    private authHelper: AuthHelper,
+    private userApi: UserApi
   ) {}
+
+  // ========== Список заявок ==========
 
   init$ = createEffect(() =>
     this.actions$.pipe(
@@ -98,6 +108,73 @@ export class KaseEffects {
     this.actions$.pipe(
       ofType(KaseActions.setSelectedStatusId),
       map(() => KaseActions.loadAll())
+    )
+  );
+
+  // ========== Форма новой заявки ==========
+
+  initNewForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(KaseActions.initNewForm),
+      map(() => KaseActions.loadParamsForNewForm())
+    )
+  );
+
+  loadParamsForNewForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(KaseActions.loadParamsForNewForm),
+      switchMap(() =>
+        this.userApi.loadUserOwns().pipe(
+          switchMap((owns) => {
+            return [
+              ServiceActions.setAll({ services: owns.services || [] }),
+              KaseActions.setSvtItems({ svtItems: owns.items || [] }),
+              KaseActions.loadParamsForNewFormSuccess(),
+            ];
+          }),
+          catchError((error) => of(KaseActions.loadParamsForNewFormFailure({ error })))
+        )
+      )
+    )
+  );
+
+  loadParamsForNewFormSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(KaseActions.loadParamsForNewFormSuccess),
+      withLatestFrom(this.store.select(RouterSelectors.selectQueryParams), this.store.select(ServiceSelectors.getAll)),
+      map(([_action, params, services]) => {
+        const serviceName = params.service;
+        const paramsData = {
+          comment: params.comment,
+          desc: params.desc,
+          service: serviceName
+            ? services.find((service) => service.name.toLowerCase() === serviceName.toLowerCase())
+            : null,
+          without_service: params.without_service,
+          without_item: params.without_item,
+        };
+        const formData = KaseFactory.createViewForm(this.authHelper.getJwtPayload(), paramsData);
+
+        return KaseActions.setInitialDataToNewForm({ formData });
+      })
+    )
+  );
+
+  loadParamsForNewFormFailure$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(KaseActions.loadParamsForNewFormFailure),
+      withLatestFrom(this.store.select(RouterSelectors.selectQueryParams)),
+      map(([_action, params]) => {
+        const paramsData = {
+          comment: params.comment,
+          desc: params.desc,
+          without_service: true,
+          without_item: true,
+        };
+        const formData = KaseFactory.createViewForm(this.authHelper.getJwtPayload(), paramsData);
+
+        return KaseActions.setInitialDataToNewForm({ formData });
+      })
     )
   );
 }

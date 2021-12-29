@@ -12,4 +12,8 @@ export class UserApiStub implements UserApiAbstract {
   loadNewNotifications() {
     return of(null);
   }
+
+  loadUserOwns() {
+    return of(null);
+  }
 }

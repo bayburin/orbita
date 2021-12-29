@@ -1,9 +1,13 @@
+import { KaseViewForm } from './../../entities/form/kase-view-form.interface';
 import { Observable } from 'rxjs';
 import { Filter } from '../../entities/filter.interface';
 
 import { Kase } from '../../entities/models/kase.interface';
+import { SvtItem } from '../../entities/models/svt/svt-item.interface';
 
 export abstract class KaseFacadeAbstract {
+  // ========== Список заявок ==========
+
   /**
    * Список заявок
    */
@@ -32,6 +36,28 @@ export abstract class KaseFacadeAbstract {
    * Показывает, имеется ли у пользователя хотя бы одна заявка
    */
   isAnyKase$: Observable<boolean>;
+
+  // ========== Форма новой заявки ==========
+
+  /**
+   * Данные формы
+   */
+  formEntity$: Observable<KaseViewForm>;
+
+  /**
+   * Список ВТ, доступной пользователю
+   */
+  formSvtItems$: Observable<SvtItem[]>;
+
+  /**
+   * Индикатор загрузки параметров формы
+   */
+  formLoadingParams$: Observable<boolean>;
+
+  /**
+   * Данные об ошибке, произошедшей во время загрузки параметров
+   */
+  formErrorParams$: Observable<any>;
 
   /**
    * Инициализирует начальную загрузку заявок и других данных
@@ -64,4 +90,9 @@ export abstract class KaseFacadeAbstract {
    * Очищает список услуг, по которым фильтруются заявки
    */
   abstract clearSelectedServices(): void;
+
+  /**
+   * Инициализирует новую форму заявки
+   */
+  abstract initNewForm(): void;
 }
