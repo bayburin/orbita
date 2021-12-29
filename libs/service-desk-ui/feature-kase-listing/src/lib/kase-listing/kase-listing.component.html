@@ -9,7 +9,7 @@
 
 <ng-template #initComplete>
   <ng-container *ngIf="isAnyKase$ | async; else noKases">
-    <a routerLink="/claims/new" class="btn btn-primary mb-3">Создать заявку в свободной форме</a>
+    <a [routerLink]="['/claims', 'new']" class="btn btn-primary mb-3">Создать заявку в свободной форме</a>
     <lib-filter-template
       [filters]="statuses$ | async"
       [selectedId]="selectedStatusId$ | async"
@@ -27,6 +27,6 @@
 <ng-template #noKases>
   <div @contentBlockAnimation class="d-flex justify-content-start align-items-center">
     <span>Заявки отсутствуют</span>
-    <a routerLink="/claims/new" class="btn btn-primary ml-4">Создать заявку в свободной форме</a>
+    <a [routerLink]="['/claims', 'new']" class="btn btn-primary ml-4">Создать заявку в свободной форме</a>
   </div>
 </ng-template>
