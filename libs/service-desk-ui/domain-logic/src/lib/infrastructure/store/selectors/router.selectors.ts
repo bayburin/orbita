@@ -51,10 +51,9 @@ function getBreadcrumbRoute(
 ): MenuItem[] {
   const breadcrumb: BreadcrumbRoute = currentRoute.data.breadcrumb;
   let label = '';
+  path = `${path}${currentRoute.url.map((segment) => segment.path).join('/')}/`;
 
   if (breadcrumb) {
-    path = `${path}${currentRoute.url.map((segment) => segment.path).join('/')}/`;
-
     if (result[result.length - 1]?.routerLink.replace(/\//g, '') !== path.replace(/\//g, '')) {
       switch (breadcrumb.type) {
         case BreadcrumbValueTypes.TEXT:
