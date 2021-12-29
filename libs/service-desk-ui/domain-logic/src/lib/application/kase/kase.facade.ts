@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { KaseFacadeAbstract } from './kase.facade.abstract';
+import { KaseViewForm } from '../../entities/form/kase-view-form.interface';
 import * as KaseFeature from '../../infrastructure/store/kase/kase.reducer';
 import * as KaseSelectors from '../../infrastructure/store/kase/kase.selectors';
 import * as KaseActions from '../../infrastructure/store/kase/kase.actions';
@@ -54,5 +55,13 @@ export class KaseFacade implements KaseFacadeAbstract {
 
   initNewForm() {
     this.store.dispatch(KaseActions.initNewForm());
+  }
+
+  changeForm(formData: KaseViewForm) {
+    this.store.dispatch(KaseActions.changeForm({ formData }));
+  }
+
+  saveForm() {
+    this.store.dispatch(KaseActions.saveForm());
   }
 }

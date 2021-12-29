@@ -52,3 +52,11 @@ export const setInitialDataToNewForm = createAction(
 );
 
 export const setSvtItems = createAction('[Kase] Set SvtItems', props<{ svtItems: SvtItem[] }>());
+
+export const changeForm = createAction('[Kase] Change Form', props<{ formData: KaseViewForm }>());
+
+export const saveForm = createAction('[Kase/API] Save Form');
+
+export const saveFormSuccess = createAction('[Kase/API] Save Form Success');
+
+export const saveFormFailure = createAction('[Kase/API] Save Form Failure', props<{ error: any }>());

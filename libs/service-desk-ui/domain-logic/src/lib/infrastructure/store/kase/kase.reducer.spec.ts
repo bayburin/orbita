@@ -211,6 +211,37 @@ describe('KaseReducer', () => {
     });
   });
 
+  describe('saveForm', () => {
+    it('should change attributes', () => {
+      action = KaseActions.saveForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('saveFormSuccess', () => {
+    it('should change attributes', () => {
+      initialState.loading = true;
+      action = KaseActions.saveFormSuccess();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(false);
+    });
+  });
+
+  describe('saveFormFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      initialState.loading = true;
+      action = KaseActions.saveFormFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(false);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as Action;

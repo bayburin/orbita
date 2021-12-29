@@ -27,7 +27,7 @@ export abstract class ServiceFacadeAbstract {
   entities$: Observable<Service[]>;
 
   /**
-   * загружает выбранную услугу
+   * Загружает выбранную услугу
    */
   abstract loadSelected(): void;
 }

@@ -117,7 +117,17 @@ const kaseReducer = createReducer(
       ...state.form,
       svtItems,
     },
-  }))
+  })),
+  on(KaseActions.changeForm, (state, { formData }) => ({
+    ...state,
+    form: {
+      ...state.form,
+      entity: formData,
+    },
+  })),
+  on(KaseActions.saveForm, (state) => ({ ...state, loading: true, error: null })),
+  on(KaseActions.saveFormSuccess, (state) => ({ ...state, loading: false })),
+  on(KaseActions.saveFormFailure, (state, { error }) => ({ ...state, loading: false, error }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

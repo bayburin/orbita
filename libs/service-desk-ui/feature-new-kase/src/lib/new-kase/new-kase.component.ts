@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Renderer2, ElementRef, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { KaseFacade, ServiceFacade, SvtItem } from '@orbita/service-desk-ui/domain-logic';
-import { filter, take, takeWhile, map, withLatestFrom } from 'rxjs/operators';
+import { filter, take, takeWhile, map, withLatestFrom, distinctUntilChanged } from 'rxjs/operators';
 import { Location } from '@angular/common';
 import { Observable, merge, Subject } from 'rxjs';
 import { NgbTypeahead } from '@ng-bootstrap/ng-bootstrap';
@@ -52,9 +52,9 @@ export class NewKaseComponent implements OnInit, OnDestroy {
     this.kaseFacade.initNewForm();
     this.form = this.fb.group({
       id_tn: [],
-      user_tn: [{ value: '', disabled: true }],
-      fio: [{ value: '', disabled: true }],
-      dept: [{ value: '', disabled: true }],
+      user_tn: [],
+      fio: [],
+      dept: [],
       email: [],
       phone: [],
       mobile: [],
@@ -84,6 +84,14 @@ export class NewKaseComponent implements OnInit, OnDestroy {
           this.toggleFormControl(this.formService);
         }
       });
+
+    // Обновляет хранилище по любому изменению формы
+    this.form.valueChanges
+      .pipe(
+        takeWhile(() => this.alive),
+        distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
+      )
+      .subscribe((formData) => this.kaseFacade.changeForm(formData));
   }
 
   ngOnDestroy(): void {
@@ -116,7 +124,10 @@ export class NewKaseComponent implements OnInit, OnDestroy {
    * Событие отправки формы.
    */
   submitForm(): void {
-    console.log('submit');
+    this.submitted = true;
+    if (this.form.valid) {
+      this.kaseFacade.saveForm();
+    }
   }
 
   /**

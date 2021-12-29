@@ -1,7 +1,7 @@
-import { KaseViewForm } from './../../entities/form/kase-view-form.interface';
 import { Observable } from 'rxjs';
-import { Filter } from '../../entities/filter.interface';
 
+import { KaseViewForm } from './../../entities/form/kase-view-form.interface';
+import { Filter } from '../../entities/filter.interface';
 import { Kase } from '../../entities/models/kase.interface';
 import { SvtItem } from '../../entities/models/svt/svt-item.interface';
 
@@ -95,4 +95,16 @@ export abstract class KaseFacadeAbstract {
    * Инициализирует новую форму заявки
    */
   abstract initNewForm(): void;
+
+  /**
+   * Изменить данные формы
+   *
+   * @param formData - данные формы
+   */
+  abstract changeForm(formData: KaseViewForm): void;
+
+  /**
+   * Сохраняет заявку
+   */
+  abstract saveForm(): void;
 }

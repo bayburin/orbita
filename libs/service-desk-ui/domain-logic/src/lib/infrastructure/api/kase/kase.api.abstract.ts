@@ -1,8 +1,9 @@
 import { Observable } from 'rxjs';
 
+import { KaseForm } from './../../../entities/form/kase-form.interface';
 import { KaseQueryResult } from './../../../entities/server-data/kase-query-result.interface';
 import { KaseFilter } from '../../../entities/view-models/kase-filters.interface';
-import { KaseForm } from '../../../entities/models/kase-form.interface';
+import { RatingForm } from '../../../entities/form/rating-form.interface';
 
 export abstract class KaseApiAbstract {
   /**
@@ -30,5 +31,12 @@ export abstract class KaseApiAbstract {
    * @param caseId - номер заявки
    * @param data - новые данные по заявке
    */
-  abstract update(caseId: number, data: KaseForm): Observable<void>;
+  abstract update(caseId: number, data: RatingForm): Observable<void>;
+
+  /**
+   * Сохраняет заявку
+   *
+   * @param formData - данные о заявке.
+   */
+  abstract save(formData: KaseForm): Observable<void>;
 }

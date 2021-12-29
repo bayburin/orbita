@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { SERVICE_DESK_UI_ENV_TOKEN, serviceDeskUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { KaseApi } from './kase.api';
+import { KaseForm } from './../../../entities/form/kase-form.interface';
 import { KaseQueryResult } from './../../../entities/server-data/kase-query-result.interface';
 import { KaseFilter } from '../../../entities/view-models/kase-filters.interface';
 
@@ -77,6 +78,20 @@ describe('KaseApi', () => {
       httpMock.expectOne({
         method: 'PUT',
         url: `${api}/${id}`,
+      });
+    });
+  });
+
+  describe('save()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/apps`;
+    const data = { desc: 'test' } as KaseForm;
+
+    it('should revoke kase', () => {
+      service.save(data).subscribe();
+
+      httpMock.expectOne({
+        method: 'POST',
+        url: api,
       });
     });
   });

@@ -5,6 +5,7 @@ import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom, catchError, tap } from 'rxjs/operators';
 import { AuthHelper } from '@iss/ng-auth-center';
+import { Router } from '@angular/router';
 
 import { KaseFactory } from './../../factories/kase.factory';
 import { KaseApi } from './../../api/kase/kase.api';
@@ -25,7 +26,8 @@ export class KaseEffects {
     private notificationFacade: NotificationFacade,
     private store: Store<KaseFeature.KasePartialState>,
     private authHelper: AuthHelper,
-    private userApi: UserApi
+    private userApi: UserApi,
+    private router: Router
   ) {}
 
   // ========== Список заявок ==========
@@ -174,6 +176,23 @@ export class KaseEffects {
         const formData = KaseFactory.createViewForm(this.authHelper.getJwtPayload(), paramsData);
 
         return KaseActions.setInitialDataToNewForm({ formData });
+      })
+    )
+  );
+
+  saveForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(KaseActions.saveForm),
+      withLatestFrom(this.store.select(KaseSelectors.getFormEntity)),
+      switchMap(([_action, formData]) => {
+        const serverForm = KaseFactory.createServerForm(formData);
+
+        return this.kaseApi.save(serverForm).pipe(
+          tap(() => this.notificationFacade.showMessage('Заявка создана')),
+          map(() => KaseActions.saveFormSuccess()),
+          tap(() => this.router.navigate(['/claims'])),
+          catchError((error) => of(KaseActions.loadAllFailure({ error })))
+        );
       })
     )
   );

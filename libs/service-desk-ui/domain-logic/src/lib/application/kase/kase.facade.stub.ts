@@ -43,4 +43,12 @@ export class KaseFacadeStub implements KaseFacadeAbstract {
   initNewForm() {
     /** */
   }
+
+  changeForm() {
+    /** */
+  }
+
+  saveForm() {
+    /** */
+  }
 }

@@ -1,6 +1,6 @@
 /**
  * Форма заявки системы Astraea
  */
-export interface KaseForm {
+export interface RatingForm {
   rating?: number;
 }
