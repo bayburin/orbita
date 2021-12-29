@@ -40,6 +40,7 @@
       "@orbita/service-desk-ui/feature-home": ["libs/service-desk-ui/feature-home/src/index.ts"],
       "@orbita/service-desk-ui/feature-kase-listing": ["libs/service-desk-ui/feature-kase-listing/src/index.ts"],
       "@orbita/service-desk-ui/feature-markdown-help": ["libs/service-desk-ui/feature-markdown-help/src/index.ts"],
+      "@orbita/service-desk-ui/feature-new-kase": ["libs/service-desk-ui/feature-new-kase/src/index.ts"],
       "@orbita/service-desk-ui/feature-search": ["libs/service-desk-ui/feature-search/src/index.ts"],
       "@orbita/service-desk-ui/feature-search-result": ["libs/service-desk-ui/feature-search-result/src/index.ts"],
       "@orbita/service-desk-ui/feature-service-overview": [

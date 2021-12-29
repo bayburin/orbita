@@ -67,12 +67,18 @@ const routes: Routes = [
       },
       {
         path: 'claims',
-        data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Заявки' } },
         children: [
           {
             path: '',
             loadChildren: () =>
               import('@orbita/service-desk-ui/feature-all-kases').then((m) => m.ServiceDeskUiFeatureAllKasesModule),
+            data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Заявки' } },
+          },
+          {
+            path: 'new',
+            loadChildren: () =>
+              import('@orbita/service-desk-ui/feature-new-kase').then((m) => m.ServiceDeskUiFeatureNewKaseModule),
+            data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Поддержка' } },
           },
         ],
       },

@@ -838,6 +838,32 @@
       },
       "tags": ["scope:service-desk-ui", "type:feature"]
     },
+    "service-desk-ui-feature-new-kase": {
+      "projectType": "library",
+      "root": "libs/service-desk-ui/feature-new-kase",
+      "sourceRoot": "libs/service-desk-ui/feature-new-kase/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-desk-ui/feature-new-kase"],
+          "options": {
+            "jestConfig": "libs/service-desk-ui/feature-new-kase/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/service-desk-ui/feature-new-kase/src/**/*.ts",
+              "libs/service-desk-ui/feature-new-kase/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["scope:service-desk-ui", "type:feature"]
+    },
     "service-desk-ui-feature-search": {
       "projectType": "library",
       "root": "libs/service-desk-ui/feature-search",
