@@ -54,3 +54,5 @@ export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';
 export * from './lib/application/policies/service/service-policy.service';
 export * from './lib/application/policies/service/service-policy.service.stub';
+export * from './lib/application/policies/user/user-policy.service';
+export * from './lib/application/policies/user/user-policy.service.stub';

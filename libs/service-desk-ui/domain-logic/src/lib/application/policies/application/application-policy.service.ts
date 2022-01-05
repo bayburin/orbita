@@ -5,7 +5,7 @@ import { User } from '../../../entities/models/user.interface';
 import {
   QuestionPermission,
   ServicePermission,
-  ResponsibleUserPermission,
+  UserPermission,
   policyPermissionTypes,
   policyObjectTypes,
 } from '../../../entities/policies.interface';
@@ -37,7 +37,7 @@ export class ApplicationPolicyService {
 
   checkAccess(method: QuestionPermission, object: QuestionVM | QuestionOverviewVM): boolean;
   checkAccess(method: ServicePermission, object: ServiceVM): boolean;
-  checkAccess(method: ResponsibleUserPermission): boolean;
+  checkAccess(method: UserPermission): boolean;
   checkAccess(method: policyPermissionTypes, object?: policyObjectTypes): boolean {
     if (!object) {
       this._object = object;

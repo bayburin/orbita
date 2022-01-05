@@ -33,5 +33,6 @@ module.exports = {
     '<rootDir>/libs/service-desk-ui/feature-search',
     '<rootDir>/libs/service-desk-ui/feature-all-kases',
     '<rootDir>/libs/service-desk-ui/feature-new-kase',
+    '<rootDir>/libs/service-desk-ui/feature-admin',
   ],
 };

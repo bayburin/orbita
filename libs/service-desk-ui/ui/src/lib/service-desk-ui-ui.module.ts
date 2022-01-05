@@ -9,6 +9,7 @@ import { SharedUiModule } from '@orbita/shared/ui';
 
 import { QuestionCheckAccessDirective } from './directives/question-check-access/question-check-access.directive';
 import { ServiceCheckAccessDirective } from './directives/service-check-access/service-check-access.directive';
+import { UserCheckAccessDirective } from './directives/user-check-access/user-check-access.directive';
 import { SearchResultQuestionComponent } from './components/search-result-question/search-result-question.component';
 import { ShowQuestionLinkDirective } from './directives/show-question-link/show-question-link.directive';
 import { GetQuestionLinkDirective } from './directives/get-question-link/get-question-link.directive';
@@ -48,6 +49,7 @@ const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBoot
 const directives: any[] = [
   QuestionCheckAccessDirective,
   ServiceCheckAccessDirective,
+  UserCheckAccessDirective,
   ShowQuestionLinkDirective,
   GetQuestionLinkDirective,
   FileIconDirective,

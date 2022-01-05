@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthHelper } from '@iss/ng-auth-center';
 import { Subscription } from 'rxjs';
-
 import { userDashboardAnimation } from '@orbita/service-desk-ui/ui';
-import { User, NotificationFacade } from '@orbita/service-desk-ui/domain-logic';
+import { User, NotificationFacade, UserPermission } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'lib-navbar',
@@ -13,6 +12,7 @@ import { User, NotificationFacade } from '@orbita/service-desk-ui/domain-logic';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   user: User = this.authHelper.getJwtPayload();
+  permission = UserPermission;
   notifications$ = this.notificationFacade.notifications$;
   notificationsLoading$ = this.notificationFacade.loading$;
   notificationsLoadingNew$ = this.notificationFacade.loadingNew$;

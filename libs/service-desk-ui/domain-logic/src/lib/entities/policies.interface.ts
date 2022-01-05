@@ -13,10 +13,11 @@ export enum ServicePermission {
   MANAGE = 'manage', // Доступ ответственного за услугу (создание новых вопросов в услуге, редактирование вопросов в услуге)
 }
 
-export enum ResponsibleUserPermission {
-  VIEW = 'view', // Допступ на просмотр ответственных
+export enum UserPermission {
+  VIEW_ADMIN_PAGE = 'viewAdminPage', // Доступ к странице администрирования
+  VIEW_RESPONSIBLE_USERS = 'viewResponsibleUsers', // Допступ на просмотр ответственных
 }
 
 export type policyObjectTypes = QuestionOverviewVM | QuestionVM | ServiceVM;
 
-export type policyPermissionTypes = QuestionPermission | ServicePermission | ResponsibleUserPermission;
+export type policyPermissionTypes = QuestionPermission | ServicePermission | UserPermission;

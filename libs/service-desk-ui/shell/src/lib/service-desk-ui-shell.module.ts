@@ -9,6 +9,7 @@ import { NavbarComponent } from './containers/navbar/navbar.component';
 import { BreadcrumbComponent } from './containers/breadcrumb/breadcrumb.component';
 import { ServiceRedirectionResolver } from './resolvers/service-redirection.resolver';
 import { TicketRedirectionResolver } from './resolvers/ticket-redirection.resolver';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -100,6 +101,13 @@ const routes: Routes = [
         loadChildren: () =>
           import('@orbita/service-desk-ui/feature-markdown-help').then((m) => m.ServiceDeskUiFeatureMarkdownHelpModule),
         data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Справка по форматированию' } },
+      },
+      {
+        path: 'admin',
+        canLoad: [AdminGuard],
+        loadChildren: () =>
+          import('@orbita/service-desk-ui/feature-admin').then((m) => m.ServiceDeskUiFeatureAdminModule),
+        data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Администрирование' } },
       },
     ],
   },

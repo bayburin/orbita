@@ -45,6 +45,9 @@
       <ul class="navbar-nav ml-auto d-flex align-items-center">
         <li class="nav-item"><a routerLink="/categories" class="nav-link">Услуги</a></li>
         <li class="nav-item"><a routerLink="/claims" class="nav-link">Заявки</a></li>
+        <li class="nav-item" *libUserCheckAccess="permission.VIEW_ADMIN_PAGE">
+          <a routerLink="/admin" class="nav-link text-danger">Администрирование</a>
+        </li>
       </ul>
 
       <ul class="navbar-nav">
