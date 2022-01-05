@@ -13,18 +13,19 @@
             >Режим администратора</a
           >
         </div>
-        <!-- <app-responsible-user-details
-          class="responsibles-block"
-          [users]="service.responsibleUsers"
+        <lib-responsible-user-list
+          *ngIf="employeeLoaded$ | async"
+          [responsibleUsers]="service.responsible_users"
           label="Ответственные за услугу"
         >
-        </app-responsible-user-details> -->
+        </lib-responsible-user-list>
         <section class="sd-dlist-divider-b">
           <div class="mt-2">
             <lib-question-list
               *ngIf="service.questions.length; else noQuestions"
               [questions]="service.questions"
               [attachmentLoadingIds]="attachmentLoadingIds$ | async"
+              [employeeLoaded]="employeeLoaded$ | async"
               (upRating)="upRating($event)"
               (downloadAttachment)="downloadAttachment($event)"
             ></lib-question-list>

@@ -23,6 +23,10 @@ export class QuestionComponent extends AbstractSearchResultComponent<QuestionVM>
    */
   @Input() attachmentLoadingIds: number[];
   /**
+   * Флаг, определяющий, загружены ли данные об ответственных
+   */
+  @Input() employeeLoaded: boolean;
+  /**
    * Событие обновления рейтинга
    */
   @Output() upRating = new EventEmitter<void>();

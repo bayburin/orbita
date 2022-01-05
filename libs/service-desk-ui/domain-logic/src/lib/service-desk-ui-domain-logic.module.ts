@@ -15,6 +15,8 @@ import { QuestionEffects } from './infrastructure/store/question/question.effect
 import { AttachmentEffects } from './infrastructure/store/attachment/attachment.effects';
 import { DeepSearchEffects } from './infrastructure/store/deep-search/deep-search.effects';
 import { TicketEffects } from './infrastructure/store/ticket/ticket.effects';
+import { ResponsibleUserEffects } from './infrastructure/store/responsible-user/responsible-user.effects';
+import { EmployeeEffects } from './infrastructure/store/employee/employee.effects';
 
 @NgModule({
   imports: [
@@ -34,6 +36,8 @@ import { TicketEffects } from './infrastructure/store/ticket/ticket.effects';
       AttachmentEffects,
       DeepSearchEffects,
       TicketEffects,
+      ResponsibleUserEffects,
+      EmployeeEffects,
     ]),
   ],
 })

@@ -14,6 +14,7 @@ import * as fromAnswer from './answer/answer.reducer';
 import * as fromAttachment from './attachment/attachment.reducer';
 import * as fromTag from './tag/tag.reducer';
 import * as fromKase from './kase/kase.reducer';
+import * as fromEmployee from './employee/employee.reducer';
 
 export interface ServiceDeskUiState
   extends fromHome.HomePartialState,
@@ -28,6 +29,7 @@ export interface ServiceDeskUiState
     fromAttachment.AttachmentPartialState,
     fromNotification.NotificationPartialState,
     fromResponsibleUser.ResponsibleUserPartialState,
+    fromEmployee.EmployeePartialState,
     fromTag.TagPartialState,
     fromKase.KasePartialState {}
 
@@ -46,6 +48,7 @@ export const reducer: ActionReducerMap<ServiceDeskUiState> = {
   [fromAttachment.ATTACHMENT_FEATURE_KEY]: fromAttachment.reducer,
   [fromNotification.NOTIFICATION_FEATURE_KEY]: fromNotification.reducer,
   [fromResponsibleUser.RESPONSIBLE_USER_FEATURE_KEY]: fromResponsibleUser.reducer,
+  [fromEmployee.EMPLOYEE_FEATURE_KEY]: fromEmployee.reducer,
   [fromTag.TAG_FEATURE_KEY]: fromTag.reducer,
   [fromKase.KASE_FEATURE_KEY]: fromKase.reducer,
 };
@@ -63,6 +66,7 @@ export const initialState: ServiceDeskUiState = {
   [fromAttachment.ATTACHMENT_FEATURE_KEY]: fromAttachment.initialState,
   [fromNotification.NOTIFICATION_FEATURE_KEY]: fromNotification.initialState,
   [fromResponsibleUser.RESPONSIBLE_USER_FEATURE_KEY]: fromResponsibleUser.initialState,
+  [fromEmployee.EMPLOYEE_FEATURE_KEY]: fromEmployee.initialState,
   [fromTag.TAG_FEATURE_KEY]: fromTag.initialState,
   [fromKase.KASE_FEATURE_KEY]: fromKase.initialState,
 };

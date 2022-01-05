@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import * as QuestionActions from './question.actions';
-import { Question } from '../../../entities/model/question.interface';
+import { Question } from '../../../entities/models/question.interface';
 import { State, initialState, reducer } from './question.reducer';
 
 describe('QuestionReducer', () => {

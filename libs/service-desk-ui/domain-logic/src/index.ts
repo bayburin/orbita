@@ -15,6 +15,7 @@ export * from './lib/entities/models/hideable.interface';
 export * from './lib/entities/models/kase.interface';
 export * from './lib/entities/models/attachment.interface';
 export * from './lib/entities/models/svt/svt-item.interface';
+export * from './lib/entities/models/responsible-user.interface';
 
 export * from './lib/entities/view-models/category-vm.interface';
 export * from './lib/entities/view-models/service-vm.interface';
@@ -49,6 +50,8 @@ export * from './lib/application/deep-search/deep-search.facade';
 export * from './lib/application/deep-search/deep-search.facade.stub';
 export * from './lib/application/ticket/ticket.facade';
 export * from './lib/application/ticket/ticket.facade.stub';
+export * from './lib/application/employee/employee.facade';
+export * from './lib/application/employee/employee.facade.stub';
 
 export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';

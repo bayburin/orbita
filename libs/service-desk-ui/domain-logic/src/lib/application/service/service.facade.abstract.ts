@@ -20,7 +20,6 @@ export abstract class ServiceFacadeAbstract {
    * Индикатор, загружены ли данные
    */
   loaded$: Observable<boolean>;
-
   /**
    * Список моделей
    */

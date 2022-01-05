@@ -1,3 +1,5 @@
+import { EmployeeShort } from './employee/employee-short.interface';
+
 /**
  * Ответственный
  */
@@ -21,6 +23,11 @@ export interface ResponsibleUser {
    * Табельный номер
    */
   readonly tn: number;
+
+  /**
+   * Данные об ответственном
+   */
+  readonly details?: EmployeeShort;
 }
 
 export enum ResponseableTypes {

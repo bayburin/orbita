@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { ResponsibleUser } from '../../../entities/model/responsible-user.interface';
+import { ResponsibleUser } from '../../../entities/models/responsible-user.interface';
 import * as ResponsibleUserActions from './responsible-user.actions';
 import { State, initialState, reducer } from './responsible-user.reducer';
 

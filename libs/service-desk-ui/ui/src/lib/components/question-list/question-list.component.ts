@@ -27,6 +27,10 @@ export class QuestionListComponent {
    */
   @Input() attachmentLoadingIds: number[];
   /**
+   * Флаг, определяющий, загружены ли данные об ответственных
+   */
+  @Input() employeeLoaded: boolean;
+  /**
    * Событие загрузки файла
    */
   @Output() downloadAttachment = new EventEmitter<Attachment>();

@@ -2,6 +2,7 @@
   *ngFor="let question of questions; trackBy: trackByQuestion; let first = first"
   [data]="question"
   [attachmentLoadingIds]="attachmentLoadingIds"
+  [employeeLoaded]="employeeLoaded"
   [ngClass]="{ 'first-dynamic-item': first }"
   (upRating)="upRating.emit(question)"
   (downloadAttachment)="downloadAttachment.emit($event)"

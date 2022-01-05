@@ -10,7 +10,6 @@ import * as TicketActions from './ticket.actions';
 import * as TicketFeature from './ticket.reducer';
 import * as RouterSelectors from '../selectors/router.selectors';
 import * as ServiceActions from '../service/service.actions';
-import * as ResponsibleUserActions from '../responsible-user/responsible-user.actions';
 
 @Injectable()
 export class TicketEffects {
@@ -29,8 +28,9 @@ export class TicketEffects {
           switchMap((ticket) => {
             const data = TicketCacheService.normalizeTickets(ticket).entities;
 
+            // TODO: ResponsibleUserActions не используются, так как если их подключить, то грузятся данные по
+            // TODO: ответственным, когда они не нужны (в резолвере TicketRedirectionResolver)
             return [
-              ResponsibleUserActions.setEntities({ entities: data.responsible_users || {} }),
               ServiceActions.setEntities({ entities: data.services }),
               TicketActions.loadSelectedSuccess({ ticket: data.tickets[ticket.id] }),
             ];

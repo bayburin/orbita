@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import * as CategoryActions from './category.actions';
-import { Category } from '../../../entities/model/category.interface';
+import { Category } from '../../../entities/models/category.interface';
 import { State, initialState, reducer } from './category.reducer';
 
 describe('CategoryReducer', () => {

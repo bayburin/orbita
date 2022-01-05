@@ -4,7 +4,13 @@ import { ServiceVM } from './../../entities/view-models/service-vm.interface';
 import { Service } from '../../entities/models/service.interface';
 import { NormalizedServices, NormalizedServicesEntities } from './../../entities/normalized-data.interface';
 
-export const responsibleUserSchema = new schema.Entity('responsible_users');
+export const employees = new schema.Entity('employees');
+
+export const responsibleUserSchema = new schema.Entity(
+  'responsible_users',
+  { details: employees },
+  { processStrategy: (value) => ({ ...value, details: value.tn }) }
+);
 
 export const attachmentSchema = new schema.Entity('attachments');
 
@@ -14,7 +20,9 @@ export const answerSchema = new schema.Entity('answers', {
 
 export const questionSchema = new schema.Entity('questions', {
   answers: [answerSchema],
-  responsible_users: [responsibleUserSchema],
+  ticket: {
+    responsible_users: [responsibleUserSchema],
+  },
 });
 
 export const categorySchema = new schema.Entity('categories');

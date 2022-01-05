@@ -1,4 +1,4 @@
-import { Category } from '../../../entities/model/category.interface';
+import { Category } from '../../../entities/models/category.interface';
 import { categoryAdapter, initialState } from './category.reducer';
 import * as CategorySelectors from './category.selectors';
 

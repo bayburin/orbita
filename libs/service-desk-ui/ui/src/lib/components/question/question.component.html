@@ -27,8 +27,8 @@
     </div>
   </div>
   <div *ngIf="open" class="sd-list-answer" @ToggleAnswer>
-    <!-- <app-responsible-user-details class="responsibles-block" [users]="data.responsibleUsers" *ngIf="data.responsibleUsers.length">
-    </app-responsible-user-details> -->
+    <lib-responsible-user-list *ngIf="employeeLoaded" [responsibleUsers]="data.ticket.responsible_users">
+    </lib-responsible-user-list>
     <lib-answer-list
       [question]="data"
       [attachmentLoadingIds]="attachmentLoadingIds"

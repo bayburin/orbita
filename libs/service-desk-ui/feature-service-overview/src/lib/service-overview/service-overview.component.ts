@@ -9,6 +9,7 @@ import {
   QuestionFacade,
   Attachment,
   AttachmentFacade,
+  EmployeeFacade,
 } from '@orbita/service-desk-ui/domain-logic';
 @Component({
   selector: 'lib-service-overview',
@@ -21,6 +22,8 @@ export class ServiceOverviewComponent implements OnInit, AfterViewChecked {
   service$ = this.serviceFacade.selected$;
   loading$ = this.serviceFacade.loading$;
   loaded$ = this.serviceFacade.loaded$;
+  employeeLoading$ = this.employeeFacade.loading$;
+  employeeLoaded$ = this.employeeFacade.loaded$;
   attachmentLoadingIds$ = this.attachmentFacade.loadingIds$;
   identity = this.route.snapshot.queryParams.identity;
   /**
@@ -34,6 +37,7 @@ export class ServiceOverviewComponent implements OnInit, AfterViewChecked {
     private serviceFacade: ServiceFacade,
     private questionFacade: QuestionFacade,
     private attachmentFacade: AttachmentFacade,
+    private employeeFacade: EmployeeFacade,
     private route: ActivatedRoute
   ) {}
 
