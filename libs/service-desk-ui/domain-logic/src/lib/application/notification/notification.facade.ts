@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { TmpNotification, Notification } from '@orbita/service-desk-ui/domain-logic';
+import { Notification, NotificationTypes, TmpNotification } from './../../entities/models/notification.interface';
 import { NotificationFacadeAbstract } from './notification.facade.abstract';
 import * as NotificationFeature from '../../infrastructure/store/notification/notification.reducer';
 import * as NotificationSelectors from '../../infrastructure/store/notification/notification.selectors';
@@ -68,6 +68,12 @@ export class NotificationFacade implements NotificationFacadeAbstract {
 
   showMessage(message: string) {
     const notification = TmpNotificationFactory.createFromMessage(message);
+
+    this.store.dispatch(NotificationActions.addTmpNotification({ notification }));
+  }
+
+  showErrorMessage(message: string) {
+    const notification = TmpNotificationFactory.createFromMessage(message, NotificationTypes.ERROR);
 
     this.store.dispatch(NotificationActions.addTmpNotification({ notification }));
   }

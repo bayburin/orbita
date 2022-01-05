@@ -69,4 +69,11 @@ export abstract class NotificationFacadeAbstract {
    * @param message - сообщение
    */
   abstract showMessage(message: string): void;
+
+  /**
+   * Выводит указанное сообщение об ошибке
+   *
+   * @param message - сообщение
+   */
+  abstract showErrorMessage(message: string): void;
 }

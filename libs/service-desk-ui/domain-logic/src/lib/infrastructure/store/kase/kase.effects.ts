@@ -191,7 +191,7 @@ export class KaseEffects {
           tap(() => this.notificationFacade.showMessage('Заявка создана')),
           map(() => KaseActions.saveFormSuccess()),
           tap(() => this.router.navigate(['/claims'])),
-          catchError((error) => of(KaseActions.loadAllFailure({ error })))
+          catchError((error) => of(KaseActions.saveFormFailure({ error })))
         );
       })
     )

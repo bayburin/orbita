@@ -38,4 +38,8 @@ export class NotificationFacadeStub implements NotificationFacadeAbstract {
   showMessage() {
     /** */
   }
+
+  showErrorMessage() {
+    /** */
+  }
 }

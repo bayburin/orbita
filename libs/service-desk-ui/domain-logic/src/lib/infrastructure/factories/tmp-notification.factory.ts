@@ -20,10 +20,11 @@ export class TmpNotificationFactory {
    * Создает временное уведомление из текстового сообщения
    *
    * @param message - текст сообщения
+   * @param eventType - тип сообщения
    */
-  static createFromMessage(message: string): TmpNotification {
+  static createFromMessage(message: string, eventType: NotificationTypes = NotificationTypes.INFO): TmpNotification {
     return {
-      event_type: NotificationTypes.INFO,
+      event_type: eventType,
       message,
     };
   }
