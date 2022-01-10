@@ -31,4 +31,8 @@ export class DeepSearchFacade implements DeepSearchFacadeAbstract {
   setSelectedResultTypeId(selectedResultTypeId: DeepSearchFilterTypes) {
     this.store.dispatch(DeepSearchActions.setSelectedResultTypeId({ selectedResultTypeId }));
   }
+
+  clearSearchResult() {
+    this.store.dispatch(DeepSearchActions.clearResult());
+  }
 }

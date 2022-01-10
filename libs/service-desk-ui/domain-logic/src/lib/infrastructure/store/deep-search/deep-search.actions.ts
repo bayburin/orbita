@@ -17,3 +17,5 @@ export const setSelectedResultTypeId = createAction(
   '[Kase] Set SelectedResultTypeId',
   props<{ selectedResultTypeId: DeepSearchFilterTypes }>()
 );
+
+export const clearResult = createAction('[DeepSearch] Clear Result');

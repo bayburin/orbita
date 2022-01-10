@@ -35,9 +35,6 @@ const deepSearchReducer = createReducer(
     loading: true,
     loaded: false,
     error: null,
-    categoryIds: [],
-    serviceIds: [],
-    questionIds: [],
   })),
   on(DeepSearchActions.searchSuccess, (state, { categoryIds, serviceIds, questionIds }) => ({
     ...state,
@@ -51,6 +48,13 @@ const deepSearchReducer = createReducer(
   on(DeepSearchActions.setSelectedResultTypeId, (state, { selectedResultTypeId }) => ({
     ...state,
     selectedResultTypeId,
+  })),
+  on(DeepSearchActions.clearResult, (state) => ({
+    ...state,
+    loaded: false,
+    categoryIds: [],
+    serviceIds: [],
+    questionIds: [],
   }))
 );
 

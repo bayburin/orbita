@@ -45,6 +45,7 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+    this.deepSearchFacade.clearSearchResult();
   }
 
   /**

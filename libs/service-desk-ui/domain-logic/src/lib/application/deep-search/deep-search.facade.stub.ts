@@ -17,4 +17,8 @@ export class DeepSearchFacadeStub implements DeepSearchFacadeAbstract {
   setSelectedResultTypeId() {
     /** */
   }
+
+  clearSearchResult() {
+    /** */
+  }
 }

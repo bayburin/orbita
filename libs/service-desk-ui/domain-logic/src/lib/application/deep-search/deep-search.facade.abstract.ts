@@ -41,4 +41,9 @@ export abstract class DeepSearchFacadeAbstract {
    * @param id - id выбранного фильтра
    */
   abstract setSelectedResultTypeId(selectedResultTypeId: DeepSearchFilterTypes): void;
+
+  /**
+   * Очистить результаты поиска
+   */
+  abstract clearSearchResult(): void;
 }

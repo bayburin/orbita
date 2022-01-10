@@ -15,9 +15,6 @@ describe('DeepSearch Reducer', () => {
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
       expect(result.error).toBeNull();
-      expect(result.categoryIds).toEqual([]);
-      expect(result.serviceIds).toEqual([]);
-      expect(result.questionIds).toEqual([]);
     });
   });
 
@@ -59,6 +56,22 @@ describe('DeepSearch Reducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.selectedResultTypeId).toBe(DeepSearchFilterTypes.CATEGORY);
+    });
+  });
+
+  describe('clearResult', () => {
+    it('should change attributes', () => {
+      initialState.loaded = true;
+      initialState.categoryIds = [1, 2];
+      initialState.serviceIds = [3, 4];
+      initialState.questionIds = [5, 6];
+      action = DeepSearchActions.clearResult();
+      const result = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.categoryIds).toEqual([]);
+      expect(result.serviceIds).toEqual([]);
+      expect(result.questionIds).toEqual([]);
     });
   });
 
