@@ -2,7 +2,16 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { DeepSearchFacade, DeepSearchFilterTypes } from '@orbita/service-desk-ui/domain-logic';
+import {
+  AttachmentFacade,
+  DeepSearchFacade,
+  DeepSearchFilterTypes,
+  EmployeeFacade,
+  QuestionFacade,
+  QuestionOverviewVM,
+  Attachment,
+  SearchResultTypes,
+} from '@orbita/service-desk-ui/domain-logic';
 import { contentBlockAnimation } from '@orbita/service-desk-ui/ui';
 
 @Component({
@@ -17,10 +26,18 @@ export class SearchResultComponent implements OnInit, OnDestroy {
   result$ = this.deepSearchFacade.result$;
   resultTypes$ = this.deepSearchFacade.resultTypes$;
   selectedResultTypeId$ = this.deepSearchFacade.selectedResultTypeId$;
+  attachmentLoadingIds$ = this.attachmentFacade.loadingIds$;
   isAnyResult$ = this.deepSearchFacade.isAnyResult$;
+  employeeLoaded$ = this.employeeFacade.loaded$;
   subscriptions = new Subscription();
 
-  constructor(private deepSearchFacade: DeepSearchFacade, private route: ActivatedRoute) {}
+  constructor(
+    private deepSearchFacade: DeepSearchFacade,
+    private employeeFacade: EmployeeFacade,
+    private attachmentFacade: AttachmentFacade,
+    private questionFacade: QuestionFacade,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.subscriptions.add(this.route.queryParams.subscribe(() => this.deepSearchFacade.search()));
@@ -28,6 +45,24 @@ export class SearchResultComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  /**
+   * Увеличивает рейтинг популярности вопроса
+   *
+   * @param question - вопрос
+   */
+  upRating(result: SearchResultTypes) {
+    this.questionFacade.upRating(result as QuestionOverviewVM);
+  }
+
+  /**
+   * Скачивает файл
+   *
+   * @param attachment - файл
+   */
+  downloadAttachment(attachment: Attachment): void {
+    this.attachmentFacade.download(attachment);
   }
 
   /**

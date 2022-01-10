@@ -91,6 +91,8 @@ export const getDeepSearchResult = createSelector(
   QuestionSelectors.getEntities,
   ResponsibleUserSelectors.getEntities,
   AnswerSelectors.getEntities,
+  AttachmentSelectors.getEntities,
+  EmployeeSelectors.getEntities,
   (
     selectedId,
     categoriesArr,
@@ -99,7 +101,9 @@ export const getDeepSearchResult = createSelector(
     services,
     questions,
     responsible_users,
-    answers
+    answers,
+    attachments,
+    employees
   ): SearchResultTypes[] => {
     const getServices = () => ServiceCacheService.denormalizeServices(serviceIds, { services, questions });
     const getQuestions = () =>
@@ -107,6 +111,8 @@ export const getDeepSearchResult = createSelector(
         questions,
         responsible_users,
         answers,
+        attachments,
+        employees,
       });
 
     switch (selectedId) {

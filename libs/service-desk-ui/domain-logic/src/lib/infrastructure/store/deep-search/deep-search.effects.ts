@@ -10,6 +10,7 @@ import * as ServiceActions from '../service/service.actions';
 import * as QuestionActions from '../question/question.actions';
 import * as AnswerActions from '../answer/answer.actions';
 import * as ResponsibleUserActions from '../responsible-user/responsible-user.actions';
+import * as AttachmentActions from '../attachment/attachment.actions';
 import * as RouterSelectors from '../selectors/router.selectors';
 import { HomeApi } from '../../api/home/home.api';
 import { QuestionCacheService } from '../../services/question-cache.service';
@@ -49,6 +50,7 @@ export class DeepSearchEffects {
               ResponsibleUserActions.setEntities({ entities: normalizeData.entities.responsible_users || {} }),
               AnswerActions.setEntities({ entities: normalizeData.entities.answers || {} }),
               QuestionActions.setEntities({ entities: normalizeData.entities.questions || {} }),
+              AttachmentActions.setEntities({ entities: normalizeData.entities.attachments || {} }),
               DeepSearchActions.searchSuccess({ categoryIds, serviceIds, questionIds }),
             ];
           })

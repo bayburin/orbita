@@ -58,6 +58,7 @@ export interface NormalizedQuestionsEntities {
   responsible_users?: Dictionary<ResponsibleUser>;
   answers?: Dictionary<Answer>;
   attachments?: Dictionary<Attachment>;
+  employees?: Dictionary<EmployeeShort>;
 }
 
 /**

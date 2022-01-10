@@ -10,7 +10,19 @@
           [selectedId]="selectedResultTypeId$ | async"
           (selectFilter)="selectFilter($event)"
         ></lib-filter-template>
-        <lib-search-result-list [result]="result$ | async"></lib-search-result-list>
+        <div class="tab-content">
+          <div class="sd-dlist-divider-b">
+            <lib-search-result-template
+              *ngFor="let resultItem of result$ | async; let first = first"
+              [searchResult]="resultItem"
+              [employeeLoaded]="employeeLoaded$ | async"
+              [attachmentLoadingIds]="attachmentLoadingIds$ | async"
+              [ngClass]="{ 'first-dynamic-item': first }"
+              (upRating)="upRating(resultItem)"
+              (downloadAttachment)="downloadAttachment($event)"
+            ></lib-search-result-template>
+          </div>
+        </div>
       </div>
     </section>
   </div>

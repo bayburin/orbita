@@ -22,7 +22,6 @@ export class ServiceOverviewComponent implements OnInit, AfterViewChecked {
   service$ = this.serviceFacade.selected$;
   loading$ = this.serviceFacade.loading$;
   loaded$ = this.serviceFacade.loaded$;
-  employeeLoading$ = this.employeeFacade.loading$;
   employeeLoaded$ = this.employeeFacade.loaded$;
   attachmentLoadingIds$ = this.attachmentFacade.loadingIds$;
   identity = this.route.snapshot.queryParams.identity;

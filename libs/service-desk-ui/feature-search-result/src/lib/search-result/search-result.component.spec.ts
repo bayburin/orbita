@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  DeepSearchFacade,
+  DeepSearchFacadeStub,
+  EmployeeFacade,
+  EmployeeFacadeStub,
+} from '@orbita/service-desk-ui/domain-logic';
 
-import { SearchResultComponent } from './search.component';
+import { SearchResultComponent } from './search-result.component';
 
 describe('SearchResultComponent', () => {
   let component: SearchResultComponent;
@@ -9,6 +15,10 @@ describe('SearchResultComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [SearchResultComponent],
+      providers: [
+        { provide: DeepSearchFacade, useClass: DeepSearchFacadeStub },
+        { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
+      ],
     }).compileComponents();
   });
 

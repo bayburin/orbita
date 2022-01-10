@@ -8,6 +8,8 @@ import {
   ServiceFacadeStub,
   EmployeeFacade,
   EmployeeFacadeStub,
+  AttachmentFacade,
+  AttachmentFacadeStub,
 } from '@orbita/service-desk-ui/domain-logic';
 import { ServiceOverviewComponent } from './service-overview.component';
 
@@ -21,6 +23,7 @@ describe('ServiceOverviewComponent', () => {
       providers: [
         { provide: ServiceFacade, useClass: ServiceFacadeStub },
         { provide: QuestionFacade, useClass: QuestionFacadeStub },
+        { provide: AttachmentFacade, useClass: AttachmentFacadeStub },
         { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
       ],
       schemas: [NO_ERRORS_SCHEMA],

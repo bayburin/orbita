@@ -35,7 +35,8 @@ export class QuestionComponent extends AbstractSearchResultComponent<QuestionVM>
    */
   @Output() downloadAttachment = new EventEmitter<Attachment>();
 
-  constructor(private cdr: ChangeDetectorRef) {
+  // cdr публичный, чтобы компонент SearchResultTemplateComponent мог пометить компонент для проверки на изменения
+  constructor(public cdr: ChangeDetectorRef) {
     super();
   }
 
