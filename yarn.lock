@@ -1624,10 +1624,10 @@
   resolved "https://registry.yarnpkg.com/@mdi/font/-/font-5.9.55.tgz#41acd50b88073ded7095fc3029d8712b6e12f38e"
   integrity sha512-jswRF6q3eq8NWpWiqct6q+6Fg/I7nUhrxYJfiEM8JJpap0wVJLQdbKtyS65GdlK7S7Ytnx3TTi/bmw+tBhkGmg==
 
-"@ng-bootstrap/ng-bootstrap@^11.0.0-rc.0":
-  version "11.0.0-rc.0"
-  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-11.0.0-rc.0.tgz#9a50c1e653ee0770e5f9cdd6a70c4594fe34ba07"
-  integrity sha512-MA0YmQWOPGcbjtyB5PqTE09JRKysuK0Tj/z7K0AuZcEbvgfKE9YZdt8Vsa2svKxe6whFr2ps2h07EyOTtD+2zQ==
+"@ng-bootstrap/ng-bootstrap@12.0.0-beta.4":
+  version "12.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-12.0.0-beta.4.tgz#e27fb7b6672612c05bd40f1eec7f22e4396c4a11"
+  integrity sha512-iOXZT4FLouAGJDRw4ruogyR+lg648nywNWKUxW7l+mtMC9i4kdpfo4beQ/nqb4Uq2zMDs9zj4MbKVI391+kMnA==
   dependencies:
     tslib "^2.3.0"
 
@@ -1938,6 +1938,11 @@
   integrity sha512-jjMmK1tnZbm1Jq5a7fBliM4gQwjxMU7TFoRNwIyzwlO+eHPRCFv/Nv+H/Gi1jc3WR7QURG8D5d0Tn12YGrUqBQ==
   dependencies:
     esquery "^1.0.1"
+
+"@popperjs/core@^2.11.2":
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.2.tgz#830beaec4b4091a9e9398ac50f865ddea52186b9"
+  integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.1"
