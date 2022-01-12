@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
 import * as AttachmentActions from './attachment.actions';
-import { Attachment } from '../../../entities/model/attachment.interface';
+import { Attachment } from '../../../entities/models/attachment.interface';
 import { State, initialState, reducer } from './attachment.reducer';
 
 describe('AttachmentReducer', () => {

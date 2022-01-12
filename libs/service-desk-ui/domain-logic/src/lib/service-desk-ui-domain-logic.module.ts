@@ -4,6 +4,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 
 import * as fromServiceDeskUi from './infrastructure/store/index';
+import { AppEffects } from './infrastructure/store/app/app.effects';
 import { HomeEffects } from './infrastructure/store/home/home.effects';
 import { CategoryEffects } from './infrastructure/store/category/category.effects';
 import { ServiceEffects } from './infrastructure/store/service/service.effects';
@@ -25,6 +26,7 @@ import { EmployeeEffects } from './infrastructure/store/employee/employee.effect
       initialState: fromServiceDeskUi.initialState,
     }),
     EffectsModule.forFeature([
+      AppEffects,
       HomeEffects,
       CategoryEffects,
       ServiceEffects,

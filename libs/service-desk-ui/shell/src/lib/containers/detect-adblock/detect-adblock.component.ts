@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AppFacade } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'lib-detect-adblock',
@@ -6,7 +7,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
   styleUrls: ['./detect-adblock.component.scss'],
 })
 export class DetectAdblockComponent implements OnInit {
-  @Output() adBlockDetected = new EventEmitter<void>();
+  constructor(private appFacade: AppFacade) {}
 
   ngOnInit(): void {
     const iframe = document.createElement('iframe');
@@ -26,7 +27,7 @@ export class DetectAdblockComponent implements OnInit {
         checkFrame.style.visibility === 'hidden' ||
         checkFrame.offsetHeight == 0
       ) {
-        this.adBlockDetected.emit();
+        this.appFacade.detectAdBlock(true);
       }
       iframe.remove();
     }, 1000);

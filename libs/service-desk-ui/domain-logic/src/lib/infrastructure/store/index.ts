@@ -1,5 +1,6 @@
 import { ActionReducerMap, createFeatureSelector } from '@ngrx/store';
 
+import * as fromApp from './app/app.reducer';
 import * as fromHome from './home/home.reducer';
 import * as fromCategory from './category/category.reducer';
 import * as fromService from './service/service.reducer';
@@ -17,7 +18,8 @@ import * as fromKase from './kase/kase.reducer';
 import * as fromEmployee from './employee/employee.reducer';
 
 export interface ServiceDeskUiState
-  extends fromHome.HomePartialState,
+  extends fromApp.AppPartialState,
+    fromHome.HomePartialState,
     fromUserRecommendation.UserRecommendationPartialState,
     fromSearch.SearchPartialState,
     fromDeepSearch.DeepSearchPartialState,
@@ -36,6 +38,7 @@ export interface ServiceDeskUiState
 export const SERVICE_DESK_SYSTEM_FEATURE_KEY = 'serviceDeskUi';
 
 export const reducer: ActionReducerMap<ServiceDeskUiState> = {
+  [fromApp.APP_FEATURE_KEY]: fromApp.reducer,
   [fromHome.HOME_FEATURE_KEY]: fromHome.reducer,
   [fromUserRecommendation.USER_RECOMMENDATION_FEATURE_KEY]: fromUserRecommendation.reducer,
   [fromSearch.SEARCH_FEATURE_KEY]: fromSearch.reducer,
@@ -54,6 +57,7 @@ export const reducer: ActionReducerMap<ServiceDeskUiState> = {
 };
 
 export const initialState: ServiceDeskUiState = {
+  [fromApp.APP_FEATURE_KEY]: fromApp.initialState,
   [fromHome.HOME_FEATURE_KEY]: fromHome.initialState,
   [fromUserRecommendation.USER_RECOMMENDATION_FEATURE_KEY]: fromUserRecommendation.initialState,
   [fromSearch.SEARCH_FEATURE_KEY]: fromSearch.initialState,

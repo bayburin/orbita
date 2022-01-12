@@ -43,7 +43,6 @@ import { AnswerListComponent } from './components/answer-list/answer-list.compon
 import { AttachmentListComponent } from './components/attachment-list/attachment-list.component';
 import { LoadingIndicatorDirective } from './directives/loading-indicator/loading-indicator.directive';
 import { ResponsibleUserListComponent } from './components/responsible-user-list/responsible-user-list.component';
-import { DetectAdblockComponent } from './components/detect-adblock/detect-adblock.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBootstrapModule];
 
@@ -90,8 +89,8 @@ const components: any[] = [
 
 @NgModule({
   imports: [CommonModule, RouterModule, MarkdownModule.forChild(), ...modules],
-  declarations: [...components, ...directives, DetectAdblockComponent],
+  declarations: [...components, ...directives],
   entryComponents: [CategoryComponent, ServiceComponent, QuestionComponent],
-  exports: [...components, ...modules, ...directives, DetectAdblockComponent],
+  exports: [...components, ...modules, ...directives],
 })
 export class ServiceDeskUiUiModule {}

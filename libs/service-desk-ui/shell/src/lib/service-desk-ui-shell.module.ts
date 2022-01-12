@@ -7,6 +7,7 @@ import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { LayoutComponent } from './containers/layout/layout.component';
 import { NavbarComponent } from './containers/navbar/navbar.component';
 import { BreadcrumbComponent } from './containers/breadcrumb/breadcrumb.component';
+import { DetectAdblockComponent } from './containers/detect-adblock/detect-adblock.component';
 import { ServiceRedirectionResolver } from './resolvers/service-redirection.resolver';
 import { TicketRedirectionResolver } from './resolvers/ticket-redirection.resolver';
 import { AdminGuard } from './guards/admin.guard';
@@ -116,6 +117,6 @@ const routes: Routes = [
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiDomainLogicModule, ServiceDeskUiUiModule],
   exports: [RouterModule],
-  declarations: [LayoutComponent, NavbarComponent, BreadcrumbComponent],
+  declarations: [LayoutComponent, NavbarComponent, BreadcrumbComponent, DetectAdblockComponent],
 })
 export class ServiceDeskUiShellModule {}
