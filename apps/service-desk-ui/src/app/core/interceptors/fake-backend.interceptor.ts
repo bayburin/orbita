@@ -3,6 +3,16 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } fr
 import { Observable, of, throwError } from 'rxjs';
 import { mergeMap, delay, materialize, dematerialize } from 'rxjs/operators';
 
+// function makeid(length: number) {
+//   let result = '';
+//   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//   const charactersLength = characters.length;
+//   for (let i = 0; i < length; i++) {
+//     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//   }
+//   return result;
+// }
+
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -59,8 +69,15 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     //   return of(new HttpResponse({ body, status: 200 }));
     // }
 
-    return next.handle(req).pipe(materialize(), delay(1500), dematerialize());
+    // const body = { version: '2.0.2', hash: makeid(10) };
+    const body = { version: '2.0.2', hash: '7c62287bc8b04d26b9b0' };
 
-    // return next.handle(req);
+    if (req.url.endsWith('version.json')) {
+      return of(new HttpResponse({ body, status: 200 }));
+    }
+
+    // return next.handle(req).pipe(materialize(), delay(1500), dematerialize());
+
+    return next.handle(req);
   }
 }

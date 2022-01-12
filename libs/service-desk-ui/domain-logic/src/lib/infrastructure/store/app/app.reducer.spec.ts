@@ -6,7 +6,7 @@ import { State, initialState, reducer } from './app.reducer';
 describe('AppReducer', () => {
   describe('init', () => {
     it('should change attributes', () => {
-      const action = AppActions.init();
+      const action = AppActions.appInit();
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(false);
@@ -16,7 +16,7 @@ describe('AppReducer', () => {
 
   describe('loadAppSuccess', () => {
     it('should change attributes', () => {
-      const action = AppActions.loadAppSuccess();
+      const action = AppActions.appInitSuccess();
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(true);
@@ -26,7 +26,7 @@ describe('AppReducer', () => {
 
   describe('loadAppFailure', () => {
     it('should change attributes', () => {
-      const action = AppActions.loadAppFailure();
+      const action = AppActions.appInitFailure();
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(false);
@@ -40,6 +40,20 @@ describe('AppReducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.adBlock).toBe(true);
+    });
+  });
+
+  describe('loadAppVersionSuccess', () => {
+    it('should change attributes', () => {
+      const version = {
+        version: '1.2',
+        hash: 'asjdh23z',
+      };
+      const action = AppActions.loadAppVersionSuccess({ version });
+      const result: State = reducer(initialState, action);
+
+      expect(result.appVersion).toBe(version.version);
+      expect(result.appHash).toBe(version.hash);
     });
   });
 

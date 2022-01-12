@@ -18,4 +18,10 @@ export class AppFacade implements AppFacadeAbstract {
   detectAdBlock(value: boolean) {
     this.store.dispatch(AppActions.detectAdBlock({ adBlock: value }));
   }
+
+  initVersionChecking() {
+    setInterval(() => {
+      this.store.dispatch(AppActions.loadAppVersion());
+    }, 1000 * 60 * 30);
+  }
 }

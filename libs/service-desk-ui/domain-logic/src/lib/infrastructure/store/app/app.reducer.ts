@@ -8,7 +8,8 @@ export interface State {
   loading: boolean;
   loaded: boolean;
   adBlock: boolean;
-  currentVersion: string;
+  appVersion: string;
+  appHash: string;
   serverDate: string;
 }
 
@@ -20,16 +21,22 @@ export const initialState: State = {
   loading: false,
   loaded: false,
   adBlock: false,
-  currentVersion: undefined,
+  appVersion: undefined,
+  appHash: '{{POST_BUILD_ENTERS_HASH_HERE}}',
   serverDate: undefined,
 };
 
 const appReducer = createReducer(
   initialState,
-  on(AppActions.init, (state) => ({ ...state, loaded: false, loading: true })),
-  on(AppActions.loadAppSuccess, (state) => ({ ...state, loaded: true, loading: false })),
-  on(AppActions.loadAppFailure, (state) => ({ ...state, loaded: false, loading: false })),
-  on(AppActions.detectAdBlock, (state, { adBlock }) => ({ ...state, adBlock }))
+  on(AppActions.appInit, (state) => ({ ...state, loaded: false, loading: true })),
+  on(AppActions.appInitSuccess, (state) => ({ ...state, loaded: true, loading: false })),
+  on(AppActions.appInitFailure, (state) => ({ ...state, loaded: false, loading: false })),
+  on(AppActions.detectAdBlock, (state, { adBlock }) => ({ ...state, adBlock })),
+  on(AppActions.loadAppVersionSuccess, (state, { version }) => ({
+    ...state,
+    appVersion: version.version,
+    appHash: version.hash,
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

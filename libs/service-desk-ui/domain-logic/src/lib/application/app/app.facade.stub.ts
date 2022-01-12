@@ -4,4 +4,8 @@ export class AppFacadeStub implements AppFacadeAbstract {
   detectAdBlock() {
     /** */
   }
+
+  initVersionChecking() {
+    /** */
+  }
 }

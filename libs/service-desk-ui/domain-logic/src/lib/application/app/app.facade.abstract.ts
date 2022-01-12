@@ -5,4 +5,9 @@ export abstract class AppFacadeAbstract {
    * @param value - флаг
    */
   abstract detectAdBlock(value: boolean): void;
+
+  /**
+   * Инициирует проверку хэша приложения через равные промежутки времени
+   */
+  abstract initVersionChecking(): void;
 }

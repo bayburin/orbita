@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { TmpNotification, NotificationFacade, RouterFacade } from '@orbita/service-desk-ui/domain-logic';
+import { TmpNotification, NotificationFacade, RouterFacade, AppFacade } from '@orbita/service-desk-ui/domain-logic';
 import { routeAnimation } from '@orbita/service-desk-ui/ui';
 
 @Component({
@@ -15,9 +15,14 @@ export class LayoutComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
   needShowBreadcrumb$ = this.routerFacade.needShowBreadcrumb$;
 
-  constructor(private notificationFacade: NotificationFacade, private routerFacade: RouterFacade) {}
+  constructor(
+    private appFacade: AppFacade,
+    private notificationFacade: NotificationFacade,
+    private routerFacade: RouterFacade
+  ) {}
 
   ngOnInit(): void {
+    this.appFacade.initVersionChecking();
     this.subscriptions.add(this.notificationFacade.connectToUserNotifications());
   }
 

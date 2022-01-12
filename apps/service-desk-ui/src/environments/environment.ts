@@ -4,7 +4,7 @@ export const environment: ServiceDeskUiEnvironment = {
   production: false,
   serverUrl: 'https://inv-dev.iss-reshetnev.ru/api/v1',
   actionCableUrl: 'wss://inv-dev.iss-reshetnev.ru/cable',
-  versionCheckURL: 'https:/localhost.iss-reshetnev.ru:4200/version.json',
+  versionCheckURL: 'https://localhost.iss-reshetnev.ru:4200/version.json',
   auth: {
     clientId: '83',
     redirectUrl: 'https://localhost.iss-reshetnev.ru:4200/oauth2/callback',

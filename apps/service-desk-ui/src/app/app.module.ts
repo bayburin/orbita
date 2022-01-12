@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ActionCableService } from 'angular2-actioncable';
 import { MarkdownModule } from 'ngx-markdown';
 import { AuthCenterModule } from '@iss/ng-auth-center';
@@ -36,7 +36,7 @@ import { AppComponent } from './app.component';
   ],
   providers: [
     ActionCableService,
-    // { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
 })

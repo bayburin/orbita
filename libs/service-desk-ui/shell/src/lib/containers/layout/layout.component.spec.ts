@@ -1,5 +1,15 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AuthHelper, AuthHelperStub } from '@iss/ng-auth-center';
+import {
+  AppFacade,
+  AppFacadeStub,
+  NotificationFacade,
+  NotificationFacadeStub,
+  RouterFacade,
+  RouterFacadeStub,
+} from '@orbita/service-desk-ui/domain-logic';
 
 import { LayoutComponent } from './layout.component';
 
@@ -9,8 +19,14 @@ describe('LayoutComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule, NoopAnimationsModule],
       declarations: [LayoutComponent],
-      providers: [{ provide: AuthHelper, useClass: AuthHelperStub }],
+      providers: [
+        { provide: AppFacade, useClass: AppFacadeStub },
+        { provide: NotificationFacade, useClass: NotificationFacadeStub },
+        { provide: RouterFacade, useClass: RouterFacadeStub },
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
