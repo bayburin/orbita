@@ -235,13 +235,6 @@
     glob "7.2.0"
     yargs "^17.2.1"
 
-"@angular/material@13.0.2":
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-13.0.2.tgz#bbab63f69c9227110b7e22d694fe984528b3d5c2"
-  integrity sha512-DbbkQFpZ73oxOuR9LkkpeUPWP31DNIG3Z94sOrtdBhX3HfbLLOCaAJAIwMl8+bEuzDgtWBmx3taUR8l4WKCO8g==
-  dependencies:
-    tslib "^2.3.0"
-
 "@angular/platform-browser-dynamic@13.0.2":
   version "13.0.2"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-13.0.2.tgz#596dfbf5041210d2ecb959d2f298e86940a2adec"
@@ -1382,10 +1375,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@iss/ng-auth-center@^1.1.0":
-  version "1.1.2"
-  resolved "https://gitlab.iss-reshetnev.ru/api/v4/projects/774/packages/npm/@iss/ng-auth-center/-/@iss/ng-auth-center-1.1.2.tgz#5b4cb60cd2f36bd2da48ed9252bd6f04cfe7cf43"
-  integrity sha1-W0y2DNLza9LaSO2SUr1vBM/nz0M=
+"@iss/ng-auth-center@^2.0.0":
+  version "2.0.0"
+  resolved "https://gitlab.iss-reshetnev.ru/api/v4/projects/774/packages/npm/@iss/ng-auth-center/-/@iss/ng-auth-center-2.0.0.tgz#acbac12d6a6b14a4d44c5365c6fdf6f92e5e4862"
+  integrity sha1-rLrBLWprFKTUTFNlxv32+S5eSGI=
   dependencies:
     tslib "^2.0.0"
 
