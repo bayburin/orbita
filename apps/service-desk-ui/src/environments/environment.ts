@@ -1,13 +1,8 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+import { ServiceDeskUiEnvironment } from '@orbita/shared/environment';
 
-export const environment = {
+export const environment: ServiceDeskUiEnvironment = {
   production: false,
   serverUrl: 'https://inv-dev.iss-reshetnev.ru/api/v1',
-  authorizeUri: 'https://localhost.iss-reshetnev.ru:4200/oauth2/callback',
-  // clientId: 42,
-  clientId: 83,
   actionCableUrl: 'wss://inv-dev.iss-reshetnev.ru/cable',
   versionCheckURL: 'https:/localhost.iss-reshetnev.ru:4200/version.json',
   auth: {

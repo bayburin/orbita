@@ -1,12 +1,12 @@
 import { InjectionToken } from '@angular/core';
+import { IConfig } from '@iss/ng-auth-center';
 
 export interface ServiceDeskUiEnvironment {
   production: boolean;
   serverUrl: string;
-  authorizeUri: string;
-  clientId: number;
   actionCableUrl: string;
   versionCheckURL: string;
+  auth: IConfig;
 }
 
 export const SERVICE_DESK_UI_ENV_TOKEN = new InjectionToken<ServiceDeskUiEnvironment>(
