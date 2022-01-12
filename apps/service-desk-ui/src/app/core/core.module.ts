@@ -3,7 +3,6 @@ import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AuthCenterModule } from '@iss/ng-auth-center';
 
 import { environment } from '../../environments/environment';
 import { SERVICE_DESK_UI_ENV_TOKEN } from '@orbita/shared/environment';

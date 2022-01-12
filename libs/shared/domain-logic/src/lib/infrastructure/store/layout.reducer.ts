@@ -7,6 +7,7 @@ export const LAYOUT_FEATURE_KEY = 'layout';
 export interface State {
   sidebarOpened: boolean;
   theme: string;
+  adBlock: boolean;
 }
 
 export interface LayoutPartialState {
@@ -16,6 +17,7 @@ export interface LayoutPartialState {
 export const initialState: State = {
   sidebarOpened: true,
   theme: 'saga-blue-theme.css',
+  adBlock: false,
 };
 
 const layoutReducer = createReducer(
