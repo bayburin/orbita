@@ -7,10 +7,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class AbstractSearchResultComponent<T> {
   /**
-   * Определяет, показывать ли системные флаги
-   */
-  @Input() showFlags = false;
-  /**
    * Объект данных
    */
   @Input() data: T;

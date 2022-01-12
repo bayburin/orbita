@@ -7,13 +7,10 @@
       ></i>
       <div class="question-block">
         <div class="row-flex-content">
-          <!-- TODO: Разобраться с showFlags -->
-          <!-- <ng-container *ngIf="showFlags"> -->
           <lib-visible-icon
             [hideable]="data.ticket"
             *libQuestionCheckAccess="permission.VIEW_MANAGE_INFO; object: data"
           ></lib-visible-icon>
-          <!-- </ng-container> -->
           <span>{{ data.ticket.name }}</span>
         </div>
       </div>

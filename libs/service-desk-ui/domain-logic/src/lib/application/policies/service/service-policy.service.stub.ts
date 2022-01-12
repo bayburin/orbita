@@ -1,13 +1,9 @@
 export class ServicePolicyServiceStub {
-  checkAccess() {
+  viewManageInfo() {
     /** */
   }
 
-  newTicket() {
-    /** */
-  }
-
-  showFlags() {
+  manage() {
     /** */
   }
 }

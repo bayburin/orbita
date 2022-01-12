@@ -1,9 +1,5 @@
 export class QuestionPolicyServiceStub {
-  checkAccess() {
-    /** */
-  }
-
-  showFlags() {
+  viewManageInfo() {
     /** */
   }
 
