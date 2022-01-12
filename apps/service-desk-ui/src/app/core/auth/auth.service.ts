@@ -30,13 +30,12 @@ export class AuthService {
    * Авторизовывает приложение.
    */
   authorize() {
-    const state = this.generateState(30);
-    const authCenterUri = 'https://auth-center.iss-reshetnev.ru/oauth/authorize';
-    const queryParams = `?client_id=${environment.clientId}&response_type=code&state=${state}&redirect_uri=${environment.authorizeUri}&scope=`;
-    const authorizeUri = authCenterUri + queryParams;
-
-    this.setState(state);
-    window.open(authorizeUri, '_self');
+    // const state = this.generateState(30);
+    // const authCenterUri = 'https://auth-center.iss-reshetnev.ru/oauth/authorize';
+    // const queryParams = `?client_id=${environment.clientId}&response_type=code&state=${state}&redirect_uri=${environment.authorizeUri}&scope=`;
+    // const authorizeUri = authCenterUri + queryParams;
+    // this.setState(state);
+    // window.open(authorizeUri, '_self');
   }
 
   /**

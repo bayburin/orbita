@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit() {
-    this.detectAdblock();
+    // this.detectAdblock();
     this.checkVersion.initCheckVersion(environment.versionCheckURL, 1000 * 60 * 10);
     this.router.events
       .pipe(filter((event): event is NavigationEnd => event instanceof NavigationEnd))

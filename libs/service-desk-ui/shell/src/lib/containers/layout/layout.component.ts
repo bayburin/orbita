@@ -33,4 +33,11 @@ export class LayoutComponent implements OnInit, OnDestroy {
   removeTmpNotification(notification: TmpNotification): void {
     this.notificationFacade.removeTmpNotification(notification);
   }
+
+  /**
+   * Выводит сообщение при обнаружении AdBlock
+   */
+  adBlockDetected() {
+    this.notificationFacade.showMessage('Для корректной работы портала отключите, пожалуйста, AdBlock');
+  }
 }
