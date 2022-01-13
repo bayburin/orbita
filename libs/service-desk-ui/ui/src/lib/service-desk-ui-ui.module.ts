@@ -7,6 +7,8 @@ import { MarkdownModule } from 'ngx-markdown';
 import { NgBootstrapModule } from './ng-bootstrap.module';
 import { SharedUiModule } from '@orbita/shared/ui';
 
+import { TrinityRingsSpinnerModule } from 'angular-epic-spinners';
+
 import { QuestionCheckAccessDirective } from './directives/question-check-access/question-check-access.directive';
 import { ServiceCheckAccessDirective } from './directives/service-check-access/service-check-access.directive';
 import { UserCheckAccessDirective } from './directives/user-check-access/user-check-access.directive';
@@ -44,7 +46,7 @@ import { AttachmentListComponent } from './components/attachment-list/attachment
 import { LoadingIndicatorDirective } from './directives/loading-indicator/loading-indicator.directive';
 import { ResponsibleUserListComponent } from './components/responsible-user-list/responsible-user-list.component';
 
-const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBootstrapModule];
+const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBootstrapModule, TrinityRingsSpinnerModule];
 
 const directives: any[] = [
   QuestionCheckAccessDirective,

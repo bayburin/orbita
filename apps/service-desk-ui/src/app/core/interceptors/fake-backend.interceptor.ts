@@ -76,8 +76,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       return of(new HttpResponse({ body, status: 200 }));
     }
 
-    // return next.handle(req).pipe(materialize(), delay(1500), dematerialize());
+    return next.handle(req).pipe(materialize(), delay(1500), dematerialize());
 
-    return next.handle(req);
+    // return next.handle(req);
   }
 }

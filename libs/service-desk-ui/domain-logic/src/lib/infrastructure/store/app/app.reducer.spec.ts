@@ -11,12 +11,14 @@ describe('AppReducer', () => {
 
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
+      expect(result.error).toBe(null);
     });
   });
 
   describe('loadAppSuccess', () => {
     it('should change attributes', () => {
-      const action = AppActions.appInitSuccess();
+      const init = { date: new Date().toString() };
+      const action = AppActions.appInitSuccess({ init });
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(true);
@@ -26,11 +28,13 @@ describe('AppReducer', () => {
 
   describe('loadAppFailure', () => {
     it('should change attributes', () => {
-      const action = AppActions.appInitFailure();
+      const error = 'fake-error';
+      const action = AppActions.appInitFailure({ error });
       const result: State = reducer(initialState, action);
 
       expect(result.loaded).toBe(false);
       expect(result.loading).toBe(false);
+      expect(result.error).toBe(error);
     });
   });
 

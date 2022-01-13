@@ -7,6 +7,7 @@ export const APP_FEATURE_KEY = 'app';
 export interface State {
   loading: boolean;
   loaded: boolean;
+  error?: string | null;
   adBlock: boolean;
   appVersion: string;
   appHash: string;
@@ -28,9 +29,14 @@ export const initialState: State = {
 
 const appReducer = createReducer(
   initialState,
-  on(AppActions.appInit, (state) => ({ ...state, loaded: false, loading: true })),
-  on(AppActions.appInitSuccess, (state) => ({ ...state, loaded: true, loading: false })),
-  on(AppActions.appInitFailure, (state) => ({ ...state, loaded: false, loading: false })),
+  on(AppActions.appInit, (state) => ({ ...state, loaded: false, loading: true, error: null })),
+  on(AppActions.appInitSuccess, (state, { init }) => ({
+    ...state,
+    loaded: true,
+    loading: false,
+    serverDate: init.date,
+  })),
+  on(AppActions.appInitFailure, (state, { error }) => ({ ...state, loaded: false, loading: false, error })),
   on(AppActions.detectAdBlock, (state, { adBlock }) => ({ ...state, adBlock })),
   on(AppActions.loadAppVersionSuccess, (state, { version }) => ({
     ...state,

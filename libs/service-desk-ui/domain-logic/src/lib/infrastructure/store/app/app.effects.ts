@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
-import { filter, tap, map, switchMap, catchError, withLatestFrom } from 'rxjs/operators';
+import { filter, tap, map, switchMap, catchError, withLatestFrom, delay } from 'rxjs/operators';
 
 import { AppApi } from './../../api/app/app.api';
 import { NotificationFacade } from './../../../application/notification/notification.facade';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import * as AppActions from './app.actions';
 import * as AppFeature from './app.reducer';
 import * as AppSelectors from './app.selectors';
@@ -17,24 +18,27 @@ export class AppEffects {
     private readonly actions$: Actions,
     private store: Store<AppFeature.AppPartialState>,
     private appApi: AppApi,
-    private notificationFacade: NotificationFacade
+    private notificationFacade: NotificationFacade,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
-  // init$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(AppActions.init),
-  //     fetch({
-  //       run: (action) => {
-  //         // Your custom service 'load' logic goes here. For now just return a success action...
-  //         return AppActions.loadAppSuccess({ app: [] });
-  //       },
-  //       onError: (action, error) => {
-  //         console.error('Error', error);
-  //         return AppActions.loadAppFailure({ error });
-  //       },
-  //     })
-  //   )
-  // );
+  appInit$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AppActions.appInit),
+      fetch({
+        run: () =>
+          this.appApi.init().pipe(
+            delay(500),
+            map((init) => AppActions.appInitSuccess({ init }))
+          ),
+        onError: (_action, error) => {
+          this.errorHandlerService.handleError(error, 'Не удалось загрузить начальные данные.');
+
+          return AppActions.appInitFailure({ error });
+        },
+      })
+    )
+  );
 
   detectAdBlock$ = createEffect(
     () =>

@@ -14,6 +14,10 @@ export class LayoutComponent implements OnInit, OnDestroy {
   tmpNotifications$ = this.notificationFacade.tmpNotifications$;
   subscriptions = new Subscription();
   needShowBreadcrumb$ = this.routerFacade.needShowBreadcrumb$;
+  loaded$ = this.appFacade.loaded$;
+  loading$ = this.appFacade.loading$;
+  error$ = this.appFacade.error$;
+  serverDate$ = this.appFacade.serverDate$;
 
   constructor(
     private appFacade: AppFacade,
@@ -22,6 +26,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.appFacade.init();
     this.appFacade.initVersionChecking();
     this.subscriptions.add(this.notificationFacade.connectToUserNotifications());
   }

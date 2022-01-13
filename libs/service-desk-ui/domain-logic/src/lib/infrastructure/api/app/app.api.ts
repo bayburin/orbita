@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SERVICE_DESK_UI_ENV_TOKEN, ServiceDeskUiEnvironment } from '@orbita/shared/environment';
 
 import { AppApiAbstract } from './app.api.abstract';
+import { Init } from './../../../entities/server-data/init.interface';
 import { AppVersion } from './../../../entities/server-data/app-version.interface';
 
 /**
@@ -15,6 +16,10 @@ export class AppApi implements AppApiAbstract {
   readonly api = this.env.serverUrl;
 
   constructor(private http: HttpClient, @Inject(SERVICE_DESK_UI_ENV_TOKEN) private env: ServiceDeskUiEnvironment) {}
+
+  init() {
+    return this.http.get<Init>(`${this.api}/init`);
+  }
 
   appVersion() {
     const headers = new HttpHeaders({

@@ -1,21 +1,36 @@
-<lib-detect-adblock></lib-detect-adblock>
-<div class="sd-target">
-  <lib-notification-alert-list
-    [notifications]="tmpNotifications$ | async"
-    class="fixed-top on-top notification-block"
-    (click)="$event.stopPropagation()"
-    (closeNotification)="removeTmpNotification($event)"
-  ></lib-notification-alert-list>
-  <header>
-    <lib-navbar></lib-navbar>
-  </header>
-  <lib-breadcrumb *ngIf="needShowBreadcrumb$ | async"></lib-breadcrumb>
-  <main [@routeAnimation]="o.isActivated && o.activatedRoute.routeConfig.path">
-    <router-outlet #o="outlet"></router-outlet>
-  </main>
+<div *ngIf="loading$ | async; else loaded" class="app-spinner-container">
+  <h1>Идет загрузка...</h1>
+  <app-trinity-rings-spinner [animationDuration]="1200" [size]="100" class="spinner"></app-trinity-rings-spinner>
 </div>
-<div class="sd-footer">
-  <footer>
-    <lib-footer></lib-footer>
-  </footer>
-</div>
+
+<ng-template #loaded>
+  <ng-container *ngIf="loaded$ | async; else error">
+    <lib-detect-adblock></lib-detect-adblock>
+    <div class="sd-target">
+      <lib-notification-alert-list
+        [notifications]="tmpNotifications$ | async"
+        class="fixed-top on-top notification-block"
+        (click)="$event.stopPropagation()"
+        (closeNotification)="removeTmpNotification($event)"
+      ></lib-notification-alert-list>
+      <header>
+        <lib-navbar></lib-navbar>
+      </header>
+      <lib-breadcrumb *ngIf="needShowBreadcrumb$ | async"></lib-breadcrumb>
+      <main @routeAnimation>
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+    <div class="sd-footer">
+      <footer>
+        <lib-footer [date]="serverDate$ | async"></lib-footer>
+      </footer>
+    </div>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <lib-page-error [error]="error$ | async">
+    <p>Не удалось загрузить данные для работы приложения. Попробуйте обновить страницу.</p>
+  </lib-page-error>
+</ng-template>

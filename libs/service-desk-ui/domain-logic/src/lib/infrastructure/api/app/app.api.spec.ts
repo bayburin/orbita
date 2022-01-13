@@ -28,6 +28,26 @@ describe('AppApi', () => {
     expect(service).toBeTruthy();
   });
 
+  describe('init()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/init`;
+    const initData = {
+      date: new Date(),
+    };
+
+    it('should return requests', () => {
+      service.init().subscribe((result) => {
+        expect(result).toEqual(initData);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: api,
+        })
+        .flush(initData);
+    });
+  });
+
   describe('appVersion()', () => {
     const api = serviceDeskUiEnvironmentStub.versionCheckURL;
     const version = {

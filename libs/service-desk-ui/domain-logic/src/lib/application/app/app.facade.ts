@@ -13,7 +13,16 @@ import * as AppSelectors from '../../infrastructure/store/app/app.selectors';
   providedIn: 'root',
 })
 export class AppFacade implements AppFacadeAbstract {
+  loaded$ = this.store.select(AppSelectors.getLoaded);
+  loading$ = this.store.select(AppSelectors.getLoading);
+  error$ = this.store.select(AppSelectors.getError);
+  serverDate$ = this.store.select(AppSelectors.getServerDate);
+
   constructor(private store: Store<AppFeature.AppPartialState>) {}
+
+  init() {
+    this.store.dispatch(AppActions.appInit());
+  }
 
   detectAdBlock(value: boolean) {
     this.store.dispatch(AppActions.detectAdBlock({ adBlock: value }));
