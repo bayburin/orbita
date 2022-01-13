@@ -61,7 +61,7 @@ const kaseReducer = createReducer(
   // ========== Список заявок ==========
 
   on(KaseActions.init, (state) => ({ ...state, loaded: false, initLoading: true, error: null })),
-  on(KaseActions.loadAll, (state) => ({ ...state, loaded: false, loading: true, error: null })),
+  on(KaseActions.loadAll, (state) => ({ ...state, loading: true, error: null })),
   on(KaseActions.loadAllSuccess, (state, { kases }) =>
     kaseAdapter.setAll(kases, { ...state, loaded: true, loading: false, initLoading: false })
   ),

@@ -32,7 +32,6 @@ describe('KaseReducer', () => {
       action = KaseActions.loadAll();
       const result: State = reducer(initialState, action);
 
-      expect(result.loaded).toBe(false);
       expect(result.loading).toBe(true);
       expect(result.error).toBeNull();
     });
