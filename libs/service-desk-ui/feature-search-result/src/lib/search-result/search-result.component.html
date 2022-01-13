@@ -12,15 +12,13 @@
         ></lib-filter-template>
         <div class="tab-content">
           <div class="sd-dlist-divider-b">
-            <lib-search-result-template
-              *ngFor="let resultItem of result$ | async; let first = first"
-              [searchResult]="resultItem"
+            <lib-search-result-list
+              [result]="result$ | async"
               [employeeLoaded]="employeeLoaded$ | async"
               [attachmentLoadingIds]="attachmentLoadingIds$ | async"
-              [ngClass]="{ 'first-dynamic-item': first }"
-              (upRating)="upRating(resultItem)"
+              (upRating)="upRating($event)"
               (downloadAttachment)="downloadAttachment($event)"
-            ></lib-search-result-template>
+            ></lib-search-result-list>
           </div>
         </div>
       </div>

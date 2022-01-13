@@ -45,6 +45,7 @@ import { AnswerListComponent } from './components/answer-list/answer-list.compon
 import { AttachmentListComponent } from './components/attachment-list/attachment-list.component';
 import { LoadingIndicatorDirective } from './directives/loading-indicator/loading-indicator.directive';
 import { ResponsibleUserListComponent } from './components/responsible-user-list/responsible-user-list.component';
+import { SearchResultListComponent } from './components/search-result-list/search-result-list.component';
 
 const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBootstrapModule, TrinityRingsSpinnerModule];
 
@@ -87,6 +88,7 @@ const components: any[] = [
   AnswerListComponent,
   AttachmentListComponent,
   ResponsibleUserListComponent,
+  SearchResultListComponent
 ];
 
 @NgModule({

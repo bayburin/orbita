@@ -1,0 +1,9 @@
+<lib-search-result-template
+  *ngFor="let resultItem of result; let first = first"
+  [searchResult]="resultItem"
+  [employeeLoaded]="employeeLoaded"
+  [attachmentLoadingIds]="attachmentLoadingIds"
+  [ngClass]="{ 'first-dynamic-item': first }"
+  (upRating)="upRating.emit(resultItem)"
+  (downloadAttachment)="downloadAttachment.emit($event)"
+></lib-search-result-template>
