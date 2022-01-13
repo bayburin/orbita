@@ -19,7 +19,7 @@ export class UserRecommendationFacade implements UserRecommendationFacadeAbstrac
 
   constructor(private store: Store<UserRecommendationFeature.UserRecommendationPartialState>) {}
 
-  loadAll() {
-    this.store.dispatch(UserRecommendationActions.loadAll());
-  }
+  // loadAll() {
+  //   this.store.dispatch(UserRecommendationActions.loadAll());
+  // }
 }

@@ -11,6 +11,7 @@ import { KaseFactory } from './../../factories/kase.factory';
 import { KaseApi } from './../../api/kase/kase.api';
 import { NotificationFacade } from '../../../application/notification/notification.facade';
 import { UserApi } from '../../api/user/user.api';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import * as KaseActions from './kase.actions';
 import * as KaseFeature from './kase.reducer';
 import * as KaseSelectors from './kase.selectors';
@@ -27,7 +28,8 @@ export class KaseEffects {
     private store: Store<KaseFeature.KasePartialState>,
     private authHelper: AuthHelper,
     private userApi: UserApi,
-    private router: Router
+    private router: Router,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   // ========== Список заявок ==========
@@ -57,7 +59,11 @@ export class KaseEffects {
 
             return [KaseActions.setStatuses({ statuses }), KaseActions.loadAllSuccess({ kases: result.apps })];
           }),
-          catchError((error) => of(KaseActions.loadAllFailure({ error })))
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось загрузить список заявок.');
+
+            return of(KaseActions.loadAllFailure({ error }));
+          })
         )
       )
     )
@@ -73,7 +79,8 @@ export class KaseEffects {
             map(() => KaseActions.revokeSuccess())
           ),
         onError: (action, error) => {
-          console.error('Error', error);
+          this.errorHandlerService.handleError(error, 'Не удалось отменить заявку.');
+
           return KaseActions.revokeFailure({ error });
         },
       })
@@ -93,7 +100,11 @@ export class KaseEffects {
         return this.kaseApi.update(action.caseId, payload).pipe(
           tap(() => this.notificationFacade.showMessage(`Спасибо за оценку!`)),
           map(() => KaseActions.voteSuccess()),
-          catchError((error) => of(KaseActions.voteFailure({ error })))
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось сохранить оценку.');
+
+            return of(KaseActions.voteFailure({ error }));
+          })
         );
       })
     )
@@ -191,7 +202,11 @@ export class KaseEffects {
           tap(() => this.notificationFacade.showMessage('Заявка создана')),
           map(() => KaseActions.saveFormSuccess()),
           tap(() => this.router.navigate(['/claims'])),
-          catchError((error) => of(KaseActions.saveFormFailure({ error })))
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось создать заявку.');
+
+            return of(KaseActions.saveFormFailure({ error }));
+          })
         );
       })
     )

@@ -6,17 +6,19 @@ import { of } from 'rxjs';
 import { fetch } from '@nrwl/angular';
 
 import { UserApi } from '../../api/user/user.api';
+import { getLimitTypesValue } from '../../../entities/models/limit-types-value-model.enum';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import * as NotificationActions from './notification.actions';
 import * as NotificationFeature from './notification.reducer';
 import * as NotificationSelectors from './notification.selectors';
-import { getLimitTypesValue } from '../../../entities/models/limit-types-value-model.enum';
 
 @Injectable()
 export class NotificationEffects {
   constructor(
     private readonly actions$: Actions,
+    private store: Store<NotificationFeature.NotificationPartialState>,
     private userApi: UserApi,
-    private store: Store<NotificationFeature.NotificationPartialState>
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   loadAll$ = createEffect(() =>
@@ -29,7 +31,11 @@ export class NotificationEffects {
             NotificationActions.loadAllSuccess({ notifications }),
             NotificationActions.clearUnreadNotificationCount(),
           ]),
-          catchError((error) => of(NotificationActions.loadAllFailure({ error })))
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось загрузить список уведомлений.');
+
+            return of(NotificationActions.loadAllFailure({ error }));
+          })
         )
       )
     )
@@ -45,7 +51,11 @@ export class NotificationEffects {
             NotificationActions.loadNewSuccess({ notifications }),
             NotificationActions.clearUnreadNotificationCount(),
           ]),
-          catchError((error) => of(NotificationActions.loadNewFailure({ error })))
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось загрузить новые уведомления.');
+
+            return of(NotificationActions.loadNewFailure({ error }));
+          })
         )
       )
     )

@@ -4,17 +4,22 @@ import { fetch } from '@nrwl/angular';
 import { switchMap } from 'rxjs/operators';
 
 import { HomeApi } from '../../api/home/home.api';
+import { ServiceCacheService } from '../../services/service-cache.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import * as HomeActions from './home.actions';
 import * as HomeFeature from './home.reducer';
 import * as CategoryActions from '../category/category.actions';
 import * as UserRecommendationActions from '../user-recommendation/user-recommendation.actions';
 import * as ServiceActions from '../service/service.actions';
 import * as QuestionActions from '../question/question.actions';
-import { ServiceCacheService } from '../../services/service-cache.service';
 
 @Injectable()
 export class HomeEffects {
-  constructor(private readonly actions$: Actions, private homeApi: HomeApi) {}
+  constructor(
+    private readonly actions$: Actions,
+    private homeApi: HomeApi,
+    private errorHandlerService: ErrorHandlerService
+  ) {}
 
   loadHome$ = createEffect(() =>
     this.actions$.pipe(
@@ -38,7 +43,8 @@ export class HomeEffects {
           );
         },
         onError: (action, error) => {
-          console.error('Error', error);
+          this.errorHandlerService.handleError(error);
+
           return HomeActions.loadHomeFailure({ error });
         },
       })

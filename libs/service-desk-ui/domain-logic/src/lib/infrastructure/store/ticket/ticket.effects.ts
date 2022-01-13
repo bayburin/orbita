@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 
 import { TicketApi } from '../../api/ticket/ticket.api';
 import { TicketCacheService } from './../../services/ticket-cache.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import * as TicketActions from './ticket.actions';
 import * as TicketFeature from './ticket.reducer';
 import * as RouterSelectors from '../selectors/router.selectors';
@@ -16,7 +17,8 @@ export class TicketEffects {
   constructor(
     private readonly actions$: Actions,
     private store: Store<TicketFeature.TicketPartialState>,
-    private ticketApi: TicketApi
+    private ticketApi: TicketApi,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   loadSelected$ = createEffect(() =>
@@ -35,7 +37,11 @@ export class TicketEffects {
               TicketActions.loadSelectedSuccess({ ticket: data.tickets[ticket.id] }),
             ];
           }),
-          catchError((error) => of(TicketActions.loadSelectedFailure({ error })))
+          catchError((error) => {
+            this.errorHandlerService.handleError(error);
+
+            return of(TicketActions.loadSelectedFailure({ error }));
+          })
         )
       )
     )

@@ -6,6 +6,7 @@ import { switchMap, withLatestFrom, catchError } from 'rxjs/operators';
 
 import { ServiceApi } from '../../api/service/service.api';
 import { ServiceCacheService } from '../../services/service-cache.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import * as ServiceActions from './service.actions';
 import * as ServiceFeature from './service.reducer';
 import * as RouterSelectors from '../selectors/router.selectors';
@@ -20,7 +21,8 @@ export class ServiceEffects {
   constructor(
     private readonly actions$: Actions,
     private serviceApi: ServiceApi,
-    private store: Store<ServiceFeature.ServicePartialState>
+    private store: Store<ServiceFeature.ServicePartialState>,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   loadSelected$ = createEffect(() =>
@@ -42,7 +44,11 @@ export class ServiceEffects {
               ServiceActions.loadSelectedSuccess({ service: data.services[params.id] }),
             ];
           }),
-          catchError((error) => of(ServiceActions.loadSelectedFailure({ error })))
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось загрузить данные по выбранной услуге.');
+
+            return of(ServiceActions.loadSelectedFailure({ error }));
+          })
         )
       )
     )

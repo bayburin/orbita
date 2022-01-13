@@ -25,7 +25,7 @@ export class TmpNotificationFactory {
   static createFromMessage(message: string, eventType: NotificationTypes = NotificationTypes.INFO): TmpNotification {
     return {
       event_type: eventType,
-      message,
+      message: message.trim(),
     };
   }
 }

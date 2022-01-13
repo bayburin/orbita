@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 
 import { CategoryApi } from './../../api/category/category.api';
 import { CategoryCacheService } from './../../services/category-cache.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import * as CategoryActions from './category.actions';
 import * as CategoryFeature from './category.reducer';
 import * as ServiceActions from '../service/service.actions';
@@ -22,7 +23,8 @@ export class CategoryEffects {
   constructor(
     private readonly actions$: Actions,
     private store: Store<CategoryFeature.CategoryPartialState>,
-    private categoryApi: CategoryApi
+    private categoryApi: CategoryApi,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   loadAll$ = createEffect(() =>
@@ -42,7 +44,8 @@ export class CategoryEffects {
           );
         },
         onError: (_action, error) => {
-          console.error('Error', error);
+          this.errorHandlerService.handleError(error, 'Не удалось загрузить список услуг.');
+
           return CategoryActions.loadAllFailure({ error });
         },
       })
@@ -68,7 +71,11 @@ export class CategoryEffects {
               CategoryActions.loadSelectedSuccess({ category: data.categories[params.id] }),
             ];
           }),
-          catchError((error) => of(CategoryActions.loadSelectedFailure({ error })))
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось загрузить данные по услугам.');
+
+            return of(CategoryActions.loadSelectedFailure({ error }));
+          })
         )
       )
     )

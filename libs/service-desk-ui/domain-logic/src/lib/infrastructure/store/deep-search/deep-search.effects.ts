@@ -1,8 +1,12 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { filter, switchMap, withLatestFrom, map } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { filter, switchMap, withLatestFrom, map, catchError } from 'rxjs/operators';
 
+import { HomeApi } from '../../api/home/home.api';
+import { QuestionCacheService } from '../../services/question-cache.service';
+import { ErrorHandlerService } from '../../services/error-handler.service';
 import * as DeepSearchActions from './deep-search.actions';
 import * as DeepSearchFeature from './deep-search.reducer';
 import * as CategoryActions from '../category/category.actions';
@@ -12,15 +16,14 @@ import * as AnswerActions from '../answer/answer.actions';
 import * as ResponsibleUserActions from '../responsible-user/responsible-user.actions';
 import * as AttachmentActions from '../attachment/attachment.actions';
 import * as RouterSelectors from '../selectors/router.selectors';
-import { HomeApi } from '../../api/home/home.api';
-import { QuestionCacheService } from '../../services/question-cache.service';
 
 @Injectable()
 export class DeepSearchEffects {
   constructor(
     private readonly actions$: Actions,
     private store: Store<DeepSearchFeature.DeepSearchPartialState>,
-    private homeApi: HomeApi
+    private homeApi: HomeApi,
+    private errorHandlerService: ErrorHandlerService
   ) {}
 
   search$ = createEffect(() =>
@@ -53,6 +56,11 @@ export class DeepSearchEffects {
               AttachmentActions.setEntities({ entities: normalizeData.entities.attachments || {} }),
               DeepSearchActions.searchSuccess({ categoryIds, serviceIds, questionIds }),
             ];
+          }),
+          catchError((error) => {
+            this.errorHandlerService.handleError(error);
+
+            return of(DeepSearchActions.searchFailure({ error }));
           })
         );
       })
