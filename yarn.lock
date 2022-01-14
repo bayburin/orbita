@@ -7781,9 +7781,9 @@ primeicons@^4.1.0:
   integrity sha512-uEv2pSPk1zQCfaB2VgnUfnUxxlGryYi+5rbdxmZBBt5v9S/pscIQYS5YDLxsQZ7D9jn5c76+Tx5wX/2J1nK6sA==
 
 primeng@^13.0.0-rc.2:
-  version "13.0.0"
-  resolved "https://registry.yarnpkg.com/primeng/-/primeng-13.0.0.tgz#5bdf7cdca1690d942ecc6385d99b0fff1cec8403"
-  integrity sha512-e11mDjjChRwpMQ/9KTK9VkLXYklyD2GSiaTo8mzyFUV3PtAFCIyZlpdcUm4NtQcsdfF1f23EYI5rV6V1Ggz7og==
+  version "13.0.4"
+  resolved "https://registry.yarnpkg.com/primeng/-/primeng-13.0.4.tgz#8ffb5195406c0359d62594c6aaad620f1b7011a2"
+  integrity sha512-hX6TcZ5UwCzA3cfl9csk/N9l0R9mek/QR/BWDQI2zH9Jtc5W1x9FUXnZPj4pUlCDvYL5NW21Yu7d9fDhIe20qQ==
   dependencies:
     tslib "^2.3.0"
 

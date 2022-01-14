@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
-
-import { NgBootstrapModule } from './ng-bootstrap.module';
+import { TrinityRingsSpinnerModule } from 'angular-epic-spinners';
 import { SharedUiModule } from '@orbita/shared/ui';
 
-import { TrinityRingsSpinnerModule } from 'angular-epic-spinners';
+import { NgBootstrapModule } from './ng-bootstrap.module';
+import { PrimengModule } from './primeng.module';
 
 import { QuestionCheckAccessDirective } from './directives/question-check-access/question-check-access.directive';
 import { ServiceCheckAccessDirective } from './directives/service-check-access/service-check-access.directive';
@@ -47,7 +47,14 @@ import { LoadingIndicatorDirective } from './directives/loading-indicator/loadin
 import { ResponsibleUserListComponent } from './components/responsible-user-list/responsible-user-list.component';
 import { SearchResultListComponent } from './components/search-result-list/search-result-list.component';
 
-const modules: any[] = [FormsModule, ReactiveFormsModule, SharedUiModule, NgBootstrapModule, TrinityRingsSpinnerModule];
+const modules: any[] = [
+  FormsModule,
+  ReactiveFormsModule,
+  SharedUiModule,
+  NgBootstrapModule,
+  TrinityRingsSpinnerModule,
+  PrimengModule,
+];
 
 const directives: any[] = [
   QuestionCheckAccessDirective,
@@ -88,7 +95,7 @@ const components: any[] = [
   AnswerListComponent,
   AttachmentListComponent,
   ResponsibleUserListComponent,
-  SearchResultListComponent
+  SearchResultListComponent,
 ];
 
 @NgModule({

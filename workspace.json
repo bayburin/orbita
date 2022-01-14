@@ -547,6 +547,10 @@
               "node_modules/@iss/ng-auth-center/assets/styles.scss",
               "apps/service-desk-ui/src/assets/scss/bootstrap-theme-sd.scss",
               "apps/service-desk-ui/src/assets/scss/sd-skin.scss",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/primeflex/primeflex.css",
+              "node_modules/primeng/resources/themes/bootstrap4-light-blue/theme.css",
               "apps/service-desk-ui/src/styles.scss"
             ],
             "scripts": [
