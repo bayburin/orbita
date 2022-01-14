@@ -4,11 +4,11 @@ import { UserRecommendation } from '../../../entities/models/user-recommendation
 
 export const setAll = createAction('[UserRecommendation] Set All', props<{ recommendations: UserRecommendation[] }>());
 
-// export const loadAll = createAction('[UserRecommendation/API] Load All');
+export const loadAll = createAction('[UserRecommendation/API] Load All');
 
-// export const loadAllSuccess = createAction(
-//   '[UserRecommendation/API] Load All Success',
-//   props<{ recommendations: UserRecommendation[] }>()
-// );
+export const loadAllSuccess = createAction(
+  '[UserRecommendation/API] Load All Success',
+  props<{ recommendations: UserRecommendation[] }>()
+);
 
-// export const loadAllFailure = createAction('[UserRecommendation/API] Load All Failure', props<{ error: any }>());
+export const loadAllFailure = createAction('[UserRecommendation/API] Load All Failure', props<{ error: any }>());

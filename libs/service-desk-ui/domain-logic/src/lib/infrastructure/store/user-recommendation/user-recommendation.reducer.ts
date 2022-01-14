@@ -27,12 +27,12 @@ const userRecommendationReducer = createReducer(
   initialState,
   on(UserRecommendationActions.setAll, (state, { recommendations }) =>
     userRecommendationAdapter.setAll(recommendations, state)
-  )
-  // on(UserRecommendationActions.loadAll, (state) => ({ ...state, loaded: false, loading: true, error: null })),
-  // on(UserRecommendationActions.loadAllSuccess, (state, { recommendations }) =>
-  //   userRecommendationAdapter.setAll(recommendations, { ...state, loaded: true, loading: false })
-  // ),
-  // on(UserRecommendationActions.loadAllFailure, (state, { error }) => ({ ...state, error, loading: false }))
+  ),
+  on(UserRecommendationActions.loadAll, (state) => ({ ...state, loaded: false, loading: true, error: null })),
+  on(UserRecommendationActions.loadAllSuccess, (state, { recommendations }) =>
+    userRecommendationAdapter.setAll(recommendations, { ...state, loaded: true, loading: false })
+  ),
+  on(UserRecommendationActions.loadAllFailure, (state, { error }) => ({ ...state, error, loading: false }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

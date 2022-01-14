@@ -5,6 +5,7 @@ import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { UserRecommendationsComponent } from './user-recommendations/user-recommendations.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [AdminHomeComponent],
+  declarations: [AdminHomeComponent, UserRecommendationsComponent],
 })
 export class ServiceDeskUiFeatureAdminHomeModule {}

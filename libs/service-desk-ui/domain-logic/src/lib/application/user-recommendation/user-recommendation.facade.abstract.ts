@@ -19,5 +19,5 @@ export abstract class UserRecommendationFacadeAbstract {
   /**
    * Загружает список рекомендаций
    */
-  // abstract loadAll(): void;
+  abstract loadAll(): void;
 }

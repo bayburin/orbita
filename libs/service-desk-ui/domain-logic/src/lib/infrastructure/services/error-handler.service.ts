@@ -9,6 +9,12 @@ import { NotificationFacade } from './../../application/notification/notificatio
 export class ErrorHandlerService {
   constructor(private notificationFacade: NotificationFacade) {}
 
+  /**
+   * Обрабатывает ошибку и выводит соответствующее сообщение
+   *
+   * @param error - объект ошибки HttpErrorResponse
+   * @param msg - необязательное сообщение, которое будет выведено в начале строки
+   */
   handleError(error: HttpErrorResponse, msg = '') {
     let defaultMsg: string;
 

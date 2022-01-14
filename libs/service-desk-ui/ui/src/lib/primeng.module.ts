@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 
-const modules: any[] = [];
+import { TableModule } from 'primeng/table';
+
+const modules: any[] = [TableModule];
 
 @NgModule({
   imports: [...modules],

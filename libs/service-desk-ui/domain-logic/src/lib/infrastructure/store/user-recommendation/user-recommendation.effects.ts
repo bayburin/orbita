@@ -16,21 +16,21 @@ export class UserRecommendationEffects {
     private errorHandlerService: ErrorHandlerService
   ) {}
 
-  // loadAll$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(UserRecommendationActions.loadAll),
-  //     fetch({
-  //       run: () => {
-  //         return this.userRecommendationApi
-  //           .query()
-  //           .pipe(map((recommendations) => UserRecommendationActions.loadAllSuccess({ recommendations })));
-  //       },
-  //       onError: (action, error) => {
-  //         this.errorHandlerService.handleError(error);
+  loadAll$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserRecommendationActions.loadAll),
+      fetch({
+        run: () => {
+          return this.userRecommendationApi
+            .query()
+            .pipe(map((recommendations) => UserRecommendationActions.loadAllSuccess({ recommendations })));
+        },
+        onError: (_action, error) => {
+          this.errorHandlerService.handleError(error, 'Не удалось загрузить список рекомендаций для пользователя');
 
-  //         return UserRecommendationActions.loadAllFailure({ error });
-  //       },
-  //     })
-  //   )
-  // );
+          return UserRecommendationActions.loadAllFailure({ error });
+        },
+      })
+    )
+  );
 }

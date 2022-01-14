@@ -22,40 +22,40 @@ describe('UserRecommendationReducer', () => {
     });
   });
 
-  // describe('loadAll', () => {
-  //   it('should change attributes', () => {
-  //     action = UserRecommendationActions.loadAll();
-  //     const result: State = reducer(initialState, action);
+  describe('loadAll', () => {
+    it('should change attributes', () => {
+      action = UserRecommendationActions.loadAll();
+      const result: State = reducer(initialState, action);
 
-  //     expect(result.loaded).toBe(false);
-  //     expect(result.loading).toBe(true);
-  //     expect(result.error).toBeNull();
-  //   });
-  // });
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
 
-  // describe('loadAllSuccess', () => {
-  //   it('should change attributes', () => {
-  //     const recommendations = [createUserRecommendation(111), createUserRecommendation(222)];
-  //     initialState.loading = true;
-  //     action = UserRecommendationActions.loadAllSuccess({ recommendations });
-  //     const result: State = reducer(initialState, action);
+  describe('loadAllSuccess', () => {
+    it('should change attributes', () => {
+      const recommendations = [createUserRecommendation(111), createUserRecommendation(222)];
+      initialState.loading = true;
+      action = UserRecommendationActions.loadAllSuccess({ recommendations });
+      const result: State = reducer(initialState, action);
 
-  //     expect(result.ids.length).toBe(2);
-  //     expect(result.loading).toEqual(false);
-  //     expect(result.loaded).toBe(true);
-  //   });
-  // });
+      expect(result.ids.length).toBe(2);
+      expect(result.loading).toEqual(false);
+      expect(result.loaded).toBe(true);
+    });
+  });
 
-  // describe('loadAllFailure', () => {
-  //   it('should change attributes', () => {
-  //     const error = { message: 'error' };
-  //     action = UserRecommendationActions.loadAllFailure({ error });
-  //     const result: State = reducer(initialState, action);
+  describe('loadAllFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      action = UserRecommendationActions.loadAllFailure({ error });
+      const result: State = reducer(initialState, action);
 
-  //     expect(result.error).toEqual(error);
-  //     expect(result.loading).toEqual(false);
-  //   });
-  // });
+      expect(result.error).toEqual(error);
+      expect(result.loading).toEqual(false);
+    });
+  });
 
   describe('unknown action', () => {
     it('should return the previous state', () => {

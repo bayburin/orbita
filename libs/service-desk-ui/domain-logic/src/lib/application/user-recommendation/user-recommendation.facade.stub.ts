@@ -7,7 +7,7 @@ export class UserRecommendationFacadeStub implements UserRecommendationFacadeAbs
   loading$ = new BehaviorSubject(false);
   loaded$ = new BehaviorSubject(false);
 
-  // loadAll() {
-  //   /** */
-  // }
+  loadAll() {
+    /** */
+  }
 }
