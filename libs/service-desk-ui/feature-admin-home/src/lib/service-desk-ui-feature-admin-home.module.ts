@@ -4,29 +4,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
 import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 
-import { AdminComponent } from './admin/admin.component';
+import { AdminHomeComponent } from './admin-home/admin-home.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,
-    children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'home',
-      },
-      {
-        path: 'home',
-        loadChildren: () =>
-          import('@orbita/service-desk-ui/feature-admin-home').then((m) => m.ServiceDeskUiFeatureAdminHomeModule),
-      },
-    ],
+    pathMatch: 'full',
+    component: AdminHomeComponent,
   },
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  declarations: [AdminComponent],
+  declarations: [AdminHomeComponent],
 })
-export class ServiceDeskUiFeatureAdminModule {}
+export class ServiceDeskUiFeatureAdminHomeModule {}

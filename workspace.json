@@ -708,6 +708,32 @@
       },
       "tags": ["scope:service-desk-ui", "type:feature"]
     },
+    "service-desk-ui-feature-admin-home": {
+      "projectType": "library",
+      "root": "libs/service-desk-ui/feature-admin-home",
+      "sourceRoot": "libs/service-desk-ui/feature-admin-home/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-desk-ui/feature-admin-home"],
+          "options": {
+            "jestConfig": "libs/service-desk-ui/feature-admin-home/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/service-desk-ui/feature-admin-home/src/**/*.ts",
+              "libs/service-desk-ui/feature-admin-home/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["scope:service-desk-ui", "type:feature"]
+    },
     "service-desk-ui-feature-all-kases": {
       "projectType": "library",
       "root": "libs/service-desk-ui/feature-all-kases",
