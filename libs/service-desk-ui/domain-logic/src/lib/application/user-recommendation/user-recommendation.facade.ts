@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import { UserRecommendationFacadeAbstract } from './user-recommendation.facade.abstract';
+import { UserRecommendationViewForm } from '../../entities/form/user-recommendation-view-form.interface';
 import * as UserRecommendationFeature from '../../infrastructure/store/user-recommendation/user-recommendation.reducer';
 import * as UserRecommendationSelectors from '../../infrastructure/store/user-recommendation/user-recommendation.selectors';
 import * as UserRecommendationActions from '../../infrastructure/store/user-recommendation/user-recommendation.actions';
@@ -17,9 +18,32 @@ export class UserRecommendationFacade implements UserRecommendationFacadeAbstrac
   loading$ = this.store.select(UserRecommendationSelectors.getLoading);
   loaded$ = this.store.select(UserRecommendationSelectors.getLoaded);
 
+  // ========== Форма рекомендаций для пользователя ==========
+
+  formData$ = this.store.select(UserRecommendationSelectors.getFormData);
+  formLoading$ = this.store.select(UserRecommendationSelectors.getFormLoading);
+  formDisplay$ = this.store.select(UserRecommendationSelectors.getFormDisplayForm);
+  formError$ = this.store.select(UserRecommendationSelectors.getFormError);
+
   constructor(private store: Store<UserRecommendationFeature.UserRecommendationPartialState>) {}
 
   loadAll() {
     this.store.dispatch(UserRecommendationActions.loadAll());
+  }
+
+  initForm() {
+    this.store.dispatch(UserRecommendationActions.initForm());
+  }
+
+  closeForm() {
+    this.store.dispatch(UserRecommendationActions.closeForm());
+  }
+
+  changeForm(formData: UserRecommendationViewForm) {
+    this.store.dispatch(UserRecommendationActions.changeForm({ formData }));
+  }
+
+  saveForm() {
+    this.store.dispatch(UserRecommendationActions.saveForm());
   }
 }

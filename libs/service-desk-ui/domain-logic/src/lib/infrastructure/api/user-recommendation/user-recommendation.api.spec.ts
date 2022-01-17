@@ -3,6 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { SERVICE_DESK_UI_ENV_TOKEN, serviceDeskUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { UserRecommendationApi } from './user-recommendation.api';
+import { UserRecommendation } from './../../../entities/models/user-recommendation.interface';
 
 describe('CategoryApi', () => {
   let service: UserRecommendationApi;
@@ -43,6 +44,20 @@ describe('CategoryApi', () => {
           url: api,
         })
         .flush(categories);
+    });
+  });
+
+  describe('save()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations`;
+    const data = { title: 'test' } as UserRecommendation;
+
+    it('should save record', () => {
+      service.save(data).subscribe();
+
+      httpMock.expectOne({
+        method: 'POST',
+        url: api,
+      });
     });
   });
 });

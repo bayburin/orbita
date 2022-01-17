@@ -19,4 +19,8 @@ export class UserRecommendationApi implements UserRecommendationApiAbstract {
   query() {
     return this.http.get<UserRecommendation[]>(this.api);
   }
+
+  save(formData: UserRecommendation) {
+    return this.http.post<UserRecommendation>(this.api, { user_recommendation: formData });
+  }
 }

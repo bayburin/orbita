@@ -12,4 +12,11 @@ export abstract class UserRecommendationApiAbstract {
    * Получает с сервера список рекомендаций
    */
   abstract query(): Observable<UserRecommendation[]>;
+
+  /**
+   * Сохраняет запись
+   *
+   * @param formData - данные о записи.
+   */
+  abstract save(formData: UserRecommendation): Observable<UserRecommendation>;
 }

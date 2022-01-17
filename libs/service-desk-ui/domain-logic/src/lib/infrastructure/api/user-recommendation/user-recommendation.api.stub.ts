@@ -8,4 +8,8 @@ export class UserRecommendationApiStub implements UserRecommendationApiAbstract 
   query() {
     return of([]);
   }
+
+  save() {
+    return of(null);
+  }
 }

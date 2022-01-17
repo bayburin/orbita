@@ -1,15 +1,25 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import * as UserRecommendationActions from './user-recommendation.actions';
 import { UserRecommendation } from '../../../entities/models/user-recommendation.interface';
+import { UserRecommendationViewForm } from './../../../entities/form/user-recommendation-view-form.interface';
+import { UserRecommendationFactory } from './../../factories/user-recommendation.factory';
+import * as UserRecommendationActions from './user-recommendation.actions';
 
 export const USER_RECOMMENDATION_FEATURE_KEY = 'userRecommendation';
+
+export interface FormState {
+  formData: UserRecommendationViewForm;
+  loading: boolean;
+  displayForm: boolean;
+  error?: string;
+}
 
 export interface State extends EntityState<UserRecommendation> {
   loading: boolean;
   loaded: boolean;
   error?: string | null;
+  form: FormState;
 }
 
 export interface UserRecommendationPartialState {
@@ -18,9 +28,16 @@ export interface UserRecommendationPartialState {
 
 export const userRecommendationAdapter: EntityAdapter<UserRecommendation> = createEntityAdapter<UserRecommendation>();
 
+export const initialFormState: FormState = {
+  formData: null,
+  loading: false,
+  displayForm: false,
+};
+
 export const initialState: State = userRecommendationAdapter.getInitialState({
   loading: false,
   loaded: false,
+  form: initialFormState,
 });
 
 const userRecommendationReducer = createReducer(
@@ -32,7 +49,55 @@ const userRecommendationReducer = createReducer(
   on(UserRecommendationActions.loadAllSuccess, (state, { recommendations }) =>
     userRecommendationAdapter.setAll(recommendations, { ...state, loaded: true, loading: false })
   ),
-  on(UserRecommendationActions.loadAllFailure, (state, { error }) => ({ ...state, error, loading: false }))
+  on(UserRecommendationActions.loadAllFailure, (state, { error }) => ({ ...state, error, loading: false })),
+
+  // ========== Форма рекомендаций для пользователя ==========
+
+  on(UserRecommendationActions.initForm, (state) => ({
+    ...state,
+    form: {
+      ...initialFormState,
+      formData: UserRecommendationFactory.createViewForm(),
+      displayForm: true,
+    },
+  })),
+  on(UserRecommendationActions.closeForm, (state) => ({
+    ...state,
+    form: {
+      ...state.form,
+      displayForm: false,
+    },
+  })),
+  on(UserRecommendationActions.changeForm, (state, { formData }) => ({
+    ...state,
+    form: {
+      ...state.form,
+      formData: formData,
+    },
+  })),
+  on(UserRecommendationActions.saveForm, (state) => ({
+    ...state,
+    form: {
+      ...state.form,
+      loading: true,
+      error: null,
+    },
+  })),
+  on(UserRecommendationActions.saveFormSuccess, (state) => ({
+    ...state,
+    form: {
+      ...state.form,
+      loading: false,
+    },
+  })),
+  on(UserRecommendationActions.saveFormFailure, (state, { error }) => ({
+    ...state,
+    form: {
+      ...state.form,
+      loading: false,
+      error,
+    },
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

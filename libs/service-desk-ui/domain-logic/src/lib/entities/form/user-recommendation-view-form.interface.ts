@@ -1,34 +1,44 @@
 /**
  * Рекомендации пользователям
  */
-export interface UserRecommendation {
+export interface UserRecommendationViewForm {
   /**
    * Идентификатор
    */
-  readonly id: number;
+  id: number;
 
   /**
    * Наименование, которое видит пользователь
    */
-  readonly title: string;
+  title: string;
 
   /**
    * Флаг, показывающий, является ли ссылка внешней
    */
-  readonly external: boolean;
+  external: boolean;
 
   /**
    * Ссылка
    */
-  readonly link: string;
+  link: string;
 
   /**
    * Параметры ссылки
    */
-  readonly query_params: { [key: string]: string | number };
+  query_params: {
+    /**
+     * Имя параметра
+     */
+    name: string;
+
+    /**
+     * Значение параметра
+     */
+    value: string | number;
+  }[];
 
   /**
    * Порядок следования
    */
-  readonly order: number;
+  order: number;
 }

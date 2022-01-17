@@ -72,7 +72,7 @@ describe('KaseApi', () => {
     const id = 123;
     const body = { rating: 2 };
 
-    it('should revoke kase', () => {
+    it('should update kase', () => {
       service.update(id, body).subscribe();
 
       httpMock.expectOne({
@@ -86,7 +86,7 @@ describe('KaseApi', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/apps`;
     const data = { desc: 'test' } as KaseForm;
 
-    it('should revoke kase', () => {
+    it('should save kase', () => {
       service.save(data).subscribe();
 
       httpMock.expectOne({
