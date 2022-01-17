@@ -17,6 +17,7 @@ export class UserRecommendationFacade implements UserRecommendationFacadeAbstrac
   all$ = this.store.select(UserRecommendationSelectors.getAll);
   loading$ = this.store.select(UserRecommendationSelectors.getLoading);
   loaded$ = this.store.select(UserRecommendationSelectors.getLoaded);
+  selectedLoading$ = this.store.select(UserRecommendationSelectors.getSelectedLoading);
 
   // ========== Форма рекомендаций для пользователя ==========
 
@@ -31,8 +32,12 @@ export class UserRecommendationFacade implements UserRecommendationFacadeAbstrac
     this.store.dispatch(UserRecommendationActions.loadAll());
   }
 
+  edit(id: number) {
+    this.store.dispatch(UserRecommendationActions.select({ id, edit: true }));
+  }
+
   initForm() {
-    this.store.dispatch(UserRecommendationActions.initForm());
+    this.store.dispatch(UserRecommendationActions.initForm({}));
   }
 
   closeForm() {

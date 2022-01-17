@@ -18,8 +18,10 @@ export interface FormState {
 export interface State extends EntityState<UserRecommendation> {
   loading: boolean;
   loaded: boolean;
-  error?: string | null;
   form: FormState;
+  error?: string | null;
+  selectedId?: number;
+  selectedLoading?: boolean;
 }
 
 export interface UserRecommendationPartialState {
@@ -50,14 +52,24 @@ const userRecommendationReducer = createReducer(
     userRecommendationAdapter.setAll(recommendations, { ...state, loaded: true, loading: false })
   ),
   on(UserRecommendationActions.loadAllFailure, (state, { error }) => ({ ...state, error, loading: false })),
+  on(UserRecommendationActions.select, (state, { id }) => ({ ...state, selectedId: id })),
+  on(UserRecommendationActions.loadSelected, (state) => ({ ...state, selectedLoading: true, error: null })),
+  on(UserRecommendationActions.loadSelectedSuccess, (state, { recommendation }) =>
+    userRecommendationAdapter.setOne(recommendation, { ...state, selectedLoading: false })
+  ),
+  on(UserRecommendationActions.loadSelectedFailure, (state, { error }) => ({
+    ...state,
+    error,
+    selectedLoading: false,
+  })),
 
   // ========== Форма рекомендаций для пользователя ==========
 
-  on(UserRecommendationActions.initForm, (state) => ({
+  on(UserRecommendationActions.initForm, (state, { recommendation }) => ({
     ...state,
     form: {
       ...initialFormState,
-      formData: UserRecommendationFactory.createViewForm(),
+      formData: UserRecommendationFactory.createViewForm(recommendation),
       displayForm: true,
     },
   })),
@@ -88,6 +100,7 @@ const userRecommendationReducer = createReducer(
     form: {
       ...state.form,
       loading: false,
+      formData: null,
     },
   })),
   on(UserRecommendationActions.saveFormFailure, (state, { error }) => ({

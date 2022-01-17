@@ -1,7 +1,8 @@
-import { filter, take, distinctUntilChanged, skipUntil } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
-import { UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
+import { combineLatest } from 'rxjs';
+import { filter, take, distinctUntilChanged, map, takeWhile } from 'rxjs/operators';
+import { UserRecommendation, UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'service-desk-ui-admin-home-user-recommendations',
@@ -12,6 +13,7 @@ export class UserRecommendationsComponent implements OnInit {
   userRecommendations$ = this.userRecommendationFacade.all$;
   loading$ = this.userRecommendationFacade.loading$;
   loaded$ = this.userRecommendationFacade.loaded$;
+  selectedLoading$ = this.userRecommendationFacade.selectedLoading$;
   formDisplay$ = this.userRecommendationFacade.formDisplay$;
   formLoading$ = this.userRecommendationFacade.formLoading$;
   form: FormGroup;
@@ -49,24 +51,15 @@ export class UserRecommendationsComponent implements OnInit {
   newForm(): void {
     this.submitted = false;
     this.userRecommendationFacade.initForm();
-    this.form.reset();
-    this.form.setControl('query_params', this.fb.array([]));
+    this.initForm();
+  }
 
-    // Заполняет данные формы из хранилища
-    this.userRecommendationFacade.formData$
-      .pipe(
-        filter((data) => !!data),
-        take(1)
-      )
-      .subscribe((formData) => this.form.patchValue(formData, { emitEvent: false }));
-
-    // Обновляет хранилище по любому изменению формы
-    this.form.valueChanges
-      .pipe(
-        skipUntil(this.formDisplay$),
-        distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
-      )
-      .subscribe((formData) => this.userRecommendationFacade.changeForm(formData));
+  /**
+   * Инициализирует форму редактирования записи
+   */
+  editForm(userRecommendation: UserRecommendation): void {
+    this.userRecommendationFacade.edit(userRecommendation.id);
+    this.initForm();
   }
 
   /**
@@ -102,14 +95,46 @@ export class UserRecommendationsComponent implements OnInit {
     this.queryParamsForm.removeAt(index);
   }
 
+  /**
+   * Возвращает форму параметров по указанному индексу из массива
+   *
+   * @param i - индекс из массива параметров
+   */
   getQueryParamsNameForm(i: number): FormControl {
     return this.queryParamsForm.controls[i].get('name') as FormControl;
   }
 
-  private createQueryParams(): FormGroup {
+  private createQueryParams(name?: string, value?: string | number): FormGroup {
     return this.fb.group({
-      name: [null, Validators.required],
-      value: [''],
+      name: [name || null, Validators.required],
+      value: [value || ''],
     });
+  }
+
+  private initForm() {
+    this.form.reset();
+    this.form.setControl('query_params', this.fb.array([]));
+
+    // Заполняет данные формы из хранилища
+    this.userRecommendationFacade.formData$
+      .pipe(
+        filter((data) => !!data),
+        take(1)
+      )
+      .subscribe((formData) => {
+        this.form.patchValue(formData, { emitEvent: false });
+        formData.query_params.forEach((param: { name: string; value: string | number }) =>
+          this.queryParamsForm.push(this.createQueryParams(param.name, param.value), { emitEvent: false })
+        );
+      });
+
+    // Обновляет хранилище по любому изменению формы
+    combineLatest([this.form.valueChanges, this.formDisplay$])
+      .pipe(
+        takeWhile(([_formData, display]) => display),
+        map(([formData, _display]) => formData),
+        distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
+      )
+      .subscribe((formData) => this.userRecommendationFacade.changeForm(formData));
   }
 }

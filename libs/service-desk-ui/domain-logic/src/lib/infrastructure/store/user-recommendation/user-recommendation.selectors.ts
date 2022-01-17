@@ -22,9 +22,19 @@ export const getLoading = createSelector(getUserRecommendationState, (state: Sta
 
 export const getError = createSelector(getUserRecommendationState, (state: State) => state.error);
 
+export const getSelectedId = createSelector(getUserRecommendationState, (state: State) => state.selectedId);
+
+export const getSelectedLoading = createSelector(getUserRecommendationState, (state: State) => state.selectedLoading);
+
 export const getAll = createSelector(getUserRecommendationState, (state: State) => selectAll(state));
 
 export const getEntities = createSelector(getUserRecommendationState, (state: State) => selectEntities(state));
+
+export const getSelected = createSelector(
+  getEntities,
+  getSelectedId,
+  (entities, selectedId) => selectedId && entities[selectedId]
+);
 
 // ========== Форма рекомендаций для пользователя ==========
 

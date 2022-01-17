@@ -47,6 +47,24 @@ describe('CategoryApi', () => {
     });
   });
 
+  describe('show()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations/123`;
+    const category = { id: 123 };
+
+    it('should show user recommendations', () => {
+      service.show(123).subscribe((result) => {
+        expect(result).toEqual(category);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: api,
+        })
+        .flush(category);
+    });
+  });
+
   describe('save()', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations`;
     const data = { title: 'test' } as UserRecommendation;
@@ -56,6 +74,20 @@ describe('CategoryApi', () => {
 
       httpMock.expectOne({
         method: 'POST',
+        url: api,
+      });
+    });
+  });
+
+  describe('update()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations/1`;
+    const data = { title: 'test' } as UserRecommendation;
+
+    it('should update record', () => {
+      service.update(1, data).subscribe();
+
+      httpMock.expectOne({
+        method: 'PUT',
         url: api,
       });
     });

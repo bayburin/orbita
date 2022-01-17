@@ -14,9 +14,26 @@ export const loadAllSuccess = createAction(
 
 export const loadAllFailure = createAction('[UserRecommendation/API] Load All Failure', props<{ error: any }>());
 
+export const select = createAction('[UserRecommendation] Edit', props<{ id: number; edit?: boolean }>());
+
+export const loadSelected = createAction('[UserRecommendation/API] Load Selected', props<{ edit: boolean }>());
+
+export const loadSelectedSuccess = createAction(
+  '[UserRecommendation/API] Load Selected Success',
+  props<{ recommendation: UserRecommendation; edit: boolean }>()
+);
+
+export const loadSelectedFailure = createAction(
+  '[UserRecommendation/API] Load Selected Failure',
+  props<{ error: any }>()
+);
+
 // ========== Форма рекомендаций для пользователя ==========
 
-export const initForm = createAction('[UserRecommendation] Init Form');
+export const initForm = createAction(
+  '[UserRecommendation] Init Form',
+  props<{ recommendation?: UserRecommendation }>()
+);
 
 export const closeForm = createAction('[UserRecommendation] Close Form');
 

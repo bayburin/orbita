@@ -16,6 +16,10 @@ export abstract class UserRecommendationFacadeAbstract {
    * Индикатор, загружены ли данные
    */
   loaded$: Observable<boolean>;
+  /**
+   * Индикатор, идет ли загрузка выбранной записи в данный момент
+   */
+  selectedLoading$: Observable<boolean>;
 
   // ========== Форма рекомендаций для пользователя ==========
 
@@ -40,6 +44,13 @@ export abstract class UserRecommendationFacadeAbstract {
    * Загружает список рекомендаций
    */
   abstract loadAll(): void;
+
+  /**
+   * Выбрать запись для редактирования
+   *
+   * @param id - id выбранной записи
+   */
+  abstract edit(id: number): void;
 
   /**
    * Инициализирует новую форму заявки

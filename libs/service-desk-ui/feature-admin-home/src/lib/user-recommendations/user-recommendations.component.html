@@ -29,9 +29,15 @@
           <td>{{ rec.link }}</td>
           <td>{{ rec.query_params | json }}</td>
           <td>
-            <!-- <button type="button" class="btn btn-outline-primary btn-sm mb-3" (click)="Form()">
-              Редактировать
-            </button> -->
+            <button
+              [disabled]="selectedLoading$ | async"
+              pButton
+              type="button"
+              class="p-button-rounded p-button-text p-button-icon-only p-button-plain"
+              (click)="editForm(rec)"
+            >
+              <i class="mdi mdi-pencil mdi-18px"></i>
+            </button>
           </td>
         </tr>
       </ng-template>

@@ -24,6 +24,8 @@ export const getEntities = createSelector(getCategoryState, (state: State) => se
 
 export const getSelectedId = createSelector(getCategoryState, (state: State) => state.selectedId);
 
-export const getSelected = createSelector(getEntities, getSelectedId, (entities, selectedId) =>
-  selectedId ? entities[selectedId] : undefined
+export const getSelected = createSelector(
+  getEntities,
+  getSelectedId,
+  (entities, selectedId) => selectedId && entities[selectedId]
 );

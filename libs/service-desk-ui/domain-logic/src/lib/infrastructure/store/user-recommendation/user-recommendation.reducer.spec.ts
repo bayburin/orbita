@@ -1,8 +1,10 @@
 import { Action } from '@ngrx/store';
 
-import * as UserRecommendationActions from './user-recommendation.actions';
-import { UserRecommendation } from '../../../entities/models/user-recommendation.interface';
 import { State, initialState, reducer } from './user-recommendation.reducer';
+import { UserRecommendation } from '../../../entities/models/user-recommendation.interface';
+import { UserRecommendationFactory } from './../../factories/user-recommendation.factory';
+import { UserRecommendationViewForm } from '../../../entities/form/user-recommendation-view-form.interface';
+import * as UserRecommendationActions from './user-recommendation.actions';
 
 describe('UserRecommendationReducer', () => {
   let action: Action;
@@ -54,6 +56,110 @@ describe('UserRecommendationReducer', () => {
 
       expect(result.error).toEqual(error);
       expect(result.loading).toEqual(false);
+    });
+  });
+
+  describe('select', () => {
+    it('should change attributes', () => {
+      action = UserRecommendationActions.select({ id: 1 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toBe(1);
+    });
+  });
+
+  describe('loadSelected', () => {
+    it('should change attributes', () => {
+      action = UserRecommendationActions.loadSelected({ edit: true });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedLoading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('loadSelectedSuccess', () => {
+    it('should change attributes', () => {
+      const recommendation = createUserRecommendation(1);
+      action = UserRecommendationActions.loadSelectedSuccess({ recommendation, edit: true });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(1);
+      expect(result.selectedLoading).toBe(false);
+    });
+  });
+
+  describe('loadSelectedFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      action = UserRecommendationActions.loadSelectedFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.error).toEqual(error);
+      expect(result.selectedLoading).toBe(false);
+    });
+  });
+
+  // ========== Форма рекомендаций для пользователя ==========
+
+  describe('initForm', () => {
+    it('should change attributes', () => {
+      action = UserRecommendationActions.initForm({});
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.formData).toEqual(UserRecommendationFactory.createViewForm());
+      expect(result.form.displayForm).toBe(true);
+    });
+  });
+
+  describe('closeForm', () => {
+    it('should change attributes', () => {
+      action = UserRecommendationActions.closeForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.displayForm).toBe(false);
+    });
+  });
+
+  describe('changeForm', () => {
+    it('should change attributes', () => {
+      const formData = { title: 'newTitle' } as UserRecommendationViewForm;
+      action = UserRecommendationActions.changeForm({ formData });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.formData).toEqual(formData);
+    });
+  });
+
+  describe('saveForm', () => {
+    it('should change attributes', () => {
+      action = UserRecommendationActions.saveForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(true);
+      expect(result.form.error).toBe(null);
+    });
+  });
+
+  describe('saveFormSuccess', () => {
+    it('should change attributes', () => {
+      initialState.form.formData = { title: 'newTitle' } as UserRecommendationViewForm;
+      action = UserRecommendationActions.saveFormSuccess();
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(false);
+      expect(result.form.formData).toBeNull();
+    });
+  });
+
+  describe('saveFormFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      action = UserRecommendationActions.saveFormFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(false);
+      expect(result.form.error).toEqual(error);
     });
   });
 

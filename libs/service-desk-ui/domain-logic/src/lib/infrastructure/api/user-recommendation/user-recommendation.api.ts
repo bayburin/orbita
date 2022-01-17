@@ -20,7 +20,15 @@ export class UserRecommendationApi implements UserRecommendationApiAbstract {
     return this.http.get<UserRecommendation[]>(this.api);
   }
 
+  show(id: number) {
+    return this.http.get<UserRecommendation>(`${this.api}/${id}`);
+  }
+
   save(formData: UserRecommendation) {
     return this.http.post<UserRecommendation>(this.api, { user_recommendation: formData });
+  }
+
+  update(id: number, formData: UserRecommendation) {
+    return this.http.put<UserRecommendation>(`${this.api}/${id}`, { user_recommendation: formData });
   }
 }

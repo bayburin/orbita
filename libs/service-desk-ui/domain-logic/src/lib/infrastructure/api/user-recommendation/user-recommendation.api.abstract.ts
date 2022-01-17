@@ -14,9 +14,24 @@ export abstract class UserRecommendationApiAbstract {
   abstract query(): Observable<UserRecommendation[]>;
 
   /**
+   * Загружает рекомендацию для пользователя
+   *
+   * @param id - id записи
+   */
+  abstract show(id: number): Observable<UserRecommendation>;
+
+  /**
    * Сохраняет запись
    *
    * @param formData - данные о записи.
    */
   abstract save(formData: UserRecommendation): Observable<UserRecommendation>;
+
+  /**
+   * Обновляет запись
+   *
+   * @param id - id записи
+   * @param formData - новые данные
+   */
+  abstract update(id: number, formData: UserRecommendation): Observable<UserRecommendation>;
 }

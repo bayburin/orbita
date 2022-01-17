@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
-import { map, switchMap, withLatestFrom, catchError, tap } from 'rxjs/operators';
+import { map, switchMap, withLatestFrom, catchError, tap, filter } from 'rxjs/operators';
 
 import { UserRecommendationApi } from './../../api/user-recommendation/user-recommendation.api';
 import { ErrorHandlerService } from '../../services/error-handler.service';
@@ -41,6 +41,39 @@ export class UserRecommendationEffects {
     )
   );
 
+  select$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserRecommendationActions.select),
+      map((action) => UserRecommendationActions.loadSelected({ edit: action.edit }))
+    )
+  );
+
+  loadSelected$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserRecommendationActions.loadSelected),
+      withLatestFrom(this.store.select(UserRecommendationSelectors.getSelectedId)),
+      switchMap(([action, selectedId]) =>
+        this.userRecommendationApi.show(selectedId).pipe(
+          map((recommendation) => UserRecommendationActions.loadSelectedSuccess({ recommendation, edit: action.edit })),
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось загрузить запись.');
+
+            return of(UserRecommendationActions.loadSelectedFailure({ error }));
+          })
+        )
+      )
+    )
+  );
+
+  loadSelectedSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserRecommendationActions.loadSelectedSuccess),
+      filter((action) => Boolean(action.edit)),
+      withLatestFrom(this.store.select(UserRecommendationSelectors.getSelected)),
+      map(([_action, userRecommendation]) => UserRecommendationActions.initForm({ recommendation: userRecommendation }))
+    )
+  );
+
   // ========== Форма рекомендаций для пользователя ==========
 
   saveForm$ = createEffect(() =>
@@ -50,15 +83,21 @@ export class UserRecommendationEffects {
       switchMap(([_action, formData]) => {
         const serverForm = UserRecommendationFactory.createServerForm(formData);
 
-        return this.userRecommendationApi.save(serverForm).pipe(
-          tap(() => this.notificationFacade.showMessage('Запись создана')),
-          map(() => UserRecommendationActions.saveFormSuccess()),
-          catchError((error) => {
-            this.errorHandlerService.handleError(error, 'Не удалось создать запись.');
+        if (formData.id) {
+          return this.userRecommendationApi
+            .update(serverForm.id, serverForm)
+            .pipe(tap(() => this.notificationFacade.showMessage('Запись обновлена')));
+        } else {
+          return this.userRecommendationApi
+            .save(serverForm)
+            .pipe(tap(() => this.notificationFacade.showMessage('Запись создана')));
+        }
+      }),
+      map(() => UserRecommendationActions.saveFormSuccess()),
+      catchError((error) => {
+        this.errorHandlerService.handleError(error, 'Не удалось сохранить запись.');
 
-            return of(UserRecommendationActions.saveFormFailure({ error }));
-          })
-        );
+        return of(UserRecommendationActions.saveFormFailure({ error }));
       })
     )
   );

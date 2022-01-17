@@ -6,12 +6,17 @@ export class UserRecommendationFacadeStub implements UserRecommendationFacadeAbs
   all$ = new BehaviorSubject([]);
   loading$ = new BehaviorSubject(false);
   loaded$ = new BehaviorSubject(false);
+  selectedLoading$ = new BehaviorSubject(false);
   formData$ = new BehaviorSubject(null);
   formLoading$ = new BehaviorSubject(false);
   formDisplay$ = new BehaviorSubject(false);
   formError$ = new BehaviorSubject(null);
 
   loadAll() {
+    /** */
+  }
+
+  edit() {
     /** */
   }
 

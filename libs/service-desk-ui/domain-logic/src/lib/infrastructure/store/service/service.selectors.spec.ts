@@ -1,4 +1,4 @@
-import { Service } from '../../../entities/model/service.interface';
+import { Service } from '../../../entities/models/service.interface';
 import { serviceAdapter, ServicePartialState, initialState } from './service.reducer';
 import * as ServiceSelectors from './service.selectors';
 

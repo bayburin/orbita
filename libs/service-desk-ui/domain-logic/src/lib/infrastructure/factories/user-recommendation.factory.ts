@@ -8,14 +8,21 @@ export class UserRecommendationFactory {
   /**
    * Создает объект для формы новой записи
    */
-  static createViewForm(): UserRecommendationViewForm {
+  static createViewForm(rec: UserRecommendation = {} as UserRecommendation): UserRecommendationViewForm {
     return {
-      id: null,
-      order: null,
-      title: null,
-      external: false,
-      link: null,
-      query_params: [],
+      id: rec.id,
+      order: rec.order,
+      title: rec.title,
+      external: rec.external || false,
+      link: rec.link,
+      query_params: Object.entries(rec.query_params || {}).reduce((acc, [key, val]) => {
+        acc.push({
+          name: key,
+          value: val as any,
+        });
+
+        return acc;
+      }, [] as { name: string; value: string }[]),
     };
   }
 
