@@ -91,12 +91,12 @@ export class UserRecommendationEffects {
     )
   );
 
-  destroySuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(UserRecommendationActions.destroySuccess),
-      map(() => UserRecommendationActions.loadAll())
-    )
-  );
+  // destroySuccess$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(UserRecommendationActions.destroySuccess),
+  //     map(() => UserRecommendationActions.loadAll())
+  //   )
+  // );
 
   // ========== Форма рекомендаций для пользователя ==========
 
@@ -117,7 +117,7 @@ export class UserRecommendationEffects {
             .pipe(tap(() => this.notificationFacade.showMessage('Запись создана')));
         }
       }),
-      map(() => UserRecommendationActions.saveFormSuccess()),
+      map((recommendation) => UserRecommendationActions.saveFormSuccess({ recommendation })),
       catchError((error) => {
         this.errorHandlerService.handleError(error, 'Не удалось сохранить запись.');
 
@@ -129,7 +129,7 @@ export class UserRecommendationEffects {
   saveFormSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserRecommendationActions.saveFormSuccess),
-      switchMap(() => [UserRecommendationActions.closeForm(), UserRecommendationActions.loadAll()])
+      map(() => UserRecommendationActions.closeForm())
     )
   );
 }

@@ -151,7 +151,9 @@ describe('UserRecommendationReducer', () => {
       action = UserRecommendationActions.closeForm();
       const result: State = reducer(initialState, action);
 
+      expect(result.selectedId).toBeNull();
       expect(result.form.displayForm).toBe(false);
+      expect(result.form.formData).toBeNull();
     });
   });
 
@@ -177,12 +179,13 @@ describe('UserRecommendationReducer', () => {
 
   describe('saveFormSuccess', () => {
     it('should change attributes', () => {
+      const recommendation = createUserRecommendation(1, 'test-name');
       initialState.form.formData = { title: 'newTitle' } as UserRecommendationViewForm;
-      action = UserRecommendationActions.saveFormSuccess();
+      action = UserRecommendationActions.saveFormSuccess({ recommendation });
       const result: State = reducer(initialState, action);
 
+      expect(result.ids.length).toBe(1);
       expect(result.form.loading).toBe(false);
-      expect(result.form.formData).toBeNull();
     });
   });
 

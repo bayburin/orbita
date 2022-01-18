@@ -50,6 +50,9 @@ export const changeForm = createAction(
 
 export const saveForm = createAction('[UserRecommendation/API] Save Form');
 
-export const saveFormSuccess = createAction('[UserRecommendation/API] Save Form Success');
+export const saveFormSuccess = createAction(
+  '[UserRecommendation/API] Save Form Success',
+  props<{ recommendation: UserRecommendation }>()
+);
 
 export const saveFormFailure = createAction('[UserRecommendation/API] Save Form Failure', props<{ error: any }>());

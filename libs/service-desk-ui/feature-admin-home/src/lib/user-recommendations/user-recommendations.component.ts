@@ -39,15 +39,14 @@ export class UserRecommendationsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.loadData();
+  }
+
+  /**
+   * Загружает данные таблицы
+   */
+  loadData(): void {
     this.userRecommendationFacade.loadAll();
-    this.form = this.fb.group({
-      id: [],
-      title: [null, Validators.required],
-      external: [false, Validators.required],
-      link: [null, Validators.required],
-      order: [],
-      query_params: this.fb.array([]),
-    });
   }
 
   /**
@@ -128,8 +127,14 @@ export class UserRecommendationsComponent implements OnInit {
   }
 
   private initForm() {
-    this.form.reset();
-    this.form.setControl('query_params', this.fb.array([]));
+    this.form = this.fb.group({
+      id: [],
+      title: [null, Validators.required],
+      external: [false, Validators.required],
+      link: [null, Validators.required],
+      order: [],
+      query_params: this.fb.array([]),
+    });
 
     // Заполняет данные формы из хранилища
     this.userRecommendationFacade.formData$

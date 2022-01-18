@@ -82,9 +82,11 @@ const userRecommendationReducer = createReducer(
   })),
   on(UserRecommendationActions.closeForm, (state) => ({
     ...state,
+    selectedId: null,
     form: {
       ...state.form,
       displayForm: false,
+      formData: null,
     },
   })),
   on(UserRecommendationActions.changeForm, (state, { formData }) => ({
@@ -102,14 +104,15 @@ const userRecommendationReducer = createReducer(
       error: null,
     },
   })),
-  on(UserRecommendationActions.saveFormSuccess, (state) => ({
-    ...state,
-    form: {
-      ...state.form,
-      loading: false,
-      formData: null,
-    },
-  })),
+  on(UserRecommendationActions.saveFormSuccess, (state, { recommendation }) =>
+    userRecommendationAdapter.setOne(recommendation, {
+      ...state,
+      form: {
+        ...state.form,
+        loading: false,
+      },
+    })
+  ),
   on(UserRecommendationActions.saveFormFailure, (state, { error }) => ({
     ...state,
     form: {

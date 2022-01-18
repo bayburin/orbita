@@ -6,10 +6,19 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToolbarModule } from 'primeng/toolbar';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
-const modules: any[] = [TableModule, DialogModule, ButtonModule, InputTextModule, CheckboxModule, ConfirmDialogModule];
+const modules: any[] = [
+  TableModule,
+  DialogModule,
+  ButtonModule,
+  InputTextModule,
+  CheckboxModule,
+  ConfirmDialogModule,
+  ToolbarModule,
+];
 
 @NgModule({
   imports: [...modules],
