@@ -112,4 +112,21 @@ describe('CategoryApi', () => {
         .flush(recommendation);
     });
   });
+
+  describe('reorder()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations/reorder`;
+    const data = [
+      { id: 2, order: 20 },
+      { id: 3, order: 30 },
+    ];
+
+    it('should update records', () => {
+      service.reorder(data).subscribe();
+
+      httpMock.expectOne({
+        method: 'PUT',
+        url: api,
+      });
+    });
+  });
 });

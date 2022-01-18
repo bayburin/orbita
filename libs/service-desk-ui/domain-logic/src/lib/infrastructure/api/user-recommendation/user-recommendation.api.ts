@@ -35,4 +35,8 @@ export class UserRecommendationApi implements UserRecommendationApiAbstract {
   destroy(id: number) {
     return this.http.delete<UserRecommendation>(`${this.api}/${id}`);
   }
+
+  reorder(data: { id: number; order: number }[]) {
+    return this.http.put<UserRecommendation[]>(`${this.api}/reorder`, { new_orders: data });
+  }
 }

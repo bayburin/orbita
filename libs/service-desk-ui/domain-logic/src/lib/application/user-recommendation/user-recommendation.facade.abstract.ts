@@ -80,4 +80,12 @@ export abstract class UserRecommendationFacadeAbstract {
    * @param id - id записи
    */
   abstract destroy(id: number): void;
+
+  /**
+   * Изменяет порядок следования записей
+   *
+   * @param oldIndex - старый индекс записи
+   * @param newIndex - новый индекс записи
+   */
+  abstract reorder(oldIndex: number, newIndex: number): void;
 }

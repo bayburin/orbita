@@ -55,4 +55,8 @@ export class UserRecommendationFacade implements UserRecommendationFacadeAbstrac
   destroy(id: number) {
     this.store.dispatch(UserRecommendationActions.destroy({ id }));
   }
+
+  reorder(oldIndex: number, newIndex: number) {
+    this.store.dispatch(UserRecommendationActions.reorder({ oldIndex, newIndex }));
+  }
 }

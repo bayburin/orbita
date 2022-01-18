@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
 import { combineLatest } from 'rxjs';
 import { filter, take, distinctUntilChanged, map, takeWhile } from 'rxjs/operators';
-import { UserRecommendation, UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
+import {
+  getUserRecommendationLinkTypes,
+  UserRecommendation,
+  UserRecommendationFacade,
+  UserRecommendationLinkTypesVM,
+} from '@orbita/service-desk-ui/domain-logic';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
@@ -117,6 +122,25 @@ export class UserRecommendationsComponent implements OnInit {
    */
   getQueryParamsNameForm(i: number): FormControl {
     return this.queryParamsForm.controls[i].get('name') as FormControl;
+  }
+
+  /**
+   * Возвращает объект-представление для типа ссылки указанной записи
+   *
+   * @param external - тип ссылки
+   */
+  linkType(external: boolean): UserRecommendationLinkTypesVM {
+    return getUserRecommendationLinkTypes(external);
+  }
+
+  /**
+   * Перехватывает событие переноса строки
+   *
+   * @param event - объект события
+   */
+  reorderRow(event: { dragIndex: number; dropIndex: number }): void {
+    console.log(event);
+    this.userRecommendationFacade.reorder(event.dragIndex, event.dropIndex);
   }
 
   private createQueryParams(name?: string, value?: string | number): FormGroup {

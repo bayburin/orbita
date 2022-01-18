@@ -39,4 +39,8 @@ export class UserRecommendationFacadeStub implements UserRecommendationFacadeAbs
   destroy() {
     /** */
   }
+
+  reorder() {
+    /** */
+  }
 }

@@ -15,24 +15,34 @@
       </ng-template>
     </p-toolbar>
 
-    <p-table [value]="userRecommendations$ | async" styleClass="p-datatable-sm" responsiveLayout="scroll" dataKey="id">
+    <p-table
+      [value]="userRecommendations$ | async"
+      styleClass="p-datatable-sm"
+      responsiveLayout="scroll"
+      dataKey="id"
+      (onRowReorder)="reorderRow($event)"
+    >
       <ng-template pTemplate="header">
         <tr>
+          <th></th>
           <th>#</th>
-          <th>Порядок</th>
           <th>Наименование</th>
-          <th>Внешняя</th>
+          <th>Тип</th>
           <th>Ссылка</th>
           <th>Параметры</th>
           <th></th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-rec>
-        <tr>
+      <ng-template pTemplate="body" let-rec let-index="rowIndex">
+        <tr [pReorderableRow]="index">
+          <td>
+            <i class="mdi mdi-format-line-spacing mdi-18px" [pReorderableRowHandle]="index"></i>
+          </td>
           <td>{{ rec.id }}</td>
-          <td>{{ rec.order }}</td>
           <td>{{ rec.title }}</td>
-          <td>{{ rec.external }}</td>
+          <td>
+            <span [class]="'sd-badge link-' + linkType(rec.external).badge">{{ linkType(rec.external).title }}</span>
+          </td>
           <td>{{ rec.link }}</td>
           <td>{{ rec.query_params | json }}</td>
           <td class="text-center">

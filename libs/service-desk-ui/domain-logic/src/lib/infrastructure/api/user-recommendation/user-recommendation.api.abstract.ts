@@ -41,4 +41,9 @@ export abstract class UserRecommendationApiAbstract {
    * @param id - id записи.
    */
   abstract destroy(id: number): Observable<UserRecommendation>;
+
+  /**
+   * Обновляет порядок следования записей у пользователя
+   */
+  abstract reorder(data: { id: number; order: number }[]): Observable<UserRecommendation[]>;
 }

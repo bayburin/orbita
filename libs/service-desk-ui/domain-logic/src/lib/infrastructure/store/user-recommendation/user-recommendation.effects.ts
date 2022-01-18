@@ -98,6 +98,28 @@ export class UserRecommendationEffects {
   //   )
   // );
 
+  reorder$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserRecommendationActions.reorder),
+      withLatestFrom(this.store.select(UserRecommendationSelectors.getAll)),
+      switchMap(([action, userRecommendations]) => {
+        const minIndex = Math.min(action.oldIndex, action.newIndex);
+        const data = userRecommendations
+          .slice(minIndex)
+          .map((rec, index) => ({ id: rec.id, order: (minIndex + index) * 10 }));
+
+        return this.userRecommendationApi.reorder(data).pipe(
+          map((recommendations) => UserRecommendationActions.reorderSuccess({ recommendations })),
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось удалить запись.');
+
+            return of(UserRecommendationActions.destroyFailure({ error }));
+          })
+        );
+      })
+    )
+  );
+
   // ========== Форма рекомендаций для пользователя ==========
 
   saveForm$ = createEffect(() =>
@@ -107,21 +129,27 @@ export class UserRecommendationEffects {
       switchMap(([_action, formData]) => {
         const serverForm = UserRecommendationFactory.createServerForm(formData);
 
-        if (formData.id) {
-          return this.userRecommendationApi
-            .update(serverForm.id, serverForm)
-            .pipe(tap(() => this.notificationFacade.showMessage('Запись обновлена')));
-        } else {
-          return this.userRecommendationApi
-            .save(serverForm)
-            .pipe(tap(() => this.notificationFacade.showMessage('Запись создана')));
-        }
-      }),
-      map((recommendation) => UserRecommendationActions.saveFormSuccess({ recommendation })),
-      catchError((error) => {
-        this.errorHandlerService.handleError(error, 'Не удалось сохранить запись.');
+        if (serverForm.id) {
+          return this.userRecommendationApi.update(serverForm.id, serverForm).pipe(
+            tap(() => this.notificationFacade.showMessage('Запись обновлена')),
+            map((recommendation) => UserRecommendationActions.saveFormSuccess({ recommendation })),
+            catchError((error) => {
+              this.errorHandlerService.handleError(error, 'Не удалось обновить запись.');
 
-        return of(UserRecommendationActions.saveFormFailure({ error }));
+              return of(UserRecommendationActions.saveFormFailure({ error }));
+            })
+          );
+        } else {
+          return this.userRecommendationApi.save(serverForm).pipe(
+            tap(() => this.notificationFacade.showMessage('Запись создана')),
+            map((recommendation) => UserRecommendationActions.saveFormSuccess({ recommendation })),
+            catchError((error) => {
+              this.errorHandlerService.handleError(error, 'Не удалось сохранить запись.');
+
+              return of(UserRecommendationActions.saveFormFailure({ error }));
+            })
+          );
+        }
       })
     )
   );

@@ -28,7 +28,9 @@ export interface UserRecommendationPartialState {
   readonly [USER_RECOMMENDATION_FEATURE_KEY]: State;
 }
 
-export const userRecommendationAdapter: EntityAdapter<UserRecommendation> = createEntityAdapter<UserRecommendation>();
+export const userRecommendationAdapter: EntityAdapter<UserRecommendation> = createEntityAdapter<UserRecommendation>({
+  sortComparer: (a: UserRecommendation, b: UserRecommendation) => (a.order > b.order ? 1 : -1),
+});
 
 export const initialFormState: FormState = {
   formData: null,
@@ -53,11 +55,16 @@ const userRecommendationReducer = createReducer(
   ),
   on(UserRecommendationActions.loadAllFailure, (state, { error }) => ({ ...state, error, loading: false })),
   on(UserRecommendationActions.select, (state, { id }) => ({ ...state, selectedId: id })),
-  on(UserRecommendationActions.loadSelected, UserRecommendationActions.destroy, (state) => ({
-    ...state,
-    selectedLoading: true,
-    error: null,
-  })),
+  on(
+    UserRecommendationActions.loadSelected,
+    UserRecommendationActions.destroy,
+    UserRecommendationActions.reorder,
+    (state) => ({
+      ...state,
+      selectedLoading: true,
+      error: null,
+    })
+  ),
   on(UserRecommendationActions.loadSelectedSuccess, (state, { recommendation }) =>
     userRecommendationAdapter.setOne(recommendation, { ...state, selectedLoading: false })
   ),
@@ -68,6 +75,9 @@ const userRecommendationReducer = createReducer(
   })),
   on(UserRecommendationActions.destroySuccess, (state, { id }) =>
     userRecommendationAdapter.removeOne(id, { ...state, selectedLoading: false })
+  ),
+  on(UserRecommendationActions.reorderSuccess, (state, { recommendations }) =>
+    userRecommendationAdapter.setMany(recommendations, { ...state, selectedLoading: false })
   ),
 
   // ========== Форма рекомендаций для пользователя ==========
