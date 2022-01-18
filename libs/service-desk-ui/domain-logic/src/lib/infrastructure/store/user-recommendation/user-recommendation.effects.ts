@@ -74,6 +74,30 @@ export class UserRecommendationEffects {
     )
   );
 
+  destroy$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserRecommendationActions.destroy),
+      fetch({
+        run: (action) =>
+          this.userRecommendationApi
+            .destroy(action.id)
+            .pipe(map(() => UserRecommendationActions.destroySuccess({ id: action.id }))),
+        onError: (_action, error) => {
+          this.errorHandlerService.handleError(error, 'Не удалось удалить запись.');
+
+          return of(UserRecommendationActions.destroyFailure({ error }));
+        },
+      })
+    )
+  );
+
+  destroySuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserRecommendationActions.destroySuccess),
+      map(() => UserRecommendationActions.loadAll())
+    )
+  );
+
   // ========== Форма рекомендаций для пользователя ==========
 
   saveForm$ = createEffect(() =>

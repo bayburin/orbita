@@ -53,15 +53,22 @@ const userRecommendationReducer = createReducer(
   ),
   on(UserRecommendationActions.loadAllFailure, (state, { error }) => ({ ...state, error, loading: false })),
   on(UserRecommendationActions.select, (state, { id }) => ({ ...state, selectedId: id })),
-  on(UserRecommendationActions.loadSelected, (state) => ({ ...state, selectedLoading: true, error: null })),
+  on(UserRecommendationActions.loadSelected, UserRecommendationActions.destroy, (state) => ({
+    ...state,
+    selectedLoading: true,
+    error: null,
+  })),
   on(UserRecommendationActions.loadSelectedSuccess, (state, { recommendation }) =>
     userRecommendationAdapter.setOne(recommendation, { ...state, selectedLoading: false })
   ),
-  on(UserRecommendationActions.loadSelectedFailure, (state, { error }) => ({
+  on(UserRecommendationActions.loadSelectedFailure, UserRecommendationActions.destroyFailure, (state, { error }) => ({
     ...state,
     error,
     selectedLoading: false,
   })),
+  on(UserRecommendationActions.destroySuccess, (state, { id }) =>
+    userRecommendationAdapter.removeOne(id, { ...state, selectedLoading: false })
+  ),
 
   // ========== Форма рекомендаций для пользователя ==========
 

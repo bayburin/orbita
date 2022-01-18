@@ -34,4 +34,11 @@ export abstract class UserRecommendationApiAbstract {
    * @param formData - новые данные
    */
   abstract update(id: number, formData: UserRecommendation): Observable<UserRecommendation>;
+
+  /**
+   * Удаляет запись
+   *
+   * @param id - id записи.
+   */
+  abstract destroy(id: number): Observable<UserRecommendation>;
 }

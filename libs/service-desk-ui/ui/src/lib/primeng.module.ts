@@ -5,11 +5,15 @@ import { DialogModule } from 'primeng/dialog';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
-const modules: any[] = [TableModule, DialogModule, ButtonModule, InputTextModule, CheckboxModule];
+import { ConfirmationService, MessageService } from 'primeng/api';
+
+const modules: any[] = [TableModule, DialogModule, ButtonModule, InputTextModule, CheckboxModule, ConfirmDialogModule];
 
 @NgModule({
   imports: [...modules],
   exports: [...modules],
+  providers: [ConfirmationService, MessageService],
 })
 export class PrimengModule {}

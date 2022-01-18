@@ -6,7 +6,7 @@
 
 <ng-template #loaded>
   <ng-container *ngIf="loaded$ | async; else error">
-    <button type="button" class="btn btn-outline-primary btn-sm mb-3" (click)="newForm()">Создать</button>
+    <button type="button" class="btn btn-outline-primary btn mb-3" (click)="newForm()">Создать</button>
 
     <p-table [value]="userRecommendations$ | async" styleClass="p-datatable-sm" responsiveLayout="scroll" dataKey="id">
       <ng-template pTemplate="header">
@@ -37,6 +37,15 @@
               (click)="editForm(rec)"
             >
               <i class="mdi mdi-pencil mdi-18px"></i>
+            </button>
+            <button
+              [disabled]="selectedLoading$ | async"
+              pButton
+              type="button"
+              class="p-button-rounded p-button-text p-button-icon-only p-button-plain"
+              (click)="remove(rec)"
+            >
+              <i class="mdi mdi-trash-can-outline mdi-18px"></i>
             </button>
           </td>
         </tr>
@@ -159,3 +168,10 @@
     <button (click)="closeForm()" class="btn btn-gray-white ml-3">Отменить</button>
   </ng-template>
 </p-dialog>
+
+<p-confirmDialog #cd [style]="{ width: '50vw' }" [baseZIndex]="10000" [dismissableMask]="true">
+  <ng-template pTemplate="footer">
+    <button type="button" class="btn btn-gray-white" (click)="cd.reject()">Нет</button>
+    <button type="button" class="btn btn-outline-primary" (click)="cd.accept()">Да</button>
+  </ng-template>
+</p-confirmDialog>

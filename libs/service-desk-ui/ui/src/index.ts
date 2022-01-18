@@ -12,3 +12,5 @@ export * from './lib/animations/user-dashboard.animation';
 
 export * from './lib/components/question/question.component';
 export * from './lib/components/question-list/question-list.component';
+
+export * from './lib/primeng.locale';

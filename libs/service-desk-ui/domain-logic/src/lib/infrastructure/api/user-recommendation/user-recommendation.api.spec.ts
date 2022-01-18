@@ -31,11 +31,11 @@ describe('CategoryApi', () => {
 
   describe('query()', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations`;
-    const categories = [{ id: 1 }, { id: 2 }];
+    const recommendations = [{ id: 1 }, { id: 2 }];
 
     it('should return user recommendations', () => {
       service.query().subscribe((result) => {
-        expect(result).toEqual(categories);
+        expect(result).toEqual(recommendations);
       });
 
       httpMock
@@ -43,17 +43,17 @@ describe('CategoryApi', () => {
           method: 'GET',
           url: api,
         })
-        .flush(categories);
+        .flush(recommendations);
     });
   });
 
   describe('show()', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations/123`;
-    const category = { id: 123 };
+    const recommendation = { id: 123 };
 
     it('should show user recommendations', () => {
       service.show(123).subscribe((result) => {
-        expect(result).toEqual(category);
+        expect(result).toEqual(recommendation);
       });
 
       httpMock
@@ -61,35 +61,55 @@ describe('CategoryApi', () => {
           method: 'GET',
           url: api,
         })
-        .flush(category);
+        .flush(recommendation);
     });
   });
 
   describe('save()', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations`;
-    const data = { title: 'test' } as UserRecommendation;
+    const recommendation = { title: 'test' } as UserRecommendation;
 
     it('should save record', () => {
-      service.save(data).subscribe();
+      service.save(recommendation).subscribe((result) => expect(result).toEqual(recommendation));
 
-      httpMock.expectOne({
-        method: 'POST',
-        url: api,
-      });
+      httpMock
+        .expectOne({
+          method: 'POST',
+          url: api,
+        })
+        .flush(recommendation);
     });
   });
 
   describe('update()', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations/1`;
-    const data = { title: 'test' } as UserRecommendation;
+    const recommendation = { title: 'test' } as UserRecommendation;
 
     it('should update record', () => {
-      service.update(1, data).subscribe();
+      service.update(1, recommendation).subscribe((result) => expect(result).toEqual(recommendation));
 
-      httpMock.expectOne({
-        method: 'PUT',
-        url: api,
-      });
+      httpMock
+        .expectOne({
+          method: 'PUT',
+          url: api,
+        })
+        .flush(recommendation);
+    });
+  });
+
+  describe('destroy()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/user_recommendations/1`;
+    const recommendation = { title: 'test' } as UserRecommendation;
+
+    it('should destroy record', () => {
+      service.destroy(1).subscribe((result) => expect(result).toEqual(recommendation));
+
+      httpMock
+        .expectOne({
+          method: 'DELETE',
+          url: api,
+        })
+        .flush(recommendation);
     });
   });
 });

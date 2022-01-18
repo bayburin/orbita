@@ -35,4 +35,8 @@ export class UserRecommendationFacadeStub implements UserRecommendationFacadeAbs
   saveForm() {
     /** */
   }
+
+  destroy() {
+    /** */
+  }
 }

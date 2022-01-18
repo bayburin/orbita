@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@ang
 import { combineLatest } from 'rxjs';
 import { filter, take, distinctUntilChanged, map, takeWhile } from 'rxjs/operators';
 import { UserRecommendation, UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'service-desk-ui-admin-home-user-recommendations',
@@ -31,7 +32,11 @@ export class UserRecommendationsComponent implements OnInit {
     return this.form.get('query_params') as FormArray;
   }
 
-  constructor(private userRecommendationFacade: UserRecommendationFacade, private fb: FormBuilder) {}
+  constructor(
+    private userRecommendationFacade: UserRecommendationFacade,
+    private fb: FormBuilder,
+    private confirmationService: ConfirmationService
+  ) {}
 
   ngOnInit(): void {
     this.userRecommendationFacade.loadAll();
@@ -60,6 +65,17 @@ export class UserRecommendationsComponent implements OnInit {
   editForm(userRecommendation: UserRecommendation): void {
     this.userRecommendationFacade.edit(userRecommendation.id);
     this.initForm();
+  }
+
+  /**
+   * Удаляет запись
+   */
+  remove(userRecommendation: UserRecommendation): void {
+    this.confirmationService.confirm({
+      message: `Вы действительно хотите удалить запись №${userRecommendation.id} "${userRecommendation.title}"?`,
+      header: 'Подтверждение удаления',
+      accept: () => this.userRecommendationFacade.destroy(userRecommendation.id),
+    });
   }
 
   /**

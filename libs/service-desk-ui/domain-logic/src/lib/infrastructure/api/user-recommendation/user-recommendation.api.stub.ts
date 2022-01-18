@@ -20,4 +20,8 @@ export class UserRecommendationApiStub implements UserRecommendationApiAbstract 
   update() {
     return of(null);
   }
+
+  destroy() {
+    return of(null);
+  }
 }

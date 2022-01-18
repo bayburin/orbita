@@ -28,6 +28,12 @@ export const loadSelectedFailure = createAction(
   props<{ error: any }>()
 );
 
+export const destroy = createAction('[UserRecommendation/API] Destroy', props<{ id: number }>());
+
+export const destroySuccess = createAction('[UserRecommendation/API] Destroy Success', props<{ id: number }>());
+
+export const destroyFailure = createAction('[UserRecommendation/API] Destroy Failure', props<{ error: any }>());
+
 // ========== Форма рекомендаций для пользователя ==========
 
 export const initForm = createAction(

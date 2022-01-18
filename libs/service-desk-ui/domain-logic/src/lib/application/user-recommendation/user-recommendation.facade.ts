@@ -51,4 +51,8 @@ export class UserRecommendationFacade implements UserRecommendationFacadeAbstrac
   saveForm() {
     this.store.dispatch(UserRecommendationActions.saveForm());
   }
+
+  destroy(id: number) {
+    this.store.dispatch(UserRecommendationActions.destroy({ id }));
+  }
 }

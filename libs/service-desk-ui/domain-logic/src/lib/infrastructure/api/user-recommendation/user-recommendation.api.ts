@@ -31,4 +31,8 @@ export class UserRecommendationApi implements UserRecommendationApiAbstract {
   update(id: number, formData: UserRecommendation) {
     return this.http.put<UserRecommendation>(`${this.api}/${id}`, { user_recommendation: formData });
   }
+
+  destroy(id: number) {
+    return this.http.delete<UserRecommendation>(`${this.api}/${id}`);
+  }
 }

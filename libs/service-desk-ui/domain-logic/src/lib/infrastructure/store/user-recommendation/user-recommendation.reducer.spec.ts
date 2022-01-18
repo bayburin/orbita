@@ -100,6 +100,40 @@ describe('UserRecommendationReducer', () => {
     });
   });
 
+  describe('destroy', () => {
+    it('should change attributes', () => {
+      action = UserRecommendationActions.destroy({ id: 123 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedLoading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('destroySuccess', () => {
+    it('should change attributes', () => {
+      const recommendation = createUserRecommendation(1);
+      initialState.ids = [1];
+      initialState.entities = { 1: recommendation };
+      action = UserRecommendationActions.destroySuccess({ id: 1 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(0);
+      expect(result.selectedLoading).toBe(false);
+    });
+  });
+
+  describe('destroyFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      action = UserRecommendationActions.destroyFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.error).toEqual(error);
+      expect(result.selectedLoading).toBe(false);
+    });
+  });
+
   // ========== Форма рекомендаций для пользователя ==========
 
   describe('initForm', () => {
