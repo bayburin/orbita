@@ -17,6 +17,8 @@ import { ShowQuestionLinkDirective } from './directives/show-question-link/show-
 import { GetQuestionLinkDirective } from './directives/get-question-link/get-question-link.directive';
 import { FileIconDirective } from './directives/file-icon/file-icon.directive';
 
+import { QueryParamsPipe } from './pipes/query-params/query-params.pipe';
+
 import { UserRecommendationsComponent } from './components/user-recommendations/user-recommendations.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { SectionHeaderComponent } from './components/section-header/section-header.component';
@@ -66,6 +68,8 @@ const directives: any[] = [
   LoadingIndicatorDirective,
 ];
 
+const pipes: any[] = [QueryParamsPipe];
+
 const components: any[] = [
   UserRecommendationsComponent,
   LoadingComponent,
@@ -100,8 +104,8 @@ const components: any[] = [
 
 @NgModule({
   imports: [CommonModule, RouterModule, MarkdownModule.forChild(), ...modules],
-  declarations: [...components, ...directives],
+  declarations: [...components, ...directives, ...pipes],
   entryComponents: [CategoryComponent, ServiceComponent, QuestionComponent],
-  exports: [...components, ...modules, ...directives],
+  exports: [...components, ...modules, ...directives, ...pipes],
 })
 export class ServiceDeskUiUiModule {}

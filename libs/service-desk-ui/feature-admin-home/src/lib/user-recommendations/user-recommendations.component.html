@@ -44,7 +44,7 @@
             <span [class]="'sd-badge link-' + linkType(rec.external).badge">{{ linkType(rec.external).title }}</span>
           </td>
           <td>{{ rec.link }}</td>
-          <td>{{ rec.query_params | json }}</td>
+          <td [innerHTML]="rec.query_params | queryParams"></td>
           <td class="text-center">
             <button
               [disabled]="selectedLoading$ | async"
