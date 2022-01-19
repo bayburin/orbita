@@ -2,9 +2,9 @@ import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserRecommendation, UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
 import { ConfirmationService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 import { AdminUserRecommendationFormComponent } from '../admin-user-recommendation-form/admin-user-recommendation-form.component';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'service-desk-ui-admin-home-admin-user-recommendations',
@@ -18,7 +18,6 @@ export class AdminUserRecommendationsComponent implements OnInit, OnDestroy {
   loadingIds$ = this.userRecommendationFacade.loadingIds$;
   formDisplay$ = this.userRecommendationFacade.formDisplay$;
   subscriptions = new Subscription();
-
   ref: DynamicDialogRef;
 
   constructor(

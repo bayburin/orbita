@@ -51,6 +51,7 @@ import { LoadingIndicatorDirective } from './directives/loading-indicator/loadin
 import { ResponsibleUserListComponent } from './components/responsible-user-list/responsible-user-list.component';
 import { SearchResultListComponent } from './components/search-result-list/search-result-list.component';
 import { AdminUserRecommendationsTableComponent } from './components/admin-user-recommendations-table/admin-user-recommendations-table.component';
+import { AdminCategoriesTableComponent } from './components/admin-categories-table/admin-categories-table.component';
 
 const modules: any[] = [
   FormsModule,
@@ -106,6 +107,7 @@ const components: any[] = [
   ResponsibleUserListComponent,
   SearchResultListComponent,
   AdminUserRecommendationsTableComponent,
+  AdminCategoriesTableComponent,
 ];
 
 @NgModule({
