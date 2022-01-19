@@ -17,6 +17,7 @@ import { ShowQuestionLinkDirective } from './directives/show-question-link/show-
 import { GetQuestionLinkDirective } from './directives/get-question-link/get-question-link.directive';
 import { FileIconDirective } from './directives/file-icon/file-icon.directive';
 import { DisableOnLoadingDirective } from './directives/disable-on-loading/disable-on-loading.directive';
+import { ExternalHrefDirective } from './directives/external-href/external-href.directive';
 
 import { QueryParamsPipe } from './pipes/query-params/query-params.pipe';
 
@@ -69,6 +70,7 @@ const directives: any[] = [
   FileIconDirective,
   LoadingIndicatorDirective,
   DisableOnLoadingDirective,
+  ExternalHrefDirective,
 ];
 
 const pipes: any[] = [QueryParamsPipe];

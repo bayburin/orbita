@@ -1,7 +1,7 @@
-import { By } from '@angular/platform-browser';
 import { Component, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentFixture, waitForAsync, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { DisableOnLoadingDirective } from './disable-on-loading.directive';
 

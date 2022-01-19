@@ -1,8 +1,17 @@
 <ul class="sd-list-masonry sd-list-masonry-sm-6 sd-list-masonry-md-3 list-unstyled mb-0" @contentBlockAnimation>
   <li *ngFor="let recommendation of userRecommendations; trackBy: trackByRecommendation">
-    <a *ngIf="!recommendation.external" [routerLink]="recommendation.link" [queryParams]="recommendation.query_params">
-      {{ recommendation.title }}
-    </a>
-    <a *ngIf="recommendation.external" [href]="recommendation.link" target="_blank">{{ recommendation.title }}</a>
+    <ng-container
+      [ngTemplateOutlet]="recommendation.external ? externalLink : localLink"
+      [ngTemplateOutletContext]="{ recommendation: recommendation }"
+    >
+    </ng-container>
   </li>
 </ul>
+
+<ng-template #externalLink let-rec="recommendation">
+  <a [libExternalHref]="rec" target="_blank">{{ rec.title }}</a>
+</ng-template>
+
+<ng-template #localLink let-rec="recommendation">
+  <a [routerLink]="rec.link" [queryParams]="rec.query_params">{{ rec.title }}</a>
+</ng-template>
