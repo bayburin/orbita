@@ -17,9 +17,9 @@ export abstract class UserRecommendationFacadeAbstract {
    */
   loaded$: Observable<boolean>;
   /**
-   * Индикатор, идет ли загрузка выбранной записи в данный момент
+   * Список id тех записей, которые сейчас обрабатываются
    */
-  selectedLoading$: Observable<boolean>;
+  loadingIds$: Observable<number[]>;
 
   // ========== Форма рекомендаций для пользователя ==========
 

@@ -34,6 +34,7 @@ describe('LoadingIndicatorDirective', () => {
     component.id = 1;
     directive = TestBed.inject(LoadingIndicatorDirective);
   });
+
   it('should create an instance', () => {
     expect(directive).toBeTruthy();
   });

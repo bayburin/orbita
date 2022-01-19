@@ -82,40 +82,44 @@ export class UserRecommendationEffects {
           this.userRecommendationApi
             .destroy(action.id)
             .pipe(map(() => UserRecommendationActions.destroySuccess({ id: action.id }))),
-        onError: (_action, error) => {
+        onError: (action, error) => {
           this.errorHandlerService.handleError(error, 'Не удалось удалить запись.');
 
-          return of(UserRecommendationActions.destroyFailure({ error }));
+          return of(UserRecommendationActions.destroyFailure({ id: action.id }));
         },
       })
     )
   );
 
-  // destroySuccess$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(UserRecommendationActions.destroySuccess),
-  //     map(() => UserRecommendationActions.loadAll())
-  //   )
-  // );
-
   reorder$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserRecommendationActions.reorder),
       withLatestFrom(this.store.select(UserRecommendationSelectors.getAll)),
-      switchMap(([action, userRecommendations]) => {
+      map(([action, userRecommendations]) => {
         const minIndex = Math.min(action.oldIndex, action.newIndex);
         const data = userRecommendations
           .slice(minIndex)
           .map((rec, index) => ({ id: rec.id, order: (minIndex + index) * 10 }));
 
-        return this.userRecommendationApi.reorder(data).pipe(
-          map((recommendations) => UserRecommendationActions.reorderSuccess({ recommendations })),
-          catchError((error) => {
-            this.errorHandlerService.handleError(error, 'Не удалось удалить запись.');
+        return UserRecommendationActions.reorderStart({ data });
+      })
+    )
+  );
 
-            return of(UserRecommendationActions.destroyFailure({ error }));
-          })
-        );
+  reorderStart$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(UserRecommendationActions.reorderStart),
+      fetch({
+        run: (action) => {
+          return this.userRecommendationApi
+            .reorder(action.data)
+            .pipe(map((recommendations) => UserRecommendationActions.reorderSuccess({ recommendations })));
+        },
+        onError: (action, error) => {
+          this.errorHandlerService.handleError(error, 'Не удалось сохранить новый порядок.');
+
+          return of(UserRecommendationActions.reorderFailure({ ids: action.data.map((el) => el.id) }));
+        },
       })
     )
   );

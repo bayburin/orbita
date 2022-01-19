@@ -5,12 +5,13 @@ import * as UserRecommendationSelectors from './user-recommendation.selectors';
 describe('UserRecommendationSelectors', () => {
   const error = { message: 'error message' };
   const formError = { message: 'form error message' };
-  const createCategoryEntity = (id: number, name = ''): UserRecommendation =>
+  const createCategoryEntity = (id: number, order = 0, name = ''): UserRecommendation =>
     ({
       id,
+      order,
       title: name || `name-${id}`,
     } as UserRecommendation);
-  const arrEntities = [createCategoryEntity(1), createCategoryEntity(2), createCategoryEntity(3)];
+  const arrEntities = [createCategoryEntity(1, 10), createCategoryEntity(2, 20), createCategoryEntity(3, 30)];
   const entities = {
     1: arrEntities[0],
     2: arrEntities[1],
@@ -36,8 +37,7 @@ describe('UserRecommendationSelectors', () => {
       error,
       form,
       selectedId,
-      selectedLoaded: true,
-      selectedLoading: false,
+      loadingIds: [1, 2, 3],
     });
   });
 
@@ -57,8 +57,8 @@ describe('UserRecommendationSelectors', () => {
     expect(UserRecommendationSelectors.getSelectedId.projector(state)).toBe(selectedId);
   });
 
-  it('getSelectedLoading() should return "getSelectedLoading" attribute', () => {
-    expect(UserRecommendationSelectors.getSelectedLoading.projector(state)).toBe(false);
+  it('getLoadingIds() should return "loadingIds" attribute', () => {
+    expect(UserRecommendationSelectors.getLoadingIds.projector(state)).toEqual([1, 2, 3]);
   });
 
   it('getAll() should return array of entities', () => {

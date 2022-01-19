@@ -19,7 +19,7 @@ export class UserRecommendationsComponent implements OnInit {
   userRecommendations$ = this.userRecommendationFacade.all$;
   loading$ = this.userRecommendationFacade.loading$;
   loaded$ = this.userRecommendationFacade.loaded$;
-  selectedLoading$ = this.userRecommendationFacade.selectedLoading$;
+  loadingIds$ = this.userRecommendationFacade.loadingIds$;
   formDisplay$ = this.userRecommendationFacade.formDisplay$;
   formLoading$ = this.userRecommendationFacade.formLoading$;
   form: FormGroup;
@@ -139,7 +139,6 @@ export class UserRecommendationsComponent implements OnInit {
    * @param event - объект события
    */
   reorderRow(event: { dragIndex: number; dropIndex: number }): void {
-    console.log(event);
     this.userRecommendationFacade.reorder(event.dragIndex, event.dropIndex);
   }
 

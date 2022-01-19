@@ -17,7 +17,7 @@ export class UserRecommendationFacade implements UserRecommendationFacadeAbstrac
   all$ = this.store.select(UserRecommendationSelectors.getAll);
   loading$ = this.store.select(UserRecommendationSelectors.getLoading);
   loaded$ = this.store.select(UserRecommendationSelectors.getLoaded);
-  selectedLoading$ = this.store.select(UserRecommendationSelectors.getSelectedLoading);
+  loadingIds$ = this.store.select(UserRecommendationSelectors.getLoadingIds);
 
   // ========== Форма рекомендаций для пользователя ==========
 

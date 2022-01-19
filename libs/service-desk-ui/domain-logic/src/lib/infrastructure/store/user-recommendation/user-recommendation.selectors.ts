@@ -24,7 +24,7 @@ export const getError = createSelector(getUserRecommendationState, (state: State
 
 export const getSelectedId = createSelector(getUserRecommendationState, (state: State) => state.selectedId);
 
-export const getSelectedLoading = createSelector(getUserRecommendationState, (state: State) => state.selectedLoading);
+export const getLoadingIds = createSelector(getUserRecommendationState, (state: State) => state.loadingIds);
 
 export const getAll = createSelector(getUserRecommendationState, (state: State) => selectAll(state));
 

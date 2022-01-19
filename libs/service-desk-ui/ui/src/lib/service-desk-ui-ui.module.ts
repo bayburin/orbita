@@ -48,6 +48,7 @@ import { AttachmentListComponent } from './components/attachment-list/attachment
 import { LoadingIndicatorDirective } from './directives/loading-indicator/loading-indicator.directive';
 import { ResponsibleUserListComponent } from './components/responsible-user-list/responsible-user-list.component';
 import { SearchResultListComponent } from './components/search-result-list/search-result-list.component';
+import { DisableOnLoadingDirective } from './directives/disable-on-loading/disable-on-loading.directive';
 
 const modules: any[] = [
   FormsModule,
@@ -66,6 +67,7 @@ const directives: any[] = [
   GetQuestionLinkDirective,
   FileIconDirective,
   LoadingIndicatorDirective,
+  DisableOnLoadingDirective,
 ];
 
 const pipes: any[] = [QueryParamsPipe];

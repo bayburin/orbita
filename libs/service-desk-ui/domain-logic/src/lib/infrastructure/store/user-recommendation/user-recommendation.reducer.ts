@@ -19,9 +19,9 @@ export interface State extends EntityState<UserRecommendation> {
   loading: boolean;
   loaded: boolean;
   form: FormState;
+  loadingIds: number[];
   error?: string | null;
   selectedId?: number;
-  selectedLoading?: boolean;
 }
 
 export interface UserRecommendationPartialState {
@@ -42,6 +42,7 @@ export const initialState: State = userRecommendationAdapter.getInitialState({
   loading: false,
   loaded: false,
   form: initialFormState,
+  loadingIds: [],
 });
 
 const userRecommendationReducer = createReducer(
@@ -55,30 +56,52 @@ const userRecommendationReducer = createReducer(
   ),
   on(UserRecommendationActions.loadAllFailure, (state, { error }) => ({ ...state, error, loading: false })),
   on(UserRecommendationActions.select, (state, { id }) => ({ ...state, selectedId: id })),
-  on(
-    UserRecommendationActions.loadSelected,
-    UserRecommendationActions.destroy,
-    UserRecommendationActions.reorder,
-    (state) => ({
+  on(UserRecommendationActions.loadSelected, (state) => ({
+    ...state,
+    loadingIds: [...state.loadingIds, state.selectedId],
+  })),
+  on(UserRecommendationActions.loadSelectedSuccess, (state, { recommendation }) =>
+    userRecommendationAdapter.setOne(recommendation, {
       ...state,
-      selectedLoading: true,
-      error: null,
+      loadingIds: state.loadingIds.filter((loadingId) => loadingId !== recommendation.id),
     })
   ),
-  on(UserRecommendationActions.loadSelectedSuccess, (state, { recommendation }) =>
-    userRecommendationAdapter.setOne(recommendation, { ...state, selectedLoading: false })
-  ),
-  on(UserRecommendationActions.loadSelectedFailure, UserRecommendationActions.destroyFailure, (state, { error }) => ({
+  on(UserRecommendationActions.loadSelectedFailure, (state, { error }) => ({
     ...state,
+    selectedId: null,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== state.selectedId),
     error,
-    selectedLoading: false,
+  })),
+  on(UserRecommendationActions.destroy, (state, { id }) => ({
+    ...state,
+    loadingIds: [...state.loadingIds, id],
   })),
   on(UserRecommendationActions.destroySuccess, (state, { id }) =>
-    userRecommendationAdapter.removeOne(id, { ...state, selectedLoading: false })
+    userRecommendationAdapter.removeOne(id, {
+      ...state,
+      loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+    })
   ),
-  on(UserRecommendationActions.reorderSuccess, (state, { recommendations }) =>
-    userRecommendationAdapter.setMany(recommendations, { ...state, selectedLoading: false })
-  ),
+  on(UserRecommendationActions.destroyFailure, (state, { id }) => ({
+    ...state,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+  })),
+  on(UserRecommendationActions.reorderStart, (state, { data }) => ({
+    ...state,
+    loadingIds: [...state.loadingIds, ...data.map((el) => el.id)],
+  })),
+  on(UserRecommendationActions.reorderSuccess, (state, { recommendations }) => {
+    const ids = recommendations.map((rec) => rec.id);
+
+    return userRecommendationAdapter.setMany(recommendations, {
+      ...state,
+      loadingIds: state.loadingIds.filter((loadingId) => !ids.includes(loadingId)),
+    });
+  }),
+  on(UserRecommendationActions.reorderFailure, (state, { ids }) => ({
+    ...state,
+    loadingIds: state.loadingIds.filter((loadingId) => !ids.includes(loadingId)),
+  })),
 
   // ========== Форма рекомендаций для пользователя ==========
 

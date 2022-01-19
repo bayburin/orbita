@@ -47,22 +47,27 @@
           <td [innerHTML]="rec.query_params | queryParams"></td>
           <td class="text-center">
             <button
-              [disabled]="selectedLoading$ | async"
               pButton
               type="button"
               class="p-button-rounded p-button-text p-button-icon-only p-button-plain"
+              [libDisableOnLoading]="rec.id"
+              [libDisableOnLoadingIds]="loadingIds$ | async"
               (click)="editForm(rec)"
             >
-              <i class="mdi mdi-pencil mdi-18px"></i>
+              <i class="mdi mdi-pencil mdi-18px" *libLoadingIndicator="rec.id; loadingIds: loadingIds$ | async"></i>
             </button>
             <button
-              [disabled]="selectedLoading$ | async"
               pButton
               type="button"
               class="p-button-rounded p-button-text p-button-icon-only p-button-plain"
+              [libDisableOnLoading]="rec.id"
+              [libDisableOnLoadingIds]="loadingIds$ | async"
               (click)="remove(rec)"
             >
-              <i class="mdi mdi-trash-can-outline mdi-18px"></i>
+              <i
+                class="mdi mdi-trash-can-outline mdi-18px"
+                *libLoadingIndicator="rec.id; loadingIds: loadingIds$ | async"
+              ></i>
             </button>
           </td>
         </tr>

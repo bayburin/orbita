@@ -32,11 +32,18 @@ export const destroy = createAction('[UserRecommendation/API] Destroy', props<{ 
 
 export const destroySuccess = createAction('[UserRecommendation/API] Destroy Success', props<{ id: number }>());
 
-export const destroyFailure = createAction('[UserRecommendation/API] Destroy Failure', props<{ error: any }>());
+export const destroyFailure = createAction('[UserRecommendation/API] Destroy Failure', props<{ id: number }>());
 
-export const reorder = createAction(
-  '[UserRecommendation/API] Reorder',
-  props<{ oldIndex: number; newIndex: number }>()
+export const reorder = createAction('[UserRecommendation] Reorder', props<{ oldIndex: number; newIndex: number }>());
+
+export const reorderStart = createAction(
+  '[UserRecommendation/API] Reorder Start',
+  props<{
+    data: {
+      id: number;
+      order: number;
+    }[];
+  }>()
 );
 
 export const reorderSuccess = createAction(
@@ -44,7 +51,7 @@ export const reorderSuccess = createAction(
   props<{ recommendations: UserRecommendation[] }>()
 );
 
-export const reorderFailure = createAction('[UserRecommendation/API] Reorder Failure', props<{ error: any }>());
+export const reorderFailure = createAction('[UserRecommendation/API] Reorder Failure', props<{ ids: number[] }>());
 
 // ========== Форма рекомендаций для пользователя ==========
 
