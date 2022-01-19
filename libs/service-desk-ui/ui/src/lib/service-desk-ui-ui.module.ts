@@ -16,6 +16,7 @@ import { SearchResultQuestionComponent } from './components/search-result-questi
 import { ShowQuestionLinkDirective } from './directives/show-question-link/show-question-link.directive';
 import { GetQuestionLinkDirective } from './directives/get-question-link/get-question-link.directive';
 import { FileIconDirective } from './directives/file-icon/file-icon.directive';
+import { DisableOnLoadingDirective } from './directives/disable-on-loading/disable-on-loading.directive';
 
 import { QueryParamsPipe } from './pipes/query-params/query-params.pipe';
 
@@ -48,7 +49,7 @@ import { AttachmentListComponent } from './components/attachment-list/attachment
 import { LoadingIndicatorDirective } from './directives/loading-indicator/loading-indicator.directive';
 import { ResponsibleUserListComponent } from './components/responsible-user-list/responsible-user-list.component';
 import { SearchResultListComponent } from './components/search-result-list/search-result-list.component';
-import { DisableOnLoadingDirective } from './directives/disable-on-loading/disable-on-loading.directive';
+import { AdminUserRecommendationsTableComponent } from './components/admin-user-recommendations-table/admin-user-recommendations-table.component';
 
 const modules: any[] = [
   FormsModule,
@@ -102,6 +103,7 @@ const components: any[] = [
   AttachmentListComponent,
   ResponsibleUserListComponent,
   SearchResultListComponent,
+  AdminUserRecommendationsTableComponent,
 ];
 
 @NgModule({

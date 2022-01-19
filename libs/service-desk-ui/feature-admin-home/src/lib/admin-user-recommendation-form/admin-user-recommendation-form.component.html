@@ -1,0 +1,101 @@
+<form [formGroup]="form">
+  <div class="field">
+    <label for="title">Наименование</label>
+    <input
+      id="title"
+      type="text"
+      pInputText
+      formControlName="title"
+      class="inputfield w-full"
+      autofocus
+      [ngClass]="{ 'ng-invalid ng-dirty': (titleForm.touched || submitted) && titleForm.errors }"
+    />
+    <small class="p-error" *ngIf="(titleForm.touched || submitted) && titleForm.errors">Не может быть пустым</small>
+    <small class="form-text text-muted">Имя ссылки, которое будет видеть пользователь портала</small>
+  </div>
+  <div class="field">
+    <label for="link">Ссылка</label>
+    <input
+      id="link"
+      type="text"
+      pInputText
+      formControlName="link"
+      class="inputfield w-full"
+      [ngClass]="{ 'ng-invalid ng-dirty': (linkForm.touched || submitted) && linkForm.errors }"
+    />
+    <small class="p-error" *ngIf="(linkForm.touched || submitted) && linkForm.errors">Не может быть пустым</small>
+    <small class="form-text text-muted"
+      >Для внешних ссылок указывать полный путь (например http://cosmos). Для внутренних ссылок не указывать домен
+      (например /categores/1 будет означать https://service-desk.iss-reshetnev.ru/categories/1)</small
+    >
+  </div>
+  <div class="field-checkbox">
+    <p-checkbox inputId="external" formControlName="external" [binary]="true"></p-checkbox>
+    <label class="mb-0" for="external">Внешняя ссылка</label>
+  </div>
+  <div formArrayName="query_params">
+    <div class="mb-2">
+      <label>Дополнительные параметры ссылки</label>
+      <button
+        pButton
+        type="button"
+        class="p-button-rounded p-button-text p-button-icon-only p-button-plain ml-2"
+        (click)="addParam()"
+      >
+        <i class="mdi mdi-plus-circle-outline mdi-18px"></i>
+      </button>
+    </div>
+    <div *ngFor="let control of queryParamsForm.controls; let i = index">
+      <div [formGroupName]="i" class="formgrid grid">
+        <div class="field col">
+          <input
+            type="text"
+            pInputText
+            formControlName="name"
+            class="inputfield w-full"
+            placeholder="Имя параметра"
+            [ngClass]="{
+              'ng-invalid ng-dirty':
+                (getQueryParamsNameForm(i).touched || submitted) && getQueryParamsNameForm(i).errors
+            }"
+          />
+          <small
+            class="p-error"
+            *ngIf="(getQueryParamsNameForm(i).touched || submitted) && getQueryParamsNameForm(i).errors"
+            >Не может быть пустым</small
+          >
+        </div>
+        <div class="field col">
+          <input
+            type="text"
+            pInputText
+            formControlName="value"
+            class="inputfield w-full"
+            placeholder="Значение параметра"
+          />
+        </div>
+        <div class="field flex align-items-center">
+          <button
+            pButton
+            type="button"
+            class="p-button-rounded p-button-text p-button-icon-only p-button-plain"
+            (click)="removeParam(i)"
+          >
+            <i class="mdi mdi-minus-circle-outline mdi-18px"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<p-divider></p-divider>
+
+<div class="text-right mt-3">
+  <button type="submit" [disabled]="formLoading$ | async" (click)="submitForm()" class="btn btn-primary">
+    <span class="d-flex justify-content-center">
+      <lib-loading [loading]="formLoading$ | async" class="mr-1 text-body"></lib-loading>Сохранить
+    </span>
+  </button>
+  <button (click)="closeForm()" class="btn btn-gray-white ml-3">Отменить</button>
+</div>

@@ -1,0 +1,37 @@
+<lib-section-header header="Раздел &#34;Рекомендуем для пользователя&#34;"></lib-section-header>
+
+<ng-container *ngIf="loading$ | async as loading; else loaded">
+  <lib-loading [loading]="loading" size="48px"></lib-loading>
+</ng-container>
+
+<ng-template #loaded>
+  <ng-container *ngIf="loaded$ | async; else error">
+    <p-toolbar styleClass="mb-3">
+      <ng-template pTemplate="left">
+        <button type="button" class="btn btn-outline-primary btn btn-sm" (click)="newForm()">Добавить</button>
+      </ng-template>
+      <ng-template pTemplate="right">
+        <button type="button" class="btn btn-outline-primary btn btn-sm" (click)="loadData()">Обновить таблицу</button>
+      </ng-template>
+    </p-toolbar>
+
+    <lib-admin-user-recommendations-table
+      [userRecommendations]="userRecommendations$ | async"
+      [loadingIds]="loadingIds$ | async"
+      (reorderRow)="reorderRow($event)"
+      (editForm)="editForm($event)"
+      (remove)="remove($event)"
+    ></lib-admin-user-recommendations-table>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <p class="text-danger">Не удалось загрузить список рекомендаций для пользователя</p>
+</ng-template>
+
+<p-confirmDialog #cd [style]="{ width: '50vw' }" [baseZIndex]="10000" [dismissableMask]="true">
+  <ng-template pTemplate="footer">
+    <button type="button" class="btn btn-gray-white" (click)="cd.reject()">Нет</button>
+    <button type="button" class="btn btn-outline-primary" (click)="cd.accept()">Да</button>
+  </ng-template>
+</p-confirmDialog>
