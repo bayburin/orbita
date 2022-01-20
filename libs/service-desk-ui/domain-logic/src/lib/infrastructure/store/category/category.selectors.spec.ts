@@ -4,6 +4,7 @@ import * as CategorySelectors from './category.selectors';
 
 describe('CategorySelectors', () => {
   const error = { message: 'error message' };
+  const formError = { message: 'form error message' };
   const createCategoryEntity = (id: number, name = ''): Category =>
     ({
       id,
@@ -16,6 +17,15 @@ describe('CategorySelectors', () => {
     3: arrEntities[2],
   };
   const selectedId = 2;
+  const formData = {
+    name: 'fake name',
+  };
+  const form = {
+    formData,
+    loading: false,
+    displayForm: true,
+    error: formError,
+  };
   let state: any;
 
   beforeEach(() => {
@@ -25,6 +35,7 @@ describe('CategorySelectors', () => {
       loading: true,
       selectedId,
       error,
+      form,
     });
   });
 
@@ -58,5 +69,27 @@ describe('CategorySelectors', () => {
 
   it('getSelected() should return svtItem state', () => {
     expect(CategorySelectors.getSelected.projector(entities, selectedId)).toEqual(entities[selectedId]);
+  });
+
+  // ========== Форма рекомендаций для пользователя ==========
+
+  it('getForm() should return "form" attribute', () => {
+    expect(CategorySelectors.getForm.projector(state)).toEqual(form);
+  });
+
+  it('getFormData() should return "formData" attribute', () => {
+    expect(CategorySelectors.getFormData.projector(form)).toEqual(formData);
+  });
+
+  it('getFormLoading() should return "loading" attribute', () => {
+    expect(CategorySelectors.getFormLoading.projector(form)).toBe(false);
+  });
+
+  it('getFormDisplayForm() should return "displayForm" attribute', () => {
+    expect(CategorySelectors.getFormDisplayForm.projector(form)).toBe(true);
+  });
+
+  it('getFormError() should return "error" attribute', () => {
+    expect(CategorySelectors.getFormError.projector(form)).toEqual(formError);
   });
 });

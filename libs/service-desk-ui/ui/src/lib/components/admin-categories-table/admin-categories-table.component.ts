@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CategoryVM } from '@orbita/service-desk-ui/domain-logic';
+import { Category } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'lib-admin-categories-table',
@@ -11,7 +11,7 @@ export class AdminCategoriesTableComponent {
   /**
    * Список категорий
    */
-  @Input() categories: CategoryVM[];
+  @Input() categories: Category[];
   /**
    * Список идентификаторов категорий, которые сейчас обрабатываются (грузятся)
    */
@@ -19,9 +19,9 @@ export class AdminCategoriesTableComponent {
   /**
    * Событие открытия формы редактирования записи
    */
-  @Output() editForm = new EventEmitter<CategoryVM>();
+  @Output() editForm = new EventEmitter<Category>();
   /**
    * Событие удаления записи
    */
-  @Output() remove = new EventEmitter<CategoryVM>();
+  @Output() remove = new EventEmitter<Category>();
 }

@@ -26,3 +26,31 @@ export const loadSelectedFailure = createAction('[Category/API] Load Selected Fa
 export const setEntities = createAction('[Category] Set Entities', props<{ entities: Dictionary<Category> }>());
 
 export const setSelectedId = createAction('[Category] Set Selected Id', props<{ selectedId: number }>());
+
+// ========== Администрирование ==========
+
+export const adminLoadAll = createAction('[Category/API] Admin Load All');
+
+export const adminLoadAllSuccess = createAction(
+  '[Category/API] Admin Load All Success',
+  props<{ categories: Category[] }>()
+);
+
+export const adminLoadAllFailure = createAction('[Category/API] Admin Load All Failure', props<{ error: any }>());
+
+// ========== Форма рекомендаций для пользователя ==========
+
+export const adminInitForm = createAction('[Category] Admin Init Form', props<{ category?: Category }>());
+
+export const adminCloseForm = createAction('[Category] Admin Close Form');
+
+export const adminChangeForm = createAction('[Category] Admin Change Form', props<{ formData: Category }>());
+
+export const adminSaveForm = createAction('[Category/API] Admin Save Form');
+
+export const adminSaveFormSuccess = createAction(
+  '[Category/API] Admin Save Form Success',
+  props<{ category: Category }>()
+);
+
+export const adminSaveFormFailure = createAction('[Category/API] Admin Save Form Failure', props<{ error: any }>());

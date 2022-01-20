@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 
-import { CATEGORY_FEATURE_KEY, State, categoryAdapter, CategoryPartialState } from './category.reducer';
+import { CATEGORY_FEATURE_KEY, State, categoryAdapter, CategoryPartialState, FormState } from './category.reducer';
 import { getServiceDeskUiState } from './../index';
 
 export const getCategoryState = createSelector(
@@ -29,3 +29,15 @@ export const getSelected = createSelector(
   getSelectedId,
   (entities, selectedId) => selectedId && entities[selectedId]
 );
+
+// ========== Форма рекомендаций для пользователя ==========
+
+export const getForm = createSelector(getCategoryState, (state: State) => state.form);
+
+export const getFormData = createSelector(getForm, (state: FormState) => state.formData);
+
+export const getFormLoading = createSelector(getForm, (state: FormState) => state.loading);
+
+export const getFormDisplayForm = createSelector(getForm, (state: FormState) => state.displayForm);
+
+export const getFormError = createSelector(getForm, (state: FormState) => state.error);

@@ -111,6 +111,73 @@ describe('CategoryReducer', () => {
     });
   });
 
+  // ========== Форма рекомендаций для пользователя ==========
+
+  describe('initForm', () => {
+    it('should change attributes', () => {
+      const category = createCategory(1, 'test');
+      action = CategoryActions.adminInitForm({ category });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.formData).toEqual(category);
+      expect(result.form.displayForm).toBe(true);
+    });
+  });
+
+  describe('closeForm', () => {
+    it('should change attributes', () => {
+      action = CategoryActions.adminCloseForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toBeNull();
+      expect(result.form.displayForm).toBe(false);
+      expect(result.form.formData).toBeNull();
+    });
+  });
+
+  describe('changeForm', () => {
+    it('should change attributes', () => {
+      const formData = createCategory(1, 'test');
+      action = CategoryActions.adminChangeForm({ formData });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.formData).toEqual(formData);
+    });
+  });
+
+  describe('saveForm', () => {
+    it('should change attributes', () => {
+      action = CategoryActions.adminSaveForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(true);
+      expect(result.form.error).toBe(null);
+    });
+  });
+
+  describe('saveFormSuccess', () => {
+    it('should change attributes', () => {
+      const category = createCategory(1, 'test');
+      initialState.form.formData = category;
+      action = CategoryActions.adminSaveFormSuccess({ category });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(1);
+      expect(result.form.loading).toBe(false);
+    });
+  });
+
+  describe('saveFormFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      action = CategoryActions.adminSaveFormFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(false);
+      expect(result.form.error).toEqual(error);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as Action;

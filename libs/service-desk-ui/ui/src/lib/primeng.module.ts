@@ -9,6 +9,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToolbarModule } from 'primeng/toolbar';
 import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 import { DividerModule } from 'primeng/divider';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -22,6 +23,7 @@ const modules: any[] = [
   ToolbarModule,
   DynamicDialogModule,
   DividerModule,
+  InputTextareaModule,
 ];
 
 @NgModule({

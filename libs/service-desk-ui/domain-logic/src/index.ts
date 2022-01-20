@@ -56,6 +56,9 @@ export * from './lib/application/ticket/ticket.facade.stub';
 export * from './lib/application/employee/employee.facade';
 export * from './lib/application/employee/employee.facade.stub';
 
+export * from './lib/application/admin/admin-category/admin-category.facade';
+export * from './lib/application/admin/admin-category/admin-category.facade.stub';
+
 export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';
 export * from './lib/application/policies/service/service-policy.service';

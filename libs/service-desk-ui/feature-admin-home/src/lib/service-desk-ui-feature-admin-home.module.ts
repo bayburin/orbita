@@ -8,6 +8,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
 import { AdminUserRecommendationsComponent } from './admin-user-recommendations/admin-user-recommendations.component';
 import { AdminUserRecommendationFormComponent } from './admin-user-recommendation-form/admin-user-recommendation-form.component';
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
+import { AdminCategoryFormComponent } from './admin-category-form/admin-category-form.component';
 
 const routes: Routes = [
   {
@@ -19,7 +20,13 @@ const routes: Routes = [
 
 @NgModule({
   imports: [CommonModule, RouterModule.forChild(routes), ServiceDeskUiUiModule, ServiceDeskUiDomainLogicModule],
-  entryComponents: [AdminUserRecommendationFormComponent],
-  declarations: [AdminHomeComponent, AdminUserRecommendationsComponent, AdminUserRecommendationFormComponent, AdminCategoriesComponent],
+  entryComponents: [AdminUserRecommendationFormComponent, AdminCategoryFormComponent],
+  declarations: [
+    AdminHomeComponent,
+    AdminUserRecommendationsComponent,
+    AdminUserRecommendationFormComponent,
+    AdminCategoriesComponent,
+    AdminCategoryFormComponent,
+  ],
 })
 export class ServiceDeskUiFeatureAdminHomeModule {}

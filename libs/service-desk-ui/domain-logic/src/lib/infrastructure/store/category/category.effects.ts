@@ -2,14 +2,17 @@ import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
-import { switchMap, withLatestFrom, catchError } from 'rxjs/operators';
+import { switchMap, withLatestFrom, catchError, map, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { CategoryApi } from './../../api/category/category.api';
 import { CategoryCacheService } from './../../services/category-cache.service';
+import { AdminCategoryApi } from './../../api/admin/admin-category/admin-category.api';
 import { ErrorHandlerService } from '../../services/error-handler.service';
+import { NotificationFacade } from './../../../application/notification/notification.facade';
 import * as CategoryActions from './category.actions';
 import * as CategoryFeature from './category.reducer';
+import * as CategorySelectors from './category.selectors';
 import * as ServiceActions from '../service/service.actions';
 import * as QuestionActions from '../question/question.actions';
 import * as AnswerActions from '../answer/answer.actions';
@@ -24,7 +27,9 @@ export class CategoryEffects {
     private readonly actions$: Actions,
     private store: Store<CategoryFeature.CategoryPartialState>,
     private categoryApi: CategoryApi,
-    private errorHandlerService: ErrorHandlerService
+    private adminCategoryApi: AdminCategoryApi,
+    private errorHandlerService: ErrorHandlerService,
+    private notificationFacade: NotificationFacade
   ) {}
 
   loadAll$ = createEffect(() =>
@@ -78,6 +83,51 @@ export class CategoryEffects {
           })
         )
       )
+    )
+  );
+
+  // ========== Администрирование ==========
+
+  adminLoadAll$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CategoryActions.adminLoadAll),
+      fetch({
+        run: (_action) => {
+          return this.adminCategoryApi
+            .query()
+            .pipe(map((categories) => CategoryActions.adminLoadAllSuccess({ categories })));
+        },
+        onError: (_action, error) => {
+          this.errorHandlerService.handleError(error, 'Не удалось загрузить список категорий.');
+
+          return CategoryActions.adminLoadAllFailure({ error });
+        },
+      })
+    )
+  );
+
+  saveForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CategoryActions.adminSaveForm),
+      withLatestFrom(this.store.select(CategorySelectors.getFormData)),
+      switchMap(([_action, formData]) => {
+        return this.adminCategoryApi.save(formData).pipe(
+          tap(() => this.notificationFacade.showMessage('Запись создана')),
+          map((category) => CategoryActions.adminSaveFormSuccess({ category })),
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось сохранить запись.');
+
+            return of(CategoryActions.adminSaveFormFailure({ error }));
+          })
+        );
+      })
+    )
+  );
+
+  saveFormSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CategoryActions.adminSaveFormSuccess),
+      map(() => CategoryActions.adminCloseForm())
     )
   );
 }

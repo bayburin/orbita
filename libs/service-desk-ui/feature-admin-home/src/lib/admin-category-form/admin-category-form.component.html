@@ -1,0 +1,55 @@
+<form [formGroup]="form">
+  <div class="field">
+    <label for="name">Наименование</label>
+    <input
+      id="name"
+      type="text"
+      pInputText
+      formControlName="name"
+      class="inputfield w-full"
+      autofocus
+      [ngClass]="{ 'ng-invalid ng-dirty': (nameForm.touched || submitted) && nameForm.errors }"
+    />
+    <small class="p-error" *ngIf="(nameForm.touched || submitted) && nameForm.errors">Не может быть пустым</small>
+  </div>
+  <div class="field">
+    <label for="short_description">Описание</label>
+    <textarea
+      id="short_description"
+      pInputTextarea
+      formControlName="short_description"
+      class="inputfield w-full"
+    ></textarea>
+  </div>
+  <div class="field">
+    <label for="icon_name">Иконка</label>
+    <input
+      id="icon_name"
+      type="text"
+      pInputText
+      formControlName="icon_name"
+      class="inputfield w-full"
+      autofocus
+      [ngClass]="{ 'ng-invalid ng-dirty': (iconNameForm.touched || submitted) && iconNameForm.errors }"
+    />
+    <small class="p-error" *ngIf="(iconNameForm.touched || submitted) && iconNameForm.errors"
+      >Не может быть пустым</small
+    >
+    <small class="form-text text-muted"
+      >Название иконки, которая будет выводиться на главной странице. Список можно посмотреть по
+      <a target="_blank" href="https://pictogrammers.github.io/@mdi/font/5.4.55/">этому</a> адресу. Название должно
+      соответствовать тому, что указано на сайте.</small
+    >
+  </div>
+</form>
+
+<p-divider></p-divider>
+
+<div class="text-right mt-3">
+  <button type="submit" [disabled]="formLoading$ | async" (click)="submitForm()" class="btn btn-primary">
+    <span class="d-flex justify-content-center">
+      <lib-loading [loading]="formLoading$ | async" class="mr-1 text-body"></lib-loading>Сохранить
+    </span>
+  </button>
+  <button (click)="closeForm()" class="btn btn-gray-white ml-3">Отменить</button>
+</div>

@@ -26,7 +26,7 @@ export abstract class CategoryFacadeAbstract {
   abstract loadAll(): void;
 
   /**
-   * загружает выбранную категорию
+   * Загружает выбранную категорию
    */
   abstract loadSelected(): void;
 }
