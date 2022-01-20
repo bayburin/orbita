@@ -46,9 +46,11 @@ export abstract class AdminCategoryFacadeAbstract {
   abstract loadAll(): void;
 
   /**
-   * Загружает выбранную категорию
+   * Выбрать категорию для редактирования
+   *
+   * @param id - id выбранной записи
    */
-  abstract loadSelected(): void;
+  abstract edit(id: number): void;
 
   /**
    * Инициализирует новую форму заявки

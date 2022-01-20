@@ -26,4 +26,12 @@ export abstract class AdminCategoryApiAbstract {
    * @param formData - данные о категории.
    */
   abstract save(formData: Category): Observable<Category>;
+
+  /**
+   * Обновляет категорию
+   *
+   * @param id - id категории
+   * @param formData - новые данные
+   */
+  abstract update(id: number, formData: Category): Observable<Category>;
 }

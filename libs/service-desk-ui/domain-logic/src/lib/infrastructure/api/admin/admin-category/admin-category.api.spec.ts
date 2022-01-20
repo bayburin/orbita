@@ -67,17 +67,33 @@ describe('AdminCategoryApi', () => {
 
   describe('save()', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/admin/categories`;
-    const recommendation = { name: 'test' } as Category;
+    const category = { name: 'test' } as Category;
 
     it('should save record', () => {
-      service.save(recommendation).subscribe((result) => expect(result).toEqual(recommendation));
+      service.save(category).subscribe((result) => expect(result).toEqual(category));
 
       httpMock
         .expectOne({
           method: 'POST',
           url: api,
         })
-        .flush(recommendation);
+        .flush(category);
+    });
+  });
+
+  describe('update()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/admin/categories/1`;
+    const category = { name: 'test' } as Category;
+
+    it('should update record', () => {
+      service.update(1, category).subscribe((result) => expect(result).toEqual(category));
+
+      httpMock
+        .expectOne({
+          method: 'PUT',
+          url: api,
+        })
+        .flush(category);
     });
   });
 });

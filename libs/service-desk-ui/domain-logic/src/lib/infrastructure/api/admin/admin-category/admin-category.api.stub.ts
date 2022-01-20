@@ -16,4 +16,8 @@ export class AdminCategoryApiStub implements AdminCategoryApiAbstract {
   save() {
     return of(null);
   }
+
+  update() {
+    return of(null);
+  }
 }

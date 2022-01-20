@@ -17,6 +17,7 @@ export interface State extends EntityState<Category> {
   loading: boolean;
   loaded: boolean;
   form: FormState;
+  loadingIds: number[];
   selectedId?: number;
   error?: string | null;
 }
@@ -37,6 +38,7 @@ export const initialState: State = categoryAdapter.getInitialState({
   loading: false,
   loaded: false,
   form: initialFormState,
+  loadingIds: [],
 });
 
 const categoryReducer = createReducer(
@@ -94,6 +96,23 @@ const categoryReducer = createReducer(
     ...state,
     error,
     loading: false,
+  })),
+  on(CategoryActions.adminSelect, (state, { id }) => ({ ...state, selectedId: id })),
+  on(CategoryActions.adminLoadSelected, (state) => ({
+    ...state,
+    loadingIds: [...state.loadingIds, state.selectedId],
+  })),
+  on(CategoryActions.adminLoadSelectedSuccess, (state, { category }) =>
+    categoryAdapter.setOne(category, {
+      ...state,
+      loadingIds: state.loadingIds.filter((loadingId) => loadingId !== category.id),
+    })
+  ),
+  on(CategoryActions.adminLoadSelectedFailure, (state, { error }) => ({
+    ...state,
+    selectedId: null,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== state.selectedId),
+    error,
   })),
 
   // ========== Форма рекомендаций для пользователя ==========

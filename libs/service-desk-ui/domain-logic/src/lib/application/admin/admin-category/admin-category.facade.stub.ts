@@ -16,7 +16,7 @@ export class AdminCategoryFacadeStub implements AdminCategoryFacadeAbstract {
     /** */
   }
 
-  loadSelected() {
+  edit() {
     /** */
   }
 

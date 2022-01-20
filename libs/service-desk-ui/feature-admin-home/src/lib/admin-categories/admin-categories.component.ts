@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
-import { AdminCategoryFacade } from '@orbita/service-desk-ui/domain-logic';
+import { AdminCategoryFacade, Category } from '@orbita/service-desk-ui/domain-logic';
 import { Subscription } from 'rxjs';
 
 import { AdminCategoryFormComponent } from '../admin-category-form/admin-category-form.component';
@@ -51,6 +51,22 @@ export class AdminCategoriesComponent implements OnInit, OnDestroy {
    */
   newForm(): void {
     this.adminCategoryFacade.initForm();
+  }
+
+  /**
+   * Инициализирует форму редактирования записи
+   *
+   * @param category - категория, которую необходимо редактировать
+   */
+  editForm(category: Category): void {
+    this.adminCategoryFacade.edit(category.id);
+  }
+
+  /**
+   * Удаляет запись
+   */
+  remove(userRecommendation: Category): void {
+    /** */
   }
 
   private showForm() {

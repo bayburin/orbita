@@ -38,6 +38,23 @@ export const adminLoadAllSuccess = createAction(
 
 export const adminLoadAllFailure = createAction('[Category/API] Admin Load All Failure', props<{ error: any }>());
 
+export const adminSelect = createAction('[UserRecommendation] Admin Select', props<{ id: number; edit?: boolean }>());
+
+export const adminLoadSelected = createAction(
+  '[UserRecommendation/API] Admin Load Selected',
+  props<{ edit: boolean }>()
+);
+
+export const adminLoadSelectedSuccess = createAction(
+  '[UserRecommendation/API] Admin Load Selected Success',
+  props<{ category: Category; edit: boolean }>()
+);
+
+export const adminLoadSelectedFailure = createAction(
+  '[UserRecommendation/API] Admin Load Selected Failure',
+  props<{ error: any }>()
+);
+
 // ========== Форма рекомендаций для пользователя ==========
 
 export const adminInitForm = createAction('[Category] Admin Init Form', props<{ category?: Category }>());

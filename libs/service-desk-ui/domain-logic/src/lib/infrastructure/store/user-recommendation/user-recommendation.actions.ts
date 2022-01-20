@@ -14,7 +14,7 @@ export const loadAllSuccess = createAction(
 
 export const loadAllFailure = createAction('[UserRecommendation/API] Load All Failure', props<{ error: any }>());
 
-export const select = createAction('[UserRecommendation] Edit', props<{ id: number; edit?: boolean }>());
+export const select = createAction('[UserRecommendation] Select', props<{ id: number; edit?: boolean }>());
 
 export const loadSelected = createAction('[UserRecommendation/API] Load Selected', props<{ edit: boolean }>());
 

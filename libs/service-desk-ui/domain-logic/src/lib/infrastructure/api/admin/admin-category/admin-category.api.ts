@@ -27,4 +27,8 @@ export class AdminCategoryApi implements AdminCategoryApiAbstract {
   save(formData: Category) {
     return this.http.post<Category>(this.api, { category: formData });
   }
+
+  update(id: number, formData: Category) {
+    return this.http.put<Category>(`${this.api}/${id}`, { category: formData });
+  }
 }

@@ -2,7 +2,7 @@ import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
-import { switchMap, withLatestFrom, catchError, map, tap } from 'rxjs/operators';
+import { switchMap, withLatestFrom, catchError, map, tap, filter } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { CategoryApi } from './../../api/category/category.api';
@@ -106,25 +106,70 @@ export class CategoryEffects {
     )
   );
 
-  saveForm$ = createEffect(() =>
+  adminSelect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CategoryActions.adminSelect),
+      map((action) => CategoryActions.adminLoadSelected({ edit: action.edit }))
+    )
+  );
+
+  adminLoadSelected$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CategoryActions.adminLoadSelected),
+      withLatestFrom(this.store.select(CategorySelectors.getSelectedId)),
+      switchMap(([action, selectedId]) =>
+        this.adminCategoryApi.show(selectedId).pipe(
+          map((category) => CategoryActions.adminLoadSelectedSuccess({ category, edit: action.edit })),
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось загрузить категорию.');
+
+            return of(CategoryActions.adminLoadSelectedFailure({ error }));
+          })
+        )
+      )
+    )
+  );
+
+  adminLoadSelectedSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CategoryActions.adminLoadSelectedSuccess),
+      filter((action) => Boolean(action.edit)),
+      withLatestFrom(this.store.select(CategorySelectors.getSelected)),
+      map(([_action, userRecommendation]) => CategoryActions.adminInitForm({ category: userRecommendation }))
+    )
+  );
+
+  adminSaveForm$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CategoryActions.adminSaveForm),
       withLatestFrom(this.store.select(CategorySelectors.getFormData)),
       switchMap(([_action, formData]) => {
-        return this.adminCategoryApi.save(formData).pipe(
-          tap(() => this.notificationFacade.showMessage('Запись создана')),
-          map((category) => CategoryActions.adminSaveFormSuccess({ category })),
-          catchError((error) => {
-            this.errorHandlerService.handleError(error, 'Не удалось сохранить запись.');
+        if (formData.id) {
+          return this.adminCategoryApi.update(formData.id, formData).pipe(
+            tap(() => this.notificationFacade.showMessage('Категория обновлена')),
+            map((category) => CategoryActions.adminSaveFormSuccess({ category })),
+            catchError((error) => {
+              this.errorHandlerService.handleError(error, 'Не удалось обновить категорию.');
 
-            return of(CategoryActions.adminSaveFormFailure({ error }));
-          })
-        );
+              return of(CategoryActions.adminSaveFormFailure({ error }));
+            })
+          );
+        } else {
+          return this.adminCategoryApi.save(formData).pipe(
+            tap(() => this.notificationFacade.showMessage('Категория создана')),
+            map((category) => CategoryActions.adminSaveFormSuccess({ category })),
+            catchError((error) => {
+              this.errorHandlerService.handleError(error, 'Не удалось сохранить категорию.');
+
+              return of(CategoryActions.adminSaveFormFailure({ error }));
+            })
+          );
+        }
       })
     )
   );
 
-  saveFormSuccess$ = createEffect(() =>
+  adminSaveFormSuccess$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CategoryActions.adminSaveFormSuccess),
       map(() => CategoryActions.adminCloseForm())

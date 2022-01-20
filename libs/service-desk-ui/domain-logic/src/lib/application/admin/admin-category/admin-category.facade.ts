@@ -33,8 +33,8 @@ export class AdminCategoryFacade implements AdminCategoryFacadeAbstract {
     this.store.dispatch(CategoryActions.adminLoadAll());
   }
 
-  loadSelected() {
-    this.store.dispatch(CategoryActions.loadSelected());
+  edit(id: number) {
+    this.store.dispatch(CategoryActions.adminSelect({ id, edit: true }));
   }
 
   initForm() {
