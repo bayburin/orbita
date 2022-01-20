@@ -5,7 +5,7 @@ import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
 import { map, switchMap, withLatestFrom, catchError, tap, filter } from 'rxjs/operators';
 
-import { UserRecommendationApi } from './../../api/user-recommendation/user-recommendation.api';
+import { AdminUserRecommendationApi } from './../../api/admin/admin-user-recommendation/admin-user-recommendation.api';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 import { NotificationFacade } from '../../../application/notification/notification.facade';
 import { UserRecommendationFactory } from './../../factories/user-recommendation.factory';
@@ -18,7 +18,7 @@ export class UserRecommendationEffects {
   constructor(
     private readonly actions$: Actions,
     private store: Store<UserRecommendationFeature.State>,
-    private userRecommendationApi: UserRecommendationApi,
+    private adminUserRecommendationApi: AdminUserRecommendationApi,
     private notificationFacade: NotificationFacade,
     private errorHandlerService: ErrorHandlerService
   ) {}
@@ -28,7 +28,7 @@ export class UserRecommendationEffects {
       ofType(UserRecommendationActions.loadAll),
       fetch({
         run: () => {
-          return this.userRecommendationApi
+          return this.adminUserRecommendationApi
             .query()
             .pipe(map((recommendations) => UserRecommendationActions.loadAllSuccess({ recommendations })));
         },
@@ -53,7 +53,7 @@ export class UserRecommendationEffects {
       ofType(UserRecommendationActions.loadSelected),
       withLatestFrom(this.store.select(UserRecommendationSelectors.getSelectedId)),
       switchMap(([action, selectedId]) =>
-        this.userRecommendationApi.show(selectedId).pipe(
+        this.adminUserRecommendationApi.show(selectedId).pipe(
           map((recommendation) => UserRecommendationActions.loadSelectedSuccess({ recommendation, edit: action.edit })),
           catchError((error) => {
             this.errorHandlerService.handleError(error, 'Не удалось загрузить запись.');
@@ -79,7 +79,7 @@ export class UserRecommendationEffects {
       ofType(UserRecommendationActions.destroy),
       fetch({
         run: (action) =>
-          this.userRecommendationApi
+          this.adminUserRecommendationApi
             .destroy(action.id)
             .pipe(map(() => UserRecommendationActions.destroySuccess({ id: action.id }))),
         onError: (action, error) => {
@@ -111,7 +111,7 @@ export class UserRecommendationEffects {
       ofType(UserRecommendationActions.reorderStart),
       fetch({
         run: (action) => {
-          return this.userRecommendationApi
+          return this.adminUserRecommendationApi
             .reorder(action.data)
             .pipe(map((recommendations) => UserRecommendationActions.reorderSuccess({ recommendations })));
         },
@@ -134,7 +134,7 @@ export class UserRecommendationEffects {
         const serverForm = UserRecommendationFactory.createServerForm(formData);
 
         if (serverForm.id) {
-          return this.userRecommendationApi.update(serverForm.id, serverForm).pipe(
+          return this.adminUserRecommendationApi.update(serverForm.id, serverForm).pipe(
             tap(() => this.notificationFacade.showMessage('Запись обновлена')),
             map((recommendation) => UserRecommendationActions.saveFormSuccess({ recommendation })),
             catchError((error) => {
@@ -144,7 +144,7 @@ export class UserRecommendationEffects {
             })
           );
         } else {
-          return this.userRecommendationApi.save(serverForm).pipe(
+          return this.adminUserRecommendationApi.save(serverForm).pipe(
             tap(() => this.notificationFacade.showMessage('Запись создана')),
             map((recommendation) => UserRecommendationActions.saveFormSuccess({ recommendation })),
             catchError((error) => {

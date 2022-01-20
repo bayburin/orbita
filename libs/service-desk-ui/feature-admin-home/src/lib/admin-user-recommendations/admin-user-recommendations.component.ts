@@ -1,6 +1,6 @@
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserRecommendation, UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
+import { UserRecommendation, AdminUserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
 import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
@@ -12,16 +12,16 @@ import { AdminUserRecommendationFormComponent } from '../admin-user-recommendati
   styleUrls: ['./admin-user-recommendations.component.scss'],
 })
 export class AdminUserRecommendationsComponent implements OnInit, OnDestroy {
-  userRecommendations$ = this.userRecommendationFacade.all$;
-  loading$ = this.userRecommendationFacade.loading$;
-  loaded$ = this.userRecommendationFacade.loaded$;
-  loadingIds$ = this.userRecommendationFacade.loadingIds$;
-  formDisplay$ = this.userRecommendationFacade.formDisplay$;
+  userRecommendations$ = this.adminUserRecommendationFacade.all$;
+  loading$ = this.adminUserRecommendationFacade.loading$;
+  loaded$ = this.adminUserRecommendationFacade.loaded$;
+  loadingIds$ = this.adminUserRecommendationFacade.loadingIds$;
+  formDisplay$ = this.adminUserRecommendationFacade.formDisplay$;
   subscriptions = new Subscription();
   ref: DynamicDialogRef;
 
   constructor(
-    private userRecommendationFacade: UserRecommendationFacade,
+    private adminUserRecommendationFacade: AdminUserRecommendationFacade,
     private confirmationService: ConfirmationService,
     private dialogService: DialogService
   ) {}
@@ -49,21 +49,21 @@ export class AdminUserRecommendationsComponent implements OnInit, OnDestroy {
    * Загружает данные таблицы
    */
   loadData(): void {
-    this.userRecommendationFacade.loadAll();
+    this.adminUserRecommendationFacade.loadAll();
   }
 
   /**
    * Инициализирует новую форму
    */
   newForm(): void {
-    this.userRecommendationFacade.initForm();
+    this.adminUserRecommendationFacade.initForm();
   }
 
   /**
    * Инициализирует форму редактирования записи
    */
   editForm(userRecommendation: UserRecommendation): void {
-    this.userRecommendationFacade.edit(userRecommendation.id);
+    this.adminUserRecommendationFacade.edit(userRecommendation.id);
   }
 
   /**
@@ -73,7 +73,7 @@ export class AdminUserRecommendationsComponent implements OnInit, OnDestroy {
     this.confirmationService.confirm({
       message: `Вы действительно хотите удалить запись №${userRecommendation.id} "${userRecommendation.title}"?`,
       header: 'Подтверждение удаления',
-      accept: () => this.userRecommendationFacade.destroy(userRecommendation.id),
+      accept: () => this.adminUserRecommendationFacade.destroy(userRecommendation.id),
     });
   }
 
@@ -83,7 +83,7 @@ export class AdminUserRecommendationsComponent implements OnInit, OnDestroy {
    * @param event - объект события
    */
   reorderRow(event: { dragIndex: number; dropIndex: number }): void {
-    this.userRecommendationFacade.reorder(event.dragIndex, event.dropIndex);
+    this.adminUserRecommendationFacade.reorder(event.dragIndex, event.dropIndex);
   }
 
   private showForm() {

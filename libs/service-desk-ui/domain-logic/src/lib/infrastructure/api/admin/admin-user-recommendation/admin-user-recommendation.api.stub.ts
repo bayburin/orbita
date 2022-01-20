@@ -1,8 +1,8 @@
 import { of } from 'rxjs';
 
-import { UserRecommendationApiAbstract } from './user-recommendation.api.abstract';
+import { AdminUserRecommendationApiAbstract } from './admin-user-recommendation.api.abstract';
 
-export class UserRecommendationApiStub implements UserRecommendationApiAbstract {
+export class AdminUserRecommendationApiStub implements AdminUserRecommendationApiAbstract {
   api = '';
 
   query() {

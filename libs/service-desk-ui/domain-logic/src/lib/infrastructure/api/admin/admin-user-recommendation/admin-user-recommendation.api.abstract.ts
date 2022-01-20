@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
-import { UserRecommendation } from '../../../entities/models/user-recommendation.interface';
+import { UserRecommendation } from '../../../../entities/models/user-recommendation.interface';
 
-export abstract class UserRecommendationApiAbstract {
+export abstract class AdminUserRecommendationApiAbstract {
   /**
    * Адрес сервера
    */

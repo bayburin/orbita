@@ -70,43 +70,47 @@ describe('UserRecommendationReducer', () => {
 
   describe('loadSelected', () => {
     it('should change attributes', () => {
+      initialState.selectedId = 12;
       action = UserRecommendationActions.loadSelected({ edit: true });
       const result: State = reducer(initialState, action);
 
-      expect(result.selectedLoading).toBe(true);
-      expect(result.error).toBeNull();
+      expect(result.loadingIds).toEqual([12]);
     });
   });
 
   describe('loadSelectedSuccess', () => {
     it('should change attributes', () => {
       const recommendation = createUserRecommendation(1);
+      initialState.loadingIds = [1];
       action = UserRecommendationActions.loadSelectedSuccess({ recommendation, edit: true });
       const result: State = reducer(initialState, action);
 
       expect(result.ids.length).toBe(1);
-      expect(result.selectedLoading).toBe(false);
+      expect(result.loadingIds).toEqual([]);
     });
   });
 
   describe('loadSelectedFailure', () => {
     it('should change attributes', () => {
       const error = { message: 'error' };
+      initialState.selectedId = 1;
+      initialState.loadingIds = [1];
       action = UserRecommendationActions.loadSelectedFailure({ error });
       const result: State = reducer(initialState, action);
 
       expect(result.error).toEqual(error);
-      expect(result.selectedLoading).toBe(false);
+      expect(result.selectedId).toBeNull();
+      expect(result.loadingIds).toEqual([]);
     });
   });
 
   describe('destroy', () => {
     it('should change attributes', () => {
+      initialState.loadingIds = [];
       action = UserRecommendationActions.destroy({ id: 123 });
       const result: State = reducer(initialState, action);
 
-      expect(result.selectedLoading).toBe(true);
-      expect(result.error).toBeNull();
+      expect(result.loadingIds).toEqual([123]);
     });
   });
 
@@ -115,22 +119,61 @@ describe('UserRecommendationReducer', () => {
       const recommendation = createUserRecommendation(1);
       initialState.ids = [1];
       initialState.entities = { 1: recommendation };
+      initialState.loadingIds = [1];
       action = UserRecommendationActions.destroySuccess({ id: 1 });
       const result: State = reducer(initialState, action);
 
       expect(result.ids.length).toBe(0);
-      expect(result.selectedLoading).toBe(false);
+      expect(result.loadingIds).toEqual([]);
     });
   });
 
   describe('destroyFailure', () => {
     it('should change attributes', () => {
-      const error = { message: 'error' };
-      action = UserRecommendationActions.destroyFailure({ error });
+      const recommendation = createUserRecommendation(1);
+      initialState.ids = [1];
+      initialState.entities = { 1: recommendation };
+      initialState.loadingIds = [1];
+      action = UserRecommendationActions.destroyFailure({ id: 1 });
       const result: State = reducer(initialState, action);
 
-      expect(result.error).toEqual(error);
-      expect(result.selectedLoading).toBe(false);
+      expect(result.ids.length).toBe(1);
+      expect(result.loadingIds).toEqual([]);
+    });
+  });
+
+  describe('reorderStart', () => {
+    it('should change attributes', () => {
+      const data = [
+        { id: 1, order: 10 },
+        { id: 2, order: 20 },
+      ];
+      initialState.loadingIds = [];
+      action = UserRecommendationActions.reorderStart({ data });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loadingIds).toEqual([1, 2]);
+    });
+  });
+
+  describe('reorderSuccess', () => {
+    it('should change attributes', () => {
+      const recommendations = [createUserRecommendation(1), createUserRecommendation(2)];
+      initialState.loadingIds = [1, 2];
+      action = UserRecommendationActions.reorderSuccess({ recommendations });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loadingIds).toEqual([]);
+    });
+  });
+
+  describe('reorderFailure', () => {
+    it('should change attributes', () => {
+      initialState.loadingIds = [1, 2];
+      action = UserRecommendationActions.reorderFailure({ ids: [1, 2] });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loadingIds).toEqual([]);
     });
   });
 

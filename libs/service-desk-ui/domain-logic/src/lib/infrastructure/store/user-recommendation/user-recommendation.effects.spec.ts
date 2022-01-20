@@ -8,10 +8,10 @@ import { Observable } from 'rxjs';
 
 import * as UserRecommendationActions from './user-recommendation.actions';
 import { UserRecommendationEffects } from './user-recommendation.effects';
-import { UserRecommendationApi } from './../../api/user-recommendation/user-recommendation.api';
-import { UserRecommendationApiStub } from './../../api/user-recommendation/user-recommendation.api.stub';
+import { AdminUserRecommendationApi } from './../../api/admin/admin-user-recommendation/admin-user-recommendation.api';
+import { AdminUserRecommendationApiStub } from './../../api/admin/admin-user-recommendation/admin-user-recommendation.api.stub';
 
-describe('UserRecommendationEffects', () => {
+describe('AdminUserRecommendationEffects', () => {
   let actions: Observable<Action>;
   let effects: UserRecommendationEffects;
 
@@ -22,7 +22,7 @@ describe('UserRecommendationEffects', () => {
         UserRecommendationEffects,
         provideMockActions(() => actions),
         provideMockStore(),
-        { provide: UserRecommendationApi, useClass: UserRecommendationApiStub },
+        { provide: AdminUserRecommendationApi, useClass: AdminUserRecommendationApiStub },
       ],
     });
 

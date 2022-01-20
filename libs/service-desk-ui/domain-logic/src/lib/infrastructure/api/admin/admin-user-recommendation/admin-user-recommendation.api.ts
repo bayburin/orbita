@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SERVICE_DESK_UI_ENV_TOKEN, ServiceDeskUiEnvironment } from '@orbita/shared/environment';
 
-import { UserRecommendationApiAbstract } from './user-recommendation.api.abstract';
-import { UserRecommendation } from '../../../entities/models/user-recommendation.interface';
+import { AdminUserRecommendationApiAbstract } from './admin-user-recommendation.api.abstract';
+import { UserRecommendation } from '../../../../entities/models/user-recommendation.interface';
 
 /**
  * Содержит API категорий
@@ -11,8 +11,8 @@ import { UserRecommendation } from '../../../entities/models/user-recommendation
 @Injectable({
   providedIn: 'root',
 })
-export class UserRecommendationApi implements UserRecommendationApiAbstract {
-  readonly api = `${this.env.serverUrl}/user_recommendations`;
+export class AdminUserRecommendationApi implements AdminUserRecommendationApiAbstract {
+  readonly api = `${this.env.serverUrl}/admin/user_recommendations`;
 
   constructor(private http: HttpClient, @Inject(SERVICE_DESK_UI_ENV_TOKEN) private env: ServiceDeskUiEnvironment) {}
 

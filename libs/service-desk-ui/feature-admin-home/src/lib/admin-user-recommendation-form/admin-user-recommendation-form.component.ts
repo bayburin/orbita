@@ -1,7 +1,7 @@
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
+import { AdminUserRecommendationFacade } from '@orbita/service-desk-ui/domain-logic';
 import { Subscription } from 'rxjs';
 import { filter, take, distinctUntilChanged, map } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import { filter, take, distinctUntilChanged, map } from 'rxjs/operators';
   styleUrls: ['./admin-user-recommendation-form.component.scss'],
 })
 export class AdminUserRecommendationFormComponent implements OnInit, OnDestroy {
-  formLoading$ = this.userRecommendationFacade.formLoading$;
+  formLoading$ = this.adminUserRecommendationFacade.formLoading$;
   form: FormGroup;
   submitted = false;
   subscriptions = new Subscription();
@@ -29,7 +29,7 @@ export class AdminUserRecommendationFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private userRecommendationFacade: UserRecommendationFacade,
+    private adminUserRecommendationFacade: AdminUserRecommendationFacade,
     private fb: FormBuilder,
     public ref: DynamicDialogRef
   ) {}
@@ -73,7 +73,7 @@ export class AdminUserRecommendationFormComponent implements OnInit, OnDestroy {
   submitForm(): void {
     this.submitted = true;
     if (this.form.valid) {
-      this.userRecommendationFacade.saveForm();
+      this.adminUserRecommendationFacade.saveForm();
     }
   }
 
@@ -81,7 +81,7 @@ export class AdminUserRecommendationFormComponent implements OnInit, OnDestroy {
    * Закрывает форму
    */
   closeForm(): void {
-    this.userRecommendationFacade.closeForm();
+    this.adminUserRecommendationFacade.closeForm();
   }
 
   private createQueryParams(name?: string, value?: string | number): FormGroup {
@@ -102,7 +102,7 @@ export class AdminUserRecommendationFormComponent implements OnInit, OnDestroy {
     });
 
     // Заполняет данные формы из хранилища
-    this.userRecommendationFacade.formData$
+    this.adminUserRecommendationFacade.formData$
       .pipe(
         filter((data) => !!data),
         take(1)
@@ -121,7 +121,7 @@ export class AdminUserRecommendationFormComponent implements OnInit, OnDestroy {
           map((formData) => formData),
           distinctUntilChanged((a: any, b: any) => JSON.stringify(a) === JSON.stringify(b))
         )
-        .subscribe((formData) => this.userRecommendationFacade.changeForm(formData))
+        .subscribe((formData) => this.adminUserRecommendationFacade.changeForm(formData))
     );
   }
 }

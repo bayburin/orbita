@@ -2,18 +2,18 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { SERVICE_DESK_UI_ENV_TOKEN, serviceDeskUiEnvironmentStub } from '@orbita/shared/environment';
 
-import { UserRecommendationApi } from './user-recommendation.api';
-import { UserRecommendation } from './../../../entities/models/user-recommendation.interface';
+import { AdminUserRecommendationApi } from './admin-user-recommendation.api';
+import { UserRecommendation } from './../../../../entities/models/user-recommendation.interface';
 
 describe('CategoryApi', () => {
-  let service: UserRecommendationApi;
+  let service: AdminUserRecommendationApi;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        UserRecommendationApi,
+        AdminUserRecommendationApi,
         {
           provide: SERVICE_DESK_UI_ENV_TOKEN,
           useValue: serviceDeskUiEnvironmentStub,
@@ -21,7 +21,7 @@ describe('CategoryApi', () => {
       ],
     });
 
-    service = TestBed.inject(UserRecommendationApi);
+    service = TestBed.inject(AdminUserRecommendationApi);
     httpMock = TestBed.inject(HttpTestingController);
   });
 
