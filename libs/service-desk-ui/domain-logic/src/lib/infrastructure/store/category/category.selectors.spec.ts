@@ -36,6 +36,7 @@ describe('CategorySelectors', () => {
       selectedId,
       error,
       form,
+      loadingIds: [1, 2, 3],
     });
   });
 
@@ -53,6 +54,10 @@ describe('CategorySelectors', () => {
 
   it('getError() should return "error" attribute', () => {
     expect(CategorySelectors.getError.projector(state)).toEqual(error);
+  });
+
+  it('getLoadingIds() should return "loadingIds" attribute', () => {
+    expect(CategorySelectors.getLoadingIds.projector(state)).toEqual([1, 2, 3]);
   });
 
   it('getAll() should return array of entities', () => {

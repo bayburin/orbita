@@ -28,10 +28,3 @@
 <ng-template #error>
   <p class="text-danger">Не удалось загрузить список рекомендаций для пользователя</p>
 </ng-template>
-
-<p-confirmDialog #cd [style]="{ width: '50vw' }" [baseZIndex]="10000" [dismissableMask]="true">
-  <ng-template pTemplate="footer">
-    <button type="button" class="btn btn-gray-white" (click)="cd.reject()">Нет</button>
-    <button type="button" class="btn btn-outline-primary" (click)="cd.accept()">Да</button>
-  </ng-template>
-</p-confirmDialog>

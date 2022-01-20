@@ -16,9 +16,9 @@ import * as VMSelectors from '../../../infrastructure/store/selectors/vm.selecto
 })
 export class AdminCategoryFacade implements AdminCategoryFacadeAbstract {
   all$ = this.store.select(CategorySelectors.getAll);
-  selected$ = this.store.select(VMSelectors.getSelectedCategoryVM);
   loading$ = this.store.select(CategorySelectors.getLoading);
   loaded$ = this.store.select(CategorySelectors.getLoaded);
+  loadingIds$ = this.store.select(CategorySelectors.getLoadingIds);
 
   // ========== Форма рекомендаций для пользователя ==========
 
@@ -51,5 +51,9 @@ export class AdminCategoryFacade implements AdminCategoryFacadeAbstract {
 
   saveForm() {
     this.store.dispatch(CategoryActions.adminSaveForm());
+  }
+
+  destroy(id: number) {
+    this.store.dispatch(CategoryActions.adminDestroy({ id }));
   }
 }

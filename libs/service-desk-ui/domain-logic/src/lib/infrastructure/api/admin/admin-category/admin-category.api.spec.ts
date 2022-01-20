@@ -96,4 +96,20 @@ describe('AdminCategoryApi', () => {
         .flush(category);
     });
   });
+
+  describe('destroy()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/admin/categories/1`;
+    const recommendation = { name: 'test' } as Category;
+
+    it('should destroy record', () => {
+      service.destroy(1).subscribe((result) => expect(result).toEqual(recommendation));
+
+      httpMock
+        .expectOne({
+          method: 'DELETE',
+          url: api,
+        })
+        .flush(recommendation);
+    });
+  });
 });

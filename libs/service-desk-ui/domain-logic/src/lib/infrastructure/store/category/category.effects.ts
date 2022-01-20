@@ -175,4 +175,21 @@ export class CategoryEffects {
       map(() => CategoryActions.adminCloseForm())
     )
   );
+
+  adminDestroy$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CategoryActions.adminDestroy),
+      fetch({
+        run: (action) =>
+          this.adminCategoryApi
+            .destroy(action.id)
+            .pipe(map(() => CategoryActions.adminDestroySuccess({ id: action.id }))),
+        onError: (action, error) => {
+          this.errorHandlerService.handleError(error, 'Не удалось удалить категорию.');
+
+          return of(CategoryActions.adminDestroyFailure({ id: action.id }));
+        },
+      })
+    )
+  );
 }

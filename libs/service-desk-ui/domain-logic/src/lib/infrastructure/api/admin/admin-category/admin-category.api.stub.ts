@@ -20,4 +20,8 @@ export class AdminCategoryApiStub implements AdminCategoryApiAbstract {
   update() {
     return of(null);
   }
+
+  destroy() {
+    return of(null);
+  }
 }

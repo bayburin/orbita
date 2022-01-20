@@ -114,6 +114,20 @@ const categoryReducer = createReducer(
     loadingIds: state.loadingIds.filter((loadingId) => loadingId !== state.selectedId),
     error,
   })),
+  on(CategoryActions.adminDestroy, (state, { id }) => ({
+    ...state,
+    loadingIds: [...state.loadingIds, id],
+  })),
+  on(CategoryActions.adminDestroySuccess, (state, { id }) =>
+    categoryAdapter.removeOne(id, {
+      ...state,
+      loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+    })
+  ),
+  on(CategoryActions.adminDestroyFailure, (state, { id }) => ({
+    ...state,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+  })),
 
   // ========== Форма рекомендаций для пользователя ==========
 

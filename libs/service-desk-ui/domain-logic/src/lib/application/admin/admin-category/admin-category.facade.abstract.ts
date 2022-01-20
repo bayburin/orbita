@@ -1,17 +1,12 @@
 import { Observable } from 'rxjs';
 
 import { Category } from '../../../entities/models/category.interface';
-import { CategoryVM } from '../../../entities/view-models/category-vm.interface';
 
 export abstract class AdminCategoryFacadeAbstract {
   /**
    * Список категорий
    */
   all$: Observable<Category[]>;
-  /**
-   * Выбранная категория
-   */
-  selected$: Observable<CategoryVM>;
   /**
    * Индикатор, идет ли загрузка в данный момент
    */
@@ -20,6 +15,10 @@ export abstract class AdminCategoryFacadeAbstract {
    * Индикатор, загружены ли данные
    */
   loaded$: Observable<boolean>;
+  /**
+   * Список id тех категорий, которые сейчас обрабатываются
+   */
+  loadingIds$: Observable<number[]>;
 
   // ========== Форма рекомендаций для пользователя ==========
 
@@ -73,4 +72,11 @@ export abstract class AdminCategoryFacadeAbstract {
    * Сохраняет заявку
    */
   abstract saveForm(): void;
+
+  /**
+   * Удаляет запись
+   *
+   * @param id - id записи
+   */
+  abstract destroy(id: number): void;
 }

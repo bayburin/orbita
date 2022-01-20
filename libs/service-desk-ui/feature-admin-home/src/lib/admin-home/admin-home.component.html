@@ -10,3 +10,10 @@
     <service-desk-ui-admin-home-admin-categories></service-desk-ui-admin-home-admin-categories>
   </div>
 </section>
+
+<p-confirmDialog #cd [style]="{ width: '50vw' }" [baseZIndex]="10000" [dismissableMask]="true">
+  <ng-template pTemplate="footer">
+    <button type="button" class="btn btn-gray-white" (click)="cd.reject()">Нет</button>
+    <button type="button" class="btn btn-outline-primary" (click)="cd.accept()">Да</button>
+  </ng-template>
+</p-confirmDialog>

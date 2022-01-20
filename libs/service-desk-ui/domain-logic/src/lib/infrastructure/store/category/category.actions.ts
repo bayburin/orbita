@@ -55,6 +55,18 @@ export const adminLoadSelectedFailure = createAction(
   props<{ error: any }>()
 );
 
+export const adminDestroy = createAction('[UserRecommendation/API] Admin Destroy', props<{ id: number }>());
+
+export const adminDestroySuccess = createAction(
+  '[UserRecommendation/API] Admin Destroy Success',
+  props<{ id: number }>()
+);
+
+export const adminDestroyFailure = createAction(
+  '[UserRecommendation/API] Admin Destroy Failure',
+  props<{ id: number }>()
+);
+
 // ========== Форма рекомендаций для пользователя ==========
 
 export const adminInitForm = createAction('[Category] Admin Init Form', props<{ category?: Category }>());

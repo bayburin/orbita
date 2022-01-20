@@ -71,7 +71,7 @@ export class AdminUserRecommendationsComponent implements OnInit, OnDestroy {
    */
   remove(userRecommendation: UserRecommendation): void {
     this.confirmationService.confirm({
-      message: `Вы действительно хотите удалить запись №${userRecommendation.id} "${userRecommendation.title}"?`,
+      message: `Вы действительно хотите удалить рекомендацию №${userRecommendation.id} "${userRecommendation.title}"?`,
       header: 'Подтверждение удаления',
       accept: () => this.adminUserRecommendationFacade.destroy(userRecommendation.id),
     });

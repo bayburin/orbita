@@ -31,4 +31,8 @@ export class AdminCategoryApi implements AdminCategoryApiAbstract {
   update(id: number, formData: Category) {
     return this.http.put<Category>(`${this.api}/${id}`, { category: formData });
   }
+
+  destroy(id: number) {
+    return this.http.delete<Category>(`${this.api}/${id}`);
+  }
 }

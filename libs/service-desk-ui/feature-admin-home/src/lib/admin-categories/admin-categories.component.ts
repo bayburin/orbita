@@ -1,6 +1,7 @@
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DynamicDialogRef, DialogService } from 'primeng/dynamicdialog';
-import { AdminCategoryFacade, Category } from '@orbita/service-desk-ui/domain-logic';
+import { Category, AdminCategoryFacade } from '@orbita/service-desk-ui/domain-logic';
+import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
 import { AdminCategoryFormComponent } from '../admin-category-form/admin-category-form.component';
@@ -14,11 +15,16 @@ export class AdminCategoriesComponent implements OnInit, OnDestroy {
   categories$ = this.adminCategoryFacade.all$;
   loading$ = this.adminCategoryFacade.loading$;
   loaded$ = this.adminCategoryFacade.loaded$;
+  loadingIds$ = this.adminCategoryFacade.loadingIds$;
   formDisplay$ = this.adminCategoryFacade.formDisplay$;
   subscriptions = new Subscription();
   ref: DynamicDialogRef;
 
-  constructor(private adminCategoryFacade: AdminCategoryFacade, private dialogService: DialogService) {}
+  constructor(
+    private adminCategoryFacade: AdminCategoryFacade,
+    private confirmationService: ConfirmationService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit(): void {
     this.loadData();
@@ -63,10 +69,16 @@ export class AdminCategoriesComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Удаляет запись
+   * Удаляет категорию
+   *
+   * @param category - категория, которую необходимо удалить
    */
-  remove(userRecommendation: Category): void {
-    /** */
+  remove(category: Category): void {
+    this.confirmationService.confirm({
+      message: `Вы действительно хотите удалить категорию №${category.id} "${category.name}"? Это действие удалит все связанные услуги, вопросы и формы заявок!`,
+      header: 'Подтверждение удаления',
+      accept: () => this.adminCategoryFacade.destroy(category.id),
+    });
   }
 
   private showForm() {

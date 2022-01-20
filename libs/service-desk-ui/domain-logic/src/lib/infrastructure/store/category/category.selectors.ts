@@ -18,6 +18,8 @@ export const getLoading = createSelector(getCategoryState, (state: State) => sta
 
 export const getError = createSelector(getCategoryState, (state: State) => state.error);
 
+export const getLoadingIds = createSelector(getCategoryState, (state: State) => state.loadingIds);
+
 export const getAll = createSelector(getCategoryState, (state: State) => selectAll(state));
 
 export const getEntities = createSelector(getCategoryState, (state: State) => selectEntities(state));
