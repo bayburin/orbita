@@ -16,6 +16,8 @@ export const getLoading = createSelector(getServiceState, (state: State) => stat
 
 export const getError = createSelector(getServiceState, (state: State) => state.error);
 
+export const getIds = createSelector(getServiceState, (state: State) => state.ids as number[]);
+
 export const getAll = createSelector(getServiceState, (state: State) => selectAll(state));
 
 export const getEntities = createSelector(getServiceState, (state: State) => selectEntities(state));

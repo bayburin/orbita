@@ -12,3 +12,14 @@ export const loadSelectedSuccess = createAction('[Service/API] Load Selected Suc
 export const loadSelectedFailure = createAction('[Service/API] Load Selected Failure', props<{ error: string }>());
 
 export const setAll = createAction('[Service] Set All', props<{ services: Service[] }>());
+
+// ========== Администрирование ==========
+
+export const adminLoadAll = createAction('[Service/API] Admin Load All');
+
+export const adminLoadAllSuccess = createAction(
+  '[Service/API] Admin Load All Success',
+  props<{ entities: Dictionary<Service>; ids: number[] }>()
+);
+
+export const adminLoadAllFailure = createAction('[Service/API] Admin Load All Failure', props<{ error: any }>());

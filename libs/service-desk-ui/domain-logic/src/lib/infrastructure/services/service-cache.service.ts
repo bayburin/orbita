@@ -1,6 +1,7 @@
 import { schema, normalize, denormalize } from 'normalizr';
 
 import { ServiceVM } from './../../entities/view-models/service-vm.interface';
+import { ServiceOverviewVM } from './../../entities/view-models/service-overview-vm.interface';
 import { Service } from '../../entities/models/service.interface';
 import { NormalizedServices, NormalizedServicesEntities } from './../../entities/normalized-data.interface';
 
@@ -43,11 +44,14 @@ export class ServiceCacheService {
     return Array.isArray(services) ? normalize(services, servicesSchema) : normalize(services, serviceSchema);
   }
 
-  static denormalizeService(service: Service, entities: NormalizedServicesEntities): ServiceVM {
+  static denormalizeService(service: Service, entities: NormalizedServicesEntities): ServiceVM | ServiceOverviewVM[] {
     return denormalize(service, serviceSchema, entities);
   }
 
-  static denormalizeServices(serviceIds: number[], entities: NormalizedServicesEntities): ServiceVM[] {
+  static denormalizeServices(
+    serviceIds: number[],
+    entities: NormalizedServicesEntities
+  ): ServiceVM[] | ServiceOverviewVM[] {
     return denormalize(serviceIds, servicesSchema, entities);
   }
 }

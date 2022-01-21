@@ -36,7 +36,28 @@ const serviceReducer = createReducer(
     serviceAdapter.setOne(service, { ...state, selectedId: service.id, loaded: true, loading: false })
   ),
   on(ServiceActions.loadSelectedFailure, (state, { error }) => ({ ...state, error, loading: false })),
-  on(ServiceActions.setAll, (state, { services }) => serviceAdapter.setAll(services, state))
+  on(ServiceActions.setAll, (state, { services }) => serviceAdapter.setAll(services, state)),
+
+  // ========== Администрирование ==========
+
+  on(ServiceActions.adminLoadAll, (state) => ({
+    ...state,
+    loaded: false,
+    loading: true,
+    error: null,
+  })),
+  on(ServiceActions.adminLoadAllSuccess, (state, { entities, ids }) => ({
+    ...state,
+    loaded: true,
+    loading: false,
+    entities,
+    ids,
+  })),
+  on(ServiceActions.adminLoadAllFailure, (state, { error }) => ({
+    ...state,
+    error,
+    loading: false,
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

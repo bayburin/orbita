@@ -70,6 +70,43 @@ describe('Service Reducer', () => {
     });
   });
 
+  // ========== Администрирование ==========
+
+  describe('adminLoadAll', () => {
+    it('should change attributes', () => {
+      action = ServiceActions.adminLoadAll();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('adminLoadAllSuccess', () => {
+    it('should change attributes', () => {
+      const entities = { 111: createService(111), 222: createService(222) };
+      initialState.loading = true;
+      action = ServiceActions.adminLoadAllSuccess({ entities, ids: [111, 222] });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(2);
+      expect(result.loading).toEqual(false);
+      expect(result.loaded).toBe(true);
+    });
+  });
+
+  describe('adminLoadAllFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      action = ServiceActions.adminLoadAllFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.error).toEqual(error);
+      expect(result.loading).toEqual(false);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as Action;

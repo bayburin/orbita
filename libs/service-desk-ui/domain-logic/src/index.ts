@@ -60,6 +60,8 @@ export * from './lib/application/admin/admin-category/admin-category.facade';
 export * from './lib/application/admin/admin-category/admin-category.facade.stub';
 export * from './lib/application/admin/admin-user-recommendation/admin-user-recommendation.facade';
 export * from './lib/application/admin/admin-user-recommendation/admin-user-recommendation.facade.stub';
+export * from './lib/application/admin/admin-service/admin-service.facade';
+export * from './lib/application/admin/admin-service/admin-service.facade.stub';
 
 export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';

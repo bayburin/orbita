@@ -6,7 +6,7 @@ import { AdminUserRecommendationApiAbstract } from './admin-user-recommendation.
 import { UserRecommendation } from '../../../../entities/models/user-recommendation.interface';
 
 /**
- * Содержит API категорий
+ * Содержит API рекомендаций
  */
 @Injectable({
   providedIn: 'root',

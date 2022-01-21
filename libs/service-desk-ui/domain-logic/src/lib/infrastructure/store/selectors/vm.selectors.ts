@@ -9,6 +9,7 @@ import { CategoryVM } from '../../../entities/view-models/category-vm.interface'
 import { ServiceCacheService } from '../../services/service-cache.service';
 import { QuestionCacheService } from '../../services/question-cache.service';
 import { DeepSearchFilterTypes } from '../../../entities/filter.interface';
+import { ServiceOverviewVM } from './../../../entities/view-models/service-overview-vm.interface';
 import * as AnswerSelectors from '../answer/answer.selectors';
 import * as QuestionSelectors from '../question/question.selectors';
 import * as ServiceSelectors from '../service/service.selectors';
@@ -32,6 +33,15 @@ export const getSelectedTicketOverviewVM = createSelector(
 
 // ========== Services ==========
 
+export const getAllServicesVM = createSelector(
+  ServiceSelectors.getIds,
+  ServiceSelectors.getEntities,
+  CategorySelectors.getEntities,
+  ResponsibleUserSelectors.getEntities,
+  (ids, services, categories, responsible_users): ServiceOverviewVM[] =>
+    ServiceCacheService.denormalizeServices(ids, { categories, services, responsible_users }) as ServiceOverviewVM[]
+);
+
 export const getSelectedServiceVM = createSelector(
   ServiceSelectors.getSelected,
   QuestionSelectors.getEntities,
@@ -40,7 +50,13 @@ export const getSelectedServiceVM = createSelector(
   AttachmentSelectors.getEntities,
   EmployeeSelectors.getEntities,
   (service, questions, answers, responsible_users, attachments, employees): ServiceVM =>
-    ServiceCacheService.denormalizeService(service, { questions, answers, responsible_users, attachments, employees })
+    ServiceCacheService.denormalizeService(service, {
+      questions,
+      answers,
+      responsible_users,
+      attachments,
+      employees,
+    }) as ServiceVM
 );
 
 // ========== Categories ==========

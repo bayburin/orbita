@@ -1,12 +1,14 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
+import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
 import { switchMap, withLatestFrom, catchError } from 'rxjs/operators';
 
 import { ServiceApi } from '../../api/service/service.api';
 import { ServiceCacheService } from '../../services/service-cache.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
+import { AdminServiceApi } from './../../api/admin/admin-service/admin-service.api';
 import * as ServiceActions from './service.actions';
 import * as ServiceFeature from './service.reducer';
 import * as RouterSelectors from '../selectors/router.selectors';
@@ -21,6 +23,7 @@ export class ServiceEffects {
   constructor(
     private readonly actions$: Actions,
     private serviceApi: ServiceApi,
+    private adminServiceApi: AdminServiceApi,
     private store: Store<ServiceFeature.ServicePartialState>,
     private errorHandlerService: ErrorHandlerService
   ) {}
@@ -51,6 +54,33 @@ export class ServiceEffects {
           })
         )
       )
+    )
+  );
+
+  // ========== Администрирование ==========
+
+  adminLoadAll$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ServiceActions.adminLoadAll),
+      fetch({
+        run: (_action) =>
+          this.adminServiceApi.query().pipe(
+            switchMap((services) => {
+              const data = ServiceCacheService.normalizeServices(services);
+
+              return [
+                ServiceActions.adminLoadAllSuccess({ entities: data.entities.services, ids: data.result as number[] }),
+                CategoryActions.setEntities({ entities: data.entities.categories || {} }),
+                ResponsibleUserActions.setEntities({ entities: data.entities.responsible_users || {} }),
+              ];
+            })
+          ),
+        onError: (_action, error) => {
+          this.errorHandlerService.handleError(error, 'Не удалось загрузить список услуг.');
+
+          return ServiceActions.adminLoadAllFailure({ error });
+        },
+      })
     )
   );
 }

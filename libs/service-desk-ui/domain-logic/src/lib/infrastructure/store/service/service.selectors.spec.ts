@@ -40,6 +40,10 @@ describe('ServiceSelectors', () => {
     expect(ServiceSelectors.getError.projector(state)).toEqual(error);
   });
 
+  it('getIds() should return "ids" attribute', () => {
+    expect(ServiceSelectors.getIds.projector(state)).toEqual([1, 2, 3]);
+  });
+
   it('getAll() should return array of entities', () => {
     expect(ServiceSelectors.getAll.projector(state)).toEqual(arrEntities);
   });
