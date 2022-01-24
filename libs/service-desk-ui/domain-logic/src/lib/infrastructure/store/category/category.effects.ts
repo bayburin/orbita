@@ -183,7 +183,12 @@ export class CategoryEffects {
         run: (action) =>
           this.adminCategoryApi
             .destroy(action.id)
-            .pipe(map(() => CategoryActions.adminDestroySuccess({ id: action.id }))),
+            .pipe(
+              switchMap(() => [
+                CategoryActions.adminDestroySuccess({ id: action.id }),
+                ServiceActions.adminDestroyWithDestroyedCategory({ categoryId: action.id }),
+              ])
+            ),
         onError: (action, error) => {
           this.errorHandlerService.handleError(error, 'Не удалось удалить категорию.');
 

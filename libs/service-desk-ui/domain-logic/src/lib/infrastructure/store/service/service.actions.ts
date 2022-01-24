@@ -23,3 +23,8 @@ export const adminLoadAllSuccess = createAction(
 );
 
 export const adminLoadAllFailure = createAction('[Service/API] Admin Load All Failure', props<{ error: any }>());
+
+export const adminDestroyWithDestroyedCategory = createAction(
+  '[Service] Admin Destroy With Destroyed Category',
+  props<{ categoryId: number }>()
+);

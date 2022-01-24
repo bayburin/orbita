@@ -6,9 +6,10 @@ import { State, initialState, reducer } from './service.reducer';
 
 describe('Service Reducer', () => {
   let action: Action;
-  const createService = (id: number, name = ''): Service =>
+  const createService = (id: number, name = '', categoryId = 0): Service =>
     ({
       id,
+      category_id: categoryId,
       name: name || `name-${id}`,
     } as Service);
 
@@ -104,6 +105,18 @@ describe('Service Reducer', () => {
 
       expect(result.error).toEqual(error);
       expect(result.loading).toEqual(false);
+    });
+  });
+
+  describe('adminDestroyWithDestroyedCategory', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      initialState.entities = { 1: createService(1, 'service 1', 2), 2: createService(2, 'service 2', 3) };
+      initialState.ids = [1, 2];
+      action = ServiceActions.adminDestroyWithDestroyedCategory({ categoryId: 3 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids).toEqual([1]);
     });
   });
 

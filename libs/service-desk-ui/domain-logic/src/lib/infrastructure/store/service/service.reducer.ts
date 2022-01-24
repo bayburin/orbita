@@ -57,7 +57,10 @@ const serviceReducer = createReducer(
     ...state,
     error,
     loading: false,
-  }))
+  })),
+  on(ServiceActions.adminDestroyWithDestroyedCategory, (state, { categoryId }) =>
+    serviceAdapter.removeMany((service) => service.category_id === categoryId, state)
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {
