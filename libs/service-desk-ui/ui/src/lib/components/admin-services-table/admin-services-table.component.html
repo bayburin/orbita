@@ -15,6 +15,7 @@
       <th>Описание</th>
       <th>Тип</th>
       <th>Свободная заявка</th>
+      <th>Ответственные</th>
       <th></th>
     </tr>
     <tr>
@@ -90,6 +91,7 @@
         </p-columnFilter>
       </th>
       <th></th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rec let-index="rowIndex">
@@ -103,6 +105,9 @@
       </td>
       <td>
         <lib-service-has-common-case-type [hasCommonCase]="rec.has_common_case"></lib-service-has-common-case-type>
+      </td>
+      <td>
+        <lib-responsible-user-list [responsibleUsers]="rec.responsible_users"></lib-responsible-user-list>
       </td>
       <td class="text-center">
         <button

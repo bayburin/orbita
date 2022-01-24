@@ -38,8 +38,14 @@ export const getAllServicesVM = createSelector(
   ServiceSelectors.getEntities,
   CategorySelectors.getEntities,
   ResponsibleUserSelectors.getEntities,
-  (ids, services, categories, responsible_users): ServiceOverviewVM[] =>
-    ServiceCacheService.denormalizeServices(ids, { categories, services, responsible_users }) as ServiceOverviewVM[]
+  EmployeeSelectors.getEntities,
+  (ids, services, categories, responsible_users, employees): ServiceOverviewVM[] =>
+    ServiceCacheService.denormalizeServices(ids, {
+      categories,
+      services,
+      responsible_users,
+      employees,
+    }) as ServiceOverviewVM[]
 );
 
 export const getSelectedServiceVM = createSelector(
