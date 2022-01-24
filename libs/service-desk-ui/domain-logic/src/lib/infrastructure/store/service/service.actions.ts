@@ -28,3 +28,20 @@ export const adminDestroyWithDestroyedCategory = createAction(
   '[Service] Admin Destroy With Destroyed Category',
   props<{ categoryId: number }>()
 );
+
+// ========== Форма рекомендаций для пользователя ==========
+
+export const adminInitForm = createAction('[Service] Admin Init Form', props<{ service?: Service }>());
+
+export const adminCloseForm = createAction('[Service] Admin Close Form');
+
+export const adminChangeForm = createAction('[Service] Admin Change Form', props<{ formData: Service }>());
+
+export const adminSaveForm = createAction('[Service/API] Admin Save Form');
+
+export const adminSaveFormSuccess = createAction(
+  '[Service/API] Admin Save Form Success',
+  props<{ service: Service }>()
+);
+
+export const adminSaveFormFailure = createAction('[Service/API] Admin Save Form Failure', props<{ error: any }>());

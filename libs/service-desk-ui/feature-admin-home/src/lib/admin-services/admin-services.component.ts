@@ -4,6 +4,8 @@ import { ServiceOverviewVM, AdminServiceFacade, AdminCategoryFacade } from '@orb
 import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
+import { AdminServiceFormComponent } from './../admin-service-form/admin-service-form.component';
+
 @Component({
   selector: 'service-desk-ui-admin-home-admin-services',
   templateUrl: './admin-services.component.html',
@@ -14,11 +16,31 @@ export class AdminServicesComponent implements OnInit {
   services$ = this.adminServiceFacade.all$;
   loading$ = this.adminServiceFacade.loading$;
   loaded$ = this.adminServiceFacade.loaded$;
+  loadingIds$ = this.adminServiceFacade.loadingIds$;
+  formDisplay$ = this.adminServiceFacade.formDisplay$;
+  subscriptions = new Subscription();
+  ref: DynamicDialogRef;
 
-  constructor(private adminCategoryFacade: AdminCategoryFacade, private adminServiceFacade: AdminServiceFacade) {}
+  constructor(
+    private adminServiceFacade: AdminServiceFacade,
+    private adminCategoryFacade: AdminCategoryFacade,
+    private confirmationService: ConfirmationService,
+    private dialogService: DialogService
+  ) {}
 
   ngOnInit(): void {
-    this.adminServiceFacade.loadAll();
+    this.loadData();
+    this.subscriptions.add(
+      this.formDisplay$.subscribe((display) => {
+        if (display) {
+          this.showForm();
+        } else {
+          if (this.ref) {
+            this.ref.close();
+          }
+        }
+      })
+    );
   }
 
   /**
@@ -26,6 +48,13 @@ export class AdminServicesComponent implements OnInit {
    */
   loadData(): void {
     this.adminServiceFacade.loadAll();
+  }
+
+  /**
+   * Инициализирует новую форму
+   */
+  newForm(): void {
+    this.adminServiceFacade.initForm();
   }
 
   /**
@@ -46,10 +75,13 @@ export class AdminServicesComponent implements OnInit {
     /** */
   }
 
-  /**
-   * Инициализирует новую форму
-   */
-  newForm(): void {
-    /** */
+  private showForm() {
+    this.ref = this.dialogService.open(AdminServiceFormComponent, {
+      header: 'Услуги',
+      width: '40vw',
+      closeOnEscape: false,
+      closable: false,
+      baseZIndex: 10000,
+    });
   }
 }

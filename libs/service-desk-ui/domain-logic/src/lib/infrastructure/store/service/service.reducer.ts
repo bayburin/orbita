@@ -6,10 +6,19 @@ import { Service } from '../../../entities/models/service.interface';
 
 export const SERVICE_FEATURE_KEY = 'service';
 
+export interface FormState {
+  formData: Service;
+  loading: boolean;
+  displayForm: boolean;
+  error?: string;
+}
+
 export interface State extends EntityState<Service> {
   selectedId?: number;
   loading: boolean;
   loaded: boolean;
+  form: FormState;
+  loadingIds: number[];
   error?: string | null;
 }
 
@@ -19,9 +28,17 @@ export interface ServicePartialState {
 
 export const serviceAdapter: EntityAdapter<Service> = createEntityAdapter<Service>();
 
+export const initialFormState: FormState = {
+  formData: null,
+  loading: false,
+  displayForm: false,
+};
+
 export const initialState: State = serviceAdapter.getInitialState({
   loading: false,
   loaded: false,
+  form: initialFormState,
+  loadingIds: [],
 });
 
 const serviceReducer = createReducer(
@@ -60,7 +77,59 @@ const serviceReducer = createReducer(
   })),
   on(ServiceActions.adminDestroyWithDestroyedCategory, (state, { categoryId }) =>
     serviceAdapter.removeMany((service) => service.category_id === categoryId, state)
-  )
+  ),
+
+  // ========== Форма рекомендаций для пользователя ==========
+
+  on(ServiceActions.adminInitForm, (state, { service }) => ({
+    ...state,
+    form: {
+      ...initialFormState,
+      formData: service,
+      displayForm: true,
+    },
+  })),
+  on(ServiceActions.adminCloseForm, (state) => ({
+    ...state,
+    selectedId: null,
+    form: {
+      ...state.form,
+      displayForm: false,
+      formData: null,
+    },
+  })),
+  on(ServiceActions.adminChangeForm, (state, { formData }) => ({
+    ...state,
+    form: {
+      ...state.form,
+      formData: formData,
+    },
+  })),
+  on(ServiceActions.adminSaveForm, (state) => ({
+    ...state,
+    form: {
+      ...state.form,
+      loading: true,
+      error: null,
+    },
+  })),
+  on(ServiceActions.adminSaveFormSuccess, (state, { service }) =>
+    serviceAdapter.setOne(service, {
+      ...state,
+      form: {
+        ...state.form,
+        loading: false,
+      },
+    })
+  ),
+  on(ServiceActions.adminSaveFormFailure, (state, { error }) => ({
+    ...state,
+    form: {
+      ...state.form,
+      loading: false,
+      error,
+    },
+  }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

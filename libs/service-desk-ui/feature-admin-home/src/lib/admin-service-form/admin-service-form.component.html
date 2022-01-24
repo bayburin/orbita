@@ -1,0 +1,62 @@
+<form [formGroup]="form">
+  <div class="field">
+    <label for="category_id">Категория</label>
+    <p-dropdown
+      id="category_id"
+      formControlName="category_id"
+      [options]="categories$ | async"
+      [showClear]="true"
+      placeholder="Выберите категорию"
+      optionValue="id"
+      optionLabel="name"
+      appendTo="body"
+      styleClass="w-full inputfield"
+      [ngClass]="{ 'ng-invalid ng-dirty': (categoryIdForm.touched || submitted) && categoryIdForm.errors }"
+    >
+    </p-dropdown>
+    <small class="p-error" *ngIf="(categoryIdForm.touched || submitted) && categoryIdForm.errors"
+      >Не может быть пустым</small
+    >
+  </div>
+  <div class="field">
+    <label for="name">Наименование услуги</label>
+    <input
+      id="name"
+      type="text"
+      pInputText
+      formControlName="name"
+      class="inputfield w-full"
+      autofocus
+      [ngClass]="{ 'ng-invalid ng-dirty': (nameForm.touched || submitted) && nameForm.errors }"
+    />
+    <small class="p-error" *ngIf="(nameForm.touched || submitted) && nameForm.errors">Не может быть пустым</small>
+  </div>
+  <div class="field">
+    <label for="short_description">Описание</label>
+    <textarea
+      id="short_description"
+      pInputTextarea
+      formControlName="short_description"
+      class="inputfield w-full"
+    ></textarea>
+  </div>
+  <div class="field-checkbox">
+    <p-checkbox inputId="is_hidden" formControlName="is_hidden" [binary]="true"></p-checkbox>
+    <label class="mb-0" for="is_hidden">Скрыть от пользователя</label>
+  </div>
+  <div class="field-checkbox">
+    <p-checkbox inputId="has_common_case" formControlName="has_common_case" [binary]="true"></p-checkbox>
+    <label class="mb-0" for="has_common_case">Возможность создать заявку в свободной форме на данную услугу</label>
+  </div>
+</form>
+
+<p-divider></p-divider>
+
+<div class="text-right mt-3">
+  <button type="submit" [disabled]="formLoading$ | async" (click)="submitForm()" class="btn btn-primary">
+    <span class="d-flex justify-content-center">
+      <lib-loading [loading]="formLoading$ | async" class="mr-1 text-body"></lib-loading>Сохранить
+    </span>
+  </button>
+  <button (click)="closeForm()" class="btn btn-gray-white ml-3">Отменить</button>
+</div>

@@ -10,6 +10,7 @@ import { AdminUserRecommendationFormComponent } from './admin-user-recommendatio
 import { AdminCategoriesComponent } from './admin-categories/admin-categories.component';
 import { AdminCategoryFormComponent } from './admin-category-form/admin-category-form.component';
 import { AdminServicesComponent } from './admin-services/admin-services.component';
+import { AdminServiceFormComponent } from './admin-service-form/admin-service-form.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
     AdminCategoriesComponent,
     AdminCategoryFormComponent,
     AdminServicesComponent,
+    AdminServiceFormComponent,
   ],
 })
 export class ServiceDeskUiFeatureAdminHomeModule {}

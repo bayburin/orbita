@@ -4,7 +4,7 @@ import * as ServiceActions from './service.actions';
 import { Service } from '../../../entities/models/service.interface';
 import { State, initialState, reducer } from './service.reducer';
 
-describe('Service Reducer', () => {
+describe('ServiceReducer', () => {
   let action: Action;
   const createService = (id: number, name = '', categoryId = 0): Service =>
     ({
@@ -117,6 +117,75 @@ describe('Service Reducer', () => {
       const result: State = reducer(initialState, action);
 
       expect(result.ids).toEqual([1]);
+    });
+  });
+
+  // ========== Форма рекомендаций для пользователя ==========
+
+  describe('adminInitForm', () => {
+    it('should change attributes', () => {
+      const service = createService(1, 'test');
+      action = ServiceActions.adminInitForm({ service });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.formData).toEqual(service);
+      expect(result.form.displayForm).toBe(true);
+    });
+  });
+
+  describe('adminCloseForm', () => {
+    it('should change attributes', () => {
+      action = ServiceActions.adminCloseForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toBeNull();
+      expect(result.form.displayForm).toBe(false);
+      expect(result.form.formData).toBeNull();
+    });
+  });
+
+  describe('adminChangeForm', () => {
+    it('should change attributes', () => {
+      const formData = createService(1, 'test');
+      action = ServiceActions.adminChangeForm({ formData });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.formData).toEqual(formData);
+    });
+  });
+
+  describe('adminSaveForm', () => {
+    it('should change attributes', () => {
+      action = ServiceActions.adminSaveForm();
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(true);
+      expect(result.form.error).toBe(null);
+    });
+  });
+
+  describe('adminSaveFormSuccess', () => {
+    it('should change attributes', () => {
+      const service = createService(1, 'test');
+      initialState.ids = [];
+      initialState.entities = {};
+      initialState.form.formData = service;
+      action = ServiceActions.adminSaveFormSuccess({ service });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(1);
+      expect(result.form.loading).toBe(false);
+    });
+  });
+
+  describe('adminSaveFormFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      action = ServiceActions.adminSaveFormFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.form.loading).toBe(false);
+      expect(result.form.error).toEqual(error);
     });
   });
 

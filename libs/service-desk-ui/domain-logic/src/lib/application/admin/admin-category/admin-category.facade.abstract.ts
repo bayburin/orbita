@@ -52,7 +52,7 @@ export abstract class AdminCategoryFacadeAbstract {
   abstract edit(id: number): void;
 
   /**
-   * Инициализирует новую форму заявки
+   * Инициализирует новую форму категории
    */
   abstract initForm(): void;
 

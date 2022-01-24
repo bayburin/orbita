@@ -6,8 +6,29 @@ export class AdminServiceFacadeStub implements AdminServiceFacadeAbstract {
   all$ = new BehaviorSubject([]);
   loading$ = new BehaviorSubject(false);
   loaded$ = new BehaviorSubject(false);
+  loadingIds$ = new BehaviorSubject([]);
+  formData$ = new BehaviorSubject(null);
+  formLoading$ = new BehaviorSubject(false);
+  formDisplay$ = new BehaviorSubject(false);
+  formError$ = new BehaviorSubject(null);
 
   loadAll() {
+    /** */
+  }
+
+  initForm() {
+    /** */
+  }
+
+  closeForm() {
+    /** */
+  }
+
+  changeForm() {
+    /** */
+  }
+
+  saveForm() {
     /** */
   }
 }
