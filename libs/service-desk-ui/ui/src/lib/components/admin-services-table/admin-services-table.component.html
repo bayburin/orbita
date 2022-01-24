@@ -1,4 +1,5 @@
 <p-table
+  #serviceTable
   [value]="services"
   styleClass="p-datatable-sm"
   responsiveLayout="scroll"
@@ -8,30 +9,100 @@
 >
   <ng-template pTemplate="header">
     <tr>
-      <th>#</th>
-      <th>Категория</th>
-      <th>Наименование</th>
+      <th width="6%">#</th>
+      <th width="25%">Категория</th>
+      <th width="25%">Наименование</th>
       <th>Описание</th>
       <th>Тип</th>
       <th>Свободная заявка</th>
+      <th></th>
+    </tr>
+    <tr>
+      <th>
+        <p-columnFilter field="id" matchMode="equals" [showMenu]="false"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="category.id" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-dropdown
+              [ngModel]="value"
+              [options]="categories"
+              [showClear]="true"
+              placeholder="Все"
+              optionValue="id"
+              optionLabel="name"
+              (onChange)="filter($event.value)"
+            >
+            </p-dropdown>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="name" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="short_description" matchMode="contains" [showMenu]="false"></p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="is_hidden" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-dropdown
+              [ngModel]="value"
+              [options]="isHiddenValues"
+              [showClear]="true"
+              placeholder="Все"
+              optionValue="is_hidden"
+              (onChange)="filter($event.value)"
+            >
+              <ng-template let-item pTemplate="selectedItem">
+                <lib-service-is-hidden-type [isHidden]="item.is_hidden"></lib-service-is-hidden-type>
+              </ng-template>
+              <ng-template let-option pTemplate="item">
+                <lib-service-is-hidden-type [isHidden]="option.is_hidden"></lib-service-is-hidden-type>
+              </ng-template>
+            </p-dropdown>
+          </ng-template>
+        </p-columnFilter>
+      </th>
+      <th>
+        <p-columnFilter field="has_common_case" matchMode="equals" [showMenu]="false">
+          <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+            <p-dropdown
+              [ngModel]="value"
+              [options]="hasCommonCaseValues"
+              [showClear]="true"
+              placeholder="Все"
+              optionValue="has_common_case"
+              (onChange)="filter($event.value)"
+            >
+              <ng-template let-item pTemplate="selectedItem">
+                <lib-service-has-common-case-type
+                  [hasCommonCase]="item.has_common_case"
+                ></lib-service-has-common-case-type>
+              </ng-template>
+              <ng-template let-option pTemplate="item">
+                <lib-service-has-common-case-type
+                  [hasCommonCase]="option.has_common_case"
+                ></lib-service-has-common-case-type>
+              </ng-template>
+            </p-dropdown>
+          </ng-template>
+        </p-columnFilter>
+      </th>
       <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-rec let-index="rowIndex">
     <tr>
       <td>{{ rec.id }}</td>
-      <td>{{ rec.category.name }}</td>
+      <td>{{ rec.category?.name }}</td>
       <td>{{ rec.name }}</td>
       <td>{{ rec.short_description }}</td>
       <td>
-        <span [class]="'sd-badge service-' + serviceHiddenType(rec.is_hidden).badge">
-          {{ serviceHiddenType(rec.is_hidden).title }}
-        </span>
+        <lib-service-is-hidden-type [isHidden]="rec.is_hidden"></lib-service-is-hidden-type>
       </td>
       <td>
-        <span [class]="'sd-badge service-' + serviceHasCommonCaseType(rec.has_common_case).badge">
-          {{ serviceHasCommonCaseType(rec.has_common_case).title }}
-        </span>
+        <lib-service-has-common-case-type [hasCommonCase]="rec.has_common_case"></lib-service-has-common-case-type>
       </td>
       <td class="text-center">
         <button

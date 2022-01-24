@@ -53,6 +53,8 @@ import { SearchResultListComponent } from './components/search-result-list/searc
 import { AdminUserRecommendationsTableComponent } from './components/admin-user-recommendations-table/admin-user-recommendations-table.component';
 import { AdminCategoriesTableComponent } from './components/admin-categories-table/admin-categories-table.component';
 import { AdminServicesTableComponent } from './components/admin-services-table/admin-services-table.component';
+import { ServiceIsHiddenTypeComponent } from './components/service-is-hidden-type/service-is-hidden-type.component';
+import { ServiceHasCommonCaseTypeComponent } from './components/service-has-common-case-type/service-has-common-case-type.component';
 
 const modules: any[] = [
   FormsModule,
@@ -110,12 +112,13 @@ const components: any[] = [
   AdminUserRecommendationsTableComponent,
   AdminCategoriesTableComponent,
   AdminServicesTableComponent,
+  ServiceIsHiddenTypeComponent,
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule, MarkdownModule.forChild(), ...modules],
-  declarations: [...components, ...directives, ...pipes],
+  declarations: [...components, ...directives, ...pipes, ServiceHasCommonCaseTypeComponent],
   entryComponents: [CategoryComponent, ServiceComponent, QuestionComponent],
-  exports: [...components, ...modules, ...directives, ...pipes],
+  exports: [...components, ...modules, ...directives, ...pipes, ServiceHasCommonCaseTypeComponent],
 })
 export class ServiceDeskUiUiModule {}

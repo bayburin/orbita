@@ -1,6 +1,6 @@
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ServiceOverviewVM, AdminServiceFacade } from '@orbita/service-desk-ui/domain-logic';
+import { ServiceOverviewVM, AdminServiceFacade, AdminCategoryFacade } from '@orbita/service-desk-ui/domain-logic';
 import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
@@ -10,11 +10,12 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./admin-services.component.scss'],
 })
 export class AdminServicesComponent implements OnInit {
+  categories$ = this.adminCategoryFacade.all$;
   services$ = this.adminServiceFacade.all$;
   loading$ = this.adminServiceFacade.loading$;
   loaded$ = this.adminServiceFacade.loaded$;
 
-  constructor(private adminServiceFacade: AdminServiceFacade) {}
+  constructor(private adminCategoryFacade: AdminCategoryFacade, private adminServiceFacade: AdminServiceFacade) {}
 
   ngOnInit(): void {
     this.adminServiceFacade.loadAll();

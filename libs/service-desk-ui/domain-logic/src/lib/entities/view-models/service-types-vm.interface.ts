@@ -18,12 +18,30 @@ export interface ServiceHiddenTypesVM {
    * Тип badge
    */
   badge: string;
+  /**
+   * Ключ
+   */
+  is_hidden?: boolean;
 }
 
-const ServiceHiddenTypesVMMap: Record<string, ServiceHiddenTypesVM> = {
+const serviceHiddenTypesVMMap: Record<string, ServiceHiddenTypesVM> = {
   true: ServiceTypesVMFactory.create<ServiceHiddenTypesVM>('Скрытая', 'hidden'),
   false: ServiceTypesVMFactory.create<ServiceHiddenTypesVM>('Открытая', 'visible'),
 };
+
+/**
+ * Массив представлений типов услуг
+ */
+export const serviceHiddenVMArray = Object.keys(serviceHiddenTypesVMMap)
+  .map((el) => el === 'true')
+  .reduce<ServiceHiddenTypesVM[]>((arr, is_hidden) => {
+    arr.push({
+      is_hidden,
+      ...getServiceHiddenTypes(is_hidden),
+    });
+
+    return arr;
+  }, []);
 
 /**
  * Функция возвращает значение объекта ServiceHiddenTypesVM исходя из полученного типа external
@@ -31,7 +49,7 @@ const ServiceHiddenTypesVMMap: Record<string, ServiceHiddenTypesVM> = {
  * @param external - тип ссылки (true - внешняя, false - внутренняя)
  */
 export function getServiceHiddenTypes(external: boolean): ServiceHiddenTypesVM {
-  return ServiceHiddenTypesVMMap[external.toString()];
+  return serviceHiddenTypesVMMap[external.toString()];
 }
 
 // =================================================================
@@ -45,12 +63,30 @@ export interface ServiceHasCommonCaseTypesVM {
    * Тип badge
    */
   badge: string;
+  /**
+   * Ключ
+   */
+  has_common_case?: boolean;
 }
 
-const ServiceHasCommonCaseTypesVMMap: Record<string, ServiceHasCommonCaseTypesVM> = {
+const serviceHasCommonCaseTypesVMMap: Record<string, ServiceHasCommonCaseTypesVM> = {
   true: ServiceTypesVMFactory.create<ServiceHasCommonCaseTypesVM>('Да', 'common-case'),
   false: ServiceTypesVMFactory.create<ServiceHasCommonCaseTypesVM>('Нет', 'not-common-case'),
 };
+
+/**
+ * Массив представлений типов услуг
+ */
+export const serviceHasCommonCaseVMArray = Object.keys(serviceHasCommonCaseTypesVMMap)
+  .map((el) => el === 'true')
+  .reduce<ServiceHasCommonCaseTypesVM[]>((arr, has_common_case) => {
+    arr.push({
+      has_common_case,
+      ...getServiceHasCommonCaseTypes(has_common_case),
+    });
+
+    return arr;
+  }, []);
 
 /**
  * Функция возвращает значение объекта UserRecommendationLinkTypesVMMap исходя из полученного типа external
@@ -58,5 +94,5 @@ const ServiceHasCommonCaseTypesVMMap: Record<string, ServiceHasCommonCaseTypesVM
  * @param external - тип ссылки (true - внешняя, false - внутренняя)
  */
 export function getServiceHasCommonCaseTypes(external: boolean): ServiceHasCommonCaseTypesVM {
-  return ServiceHasCommonCaseTypesVMMap[external.toString()];
+  return serviceHasCommonCaseTypesVMMap[external.toString()];
 }

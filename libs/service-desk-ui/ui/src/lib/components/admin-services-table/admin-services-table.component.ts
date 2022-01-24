@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import {
-  getServiceHiddenTypes,
   ServiceOverviewVM,
-  ServiceHiddenTypesVM,
-  getServiceHasCommonCaseTypes,
-  ServiceHasCommonCaseTypesVM,
+  serviceHiddenVMArray,
+  serviceHasCommonCaseVMArray,
+  Category,
 } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
@@ -14,6 +13,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminServicesTableComponent {
+  isHiddenValues = serviceHiddenVMArray;
+  hasCommonCaseValues = serviceHasCommonCaseVMArray;
+  /**
+   * Список категорий
+   */
+  @Input() categories: Category[];
   /**
    * Список услуг
    */
@@ -30,22 +35,4 @@ export class AdminServicesTableComponent {
    * Событие удаления записи
    */
   @Output() remove = new EventEmitter<ServiceOverviewVM>();
-
-  /**
-   * Возвращает объект-представление для типа ссылки указанной записи
-   *
-   * @param isHidden - тип услуги
-   */
-  serviceHiddenType(isHidden: boolean): ServiceHiddenTypesVM {
-    return getServiceHiddenTypes(isHidden);
-  }
-
-  /**
-   * Возвращает объект-представление для типа ссылки указанной записи
-   *
-   * @param isHidden - тип услуги
-   */
-  serviceHasCommonCaseType(hasCommonCase: boolean): ServiceHasCommonCaseTypesVM {
-    return getServiceHasCommonCaseTypes(hasCommonCase);
-  }
 }

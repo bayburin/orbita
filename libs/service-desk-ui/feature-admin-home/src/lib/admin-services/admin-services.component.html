@@ -16,6 +16,7 @@
     </p-toolbar>
 
     <lib-admin-services-table
+      [categories]="categories$ | async"
       [services]="services$ | async"
       [loadingIds]="[]"
       (editForm)="editForm($event)"
