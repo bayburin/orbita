@@ -1,6 +1,6 @@
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Service, AdminServiceFacade } from '@orbita/service-desk-ui/domain-logic';
+import { ServiceOverviewVM, AdminServiceFacade } from '@orbita/service-desk-ui/domain-logic';
 import { ConfirmationService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
@@ -25,6 +25,24 @@ export class AdminServicesComponent implements OnInit {
    */
   loadData(): void {
     this.adminServiceFacade.loadAll();
+  }
+
+  /**
+   * Инициализирует форму редактирования записи
+   *
+   * @param service - услуга, которую необходимо редактировать
+   */
+  editForm(service: ServiceOverviewVM): void {
+    /** */
+  }
+
+  /**
+   * Удаляет услугу
+   *
+   * @param service - услуга, которую необходимо удалить
+   */
+  remove(service: ServiceOverviewVM): void {
+    /** */
   }
 
   /**

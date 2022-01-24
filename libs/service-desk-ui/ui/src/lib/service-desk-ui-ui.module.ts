@@ -52,6 +52,7 @@ import { ResponsibleUserListComponent } from './components/responsible-user-list
 import { SearchResultListComponent } from './components/search-result-list/search-result-list.component';
 import { AdminUserRecommendationsTableComponent } from './components/admin-user-recommendations-table/admin-user-recommendations-table.component';
 import { AdminCategoriesTableComponent } from './components/admin-categories-table/admin-categories-table.component';
+import { AdminServicesTableComponent } from './components/admin-services-table/admin-services-table.component';
 
 const modules: any[] = [
   FormsModule,
@@ -108,6 +109,7 @@ const components: any[] = [
   SearchResultListComponent,
   AdminUserRecommendationsTableComponent,
   AdminCategoriesTableComponent,
+  AdminServicesTableComponent,
 ];
 
 @NgModule({

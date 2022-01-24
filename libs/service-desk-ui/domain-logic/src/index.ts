@@ -26,6 +26,8 @@ export * from './lib/entities/view-models/limit-types-vm.enum';
 export * from './lib/entities/view-models/answer-vm.interface';
 export * from './lib/entities/view-models/ticket-overview-vm.interface';
 export * from './lib/entities/view-models/user-recommendation-link-types-vm.interface';
+export * from './lib/entities/view-models/service-overview-vm.interface';
+export * from './lib/entities/view-models/service-types-vm.interface';
 
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';
