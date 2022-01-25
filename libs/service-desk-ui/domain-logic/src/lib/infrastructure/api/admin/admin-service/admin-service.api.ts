@@ -4,6 +4,7 @@ import { SERVICE_DESK_UI_ENV_TOKEN, ServiceDeskUiEnvironment } from '@orbita/sha
 
 import { AdminServiceApiAbstract } from './admin-service.api.abstract';
 import { Service } from '../../../../entities/models/service.interface';
+import { ServiceForm } from '../../../../entities/form/service-form.interface';
 
 /**
  * Содержит API услуг
@@ -22,5 +23,17 @@ export class AdminServiceApi implements AdminServiceApiAbstract {
 
   show(id: number) {
     return this.http.get<Service>(`${this.api}/${id}`);
+  }
+
+  save(formData: ServiceForm) {
+    return this.http.post<Service>(this.api, { service: formData });
+  }
+
+  update(id: number, formData: ServiceForm) {
+    return this.http.put<Service>(`${this.api}/${id}`, { service: formData });
+  }
+
+  destroy(id: number) {
+    return this.http.delete<Service>(`${this.api}/${id}`);
   }
 }

@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { Service } from '../../../../entities/models/service.interface';
+import { ServiceForm } from '../../../../entities/form/service-form.interface';
 
 export abstract class AdminServiceApiAbstract {
   /**
@@ -19,4 +20,26 @@ export abstract class AdminServiceApiAbstract {
    * @param id - ID категории
    */
   abstract show(id: number): Observable<Service>;
+
+  /**
+   * Сохраняет услугу
+   *
+   * @param formData - данные о категории.
+   */
+  abstract save(formData: ServiceForm): Observable<Service>;
+
+  /**
+   * Обновляет услугу
+   *
+   * @param id - id услуги
+   * @param formData - новые данные
+   */
+  abstract update(id: number, formData: ServiceForm): Observable<Service>;
+
+  /**
+   * Удаляет запись
+   *
+   * @param id - id записи.
+   */
+  abstract destroy(id: number): Observable<Service>;
 }

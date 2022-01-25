@@ -3,14 +3,16 @@ import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { fetch } from '@nrwl/angular';
 import { of } from 'rxjs';
-import { switchMap, withLatestFrom, catchError } from 'rxjs/operators';
+import { switchMap, withLatestFrom, catchError, map, tap } from 'rxjs/operators';
 
 import { ServiceApi } from '../../api/service/service.api';
 import { ServiceCacheService } from '../../services/service-cache.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 import { AdminServiceApi } from './../../api/admin/admin-service/admin-service.api';
+import { NotificationFacade } from '../../../application/notification/notification.facade';
 import * as ServiceActions from './service.actions';
 import * as ServiceFeature from './service.reducer';
+import * as ServiceSelectors from './service.selectors';
 import * as RouterSelectors from '../selectors/router.selectors';
 import * as CategoryActions from '../category/category.actions';
 import * as QuestionActions from '../question/question.actions';
@@ -25,7 +27,8 @@ export class ServiceEffects {
     private serviceApi: ServiceApi,
     private adminServiceApi: AdminServiceApi,
     private store: Store<ServiceFeature.ServicePartialState>,
-    private errorHandlerService: ErrorHandlerService
+    private errorHandlerService: ErrorHandlerService,
+    private notificationFacade: NotificationFacade
   ) {}
 
   loadSelected$ = createEffect(() =>
@@ -81,6 +84,43 @@ export class ServiceEffects {
           return ServiceActions.adminLoadAllFailure({ error });
         },
       })
+    )
+  );
+
+  adminSaveForm$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ServiceActions.adminSaveForm),
+      withLatestFrom(this.store.select(ServiceSelectors.getFormData)),
+      switchMap(([_action, formData]) => {
+        if (formData.id) {
+          return this.adminServiceApi.update(formData.id, formData).pipe(
+            tap(() => this.notificationFacade.showMessage('Услуга обновлена')),
+            map((service) => ServiceActions.adminSaveFormSuccess({ service })),
+            catchError((error) => {
+              this.errorHandlerService.handleError(error, 'Не удалось обновить услугу.');
+
+              return of(ServiceActions.adminSaveFormFailure({ error }));
+            })
+          );
+        } else {
+          return this.adminServiceApi.save(formData).pipe(
+            tap(() => this.notificationFacade.showMessage('Услуга создана')),
+            map((service) => ServiceActions.adminSaveFormSuccess({ service })),
+            catchError((error) => {
+              this.errorHandlerService.handleError(error, 'Не удалось сохранить услугу.');
+
+              return of(ServiceActions.adminSaveFormFailure({ error }));
+            })
+          );
+        }
+      })
+    )
+  );
+
+  adminSaveFormSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ServiceActions.adminSaveFormSuccess),
+      map(() => ServiceActions.adminCloseForm())
     )
   );
 }

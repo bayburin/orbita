@@ -3,6 +3,8 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { SERVICE_DESK_UI_ENV_TOKEN, serviceDeskUiEnvironmentStub } from '@orbita/shared/environment';
 
 import { AdminServiceApi } from './admin-service.api';
+import { Service } from '../../../../entities/models/service.interface';
+import { ServiceForm } from '../../../../entities/form/service-form.interface';
 
 describe('AdminServiceApi', () => {
   let adminService: AdminServiceApi;
@@ -58,6 +60,56 @@ describe('AdminServiceApi', () => {
       httpMock
         .expectOne({
           method: 'GET',
+          url: api,
+        })
+        .flush(service);
+    });
+  });
+
+  describe('save()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/admin/services`;
+    const formData = { name: 'form-name' } as ServiceForm;
+    const service = { name: 'test' } as Service;
+
+    it('should save record', () => {
+      adminService.save(formData).subscribe((result) => expect(result).toEqual(service));
+
+      httpMock
+        .expectOne({
+          method: 'POST',
+          url: api,
+        })
+        .flush(service);
+    });
+  });
+
+  describe('update()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/admin/services/1`;
+    const formData = { name: 'form-name' } as ServiceForm;
+    const service = { name: 'test' } as Service;
+
+    it('should update record', () => {
+      adminService.update(1, formData).subscribe((result) => expect(result).toEqual(service));
+
+      httpMock
+        .expectOne({
+          method: 'PUT',
+          url: api,
+        })
+        .flush(service);
+    });
+  });
+
+  describe('destroy()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/admin/services/1`;
+    const service = { name: 'test' } as Service;
+
+    it('should destroy record', () => {
+      adminService.destroy(1).subscribe((result) => expect(result).toEqual(service));
+
+      httpMock
+        .expectOne({
+          method: 'DELETE',
           url: api,
         })
         .flush(service);
