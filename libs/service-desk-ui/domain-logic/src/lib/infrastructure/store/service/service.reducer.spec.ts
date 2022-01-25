@@ -176,7 +176,7 @@ describe('ServiceReducer', () => {
       action = ServiceActions.adminInitForm({ service });
       const result: State = reducer(initialState, action);
 
-      expect(result.form.formData).toEqual(ServiceFactory.createForm(service));
+      expect(result.form.formData).toEqual(ServiceFactory.createViewForm(service));
       expect(result.form.displayForm).toBe(true);
     });
   });

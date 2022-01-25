@@ -10,6 +10,7 @@ import { ServiceCacheService } from '../../services/service-cache.service';
 import { ErrorHandlerService } from '../../services/error-handler.service';
 import { AdminServiceApi } from './../../api/admin/admin-service/admin-service.api';
 import { NotificationFacade } from '../../../application/notification/notification.facade';
+import { ServiceFactory } from '../../factories/service.factory';
 import * as ServiceActions from './service.actions';
 import * as ServiceFeature from './service.reducer';
 import * as ServiceSelectors from './service.selectors';
@@ -128,7 +129,7 @@ export class ServiceEffects {
       withLatestFrom(this.store.select(ServiceSelectors.getFormData)),
       switchMap(([_action, formData]) => {
         if (formData.id) {
-          return this.adminServiceApi.update(formData.id, formData).pipe(
+          return this.adminServiceApi.update(formData.id, ServiceFactory.createServerForm(formData)).pipe(
             tap(() => this.notificationFacade.showMessage('Услуга обновлена')),
             switchMap((service) => {
               const data = ServiceCacheService.normalizeServices(service);
@@ -148,7 +149,7 @@ export class ServiceEffects {
             })
           );
         } else {
-          return this.adminServiceApi.save(formData).pipe(
+          return this.adminServiceApi.save(ServiceFactory.createServerForm(formData)).pipe(
             tap(() => this.notificationFacade.showMessage('Услуга создана')),
             switchMap((service) => {
               const data = ServiceCacheService.normalizeServices(service);

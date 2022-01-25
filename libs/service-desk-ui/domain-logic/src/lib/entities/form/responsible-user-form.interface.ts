@@ -1,4 +1,4 @@
-import { ResponseableTypes } from './../models/responsible-user.interface';
+import { EmployeeShort } from './../models/employee/employee-short.interface';
 
 /**
  * Форма ответственного
@@ -13,6 +13,11 @@ export interface ResponsibleUserForm {
    * Табельный номер
    */
   tn: number;
+
+  /**
+   * Данные об ответственном
+   */
+  details?: EmployeeShort;
 
   /**
    * Флаг обозначающий, что запись будет удалена из БД

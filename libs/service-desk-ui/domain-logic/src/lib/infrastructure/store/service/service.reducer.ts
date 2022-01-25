@@ -104,7 +104,7 @@ const serviceReducer = createReducer(
     ...state,
     form: {
       ...initialFormState,
-      formData: ServiceFactory.createForm(service),
+      formData: ServiceFactory.createViewForm(service),
       displayForm: true,
     },
   })),

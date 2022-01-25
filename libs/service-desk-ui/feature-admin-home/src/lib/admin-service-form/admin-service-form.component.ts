@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { filter, take, distinctUntilChanged, map, tap } from 'rxjs/operators';
@@ -25,17 +25,17 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
   subscriptions = new Subscription();
   employees$ = this.employeeFacade.searched$.pipe(
     tap((employees) => {
-      if (this.employeeAutoComplete) {
-        // Почему-то при ручном вызове поиска выдается строка "данные не найдены".
-        // Чтобы исправить это далее атрибут noResults устанавливается вручную.
-        this.employeeAutoComplete.noResults = employees.length ? false : true;
+      // Почему-то при ручном вызове поиска выдается строка "данные не найдены".
+      // Чтобы исправить это далее атрибут noResults устанавливается вручную.
+      if (this.employeeAutoCompletes?.length) {
+        this.employeeAutoCompletes.forEach((el) => (el.noResults = employees.length ? false : true));
       }
     })
   );
   employeesLoading$ = this.employeeFacade.loading$;
   employee = new FormControl();
-  selectedEmployee$ = this.adminServiceFacade.selected$;
-  @ViewChild('employeeAutoComplete') employeeAutoComplete: AutoComplete;
+  selectedService$ = this.adminServiceFacade.selected$;
+  @ViewChildren('employeeAutoComplete') employeeAutoCompletes: QueryList<AutoComplete>;
 
   get categoryIdForm(): FormControl {
     return this.form.get('category_id') as FormControl;
@@ -74,6 +74,46 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Добавить параметры в форму
+   */
+  addUser(): void {
+    this.responsibleUsersForm.push(this.createResponsibleUser());
+  }
+
+  /**
+   * Удаляет ответственного из формы
+   *
+   * @param i - индекс параметра в форме
+   */
+  removeUser(i: number): void {
+    const findedControl = this.responsibleUsersForm.controls[i];
+
+    if (findedControl.value.id) {
+      (findedControl.get('_destroy') as FormControl).setValue(true);
+    } else {
+      this.responsibleUsersForm.removeAt(i);
+    }
+  }
+
+  /**
+   * Возвращает форму с табельным по указанному индексу из массива
+   *
+   * @param i - индекс из массива ответственных
+   */
+  getResponsibleUserTnForm(i: number): FormControl {
+    return this.responsibleUsersForm.controls[i].get('tn') as FormControl;
+  }
+
+  /**
+   * Возвращает форму с флагом удаления по указанному индексу из массива
+   *
+   * @param i - индекс из массива ответственных
+   */
+  getResponsibleUserDestroyForm(i: number): FormControl {
+    return this.responsibleUsersForm.controls[i].get('_destroy') as FormControl;
+  }
+
+  /**
    * Событие отправки формы.
    */
   submitForm(): void {
@@ -104,51 +144,38 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Добавляет выбранного пользователя в форму заявки
+   * Записывает в форму табельный номер выбранного ответственного
    *
    * @param employee - выбранный работник
+   * @param i - индекс в массиве исполнителей
    */
-  selectEmployee(employee: EmployeeShort): void {
-    const findedControl = this.responsibleUsersForm.controls.find(
-      (control) => control.value.tn === employee.personnelNo
-    );
-
-    if (findedControl && findedControl.value.id) {
-      (findedControl.get('_destroy') as FormControl).setValue(false);
-    } else if (!findedControl) {
-      this.responsibleUsersForm.push(this.createResponsibleUser(employee.personnelNo));
-    }
+  selectEmployee(employee: EmployeeShort, i: number): void {
+    this.responsibleUsersForm.controls[i].patchValue({ tn: employee.personnelNo });
   }
 
   /**
-   * Удаляет выбранного пользователя из формы заявки
+   * Открывает окно autocomplete по указанному индексу
    *
-   * @param employee - выбранный работник
+   * @param i - индекс элемента в форме
    */
-  unselectEmployee(employee: EmployeeShort): void {
-    if (!employee) {
-      return;
-    }
+  showEmployeeAutoComplete(i: number) {
+    this.employeeAutoCompletes.get(i).show();
+  }
 
-    const findedControl = this.responsibleUsersForm.controls.find(
-      (control) => control.value.tn === employee.personnelNo
-    );
-
-    if (findedControl.value.id) {
-      (findedControl.get('_destroy') as FormControl).setValue(true);
-    } else {
-      const index = this.responsibleUsersForm.controls.findIndex((control) => control == findedControl);
-
-      if (index !== -1) {
-        this.responsibleUsersForm.removeAt(index);
-      }
-    }
+  /**
+   * Очищает данные о выбранном работнике
+   *
+   * @param i - индекс элемента в форме
+   */
+  clearEmployee(i: number) {
+    this.responsibleUsersForm.controls[i].patchValue({ tn: null });
   }
 
   private createResponsibleUser(tn?: number, id?: number): FormGroup {
     return this.fb.group({
       id: [id || null],
       tn: [tn || null, Validators.required],
+      details: [],
       _destroy: [false],
     });
   }
@@ -173,23 +200,24 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
       .subscribe((formData) => {
         this.form.patchValue(formData, { emitEvent: false });
         formData.responsible_users.forEach((param: ResponsibleUserForm) =>
-          this.responsibleUsersForm.push(this.createResponsibleUser(param.tn, param.id), { emitEvent: false })
+          this.responsibleUsersForm.push(this.createResponsibleUser(param.tn, param.id), {
+            emitEvent: false,
+          })
         );
       });
 
     // При редактировании в поле выбора ответственных выводит данные о выбранных ответственных
     this.subscriptions.add(
-      this.selectedEmployee$
-        .pipe(
-          filter((data) => Boolean(data)),
-          take(1)
-        )
-        .subscribe((selectedEmployee) => {
-          const employees = selectedEmployee.responsible_users
-            .map((user) => user.details)
-            .filter((user) => Boolean(user));
-          this.employee.setValue(employees);
-        })
+      this.selectedService$.pipe(filter((data) => Boolean(data))).subscribe((selectedService) => {
+        const employees = selectedService.responsible_users.map((user) => user.details).filter((user) => Boolean(user));
+
+        this.responsibleUsersForm.controls.forEach((control) => {
+          const currentTn = control.get('tn').value;
+          const employee = employees.find((employee) => employee.personnelNo === currentTn);
+
+          control.patchValue({ details: employee }, { emitEvent: false });
+        });
+      })
     );
 
     // Обновляет хранилище по любому изменению формы

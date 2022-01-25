@@ -48,33 +48,69 @@
     <p-checkbox inputId="has_common_case" formControlName="has_common_case" [binary]="true"></p-checkbox>
     <label class="mb-0" for="has_common_case">Возможность создать заявку в свободной форме на данную услугу</label>
   </div>
-  <div class="field">
-    <label for="category_id">Ответственные</label>
-    <div class="p-fluid">
-      <p-autoComplete
-        #employeeAutoComplete
-        id="employee"
-        [multiple]="true"
-        [formControl]="employee"
-        [suggestions]="employees$ | async"
-        [showEmptyMessage]="true"
-        [minLength]="3"
-        [virtualScroll]="true"
-        scrollHeight="300px"
-        [itemSize]="50"
-        field="fullName"
-        placeholder="Введите ФИО или табельный"
-        appendTo="body"
-        (completeMethod)="searchEmployee($event)"
-        (onFocus)="employeeAutoComplete.show()"
-        (onSelect)="selectEmployee($event)"
-        (onUnselect)="unselectEmployee($event)"
+  <div formArrayName="responsible_users">
+    <div class="mb-2">
+      <label>Ответственные за услугу</label>
+      <button
+        pButton
+        type="button"
+        class="p-button-rounded p-button-text p-button-icon-only p-button-plain ml-2"
+        (click)="addUser()"
       >
-        <ng-template let-employee pTemplate="item">
-          <p-chip [label]="employee.departmentForAccounting"></p-chip>
-          <span class="ml-3">{{ employee.fullName }}</span>
-        </ng-template>
-      </p-autoComplete>
+        <i class="mdi mdi-plus-circle-outline mdi-18px"></i>
+      </button>
+    </div>
+
+    <div *ngFor="let control of responsibleUsersForm.controls; let i = index">
+      <div [ngClass]="{ hidden: getResponsibleUserDestroyForm(i).value }" [formGroupName]="i" class="formgrid grid">
+        <div class="field col">
+          <p-autoComplete
+            #employeeAutoComplete
+            formControlName="details"
+            [suggestions]="employees$ | async"
+            [showEmptyMessage]="true"
+            [minLength]="3"
+            [virtualScroll]="true"
+            scrollHeight="300px"
+            [itemSize]="50"
+            field="fullName"
+            placeholder="Введите ФИО или табельный номер"
+            appendTo="body"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+            (completeMethod)="searchEmployee($event)"
+            (onSelect)="selectEmployee($event, i)"
+            (onFocus)="showEmployeeAutoComplete(i)"
+            (onClear)="clearEmployee(i)"
+          >
+            <ng-template let-employee pTemplate="item">
+              <p-chip [label]="employee.departmentForAccounting"></p-chip>
+              <span class="ml-3">{{ employee.fullName }}</span>
+            </ng-template>
+          </p-autoComplete>
+          <small
+            class="p-error"
+            *ngIf="(getResponsibleUserTnForm(i).touched || submitted) && getResponsibleUserTnForm(i).errors"
+            >Не может быть пустым</small
+          >
+        </div>
+        <div
+          *ngIf="getResponsibleUserTnForm(i).value"
+          class="field col-2 flex align-items-center justify-content-center"
+        >
+          <span>Таб. № {{ getResponsibleUserTnForm(i).value }}</span>
+        </div>
+        <div class="field flex align-items-center">
+          <button
+            pButton
+            type="button"
+            class="p-button-rounded p-button-text p-button-icon-only p-button-plain"
+            (click)="removeUser(i)"
+          >
+            <i class="mdi mdi-minus-circle-outline mdi-18px"></i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </form>
