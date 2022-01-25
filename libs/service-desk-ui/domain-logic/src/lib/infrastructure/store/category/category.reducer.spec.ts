@@ -102,6 +102,16 @@ describe('CategoryReducer', () => {
     });
   });
 
+  describe('setOne', () => {
+    it('should change attributes', () => {
+      const category = createCategory(111);
+      action = CategoryActions.setOne({ category });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(1);
+    });
+  });
+
   describe('setSelectedId', () => {
     it('should change attributes', () => {
       action = CategoryActions.setSelectedId({ selectedId: 123 });

@@ -25,6 +25,8 @@ export const loadSelectedFailure = createAction('[Category/API] Load Selected Fa
 
 export const setEntities = createAction('[Category] Set Entities', props<{ entities: Dictionary<Category> }>());
 
+export const setOne = createAction('[Category] Set One', props<{ category: Category }>());
+
 export const setSelectedId = createAction('[Category] Set Selected Id', props<{ selectedId: number }>());
 
 // ========== Администрирование ==========
@@ -38,34 +40,25 @@ export const adminLoadAllSuccess = createAction(
 
 export const adminLoadAllFailure = createAction('[Category/API] Admin Load All Failure', props<{ error: any }>());
 
-export const adminSelect = createAction('[UserRecommendation] Admin Select', props<{ id: number; edit?: boolean }>());
+export const adminSelect = createAction('[Category] Admin Select', props<{ id: number; edit?: boolean }>());
 
-export const adminLoadSelected = createAction(
-  '[UserRecommendation/API] Admin Load Selected',
-  props<{ edit: boolean }>()
-);
+export const adminLoadSelected = createAction('[Category/API] Admin Load Selected', props<{ edit: boolean }>());
 
 export const adminLoadSelectedSuccess = createAction(
-  '[UserRecommendation/API] Admin Load Selected Success',
+  '[Category/API] Admin Load Selected Success',
   props<{ category: Category; edit: boolean }>()
 );
 
 export const adminLoadSelectedFailure = createAction(
-  '[UserRecommendation/API] Admin Load Selected Failure',
+  '[Category/API] Admin Load Selected Failure',
   props<{ error: any }>()
 );
 
-export const adminDestroy = createAction('[UserRecommendation/API] Admin Destroy', props<{ id: number }>());
+export const adminDestroy = createAction('[Category/API] Admin Destroy', props<{ id: number }>());
 
-export const adminDestroySuccess = createAction(
-  '[UserRecommendation/API] Admin Destroy Success',
-  props<{ id: number }>()
-);
+export const adminDestroySuccess = createAction('[Category/API] Admin Destroy Success', props<{ id: number }>());
 
-export const adminDestroyFailure = createAction(
-  '[UserRecommendation/API] Admin Destroy Failure',
-  props<{ id: number }>()
-);
+export const adminDestroyFailure = createAction('[Category/API] Admin Destroy Failure', props<{ id: number }>());
 
 // ========== Форма рекомендаций для пользователя ==========
 

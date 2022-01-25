@@ -72,9 +72,9 @@ export class ServiceEffects {
               const data = ServiceCacheService.normalizeServices(services);
 
               return [
-                ServiceActions.adminLoadAllSuccess({ entities: data.entities.services, ids: data.result as number[] }),
                 CategoryActions.setEntities({ entities: data.entities.categories || {} }),
                 ResponsibleUserActions.setEntities({ entities: data.entities.responsible_users || {} }),
+                ServiceActions.adminLoadAllSuccess({ entities: data.entities.services, ids: data.result as number[] }),
               ];
             })
           ),
@@ -87,6 +87,41 @@ export class ServiceEffects {
     )
   );
 
+  adminSelect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ServiceActions.adminSelect),
+      map(() => ServiceActions.adminLoadSelected())
+    )
+  );
+
+  adminLoadSelected$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ServiceActions.adminLoadSelected),
+      withLatestFrom(this.store.select(ServiceSelectors.getSelectedId)),
+      switchMap(([_action, selectedId]) =>
+        this.adminServiceApi.show(selectedId).pipe(
+          switchMap((service) => {
+            const data = ServiceCacheService.normalizeServices(service).entities;
+
+            return [
+              CategoryActions.setOne({ category: data.categories[service.category_id] }),
+              ResponsibleUserActions.setMany({
+                responsibleUsers: Object.values(data.responsible_users || []),
+              }),
+              ServiceActions.adminLoadSelectedSuccess({ service: data.services[selectedId] }),
+              ServiceActions.adminInitForm({ service }),
+            ];
+          }),
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось загрузить услугу.');
+
+            return of(ServiceActions.adminLoadSelectedFailure({ error }));
+          })
+        )
+      )
+    )
+  );
+
   adminSaveForm$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ServiceActions.adminSaveForm),
@@ -95,7 +130,17 @@ export class ServiceEffects {
         if (formData.id) {
           return this.adminServiceApi.update(formData.id, formData).pipe(
             tap(() => this.notificationFacade.showMessage('Услуга обновлена')),
-            map((service) => ServiceActions.adminSaveFormSuccess({ service })),
+            switchMap((service) => {
+              const data = ServiceCacheService.normalizeServices(service);
+
+              return [
+                CategoryActions.setOne({ category: data.entities.categories[service.category_id] }),
+                ResponsibleUserActions.setMany({
+                  responsibleUsers: Object.values(data.entities.responsible_users || []),
+                }),
+                ServiceActions.adminSaveFormSuccess({ service: data.entities.services[data.result as number] }),
+              ];
+            }),
             catchError((error) => {
               this.errorHandlerService.handleError(error, 'Не удалось обновить услугу.');
 
@@ -105,7 +150,17 @@ export class ServiceEffects {
         } else {
           return this.adminServiceApi.save(formData).pipe(
             tap(() => this.notificationFacade.showMessage('Услуга создана')),
-            map((service) => ServiceActions.adminSaveFormSuccess({ service })),
+            switchMap((service) => {
+              const data = ServiceCacheService.normalizeServices(service);
+
+              return [
+                CategoryActions.setOne({ category: data.entities.categories[service.category_id] }),
+                ResponsibleUserActions.setMany({
+                  responsibleUsers: Object.values(data.entities.responsible_users || []),
+                }),
+                ServiceActions.adminSaveFormSuccess({ service: data.entities.services[data.result as number] }),
+              ];
+            }),
             catchError((error) => {
               this.errorHandlerService.handleError(error, 'Не удалось сохранить услугу.');
 

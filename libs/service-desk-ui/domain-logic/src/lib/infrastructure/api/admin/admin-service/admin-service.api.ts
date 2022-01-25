@@ -5,6 +5,7 @@ import { SERVICE_DESK_UI_ENV_TOKEN, ServiceDeskUiEnvironment } from '@orbita/sha
 import { AdminServiceApiAbstract } from './admin-service.api.abstract';
 import { Service } from '../../../../entities/models/service.interface';
 import { ServiceForm } from '../../../../entities/form/service-form.interface';
+import { ServiceOverviewVM } from '../../../../entities/view-models/service-overview-vm.interface';
 
 /**
  * Содержит API услуг
@@ -18,19 +19,19 @@ export class AdminServiceApi implements AdminServiceApiAbstract {
   constructor(private http: HttpClient, @Inject(SERVICE_DESK_UI_ENV_TOKEN) private env: ServiceDeskUiEnvironment) {}
 
   query() {
-    return this.http.get<Service[]>(this.api);
+    return this.http.get<ServiceOverviewVM[]>(this.api);
   }
 
   show(id: number) {
-    return this.http.get<Service>(`${this.api}/${id}`);
+    return this.http.get<ServiceOverviewVM>(`${this.api}/${id}`);
   }
 
   save(formData: ServiceForm) {
-    return this.http.post<Service>(this.api, { service: formData });
+    return this.http.post<ServiceOverviewVM>(this.api, { service: formData });
   }
 
   update(id: number, formData: ServiceForm) {
-    return this.http.put<Service>(`${this.api}/${id}`, { service: formData });
+    return this.http.put<ServiceOverviewVM>(`${this.api}/${id}`, { service: formData });
   }
 
   destroy(id: number) {

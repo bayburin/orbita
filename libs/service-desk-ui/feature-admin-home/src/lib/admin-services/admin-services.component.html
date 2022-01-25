@@ -18,7 +18,7 @@
     <lib-admin-services-table
       [categories]="categories$ | async"
       [services]="services$ | async"
-      [loadingIds]="[]"
+      [loadingIds]="loadingIds$ | async"
       (editForm)="editForm($event)"
       (remove)="remove($event)"
     ></lib-admin-services-table>

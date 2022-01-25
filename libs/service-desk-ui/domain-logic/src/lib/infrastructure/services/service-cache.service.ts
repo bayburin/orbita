@@ -40,7 +40,9 @@ export const servicesSchema = new schema.Array(serviceSchema);
  * Сервис для нормализации данных по категориям
  */
 export class ServiceCacheService {
-  static normalizeServices(services: Service | Service[]): NormalizedServices {
+  static normalizeServices(
+    services: ServiceOverviewVM | ServiceOverviewVM[] | ServiceVM | ServiceVM[]
+  ): NormalizedServices {
     return Array.isArray(services) ? normalize(services, servicesSchema) : normalize(services, serviceSchema);
   }
 

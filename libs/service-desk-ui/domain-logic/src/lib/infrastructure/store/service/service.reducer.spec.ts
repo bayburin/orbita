@@ -1,8 +1,11 @@
 import { Action } from '@ngrx/store';
 
-import * as ServiceActions from './service.actions';
 import { Service } from '../../../entities/models/service.interface';
+import { ServiceOverviewVM } from './../../../entities/view-models/service-overview-vm.interface';
 import { State, initialState, reducer } from './service.reducer';
+import { ServiceForm } from '../../../entities/form/service-form.interface';
+import { ServiceFactory } from '../../factories/service.factory';
+import * as ServiceActions from './service.actions';
 
 describe('ServiceReducer', () => {
   let action: Action;
@@ -108,6 +111,51 @@ describe('ServiceReducer', () => {
     });
   });
 
+  describe('adminSelect', () => {
+    it('should change attributes', () => {
+      action = ServiceActions.adminSelect({ id: 1 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.selectedId).toBe(1);
+    });
+  });
+
+  describe('adminLoadSelected', () => {
+    it('should change attributes', () => {
+      initialState.selectedId = 12;
+      action = ServiceActions.adminLoadSelected();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loadingIds).toEqual([12]);
+    });
+  });
+
+  describe('adminLoadSelectedSuccess', () => {
+    it('should change attributes', () => {
+      const service = createService(1);
+      initialState.loadingIds = [1];
+      action = ServiceActions.adminLoadSelectedSuccess({ service });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(1);
+      expect(result.loadingIds).toEqual([]);
+    });
+  });
+
+  describe('adminLoadSelectedFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      initialState.selectedId = 1;
+      initialState.loadingIds = [1];
+      action = ServiceActions.adminLoadSelectedFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.error).toEqual(error);
+      expect(result.selectedId).toBeNull();
+      expect(result.loadingIds).toEqual([]);
+    });
+  });
+
   describe('adminDestroyWithDestroyedCategory', () => {
     it('should change attributes', () => {
       const error = { message: 'error' };
@@ -124,11 +172,11 @@ describe('ServiceReducer', () => {
 
   describe('adminInitForm', () => {
     it('should change attributes', () => {
-      const service = createService(1, 'test');
+      const service = createService(1, 'test') as unknown as ServiceOverviewVM;
       action = ServiceActions.adminInitForm({ service });
       const result: State = reducer(initialState, action);
 
-      expect(result.form.formData).toEqual(service);
+      expect(result.form.formData).toEqual(ServiceFactory.createForm(service));
       expect(result.form.displayForm).toBe(true);
     });
   });
@@ -146,7 +194,7 @@ describe('ServiceReducer', () => {
 
   describe('adminChangeForm', () => {
     it('should change attributes', () => {
-      const formData = createService(1, 'test');
+      const formData = { name: 'form-name' } as ServiceForm;
       action = ServiceActions.adminChangeForm({ formData });
       const result: State = reducer(initialState, action);
 
@@ -167,9 +215,10 @@ describe('ServiceReducer', () => {
   describe('adminSaveFormSuccess', () => {
     it('should change attributes', () => {
       const service = createService(1, 'test');
+      const formData = { name: 'form-name' } as ServiceForm;
       initialState.ids = [];
       initialState.entities = {};
-      initialState.form.formData = service;
+      initialState.form.formData = formData;
       action = ServiceActions.adminSaveFormSuccess({ service });
       const result: State = reducer(initialState, action);
 

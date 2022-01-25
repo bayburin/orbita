@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { Service } from '../../../entities/models/service.interface';
+import { ServiceOverviewVM } from '../../../entities/view-models/service-overview-vm.interface';
 
 export abstract class ServiceApiAbstract {
   /**
@@ -13,5 +13,5 @@ export abstract class ServiceApiAbstract {
    *
    * @param id - ID категории
    */
-  abstract show(id: number): Observable<Service>;
+  abstract show(id: number): Observable<ServiceOverviewVM>;
 }

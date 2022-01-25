@@ -133,8 +133,7 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
 
   private createResponsibleUser(tn?: number, id?: number): FormGroup {
     return this.fb.group({
-      responseable_type: ['Service'],
-      responseable_id: [id || null],
+      id: [id || null],
       tn: [tn || null, Validators.required],
       _destroy: [false],
     });

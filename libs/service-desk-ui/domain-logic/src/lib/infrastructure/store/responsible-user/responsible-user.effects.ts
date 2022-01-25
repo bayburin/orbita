@@ -15,4 +15,11 @@ export class ResponsibleUserEffects {
       map((action) => EmployeeActions.loadAll({ tns: Object.values(action.entities).map((entity) => entity.tn) }))
     )
   );
+
+  setMany$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ResponsibleUserActions.setMany),
+      map((action) => EmployeeActions.loadMany({ tns: action.responsibleUsers.map((user) => user.tn) }))
+    )
+  );
 }

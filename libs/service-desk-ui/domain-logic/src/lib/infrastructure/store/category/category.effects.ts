@@ -135,7 +135,7 @@ export class CategoryEffects {
       ofType(CategoryActions.adminLoadSelectedSuccess),
       filter((action) => Boolean(action.edit)),
       withLatestFrom(this.store.select(CategorySelectors.getSelected)),
-      map(([_action, userRecommendation]) => CategoryActions.adminInitForm({ category: userRecommendation }))
+      map(([_action, category]) => CategoryActions.adminInitForm({ category }))
     )
   );
 

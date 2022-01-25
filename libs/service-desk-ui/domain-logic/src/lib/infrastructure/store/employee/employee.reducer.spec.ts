@@ -47,6 +47,41 @@ describe('EmployeeReducer', () => {
     });
   });
 
+  describe('loadMany', () => {
+    it('should change attributes', () => {
+      action = EmployeeActions.loadMany({ tns: [1, 2, 3] });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loading).toBe(true);
+      expect(result.loaded).toBe(false);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('loadManySuccess', () => {
+    it('should change attributes', () => {
+      const employees = [createEmployeeShortEntity(1), createEmployeeShortEntity(2)];
+      action = EmployeeActions.loadManySuccess({ employees });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids).toEqual([1, 2]);
+      expect(result.loading).toBe(false);
+      expect(result.loaded).toBe(true);
+    });
+  });
+
+  describe('loadManyFailure', () => {
+    it('should change attributes', () => {
+      const error = 'fake-error';
+      action = EmployeeActions.loadManyFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(0);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBe(error);
+    });
+  });
+
   describe('searchStart', () => {
     it('should change attributes', () => {
       action = EmployeeActions.searchStart({ ids: [1, 2], key: 'fio', value: 'fake-fio' });

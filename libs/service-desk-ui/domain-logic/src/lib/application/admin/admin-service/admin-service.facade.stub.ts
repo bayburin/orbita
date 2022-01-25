@@ -16,6 +16,10 @@ export class AdminServiceFacadeStub implements AdminServiceFacadeAbstract {
     /** */
   }
 
+  edit() {
+    /** */
+  }
+
   initForm() {
     /** */
   }

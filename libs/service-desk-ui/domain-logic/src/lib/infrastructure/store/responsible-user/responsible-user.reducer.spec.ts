@@ -22,6 +22,16 @@ describe('ResponsibleUserReducer', () => {
     });
   });
 
+  describe('setMany', () => {
+    it('should change attributes', () => {
+      const responsibleUsers = [createResponsibleUser(111), createResponsibleUser(222)];
+      action = ResponsibleUserActions.setMany({ responsibleUsers });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(2);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as Action;

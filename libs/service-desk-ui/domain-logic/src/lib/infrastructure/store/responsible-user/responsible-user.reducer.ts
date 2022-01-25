@@ -22,7 +22,10 @@ const responsibleUserReducer = createReducer(
     ...state,
     entities: entities,
     ids: Object.keys(entities).map(Number),
-  }))
+  })),
+  on(ResponsibleUserActions.setMany, (state, { responsibleUsers }) =>
+    responsibleUserAdapter.setMany(responsibleUsers, state)
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {

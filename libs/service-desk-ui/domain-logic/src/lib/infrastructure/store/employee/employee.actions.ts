@@ -8,6 +8,15 @@ export const loadAllSuccess = createAction('[Employee/Api] Load All Success', pr
 
 export const loadAllFailure = createAction('[Employee/Api] Load All Failure', props<{ error: any }>());
 
+export const loadMany = createAction('[Employee/Api] Load Many', props<{ tns: number[] }>());
+
+export const loadManySuccess = createAction(
+  '[Employee/Api] Load Many Success',
+  props<{ employees: EmployeeShort[] }>()
+);
+
+export const loadManyFailure = createAction('[Employee/Api] Load Many Failure', props<{ error: any }>());
+
 export const search = createAction('[Employee/Api] Search', props<{ key: string; value: string }>());
 
 export const searchStart = createAction(

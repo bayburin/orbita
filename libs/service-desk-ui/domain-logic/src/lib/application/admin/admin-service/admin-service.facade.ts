@@ -36,6 +36,10 @@ export class AdminServiceFacade implements AdminServiceFacadeAbstract {
     this.store.dispatch(ServiceActions.adminLoadAll());
   }
 
+  edit(id: number) {
+    this.store.dispatch(ServiceActions.adminSelect({ id }));
+  }
+
   initForm() {
     this.store.dispatch(ServiceActions.adminInitForm({}));
   }

@@ -1,6 +1,6 @@
 import { Category } from '../models/category.interface';
 import { UserRecommendation } from '../models/user-recommendation.interface';
-import { Service } from '../models/service.interface';
+import { ServiceVM } from '../view-models/service-vm.interface';
 
 /**
  * Данные для домашней директории
@@ -17,5 +17,5 @@ export interface Home {
   /**
    * Список популярных услуг
    */
-  services: Service[];
+  services: ServiceVM[];
 }

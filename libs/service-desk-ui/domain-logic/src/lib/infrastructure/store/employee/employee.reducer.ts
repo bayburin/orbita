@@ -29,7 +29,7 @@ export const initialState: State = employeeAdapter.getInitialState({
 
 const employeeReducer = createReducer(
   initialState,
-  on(EmployeeActions.loadAll, (state) => ({
+  on(EmployeeActions.loadAll, EmployeeActions.loadMany, (state) => ({
     ...state,
     loading: true,
     loaded: false,
@@ -38,11 +38,19 @@ const employeeReducer = createReducer(
   on(EmployeeActions.loadAllSuccess, (state, { employees }) =>
     employeeAdapter.setAll(employees, { ...state, loading: false, loaded: true })
   ),
-  on(EmployeeActions.loadAllFailure, EmployeeActions.searchFailure, (state, { error }) => ({
-    ...state,
-    loading: false,
-    error,
-  })),
+  on(
+    EmployeeActions.loadAllFailure,
+    EmployeeActions.loadManyFailure,
+    EmployeeActions.searchFailure,
+    (state, { error }) => ({
+      ...state,
+      loading: false,
+      error,
+    })
+  ),
+  on(EmployeeActions.loadManySuccess, (state, { employees }) =>
+    employeeAdapter.setMany(employees, { ...state, loading: false, loaded: true })
+  ),
   on(EmployeeActions.searchStart, (state, { ids }) =>
     employeeAdapter.removeMany(ids, {
       ...state,

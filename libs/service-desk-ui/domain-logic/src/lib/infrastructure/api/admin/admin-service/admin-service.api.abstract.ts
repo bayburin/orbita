@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 
 import { Service } from '../../../../entities/models/service.interface';
 import { ServiceForm } from '../../../../entities/form/service-form.interface';
+import { ServiceOverviewVM } from '../../../../entities/view-models/service-overview-vm.interface';
 
 export abstract class AdminServiceApiAbstract {
   /**
@@ -12,21 +13,21 @@ export abstract class AdminServiceApiAbstract {
   /**
    * Получает с сервера список услуг
    */
-  abstract query(): Observable<Service[]>;
+  abstract query(): Observable<ServiceOverviewVM[]>;
 
   /**
    * Получает с сервера данные по выбранной услуге
    *
    * @param id - ID категории
    */
-  abstract show(id: number): Observable<Service>;
+  abstract show(id: number): Observable<ServiceOverviewVM>;
 
   /**
    * Сохраняет услугу
    *
    * @param formData - данные о категории.
    */
-  abstract save(formData: ServiceForm): Observable<Service>;
+  abstract save(formData: ServiceForm): Observable<ServiceOverviewVM>;
 
   /**
    * Обновляет услугу
@@ -34,7 +35,7 @@ export abstract class AdminServiceApiAbstract {
    * @param id - id услуги
    * @param formData - новые данные
    */
-  abstract update(id: number, formData: ServiceForm): Observable<Service>;
+  abstract update(id: number, formData: ServiceForm): Observable<ServiceOverviewVM>;
 
   /**
    * Удаляет запись

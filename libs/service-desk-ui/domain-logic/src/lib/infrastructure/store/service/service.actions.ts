@@ -3,6 +3,7 @@ import { Dictionary } from '@ngrx/entity';
 
 import { Service } from '../../../entities/models/service.interface';
 import { ServiceForm } from '../../../entities/form/service-form.interface';
+import { ServiceOverviewVM } from '../../../entities/view-models/service-overview-vm.interface';
 
 export const setEntities = createAction('[Service] Set Entities', props<{ entities: Dictionary<Service> }>());
 
@@ -25,6 +26,20 @@ export const adminLoadAllSuccess = createAction(
 
 export const adminLoadAllFailure = createAction('[Service/API] Admin Load All Failure', props<{ error: any }>());
 
+export const adminSelect = createAction('[Service] Admin Select', props<{ id: number }>());
+
+export const adminLoadSelected = createAction('[Service/API] Admin Load Selected');
+
+export const adminLoadSelectedSuccess = createAction(
+  '[Service/API] Admin Load Selected Success',
+  props<{ service: Service }>()
+);
+
+export const adminLoadSelectedFailure = createAction(
+  '[Service/API] Admin Load Selected Failure',
+  props<{ error: any }>()
+);
+
 export const adminDestroyWithDestroyedCategory = createAction(
   '[Service] Admin Destroy With Destroyed Category',
   props<{ categoryId: number }>()
@@ -32,7 +47,7 @@ export const adminDestroyWithDestroyedCategory = createAction(
 
 // ========== Форма рекомендаций для пользователя ==========
 
-export const adminInitForm = createAction('[Service] Admin Init Form', props<{ service?: ServiceForm }>());
+export const adminInitForm = createAction('[Service] Admin Init Form', props<{ service?: ServiceOverviewVM }>());
 
 export const adminCloseForm = createAction('[Service] Admin Close Form');
 

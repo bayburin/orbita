@@ -37,6 +37,23 @@ export class EmployeeEffects {
     )
   );
 
+  loadMany$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EmployeeActions.loadMany),
+      fetch({
+        run: (action) =>
+          this.employeeApi
+            .queryByTns(action.tns)
+            .pipe(map((employees) => EmployeeActions.loadManySuccess({ employees }))),
+        onError: (_action, error) => {
+          this.errorHandlerService.handleError(error, 'Не удалось загрузить данные по ответственным.');
+
+          return EmployeeActions.loadManyFailure({ error });
+        },
+      })
+    )
+  );
+
   search$ = createEffect(() =>
     this.actions$.pipe(
       ofType(EmployeeActions.search),

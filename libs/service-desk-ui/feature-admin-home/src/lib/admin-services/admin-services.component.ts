@@ -63,7 +63,7 @@ export class AdminServicesComponent implements OnInit {
    * @param service - услуга, которую необходимо редактировать
    */
   editForm(service: ServiceOverviewVM): void {
-    /** */
+    this.adminServiceFacade.edit(service.id);
   }
 
   /**

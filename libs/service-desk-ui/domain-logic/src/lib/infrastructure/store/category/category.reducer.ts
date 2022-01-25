@@ -75,6 +75,7 @@ const categoryReducer = createReducer(
     entities,
     ids: Object.keys(entities).map(Number),
   })),
+  on(CategoryActions.setOne, (state, { category }) => categoryAdapter.setOne(category, state)),
   on(CategoryActions.setSelectedId, (state, { selectedId }) => ({ ...state, selectedId })),
 
   // ========== Администрирование ==========

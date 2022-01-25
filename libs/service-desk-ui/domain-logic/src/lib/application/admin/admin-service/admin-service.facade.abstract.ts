@@ -46,6 +46,13 @@ export abstract class AdminServiceFacadeAbstract {
   abstract loadAll(): void;
 
   /**
+   * Выбрать услугу для редактирования
+   *
+   * @param id - id выбранной записи
+   */
+  abstract edit(id: number): void;
+
+  /**
    * Инициализирует новую форму услуги
    */
   abstract initForm(): void;

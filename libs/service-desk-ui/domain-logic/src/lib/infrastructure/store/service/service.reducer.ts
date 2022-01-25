@@ -1,9 +1,10 @@
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
-import * as ServiceActions from './service.actions';
 import { Service } from '../../../entities/models/service.interface';
 import { ServiceForm } from '../../../entities/form/service-form.interface';
+import { ServiceFactory } from '../../factories/service.factory';
+import * as ServiceActions from './service.actions';
 
 export const SERVICE_FEATURE_KEY = 'service';
 
@@ -76,6 +77,23 @@ const serviceReducer = createReducer(
     error,
     loading: false,
   })),
+  on(ServiceActions.adminSelect, (state, { id }) => ({ ...state, selectedId: id })),
+  on(ServiceActions.adminLoadSelected, (state) => ({
+    ...state,
+    loadingIds: [...state.loadingIds, state.selectedId],
+  })),
+  on(ServiceActions.adminLoadSelectedSuccess, (state, { service }) =>
+    serviceAdapter.setOne(service, {
+      ...state,
+      loadingIds: state.loadingIds.filter((loadingId) => loadingId !== service.id),
+    })
+  ),
+  on(ServiceActions.adminLoadSelectedFailure, (state, { error }) => ({
+    ...state,
+    selectedId: null,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== state.selectedId),
+    error,
+  })),
   on(ServiceActions.adminDestroyWithDestroyedCategory, (state, { categoryId }) =>
     serviceAdapter.removeMany((service) => service.category_id === categoryId, state)
   ),
@@ -86,7 +104,7 @@ const serviceReducer = createReducer(
     ...state,
     form: {
       ...initialFormState,
-      formData: service,
+      formData: ServiceFactory.createForm(service),
       displayForm: true,
     },
   })),
