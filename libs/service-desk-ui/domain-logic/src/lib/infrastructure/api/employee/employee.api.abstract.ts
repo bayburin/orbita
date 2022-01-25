@@ -14,4 +14,12 @@ export abstract class EmployeeApiAbstract {
    * @param tns - список табельных номеров
    */
   abstract queryByTns(tns: number[]): Observable<EmployeeShort[]>;
+
+  /**
+   * Поиск работников по указанному ключу
+   *
+   * @param key - ключ
+   * @param value - значение
+   */
+  abstract search(key: string, value: string): Observable<EmployeeShort[]>;
 }

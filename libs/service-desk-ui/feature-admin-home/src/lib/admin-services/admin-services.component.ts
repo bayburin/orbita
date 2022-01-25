@@ -78,7 +78,7 @@ export class AdminServicesComponent implements OnInit {
   private showForm() {
     this.ref = this.dialogService.open(AdminServiceFormComponent, {
       header: 'Услуги',
-      width: '40vw',
+      width: '50vw',
       closeOnEscape: false,
       closable: false,
       baseZIndex: 10000,

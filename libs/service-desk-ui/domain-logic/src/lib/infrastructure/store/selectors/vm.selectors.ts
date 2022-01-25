@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 
+import { ResponsibleUserForm } from './../../../entities/form/responsible-user-form.interface';
 import { TicketCacheService } from './../../services/ticket-cache.service';
 import { TicketOverviewVM } from './../../../entities/view-models/ticket-overview-vm.interface';
 import { SearchResultTypes } from './../../../entities/models/search-result.types';
@@ -63,6 +64,20 @@ export const getSelectedServiceVM = createSelector(
       attachments,
       employees,
     }) as ServiceVM
+);
+
+export const getSearchedEmployeesForServiceForm = createSelector(
+  ServiceSelectors.getFormData,
+  EmployeeSelectors.getSearched,
+  (formData, employees) => {
+    if (formData && formData.responsible_users.length) {
+      return employees.filter(
+        (employee) => !formData.responsible_users.some((user: ResponsibleUserForm) => user.tn === employee.personnelNo)
+      );
+    } else {
+      return employees;
+    }
+  }
 );
 
 // ========== Categories ==========

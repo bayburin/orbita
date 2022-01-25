@@ -48,6 +48,35 @@
     <p-checkbox inputId="has_common_case" formControlName="has_common_case" [binary]="true"></p-checkbox>
     <label class="mb-0" for="has_common_case">Возможность создать заявку в свободной форме на данную услугу</label>
   </div>
+  <div class="field">
+    <label for="category_id">Ответственные</label>
+    <div class="p-fluid">
+      <p-autoComplete
+        #employeeAutoComplete
+        id="employee"
+        [multiple]="true"
+        [formControl]="employee"
+        [suggestions]="employees$ | async"
+        [showEmptyMessage]="true"
+        [minLength]="3"
+        [virtualScroll]="true"
+        scrollHeight="300px"
+        [itemSize]="50"
+        field="fullName"
+        placeholder="Введите ФИО или табельный"
+        appendTo="body"
+        (completeMethod)="searchEmployee($event)"
+        (onFocus)="employeeAutoComplete.show()"
+        (onSelect)="selectEmployee($event)"
+        (onUnselect)="unselectEmployee($event)"
+      >
+        <ng-template let-employee pTemplate="item">
+          <p-chip [label]="employee.departmentForAccounting"></p-chip>
+          <span class="ml-3">{{ employee.fullName }}</span>
+        </ng-template>
+      </p-autoComplete>
+    </div>
+  </div>
 </form>
 
 <p-divider></p-divider>

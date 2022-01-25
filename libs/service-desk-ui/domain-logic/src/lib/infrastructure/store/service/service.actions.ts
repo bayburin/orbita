@@ -2,6 +2,7 @@ import { createAction, props } from '@ngrx/store';
 import { Dictionary } from '@ngrx/entity';
 
 import { Service } from '../../../entities/models/service.interface';
+import { ServiceForm } from '../../../entities/form/service-form.interface';
 
 export const setEntities = createAction('[Service] Set Entities', props<{ entities: Dictionary<Service> }>());
 
@@ -31,11 +32,11 @@ export const adminDestroyWithDestroyedCategory = createAction(
 
 // ========== Форма рекомендаций для пользователя ==========
 
-export const adminInitForm = createAction('[Service] Admin Init Form', props<{ service?: Service }>());
+export const adminInitForm = createAction('[Service] Admin Init Form', props<{ service?: ServiceForm }>());
 
 export const adminCloseForm = createAction('[Service] Admin Close Form');
 
-export const adminChangeForm = createAction('[Service] Admin Change Form', props<{ formData: Service }>());
+export const adminChangeForm = createAction('[Service] Admin Change Form', props<{ formData: ServiceForm }>());
 
 export const adminSaveForm = createAction('[Service/API] Admin Save Form');
 

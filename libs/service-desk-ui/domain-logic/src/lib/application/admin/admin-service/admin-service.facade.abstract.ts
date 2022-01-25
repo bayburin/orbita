@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 
 import { ServiceOverviewVM } from './../../../entities/view-models/service-overview-vm.interface';
-import { Service } from '../../../entities/models/service.interface';
+import { ServiceForm } from '../../../entities/form/service-form.interface';
 
 export abstract class AdminServiceFacadeAbstract {
   /**
@@ -26,7 +26,7 @@ export abstract class AdminServiceFacadeAbstract {
   /**
    * Данные формы
    */
-  formData$: Observable<Service>;
+  formData$: Observable<ServiceForm>;
   /**
    * Индикатор загрузки формы
    */
@@ -60,7 +60,7 @@ export abstract class AdminServiceFacadeAbstract {
    *
    * @param formData - данные формы
    */
-  abstract changeForm(formData: Service): void;
+  abstract changeForm(formData: ServiceForm): void;
 
   /**
    * Сохраняет заявку

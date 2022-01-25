@@ -45,4 +45,22 @@ describe('EmployeeApi', () => {
         .flush(employees);
     });
   });
+
+  describe('search()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/employees/search`;
+    const employees = [{ id: 5 }];
+
+    it('should return notifications', () => {
+      service.search('fakeKey', 'fakeValue').subscribe((result) => {
+        expect(result).toEqual(employees);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: `${api}?key=fakeKey&value=fakeValue`,
+        })
+        .flush(employees);
+    });
+  });
 });

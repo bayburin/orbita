@@ -8,4 +8,8 @@ export class EmployeeApiStub implements EmployeeApiAbstract {
   queryByTns() {
     return of([]);
   }
+
+  search() {
+    return of([]);
+  }
 }

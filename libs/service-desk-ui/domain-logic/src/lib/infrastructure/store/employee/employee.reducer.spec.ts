@@ -47,6 +47,44 @@ describe('EmployeeReducer', () => {
     });
   });
 
+  describe('searchStart', () => {
+    it('should change attributes', () => {
+      action = EmployeeActions.searchStart({ ids: [1, 2], key: 'fio', value: 'fake-fio' });
+      initialState.searchIds = [1, 2];
+      const result: State = reducer(initialState, action);
+
+      expect(result.searchIds).toEqual([]);
+      expect(result.loading).toBe(true);
+      expect(result.loaded).toBe(false);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('searchSuccess', () => {
+    it('should change attributes', () => {
+      const employees = [createEmployeeShortEntity(1), createEmployeeShortEntity(2)];
+      action = EmployeeActions.searchSuccess({ employees });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids).toEqual([1, 2]);
+      expect(result.searchIds).toEqual([1, 2]);
+      expect(result.loading).toBe(false);
+      expect(result.loaded).toBe(true);
+    });
+  });
+
+  describe('searchFailure', () => {
+    it('should change attributes', () => {
+      const error = 'fake-error';
+      action = EmployeeActions.searchFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(0);
+      expect(result.loading).toBe(false);
+      expect(result.error).toBe(error);
+    });
+  });
+
   describe('unknown action', () => {
     it('should return the previous state', () => {
       const action = {} as Action;

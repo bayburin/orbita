@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 
 import { AdminServiceFacadeAbstract } from './admin-service.facade.abstract';
-import { Service } from '../../../entities/models/service.interface';
+import { ServiceForm } from '../../../entities/form/service-form.interface';
 import * as ServiceFeature from '../../../infrastructure/store/service/service.reducer';
 import * as ServiceSelectors from '../../../infrastructure/store/service/service.selectors';
 import * as ServiceActions from '../../../infrastructure/store/service/service.actions';
@@ -44,7 +44,7 @@ export class AdminServiceFacade implements AdminServiceFacadeAbstract {
     this.store.dispatch(ServiceActions.adminCloseForm());
   }
 
-  changeForm(formData: Service) {
+  changeForm(formData: ServiceForm) {
     this.store.dispatch(ServiceActions.adminChangeForm({ formData }));
   }
 

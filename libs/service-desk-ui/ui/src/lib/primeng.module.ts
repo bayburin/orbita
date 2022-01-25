@@ -11,6 +11,8 @@ import { DynamicDialogModule, DialogService } from 'primeng/dynamicdialog';
 import { DividerModule } from 'primeng/divider';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { DropdownModule } from 'primeng/dropdown';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { ChipModule } from 'primeng/chip';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 
@@ -26,6 +28,8 @@ const modules: any[] = [
   DividerModule,
   InputTextareaModule,
   DropdownModule,
+  AutoCompleteModule,
+  ChipModule,
 ];
 
 @NgModule({

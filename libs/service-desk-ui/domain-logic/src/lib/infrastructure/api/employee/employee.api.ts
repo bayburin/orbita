@@ -21,4 +21,10 @@ export class EmployeeApi implements EmployeeApiAbstract {
 
     return this.http.get<EmployeeShort[]>(`${this.api}`, { params });
   }
+
+  search(key: string, value: string) {
+    const params = new HttpParams().set('key', key).set('value', value);
+
+    return this.http.get<EmployeeShort[]>(`${this.api}/search`, { params });
+  }
 }

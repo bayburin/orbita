@@ -3,11 +3,12 @@ import { createReducer, on, Action } from '@ngrx/store';
 
 import * as ServiceActions from './service.actions';
 import { Service } from '../../../entities/models/service.interface';
+import { ServiceForm } from '../../../entities/form/service-form.interface';
 
 export const SERVICE_FEATURE_KEY = 'service';
 
 export interface FormState {
-  formData: Service;
+  formData: ServiceForm;
   loading: boolean;
   displayForm: boolean;
   error?: string;

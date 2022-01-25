@@ -10,6 +10,7 @@ export interface State extends EntityState<EmployeeShort> {
   loading: boolean;
   loaded: boolean;
   error?: string | null;
+  searchIds: number[];
 }
 
 export interface EmployeePartialState {
@@ -23,15 +24,42 @@ export const employeeAdapter: EntityAdapter<EmployeeShort> = createEntityAdapter
 export const initialState: State = employeeAdapter.getInitialState({
   loading: false,
   loaded: false,
+  searchIds: [],
 });
 
 const employeeReducer = createReducer(
   initialState,
-  on(EmployeeActions.loadAll, (state) => ({ ...state, loading: true, loaded: false, error: null })),
+  on(EmployeeActions.loadAll, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+    error: null,
+  })),
   on(EmployeeActions.loadAllSuccess, (state, { employees }) =>
     employeeAdapter.setAll(employees, { ...state, loading: false, loaded: true })
   ),
-  on(EmployeeActions.loadAllFailure, (state, { error }) => ({ ...state, loading: false, error }))
+  on(EmployeeActions.loadAllFailure, EmployeeActions.searchFailure, (state, { error }) => ({
+    ...state,
+    loading: false,
+    error,
+  })),
+  on(EmployeeActions.searchStart, (state, { ids }) =>
+    employeeAdapter.removeMany(ids, {
+      ...state,
+      searchIds: [],
+      loading: true,
+      loaded: false,
+      error: null,
+    })
+  ),
+  on(EmployeeActions.searchSuccess, (state, { employees }) =>
+    employeeAdapter.setMany(employees, {
+      ...state,
+      searchIds: employees.map((el) => el.personnelNo),
+      loading: false,
+      loaded: true,
+    })
+  )
 );
 
 export function reducer(state: State | undefined, action: Action) {

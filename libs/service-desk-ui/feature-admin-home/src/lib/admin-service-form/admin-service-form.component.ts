@@ -1,9 +1,15 @@
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AdminCategoryFacade, AdminServiceFacade } from '@orbita/service-desk-ui/domain-logic';
 import { Subscription } from 'rxjs';
-import { filter, take, distinctUntilChanged, map } from 'rxjs/operators';
+import { filter, take, distinctUntilChanged, map, tap } from 'rxjs/operators';
+import { AutoComplete } from 'primeng/autocomplete';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import {
+  AdminCategoryFacade,
+  AdminServiceFacade,
+  EmployeeFacade,
+  EmployeeShort,
+} from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
   selector: 'service-desk-ui-admin-home-admin-service-form',
@@ -16,6 +22,18 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   submitted = false;
   subscriptions = new Subscription();
+  employees$ = this.employeeFacade.searched$.pipe(
+    tap((employees) => {
+      if (this.employeeAutoComplete) {
+        // Почему-то при ручном вызове поиска выдается строка "данные не найдены".
+        // Чтобы исправить это далее атрибут noResults устанавливается вручную.
+        this.employeeAutoComplete.noResults = employees.length ? false : true;
+      }
+    })
+  );
+  employeesLoading$ = this.employeeFacade.loading$;
+  employee = new FormControl();
+  @ViewChild('employeeAutoComplete') employeeAutoComplete: AutoComplete;
 
   get categoryIdForm(): FormControl {
     return this.form.get('category_id') as FormControl;
@@ -40,6 +58,7 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
   constructor(
     private adminServiceFacade: AdminServiceFacade,
     private adminCategoryFacade: AdminCategoryFacade,
+    private employeeFacade: EmployeeFacade,
     private fb: FormBuilder,
     public ref: DynamicDialogRef
   ) {}
@@ -50,15 +69,6 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
-  }
-
-  /**
-   * Возвращает форму ответственных по указанному индексу из массива
-   *
-   * @param i - индекс из массива параметров
-   */
-  getResponsibleUserTnForm(i: number): FormControl {
-    return this.responsibleUsersForm.controls[i].get('tn') as FormControl;
   }
 
   /**
@@ -76,6 +86,49 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
    */
   closeForm(): void {
     this.adminServiceFacade.closeForm();
+  }
+
+  /**
+   * Выполняет поиск работников
+   *
+   * @param event - событие поиска
+   */
+  searchEmployee(event: any): void {
+    if (event.query && typeof event.query === 'string') {
+      const key = /^\d+$/.test(event.query) ? 'personnelNo' : 'fullName';
+
+      this.employeeFacade.search(key, event.query.trim());
+    }
+  }
+
+  /**
+   * Добавляет выбранного пользователя в форму заявки
+   *
+   * @param employee - выбранный работник
+   */
+  selectEmployee(employee: EmployeeShort): void {
+    this.responsibleUsersForm.push(this.createResponsibleUser(employee.personnelNo));
+  }
+
+  /**
+   * Удаляет выбранного пользователя из формы заявки
+   *
+   * @param employee - выбранный работник
+   */
+  unselectEmployee(employee: EmployeeShort): void {
+    const findedControl = this.responsibleUsersForm.controls.find(
+      (control) => control.value.tn === employee.personnelNo
+    );
+
+    if (findedControl.value.id) {
+      (findedControl.get('_destroy') as FormControl).setValue(true);
+    } else {
+      const index = this.responsibleUsersForm.controls.findIndex((control) => control == findedControl);
+
+      if (index !== -1) {
+        this.responsibleUsersForm.removeAt(index);
+      }
+    }
   }
 
   private createResponsibleUser(tn?: number, id?: number): FormGroup {
