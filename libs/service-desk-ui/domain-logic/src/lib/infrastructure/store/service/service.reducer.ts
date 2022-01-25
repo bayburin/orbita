@@ -97,6 +97,20 @@ const serviceReducer = createReducer(
   on(ServiceActions.adminDestroyWithDestroyedCategory, (state, { categoryId }) =>
     serviceAdapter.removeMany((service) => service.category_id === categoryId, state)
   ),
+  on(ServiceActions.adminDestroy, (state, { id }) => ({
+    ...state,
+    loadingIds: [...state.loadingIds, id],
+  })),
+  on(ServiceActions.adminDestroySuccess, (state, { id }) =>
+    serviceAdapter.removeOne(id, {
+      ...state,
+      loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+    })
+  ),
+  on(ServiceActions.adminDestroyFailure, (state, { id }) => ({
+    ...state,
+    loadingIds: state.loadingIds.filter((loadingId) => loadingId !== id),
+  })),
 
   // ========== Форма рекомендаций для пользователя ==========
 

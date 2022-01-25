@@ -72,7 +72,11 @@ export class AdminServicesComponent implements OnInit {
    * @param service - услуга, которую необходимо удалить
    */
   remove(service: ServiceOverviewVM): void {
-    /** */
+    this.confirmationService.confirm({
+      message: `Вы действительно хотите удалить услугу №${service.id} "${service.name}"? Это действие удалит все связанные вопросы и формы заявок!`,
+      header: 'Подтверждение удаления',
+      accept: () => this.adminServiceFacade.destroy(service.id),
+    });
   }
 
   private showForm() {

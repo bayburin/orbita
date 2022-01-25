@@ -168,6 +168,44 @@ describe('ServiceReducer', () => {
     });
   });
 
+  describe('adminDestroy', () => {
+    it('should change attributes', () => {
+      initialState.loadingIds = [];
+      action = ServiceActions.adminDestroy({ id: 123 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.loadingIds).toEqual([123]);
+    });
+  });
+
+  describe('adminDestroySuccess', () => {
+    it('should change attributes', () => {
+      const service = createService(1);
+      initialState.ids = [1];
+      initialState.entities = { 1: service };
+      initialState.loadingIds = [1];
+      action = ServiceActions.adminDestroySuccess({ id: 1 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(0);
+      expect(result.loadingIds).toEqual([]);
+    });
+  });
+
+  describe('adminDestroyFailure', () => {
+    it('should change attributes', () => {
+      const service = createService(1);
+      initialState.ids = [1];
+      initialState.entities = { 1: service };
+      initialState.loadingIds = [1];
+      action = ServiceActions.adminDestroyFailure({ id: 1 });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(1);
+      expect(result.loadingIds).toEqual([]);
+    });
+  });
+
   // ========== Форма рекомендаций для пользователя ==========
 
   describe('adminInitForm', () => {

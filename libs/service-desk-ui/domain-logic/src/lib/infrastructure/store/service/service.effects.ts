@@ -179,4 +179,21 @@ export class ServiceEffects {
       map(() => ServiceActions.adminCloseForm())
     )
   );
+
+  adminDestroy$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ServiceActions.adminDestroy),
+      fetch({
+        run: (action) =>
+          this.adminServiceApi
+            .destroy(action.id)
+            .pipe(map(() => ServiceActions.adminDestroySuccess({ id: action.id }))),
+        onError: (action, error) => {
+          this.errorHandlerService.handleError(error, 'Не удалось удалить услугу.');
+
+          return of(ServiceActions.adminDestroyFailure({ id: action.id }));
+        },
+      })
+    )
+  );
 }

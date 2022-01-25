@@ -56,4 +56,8 @@ export class AdminServiceFacade implements AdminServiceFacadeAbstract {
   saveForm() {
     this.store.dispatch(ServiceActions.adminSaveForm());
   }
+
+  destroy(id: number) {
+    this.store.dispatch(ServiceActions.adminDestroy({ id }));
+  }
 }

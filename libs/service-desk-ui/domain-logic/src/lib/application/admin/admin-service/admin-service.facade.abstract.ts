@@ -77,4 +77,11 @@ export abstract class AdminServiceFacadeAbstract {
    * Сохраняет заявку
    */
   abstract saveForm(): void;
+
+  /**
+   * Удаляет запись
+   *
+   * @param id - id записи
+   */
+  abstract destroy(id: number): void;
 }

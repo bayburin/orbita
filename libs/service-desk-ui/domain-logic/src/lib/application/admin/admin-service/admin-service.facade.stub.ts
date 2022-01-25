@@ -36,4 +36,8 @@ export class AdminServiceFacadeStub implements AdminServiceFacadeAbstract {
   saveForm() {
     /** */
   }
+
+  destroy() {
+    /** */
+  }
 }

@@ -45,6 +45,12 @@ export const adminDestroyWithDestroyedCategory = createAction(
   props<{ categoryId: number }>()
 );
 
+export const adminDestroy = createAction('[Service/API] Admin Destroy', props<{ id: number }>());
+
+export const adminDestroySuccess = createAction('[Service/API] Admin Destroy Success', props<{ id: number }>());
+
+export const adminDestroyFailure = createAction('[Service/API] Admin Destroy Failure', props<{ id: number }>());
+
 // ========== Форма рекомендаций для пользователя ==========
 
 export const adminInitForm = createAction('[Service] Admin Init Form', props<{ service?: ServiceOverviewVM }>());
