@@ -19,6 +19,7 @@ export class AdminServiceFacade implements AdminServiceFacadeAbstract {
   all$ = this.store
     .select(VMSelectors.getAllServicesVM)
     .pipe(map((services) => services.sort((a, b) => (a.id > b.id ? -1 : 1))));
+  selected$ = this.store.select(VMSelectors.getSelectedOverviewServiceVM);
   loading$ = this.store.select(ServiceSelectors.getLoading);
   loaded$ = this.store.select(ServiceSelectors.getLoaded);
   loadingIds$ = this.store.select(ServiceSelectors.getLoadingIds);

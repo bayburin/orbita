@@ -30,6 +30,8 @@ export * from './lib/entities/view-models/user-recommendation-link-types-vm.inte
 export * from './lib/entities/view-models/service-overview-vm.interface';
 export * from './lib/entities/view-models/service-types-vm.interface';
 
+export * from './lib/entities/form/responsible-user-form.interface';
+
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';
 export * from './lib/application/home/home.facade';

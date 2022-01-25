@@ -9,6 +9,10 @@ export abstract class AdminServiceFacadeAbstract {
    */
   all$: Observable<ServiceOverviewVM[]>;
   /**
+   * Выбранная услуга
+   */
+  selected$: Observable<ServiceOverviewVM>;
+  /**
    * Индикатор, идет ли загрузка в данный момент
    */
   loading$: Observable<boolean>;

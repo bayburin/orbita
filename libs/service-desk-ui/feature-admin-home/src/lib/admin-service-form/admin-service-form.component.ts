@@ -9,6 +9,7 @@ import {
   AdminServiceFacade,
   EmployeeFacade,
   EmployeeShort,
+  ResponsibleUserForm,
 } from '@orbita/service-desk-ui/domain-logic';
 
 @Component({
@@ -33,6 +34,7 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
   );
   employeesLoading$ = this.employeeFacade.loading$;
   employee = new FormControl();
+  selectedEmployee$ = this.adminServiceFacade.selected$;
   @ViewChild('employeeAutoComplete') employeeAutoComplete: AutoComplete;
 
   get categoryIdForm(): FormControl {
@@ -107,7 +109,15 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
    * @param employee - выбранный работник
    */
   selectEmployee(employee: EmployeeShort): void {
-    this.responsibleUsersForm.push(this.createResponsibleUser(employee.personnelNo));
+    const findedControl = this.responsibleUsersForm.controls.find(
+      (control) => control.value.tn === employee.personnelNo
+    );
+
+    if (findedControl && findedControl.value.id) {
+      (findedControl.get('_destroy') as FormControl).setValue(false);
+    } else if (!findedControl) {
+      this.responsibleUsersForm.push(this.createResponsibleUser(employee.personnelNo));
+    }
   }
 
   /**
@@ -116,6 +126,10 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
    * @param employee - выбранный работник
    */
   unselectEmployee(employee: EmployeeShort): void {
+    if (!employee) {
+      return;
+    }
+
     const findedControl = this.responsibleUsersForm.controls.find(
       (control) => control.value.tn === employee.personnelNo
     );
@@ -158,10 +172,25 @@ export class AdminServiceFormComponent implements OnInit, OnDestroy {
       )
       .subscribe((formData) => {
         this.form.patchValue(formData, { emitEvent: false });
-        // formData.responsible_users.forEach((param: ResponsibleUserForm) =>
-        //   this.responsibleUsersForm.push(this.createResponsibleUser(param.name, param.value), { emitEvent: false })
-        // );
+        formData.responsible_users.forEach((param: ResponsibleUserForm) =>
+          this.responsibleUsersForm.push(this.createResponsibleUser(param.tn, param.id), { emitEvent: false })
+        );
       });
+
+    // При редактировании в поле выбора ответственных выводит данные о выбранных ответственных
+    this.subscriptions.add(
+      this.selectedEmployee$
+        .pipe(
+          filter((data) => Boolean(data)),
+          take(1)
+        )
+        .subscribe((selectedEmployee) => {
+          const employees = selectedEmployee.responsible_users
+            .map((user) => user.details)
+            .filter((user) => Boolean(user));
+          this.employee.setValue(employees);
+        })
+    );
 
     // Обновляет хранилище по любому изменению формы
     this.subscriptions.add(

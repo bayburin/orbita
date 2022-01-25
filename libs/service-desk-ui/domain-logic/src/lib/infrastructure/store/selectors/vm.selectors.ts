@@ -49,6 +49,19 @@ export const getAllServicesVM = createSelector(
     }) as ServiceOverviewVM[]
 );
 
+export const getSelectedOverviewServiceVM = createSelector(
+  ServiceSelectors.getSelected,
+  CategorySelectors.getEntities,
+  ResponsibleUserSelectors.getEntities,
+  EmployeeSelectors.getEntities,
+  (service, categories, responsible_users, employees): ServiceOverviewVM =>
+    ServiceCacheService.denormalizeService(service, {
+      categories,
+      responsible_users,
+      employees,
+    }) as ServiceOverviewVM
+);
+
 export const getSelectedServiceVM = createSelector(
   ServiceSelectors.getSelected,
   QuestionSelectors.getEntities,
@@ -66,13 +79,17 @@ export const getSelectedServiceVM = createSelector(
     }) as ServiceVM
 );
 
+// Селектор выводит список работников (как результат поиска в админке услуги), исключая из выдачи тех работников, которые уже выбраны
 export const getSearchedEmployeesForServiceForm = createSelector(
   ServiceSelectors.getFormData,
   EmployeeSelectors.getSearched,
   (formData, employees) => {
     if (formData && formData.responsible_users.length) {
       return employees.filter(
-        (employee) => !formData.responsible_users.some((user: ResponsibleUserForm) => user.tn === employee.personnelNo)
+        (employee) =>
+          !formData.responsible_users.some(
+            (user: ResponsibleUserForm) => user.tn === employee.personnelNo && !user._destroy
+          )
       );
     } else {
       return employees;
