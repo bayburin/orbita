@@ -17,6 +17,10 @@ export class AdminCategoriesTableComponent {
    */
   @Input() loadingIds: number[];
   /**
+   * Индикатор загрузки таблицы
+   */
+  @Input() loading: boolean;
+  /**
    * Событие открытия формы редактирования записи
    */
   @Output() editForm = new EventEmitter<Category>();

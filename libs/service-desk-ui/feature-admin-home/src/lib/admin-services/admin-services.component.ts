@@ -15,7 +15,6 @@ export class AdminServicesComponent implements OnInit {
   categories$ = this.adminCategoryFacade.all$;
   services$ = this.adminServiceFacade.all$;
   loading$ = this.adminServiceFacade.loading$;
-  loaded$ = this.adminServiceFacade.loaded$;
   loadingIds$ = this.adminServiceFacade.loadingIds$;
   formDisplay$ = this.adminServiceFacade.formDisplay$;
   subscriptions = new Subscription();
@@ -29,7 +28,6 @@ export class AdminServicesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadData();
     this.subscriptions.add(
       this.formDisplay$.subscribe((display) => {
         if (display) {

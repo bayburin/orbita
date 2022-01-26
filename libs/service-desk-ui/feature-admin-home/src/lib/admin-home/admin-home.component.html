@@ -1,22 +1,32 @@
-<section class="sd-pb-6">
-  <div class="container-fluid mb-6">
-    <service-desk-ui-admin-home-admin-user-recommendations></service-desk-ui-admin-home-admin-user-recommendations>
-  </div>
-  <div class="border-bottom"></div>
-</section>
+<ng-container *ngIf="loading$ | async as loading; else loaded">
+  <lib-loading [loading]="loading" size="48px"></lib-loading>
+</ng-container>
 
-<section class="sd-pb-6">
-  <div class="container-fluid mb-6">
-    <service-desk-ui-admin-home-admin-categories></service-desk-ui-admin-home-admin-categories>
-  </div>
-  <div class="border-bottom"></div>
-</section>
+<ng-template #loaded>
+  <ng-container *ngIf="loaded$ | async; else error">
+    <section class="sd-pb-6">
+      <div class="container-fluid mb-6">
+        <service-desk-ui-admin-home-admin-user-recommendations></service-desk-ui-admin-home-admin-user-recommendations>
+      </div>
+      <div class="border-bottom"></div>
+    </section>
+    <section class="sd-pb-6">
+      <div class="container-fluid mb-6">
+        <service-desk-ui-admin-home-admin-categories></service-desk-ui-admin-home-admin-categories>
+      </div>
+      <div class="border-bottom"></div>
+    </section>
+    <section class="sd-pb-6">
+      <div class="container-fluid">
+        <service-desk-ui-admin-home-admin-services></service-desk-ui-admin-home-admin-services>
+      </div>
+    </section>
+  </ng-container>
+</ng-template>
 
-<section class="sd-pb-6">
-  <div class="container-fluid">
-    <service-desk-ui-admin-home-admin-services></service-desk-ui-admin-home-admin-services>
-  </div>
-</section>
+<ng-template #error>
+  <p class="text-danger">Не удалось загрузить данные</p>
+</ng-template>
 
 <p-confirmDialog #cd [style]="{ width: '50vw' }" [baseZIndex]="10000" [dismissableMask]="true">
   <ng-template pTemplate="footer">

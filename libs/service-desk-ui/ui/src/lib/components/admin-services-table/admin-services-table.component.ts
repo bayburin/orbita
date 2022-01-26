@@ -24,6 +24,10 @@ export class AdminServicesTableComponent {
    */
   @Input() services: ServiceOverviewVM[];
   /**
+   * Индикатор загрузки таблицы
+   */
+  @Input() loading: boolean;
+  /**
    * Список идентификаторов услуг, которые сейчас обрабатываются (грузятся)
    */
   @Input() loadingIds: number[];

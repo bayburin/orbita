@@ -1,30 +1,17 @@
 <lib-section-header header="Услуги"></lib-section-header>
-
-<ng-container *ngIf="loading$ | async as loading; else loaded">
-  <lib-loading [loading]="loading" size="48px"></lib-loading>
-</ng-container>
-
-<ng-template #loaded>
-  <ng-container *ngIf="loaded$ | async; else error">
-    <p-toolbar styleClass="mb-3">
-      <ng-template pTemplate="left">
-        <button type="button" class="btn btn-outline-primary btn btn-sm" (click)="newForm()">Добавить</button>
-      </ng-template>
-      <ng-template pTemplate="right">
-        <button type="button" class="btn btn-outline-primary btn btn-sm" (click)="loadData()">Обновить таблицу</button>
-      </ng-template>
-    </p-toolbar>
-
-    <lib-admin-services-table
-      [categories]="categories$ | async"
-      [services]="services$ | async"
-      [loadingIds]="loadingIds$ | async"
-      (editForm)="editForm($event)"
-      (remove)="remove($event)"
-    ></lib-admin-services-table>
-  </ng-container>
-</ng-template>
-
-<ng-template #error>
-  <p class="text-danger">Не удалось загрузить список услуг</p>
-</ng-template>
+<p-toolbar styleClass="mb-3">
+  <ng-template pTemplate="left">
+    <button type="button" class="btn btn-outline-primary btn btn-sm" (click)="newForm()">Добавить</button>
+  </ng-template>
+  <ng-template pTemplate="right">
+    <button type="button" class="btn btn-outline-primary btn btn-sm" (click)="loadData()">Обновить таблицу</button>
+  </ng-template>
+</p-toolbar>
+<lib-admin-services-table
+  [categories]="categories$ | async"
+  [services]="services$ | async"
+  [loadingIds]="loadingIds$ | async"
+  [loading]="loading$ | async"
+  (editForm)="editForm($event)"
+  (remove)="remove($event)"
+></lib-admin-services-table>

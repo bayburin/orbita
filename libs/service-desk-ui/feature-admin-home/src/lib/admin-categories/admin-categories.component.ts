@@ -14,7 +14,6 @@ import { AdminCategoryFormComponent } from '../admin-category-form/admin-categor
 export class AdminCategoriesComponent implements OnInit, OnDestroy {
   categories$ = this.adminCategoryFacade.all$;
   loading$ = this.adminCategoryFacade.loading$;
-  loaded$ = this.adminCategoryFacade.loaded$;
   loadingIds$ = this.adminCategoryFacade.loadingIds$;
   formDisplay$ = this.adminCategoryFacade.formDisplay$;
   subscriptions = new Subscription();
@@ -27,7 +26,6 @@ export class AdminCategoriesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.loadData();
     this.subscriptions.add(
       this.formDisplay$.subscribe((display) => {
         if (display) {

@@ -67,6 +67,8 @@ export * from './lib/application/admin/admin-user-recommendation/admin-user-reco
 export * from './lib/application/admin/admin-user-recommendation/admin-user-recommendation.facade.stub';
 export * from './lib/application/admin/admin-service/admin-service.facade';
 export * from './lib/application/admin/admin-service/admin-service.facade.stub';
+export * from './lib/application/admin/admin-home/admin-home.facade';
+export * from './lib/application/admin/admin-home/admin-home.facade.stub';
 
 export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';

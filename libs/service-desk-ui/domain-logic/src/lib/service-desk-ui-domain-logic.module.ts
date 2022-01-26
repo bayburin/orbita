@@ -6,6 +6,7 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromServiceDeskUi from './infrastructure/store/index';
 import { AppEffects } from './infrastructure/store/app/app.effects';
 import { HomeEffects } from './infrastructure/store/home/home.effects';
+import { AdminHomeEffects } from './infrastructure/store/admin-home/admin-home.effects';
 import { CategoryEffects } from './infrastructure/store/category/category.effects';
 import { ServiceEffects } from './infrastructure/store/service/service.effects';
 import { UserRecommendationEffects } from './infrastructure/store/user-recommendation/user-recommendation.effects';
@@ -40,6 +41,7 @@ import { EmployeeEffects } from './infrastructure/store/employee/employee.effect
       TicketEffects,
       ResponsibleUserEffects,
       EmployeeEffects,
+      AdminHomeEffects,
     ]),
   ],
 })

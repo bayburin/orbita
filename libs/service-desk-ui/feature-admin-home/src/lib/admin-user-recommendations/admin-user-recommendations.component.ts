@@ -14,7 +14,6 @@ import { AdminUserRecommendationFormComponent } from '../admin-user-recommendati
 export class AdminUserRecommendationsComponent implements OnInit, OnDestroy {
   userRecommendations$ = this.adminUserRecommendationFacade.all$;
   loading$ = this.adminUserRecommendationFacade.loading$;
-  loaded$ = this.adminUserRecommendationFacade.loaded$;
   loadingIds$ = this.adminUserRecommendationFacade.loadingIds$;
   formDisplay$ = this.adminUserRecommendationFacade.formDisplay$;
   subscriptions = new Subscription();
@@ -27,7 +26,6 @@ export class AdminUserRecommendationsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.loadData();
     this.subscriptions.add(
       this.formDisplay$.subscribe((display) => {
         if (display) {

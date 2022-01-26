@@ -21,6 +21,10 @@ export class AdminUserRecommendationsTableComponent {
    */
   @Input() loadingIds: number[];
   /**
+   * Индикатор загрузки таблицы
+   */
+  @Input() loading: boolean;
+  /**
    * Событие изменения порядка строк
    */
   @Output() reorderRow = new EventEmitter<{ dragIndex: number; dropIndex: number }>();
