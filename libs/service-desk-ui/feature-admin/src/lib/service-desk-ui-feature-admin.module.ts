@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ServiceDeskUiUiModule } from '@orbita/service-desk-ui/ui';
-import { ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
+import { BreadcrumbValueTypes, ServiceDeskUiDomainLogicModule } from '@orbita/service-desk-ui/domain-logic';
 
 import { AdminComponent } from './admin/admin.component';
 
@@ -20,6 +20,14 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () =>
           import('@orbita/service-desk-ui/feature-admin-home').then((m) => m.ServiceDeskUiFeatureAdminHomeModule),
+      },
+      {
+        path: 'services/:serviceId/tickets',
+        loadChildren: () =>
+          import('@orbita/service-desk-ui/feature-admin-ticket-listing').then(
+            (m) => m.ServiceDeskUiFeatureAdminTicketListingModule
+          ),
+        // data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Тикеты' } },
       },
     ],
   },

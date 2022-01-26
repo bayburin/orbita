@@ -32,6 +32,9 @@
       "@orbita/service-desk-ui/domain-logic": ["libs/service-desk-ui/domain-logic/src/index.ts"],
       "@orbita/service-desk-ui/feature-admin": ["libs/service-desk-ui/feature-admin/src/index.ts"],
       "@orbita/service-desk-ui/feature-admin-home": ["libs/service-desk-ui/feature-admin-home/src/index.ts"],
+      "@orbita/service-desk-ui/feature-admin-ticket-listing": [
+        "libs/service-desk-ui/feature-admin-ticket-listing/src/index.ts"
+      ],
       "@orbita/service-desk-ui/feature-all-kases": ["libs/service-desk-ui/feature-all-kases/src/index.ts"],
       "@orbita/service-desk-ui/feature-category-listing": [
         "libs/service-desk-ui/feature-category-listing/src/index.ts"

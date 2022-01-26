@@ -738,6 +738,32 @@
       },
       "tags": ["scope:service-desk-ui", "type:feature"]
     },
+    "service-desk-ui-feature-admin-ticket-listing": {
+      "projectType": "library",
+      "root": "libs/service-desk-ui/feature-admin-ticket-listing",
+      "sourceRoot": "libs/service-desk-ui/feature-admin-ticket-listing/src",
+      "prefix": "orbita",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/service-desk-ui/feature-admin-ticket-listing"],
+          "options": {
+            "jestConfig": "libs/service-desk-ui/feature-admin-ticket-listing/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/service-desk-ui/feature-admin-ticket-listing/src/**/*.ts",
+              "libs/service-desk-ui/feature-admin-ticket-listing/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": ["scope:service-desk-ui", "type:feature"]
+    },
     "service-desk-ui-feature-all-kases": {
       "projectType": "library",
       "root": "libs/service-desk-ui/feature-all-kases",
