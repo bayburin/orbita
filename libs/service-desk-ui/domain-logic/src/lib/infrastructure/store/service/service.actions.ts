@@ -26,29 +26,29 @@ export const adminLoadAllSuccess = createAction(
 
 export const adminLoadAllFailure = createAction('[Service/API] Admin Load All Failure', props<{ error: any }>());
 
-export const adminSelect = createAction('[Service] Admin Select', props<{ id: number; edit?: boolean }>());
+export const adminSelectForEdit = createAction('[Service] Admin Select For Edit', props<{ id: number }>());
 
-export const adminLoadSelectedOnEdit = createAction('[Service/API] Admin Load Selected On Edit');
+export const adminLoadSelectedForEdit = createAction('[Service/API] Admin Load Selected For Edit');
 
-export const adminLoadSelectedOnEditSuccess = createAction(
-  '[Service/API] Admin Load Selected On Edit Success',
+export const adminLoadSelectedForEditSuccess = createAction(
+  '[Service/API] Admin Load Selected For Edit Success',
   props<{ service: Service }>()
 );
 
-export const adminLoadSelectedOnEditFailure = createAction(
-  '[Service/API] Admin Load Selected On Edit Failure',
+export const adminLoadSelectedForEditFailure = createAction(
+  '[Service/API] Admin Load Selected For Edit Failure',
   props<{ error: any }>()
 );
 
-export const adminLoadSelectedOnShow = createAction('[Service/API] Admin Load Selected On Show');
+export const adminLoadSelectedForEditTickets = createAction('[Service/API] Admin Load Selected For Edit Tickets');
 
-export const adminLoadSelectedOnShowSuccess = createAction(
-  '[Service/API] Admin Load Selected On Show Success',
+export const adminLoadSelectedForEditTicketsSuccess = createAction(
+  '[Service/API] Admin Load Selected For Edit Tickets Success',
   props<{ service: Service }>()
 );
 
-export const adminLoadSelectedOnShowFailure = createAction(
-  '[Service/API] Admin Load Selected On Show Failure',
+export const adminLoadSelectedForEditTicketsFailure = createAction(
+  '[Service/API] Admin Load Selected For Edit Tickets Failure',
   props<{ error: any }>()
 );
 

@@ -7,6 +7,7 @@ import { Answer } from './models/answer.interface';
 import { Attachment } from './models/attachment.interface';
 import { Ticket } from './models/ticket.interface';
 import { EmployeeShort } from './models/employee/employee-short.interface';
+import { Tag } from './models/tag.interface';
 
 /**
  * Нормализованные данные категории
@@ -39,6 +40,7 @@ export interface NormalizedServicesEntities {
   responsible_users?: Dictionary<ResponsibleUser>;
   attachments?: Dictionary<Attachment>;
   employees?: Dictionary<EmployeeShort>;
+  tags?: Dictionary<Tag>;
 }
 
 /**

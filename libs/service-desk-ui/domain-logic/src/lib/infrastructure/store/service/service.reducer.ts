@@ -59,7 +59,7 @@ const serviceReducer = createReducer(
 
   // ========== Администрирование ==========
 
-  on(ServiceActions.adminLoadAll, ServiceActions.adminLoadSelectedOnShow, (state) => ({
+  on(ServiceActions.adminLoadAll, ServiceActions.adminLoadSelectedForEditTickets, (state) => ({
     ...state,
     loaded: false,
     loading: true,
@@ -72,30 +72,30 @@ const serviceReducer = createReducer(
     entities,
     ids,
   })),
-  on(ServiceActions.adminLoadAllFailure, ServiceActions.adminLoadSelectedOnShowFailure, (state, { error }) => ({
+  on(ServiceActions.adminLoadAllFailure, ServiceActions.adminLoadSelectedForEditTicketsFailure, (state, { error }) => ({
     ...state,
     error,
     loading: false,
   })),
-  on(ServiceActions.adminSelect, (state, { id }) => ({ ...state, selectedId: id })),
-  on(ServiceActions.adminLoadSelectedOnEdit, (state) => ({
+  on(ServiceActions.adminSelectForEdit, (state, { id }) => ({ ...state, selectedId: id })),
+  on(ServiceActions.adminLoadSelectedForEdit, (state) => ({
     ...state,
     loadingIds: [...state.loadingIds, state.selectedId],
   })),
-  on(ServiceActions.adminLoadSelectedOnEditSuccess, (state, { service }) =>
+  on(ServiceActions.adminLoadSelectedForEditSuccess, (state, { service }) =>
     serviceAdapter.setOne(service, {
       ...state,
       loadingIds: state.loadingIds.filter((loadingId) => loadingId !== service.id),
     })
   ),
-  on(ServiceActions.adminLoadSelectedOnEditFailure, (state, { error }) => ({
+  on(ServiceActions.adminLoadSelectedForEditFailure, (state, { error }) => ({
     ...state,
     selectedId: null,
     loadingIds: state.loadingIds.filter((loadingId) => loadingId !== state.selectedId),
     error,
   })),
-  on(ServiceActions.adminLoadSelectedOnShowSuccess, (state, { service }) =>
-    serviceAdapter.setOne(service, { ...state, loaded: true, loading: false })
+  on(ServiceActions.adminLoadSelectedForEditTicketsSuccess, (state, { service }) =>
+    serviceAdapter.setOne(service, { ...state, loaded: true, loading: false, selectedId: service.id })
   ),
   on(ServiceActions.adminDestroyWithDestroyedCategory, (state, { categoryId }) =>
     serviceAdapter.removeMany((service) => service.category_id === categoryId, state)

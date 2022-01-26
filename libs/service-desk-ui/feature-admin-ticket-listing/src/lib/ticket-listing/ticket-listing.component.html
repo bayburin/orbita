@@ -1,1 +1,13 @@
-<p>ticket-listing works!</p>
+<ng-container *ngIf="loading$ | async as loading; else loaded">
+  <lib-loading [loading]="loading" size="48px"></lib-loading>
+</ng-container>
+
+<ng-template #loaded>
+  <ng-container *ngIf="loaded$ | async; else error">
+    <p>Data loaded</p>
+  </ng-container>
+</ng-template>
+
+<ng-template #error>
+  <p class="text-danger">Не удалось загрузить данные</p>
+</ng-template>

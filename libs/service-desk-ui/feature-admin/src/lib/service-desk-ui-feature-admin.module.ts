@@ -22,12 +22,12 @@ const routes: Routes = [
           import('@orbita/service-desk-ui/feature-admin-home').then((m) => m.ServiceDeskUiFeatureAdminHomeModule),
       },
       {
-        path: 'services/:serviceId/tickets',
+        path: 'services/:id',
         loadChildren: () =>
           import('@orbita/service-desk-ui/feature-admin-ticket-listing').then(
             (m) => m.ServiceDeskUiFeatureAdminTicketListingModule
           ),
-        // data: { breadcrumb: { type: BreadcrumbValueTypes.TEXT, value: 'Тикеты' } },
+        data: { breadcrumb: { type: BreadcrumbValueTypes.SERVICE_ID } },
       },
     ],
   },

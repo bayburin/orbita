@@ -19,10 +19,13 @@ export const answerSchema = new schema.Entity('answers', {
   attachments: [attachmentSchema],
 });
 
+export const tagSchema = new schema.Entity('tags');
+
 export const questionSchema = new schema.Entity('questions', {
   answers: [answerSchema],
   ticket: {
     responsible_users: [responsibleUserSchema],
+    tags: [tagSchema],
   },
 });
 

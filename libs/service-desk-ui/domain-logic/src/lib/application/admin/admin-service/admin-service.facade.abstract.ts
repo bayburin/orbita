@@ -57,6 +57,11 @@ export abstract class AdminServiceFacadeAbstract {
   abstract edit(id: number): void;
 
   /**
+   * Выбрать услугу для просмотра (и редактирования вопрсов)
+   */
+  abstract show(): void;
+
+  /**
    * Инициализирует новую форму услуги
    */
   abstract initForm(): void;
