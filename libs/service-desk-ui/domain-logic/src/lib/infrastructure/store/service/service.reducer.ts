@@ -59,7 +59,7 @@ const serviceReducer = createReducer(
 
   // ========== Администрирование ==========
 
-  on(ServiceActions.adminLoadAll, (state) => ({
+  on(ServiceActions.adminLoadAll, ServiceActions.adminLoadSelectedOnShow, (state) => ({
     ...state,
     loaded: false,
     loading: true,
@@ -72,28 +72,31 @@ const serviceReducer = createReducer(
     entities,
     ids,
   })),
-  on(ServiceActions.adminLoadAllFailure, (state, { error }) => ({
+  on(ServiceActions.adminLoadAllFailure, ServiceActions.adminLoadSelectedOnShowFailure, (state, { error }) => ({
     ...state,
     error,
     loading: false,
   })),
   on(ServiceActions.adminSelect, (state, { id }) => ({ ...state, selectedId: id })),
-  on(ServiceActions.adminLoadSelected, (state) => ({
+  on(ServiceActions.adminLoadSelectedOnEdit, (state) => ({
     ...state,
     loadingIds: [...state.loadingIds, state.selectedId],
   })),
-  on(ServiceActions.adminLoadSelectedSuccess, (state, { service }) =>
+  on(ServiceActions.adminLoadSelectedOnEditSuccess, (state, { service }) =>
     serviceAdapter.setOne(service, {
       ...state,
       loadingIds: state.loadingIds.filter((loadingId) => loadingId !== service.id),
     })
   ),
-  on(ServiceActions.adminLoadSelectedFailure, (state, { error }) => ({
+  on(ServiceActions.adminLoadSelectedOnEditFailure, (state, { error }) => ({
     ...state,
     selectedId: null,
     loadingIds: state.loadingIds.filter((loadingId) => loadingId !== state.selectedId),
     error,
   })),
+  on(ServiceActions.adminLoadSelectedOnShowSuccess, (state, { service }) =>
+    serviceAdapter.setOne(service, { ...state, loaded: true, loading: false })
+  ),
   on(ServiceActions.adminDestroyWithDestroyedCategory, (state, { categoryId }) =>
     serviceAdapter.removeMany((service) => service.category_id === categoryId, state)
   ),

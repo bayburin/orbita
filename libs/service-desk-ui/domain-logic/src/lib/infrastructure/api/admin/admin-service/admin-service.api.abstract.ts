@@ -16,16 +16,23 @@ export abstract class AdminServiceApiAbstract {
   abstract query(): Observable<ServiceOverviewVM[]>;
 
   /**
-   * Получает с сервера данные по выбранной услуге
+   * Получает с сервера все данные по выбранной услуге
    *
-   * @param id - ID категории
+   * @param id - ID услуги
    */
   abstract show(id: number): Observable<ServiceOverviewVM>;
 
   /**
+   * Получает с сервера данные по выбранной услуге для редактирования
+   *
+   * @param id - ID услуги
+   */
+  abstract edit(id: number): Observable<ServiceOverviewVM>;
+
+  /**
    * Сохраняет услугу
    *
-   * @param formData - данные о категории.
+   * @param formData - данные об услуге.
    */
   abstract save(formData: ServiceForm): Observable<ServiceOverviewVM>;
 

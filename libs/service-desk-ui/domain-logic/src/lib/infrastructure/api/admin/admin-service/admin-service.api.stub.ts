@@ -13,6 +13,10 @@ export class AdminServiceApiStub implements AdminServiceApiAbstract {
     return of(null);
   }
 
+  edit() {
+    return of(null);
+  }
+
   save() {
     return of(null);
   }

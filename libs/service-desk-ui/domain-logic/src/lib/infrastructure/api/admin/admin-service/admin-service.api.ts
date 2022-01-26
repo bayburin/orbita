@@ -26,6 +26,10 @@ export class AdminServiceApi implements AdminServiceApiAbstract {
     return this.http.get<ServiceOverviewVM>(`${this.api}/${id}`);
   }
 
+  edit(id: number) {
+    return this.http.get<ServiceOverviewVM>(`${this.api}/${id}/edit`);
+  }
+
   save(formData: ServiceForm) {
     return this.http.post<ServiceOverviewVM>(this.api, { service: formData });
   }

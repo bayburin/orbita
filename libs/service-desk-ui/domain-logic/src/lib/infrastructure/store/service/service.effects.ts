@@ -91,13 +91,46 @@ export class ServiceEffects {
   adminSelect$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ServiceActions.adminSelect),
-      map(() => ServiceActions.adminLoadSelected())
+      map((action) =>
+        action.edit ? ServiceActions.adminLoadSelectedOnEdit() : ServiceActions.adminLoadSelectedOnShow()
+      )
     )
   );
 
-  adminLoadSelected$ = createEffect(() =>
+  adminLoadSelectedOnEdit$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ServiceActions.adminLoadSelected),
+      ofType(ServiceActions.adminLoadSelectedOnEdit),
+      withLatestFrom(this.store.select(ServiceSelectors.getSelectedId)),
+      switchMap(([_action, selectedId]) =>
+        this.adminServiceApi.edit(selectedId).pipe(
+          switchMap((service) => {
+            const data = ServiceCacheService.normalizeServices(service).entities;
+
+            return [
+              AttachmentActions.setEntities({ entities: data.attachments || {} }),
+              AnswerActions.setEntities({ entities: data.answers || {} }),
+              QuestionActions.setEntities({ entities: data.questions || {} }),
+              CategoryActions.setOne({ category: data.categories[service.category_id] }),
+              ResponsibleUserActions.setMany({
+                responsibleUsers: Object.values(data.responsible_users || []),
+              }),
+              ServiceActions.adminLoadSelectedOnEditSuccess({ service: data.services[selectedId] }),
+              ServiceActions.adminInitForm({ service }),
+            ];
+          }),
+          catchError((error) => {
+            this.errorHandlerService.handleError(error, 'Не удалось загрузить услугу.');
+
+            return of(ServiceActions.adminLoadSelectedOnEditFailure({ error }));
+          })
+        )
+      )
+    )
+  );
+
+  adminLoadSelectedOnShow$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ServiceActions.adminLoadSelectedOnShow),
       withLatestFrom(this.store.select(ServiceSelectors.getSelectedId)),
       switchMap(([_action, selectedId]) =>
         this.adminServiceApi.show(selectedId).pipe(
@@ -109,14 +142,14 @@ export class ServiceEffects {
               ResponsibleUserActions.setMany({
                 responsibleUsers: Object.values(data.responsible_users || []),
               }),
-              ServiceActions.adminLoadSelectedSuccess({ service: data.services[selectedId] }),
+              ServiceActions.adminLoadSelectedOnShowSuccess({ service: data.services[selectedId] }),
               ServiceActions.adminInitForm({ service }),
             ];
           }),
           catchError((error) => {
             this.errorHandlerService.handleError(error, 'Не удалось загрузить услугу.');
 
-            return of(ServiceActions.adminLoadSelectedFailure({ error }));
+            return of(ServiceActions.adminLoadSelectedOnShowFailure({ error }));
           })
         )
       )

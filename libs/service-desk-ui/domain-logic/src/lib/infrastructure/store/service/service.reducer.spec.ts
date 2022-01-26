@@ -123,7 +123,7 @@ describe('ServiceReducer', () => {
   describe('adminLoadSelected', () => {
     it('should change attributes', () => {
       initialState.selectedId = 12;
-      action = ServiceActions.adminLoadSelected();
+      action = ServiceActions.adminLoadSelectedOnEdit();
       const result: State = reducer(initialState, action);
 
       expect(result.loadingIds).toEqual([12]);
@@ -134,7 +134,7 @@ describe('ServiceReducer', () => {
     it('should change attributes', () => {
       const service = createService(1);
       initialState.loadingIds = [1];
-      action = ServiceActions.adminLoadSelectedSuccess({ service });
+      action = ServiceActions.adminLoadSelectedOnEditSuccess({ service });
       const result: State = reducer(initialState, action);
 
       expect(result.ids.length).toBe(1);
@@ -147,12 +147,47 @@ describe('ServiceReducer', () => {
       const error = { message: 'error' };
       initialState.selectedId = 1;
       initialState.loadingIds = [1];
-      action = ServiceActions.adminLoadSelectedFailure({ error });
+      action = ServiceActions.adminLoadSelectedOnEditFailure({ error });
       const result: State = reducer(initialState, action);
 
       expect(result.error).toEqual(error);
       expect(result.selectedId).toBeNull();
       expect(result.loadingIds).toEqual([]);
+    });
+  });
+
+  describe('adminLoadSelectedOnShow', () => {
+    it('should change attributes', () => {
+      action = ServiceActions.adminLoadSelectedOnShow();
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(false);
+      expect(result.loading).toBe(true);
+      expect(result.error).toBeNull();
+    });
+  });
+
+  describe('adminLoadSelectedOnShowSuccess', () => {
+    it('should change attributes', () => {
+      const service = createService(1);
+      action = ServiceActions.adminLoadSelectedOnShowSuccess({ service });
+      const result: State = reducer(initialState, action);
+
+      expect(result.ids.length).toBe(1);
+      expect(result.loaded).toBe(true);
+      expect(result.loading).toBe(false);
+    });
+  });
+
+  describe('adminLoadSelectedOnShowFailure', () => {
+    it('should change attributes', () => {
+      const error = { message: 'error' };
+      initialState.loading = true;
+      action = ServiceActions.adminLoadSelectedOnShowFailure({ error });
+      const result: State = reducer(initialState, action);
+
+      expect(result.error).toEqual(error);
+      expect(result.loading).toBe(false);
     });
   });
 

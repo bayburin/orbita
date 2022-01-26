@@ -66,6 +66,24 @@ describe('AdminServiceApi', () => {
     });
   });
 
+  describe('edit()', () => {
+    const api = `${serviceDeskUiEnvironmentStub.serverUrl}/admin/services/1/edit`;
+    const service = { id: 1 };
+
+    it('should return service', () => {
+      adminService.edit(1).subscribe((result) => {
+        expect(result).toEqual(service);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: api,
+        })
+        .flush(service);
+    });
+  });
+
   describe('save()', () => {
     const api = `${serviceDeskUiEnvironmentStub.serverUrl}/admin/services`;
     const formData = { name: 'form-name' } as ServiceForm;
