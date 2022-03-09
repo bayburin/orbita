@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import * as SvtItemFeature from '../../infrastructure/store/svt-item/svt-item.reducer';
 import * as SvtItemActions from '../../infrastructure/store/svt-item/svt-item.actions';
 import * as SvtItemSelectors from '../../infrastructure/store/svt-item/svt-item.selectors';
+import * as SvtItemViewModelSelectors from '../../infrastructure/store/selectors/svt-item-view-model.selectors';
 import { SvtFacadeAbstract } from './svt.facade.abstract';
 import { SvtFilters } from './../../entities/filter.interface';
 import { PrimeFilter } from './../../entities/prime-filter.interface';
@@ -18,9 +19,9 @@ import { processSvtItemTableFilters } from '../../infrastructure/utils/process-s
 export class SvtFacade implements SvtFacadeAbstract {
   loadingItem$ = this.store.select(SvtItemSelectors.getLoading);
   loadedItem$ = this.store.select(SvtItemSelectors.getLoaded);
-  allItems$ = this.store.select(SvtItemSelectors.getAll);
-  selectedItem$ = this.store.select(SvtItemSelectors.getSelected);
-  allForFormItems$ = this.store.select(SvtItemSelectors.getAll);
+  allItems$ = this.store.select(SvtItemViewModelSelectors.getAllSvtItems);
+  selectedItem$ = this.store.select(SvtItemViewModelSelectors.getSelectedSvtItem);
+  allForFormItems$ = this.store.select(SvtItemViewModelSelectors.getAllSvtItems);
 
   constructor(private store: Store<SvtItemFeature.SvtItemPartialState>) {}
 

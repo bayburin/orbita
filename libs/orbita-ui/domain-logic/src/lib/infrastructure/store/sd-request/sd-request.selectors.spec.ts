@@ -49,6 +49,7 @@ describe('SdRequestSelectors', () => {
       entity: newFormEntity,
       loading: false,
       created,
+      updateView: true,
       showModalAfterCreate: true,
     };
     state = sdRequestAdapter.setAll(arrEntities, {
@@ -153,6 +154,10 @@ describe('SdRequestSelectors', () => {
 
   it('getNewFormCreated() should return created attribute', () => {
     expect(SdRequestSelectors.getNewFormCreated.projector(newFormState)).toEqual(created);
+  });
+
+  it('getNewFormUpdateView() should return updateView attribute', () => {
+    expect(SdRequestSelectors.getNewFormUpdateView.projector(newFormState)).toBe(true);
   });
 
   it('getNewFormShowModalAfterCreate() should return created attribute', () => {

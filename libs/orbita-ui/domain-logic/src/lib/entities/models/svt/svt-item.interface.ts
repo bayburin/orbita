@@ -1,8 +1,5 @@
-import { SvtWorkplace } from './svt-workplace.interface';
-import { SvtType } from './svt-type.interface';
-
 /**
- * Интерфейс ВТ
+ * ВТ
  */
 export interface SvtItem {
   /**
@@ -24,11 +21,6 @@ export interface SvtItem {
    * Идентификатор РМ
    */
   readonly workplace_id: number;
-
-  /**
-   * РМ
-   */
-  readonly workplace: SvtWorkplace;
 
   /**
    * Идентификатор модели
@@ -59,11 +51,6 @@ export interface SvtItem {
    * Текстовое наименование модели
    */
   readonly short_item_model: string;
-
-  /**
-   * Тип ВТ
-   */
-  readonly type: SvtType;
 }
 
 /**

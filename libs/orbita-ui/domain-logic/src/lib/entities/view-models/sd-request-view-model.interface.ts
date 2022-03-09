@@ -1,28 +1,12 @@
 import { ParameterViewModel } from './parameter-view-model.interface';
 import { MessageViewModel } from './message-view-model.interface';
 import { TicketViewModel } from './ticket-view-model.interface';
-import { Application } from './../models/application.interface';
 import { HistoryViewModel } from './history-view-model.interface';
 
 /**
- * Интерфейс заявки
+ * Заявка
  */
 export interface SdRequestViewModel extends TicketViewModel {
-  /**
-   * ID заявки во внешней системе.
-   */
-  readonly integration_id: number;
-
-  /**
-   * ID приложения, с которого пришла заявка.
-   */
-  readonly application_id: number;
-
-  /**
-   * Приложение создавшнее/обрабатывающее заявку
-   */
-  readonly application: Application;
-
   /**
    * ID Услуги
    */

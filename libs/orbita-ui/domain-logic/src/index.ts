@@ -38,6 +38,8 @@ export * from './lib/entities/view-models/employee-filters-view-model.enum';
 export * from './lib/entities/view-models/sd-ticket-view-model.interface';
 export * from './lib/entities/view-models/parameter-view-model.interface';
 export * from './lib/entities/view-models/parameter-schema-view-model.interface';
+export * from './lib/entities/view-models/claim-application-view-model.interface';
+export * from './lib/entities/view-models/svt/svt-item-view-model.interface';
 
 export * from './lib/application/app/app.facade';
 export * from './lib/application/app/app.facade.stub';

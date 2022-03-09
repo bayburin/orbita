@@ -1,3 +1,4 @@
+import { ClaimApplication } from './claim-application.interface';
 import { SourceSnapshot } from './source-snapshot.interface';
 
 /**
@@ -53,6 +54,11 @@ export interface Ticket {
    * Массив идентификатор прикрепленных файлов
    */
   readonly attachments: number[];
+
+  /**
+   * Массив связей с внешними приолжениями
+   */
+  readonly claim_applications: ClaimApplication[];
 }
 
 /**

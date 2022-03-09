@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { SvtItem } from './../../entities/models/svt/svt-item.interface';
+import { SvtItemViewModel } from '../../entities/view-models/svt/svt-item-view-model.interface';
 import { SvtFilters } from './../../entities/filter.interface';
 import { PrimeFilter } from './../../entities/prime-filter.interface';
 
@@ -16,15 +16,15 @@ export abstract class SvtFacadeAbstract {
   /**
    * Список ВТ
    */
-  allItems$: Observable<SvtItem[]>;
+  allItems$: Observable<SvtItemViewModel[]>;
   /**
    * Выбранная ВТ
    */
-  selectedItem$: Observable<SvtItem>;
+  selectedItem$: Observable<SvtItemViewModel>;
   /**
    * Список ВТ
    */
-  allForFormItems$: Observable<SvtItem[]>;
+  allForFormItems$: Observable<SvtItemViewModel[]>;
 
   /**
    * Поиск ВТ

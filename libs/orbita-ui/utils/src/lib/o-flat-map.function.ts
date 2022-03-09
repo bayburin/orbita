@@ -5,5 +5,9 @@
  * @param arr - исходный массив
  */
 export const oFlatMap = function (f: (a: any) => any[], arr: any[]) {
-  return arr.map(f).reduce((acc, el) => acc.concat(el), []);
+  return arr.map(f).reduce((acc, el) => {
+    acc.push(...el);
+
+    return acc;
+  }, []);
 };

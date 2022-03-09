@@ -23,13 +23,13 @@
   <ng-template pTemplate="header">
     <tr>
       <th width="5%">№</th>
-      <th width="7%">Внешн №</th>
-      <th width="7%">Внешн имя</th>
+      <!-- <th width="7%">Внешн №</th>
+      <th width="7%">Внешн имя</th> -->
       <th width="7%">Дата подачи</th>
       <!-- <th width="7%">Дедлайн</th> -->
       <th width="8%">Статус</th>
-      <th width="9%">Вид услуги</th>
-      <th width="9%">Вид заявки</th>
+      <th width="13%">Вид услуги</th>
+      <th width="13%">Вид заявки</th>
       <th>Подробности</th>
       <th width="8%">Приоритет</th>
       <th width="8%">Исполнители</th>
@@ -49,8 +49,8 @@
           </ng-template>
         </p-columnFilter>
       </th>
-      <th></th>
-      <th></th>
+      <!-- <th></th>
+      <th></th> -->
       <th>
         <p-columnFilter type="date" field="created_at" matchMode="equals" [showMenu]="false">
           <ng-template pTemplate="filter" let-filter="filterCallback">
@@ -124,7 +124,7 @@
               [ngModel]="table.filters.ticket_identity?.value"
               [options]="sdTickets"
               [virtualScroll]="true"
-              optionValue="id"
+              optionValue="identity"
               optionLabel="name"
               defaultLabel="Все"
               scrollHeight="400px"
@@ -232,8 +232,8 @@
       <td>
         <a [routerLink]="['sd-requests', req.id]">{{ req.id }}</a>
       </td>
-      <td>{{ req.integration_id }}</td>
-      <td>{{ req.application?.name }}</td>
+      <!-- <td>{{ req.integration_id }}</td>
+      <td>{{ req.application?.name }}</td> -->
       <td>{{ req.runtime.created_at | datetime }}</td>
       <!-- <td>{{ req.runtime.finished_at_plan | datetime }}</td> -->
       <td>
@@ -263,7 +263,7 @@
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-req>
     <tr>
-      <td colspan="11" class="pt-0">
+      <td colspan="9" class="pt-0">
         <div class="p-2">
           <lib-show-sd-request [sdRequest]="req"></lib-show-sd-request>
         </div>
@@ -272,7 +272,7 @@
   </ng-template>
   <ng-template pTemplate="emptymessage">
     <tr>
-      <td colspan="11">Заявки отсутствуют</td>
+      <td colspan="9">Заявки отсутствуют</td>
     </tr>
   </ng-template>
 </p-table>

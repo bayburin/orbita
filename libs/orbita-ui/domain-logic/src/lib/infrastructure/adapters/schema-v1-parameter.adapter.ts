@@ -23,11 +23,11 @@ export class SchemaV1ParameterAdapter {
     this.result.table.columns = schema.table.columns.slice().sort((a, b) => (a.order > b.order ? 1 : -1));
     // Данные таблицы в виде { [key]: string }
     this.result.table.data = schema.table.data.map((str) => {
-      return Object.entries(str).reduce((acc, [key, val]) => {
+      return Object.entries(str).reduce<{ [key: string]: string }>((acc, [key, val]) => {
         acc[key] = val.desc;
 
         return acc;
-      }, {} as { [key: string]: string });
+      }, {});
     });
 
     return this.result;

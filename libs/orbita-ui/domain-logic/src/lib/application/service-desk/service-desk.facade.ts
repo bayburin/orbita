@@ -19,8 +19,8 @@ import { SdTicketCacheService } from './../../infrastructure/services/sd-ticket-
   providedIn: 'root',
 })
 export class ServiceDeskFacade implements ServiceDeskFacadeAbstract {
-  loading$ = this.sdTicketStore.select(SdTicketSelectors.getLoading);
-  loaded$ = this.sdTicketStore.select(SdTicketSelectors.getLoaded);
+  loadingSdTickets$ = this.sdTicketStore.select(SdTicketSelectors.getLoading);
+  loadedSdTickets$ = this.sdTicketStore.select(SdTicketSelectors.getLoaded);
   loadSdTickets$ = this.sdTicketStore.select(SdTicketSelectors.getNeedTickets).pipe(
     filter((needTickets) => needTickets),
     tap(() => this.sdTicketStore.dispatch(SdTicketActions.loadAll())),
@@ -41,7 +41,7 @@ export class ServiceDeskFacade implements ServiceDeskFacadeAbstract {
     ),
     share()
   );
-
+  sdTicket$ = this.sdTicketStore.select(ServiceDeskViewModelSelectors.getSelectedTicketViewModel);
   sdTickets$ = muteFirst(
     this.loadSdTickets$.pipe(startWith(null)),
     this.sdTicketStore.select(SdTicketSelectors.getAll)

@@ -9,4 +9,8 @@ export class ServiceDeskApiStub implements ServiceDeskApiAbstract {
   getTickets(): Observable<SdTicket[]> {
     return of([]);
   }
+
+  getTicket() {
+    return of(null);
+  }
 }

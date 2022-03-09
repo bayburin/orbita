@@ -16,6 +16,10 @@ export interface EmployeeFiltersViewModel {
    * Флаг, показывающий публичность атрибута
    */
   isPublic: boolean;
+  /**
+   * Ключ фильтра
+   */
+  filter?: EmployeeFilters;
 }
 
 /**
@@ -41,23 +45,27 @@ export const employeeFiltersViewModelMap: Record<EmployeeFilters, EmployeeFilter
 /**
  * Массив фильтров
  */
-export const employeeFiltersArray: EmployeeFilters[] = Object.keys(employeeFiltersViewModelMap).reduce(
-  (arr, filter) => arr.concat(filter as EmployeeFilters),
+export const employeeFiltersArray = Object.keys(employeeFiltersViewModelMap).reduce<EmployeeFilters[]>(
+  (arr, filter) => {
+    arr.push(filter as EmployeeFilters);
+
+    return arr;
+  },
   []
 );
 
 /**
  * Массив представлений фильтров
  */
-export const employeeFiltersViewModelArray: EmployeeFiltersViewModel[] = Object.keys(employeeFiltersViewModelMap)
-  .reduce(
-    (arr, filter) =>
-      arr.concat({
-        filter,
-        ...getViewModelEmployeeFilters(filter as EmployeeFilters),
-      }),
-    []
-  )
+export const employeeFiltersViewModelArray = (Object.keys(employeeFiltersViewModelMap) as EmployeeFilters[])
+  .reduce<EmployeeFiltersViewModel[]>((arr, filter) => {
+    arr.push({
+      filter,
+      ...getViewModelEmployeeFilters(filter),
+    });
+
+    return arr;
+  }, [])
   .filter((el) => el.isPublic);
 
 /**

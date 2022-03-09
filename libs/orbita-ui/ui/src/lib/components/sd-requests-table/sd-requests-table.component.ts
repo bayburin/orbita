@@ -88,6 +88,10 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
    * Событие выбора заявки для ее детального просмотра
    */
   @Output() viewSdRequest = new EventEmitter<SdRequestViewModel>();
+  /**
+   * Событие закрытия заявки
+   */
+  @Output() closeSdRequest = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.subscribeToLazyLoadEvent();
@@ -97,6 +101,11 @@ export class SdRequestsTableComponent implements OnInit, OnDestroy {
         icon: 'mdi mdi-file-find-outline mdi-18px',
         command: () => this.viewSdRequest.emit(this.selectedSdRequest),
       },
+      // {
+      //   label: 'Закрыть заявку',
+      //   icon: 'mdi mdi-check mdi-18px',
+      //   command: () => this.closeSdRequest.emit(this.selectedSdRequest.id),
+      // },
     ];
   }
 

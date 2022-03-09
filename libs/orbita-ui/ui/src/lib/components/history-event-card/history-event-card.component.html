@@ -11,7 +11,10 @@
     </div>
   </ng-template>
   <div class="history-card-body">
-    <b>{{ history.user.fio | fioInitials }}:</b> {{ history.action }}
+    <b [pTooltip]="history.user_info.fio" tooltipStyleClass="full-fio-tooltip" tooltipPosition="top">
+      {{ history.user_info.fio | fioInitials }}:
+    </b>
+    {{ history.action }}
   </div>
   <ng-template pTemplate="footer">
     <div class="history-card-footer">

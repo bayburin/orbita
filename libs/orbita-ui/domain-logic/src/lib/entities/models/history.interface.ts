@@ -28,7 +28,47 @@ export interface History {
   readonly action: string;
 
   /**
+   * Данные о пользователе, который вызвал событие, на момент фиксации события
+   */
+  readonly user_info: HistoryUserInfo;
+
+  /**
    * Время события
    */
   readonly created_at: string;
+}
+
+/**
+ * Данные о пользователе, который вызвал событие, на момент фиксации события
+ */
+export interface HistoryUserInfo {
+  /**
+   * Табельный номер
+   */
+  readonly tn: number;
+
+  /**
+   * ФИО
+   */
+  readonly fio: string;
+
+  /**
+   * email
+   */
+  readonly email: string;
+
+  /**
+   * IdTn пользователя
+   */
+  readonly id_tn: number;
+
+  /**
+   * Доменная учетная запись
+   */
+  readonly login: string;
+
+  /**
+   * Рабочий телефон
+   */
+  readonly work_tel: string;
 }

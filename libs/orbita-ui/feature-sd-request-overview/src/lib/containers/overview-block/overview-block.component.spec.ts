@@ -16,6 +16,8 @@ import {
   UserFacadeStub,
   MessageFacade,
   MessageFacadeStub,
+  ServiceDeskFacade,
+  ServiceDeskFacadeStub,
 } from '@orbita/orbita-ui/domain-logic';
 import { DatetimePipe } from '@orbita/orbita-ui/ui';
 import { ConfirmationService } from 'primeng/api';
@@ -39,6 +41,7 @@ describe('OverviewBlockComponent', () => {
       declarations: [OverviewBlockComponent, DatetimePipe, ExampleComponent],
       providers: [
         { provide: SdRequestFacade, useClass: SdRequestFacadeStub },
+        { provide: ServiceDeskFacade, useClass: ServiceDeskFacadeStub },
         { provide: EmployeeFacade, useClass: EmployeeFacadeStub },
         { provide: SvtFacade, useClass: SvtFacadeStub },
         { provide: AuthCenterFacade, useClass: AuthCenterFacadeStub },

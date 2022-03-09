@@ -1,4 +1,4 @@
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -27,6 +27,7 @@ describe('SdRequestsBlockComponent', () => {
         { provide: UserFacade, useClass: UserFacadeStub },
         { provide: ServiceDeskFacade, useClass: ServiceDeskFacadeStub },
         MessageService,
+        ConfirmationService,
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

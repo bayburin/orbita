@@ -10,8 +10,6 @@ export const getSdServiceState = createSelector(
 
 const { selectAll, selectEntities } = sdServiceAdapter.getSelectors();
 
-export const getLoaded = createSelector(getSdServiceState, (state: State) => state.loaded);
-
 export const getAll = createSelector(getSdServiceState, (state: State) => selectAll(state));
 
 export const getEntities = createSelector(getSdServiceState, (state: State) => selectEntities(state));

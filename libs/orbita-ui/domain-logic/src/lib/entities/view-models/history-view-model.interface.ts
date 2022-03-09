@@ -1,3 +1,4 @@
+import { HistoryUserInfo } from './../models/history.interface';
 import { EventType } from '../models/event-type.interface';
 import { User } from '../models/user.interface';
 
@@ -39,6 +40,11 @@ export interface HistoryViewModel {
    * Текстовое описание произошедшего события
    */
   readonly action: string;
+
+  /**
+   * Данные о пользователе, который вызвал событие, на момент фиксации события
+   */
+  readonly user_info: HistoryUserInfo;
 
   /**
    * Время события

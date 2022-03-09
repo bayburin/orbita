@@ -31,6 +31,7 @@
     [sdTickets]="sdTickets$ | async"
     (tableChanged)="tableChanged($event)"
     (viewSdRequest)="redirectToSdRequestPage($event)"
+    (closeSdRequest)="closeSdRequest($event)"
   ></lib-sd-requests-table>
 </div>
 
@@ -44,3 +45,13 @@
     </div>
   </ng-template>
 </p-toast>
+
+<p-confirmDialog
+  [style]="{ width: '40vw' }"
+  [baseZIndex]="10000"
+  rejectButtonStyleClass="p-button-text"
+  rejectIcon=""
+  acceptIcon=""
+  [dismissableMask]="true"
+>
+</p-confirmDialog>

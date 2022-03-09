@@ -15,6 +15,9 @@ import {
   UserGroup,
   AttachmentViewForm,
   MessageFacade,
+  ServiceDeskFacade,
+  Statuses,
+  ClaimApplicationViewModel,
 } from '@orbita/orbita-ui/domain-logic';
 import { Message, ConfirmationService } from 'primeng/api';
 
@@ -42,6 +45,8 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   priorities = prioritiesViewModelArray;
   userGroups$ = this.userFacade.userGroups$;
   editMode: boolean;
+  sdTicket$ = this.serviceDeskFacade.sdTicket$;
+  loadedSdTicket$ = this.serviceDeskFacade.loadedSdTickets$;
 
   // ========== Раздел формы ==========
 
@@ -65,6 +70,7 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   constructor(
     private sdRequestFacade: SdRequestFacade,
+    private serviceDeskFacade: ServiceDeskFacade,
     private employeeFacade: EmployeeFacade,
     private svtFacade: SvtFacade,
     private acFacade: AuthCenterFacade,
@@ -96,6 +102,10 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
 
   trackByUser(index: number, user: User): number {
     return user.id;
+  }
+
+  trackByClaimApplication(index: number, clApp: ClaimApplicationViewModel) {
+    return clApp.id;
   }
 
   /**
@@ -149,9 +159,13 @@ export class OverviewBlockComponent implements OnInit, OnDestroy {
   closeSdRequest(id: number) {
     this.confirmationService.confirm({
       header: 'Внимание!',
-      message: 'Вы действительно хотите закрыть заявку?',
+      message: `Вы действительно хотите закрыть заявку №${id}?`,
       accept: () => this.sdRequestFacade.closeSdRequest(id),
     });
+  }
+
+  isSdRequestClosed(status: Statuses) {
+    return status == Statuses.DONE || status == Statuses.OPENED;
   }
 
   private buildForm(): void {

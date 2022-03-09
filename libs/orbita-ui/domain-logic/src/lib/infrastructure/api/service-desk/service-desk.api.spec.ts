@@ -45,4 +45,23 @@ describe('ServiceDeskApi', () => {
         .flush(sdTickets);
     });
   });
+
+  describe('getTicket()', () => {
+    const api = `${orbitaUiEnvironmentStub.serviceDeskApi}/v2/tickets`;
+    const id = 1;
+    const sdTicket = { id: 1 };
+
+    it('should return free_sd_request_types', () => {
+      service.getTicket(id).subscribe((result) => {
+        expect(result).toEqual(sdTicket);
+      });
+
+      httpMock
+        .expectOne({
+          method: 'GET',
+          url: `${api}/identity/${id}`,
+        })
+        .flush(sdTicket);
+    });
+  });
 });

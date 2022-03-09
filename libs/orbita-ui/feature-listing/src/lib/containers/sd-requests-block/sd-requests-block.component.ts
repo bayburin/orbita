@@ -3,6 +3,7 @@ import { LazyLoadEvent, MessageService } from 'primeng/api';
 import { SdRequestFacade, UserFacade, ServiceDeskFacade, SdRequestViewModel } from '@orbita/orbita-ui/domain-logic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'lib-sd-requests-block',
@@ -25,7 +26,8 @@ export class SdRequestsBlockComponent implements OnInit, OnDestroy {
     private sdFacade: ServiceDeskFacade,
     private router: Router,
     private route: ActivatedRoute,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -62,5 +64,18 @@ export class SdRequestsBlockComponent implements OnInit, OnDestroy {
    */
   redirectToSdRequestPage(sdRequest: SdRequestViewModel) {
     this.router.navigate(['sd-requests', sdRequest.id], { relativeTo: this.route });
+  }
+
+  /**
+   * Закрывает заявку
+   *
+   * @param id - номер заявки
+   */
+  closeSdRequest(id: number) {
+    this.confirmationService.confirm({
+      header: 'Внимание!',
+      message: `Вы действительно хотите закрыть заявку №${id}?`,
+      accept: () => this.sdRequestFacade.closeSdRequest(id),
+    });
   }
 }

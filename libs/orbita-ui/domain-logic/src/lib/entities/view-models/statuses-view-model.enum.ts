@@ -12,6 +12,10 @@ export interface StatusesViewModel {
    * Тип badge
    */
   badge: string;
+  /**
+   * Ключ статуса
+   */
+  status?: Statuses;
 }
 
 /**
@@ -36,20 +40,24 @@ export const statusesViewModelMap: Record<Statuses, StatusesViewModel> = {
 /**
  * Массив статусов
  */
-export const statusesArray: Statuses[] = Object.keys(statusesViewModelMap).reduce(
-  (arr, status) => arr.concat(status as Statuses),
-  []
-);
+export const statusesArray = Object.keys(statusesViewModelMap).reduce<Statuses[]>((arr, status) => {
+  arr.push(status as Statuses);
+
+  return arr;
+}, []);
 
 /**
  * Массив статусов
  */
-export const statusesViewModelArray: StatusesViewModel[] = Object.keys(statusesViewModelMap).reduce(
-  (arr, status) =>
-    arr.concat({
+export const statusesViewModelArray = (Object.keys(statusesViewModelMap) as Statuses[]).reduce<StatusesViewModel[]>(
+  (arr, status) => {
+    arr.push({
       status,
-      ...getViewModelStatus(status as Statuses),
-    }),
+      ...getViewModelStatus(status),
+    });
+
+    return arr;
+  },
   []
 );
 

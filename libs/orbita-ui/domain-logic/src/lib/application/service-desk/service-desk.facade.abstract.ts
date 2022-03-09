@@ -6,17 +6,21 @@ import { SdTicketViewModel } from './../../entities/view-models/sd-ticket-view-m
 
 export abstract class ServiceDeskFacadeAbstract {
   /**
-   * Индикатор, идет ли загрузка в данный момент
+   * Индикатор, идет ли загрузка видов тикетов в данный момент
    */
-  loading$: Observable<boolean>;
+  loadingSdTickets$: Observable<boolean>;
   /**
-   * Индикатор, загружены ли данные
+   * Индикатор, загружены ли виды тикетов
    */
-  loaded$: Observable<boolean>;
+  loadedSdTickets$: Observable<boolean>;
   /**
    * Загружает список видов тикетов из техподдержки
    */
   loadSdTickets$: Observable<void | SdTicket[]>;
+  /**
+   * Выбранный вид тикета техподдержки
+   */
+  sdTicket$: Observable<SdTicket>;
   /**
    * Список видов тикетов техподдержки
    */

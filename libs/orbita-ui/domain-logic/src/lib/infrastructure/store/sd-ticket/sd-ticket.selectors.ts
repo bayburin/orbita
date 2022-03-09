@@ -25,3 +25,11 @@ export const getEntities = createSelector(getSdTicketState, (state: State) => se
 export const getAllFreeApplications = createSelector(getAll, (sdTickets) =>
   sdTickets.filter((sdTicket) => sdTicket.ticketable_type === 'FreeApplication')
 );
+
+export const getSelectedIdentity = createSelector(getSdTicketState, (state: State) => state.selectedIdentity);
+
+export const getSelected = createSelector(
+  getEntities,
+  getSelectedIdentity,
+  (entities, selectedId) => selectedId && entities[selectedId]
+);

@@ -211,6 +211,15 @@ describe('SdRequestReducer', () => {
     });
   });
 
+  describe('initNewForm', () => {
+    it('should set attributes', () => {
+      action = SdRequestActions.initNewForm();
+      const result: NewFormState = reducer(initialState, action).newForm;
+
+      expect(result.updateView).toBe(true);
+    });
+  });
+
   describe('setEmployeeToNewForm', () => {
     it('should set attributes', () => {
       const employee = { id: 123 } as EmployeeShort;
@@ -233,11 +242,13 @@ describe('SdRequestReducer', () => {
 
   describe('changeNewForm', () => {
     it('should set attributes', () => {
+      initialState.newForm.updateView = true;
       const form = { description: 'test' } as NewSdRequestViewForm;
       action = SdRequestActions.changeNewForm({ entity: form });
       const result: NewFormState = reducer(initialState, action).newForm;
 
       expect(result.entity).toEqual(form);
+      expect(result.updateView).toBe(false);
     });
   });
 
@@ -252,12 +263,14 @@ describe('SdRequestReducer', () => {
 
   describe('saveNewFormSuccess', () => {
     it('should set attributes', () => {
+      initialState.newForm.updateView = false;
       const sdRequest = createSdRequest(111);
       action = SdRequestActions.saveNewFormSuccess({ sdRequest });
-      const result: State = reducer(initialState, action);
+      const result: NewFormState = reducer(initialState, action).newForm;
 
-      expect(result.newForm.loading).toBe(false);
-      expect(result.newForm.created).toEqual(sdRequest);
+      expect(result.loading).toBe(false);
+      expect(result.created).toEqual(sdRequest);
+      expect(result.updateView).toBe(true);
     });
   });
 

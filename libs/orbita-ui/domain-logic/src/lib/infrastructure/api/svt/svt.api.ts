@@ -22,7 +22,7 @@ export class SvtApi implements SvtApiAbstract {
   }
 
   queryItems(filters: SvtFilters) {
-    const params = new HttpParams().append('filters', `${JSON.stringify(filters)}`);
+    const params = new HttpParams().append('filters', JSON.stringify(filters));
 
     return this.http.get<SvtItem[]>(`${this.api}/items`, { params });
   }

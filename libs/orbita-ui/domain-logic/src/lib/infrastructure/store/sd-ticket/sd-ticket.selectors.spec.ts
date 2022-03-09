@@ -22,6 +22,7 @@ describe('SdTicketSelectors', () => {
       loading: false,
       loaded: true,
       needTickets: true,
+      selectedIdentity: 1,
       error: 'error message',
     });
   });
@@ -52,5 +53,13 @@ describe('SdTicketSelectors', () => {
 
   it('getAllFreeApplications() should return entities', () => {
     expect(SdTicketSelectors.getAllFreeApplications.projector(arrEntities)).toEqual([arrEntities[0]]);
+  });
+
+  it('getSelectedIdentity() should return entities', () => {
+    expect(SdTicketSelectors.getSelectedIdentity.projector(state)).toBe(1);
+  });
+
+  it('getSelected() should return entities', () => {
+    expect(SdTicketSelectors.getSelected.projector(entities, 1)).toEqual(arrEntities[0]);
   });
 });

@@ -1,3 +1,4 @@
+import { ClaimApplicationViewModel } from './claim-application-view-model.interface';
 import { TicketTypes, Statuses, Priorities, Runtime } from './../models/ticket.interface';
 import { SourceSnapshot } from './../models/source-snapshot.interface';
 import { MessageViewModel } from './message-view-model.interface';
@@ -57,4 +58,9 @@ export interface TicketViewModel {
    * Массив объект Attachment
    */
   readonly attachments: Attachment[];
+
+  /**
+   * Массив вшених приложений, к которым относится заявка
+   */
+  readonly claim_applications: ClaimApplicationViewModel[];
 }
