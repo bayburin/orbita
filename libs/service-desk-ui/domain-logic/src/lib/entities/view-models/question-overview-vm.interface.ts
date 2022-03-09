@@ -27,6 +27,11 @@ export interface QuestionOverviewVM {
   readonly correction?: QuestionOverviewVM;
 
   /**
+   * Чистовой вариант вопроса
+   */
+  readonly original?: QuestionOverviewVM;
+
+  /**
    * Список ответов
    */
   readonly answers?: AnswerVM[];

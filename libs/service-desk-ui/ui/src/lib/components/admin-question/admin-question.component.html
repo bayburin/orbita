@@ -1,0 +1,71 @@
+<div class="sd-list-item" [ngClass]="{ 'active-item': open }" [id]="question.id">
+  <div class="sd-list-question">
+    <div class="sd-list-question-group" (click)="toggleQuestion()">
+      <i
+        class="mdi mdi-24px"
+        [ngClass]="open ? 'mdi-arrow-up-drop-circle-outline' : 'mdi-arrow-down-drop-circle-outline'"
+      ></i>
+      <lib-visible-icon [hideable]="ticket"></lib-visible-icon>
+      <div class="question-block">
+        <div class="question-block-content">
+          <span class="row-flex-content dynamic-block">
+            <span class="badge bg-yellow-200" *ngIf="ticket.state === 'draft'">
+              <span class="additional-text">[черновик]</span>
+            </span>
+            <span
+              *ngIf="question.correction || question.original"
+              ngbTooltip="Имеются неподтвержденные правки"
+              container="body"
+            >
+              <i class="mdi mdi-pencil-plus-outline mdi-18px ml-1 text-warning"></i>
+            </span>
+          </span>
+          <span [innerHtml]="ticket.name" class="flex-grow-1"></span>
+        </div>
+        <div class="mt-1" *ngIf="ticket.tags.length">
+          <div class="additional-text">
+            <small>теги:</small>
+            <div class="row-inline-content ml-1">
+              <span *ngFor="let tag of ticket.tags; trackBy: trackByTag" class="badge bg-blue-100">{{ tag.name }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-block">
+        <div ngbDropdown container="body" (click)="$event.stopPropagation()">
+          <button class="btn btn-sm btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Действия</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="">
+            <button ngbDropdownItem class="align-button-content">
+              <i class="mdi mdi-file-swap-outline mdi-18px"></i>Посмотреть оригинал
+            </button>
+            <button ngbDropdownItem class="align-button-content">
+              <i class="mdi mdi-file-swap-outline mdi-18px"></i>Посмотреть правки
+            </button>
+            <a [routerLink]="['questions', question.id]" ngbDropdownItem class="align-button-content">
+              <i class="mdi mdi-file-document-edit-outline mdi-18px"></i>Редактировать
+            </a>
+            <button ngbDropdownItem class="align-button-content" (click)="publish.emit()">
+              <i class="mdi mdi-checkbox-marked-circle-outline mdi-18px"></i>Опубликовать
+            </button>
+            <div>
+              <button ngbDropdownItem class="align-button-content" (click)="destroyPublished.emit()">
+                <i class="mdi mdi-delete mdi-18px"></i>Удалить вопрос
+              </button>
+            </div>
+            <div>
+              <button ngbDropdownItem class="align-button-content" (click)="destroyDraft.emit()">
+                <i class="mdi mdi-delete mdi-18px"></i>Удалить черновик
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="open" class="sd-list-answer" @ToggleAnswer>
+    <lib-responsible-user-list *ngIf="employeeLoaded" [responsibleUsers]="ticket.responsible_users">
+    </lib-responsible-user-list>
+    <lib-admin-answer-list [question]="question" [attachmentLoadingIds]="attachmentLoadingIds"></lib-admin-answer-list>
+  </div>
+</div>

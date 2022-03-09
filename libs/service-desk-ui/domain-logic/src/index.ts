@@ -17,6 +17,7 @@ export * from './lib/entities/models/attachment.interface';
 export * from './lib/entities/models/svt/svt-item.interface';
 export * from './lib/entities/models/responsible-user.interface';
 export * from './lib/entities/models/employee/employee-short.interface';
+export * from './lib/entities/models/tag.interface';
 
 export * from './lib/entities/view-models/category-vm.interface';
 export * from './lib/entities/view-models/service-vm.interface';
@@ -29,6 +30,7 @@ export * from './lib/entities/view-models/ticket-overview-vm.interface';
 export * from './lib/entities/view-models/user-recommendation-link-types-vm.interface';
 export * from './lib/entities/view-models/service-overview-vm.interface';
 export * from './lib/entities/view-models/service-types-vm.interface';
+export * from './lib/entities/view-models/ticket-vm.interface';
 
 export * from './lib/entities/form/responsible-user-form.interface';
 
@@ -69,6 +71,8 @@ export * from './lib/application/admin/admin-service/admin-service.facade';
 export * from './lib/application/admin/admin-service/admin-service.facade.stub';
 export * from './lib/application/admin/admin-home/admin-home.facade';
 export * from './lib/application/admin/admin-home/admin-home.facade.stub';
+export * from './lib/application/admin/admin-question/admin-question.facade';
+export * from './lib/application/admin/admin-question/admin-question.facade.stub';
 
 export * from './lib/application/policies/question/question-policy.service';
 export * from './lib/application/policies/question/question-policy.service.stub';

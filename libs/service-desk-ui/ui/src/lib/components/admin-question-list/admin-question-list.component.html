@@ -1,0 +1,11 @@
+<lib-admin-question
+  *ngFor="let question of questions; trackBy: trackByQuestion; let first = first"
+  [question]="question"
+  [attachmentLoadingIds]="attachmentLoadingIds"
+  [employeeLoaded]="employeeLoaded"
+  [ngClass]="{ 'first-dynamic-item': first }"
+  (publish)="publish.emit(question)"
+  (destroyPublished)="destroyPublished.emit(question)"
+  (destroyDraft)="destroyDraft.emit(question)"
+  (downloadAttachment)="downloadAttachment.emit($event)"
+></lib-admin-question>

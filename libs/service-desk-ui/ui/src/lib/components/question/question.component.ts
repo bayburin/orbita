@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, ChangeDetectorRef, Input } from '@angular/core';
-
 import { Attachment, QuestionPermission, QuestionVM } from '@orbita/service-desk-ui/domain-logic';
+
 import { AbstractSearchResultComponent } from './../abstract-search-result/abstract-search-result.component';
 import { toggleAnswer } from './../../animations/toggle-answer.animation';
 import { showFlagRight } from './../../animations/show-flag-right.animation';

@@ -1,5 +1,6 @@
 import { Hideable } from '../models/hideable.interface';
 import { ResponsibleUser } from '../models/responsible-user.interface';
+import { Tag } from '../models/tag.interface';
 import { TicketStates, TicketTypes } from '../models/ticket.interface';
 
 /**
@@ -54,7 +55,7 @@ export interface TicketVM extends Hideable {
   /**
    * Список тегов
    */
-  readonly tags: number[];
+  readonly tags: Tag[];
 
   /**
    * Список ответственных

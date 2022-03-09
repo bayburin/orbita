@@ -21,6 +21,7 @@ import * as ResponsibleUserSelectors from '../responsible-user/responsible-user.
 import * as AttachmentSelectors from '../attachment/attachment.selectors';
 import * as TicketSelectors from '../ticket/ticket.selectors';
 import * as EmployeeSelectors from '../employee/employee.selectors';
+import * as TagSelectors from '../tag/tag.selectors';
 
 // ========== Tickets ==========
 
@@ -51,14 +52,22 @@ export const getAllServicesVM = createSelector(
 
 export const getSelectedOverviewServiceVM = createSelector(
   ServiceSelectors.getSelected,
+  QuestionSelectors.getEntities,
+  AnswerSelectors.getEntities,
   CategorySelectors.getEntities,
   ResponsibleUserSelectors.getEntities,
+  AttachmentSelectors.getEntities,
   EmployeeSelectors.getEntities,
-  (service, categories, responsible_users, employees): ServiceOverviewVM =>
+  TagSelectors.getEntities,
+  (service, questions, answers, categories, responsible_users, attachments, employees, tags): ServiceOverviewVM =>
     ServiceCacheService.denormalizeService(service, {
+      questions,
+      answers,
       categories,
       responsible_users,
+      attachments,
       employees,
+      tags,
     }) as ServiceOverviewVM
 );
 

@@ -55,6 +55,9 @@ import { AdminCategoriesTableComponent } from './components/admin-categories-tab
 import { AdminServicesTableComponent } from './components/admin-services-table/admin-services-table.component';
 import { ServiceIsHiddenTypeComponent } from './components/service-is-hidden-type/service-is-hidden-type.component';
 import { ServiceHasCommonCaseTypeComponent } from './components/service-has-common-case-type/service-has-common-case-type.component';
+import { AdminQuestionListComponent } from './components/admin-question-list/admin-question-list.component';
+import { AdminQuestionComponent } from './components/admin-question/admin-question.component';
+import { AdminAnswerListComponent } from './components/admin-answer-list/admin-answer-list.component';
 
 const modules: any[] = [
   FormsModule,
@@ -109,16 +112,20 @@ const components: any[] = [
   AttachmentListComponent,
   ResponsibleUserListComponent,
   SearchResultListComponent,
+  ServiceIsHiddenTypeComponent,
+  ServiceHasCommonCaseTypeComponent,
   AdminUserRecommendationsTableComponent,
   AdminCategoriesTableComponent,
   AdminServicesTableComponent,
-  ServiceIsHiddenTypeComponent,
+  AdminQuestionListComponent,
+  AdminQuestionComponent,
+  AdminAnswerListComponent,
 ];
 
 @NgModule({
   imports: [CommonModule, RouterModule, MarkdownModule.forChild(), ...modules],
-  declarations: [...components, ...directives, ...pipes, ServiceHasCommonCaseTypeComponent],
+  declarations: [...components, ...directives, ...pipes],
   entryComponents: [CategoryComponent, ServiceComponent, QuestionComponent],
-  exports: [...components, ...modules, ...directives, ...pipes, ServiceHasCommonCaseTypeComponent],
+  exports: [...components, ...modules, ...directives, ...pipes],
 })
 export class ServiceDeskUiUiModule {}

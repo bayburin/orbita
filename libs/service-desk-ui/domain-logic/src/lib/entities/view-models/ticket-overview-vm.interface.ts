@@ -1,8 +1,8 @@
-import { Service } from '../models/service.interface';
 import { ResponsibleUser } from '../models/responsible-user.interface';
 import { TicketStates, TicketTypes } from '../models/ticket.interface';
 import { TicketOverviewServiceVM } from './ticket-overview-service-vm.interface';
 import { Hideable } from '../models/hideable.interface';
+import { Tag } from '../models/tag.interface';
 
 /**
  * Полное представление тикета
@@ -61,7 +61,7 @@ export interface TicketOverviewVM extends Hideable {
   /**
    * Список тегов
    */
-  readonly tags: number[];
+  readonly tags: Tag[];
 
   /**
    * Список ответственных
