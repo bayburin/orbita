@@ -28,11 +28,11 @@ services:
     restart: unless-stopped
     ports:
       - '4200:4200'
-    command: nx serve orbita-ui --host 0.0.0.0 --disable-host-check --ssl=true --ssl-cert=/app/.docker/tls/iss_reshetnev_ru.crt --ssl-key=/app/.docker/tls/iss-reshetnev.ru.key
+    command: nx serve orbita-ui --host 0.0.0.0 --disable-host-check --ssl=true --ssl-cert=/app/.docker/tls/iss-reshetnev.ru.crt --ssl-key=/app/.docker/tls/iss-reshetnev.ru.key
 
   service-desk-ui:
     <<: *frontend
     restart: unless-stopped
     ports:
       - '4200:4200'
-    command: nx serve service-desk-ui --host 0.0.0.0 --disable-host-check --ssl=true --ssl-cert=/app/.docker/tls/iss_reshetnev_ru.crt --ssl-key=/app/.docker/tls/iss-reshetnev.ru.key
+    command: nx serve service-desk-ui --host 0.0.0.0 --disable-host-check --ssl=true --ssl-cert=/app/.docker/tls/iss-reshetnev.ru.crt --ssl-key=/app/.docker/tls/iss-reshetnev.ru.key
